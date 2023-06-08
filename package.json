@@ -1,0 +1,30 @@
+{
+  "name": "frui",
+  "version": "0.0.2",
+  "license": "MIT",
+  "description": "A collection of vanilla react and tailwind components written in typescript.",
+  "author": "Chris <chris@incept.asia>",
+  "homepage": "https://github.com/cblanquera/frui",
+  "bugs": "https://github.com/cblanquera/frui/issues",
+  "repository": "cblanquera/frui",
+  "scripts": {
+    "build": "npm run build:tsc && npm run build:files",
+    "build:tsc": "tsc",
+    "build:files": "cp ./README.md ./dist/ && cp ./package.json ./dist/ && cp ./LICENSE ./dist/"
+  },
+  "dependencies": { 
+    "inputmask": "5.0.8",
+    "moment": "2.29.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "markdown-to-jsx": "7.2.0"
+  },
+  "devDependencies": {
+    "@types/inputmask": "5.0.3",
+    "@types/node": "20.2.5",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "ts-node": "10.9.1",
+    "typescript": "5.0.4"
+  }
+}

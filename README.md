@@ -7,7 +7,7 @@
 A collection of vanilla react and tailwind components, fields and 
 output formats written in typescript.
 
-Checkout the [DEMO](https://cblanquera.github.io/frui)
+Checkout the [Examples](https://cblanquera.github.io/frui)
 
 ## Install
 

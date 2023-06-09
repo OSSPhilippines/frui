@@ -29,6 +29,7 @@ const FieldInput: React.FC<FieldInputProps> = (props) => {
     borderColor: error ? errorColor: 'black',
     borderStyle: 'solid',
     borderWidth: '1px',
+    boxSizing: 'border-box',
     color: 'black',
     paddingBottom: '8px',
     paddingLeft: '8px',

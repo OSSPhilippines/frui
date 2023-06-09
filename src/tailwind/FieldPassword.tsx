@@ -66,7 +66,7 @@ const FieldPassword: React.FC<FieldPasswordProps> = (props) => {
         className={map.classNames.toggle} 
         onClick={toggle}
       >
-        {showing ? '*': 'A' }
+        {showing ? '✷': 'A' }
       </span>
     </div>
   );

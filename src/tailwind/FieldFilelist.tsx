@@ -68,6 +68,7 @@ const FieldFilelist: React.FC<FieldFilelistProps> = (props) => {
         'border',
         'border-gray-400',
         'border-t-0',
+        'box-border',
         'flex',
         'py-1.5',
         'px-2',

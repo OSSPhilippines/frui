@@ -33,6 +33,7 @@ const FieldPassword: React.FC<FieldPasswordProps> = (props) => {
         backgroundColor: '#EEEEEE',
         borderColor: error ? errorColor : 'black',
         borderStyle: 'solid',
+        borderLeft: 0,
         borderBottomWidth: '1px',
         borderRightWidth: '1px',
         borderTopWidth: '1px',
@@ -65,7 +66,7 @@ const FieldPassword: React.FC<FieldPasswordProps> = (props) => {
         className={map.classNames.toggle} 
         onClick={toggle}
       >
-        {showing ? '*': 'A' }
+        {showing ? '✷': 'A' }
       </span>
     </div>
   );

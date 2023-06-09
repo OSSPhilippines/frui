@@ -157,6 +157,7 @@ const FieldSelect: React.FC<FieldSelectProps> = (props) => {
         'bg-white',
         'border',
         error ? 'border-[#DC3545]': 'border-black',
+        'box-border',
         error? 'text-[#DC3545]': 'text-black',
         'flex',
         'items-center',

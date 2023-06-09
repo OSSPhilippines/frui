@@ -32,7 +32,7 @@ const FieldTaglist: React.FC<FieldTaglistProps> = (props) => {
         borderColor: 'black',
         borderStyle: 'solid',
         borderWidth: '1px',
-        borderRadius: '5px',
+        boxSizing: 'border-box',
         color: 'black',
         display: 'flex',
         maxWidth: '100%',

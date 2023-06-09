@@ -72,6 +72,7 @@ const FieldFile: React.FC<FieldFileProps> = (props) => {
         'border',
         'border-gray-400',
         'border-t-0',
+        'box-border',
         'py-1.5',
         'px-2',
         'w-full',

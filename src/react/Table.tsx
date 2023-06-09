@@ -216,9 +216,9 @@ class TableHead extends React.Component<TableHeadProps> {
     if (props.stickyTop) {
       style.position = 'sticky';
       style.top = '-top-px';
-      if (style.left && style.right) {
+      if (props.stickyLeft && props.stickyRight) {
         style.zIndex = 4;
-      } else if (style.left || style.right) {
+      } else if (props.stickyLeft || props.stickyRight) {
         style.zIndex = 3;
       } else {
         style.zIndex = 1;

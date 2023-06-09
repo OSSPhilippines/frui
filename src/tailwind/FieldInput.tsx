@@ -29,6 +29,7 @@ const FieldInput: React.FC<FieldInputProps> = (props) => {
   const map = makeClasses(className, [
     'border',
     error ? 'border-[#DC3545]': 'border-black',
+    'box-border',
     'text-black',
     'p-2',
     'w-full'

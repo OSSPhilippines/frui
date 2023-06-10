@@ -1,12 +1,13 @@
 {
   "name": "frui",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "description": "A collection of vanilla react and tailwind components written in typescript.",
   "author": "Chris <chris@incept.asia>",
   "homepage": "https://github.com/cblanquera/frui",
   "bugs": "https://github.com/cblanquera/frui/issues",
   "repository": "cblanquera/frui",
+  "types": "index.d.ts",
   "scripts": {
     "build": "npm run build:tsc && npm run build:files",
     "build:tsc": "tsc",

@@ -4,7 +4,7 @@ import * as ReactDOM from "react-dom";
 import Button from '../src/react/Button';
 import Alert from '../src/react/Alert';
 import Badge from '../src/react/Badge';
-import Table, { Thead, Tfoot, Trow, Tcol } from '../src/react/Table';
+import Table, { Thead, Tfoot, Trow, Tcol, Tgroup } from '../src/react/Table';
 import Loader from '../src/react/Loader';
 
 import Control from '../src/react/Control';
@@ -1045,24 +1045,26 @@ const App = () => {
             <Tcol style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }}>A column Data</Tcol>
             <Tcol style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }} stickyRight>Edit</Tcol>
           </Trow>
-          <Trow>
-            <Tcol stickyLeft style={{ textAlign: 'left', backgroundColor: '#FCFCFC' }}>2</Tcol>
-            <Tcol style={{ textAlign: 'left', backgroundColor: '#FCFCFC' }}>A column Data</Tcol>
-            <Tcol style={{ textAlign: 'left', backgroundColor: '#FCFCFC' }} wrap3>A column Data</Tcol>
-            <Tcol style={{ textAlign: 'left', backgroundColor: '#FCFCFC' }} noWrap>A column Data</Tcol>
-            <Tcol style={{ textAlign: 'left', backgroundColor: '#FCFCFC' }}>A column Data</Tcol>
-            <Tcol style={{ textAlign: 'left', backgroundColor: '#FCFCFC' }}>A column Data</Tcol>
-            <Tcol stickyRight style={{ textAlign: 'left', backgroundColor: '#FCFCFC' }}>Edit</Tcol>
-          </Trow>
-          <Trow>
-            <Tcol stickyLeft style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }}>3</Tcol>
-            <Tcol style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }}>A column Data</Tcol>
-            <Tcol style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }} wrap3>A column Data</Tcol>
-            <Tcol style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }} noWrap>A column Data</Tcol>
-            <Tcol style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }}>A column Data</Tcol>
-            <Tcol style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }}>A column Data</Tcol>
-            <Tcol stickyRight style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }}>Edit</Tcol>
-          </Trow>
+          <Tgroup>
+            <Trow>
+              <Tcol stickyLeft style={{ textAlign: 'left', backgroundColor: '#FCFCFC' }}>2</Tcol>
+              <Tcol style={{ textAlign: 'left', backgroundColor: '#FCFCFC' }}>A column Data</Tcol>
+              <Tcol style={{ textAlign: 'left', backgroundColor: '#FCFCFC' }} wrap3>A column Data</Tcol>
+              <Tcol style={{ textAlign: 'left', backgroundColor: '#FCFCFC' }} noWrap>A column Data</Tcol>
+              <Tcol style={{ textAlign: 'left', backgroundColor: '#FCFCFC' }}>A column Data</Tcol>
+              <Tcol style={{ textAlign: 'left', backgroundColor: '#FCFCFC' }}>A column Data</Tcol>
+              <Tcol stickyRight style={{ textAlign: 'left', backgroundColor: '#FCFCFC' }}>Edit</Tcol>
+            </Trow>
+            <Trow>
+              <Tcol stickyLeft style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }}>3</Tcol>
+              <Tcol style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }}>A column Data</Tcol>
+              <Tcol style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }} wrap3>A column Data</Tcol>
+              <Tcol style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }} noWrap>A column Data</Tcol>
+              <Tcol style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }}>A column Data</Tcol>
+              <Tcol style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }}>A column Data</Tcol>
+              <Tcol stickyRight style={{ textAlign: 'left', backgroundColor: '#EFEFEF' }}>Edit</Tcol>
+            </Trow>
+          </Tgroup>
           <Tfoot style={{ textAlign: 'left', backgroundColor: '#CDCDCD' }} noWrap stickyBottom stickyLeft>Footer 1</Tfoot>
           <Tfoot style={{ textAlign: 'left', backgroundColor: '#CDCDCD' }} noWrap stickyBottom>Footer 2</Tfoot>
           <Tfoot style={{ textAlign: 'left', backgroundColor: '#CDCDCD' }} noWrap stickyBottom>Footer 3</Tfoot>

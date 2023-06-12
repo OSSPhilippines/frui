@@ -147,6 +147,19 @@ class TableFoot extends React.Component<TableFootProps> {
 }
 
 /**
+ * Table Group Component
+ */
+class TableGroup extends React.Component<TableRowProps> {
+  table() {
+    return 'TableGroup';
+  }
+
+  render() {
+    return this.props.children;
+  }
+}
+
+/**
  * Table Row Component
  */
 class TableRow extends React.Component<TableRowProps> {
@@ -294,6 +307,13 @@ const getBody = function(children: ReactNode) {
       } else if (typeof child === 'object' && child.props && 'tbody' in child.props) {
         body.push(child);
       } else if (typeof child?.type?.prototype?.table === 'function' 
+        && child.type.prototype.table() === 'TableGroup'
+      ) {
+        const children = child.props.children || [];
+        if (Array.isArray(children) && children.length > 0) {
+          body.push(...children);
+        }
+      } else if (typeof child?.type?.prototype?.table === 'function' 
         && child.type.prototype.table() === 'TableRow'
       ) {
         body.push(child);
@@ -334,5 +354,6 @@ export {
   TableHead as Thead,
   TableFoot as Tfoot,
   TableCol as Tcol,
-  TableRow as Trow
+  TableRow as Trow,
+  TableGroup as Tgroup
 };

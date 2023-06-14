@@ -102,7 +102,7 @@ const Fields: React.FC<FieldsProps<FieldMetadataType>> = (props) => {
         style={map.styles.name}
         className={map.classNames.name}
         defaultValue={Array.isArray(value) ? value[0]: undefined}
-        onUpdate={(name) => handlers.update('name', name)}
+        onUpdate={name => handlers.update('name', name)}
         error={error}
         required 
       />

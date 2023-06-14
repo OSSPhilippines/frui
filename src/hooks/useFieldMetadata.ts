@@ -1,15 +1,8 @@
 //types
 import type { FieldMetadataConfig } from '../types';
-//hooks
-import { useState } from 'react';
 
 export default function useFieldMetadata(config: FieldMetadataConfig) {
   const { type, values, index, set } = config;
-  //hooks
-  const row = values ? values[index]: undefined;
-  const [ name, setName ] = useState(Array.isArray(row) ? row[0] || '': '');
-  const [ value, setValue ] = useState<any>(Array.isArray(row) ? row[1] || '': '');
-
   const isNumber = type === 'number';
   const isDate = ['date', 'time', 'datetime'].includes(type || '');
   const isText = !isDate && !isNumber;
@@ -17,13 +10,17 @@ export default function useFieldMetadata(config: FieldMetadataConfig) {
   const handlers = {
     update: (key: 'name'|'value', input: any) => {
       const newValues = [ ...(values || []) ];
+      const entry: [string, string|number|Date] = [ '', '' ];
+      const current = newValues[index];
+      entry[0] = current ? current[0] : '';
+      entry[1] = current ? current[1] : '';
       if (key === 'name') {
-        setName(input);
-        newValues[index] = [ input, value ];
+        entry[0] = input;
       } else {
-        setValue(value);
-        newValues[index] = [ name, input];
+        entry[1] = input;
       }
+
+      newValues[index] = entry
       set(newValues);
     },
     remove: () => {
@@ -33,5 +30,5 @@ export default function useFieldMetadata(config: FieldMetadataConfig) {
     }
   };
   
-  return { name, value, handlers, input: { isDate, isText, isNumber } };
+  return { handlers, input: { isDate, isText, isNumber } };
 }

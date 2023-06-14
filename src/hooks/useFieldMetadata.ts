@@ -6,8 +6,9 @@ import { useState } from 'react';
 export default function useFieldMetadata(config: FieldMetadataConfig) {
   const { type, values, index, set } = config;
   //hooks
-  const [ name, setName ] = useState(values ? values[index]?.name || '': '');
-  const [ value, setValue ] = useState<any>(values ? values[index]?.value || '': '');
+  const row = values ? values[index]: undefined;
+  const [ name, setName ] = useState(Array.isArray(row) ? row[0] || '': '');
+  const [ value, setValue ] = useState<any>(Array.isArray(row) ? row[1] || '': '');
 
   const isNumber = type === 'number';
   const isDate = ['date', 'time', 'datetime'].includes(type || '');
@@ -18,10 +19,10 @@ export default function useFieldMetadata(config: FieldMetadataConfig) {
       const newValues = [ ...(values || []) ];
       if (key === 'name') {
         setName(input);
-        newValues[index] = { name: input, value };
+        newValues[index] = [ input, value ];
       } else {
         setValue(value);
-        newValues[index] = { name, value: input };
+        newValues[index] = [ name, input];
       }
       set(newValues);
     },

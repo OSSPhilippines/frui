@@ -599,16 +599,16 @@ const App = () => {
         <div style={{ padding: '10px 0', marginTop: '40px' }}>
           <Control label="Metadata">
             <Metadata 
-              value={[{name: 'a', value: 'b'}, {name: 'c', value: 'd'}]} 
-              onUpdate={console.log} 
+              value={[['a', 'b'], ['c', 'd']]} 
+              onUpdate={entries => console.log(Object.fromEntries(entries))} 
             />
           </Control>
         </div>
         <PrettyCode code={`
           <Control label="Metadata">
             <Metadata 
-              value={[{name: 'a', value: 'b'}, {name: 'c', value: 'd'}]} 
-              onUpdate={console.log} 
+              value={[['a', 'b'], ['c', 'd']]}
+              onUpdate={entries => console.log(Object.fromEntries(entries))}
             />
           </Control>
         `} />
@@ -619,8 +619,8 @@ const App = () => {
               min="0"
               max="10000000"
               step="0.01"
-              value={[{name: 'a', value: 2.05}, {name: 'c', value: 10000}]} 
-              onUpdate={console.log} 
+              value={[['a', 2.05], ['c', 10000]]} 
+              onUpdate={entries => console.log(Object.fromEntries(entries))}
               error={true}
             />
           </Control>
@@ -632,8 +632,8 @@ const App = () => {
               min="0"
               max="10000000"
               step="0.01"
-              value={[{name: 'a', value: 2.05}, {name: 'c', value: 10000}]} 
-              onUpdate={console.log} 
+              value={[['a', 2.05], ['c', 10000]]} 
+              onUpdate={entries => console.log(Object.fromEntries(entries))}
               error={true}
             />
           </Control>
@@ -642,8 +642,8 @@ const App = () => {
           <Control label="Meta Dates">
             <Metadata 
               type="date"
-              value={[{name: 'a', value: Date.now()}, {name: 'c', value: new Date}]} 
-              onUpdate={console.log} 
+              value={[['a', Date.now()], ['c', new Date]]} 
+              onUpdate={entries => console.log(Object.fromEntries(entries))}
             />
           </Control>
         </div>
@@ -651,8 +651,8 @@ const App = () => {
           <Control label="Meta Dates">
             <Metadata 
               type="date"
-              value={[{name: 'a', value: Date.now()}, {name: 'c', value: new Date}]} 
-              onUpdate={console.log} 
+              value={[['a', Date.now()], ['c', new Date]]}  
+              onUpdate={entries => console.log(Object.fromEntries(entries))}
             />
           </Control>
         `} />
@@ -660,8 +660,8 @@ const App = () => {
           <Control label="Meta Times" className="text-xs my-4">
             <Metadata 
               type="time"
-              value={[{name: 'a', value: Date.now()}, {name: 'c', value: new Date}]} 
-              onUpdate={console.log} 
+              value={[['a', Date.now()], ['c', new Date]]} 
+              onUpdate={entries => console.log(Object.fromEntries(entries))}
             />
           </Control>
         </div>
@@ -669,8 +669,8 @@ const App = () => {
           <Control label="Meta Times" className="text-xs my-4">
             <Metadata 
               type="time"
-              value={[{name: 'a', value: Date.now()}, {name: 'c', value: new Date}]} 
-              onUpdate={console.log} 
+              value={[['a', Date.now()], ['c', new Date]]} 
+              onUpdate={entries => console.log(Object.fromEntries(entries))}
             />
           </Control>
         `} />
@@ -678,8 +678,8 @@ const App = () => {
           <Control label="Meta Datetimes With Errors" error="something">
             <Metadata 
               type="datetime"
-              value={[{name: 'a', value: Date.now()}, {name: 'c', value: new Date}]} 
-              onUpdate={console.log} 
+              value={[['a', Date.now()], ['c', new Date]]} 
+              onUpdate={entries => console.log(Object.fromEntries(entries))}
               error={true}
             />
           </Control>
@@ -688,8 +688,8 @@ const App = () => {
           <Control label="Meta Datetimes With Errors" error="something">
             <Metadata 
               type="datetime"
-              value={[{name: 'a', value: Date.now()}, {name: 'c', value: new Date}]} 
-              onUpdate={console.log} 
+              value={[['a', Date.now()], ['c', new Date]]} 
+              onUpdate={entries => console.log(Object.fromEntries(entries))}
               error={true}
             />
           </Control>

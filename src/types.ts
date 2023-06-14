@@ -278,7 +278,7 @@ export type FieldMaskProps = FieldInputProps & {
 };
 
 // Field metadata component
-export type FieldMetadataType = { name: string, value: string|number|Date };
+export type FieldMetadataType = [ string, string|number|Date ];
 export type FieldMetadataConfig = {
   type?: string,
   values?: (FieldMetadataType|undefined)[],

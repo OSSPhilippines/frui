@@ -89,19 +89,8 @@ const Fields: React.FC<FieldsProps<FieldTextlistType>> = (props) => {
  * Textlist Fieldset Component (Main)
  */
 const FieldTextlist: React.FC<FieldsetProps<FieldTextlistType>> = (props) => {
-  const { label, value, type, onChange, ...attributes } = props;
   const Fieldset = make<FieldTextlistType>(Fields);
-
-  return (
-    <Fieldset 
-      {...attributes}
-      value={value} 
-      label={label} 
-      type={type}
-      emptyValue={''}
-      onChange={onChange} 
-    />
-  );
+  return (<Fieldset {...props} emptyValue={''} />);
 }
 
 export default FieldTextlist;

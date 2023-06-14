@@ -44,6 +44,7 @@ const Fields: React.FC<FieldsProps<FieldMetadataType>> = (props) => {
   });
   
   //variables
+  const value = values ? values[index]: undefined;
   const map = {
     styles: makeGroupStyles(styles, {
       row: {
@@ -100,7 +101,7 @@ const Fields: React.FC<FieldsProps<FieldMetadataType>> = (props) => {
       <FieldInput 
         style={map.styles.name}
         className={map.classNames.name}
-        defaultValue={values ? values[index]?.name: undefined}
+        defaultValue={Array.isArray(value) ? value[0]: undefined}
         onUpdate={(name) => handlers.update('name', name)}
         error={error}
         required 
@@ -110,7 +111,7 @@ const Fields: React.FC<FieldsProps<FieldMetadataType>> = (props) => {
           type={type}
           style={map.styles.value}
           className={map.classNames.value}
-          defaultValue={values ? values[index]?.value as string|number: undefined}
+          defaultValue={Array.isArray(value) ? value[1] as string|number: undefined}
           onUpdate={value => handlers.update('value', value)}
           error={error}
           required 
@@ -123,7 +124,7 @@ const Fields: React.FC<FieldsProps<FieldMetadataType>> = (props) => {
           step={step}
           style={map.styles.value}
           className={map.classNames.value}
-          defaultValue={values ? values[index]?.value as string|number: undefined}
+          defaultValue={Array.isArray(value) ? value[1] as string|number: undefined}
           onUpdate={(value: string) => handlers.update('value', value)}
           error={error}
           required 
@@ -134,7 +135,7 @@ const Fields: React.FC<FieldsProps<FieldMetadataType>> = (props) => {
           type="date"
           style={map.styles.value}
           className={map.classNames.value}
-          defaultValue={values ? values[index]?.value: undefined}
+          defaultValue={Array.isArray(value) ? value[1]: undefined}
           onUpdate={value => handlers.update('value', value)}
           error={error}
           required 
@@ -145,7 +146,7 @@ const Fields: React.FC<FieldsProps<FieldMetadataType>> = (props) => {
           type="time"
           style={map.styles.value}
           className={map.classNames.value}
-          defaultValue={values ? values[index]?.value: undefined}
+          defaultValue={Array.isArray(value) ? value[1]: undefined}
           onUpdate={(value: string) => handlers.update('value', value)}
           error={error}
           required 
@@ -156,7 +157,7 @@ const Fields: React.FC<FieldsProps<FieldMetadataType>> = (props) => {
           type="datetime-local"
           style={map.styles.value}
           className={map.classNames.value}
-          defaultValue={values ? values[index]?.value: undefined}
+          defaultValue={Array.isArray(value) ? value[1]: undefined}
           onUpdate={(value) => handlers.update('value', value)}
           error={error}
           required 
@@ -178,20 +179,9 @@ const Fields: React.FC<FieldsProps<FieldMetadataType>> = (props) => {
 /**
  * Metadata Fieldset Component (Main)
  */
-const Metadata: React.FC<FieldsetProps<FieldMetadataType>> = (props) => {
-  const { label, value, type, onChange, ...attributes } = props;
+const FieldMetadata: React.FC<FieldsetProps<FieldMetadataType>> = (props) => {
   const Fieldset = make<FieldMetadataType>(Fields);
-
-  return (
-    <Fieldset 
-      {...attributes}
-      value={value} 
-      label={label} 
-      type={type}
-      emptyValue={{ name: '', value: '' }}
-      onChange={onChange} 
-    />
-  );
+  return (<Fieldset {...props} emptyValue={['', '']} />);
 }
 
-export default Metadata;
+export default FieldMetadata;

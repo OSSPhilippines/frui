@@ -1,5 +1,5 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import React from 'react';
+import { createRoot } from 'react-dom/client';
 
 import Button from '../src/react/Button';
 import Alert from '../src/react/Alert';
@@ -588,12 +588,12 @@ const App = () => {
         `} />
         <div style={{ padding: '10px 0', marginTop: '40px' }}>
           <Control label="Textlist With Errors" error="something">
-            <Textlist value={['c', 'd']} onUpdate={console.log} error={true} />
+            <Textlist label="Add Option" value={['c', 'd']} onUpdate={console.log} error={true} />
           </Control>
         </div>
         <PrettyCode code={`
           <Control label="Textlist With Errors" error="something">
-            <Textlist value={['c', 'd']} onUpdate={console.log} error={true} />
+            <Textlist label="Add Option" value={['c', 'd']} onUpdate={console.log} error={true} />
           </Control>
         `} />
         <div style={{ padding: '10px 0', marginTop: '40px' }}>
@@ -1438,5 +1438,10 @@ const App = () => {
   );
 }
 
-// Assuming there is a div with id 'root' in your HTML file
-ReactDOM.render(<App />, document.getElementById("root"));
+const container = document.getElementById('root');
+const root = createRoot(container!);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);

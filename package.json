@@ -1,6 +1,6 @@
 {
   "name": "frui",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "license": "MIT",
   "description": "A collection of vanilla react and tailwind components written in typescript.",
   "author": "Chris <chris@incept.asia>",
@@ -12,7 +12,7 @@
     "build": "npm run build:tsc && npm run build:files",
     "build:tsc": "tsc",
     "build:files": "cp ./README.md ./dist/ && cp ./package.json ./dist/ && cp ./LICENSE ./dist/",
-    "bundle": "webpack --mode production",
+    "bundle": "webpack --mode production && rm -rf ./dist/src && rm -rf ./dist/build",
     "start": "webpack serve --mode development"
   },
   "peerDependencies": {
@@ -25,14 +25,10 @@
     "moment": "2.29.4"
   },
   "devDependencies": {
-    "@babel/core": "7.22.5",
-    "@babel/preset-env": "7.22.5",
-    "@babel/preset-react": "7.22.5",
     "@types/inputmask": "5.0.3",
     "@types/node": "20.2.5",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.10",
-    "babel-loader": "9.1.2",
     "html-webpack-plugin": "5.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",

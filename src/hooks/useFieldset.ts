@@ -1,6 +1,6 @@
 import type { FieldsetConfig } from '../types';
 //hooks
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function useFieldset<ValueType = any>(
   config: FieldsetConfig<ValueType>
@@ -17,35 +17,25 @@ export default function useFieldset<ValueType = any>(
   const safeValues: (ValueType|undefined)[] = Array.isArray(value) ? value : [];
   //hooks
   const [ values, setValues ] = useState(safeValues);
-  const [ changed, changeValues ] = useState<(ValueType|undefined)[]>();
   //handlers
   const handlers = {
-    set: (values: (ValueType|undefined)[]) => {
-      //set values
-      setValues(values);
-      //serialize the old change value and the new value
-      const serial1 = changed 
-        ? JSON.stringify(changed.filter(Boolean))
-        : undefined;
-      const serial2 = JSON.stringify(values.filter(Boolean));
+    set: (newValues: (ValueType|undefined)[]) => {
+      //serialize the new value
+      const serial = JSON.stringify(newValues);
       //if the values are different, update the change value
-      if (serial1 !== serial2) {
-        changeValues(values);
+      if (serial !== JSON.stringify(values)) {
+        const final = JSON
+          .parse(serial)
+          .map((value: any) => value === null ? undefined : value);
+        const clean = final
+          .filter((value: any) => typeof value !== 'undefined');
+        setValues(final);
+        onChange && onChange(clean as ValueType[]);
+        onUpdate && onUpdate(clean as ValueType[]);
       }
     },
     add: () => handlers.set(values.concat([emptyValue]))
   }
-  //effects
-  useEffect(() => {
-    //we only want to update the value if the change value is different
-    changed 
-      && onChange 
-      && onChange(changed.filter(Boolean) as ValueType[]);
-    //for consistency
-    changed 
-      && onUpdate 
-      && onUpdate(changed.filter(Boolean) as ValueType[]);
-  }, [ changed ]);
 
   return { values, handlers };
 }

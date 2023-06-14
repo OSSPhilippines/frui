@@ -176,11 +176,12 @@ const Fields: React.FC<FieldsProps<FieldMetadataType>> = (props) => {
   );
 };
 
+const Fieldset = make<FieldMetadataType>(Fields);
+
 /**
  * Metadata Fieldset Component (Main)
  */
 const FieldMetadata: React.FC<FieldsetProps<FieldMetadataType>> = (props) => {
-  const Fieldset = make<FieldMetadataType>(Fields);
   return (<Fieldset {...props} emptyValue={['', '']} />);
 }
 

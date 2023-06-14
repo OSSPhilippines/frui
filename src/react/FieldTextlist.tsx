@@ -85,11 +85,12 @@ const Fields: React.FC<FieldsProps<FieldTextlistType>> = (props) => {
   );
 };
 
+const Fieldset = make<FieldTextlistType>(Fields);
+
 /**
  * Textlist Fieldset Component (Main)
  */
 const FieldTextlist: React.FC<FieldsetProps<FieldTextlistType>> = (props) => {
-  const Fieldset = make<FieldTextlistType>(Fields);
   return (<Fieldset {...props} emptyValue={''} />);
 }
 

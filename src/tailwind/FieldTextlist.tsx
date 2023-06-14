@@ -81,58 +81,18 @@ const Fields: React.FC<FieldsProps<FieldTextlistType>> = (props) => {
  * Textlist Component (Main)
  */
 const FieldTextlist: React.FC<FieldsetProps<FieldTextlistType>> = (props) => {
-  const { 
-    label, 
-    value, 
-    error,
-    errorColor,
-    styles,
-    classNames,
-    onChange,
-    ...attributes 
-  } = props;
-
+  const { label, value, type, onChange, ...attributes } = props;
   const Fieldset = make<FieldTextlistType>(Fields);
 
-  const map = {
-    styles: makeGroupStyles(styles, {
-      container: undefined,
-      label: undefined,
-      field: undefined,
-      error: undefined
-    }),
-    classNames: makeGroupClasses(classNames, {
-      container: [
-        error ? 'text-[#DC3545]' : undefined
-      ].filter(Boolean).join(' '),
-      label: [
-        'block'
-      ].filter(Boolean).join(' '),
-      field: undefined,
-      error: undefined
-    })
-  };
-
   return (
-    <div className={map.classNames.container} style={map.styles.container}>
-      {label?.length && (
-        <label className={map.classNames.label} style={map.styles.label}>
-          {label}
-        </label>
-      )}
-      <div className={map.classNames.field} style={map.styles.field}>
-        <Fieldset 
-          {...attributes}
-          error={error}
-          styles={styles}
-          classNames={classNames}
-          value={value} 
-          label={label} 
-          emptyValue={''}
-          onChange={onChange} 
-        />
-      </div>
-    </div>
+    <Fieldset 
+      {...attributes}
+      value={value} 
+      label={label} 
+      type={type}
+      emptyValue={''}
+      onChange={onChange} 
+    />
   );
 }
 

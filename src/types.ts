@@ -412,6 +412,16 @@ export type FieldsProps<ValueType = any> = {
   set: (values: (ValueType|undefined)[]) => void
 };
 
+//Field slug component
+export type FieldSlugConfig = FieldInputConfig & {
+  dash?: boolean,
+  value: string|number|readonly string[]|undefined,
+  defaultValue?: string|number|readonly string[]|undefined
+};
+export type FieldSlugProps = FieldInputProps & {
+  dash?: boolean
+};
+
 // Field switch component
 export type FieldSwitchProps = HTMLInputProps & {
   label?: string,

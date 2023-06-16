@@ -1,6 +1,6 @@
 {
   "name": "frui",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "license": "MIT",
   "description": "A collection of vanilla react and tailwind components written in typescript.",
   "author": "Chris <chris@incept.asia>",

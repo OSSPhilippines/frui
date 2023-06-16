@@ -79,7 +79,7 @@ import FieldSelect from 'frui/tailwind/FieldSelect';
  - Tabs *(TODO)*
  - Tree *(TODO)*
 
-## Fields (31)
+## Fields (32)
 
  - Autocomplete
  - Checkbox
@@ -106,6 +106,7 @@ import FieldSelect from 'frui/tailwind/FieldSelect';
  - Radio Group *(TODO)*
  - Select
  - Slider *(TODO)*
+ - Slug
  - Switch
  - Taglist
  - Textarea

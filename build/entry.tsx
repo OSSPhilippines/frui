@@ -9,7 +9,8 @@ import Loader from '../src/react/Loader';
 
 import Control from '../src/react/Control';
 
-import Input from '../src/react/FieldInput';
+import FieldInput from '../src/react/FieldInput';
+import FieldSlug from '../src/react/FieldSlug';
 import FieldNumber from '../src/react/FieldNumber';
 import Password from '../src/react/FieldPassword';
 import InputMask from '../src/react/FieldMask';
@@ -119,22 +120,32 @@ const App = () => {
         </p>
         <div style={{ padding: '10px 0', marginTop: '40px' }}>
           <Control label="Input Field">
-            <Input defaultValue="value 1" onUpdate={console.log} />
+            <FieldInput defaultValue="value 1" onUpdate={console.log} />
           </Control>
         </div>
         <PrettyCode code={`
           <Control label="Input Field">
-            <Input defaultValue="value 1" onUpdate={console.log} />
+            <FieldInput defaultValue="value 1" onUpdate={console.log} />
           </Control>
         `} />
         <div style={{ padding: '10px 0', marginTop: '40px' }}>
           <Control label="Input With Error" error="something" >
-            <Input error={true} />
+            <FieldInput error={true} />
           </Control>
         </div>
         <PrettyCode code={`
           <Control label="Input With Error" error="something" >
-            <Input error={true} />
+            <FieldInput error={true} />
+          </Control>
+        `} />
+        <div style={{ padding: '10px 0', marginTop: '40px' }}>
+          <Control label="Slug Field">
+            <FieldSlug defaultValue="value 1" onUpdate={console.log} />
+          </Control>
+        </div>
+        <PrettyCode code={`
+          <Control label="Input Field">
+            <FieldSlug defaultValue="value 1" onUpdate={console.log} />
           </Control>
         `} />
         <div style={{ padding: '10px 0', marginTop: '40px' }}>

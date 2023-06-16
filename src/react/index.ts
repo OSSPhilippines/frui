@@ -37,6 +37,7 @@ import FieldRadio from './FieldRadio';
 import FieldSelect from './FieldSelect';
 import Fieldset from './Fieldset';
 //import FieldSlider from './FieldSlider';
+import FieldSlug from './FieldSlug';
 import FieldSwitch from './FieldSwitch';
 import FieldTaglist from './FieldTaglist';
 import FieldTextarea from './FieldTextarea';
@@ -109,6 +110,7 @@ export {
   FieldSelect,
   Fieldset,
   //FieldSlider,
+  FieldSlug,
   FieldSwitch,
   FieldTaglist,
   FieldTextarea,

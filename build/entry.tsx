@@ -144,8 +144,28 @@ const App = () => {
           </Control>
         </div>
         <PrettyCode code={`
-          <Control label="Input Field">
+          <Control label="Slug Field">
             <FieldSlug defaultValue="value 1" onUpdate={console.log} />
+          </Control>
+        `} />
+        <div style={{ padding: '10px 0', marginTop: '40px' }}>
+          <Control label="Slug Field (only dashes)">
+            <FieldSlug defaultValue="value 2" dash onUpdate={console.log} />
+          </Control>
+        </div>
+        <PrettyCode code={`
+          <Control label="Slug Field (only dashes)">
+            <FieldSlug defaultValue="value 2" dash onUpdate={console.log} />
+          </Control>
+        `} />
+        <div style={{ padding: '10px 0', marginTop: '40px' }}>
+          <Control label="Slug Field (only lines)">
+            <FieldSlug defaultValue="value 3" line onUpdate={console.log} />
+          </Control>
+        </div>
+        <PrettyCode code={`
+          <Control label="Slug Field (only lines)">
+            <FieldSlug defaultValue="value 3" line onUpdate={console.log} />
           </Control>
         `} />
         <div style={{ padding: '10px 0', marginTop: '40px' }}>

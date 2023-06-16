@@ -88,3 +88,23 @@ export function makeStyles(
 
   return Object.keys(styles || {}).length > 0 ? styles : undefined;
 };
+
+//function to convert a string to a slug
+export function slugify(str: string, noDash = false, noLine = false) {
+  return str.trim()
+    //replace special characters with dashes (or underscores)
+    .replace(/[^a-zA-Z0-9\-_]/g, noLine ? '-': '_')
+    //replace dashes with underscores (or dashes if allowed)
+    .replace(/-/g, noLine ? '-': '_')
+    //replace dashes with underscores (or dashes if allowed)
+    .replace(/_/g, noDash ? '_': '-')
+    //replace multiple dashes with a single dash
+    .replace(/-{2,}/g, '-')
+    //replace multiple underscores with a single underscore
+    .replace(/_{2,}/g, '_')
+    //trim dashes and underscores from the beginning and end of the string
+    .replace(/^-+|-+$/g, '')
+    .replace(/^_+|_+$/g, '')
+    //convert to lowercase
+    .toLowerCase();
+};

@@ -5,7 +5,8 @@ import useFieldSlug from '../hooks/useFieldSlug';
 
 const FieldSlug: React.FC<FieldSlugProps> = (props) => {
   const { 
-    dash = true,
+    dash,
+    line,
     value: rawValue, 
     defaultValue: rawDefaultValue, 
     onChange,
@@ -14,6 +15,7 @@ const FieldSlug: React.FC<FieldSlugProps> = (props) => {
 
   const { value, defaultValue, change } = useFieldSlug({
     dash,
+    line,
     value: rawValue, 
     defaultValue: rawDefaultValue,
     onChange

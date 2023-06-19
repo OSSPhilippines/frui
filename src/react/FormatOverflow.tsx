@@ -5,12 +5,13 @@ import React from 'react';
 
 const FormatOverflow: React.FC<FormatOverflowProps> = (props) => {
   const { value, length, words, hellip } = props;
+  const count = typeof length === 'string' ? Number(length) || undefined : length;
   if (words) {
     const words = value.split(' ');
-    if (length && words.length > length) {
+    if (count && words.length > count) {
       return (
         <>
-          {words.slice(0, length).join(' ')}
+          {words.slice(0, count).join(' ')}
           {hellip && (<>&hellip;</>)}
         </>
       );
@@ -19,10 +20,10 @@ const FormatOverflow: React.FC<FormatOverflowProps> = (props) => {
     return (<>{value}</>);
   }
 
-  if (length && value.length > length) {
+  if (count && value.length > count) {
     return (
       <>
-        {value.slice(0, length)}
+        {value.slice(0, count)}
         {hellip && (<>&hellip;</>)}
       </>
     );

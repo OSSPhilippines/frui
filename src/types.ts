@@ -576,7 +576,7 @@ export type FormatNumberProps = {
 // Format overflow component
 export type FormatOverflowProps = { 
   value: string, 
-  length?: number, 
+  length?: string|number, 
   words?: boolean,
   hellip?: boolean, 
 };

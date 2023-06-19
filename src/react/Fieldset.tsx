@@ -23,6 +23,7 @@ export default function make<ValueType = any>(
       max,
       step,
       type,
+      data,
       value, 
       emptyValue, 
       error,
@@ -46,6 +47,7 @@ export default function make<ValueType = any>(
         {values.map((value, index) => (
           typeof value !== 'undefined' ? <Fields 
             type={type}
+            data={data}
             min={min}
             max={max}
             step={step}

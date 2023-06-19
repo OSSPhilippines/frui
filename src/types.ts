@@ -384,6 +384,7 @@ export type FieldsetConfig<ValueType = any> = {
 export type FieldsetProps<ValueType = any> = ExtendsType<ButtonProps, {
   label?: string,
   type?: string,
+  data?: Record<string, any>,
   value?: ValueType[],
   min?: number|string,
   max?: number|string,
@@ -400,6 +401,7 @@ export type FieldsetProps<ValueType = any> = ExtendsType<ButtonProps, {
 //ex. const Fields: React.FC<FieldsProps<YOUR ROW TYPE>> = (props) => {}
 export type FieldsProps<ValueType = any> = {
   type?: string,
+  data?: Record<string, any>,
   min?: number|string,
   max?: number|string,
   step?: number|string,

@@ -62,6 +62,7 @@ import FormatTable from '../src/react/FormatTable';
 import FormatTaglist from '../src/react/FormatTaglist';
 import FormatText from '../src/react/FormatText'; 
 import FormatYesno from '../src/react/FormatYesno';
+
 const PrettyCode = ({ code }: {code: string}) => {
   let spaces = 0;
   let pad = 0;
@@ -104,6 +105,11 @@ const App = () => {
     {label: (<em className="font-bold">Option 2</em>), value: 'option-2', keyword: 'option2'},
     {label: 'Option 3', value: 'option-3', keyword: 'option3'},
   ];
+  const options2 = {
+    'option-a': 'Option A',
+    'option-b': 'Option B',
+    'option-c': 'Option C'
+  };
   
   return (
     <div style={{ padding: '8px' }}>
@@ -543,18 +549,17 @@ const App = () => {
         `} />
         <div style={{ padding: '10px 0', marginTop: '40px' }}>
           <Control label="Select Dropdown With Errors" style={{ position: 'relative', zIndex: 99 }} error="something">
-            <Select options={options} onUpdate={console.log} error={true} searchable={true} />
+            <Select options={options2} onUpdate={console.log} error={true} searchable={true} />
           </Control>
         </div>
         <PrettyCode code={`
-          const options = [
-            {label: 'Option 1', value: 'option-1'},
-            {label: (<em className="font-bold">Option 2</em>), value: 'option-2'},
-            {label: 'Option 3', value: 'option-3'},
-          ];
-
+          const options2 = {
+            'option-a': 'Option A',
+            'option-b': 'Option B',
+            'option-c': 'Option C'
+          };
           <Control label="Select Dropdown With Errors" style={{ position: 'relative', zIndex: 99 }} error="something">
-            <Select options={options} onUpdate={console.log} error={true} searchable={true} />
+            <Select options={options2} onUpdate={console.log} error={true} searchable={true} />
           </Control>
         `} />
         <div style={{ padding: '10px 0', marginTop: '40px' }}>

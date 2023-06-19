@@ -1,6 +1,7 @@
 //types
 import type { 
   FieldSelectDropdownProps, 
+  FieldSelectOption,
   FieldSelectProps 
 } from '../types';
 //react
@@ -20,7 +21,6 @@ import {
  */
 export const Dropdown: React.FC<FieldSelectDropdownProps> = (props) => {
   const { 
-    options, 
     show, 
     error,
     searchable,
@@ -30,6 +30,13 @@ export const Dropdown: React.FC<FieldSelectDropdownProps> = (props) => {
     search, 
     match 
   } = props;
+
+  //we need to change from {k:v} to [{value: k, label: v}]
+  const options: FieldSelectOption[] = (
+    typeof props.options === 'object' && !Array.isArray(props.options)
+  ) ? Object.keys(props.options).map(value => ({ 
+    value, label: (props.options as Record<string, string>)[value] 
+  })) : props.options;
 
   const map = {
     styles: makeGroupStyles(styles, {

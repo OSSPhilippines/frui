@@ -346,7 +346,7 @@ export type FieldSelectConfig = {
   onUpdate?: (value: string|number) => void
 };
 export type FieldSelectDropdownProps = { 
-  options: FieldSelectOption[]
+  options: FieldSelectOption[]|Record<string, string>
   show: boolean,
   error?: boolean,
   searchable?: boolean,
@@ -358,7 +358,7 @@ export type FieldSelectDropdownProps = {
 };
 export type FieldSelectProps = {
   value?: FieldSelectOption,
-  options: FieldSelectOption[],
+  options: FieldSelectOption[]|Record<string, string>,
   searchable?: boolean,
   placeholder?: string,
   error?: boolean,

@@ -175,6 +175,16 @@ const App = () => {
           </Control>
         `} />
         <div style={{ padding: '10px 0', marginTop: '40px' }}>
+          <Control label="Slug Field (camel)">
+            <FieldSlug defaultValue="some value 4" camel onUpdate={console.log} />
+          </Control>
+        </div>
+        <PrettyCode code={`
+          <Control label="Slug Field (camel)">
+            <FieldSlug defaultValue="some value 4" camel onUpdate={console.log} />
+          </Control>
+        `} />
+        <div style={{ padding: '10px 0', marginTop: '40px' }}>
           <Control label="Single File Input">
             <FieldFile
               defaultValue="foobar"

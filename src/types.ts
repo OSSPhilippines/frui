@@ -417,13 +417,15 @@ export type FieldsProps<ValueType = any> = {
 //Field slug component
 export type FieldSlugConfig = FieldInputConfig & {
   dash?: boolean,
-  line?: boolean
+  line?: boolean,
+  camel?: boolean,
   value: string|number|readonly string[]|undefined,
   defaultValue?: string|number|readonly string[]|undefined
 };
 export type FieldSlugProps = FieldInputProps & {
   dash?: boolean,
-  line?: boolean
+  line?: boolean,
+  camel?: boolean
 };
 
 // Field switch component

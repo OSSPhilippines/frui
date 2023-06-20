@@ -7,6 +7,7 @@ const FieldSlug: React.FC<FieldSlugProps> = (props) => {
   const { 
     dash,
     line,
+    camel,
     value: rawValue, 
     defaultValue: rawDefaultValue, 
     onChange,
@@ -16,6 +17,7 @@ const FieldSlug: React.FC<FieldSlugProps> = (props) => {
   const { value, defaultValue, change } = useFieldSlug({
     dash,
     line,
+    camel,
     value: rawValue, 
     defaultValue: rawDefaultValue,
     onChange

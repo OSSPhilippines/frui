@@ -108,3 +108,19 @@ export function slugify(str: string, noDash = false, noLine = false) {
     //convert to lowercase
     .toLowerCase();
 };
+
+export function camelfy(str: string) {
+  return str.trim()
+    //replace special characters with underscores
+    .replace(/[^a-zA-Z0-9]/g, '_')
+    //replace multiple underscores with a single underscore
+    .replace(/_{2,}/g, '_')
+    //trim underscores from the beginning and end of the string
+    .replace(/^_+|_+$/g, '')
+    //replace underscores with capital
+    .replace(/([-_][a-z0-9])/ig, ($1) => {
+      return $1.toUpperCase()
+        .replace('-', '')
+        .replace('_', '');
+    });
+}

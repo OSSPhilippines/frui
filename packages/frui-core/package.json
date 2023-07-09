@@ -1,17 +1,21 @@
 {
   "name": "frui-core",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "license": "MIT",
   "description": "Core library of FRUI",
   "author": "Chris <chris@incept.asia>",
   "homepage": "https://github.com/OSSPhilippines/frui",
   "bugs": "https://github.com/OSSPhilippines/frui/issues",
   "repository": "OSSPhilippines/frui",
-  "types": "index.d.ts",
+  "files": [
+    "LICENSE",
+    "package.json",
+    "README.md",
+    "dist",
+    "tsconfig.json"
+  ],
   "scripts": {
-    "build": "npm run build:tsc && npm run build:files",
-    "build:tsc": "tsc",
-    "build:files": "cp ./README.md ./dist/ && cp ./package.json ./dist/ && cp ./LICENSE ./dist/"
+    "build": "tsc"
   },
   "peerDependencies": {
     "react": "^18.0.0"

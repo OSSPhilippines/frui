@@ -1,6 +1,6 @@
 {
   "name": "frui-react",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "license": "MIT",
   "description": "A collection of vanilla react components written in typescript.",
   "author": "Chris <chris@incept.asia>",

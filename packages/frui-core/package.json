@@ -1,0 +1,26 @@
+{
+  "name": "frui-core",
+  "version": "0.0.20",
+  "license": "MIT",
+  "description": "Core library of FRUI",
+  "author": "Chris <chris@incept.asia>",
+  "homepage": "https://github.com/OSSPhilippines/frui",
+  "bugs": "https://github.com/OSSPhilippines/frui/issues",
+  "repository": "OSSPhilippines/frui",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "npm run build:tsc && npm run build:files",
+    "build:tsc": "tsc",
+    "build:files": "cp ./README.md ./dist/ && cp ./package.json ./dist/ && cp ./LICENSE ./dist/"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.2.5",
+    "@types/react": "18.0.26",
+    "react": "18.2.0",
+    "ts-node": "10.9.1",
+    "typescript": "5.0.4"
+  }
+}

@@ -40,7 +40,7 @@ const Control: React.FC<ControlProps> = (props) => {
 
   return (
     <div style={map.styles.container} className={map.classNames.container}>
-      {label && (
+      {!!label && (
         <label style={map.styles.label} className={map.classNames.label}>
           {label}
         </label>
@@ -48,7 +48,7 @@ const Control: React.FC<ControlProps> = (props) => {
       <div style={map.styles.field} className={map.classNames.field}>
         {children}
       </div>
-      {error?.length && (
+      {!!error && error?.length > 0 && (
         <div className={map.classNames.error} style={map.styles.error}>
           {error}
         </div>

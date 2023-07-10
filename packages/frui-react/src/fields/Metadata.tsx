@@ -20,11 +20,8 @@ import { makeGroupStyles, makeGroupClasses } from 'frui-core/dist/utils';
  * Key/Value Component 
  */
 const Fields: React.FC<FieldsProps<MetadataType>> = (props) => {
-  const { 
-    type,
-    min, 
-    max,
-    step,
+  const {
+    data = {},
     values, 
     index, 
     error,
@@ -33,13 +30,15 @@ const Fields: React.FC<FieldsProps<MetadataType>> = (props) => {
     classNames,
     set
   } = props;
+  //props
+  const { type, min, max, step, placeholder } = data;
+  //hooks
   const { handlers, input } = useMetadata({ 
-    type, 
+    type,
     values, 
     index, 
     set 
   });
-  
   //variables
   const value = values ? values[index]: undefined;
   const map = {
@@ -98,6 +97,7 @@ const Fields: React.FC<FieldsProps<MetadataType>> = (props) => {
       <Input 
         style={map.styles.name}
         className={map.classNames.name}
+        placeholder={Array.isArray(placeholder) ? placeholder[0]: undefined}
         defaultValue={Array.isArray(value) ? value[0]: undefined}
         onUpdate={name => handlers.update('name', name)}
         error={error}
@@ -108,6 +108,7 @@ const Fields: React.FC<FieldsProps<MetadataType>> = (props) => {
           type={type}
           style={map.styles.value}
           className={map.classNames.value}
+          placeholder={Array.isArray(placeholder) ? placeholder[1]: undefined}
           defaultValue={Array.isArray(value) ? value[1] as string|number: undefined}
           onUpdate={value => handlers.update('value', value)}
           error={error}
@@ -121,6 +122,7 @@ const Fields: React.FC<FieldsProps<MetadataType>> = (props) => {
           step={step}
           style={map.styles.value}
           className={map.classNames.value}
+          placeholder={Array.isArray(placeholder) ? placeholder[1]: undefined}
           defaultValue={Array.isArray(value) ? value[1] as string|number: undefined}
           onUpdate={(value: string) => handlers.update('value', value)}
           error={error}
@@ -132,6 +134,7 @@ const Fields: React.FC<FieldsProps<MetadataType>> = (props) => {
           type="date"
           style={map.styles.value}
           className={map.classNames.value}
+          placeholder={Array.isArray(placeholder) ? placeholder[1]: undefined}
           defaultValue={Array.isArray(value) ? value[1]: undefined}
           onUpdate={value => handlers.update('value', value)}
           error={error}
@@ -143,6 +146,7 @@ const Fields: React.FC<FieldsProps<MetadataType>> = (props) => {
           type="time"
           style={map.styles.value}
           className={map.classNames.value}
+          placeholder={Array.isArray(placeholder) ? placeholder[1]: undefined}
           defaultValue={Array.isArray(value) ? value[1]: undefined}
           onUpdate={(value: string) => handlers.update('value', value)}
           error={error}
@@ -154,6 +158,7 @@ const Fields: React.FC<FieldsProps<MetadataType>> = (props) => {
           type="datetime-local"
           style={map.styles.value}
           className={map.classNames.value}
+          placeholder={Array.isArray(placeholder) ? placeholder[1]: undefined}
           defaultValue={Array.isArray(value) ? value[1]: undefined}
           onUpdate={(value) => handlers.update('value', value)}
           error={error}

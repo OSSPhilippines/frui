@@ -736,10 +736,7 @@ const App = () => {
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Meta Numbers With Errors" error="something">
               <Metadata 
-                type="number"
-                min="0"
-                max="10000000"
-                step="0.01"
+                data={{ type: 'number', min: 0, max: 10000000, step: 0.01 }}
                 value={[['a', 2.05], ['c', 10000]]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
                 error={true}
@@ -749,10 +746,7 @@ const App = () => {
           <PrettyCode code={`
             <Control label="Meta Numbers With Errors" error="something">
               <Metadata 
-                type="number"
-                min="0"
-                max="10000000"
-                step="0.01"
+                data={{ type: 'number', min: 0, max: 10000000, step: 0.01 }}
                 value={[['a', 2.05], ['c', 10000]]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
                 error={true}
@@ -762,7 +756,7 @@ const App = () => {
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Meta Dates">
               <Metadata 
-                type="date"
+                data={{ type: 'date' }}
                 value={[['a', Date.now()], ['c', new Date]]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
               />
@@ -771,7 +765,7 @@ const App = () => {
           <PrettyCode code={`
             <Control label="Meta Dates">
               <Metadata 
-                type="date"
+                data={{ type: 'date' }}
                 value={[['a', Date.now()], ['c', new Date]]}  
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
               />
@@ -780,7 +774,7 @@ const App = () => {
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Meta Times" className="text-xs my-4">
               <Metadata 
-                type="time"
+                data={{ type: 'time' }}
                 value={[['a', Date.now()], ['c', new Date]]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
               />
@@ -789,7 +783,7 @@ const App = () => {
           <PrettyCode code={`
             <Control label="Meta Times" className="text-xs my-4">
               <Metadata 
-                type="time"
+                data={{ type: 'time' }}
                 value={[['a', Date.now()], ['c', new Date]]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
               />
@@ -798,7 +792,7 @@ const App = () => {
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Meta Datetimes With Errors" error="something">
               <Metadata 
-                type="datetime"
+                data={{ type: 'datetime' }}
                 value={[['a', Date.now()], ['c', new Date]]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
                 error={true}
@@ -808,7 +802,7 @@ const App = () => {
           <PrettyCode code={`
             <Control label="Meta Datetimes With Errors" error="something">
               <Metadata 
-                type="datetime"
+                data={{ type: 'datetime' }}
                 value={[['a', Date.now()], ['c', new Date]]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
                 error={true}

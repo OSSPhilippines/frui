@@ -23,6 +23,7 @@ import {
  */
 const Fields: React.FC<FieldsProps<TextlistType>> = (props) => {
   const { 
+    data,
     values, 
     index, 
     error,
@@ -30,6 +31,9 @@ const Fields: React.FC<FieldsProps<TextlistType>> = (props) => {
     classNames,
     set
   } = props;
+
+  const placeholder = data?.placeholder as string | undefined;
+
   //variables
   const map = {
     styles: makeGroupStyles(styles, {
@@ -59,6 +63,7 @@ const Fields: React.FC<FieldsProps<TextlistType>> = (props) => {
       <Input 
         style={styles !== false ? map.styles.value : false}
         className={map.classNames.value}
+        placeholder={placeholder}
         defaultValue={values ? values[index]: undefined}
         onUpdate={handlers.update}
         error={error}

@@ -19,10 +19,6 @@ export default function make<ValueType = any>(
     //extract props
     const { 
       add,
-      min,
-      max,
-      step,
-      type,
       data,
       value, 
       emptyValue, 
@@ -46,11 +42,7 @@ export default function make<ValueType = any>(
       <>
         {values.map((value, index) => (
           typeof value !== 'undefined' ? <Fields 
-            type={type}
             data={data}
-            min={min}
-            max={max}
-            step={step}
             key={index} 
             index={index}
             values={values}

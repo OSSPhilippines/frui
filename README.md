@@ -21,9 +21,17 @@ $ npm install frui
 You can start importing components like the following.
 
 ```js
-import { Alert, FieldInput, FormatMarkdown } from 'frui/react';
+import { Loader, fields, formats } from 'frui';
+const { Datetime } = fields;
+const { Overflow } = formats;
 //or
-import FieldSelect from 'frui/react/FieldSelect';
+import { Alert, Badge } from 'frui-react';
+import { Input, Password } from 'frui-react/fields';
+import { HTML, Markdown } from 'frui-react/formats';
+//or
+import Table, { Thead, Trow, Tcol } from 'frui-react/Table';
+import Select from 'frui-react/fields/Select';
+import Email from 'frui-react/formats/Email';
 ```
 
 ## Tailwind Setup
@@ -49,9 +57,13 @@ Tailwind components in `frui` has also been written from the ground up
 and you can importing components like the following.
 
 ```js
-import { Alert, FieldInput, FormatMarkdown } from 'frui/tailwind';
+import { Alert, Badge } from 'frui-tailwind';
+import { Input, Password } from 'frui-tailwind/fields';
+import { HTML, Markdown } from 'frui-tailwind/formats';
 //or
-import FieldSelect from 'frui/tailwind/FieldSelect';
+import Table, { Thead, Trow, Tcol } from 'frui-react/Table';
+import Select from 'frui-tailwind/fields/Select';
+import Email from 'frui-tailwind/formats/Email';
 ```
 
 ## Components (13)

@@ -1,6 +1,6 @@
 {
   "name": "frui",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "license": "MIT",
   "description": "A collection of vanilla react and tailwind components written in typescript.",
   "author": "Chris <chris@incept.asia>",
@@ -22,8 +22,8 @@
     "dev": "webpack serve --mode development"
   },
   "dependencies": {
-    "frui-react": "0.0.22",
-    "frui-tailwind": "0.0.22"
+    "frui-react": "0.0.23",
+    "frui-tailwind": "0.0.23"
   },
   "devDependencies": {
     "@types/node": "20.2.5",

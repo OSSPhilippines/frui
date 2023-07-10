@@ -18,7 +18,7 @@ export default function make<ValueType = any>(
   const Fieldset: React.FC<FieldsetProps<ValueType>> = (props) => {
     //extract props
     const { 
-      label,
+      add,
       min,
       max,
       step,
@@ -68,7 +68,7 @@ export default function make<ValueType = any>(
           type="button"
         >
           <span className="mr-0.5">&#43;</span>
-          {label || 'Add'}
+          {add || 'Add'}
         </Button>
       </>
     );

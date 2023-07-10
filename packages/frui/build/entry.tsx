@@ -709,12 +709,12 @@ const App = () => {
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Textlist With Errors" error="something">
-              <Textlist label="Add Option" value={['c', 'd']} onUpdate={console.log} error={true} />
+              <Textlist add="Add Option" value={['c', 'd']} onUpdate={console.log} error={true} />
             </Control>
           </div>
           <PrettyCode code={`
             <Control label="Textlist With Errors" error="something">
-              <Textlist label="Add Option" value={['c', 'd']} onUpdate={console.log} error={true} />
+              <Textlist add="Add Option" value={['c', 'd']} onUpdate={console.log} error={true} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>

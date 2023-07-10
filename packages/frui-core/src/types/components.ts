@@ -87,7 +87,7 @@ export type FieldsetConfig<ValueType = any> = {
 //use this type in your custom fieldset wrapper
 //ex. const Custom: React.FC<FieldsetProps<YOUR ROW TYPE>> = (props) => {}
 export type FieldsetProps<ValueType = any> = ExtendsType<ButtonProps, {
-  label?: string,
+  add?: string,
   type?: string,
   data?: Record<string, any>,
   value?: ValueType[],

@@ -4,7 +4,7 @@ import type { CountryOption, CountryConfig } from '../types/fields';
 import countries from '../data/countries.json';
 
 export default function useSelectCountry(config: CountryConfig) {
-  const { value, map } = config;
+  const { value, defaultValue, map } = config;
   //generate options
   const options = countries
     .filter(country => country.currencyType === 'fiat')
@@ -15,7 +15,12 @@ export default function useSelectCountry(config: CountryConfig) {
         option => option.value?.countryCode === value
       )[0] as CountryOption
     : undefined;
-
-  return { selected, options };
   
+  const selectedDefault = typeof defaultValue === 'string' 
+    ? options.filter(
+        option => option.value?.countryCode === defaultValue
+      )[0] as CountryOption
+    : undefined;
+
+  return { selected, selectedDefault, options };
 };

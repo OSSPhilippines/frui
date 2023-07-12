@@ -11,9 +11,15 @@ import useCurrency from 'frui-core/dist/hooks/useCurrency';
  * Styled Currency  Component (Main)
  */
 const Currency: React.FC<CurrencyProps> = (props) => {
-  const { value, placeholder = 'Choose a Currency', ...attributes } = props;
-  const { selected, options } = useCurrency({
+  const { 
+    value,
+    defaultValue,
+    placeholder = 'Choose a Currency', 
+    ...attributes 
+  } = props;
+  const { selected, selectedDefault, options } = useCurrency({
     value, 
+    defaultValue, 
     map: country => ({
       label: (
         <>
@@ -39,6 +45,7 @@ const Currency: React.FC<CurrencyProps> = (props) => {
       {...attributes} 
       placeholder={placeholder} 
       value={selected} 
+      defaultValue={selectedDefault}
       options={options} 
       searchable={true} 
     />

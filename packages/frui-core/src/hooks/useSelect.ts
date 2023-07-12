@@ -2,11 +2,12 @@
 import type { KeyboardEvent } from 'react';
 import type { SelectOption, SelectConfig } from '../types/fields';
 //hooks
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function useSelect(config: SelectConfig) {
   const { 
     value,
+    defaultValue,
     onDropdown,
     onSelected,
     onUpdate
@@ -15,7 +16,7 @@ export default function useSelect(config: SelectConfig) {
   //search query string
   const [ query, setQuery ] = useState('');
   //selected option
-  const [ selected, setSelected ] = useState(value);
+  const [ selected, setSelected ] = useState(defaultValue);
   //whether to show dropdown
   const [ showing, show ] = useState(false);
   //handlers
@@ -64,6 +65,13 @@ export default function useSelect(config: SelectConfig) {
       onUpdate && onUpdate(option.value);
     }
   };
+
+  //for controlled states we should update 
+  //the values when the value prop changes
+  useEffect(() => {
+    if (!value) return;
+    setSelected(value)
+  }, [ value ]);
 
   return { selected, showing, handlers };
   

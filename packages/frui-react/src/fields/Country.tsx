@@ -11,9 +11,15 @@ import useSelectCountry from 'frui-core/dist/hooks/useCountry';
  * Styled Country  Component (Main)
  */
 const Country: React.FC<CountryProps> = (props) => {
-  const { value, placeholder = 'Choose a Country', ...attributes } = props;
-  const { selected, options } = useSelectCountry({
+  const { 
     value, 
+    defaultValue, 
+    placeholder = 'Choose a Country', 
+    ...attributes 
+  } = props;
+  const { selected, selectedDefault, options } = useSelectCountry({
+    value, 
+    defaultValue,
     map: country => ({
       label: (
         <>
@@ -22,7 +28,7 @@ const Country: React.FC<CountryProps> = (props) => {
             src={`https://flagcdn.com/w40/${country.countryCode.toLowerCase()}.png`} 
             loading="lazy"
           />
-          <span className="inline-block ml-2">{country.countryName}</span>  
+          <span style={{ display: 'inline-block', marginLeft: '4px' }}>{country.countryName}</span>  
         </>
       ),
       value: country,
@@ -37,6 +43,7 @@ const Country: React.FC<CountryProps> = (props) => {
       {...attributes} 
       placeholder={placeholder} 
       value={selected} 
+      defaultValue={selectedDefault}
       options={options} 
       searchable={true} 
     />

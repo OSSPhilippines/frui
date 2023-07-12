@@ -11,9 +11,15 @@ import useCountry from 'frui-core/dist/hooks/useCountry';
  * Styled Country  Component (Main)
  */
 const Country: React.FC<CountryProps> = (props) => {
-  const { value, placeholder = 'Choose a Country', ...attributes } = props;
-  const { selected, options } = useCountry({
+  const { 
     value, 
+    defaultValue, 
+    placeholder = 'Choose a Country', 
+    ...attributes 
+  } = props;
+  const { selected, selectedDefault, options } = useCountry({
+    value, 
+    defaultValue, 
     map: country => ({
       label: (
         <>
@@ -37,6 +43,7 @@ const Country: React.FC<CountryProps> = (props) => {
       {...attributes} 
       placeholder={placeholder} 
       value={selected} 
+      defaultValue={selectedDefault}
       options={options} 
       searchable={true} 
     />

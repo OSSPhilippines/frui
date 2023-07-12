@@ -21,6 +21,7 @@ export default function make<ValueType = any>(
       add,
       data,
       value, 
+      defaultValue,
       emptyValue, 
       error,
       errorColor = '#DC3545',
@@ -33,6 +34,7 @@ export default function make<ValueType = any>(
 
     const { values, handlers } = useFieldset({
       value, 
+      defaultValue,
       emptyValue, 
       onChange, 
       onUpdate

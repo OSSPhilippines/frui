@@ -80,6 +80,7 @@ export type ControlProps = {
 // Fieldset component
 export type FieldsetConfig<ValueType = any> = {
   value?: ValueType[],
+  defaultValue?: ValueType[],
   emptyValue?: ValueType,
   onChange?: (values: ValueType[]) => void,
   onUpdate?: (values: ValueType[]) => void
@@ -90,6 +91,7 @@ export type FieldsetProps<ValueType = any> = ExtendsType<ButtonProps, {
   add?: string,
   data?: Record<string, any>,
   value?: ValueType[],
+  defaultValue?: ValueType[],
   emptyValue?: ValueType,
   error?: boolean,
   errorColor?: string,

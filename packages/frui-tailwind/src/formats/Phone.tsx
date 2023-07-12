@@ -7,9 +7,7 @@ import Link from './Link';
 
 const Phone: React.FC<PhoneProps> = ({ value, ...attributes }) => {
   return (
-    <Link {...attributes} value={`tel:${value}`}>
-      {value}
-    </Link>
+    <Link {...attributes} value={`tel:${value}`} label={value} />
   );
 };
 

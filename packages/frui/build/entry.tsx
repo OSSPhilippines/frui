@@ -1,4 +1,6 @@
-import React from 'react';
+import type { SelectOption } from 'frui-core/dist/types/fields';
+
+import React, { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import Button from 'frui-react/dist/Button';
@@ -9,15 +11,15 @@ import Loader from 'frui-react/dist/Loader';
 
 import Control from 'frui-react/dist/Control';
 
-import FieldInput from 'frui-react/dist/fields/Input';
-import FieldSlug from 'frui-react/dist/fields/Slug';
-import FieldNumber from 'frui-react/dist/fields/Number';
+import Input from 'frui-react/dist/fields/Input';
+import Slug from 'frui-react/dist/fields/Slug';
+import NumberField from 'frui-react/dist/fields/Number';
 import Password from 'frui-react/dist/fields/Password';
 import InputMask from 'frui-react/dist/fields/Mask';
-import FieldFile from 'frui-react/dist/fields/File';
-import FieldFilelist from 'frui-react/dist/fields/Filelist';
-import FieldImage from 'frui-react/dist/fields/Image';
-import FieldImagelist from 'frui-react/dist/fields/Imagelist';
+import File from 'frui-react/dist/fields/File';
+import Filelist from 'frui-react/dist/fields/Filelist';
+import Image from 'frui-react/dist/fields/Image';
+import Imagelist from 'frui-react/dist/fields/Imagelist';
 
 import Textarea from 'frui-react/dist/fields/Textarea';
 import Markdown from 'frui-react/dist/fields/Markdown';
@@ -32,9 +34,9 @@ import SelectCurrency from 'frui-react/dist/fields/Currency';
 
 import Autocomplete from 'frui-react/dist/fields/Autocomplete';
 
-import FieldDate from 'frui-react/dist/fields/Date';
-import FieldTime from 'frui-react/dist/fields/Time';
-import FieldDatetime from 'frui-react/dist/fields/Datetime';
+import DateField from 'frui-react/dist/fields/Date';
+import Time from 'frui-react/dist/fields/Time';
+import Datetime from 'frui-react/dist/fields/Datetime';
 
 import Taglist from 'frui-react/dist/fields/Taglist';
 import Textlist from 'frui-react/dist/fields/Textlist';
@@ -110,6 +112,29 @@ const App = () => {
     'option-b': 'Option B',
     'option-c': 'Option C'
   };
+
+  //controlled states
+  const [ num, setNum ] = React.useState(0);
+  const [ textlist, setTextlist ] = React.useState<string[]>([]);
+  const [ metadata, setMetadata ] = React.useState<Record<string, string>>({});
+  const [ select, setSelect ] = React.useState<SelectOption>();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNum(num => num + 1);
+    }, 5000);
+
+    const timeout = setTimeout(() => {
+      setTextlist(['z', 'y', 'x']);
+      setMetadata({ z: 'x', y: 'y', x: 'z'});
+      setSelect({ label: 'Option 3', value: 'option-3', keyword: 'option3' });
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    }
+  }, []);
 
   const [ tab, setTabs ] = React.useState(0);
   
@@ -201,67 +226,73 @@ const App = () => {
           </p>
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Input Field">
-              <FieldInput defaultValue="value 1" onUpdate={console.log} />
+              <Input defaultValue="value 1" onUpdate={console.log} />
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Input from 'frui-react/fields/Input'
+            
             <Control label="Input Field">
-              <FieldInput defaultValue="value 1" onUpdate={console.log} />
+              <Input defaultValue="value 1" onUpdate={console.log} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Input With Error" error="something" >
-              <FieldInput error={true} />
+              <Input error={true} />
             </Control>
           </div>
           <PrettyCode code={`
             <Control label="Input With Error" error="something" >
-              <FieldInput error={true} />
+              <Input error={true} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Slug Field">
-              <FieldSlug defaultValue="value 1" onUpdate={console.log} />
+              <Slug defaultValue="value 1" onUpdate={console.log} />
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Slug from 'frui-react/fields/Slug'
+
             <Control label="Slug Field">
-              <FieldSlug defaultValue="value 1" onUpdate={console.log} />
+              <Slug defaultValue="value 1" onUpdate={console.log} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Slug Field (only dashes)">
-              <FieldSlug defaultValue="value 2" dash onUpdate={console.log} />
+              <Slug defaultValue="value 2" dash onUpdate={console.log} />
             </Control>
           </div>
           <PrettyCode code={`
             <Control label="Slug Field (only dashes)">
-              <FieldSlug defaultValue="value 2" dash onUpdate={console.log} />
+              <Slug defaultValue="value 2" dash onUpdate={console.log} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Slug Field (only lines)">
-              <FieldSlug defaultValue="value 3" line onUpdate={console.log} />
+              <Slug defaultValue="value 3" line onUpdate={console.log} />
             </Control>
           </div>
           <PrettyCode code={`
             <Control label="Slug Field (only lines)">
-              <FieldSlug defaultValue="value 3" line onUpdate={console.log} />
+              <Slug defaultValue="value 3" line onUpdate={console.log} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Slug Field (camel)">
-              <FieldSlug defaultValue="some value 4" camel onUpdate={console.log} />
+              <Slug defaultValue="some value 4" camel onUpdate={console.log} />
             </Control>
           </div>
           <PrettyCode code={`
             <Control label="Slug Field (camel)">
-              <FieldSlug defaultValue="some value 4" camel onUpdate={console.log} />
+              <Slug defaultValue="some value 4" camel onUpdate={console.log} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Single File Input">
-              <FieldFile
+              <File
                 defaultValue="foobar"
                 onUpload={(files, then) => {
                   setTimeout(() => {
@@ -273,8 +304,11 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import File from 'frui-react/fields/File'
+
             <Control label="Single File Input">
-              <FieldFile
+              <File
                 defaultValue="foobar"
                 onUpload={(files, then) => {
                   //just a mock call
@@ -293,7 +327,7 @@ const App = () => {
           </p>
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Multi File Input">
-              <FieldFilelist
+              <Filelist
                 defaultValue={['foo', 'bar']}
                 onUpload={(files, then) => {
                   setTimeout(() => {
@@ -308,8 +342,11 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Filelist from 'frui-react/fields/Filelist'
+
             <Control label="Multi File Input">
-              <FieldFilelist
+              <Filelist
                 defaultValue={['foo', 'bar']}
                 onUpload={(files, then) => {
                   //just a mock call
@@ -326,7 +363,7 @@ const App = () => {
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Single Image Input">
-              <FieldImage
+              <Image
                 defaultValue="https://raw.githubusercontent.com/inceptjs/incept.js/main/docs/assets/incept-logo-square-1.png"
                 onUpload={(files, then) => {
                   setTimeout(() => {
@@ -338,8 +375,11 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Image from 'frui-react/fields/Image'
+
             <Control label="Single Image Input">
-              <FieldImage
+              <Image
                 defaultValue="https://raw.githubusercontent.com/inceptjs/incept.js/main/docs/assets/incept-logo-square-1.png"
                 onUpload={(files, then) => {
                   //just a mock call
@@ -353,7 +393,7 @@ const App = () => {
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Multi Image Input">
-              <FieldImagelist
+              <Imagelist
                 defaultValue={[
                   'https://raw.githubusercontent.com/inceptjs/incept.js/main/docs/assets/incept-logo-square-1.png', 
                   'https://raw.githubusercontent.com/inceptjs/incept.js/main/docs/assets/incept-logo-long.png'
@@ -371,8 +411,11 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Imagelist from 'frui-react/fields/Imagelist'
+
             <Control label="Multi Image Input">
-              <FieldImagelist
+              <Imagelist
                 defaultValue={[
                   'https://raw.githubusercontent.com/inceptjs/incept.js/main/docs/assets/incept-logo-square-1.png', 
                   'https://raw.githubusercontent.com/inceptjs/incept.js/main/docs/assets/incept-logo-long.png'
@@ -392,22 +435,41 @@ const App = () => {
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Number Input">
-              <FieldNumber defaultValue={1900.01} onUpdate={console.log} />
+              <NumberField defaultValue={1900.01} onUpdate={console.log} />
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import NumberField from 'frui-react/fields/Number'
+
             <Control label="Number Input">
-              <FieldNumber defaultValue={1900.01} onUpdate={console.log} />
+              <NumberField defaultValue={1900.01} onUpdate={console.log} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Number Input With Error" error="something">
-              <FieldNumber defaultValue="1900.01" min="0" max="2000" onUpdate={console.log} />
+              <NumberField defaultValue="1900.01" min="0" max="2000" onUpdate={console.log} />
             </Control>
           </div>
           <PrettyCode code={`
             <Control label="Number Input With Error" error="something">
-              <FieldNumber defaultValue="1900.01" min="0" max="2000" onUpdate={console.log} />
+              <NumberField defaultValue="1900.01" min="0" max="2000" onUpdate={console.log} />
+            </Control>
+          `} />
+
+          <div style={{ padding: '10px 0', marginTop: '40px' }}>
+            <Control label="Number Input (Controlled State Value)">
+              <NumberField value={num} onUpdate={console.log} />
+            </Control>
+          </div>
+          <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import NumberField from 'frui-react/fields/Number'
+
+            const [ num, setNum ] = useState(0)
+
+            <Control label="Number Input (Controlled State Value)">
+              <NumberField defaultValue={num} onUpdate={console.log} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
@@ -416,6 +478,9 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Password from 'frui-react/fields/Password'
+
             <Control label="Password Input">
               <Password onUpdate={console.log} />
             </Control>
@@ -436,8 +501,11 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Mask from 'frui-react/fields/Mask'
+
             <Control label="Input Mask">
-              <InputMask mask="9999-9999-9999-9999" onUpdate={console.log} />
+              <Mask mask="9999-9999-9999-9999" onUpdate={console.log} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
@@ -447,7 +515,7 @@ const App = () => {
           </div>
           <PrettyCode code={`
             <Control label="Input Mask With Error" error="something" >
-              <InputMask mask="9(999) 999-999" error={true} />
+              <Mask mask="9(999) 999-999" error={true} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
@@ -456,6 +524,9 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Textarea from 'frui-react/fields/Textarea'
+
             <Control label="Textarea">
               <Textarea defaultValue="value 1" onUpdate={console.log} />
             </Control>
@@ -476,6 +547,9 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Markdown from 'frui-react/fields/Markdown'
+
             <Control label="Markdown" className="text-xs my-4">
               <Markdown defaultValue="A paragraph with *emphasis* and **strong importance**" onUpdate={console.log} />
             </Control>
@@ -490,6 +564,8 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
+            import Radio from 'frui-react/fields/Radio'
+
             <Radio label="Radio A" checked={radio1 === 1} onChange={() => setRadio1(1)} />
             <Radio label="Radio B" check color="#FF893C" checked={radio1 === 2} onChange={() => setRadio1(2)} />
             <Radio label="Radio C" square solid sharp checked={radio1 === 3} onChange={() => setRadio1(3)} />
@@ -518,6 +594,8 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
+            import Checkbox from 'frui-react/fields/Checkbox'
+
             <Checkbox label="Checkbox A" />
             <Checkbox label="Checkbox B" color="#FF893C" circle sharp />
             <Checkbox label="Checkbox C" solid square />
@@ -546,6 +624,8 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
+            import Switch from 'frui-react/fields/Switch'
+
             <Switch label="Switch A" value="1" onUpdate={console.log} />
             <Switch label="Switch B" value={2} onUpdate={console.log} rounded onoff blue />
             <Switch label="Switch C" onUpdate={console.log} checkex orange knob="ridge" />
@@ -580,31 +660,35 @@ const App = () => {
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Dates">
-              <FieldDate defaultValue={new Date()} onUpdate={console.log} />
+              <DateField defaultValue={new Date()} onUpdate={console.log} />
               <div style={{ margin: '10px 0' }}></div>
-              <FieldTime defaultValue={Date.now()} onUpdate={console.log} />
+              <Time defaultValue={Date.now()} onUpdate={console.log} />
               <div style={{ margin: '10px 0' }}></div>
-              <FieldDatetime defaultValue={'2023-01-01T05:00Z'} onUpdate={console.log} />
+              <Datetime defaultValue={'2023-01-01T05:00Z'} onUpdate={console.log} />
             </Control>
           </div>
           <PrettyCode code={`
-            <FieldDate defaultValue={new Date()} onUpdate={console.log} />
-            <FieldTime defaultValue={Date.now()} onUpdate={console.log} />
-            <FieldDatetime defaultValue={'2023-01-01T05:00Z'} onUpdate={console.log} />
+            import DateField from 'frui-react/fields/Date'
+            import Time from 'frui-react/fields/Time'
+            import Datetime from 'frui-react/fields/Datetime'
+
+            <DateField defaultValue={new Date()} onUpdate={console.log} />
+            <Time defaultValue={Date.now()} onUpdate={console.log} />
+            <Datetime defaultValue={'2023-01-01T05:00Z'} onUpdate={console.log} />
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Dates With Errors" error="something">
-              <FieldDate defaultValue={new Date()} onUpdate={console.log} error={true} />
+              <DateField defaultValue={new Date()} onUpdate={console.log} error={true} />
               <div style={{ margin: '10px 0' }}></div>
-              <FieldTime defaultValue={Date.now()} onUpdate={console.log} error={true} />
+              <Time defaultValue={Date.now()} onUpdate={console.log} error={true} />
               <div style={{ margin: '10px 0' }}></div>
-              <FieldDatetime defaultValue={'2023-01-01T05:00Z'} onUpdate={console.log} error={true} />
+              <Datetime defaultValue={'2023-01-01T05:00Z'} onUpdate={console.log} error={true} />
             </Control>
           </div>
           <PrettyCode code={`
-            <FieldDate defaultValue={new Date()} onUpdate={console.log} error={true} />
-            <FieldTime defaultValue={Date.now()} onUpdate={console.log} error={true} />
-            <FieldDatetime defaultValue={'2023-01-01T05:00Z'} onUpdate={console.log} error={true} />
+            <DateField defaultValue={new Date()} onUpdate={console.log} error={true} />
+            <Time defaultValue={Date.now()} onUpdate={console.log} error={true} />
+            <Datetime defaultValue={'2023-01-01T05:00Z'} onUpdate={console.log} error={true} />
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Autocomplete">
@@ -616,20 +700,40 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
-              <Autocomplete 
-                options={complete}
-                onQuery={remote}
-                onUpdate={console.log} 
-              />
+            import Autocomplete from 'frui-react/fields/Autocomplete'
+
+            <Autocomplete 
+              options={complete}
+              onQuery={remote}
+              onUpdate={console.log} 
+            />
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Select Dropdown" style={{ position: 'relative', zIndex: 100 }}>
-              <Select options={options} onUpdate={console.log} />
+              <Select options={options} defaultValue={{label: 'Option 1', value: 'option-1', keyword: 'option1'}} onUpdate={console.log} />
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Select from 'frui-react/fields/Select'
+
             <Control label="Select Dropdown" style={{ position: 'relative', zIndex: 100 }}>
               <Select options={options} onUpdate={console.log} />
+            </Control>
+          `} />
+          <div style={{ padding: '10px 0', marginTop: '40px' }}>
+            <Control label="Select Dropdown (Controlled State Value)" style={{ position: 'relative', zIndex: 100 }}>
+              <Select options={options} value={select} onUpdate={console.log} />
+            </Control>
+          </div>
+          <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Select from 'frui-react/fields/Select'
+
+            const [ select, setSelect ] = React.useState<SelectOption>();
+
+            <Control label="Select Dropdown (Controlled State Value)" style={{ position: 'relative', zIndex: 100 }}>
+              <Select options={options} value={select} onUpdate={console.log} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
@@ -653,18 +757,21 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Country from 'frui-react/fields/Country'
+
             <Control label="Country Field" style={{ position: 'relative', zIndex: 98 }}>
-              <SelectCountry onUpdate={console.log} />
+              <Country onUpdate={console.log} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
-            <Control label="Country Field With Errors" style={{ position: 'relative', zIndex: 97 }} error="something">
+            <Control label="Country  With Errors" style={{ position: 'relative', zIndex: 97 }} error="something">
               <SelectCountry onUpdate={console.log} error={true} />
             </Control>
           </div>
           <PrettyCode code={`
-            <Control label="Country Field With Errors" style={{ position: 'relative', zIndex: 97 }} error="something">
-              <SelectCountry onUpdate={console.log} error={true} />
+            <Control label="Country  With Errors" style={{ position: 'relative', zIndex: 97 }} error="something">
+              <Country onUpdate={console.log} error={true} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
@@ -673,18 +780,21 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Currency from 'frui-react/fields/Currency'
+
             <Control label="Currency Field" style={{ position: 'relative', zIndex: 96 }}>
-              <SelectCurrency onUpdate={console.log} />
+              <Currency onUpdate={console.log} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
-            <Control label="Currency Field With Errors" error="something">
+            <Control label="Currency  With Errors" error="something">
               <SelectCurrency onUpdate={console.log} error={true} />
             </Control>
           </div>
           <PrettyCode code={`
-            <Control label="Currency Field With Errors" error="something">
-              <SelectCurrency onUpdate={console.log} error={true} />
+            <Control label="Currency  With Errors" error="something">
+              <Currency onUpdate={console.log} error={true} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
@@ -693,39 +803,63 @@ const App = () => {
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Taglist from 'frui-react/fields/Taglist'
+
             <Control label="Taglist">
               <Taglist placeholder="Yo...." value={['boo', 'far']} onUpdate={console.log} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Textlist">
-              <Textlist value={['a', 'b']} onUpdate={console.log} />
+              <Textlist defaultValue={['a', 'b']} onUpdate={console.log} />
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Textlist from 'frui-react/fields/Textlist'
+
             <Control label="Textlist">
-              <Textlist value={['a', 'b']} onUpdate={console.log} />
+              <Textlist defaultValue={['a', 'b']} onUpdate={console.log} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Textlist With Errors" error="something">
-              <Textlist add="Add Option" value={['c', 'd']} onUpdate={console.log} error={true} />
+              <Textlist add="Add Option" defaultValue={['c', 'd']} onUpdate={console.log} error={true} />
             </Control>
           </div>
           <PrettyCode code={`
             <Control label="Textlist With Errors" error="something">
-              <Textlist add="Add Option" value={['c', 'd']} onUpdate={console.log} error={true} />
+              <Textlist add="Add Option" defaultValue={['c', 'd']} onUpdate={console.log} error={true} />
+            </Control>
+          `} />
+          <div style={{ padding: '10px 0', marginTop: '40px' }}>
+            <Control label="Textlist (Controlled State Value)">
+              <Textlist value={textlist} onUpdate={console.log} />
+            </Control>
+          </div>
+          <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Textlist from 'frui-react/fields/Textlist'
+
+            const [ textlist, setTextlist ] = React.useState<string[]>([]);
+
+            <Control label="Textlist (Controlled State Value)">
+              <Textlist value={textlist} onUpdate={console.log} />
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Metadata">
               <Metadata 
-                value={[['a', 'b'], ['c', 'd']]} 
+                defaultValue={[['a', 'b'], ['c', 'd']]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))} 
               />
             </Control>
           </div>
           <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Metadata from 'frui-react/fields/Metadata'
+
             <Control label="Metadata">
               <Metadata 
                 value={[['a', 'b'], ['c', 'd']]}
@@ -734,10 +868,31 @@ const App = () => {
             </Control>
           `} />
           <div style={{ padding: '10px 0', marginTop: '40px' }}>
+            <Control label="Metadata (Controlled State Value)">
+              <Metadata 
+                value={Object.entries(metadata)} 
+                onUpdate={entries => console.log(Object.fromEntries(entries))} 
+              />
+            </Control>
+          </div>
+          <PrettyCode code={`
+            import Control from 'frui-react/Control'
+            import Metadata from 'frui-react/fields/Metadata'
+            
+            const [ metadata, setMetadata ] = React.useState<Record<string, string>>({});
+
+            <Control label="Metadata (Controlled State Value)">
+              <Metadata 
+                value={Object.entries(metadata)}
+                onUpdate={entries => console.log(Object.fromEntries(entries))}
+              />
+            </Control>
+          `} />
+          <div style={{ padding: '10px 0', marginTop: '40px' }}>
             <Control label="Meta Numbers With Errors" error="something">
               <Metadata 
                 data={{ type: 'number', min: 0, max: 10000000, step: 0.01 }}
-                value={[['a', 2.05], ['c', 10000]]} 
+                defaultValue={[['a', 2.05], ['c', 10000]]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
                 error={true}
               />
@@ -747,7 +902,7 @@ const App = () => {
             <Control label="Meta Numbers With Errors" error="something">
               <Metadata 
                 data={{ type: 'number', min: 0, max: 10000000, step: 0.01 }}
-                value={[['a', 2.05], ['c', 10000]]} 
+                defaultValue={[['a', 2.05], ['c', 10000]]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
                 error={true}
               />
@@ -757,7 +912,7 @@ const App = () => {
             <Control label="Meta Dates">
               <Metadata 
                 data={{ type: 'date' }}
-                value={[['a', Date.now()], ['c', new Date]]} 
+                defaultValue={[['a', Date.now()], ['c', new Date]]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
               />
             </Control>
@@ -766,7 +921,7 @@ const App = () => {
             <Control label="Meta Dates">
               <Metadata 
                 data={{ type: 'date' }}
-                value={[['a', Date.now()], ['c', new Date]]}  
+                defaultValue={[['a', Date.now()], ['c', new Date]]}  
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
               />
             </Control>
@@ -775,7 +930,7 @@ const App = () => {
             <Control label="Meta Times" className="text-xs my-4">
               <Metadata 
                 data={{ type: 'time' }}
-                value={[['a', Date.now()], ['c', new Date]]} 
+                defaultValue={[['a', Date.now()], ['c', new Date]]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
               />
             </Control>
@@ -784,7 +939,7 @@ const App = () => {
             <Control label="Meta Times" className="text-xs my-4">
               <Metadata 
                 data={{ type: 'time' }}
-                value={[['a', Date.now()], ['c', new Date]]} 
+                defaultValue={[['a', Date.now()], ['c', new Date]]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
               />
             </Control>
@@ -793,7 +948,7 @@ const App = () => {
             <Control label="Meta Datetimes With Errors" error="something">
               <Metadata 
                 data={{ type: 'datetime' }}
-                value={[['a', Date.now()], ['c', new Date]]} 
+                defaultValue={[['a', Date.now()], ['c', new Date]]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
                 error={true}
               />
@@ -803,7 +958,7 @@ const App = () => {
             <Control label="Meta Datetimes With Errors" error="something">
               <Metadata 
                 data={{ type: 'datetime' }}
-                value={[['a', Date.now()], ['c', new Date]]} 
+                defaultValue={[['a', Date.now()], ['c', new Date]]} 
                 onUpdate={entries => console.log(Object.fromEntries(entries))}
                 error={true}
               />
@@ -816,6 +971,8 @@ const App = () => {
             <Loader color="#006699" show={true} label="Loading..." />
           </div>
           <PrettyCode code={`
+            import Loader from 'frui-react/Loader'
+
             <Loader color="#006699" show={true} label="Loading..." />
           `} />
           <h3>Extra Small Buttons</h3>
@@ -840,6 +997,8 @@ const App = () => {
             <Button xs transparent muted>Button 15</Button>
           </div>
           <PrettyCode code={`
+            import Button from 'frui-react/Button'
+            
             <Button xs>Button XS</Button>
             <Button xs curved success>Button 1</Button>
             <Button xs rounded warning>Button 2</Button>
@@ -1047,6 +1206,8 @@ const App = () => {
             <Alert color="#006699">Alert 6</Alert>
           </div>
           <PrettyCode code={`
+            import Alert from 'frui-react/Alert'
+            
             <Alert success>Alert 1</Alert>
             <Alert warning curved>Alert 2</Alert>
             <Alert error rounded>Alert 3</Alert>
@@ -1092,6 +1253,8 @@ const App = () => {
             <Badge color="#006699">Badge 6</Badge>
           </div>
           <PrettyCode code={`
+            import Badge from 'frui-react/Badge'
+            
             <Badge success>Badge 1</Badge>
             <Badge warning curved>Badge 2</Badge>
             <Badge error rounded>Badge 3</Badge>
@@ -1189,6 +1352,8 @@ const App = () => {
             <Tfoot style={{ textAlign: 'left', backgroundColor: '#CDCDCD' }} noWrap stickyBottom stickyRight>Footer 7</Tfoot>
           </Table>
           <PrettyCode code={`
+            import Table, { Thead, Trow, Tcol, Tfoot } from 'frui-react/Table'
+            
             <Table>
               <Thead style={{ textAlign: 'left', backgroundColor: '#CDCDCD' }} noWrap stickyLeft stickyTop>Header 1</Thead>
               <Thead style={{ textAlign: 'left', backgroundColor: '#CDCDCD' }} noWrap stickyTop>Header 2</Thead>
@@ -1251,9 +1416,11 @@ const App = () => {
             </div>
           </div>
           <PrettyCode code={`
-            <FormatColor value="#D90000" lg />
-            <FormatColor value="#D90000" text={false} />
-            <FormatColor value="#D90000" box={false} />
+            import Color from 'frui-react/formats/Color'
+            
+            <Color value="#D90000" lg />
+            <Color value="#D90000" text={false} />
+            <Color value="#D90000" box={false} />
           `} />
           <h3>Country Format</h3>
           <div>
@@ -1270,9 +1437,11 @@ const App = () => {
             </div>
           </div>
           <PrettyCode code={`
-            <FormatCountry value="PH" lg />
-            <FormatCountry value="US" text={false} />
-            <FormatCountry value="GB" flag={false} />
+            import Country from 'frui-react/formats/Country'
+            
+            <Country value="PH" lg />
+            <Country value="US" text={false} />
+            <Country value="GB" flag={false} />
           `} />
           <h3>Currency Format</h3>
           <div>
@@ -1289,9 +1458,11 @@ const App = () => {
             </div>
           </div>
           <PrettyCode code={`
-            <FormatCurrency value="PHP" lg />
-            <FormatCurrency value="USD" text={false} />
-            <FormatCurrency value="USD" flag={false} />
+            import Currency from 'frui-react/formats/Currency'
+            
+            <Currency value="PHP" lg />
+            <Currency value="USD" text={false} />
+            <Currency value="USD" flag={false} />
           `} />
           <h3>Date Format</h3>
           <div>
@@ -1312,6 +1483,12 @@ const App = () => {
             </div>
           </div>
           <PrettyCode code={`
+            import DateFormat from 'frui-react/formats/Date'
+            
+            <DateFormat value="Mon, 29 May 2023 05:03:22 GMT" />
+            <DateFormat value="Mon, 29 May 2023 05:03:22 GMT" format="YYYY-MM-DD HH:MM:SS" />
+            <DateFormat value="Mon, 29 May 2023 05:03:22 GMT" format="ago" />
+            <DateFormat value="Mon, 29 May 2023 05:03:22 GMT" format="a" />
           `} />
           <div>
             <h3>Email Format</h3>
@@ -1319,28 +1496,36 @@ const App = () => {
               <FormatEmail value="hi@mail.com" className="text-blue-600" />
             </div>
             <PrettyCode code={`
-              <FormatEmail value="hi@mail.com" className="text-blue-600" />
+              import Email from 'frui-react/formats/Email'
+            
+              <Email value="hi@mail.com" className="text-blue-600" />
             `} />
             <h3>Formulas</h3>
             <div style={{ margin: '10px 0' }}>
               <FormatFormula value="29" formula="{x} + {this} + {y}" data={{ x: 4, y: 5 }} />
             </div>
             <PrettyCode code={`
-              <FormatFormula value="29" formula="{x} + {this} + {y}" data={{ x: 4, y: 5 }} />
+              import Formula from 'frui-react/formats/Formula'
+            
+              <Formula value="29" formula="{x} + {this} + {y}" data={{ x: 4, y: 5 }} />
             `} />
             <h3>HTML Format</h3>
             <div className="mt-4 w-">
               <FormatHTML value={`<h1 style="font-weight:bold">Hello</h1>`} />
             </div>
             <PrettyCode code={`
-              <FormatHTML value={\`<h1 style="font-weight:bold">Hello</h1>\`} />
+              import HTML from 'frui-react/formats/HTML'
+            
+              <HTML value={\`<h1 style="font-weight:bold">Hello</h1>\`} />
             `} />
             <h3>Image Format</h3>
             <div style={{ margin: '10px 0' }}>
               <FormatImage width="50" value="https://raw.githubusercontent.com/inceptjs/incept.js/main/docs/assets/incept-logo-square-2.png" />
             </div>
             <PrettyCode code={`
-              <FormatImage width="50" value="https://raw.githubusercontent.com/inceptjs/incept.js/main/docs/assets/incept-logo-square-2.png" />
+              import Image from 'frui-react/formats/Image'
+            
+              <Image width="50" value="https://raw.githubusercontent.com/inceptjs/incept.js/main/docs/assets/incept-logo-square-2.png" />
             `} />
             <h3>Image List</h3>
             <div style={{ margin: '10px 0' }}>
@@ -1352,7 +1537,9 @@ const App = () => {
               ]} />
             </div>
             <PrettyCode code={`
-              <FormatImagelist style={{ maxHeight: '50px' }} value={[
+              import Imagelist from 'frui-react/formats/Imagelist'
+            
+              <Imagelist style={{ maxHeight: '50px' }} value={[
                 'https://raw.githubusercontent.com/inceptjs/incept.js/main/docs/assets/incept-logo-long.png',
                 'https://raw.githubusercontent.com/inceptjs/incept.js/main/docs/assets/incept-logo-square-1.png',
                 'https://raw.githubusercontent.com/inceptjs/incept.js/main/docs/assets/incept-logo-square-2.png',
@@ -1364,42 +1551,52 @@ const App = () => {
               <FormatJSON value={{ foo: 'bar', bar: 'foo'}} />
             </div>
             <PrettyCode code={`
-              <FormatJSON value={{ foo: 'bar', bar: 'foo'}} />
+              import JSONFormat from 'frui-react/formats/JSON'
+            
+              <JSONFormat value={{ foo: 'bar', bar: 'foo'}} />
             `} />
             <h3>Link Format</h3>
             <div style={{ margin: '10px 0' }}>
               <FormatLink value="https://www.incept.asia/" className="text-blue-600" />
             </div>
             <PrettyCode code={`
-              <FormatLink value="https://www.incept.asia/" className="text-blue-600" />
+              import Link from 'frui-react/formats/Link'
+            
+              <Link value="https://www.incept.asia/" className="text-blue-600" />
             `} />
             <h3>Unordered List</h3>
             <div style={{ margin: '10px 0' }}>
               <FormatList value={[ 'one', 'two', 'three' ]} />
             </div>
             <PrettyCode code={`
-              <FormatList value={[ 'one', 'two', 'three' ]} />
+              import List from 'frui-react/formats/List'
+            
+              <List value={[ 'one', 'two', 'three' ]} />
             `} />
             <h3>Ordered List</h3>
             <div style={{ margin: '10px 0' }}>
               <FormatList value={[ 'one', 'two', 'three' ]} ordered />
             </div>
             <PrettyCode code={`
-              <FormatList value={[ 'one', 'two', 'three' ]} ordered />
+              <List value={[ 'one', 'two', 'three' ]} ordered />
             `} />
             <h3>From Markdown to HTML</h3>
             <div style={{ margin: '10px 0' }}>
               <FormatMarkdown value="A paragraph with *emphasis* and **strong importance**" />
             </div>
             <PrettyCode code={`
-              <FormatMarkdown value="A paragraph with *emphasis* and **strong importance**" />
+              import Markdown from 'frui-react/formats/Markdown'
+            
+              <Markdown value="A paragraph with *emphasis* and **strong importance**" />
             `} />
             <h3>Metadata Format</h3>
             <div style={{ margin: '10px 0' }}>
               <FormatMetadata value={{ foo: 'bar', 'very very long': 'foo'}} />
             </div>
             <PrettyCode code={`
-              <FormatMetadata value={{ foo: 'bar', 'very very long': 'foo'}} />
+              import Metadata from 'frui-react/formats/Metadata'
+            
+              <Metadata value={{ foo: 'bar', 'very very long': 'foo'}} />
             `} />
           </div>
           <h3>Number Formats</h3>
@@ -1412,8 +1609,10 @@ const App = () => {
             </div>
           </div>
           <PrettyCode code={`
-            <FormatNumber value="-1234567890.0987654321" />
-            <FormatNumber value="-1234567890.0987654321" separator="," decimals={2} absolute={true} />
+            import NumberFormat from 'frui-react/formats/Number'
+            
+            <NumberFormat value="-1234567890.0987654321" />
+            <NumberFormat value="-1234567890.0987654321" separator="," decimals={2} absolute={true} />
           `} />
           <h3>Text Overflows</h3>
           <div>
@@ -1443,14 +1642,16 @@ const App = () => {
             </div>
           </div>
           <PrettyCode code={`
-            <FormatOverflow value="a Long walk On the Beach" />
-            <FormatOverflow value="a Long walk On the Beach" words />
-            <FormatOverflow value="a Long walk On the Beach" length={4} />
-            <FormatOverflow value="a Long walk On the Beach" length={4} words />
-            <FormatOverflow value="a Long walk On the Beach" hellip />
-            <FormatOverflow value="a Long walk On the Beach" words hellip />
-            <FormatOverflow value="a Long walk On the Beach" length={4} hellip />
-            <FormatOverflow value="a Long walk On the Beach" length={4} words hellip />
+            import Overflow from 'frui-react/formats/Overflow'
+            
+            <Overflow value="a Long walk On the Beach" />
+            <Overflow value="a Long walk On the Beach" words />
+            <Overflow value="a Long walk On the Beach" length={4} />
+            <Overflow value="a Long walk On the Beach" length={4} words />
+            <Overflow value="a Long walk On the Beach" hellip />
+            <Overflow value="a Long walk On the Beach" words hellip />
+            <Overflow value="a Long walk On the Beach" length={4} hellip />
+            <Overflow value="a Long walk On the Beach" length={4} words hellip />
           `} />
           <h3>Ratings</h3>
           <div>
@@ -1465,9 +1666,11 @@ const App = () => {
             </div>
           </div>
           <PrettyCode code={`
-            <FormatRating value="6.0987654321" />
-            <FormatRating value="5" max={10} />
-            <FormatRating value="5" max={10} remainder={true} />
+            import Rating from 'frui-react/formats/Rating'
+            
+            <Rating value="6.0987654321" />
+            <Rating value="5" max={10} />
+            <Rating value="5" max={10} remainder={true} />
           `} />
           <h3>Array Separations</h3>
           <div>
@@ -1482,9 +1685,11 @@ const App = () => {
             </div>
           </div>
           <PrettyCode code={`
-            <FormatSeparated value={[ 'one', 'two', 'three' ]} />
-            <FormatSeparated value={[ 'one', 'two', 'three' ]} separator=", " />
-            <FormatSeparated className="leading-7" value={[ 'one', 'two', 'three' ]} separator="line" />
+            import Separated from 'frui-react/formats/Separated'
+            
+            <Separated value={[ 'one', 'two', 'three' ]} />
+            <Separated value={[ 'one', 'two', 'three' ]} separator=", " />
+            <Separated className="leading-7" value={[ 'one', 'two', 'three' ]} separator="line" />
           `} />
           <h3>Table Format</h3>
           <div>
@@ -1493,7 +1698,9 @@ const App = () => {
               stripes={[['#999999', 'white'], ['white', 'black'], ['#EFEFEF', 'black']]}
             />
             <PrettyCode code={`
-              <FormatTable 
+              import Table from 'frui-react/formats/Table'
+            
+              <Table 
                 value={[{ Foo: 'bar', Bar: 'foo' }, { foo: 'bar', bar: 'foo' }]} 
                 stripes={[['#999999', 'white'], ['white', 'black'], ['#EFEFEF', 'black']]}
               />
@@ -1502,8 +1709,10 @@ const App = () => {
             <FormatTaglist pill value={['foo', 'long bar', 'baz']} />
             <FormatTaglist pill error value={['foo', 'long bar', 'baz']} />
             <PrettyCode code={`
-              <FormatTaglist pill value={['foo', 'long bar', 'baz']} />
-              <FormatTaglist pill error value={['foo', 'long bar', 'baz']} />
+              import Taglist from 'frui-react/formats/Taglist'
+            
+              <Taglist pill value={['foo', 'long bar', 'baz']} />
+              <Taglist pill error value={['foo', 'long bar', 'baz']} />
             `} />
           </div>
           <h3>Text Transformations</h3>
@@ -1522,10 +1731,12 @@ const App = () => {
             </div>
           </div>
           <PrettyCode code={`
-            <FormatText value="a Long walk On the Beach" />
-            <FormatText value="a Long walk On the Beach" format="capitalize" />
-            <FormatText value="a Long walk On the Beach" format="uppercase" />
-            <FormatText value="a Long walk On the Beach" format="lowercase" />
+            import Text from 'frui-react/formats/Text'
+            
+            <Text value="a Long walk On the Beach" />
+            <Text value="a Long walk On the Beach" format="capitalize" />
+            <Text value="a Long walk On the Beach" format="uppercase" />
+            <Text value="a Long walk On the Beach" format="lowercase" />
           `} />
           <h3>Boolean Formats</h3>
           <div>
@@ -1543,10 +1754,12 @@ const App = () => {
             </div>
           </div>
           <PrettyCode code={`
-            <FormatYesno value="1" />
-            <FormatYesno value="" />
-            <FormatYesno value="1" yes="oui" no="niet" />
-            <FormatYesno value={0} yes="oui" no="niet" />
+            import Yesno from 'frui-react/formats/Yesno'
+            
+            <Yesno value="1" />
+            <Yesno value="" />
+            <Yesno value="1" yes="oui" no="niet" />
+            <Yesno value={0} yes="oui" no="niet" />
           `} />
         </div>
       </main>

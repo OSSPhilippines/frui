@@ -1,6 +1,6 @@
 import type { FieldsetConfig } from '../types/components';
 //hooks
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function useFieldset<ValueType = any>(
   config: FieldsetConfig<ValueType>
@@ -8,13 +8,14 @@ export default function useFieldset<ValueType = any>(
   //extract props
   const { 
     value, 
+    defaultValue,
     emptyValue, 
     onChange, 
     onUpdate
   } = config;
 
   //make sure we have an array
-  const safeValues: (ValueType|undefined)[] = Array.isArray(value) ? value : [];
+  const safeValues: (ValueType|undefined)[] = Array.isArray(defaultValue) ? [ ...defaultValue ] : [];
   //hooks
   const [ values, setValues ] = useState(safeValues);
   //handlers
@@ -35,7 +36,13 @@ export default function useFieldset<ValueType = any>(
       }
     },
     add: () => handlers.set(values.concat([emptyValue]))
-  }
-
+  };
+  //for controlled states we should update 
+  //the values when the value prop changes
+  useEffect(() => {
+    if (!Array.isArray(value)) return;
+    handlers.set([ ...value ]);
+  }, [ value ]);
+  
   return { values, handlers };
 }

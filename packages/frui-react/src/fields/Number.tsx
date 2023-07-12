@@ -14,6 +14,7 @@ const Number: React.FC<NumberProps> = (props) => {
   //expand props
   const { 
     name,
+    value,
     defaultValue,
     min,
     max,      
@@ -28,6 +29,7 @@ const Number: React.FC<NumberProps> = (props) => {
   } = props;
 
   const { displayValue, handlers } = useNumber({
+    value,
     defaultValue,
     min,
     max,      

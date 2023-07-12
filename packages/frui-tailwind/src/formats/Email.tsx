@@ -7,9 +7,7 @@ import Link from './Link';
 
 const Email: React.FC<EmailProps> = ({ value, ...attributes }) => {
   return (
-    <Link {...attributes} value={`mailto:${value}`}>
-      {value}
-    </Link>
+    <Link {...attributes} value={`mailto:${value}`} label={value} />
   );
 };
 

@@ -72,7 +72,8 @@ export type CountryData = {
 };
 export type CountryOption = SelectOption<CountryData>;
 export type CountryConfig = {
-  value: string | CountryOption | undefined,
+  value?: string | CountryOption | undefined,
+  defaultValue?: string | CountryOption | undefined,
   map: (country: CountryData) => CountryOption
 };
 export type CountryProps = ExtendsType<SelectProps, {
@@ -85,7 +86,8 @@ export type CurrencyOption = SelectOption<CountryData>;
 export type CurrencyConfig = CountryConfig;
 export type CurrencyProps = ExtendsType<SelectProps, {
   options?: undefined,
-  value?: CurrencyOption|string
+  value?: CurrencyOption|string,
+  defaultValue?: CurrencyOption|string
 }>;
 
 // date component
@@ -240,6 +242,7 @@ export type SelectOption<T = any> = {
 };
 export type SelectConfig = {
   value?: SelectOption,
+  defaultValue?: SelectOption,
   onDropdown?: (show: boolean) => void,
   onSelected?: (value: SelectOption) => void,
   onUpdate?: (value: string|number) => void
@@ -257,6 +260,7 @@ export type SelectDropdownProps = {
 };
 export type SelectProps = {
   value?: SelectOption,
+  defaultValue?: SelectOption,
   options: SelectOption[]|Record<string, string>,
   searchable?: boolean,
   placeholder?: string,

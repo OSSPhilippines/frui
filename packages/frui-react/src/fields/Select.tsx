@@ -138,6 +138,7 @@ const Select: React.FC<SelectProps> = (props) => {
     options,
     searchable,
     value,
+    defaultValue,
     placeholder = 'Choose an Option',
     error, 
     errorColor = '#DC3545',
@@ -152,6 +153,7 @@ const Select: React.FC<SelectProps> = (props) => {
 
   const { selected, showing, handlers } = useSelect({
     value,
+    defaultValue,
     onDropdown,
     onSelected,
     onUpdate

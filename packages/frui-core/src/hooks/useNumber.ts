@@ -148,6 +148,7 @@ function getFormatsFromInput(
 export default function useNumber(config: NumberProps) {
   //expand props
   const {
+    value,
     defaultValue,
     min,
     max,      
@@ -219,6 +220,14 @@ export default function useNumber(config: NumberProps) {
       input.selectionEnd = cursor;
     } 
   }, [ cursor ]);
+  //for controlled states we should update 
+  //the values when the value prop changes
+  useEffect(() => {
+    if (value === undefined) return;
+    const newValue = getFormats(String(value || ''), options);
+    setHiddenValue(newValue.value);
+    setDisplayValue(newValue.display);
+  }, [ value ]);
 
   return { displayValue, handlers };
 }

@@ -68,7 +68,7 @@ import Email from 'frui-tailwind/formats/Email';
 
 ## Components (13)
 
- - Accordian *(TODO)*
+ - Accordion *(TODO)*
  - Alert
  - Badge
  - Button

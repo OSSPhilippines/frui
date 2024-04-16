@@ -311,7 +311,7 @@
 }
 
 .tbl-sticky {
-  position: 'sticky';
+  position: sticky;
 }
 .tbl-sticky-b {
   bottom: 0;
@@ -320,10 +320,10 @@
   left: 0;
 }
 .tbl-sticky-t {
-  right: 0;
+  top: 0;
 }
 .tbl-sticky-r {
-  top: 0;
+  right: 0;
 }
 
 .tbl-col {

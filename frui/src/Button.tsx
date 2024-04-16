@@ -64,7 +64,7 @@ export default function Button(props: ButtonProps) {
     : xl4 ? '4xl' 
     : xl5 ? '5xl' 
     : 'md';
-  defaults.classes.push(`.btn-${size}`);
+  defaults.classes.push(`btn-${size}`);
 
   const layout = outline 
     ? 'outline' 

@@ -183,6 +183,11 @@ export type TableHeadProps = {
   noWrap?: boolean,
   rowSpan?: number,
   colSpan?: number,
+  wrap1?: boolean,
+  wrap2?: boolean,
+  wrap3?: boolean,
+  wrap4?: boolean,
+  wrap5?: boolean
 };
 
 export type TableRowProps = {

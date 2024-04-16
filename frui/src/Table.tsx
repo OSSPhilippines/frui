@@ -45,18 +45,22 @@ class TableCol extends React.Component<TableColProps> {
       ...attributes
     } = this.props;
     const classNames = [ 'tbl-col' ];
-    if (stickyBottom) {
-      classNames.push('tbl-sticky-b', 'tbl-z1');
-    } 
-    if (stickyLeft) {
-      classNames.push('tbl-sticky-l', 'tbl-z2');
+    if (stickyBottom || stickyLeft || stickyRight || stickyTop) { 
+      classNames.push('tbl-sticky');
+      if (stickyBottom) {
+        classNames.push('tbl-sticky-b', 'tbl-z1');
+      } 
+      if (stickyLeft) {
+        classNames.push('tbl-sticky-l', 'tbl-z2');
+      }
+      if (stickyRight) {
+        classNames.push('tbl-sticky-r', 'tbl-z2');
+      }
+      if (stickyTop) {
+        classNames.push('tbl-sticky-t', 'tbl-z1');
+      }
     }
-    if (stickyRight) {
-      classNames.push('tbl-sticky-r', 'tbl-z2');
-    }
-    if (stickyTop) {
-      classNames.push('tbl-sticky-t', 'tbl-z1');
-    }
+
     if (noWrap) {
       classNames.push('tbl-nowrap');
     }
@@ -116,17 +120,20 @@ class TableFoot extends React.Component<TableFootProps> {
       ...attributes
     } = this.props;
     const classNames = [ 'tbl-foot' ];
-    if (stickyBottom) {
-      classNames.push('tbl-sticky-b', 'tbl-z1');
-    } 
-    if (stickyLeft) {
-      classNames.push('tbl-sticky-l', 'tbl-z2');
-    }
-    if (stickyRight) {
-      classNames.push('tbl-sticky-r', 'tbl-z2');
-    }
-    if (noWrap) {
-      classNames.push('tbl-nowrap');
+    if (stickyBottom || stickyLeft || stickyRight) { 
+      classNames.push('tbl-sticky');
+      if (stickyBottom) {
+        classNames.push('tbl-sticky-b', 'tbl-z1');
+      } 
+      if (stickyLeft) {
+        classNames.push('tbl-sticky-l', 'tbl-z2');
+      }
+      if (stickyRight) {
+        classNames.push('tbl-sticky-r', 'tbl-z2');
+      }
+      if (noWrap) {
+        classNames.push('tbl-nowrap');
+      }
     }
 
     const extras: Record<string, number> = {};
@@ -219,26 +226,34 @@ class TableHead extends React.Component<TableHeadProps> {
       noWrap,
       rowSpan,
       colSpan,
+      wrap1,
+      wrap2,
+      wrap3,
+      wrap4,
+      wrap5,
       className,
       children,
       ...attributes
     } = this.props;
     const classNames = [ 'tbl-head' ];
-    if (stickyTop) {
-      classNames.push('tbl-sticky-t');
-      if (stickyLeft && stickyRight) {
-        classNames.push('tbl-z4');
-      } else if (stickyLeft || stickyRight) {
-        classNames.push('tbl-z3');
-      } else {
-        classNames.push('tbl-z1');
+    if (stickyLeft || stickyRight || stickyTop) { 
+      classNames.push('tbl-sticky');
+      if (stickyTop) {
+        classNames.push('tbl-sticky-t');
+        if (stickyLeft && stickyRight) {
+          classNames.push('tbl-z4');
+        } else if (stickyLeft || stickyRight) {
+          classNames.push('tbl-z3');
+        } else {
+          classNames.push('tbl-z1');
+        }
       }
-    }
-    if (stickyLeft) {
-      classNames.push('tbl-sticky-l', 'tbl-z1');
-    }
-    if (stickyRight) {
-      classNames.push('tbl-sticky-r', 'tbl-z1');
+      if (stickyLeft) {
+        classNames.push('tbl-sticky-l', 'tbl-z1');
+      }
+      if (stickyRight) {
+        classNames.push('tbl-sticky-r', 'tbl-z1');
+      }
     }
     if (noWrap) {
       classNames.push('tbl-nowrap');
@@ -251,6 +266,19 @@ class TableHead extends React.Component<TableHeadProps> {
       extras.colSpan = colSpan || 0;
     }
 
+    let rule = null;
+    if (wrap1) {
+      rule = (<Rule width="100px" />);
+    } else if (wrap2) {
+      rule = (<Rule width="200px" />);
+    } else if (wrap3) {
+      rule = (<Rule width="300px" />);
+    } else if (wrap4) {
+      rule = (<Rule width="400px" />);
+    } else if (wrap5) {
+      rule = (<Rule width="500px" />);
+    } 
+
     if (className) {
       classNames.push(className);
     }
@@ -258,6 +286,7 @@ class TableHead extends React.Component<TableHeadProps> {
     return (
       <th {...attributes} className={classNames.join(' ')} {...extras}>
         {children}
+        {rule}
       </th>
     );
   }

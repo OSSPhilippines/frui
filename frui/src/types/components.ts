@@ -9,8 +9,6 @@ import type {
 // Alert component
 export type AlertProps = {
   color?: string,
-  primary?: boolean,
-  secondary?: boolean,
   info?: boolean, 
   warning?: boolean, 
   success?: boolean, 
@@ -29,8 +27,6 @@ export type AlertProps = {
 // Badge component
 export type BadgeProps = {
   color?: string,
-  primary?: boolean,
-  secondary?: boolean,
   info?: boolean, 
   warning?: boolean, 
   success?: boolean, 
@@ -63,8 +59,6 @@ export type ButtonProps = HTMLButtonProps & {
   curved?: boolean,
   rounded?: boolean,
   pill?: boolean,
-  primary?: boolean,
-  secondary?: boolean,
   info?: boolean, 
   warning?: boolean, 
   success?: boolean, 
@@ -131,11 +125,45 @@ export type LoaderProps = {
 };
 
 // Modal component
-export type ModalProps = {
+export type ModalContextProps = { 
+  _title: string,
+  _className: string,
+  _body?: ReactNode,
+  _color?: string,
   opened: boolean,
-  onClose: Function,
+  curved: boolean,
+  rounded: boolean,
+  pill: boolean,
+  round: (size: 'none'|'rounded'|'curved'|'pill') => void,
+  title: (title: string) => void,
+  color: (color: string) => void,
+  open: (opened: boolean) => void,
+  className: (className: string) => void,
+  body: (body: ReactNode) => void
+};
+
+export type ModalProviderProps = { 
   title?: string,
+  color?: string,
+  opened?: boolean,
+  curved?: boolean,
+  rounded?: boolean,
+  pill?: boolean,
+  className?: string,
+  children: ReactNode
+};
+
+export type ModalProps = {
+  opened?: boolean,
+  fixed?: boolean,
+  absolute?: boolean,
+  onClose?: Function,
+  title?: string,
+  curved?: boolean,
+  rounded?: boolean,
+  pill?: boolean,
   style?: React.CSSProperties,
+  color?: string,
   className?: string,
   children?: React.ReactNode
 };

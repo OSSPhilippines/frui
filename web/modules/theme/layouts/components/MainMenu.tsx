@@ -52,7 +52,7 @@ const MainMenu: React.FC<{
         <Link href="/component/modal" className={`${pathname.indexOf('/component/modal') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Modals')}</span>
         </Link>
-        <Link href="/component/table" className={`${pathname.indexOf('/component/modal') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+        <Link href="/component/table" className={`${pathname.indexOf('/component/table') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Tables')}</span>
         </Link>
       </div>

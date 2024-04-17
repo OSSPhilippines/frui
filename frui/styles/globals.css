@@ -1,0 +1,161 @@
+/* Default Theme
+---------------------------------*/
+:root {
+  --black: #222222;
+  --white: #FCFCFC;
+  --info: #1474FC;
+  --error: #DC3545;
+  --warning: #FF7B07;
+  --success: #28A745;
+  --muted: #999999;
+  --curved: 5px;
+  --rounded: 12px;
+  --pill: 10000px;
+  --thin: 1px;
+  --thick: 5px;
+  --xs: 8px;
+  --sm: 10px;
+  --md: 12px;
+  --lg: 14px;
+  --xl: 16px;
+  --xl2: 18px;
+  --xl3: 20px;
+  --xl4: 22px;
+  --xl5: 24px;
+}
+
+/* Generic
+---------------------------------*/
+.block {
+  display: block;
+}
+.full {
+  width: 100%;
+}
+
+/* Text Colors
+---------------------------------*/
+.ts-xs {
+  font-size: var(--xs);
+}
+.tx-sm {
+  font-size: var(--sm);
+}
+.tx-md {
+  font-size: var(--md);
+}
+.tx-lg {
+  font-size: var(--lg);
+}
+.tx-xl {
+  font-size: var(--xl);
+}
+.tx-2xl {
+  font-size: var(--xl2);
+}
+.tx-3xl {
+  font-size: var(--xl3);
+}
+.tx-4xl {
+  font-size: var(--xl4);
+}
+.tx-5xl {
+  font-size: var(--xl5);
+}
+
+.tx-black {
+  color: var(--black) !important;
+}
+.tx-white {
+  color: var(--white) !important;
+}
+.tx-info {
+  color: var(--info) !important;
+}
+.tx-error {
+  color: var(--error) !important;
+}
+.tx-warning {
+  color: var(--warning) !important;
+}
+.tx-success {
+  color: var(--success) !important;
+}
+.tx-muted {
+  color: var(--muted) !important;
+}
+
+/* Borders
+---------------------------------*/
+.curved {
+  border-radius: var(--curved);
+}
+.rounded {
+  border-radius: var(--rounded);
+}
+.pill {
+  border-radius: var(--pill);
+}
+
+.solid {
+  border-style: solid;
+}
+.dash {
+  border-style: dashed;
+}
+.dotted {
+  border-style: dotted;
+}
+
+.thin {
+  border-width: var(--thin);
+}
+.thick {
+  border-width: var(--thick);
+}
+
+.bd-black {
+  border-color: var(--black) !important;
+}
+.bd-white {
+  border-color: var(--white) !important;
+}
+.bd-info {
+  border-color: var(--info) !important;
+}
+.bd-error {
+  border-color: var(--error) !important;
+}
+.bd-warning {
+  border-color: var(--warning) !important;
+}
+.bd-success {
+  border-color: var(--success) !important;
+}
+.bd-muted {
+  border-color: var(--muted) !important;
+}
+
+/* Backgrounds
+---------------------------------*/
+.bg-black {
+  background-color: var(--black) !important;
+}
+.bg-white {
+  background-color: var(--white) !important;
+}
+.bg-info {
+  background-color: var(--info) !important;
+}
+.bg-error {
+  background-color: var(--error) !important;
+}
+.bg-warning {
+  background-color: var(--warning) !important;
+}
+.bg-success {
+  background-color: var(--success) !important;
+}
+.bg-muted {
+  background-color: var(--muted) !important;
+}

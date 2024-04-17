@@ -7,17 +7,10 @@
   "homepage": "https://github.com/OSSPhilippines/frui",
   "bugs": "https://github.com/OSSPhilippines/frui/issues",
   "repository": "OSSPhilippines/frui",
-  "files": [
-    "LICENSE",
-    "package.json",
-    "README.md",
-    "dist",
-    "tsconfig.json"
-  ],
   "scripts": {
     "build": "yarn build:tsc && yarn build:files",
     "build:tsc": "tsc",
-    "build:files": "cp ./README.md ./dist/ && cp ./package.json ./dist/ && cp ./LICENSE ./dist/ && cp src/utils/frui.css ./dist/"
+    "build:files": "cp ./README.md ./dist/ && cp ./package.json ./dist/ && cp ./LICENSE ./dist/ && cp ./frui.css ./dist/ && cp -rf ./styles ./dist/"
   },
   "dependencies": {
     "inputmask": "5.0.8",

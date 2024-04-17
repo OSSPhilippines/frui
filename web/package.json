@@ -14,12 +14,14 @@
     "r22n": "1.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-syntax-highlighter": "15.5.0",
     "react-toastify": "10.0.4"
   },
   "devDependencies": {
     "@types/node": "20.11.16",
     "@types/react": "18.2.51",
     "@types/react-dom": "18.2.18",
+    "@types/react-syntax-highlighter": "15.5.11",
     "autoprefixer": "10.4.17",
     "dotenv-cli": "7.3.0",
     "eslint": "8.56.0",

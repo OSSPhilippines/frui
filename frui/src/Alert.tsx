@@ -7,8 +7,6 @@ import type { AlertProps } from './types/components';
 export default function Alert(props: AlertProps) {
   const { 
     color,
-    primary,
-    secondary,
     info, 
     warning,
     success, 
@@ -49,10 +47,6 @@ export default function Alert(props: AlertProps) {
     if (color) {
       defaults.styles.borderColor = color;
       defaults.styles.color = color;
-    } else if (primary) {
-      defaults.classes.push('bd-primary', 'tx-primary');
-    } else if (secondary) {
-      defaults.classes.push('bd-secondary', 'tx-secondary');
     } else if (info) {
       defaults.classes.push('bd-info', 'tx-info');
     } else if (warning) {
@@ -68,10 +62,6 @@ export default function Alert(props: AlertProps) {
     defaults.classes.push('tx-white');
     if (color) {
       defaults.styles.backgroundColor = color;
-    } else if (primary) {
-      defaults.classes.push('bg-primary');
-    } else if (secondary) {
-      defaults.classes.push('bg-secondary');
     } else if (info) {
       defaults.classes.push('bg-info');
     } else if (warning) {

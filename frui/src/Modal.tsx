@@ -1,37 +1,97 @@
 //types
-import type { ReactNode } from 'react';
-import { ModalProps } from './types/components';
+import type { ModalContextProps, ModalProviderProps, ModalProps } from './types/components';
 //react
-import React from 'react';
+import React, { createContext } from 'react';
 //hooks
-import { useState } from 'react'; 
+import { useState, useEffect, useContext } from 'react'; 
 
 export const modal: Record<string, any> = {};
 
-export function ModalProvider() {
-  const [ opened, setOpened ] = useState(false);
-  const [ className, setClassName ] = useState('');
-  const [ title, setTitle ] = useState('');
-  const [ body, setBody ] = useState<ReactNode|undefined>();
+export function useModal() {
+  const { className, title, body, round, color, open } = useContext(ModalContext);
+  return { className, title, body, round, color, open };
+}
 
-  modal.className = (className: string) => setClassName(className);
-  modal.title = (title: string) => setTitle(title);
-  modal.body = (body: ReactNode|undefined) => setBody(body);
-  modal.open = (open = true) => setOpened(open);
-  modal.opened = opened;
+export const ModalContext = createContext<ModalContextProps>({ 
+  _title: '', 
+  _className: '', 
+  _body: undefined,
+  _color: '',
+  opened: false,
+  curved: false,
+  rounded: false,
+  pill: false,
+  title: () => {},
+  className: () => {},
+  round: () => {},
+  color: () => {},
+  body: () => {},
+  open: () => {},
+});
 
-  return React.createElement(Modal, {
-    opened, 
-    title, 
+export function ModalProvider({ children, ...config }: ModalProviderProps) {
+  const [ ready, isReady ] = useState(false);
+  const [ opened, open ] = useState(false);
+  const [ _round, round ] = useState(config.curved 
+    ? 'curved' : config.rounded 
+    ? 'rounded' : config.pill
+    ? 'pill': 'none'
+  );
+  const [ _title, title ] = useState(config.title || '');
+  const [ _color, color ] = useState(config.color);
+  const [ _className, className ] = useState(config.className || '');
+  const [ _body, body ] = useState<React.ReactNode>();
+
+  const value = { 
+    _title,
+    _className, 
+    _body, 
+    opened,
+    curved: _round === 'curved',
+    rounded: _round === 'rounded',
+    pill: _round === 'pill', 
     className, 
-    onClose: () => setOpened(false), 
-  }, body);
+    round,
+    title,
+    color,
+    body,
+    open 
+  };
+
+  useEffect(() => {
+    isReady(true);
+  }, []);
+  
+  return (
+    <ModalContext.Provider value={value}>
+      {children}
+      {ready && (
+        <Modal 
+          curved={_round === 'curved'}
+          rounded={_round === 'rounded'}
+          pill={_round === 'pill'}
+          color={_color || undefined}
+          title={_title} 
+          className={_className} 
+          opened={opened} 
+          onClose={() => open(false)}
+        >
+          {_body}
+        </Modal>
+      )}
+    </ModalContext.Provider>
+  );
 };
 
 export default function Modal(props: ModalProps) {
   const { 
-    opened, 
+    opened = false, 
+    absolute,
     title, 
+    curved,
+    rounded,
+    pill, 
+    color,
     style = {},
     className, 
     onClose, 
@@ -42,21 +102,38 @@ export default function Modal(props: ModalProps) {
     style.display = 'flex';
   }
 
-  const classNames = ['control'];
+  const classNames = ['modal'];
+  if (absolute) {
+    classNames.push('modal-absolute');
+  } else {
+    classNames.push('modal-fixed');
+  }
   if (className) {
     classNames.push(className);
   }
+  const overlay = ['modal-overlay'];
+  if (curved) {
+    overlay.push('curved');
+  } else if (rounded) {
+    overlay.push('rounded');
+  } else if (pill) {
+    overlay.push('pill');
+  }
+
+  const headStyle = color ? { backgroundColor: color } : undefined;
 
   return (
     <div className={classNames.join(' ')} style={style}>
-      <section className="modal-overlay">
-        <header className="modal-head">
+      <section className={overlay.join(' ')}>
+        <header className="modal-head" style={headStyle}>
           <h6 className="modal-title">
             {title}
           </h6>
-          <button className="modal-close" onClick={() => { onClose() }}>
-            <i className="fas fa-times"></i>
-          </button>
+          {typeof onClose === 'function' && (
+            <button className="modal-close" onClick={() => { onClose() }}>
+              <i className="fas fa-times"></i>
+            </button>
+          )}
         </header>
         <main className="modal-body">
           {children}

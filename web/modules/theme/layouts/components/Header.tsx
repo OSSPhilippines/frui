@@ -1,6 +1,7 @@
 //types
 import type { MouseEventHandler } from 'react';
 //components
+import Link from 'next/link';
 import Toggle from '../../Toggle';
 
 const Header: React.FC<{
@@ -14,6 +15,29 @@ const Header: React.FC<{
         </button>
         <div className="flex-grow"></div>
         <Toggle />
+        <div className="ml-2 flex items-center">
+            <a 
+              className="flex items-center justify-center h-7 w-7 rounded-full mr-2" 
+              href="https://github.com/ossPhilippines/frui" 
+              target="_blank"
+            >
+              <i className="text-[28px] fab fa-github"></i>
+            </a>
+            <Link 
+              className="hidden md:flex items-center justify-center h-7 w-7 rounded-full bg-red-700 mr-2" 
+              href="https://www.npmjs.com/package/frui"
+              target="_blank"
+            >
+              <i className="fab fa-npm text-white"></i>
+            </Link>
+            <Link 
+              className="flex items-center justify-center h-7 w-7 rounded-full bg-blue-700" 
+              href="https://discord.gg/open-source-software-ph-905496362982981723"
+              target="_blank"
+            >
+              <i className="fab fa-discord text-white"></i>
+            </Link>
+          </div>
       </div>
     </header>
   );

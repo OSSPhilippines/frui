@@ -31,7 +31,7 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-          <div className="basis-1/2 px-3 hidden md:flex flex-col justify-center bg-b1 border-b1 border-l w-full h-full overflow-hidden">
+          <div className="basis-1/2 pt-3 px-3 hidden md:flex flex-col justify-center bg-b1 border-b1 border-l w-full h-full overflow-hidden">
             <Alert curved info>
               <i className="fas fa-info-circle mr-2"></i>
               {_('You are good to go!')}

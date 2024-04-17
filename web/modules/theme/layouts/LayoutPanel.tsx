@@ -1,7 +1,8 @@
 //hooks
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTheme } from '../../theme';
 //components
+import { ToastContainer, unload } from '../../notify';
 import Header from './components/Header';
 import MainMenu from './components/MainMenu';
 import UserMenu from './components/UserMenu';
@@ -21,6 +22,8 @@ const LayoutPanel: React.FC<{
   //hooks
   const [ opened, toggle ] = useToggle();
   const { theme, mode } = useTheme();
+  //unload flash message
+  useEffect(unload, []);
   return (
     <section className={`${theme}-${mode} bg-b0 text-t1 relative w-full h-full overflow-hidden`}>
       <>{Head && <Head />}</>
@@ -31,6 +34,7 @@ const LayoutPanel: React.FC<{
       <section className="absolute top-16 bottom-0 left-0 md:left-52 right-0">
         {children}
       </section>
+      <ToastContainer />
     </section>
   );
 };

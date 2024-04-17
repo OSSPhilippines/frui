@@ -10,7 +10,7 @@ export type Crumb = {
 
 const Item = ({ href, label, icon, last }: Crumb & { last?: boolean }) => {
   const item = href
-    ? <Link href={href} className="inline-flex items-center text-t-info">{label}</Link>
+    ? <Link href={href} className="inline-flex items-center text-t2">{label}</Link>
     : <span className="inline-flex items-center font-semibold text-t1">{label}</span>
 
   return (

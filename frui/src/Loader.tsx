@@ -13,7 +13,7 @@ const Loader: React.FC<LoaderProps> = (props) => {
   if (show === false) {
     container.display = 'none';
   }
-  const classNames = ['control'];
+  const classNames = ['loader'];
   if (className) {
     classNames.push(className);
   }

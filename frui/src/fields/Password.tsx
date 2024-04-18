@@ -35,7 +35,7 @@ export default function Password(props: PasswordProps) {
     classNames.push(className);
   }
 
-  const toggleClass = [ 'field-password-control' ];
+  const toggleClass = [ 'field-password-toggle' ];
   if (error) {
     toggleClass.push('tx-error bd-error');
   }

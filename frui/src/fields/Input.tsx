@@ -17,7 +17,6 @@ export type InputConfig = {
  */
 export type InputProps = ExtendsType<HTMLInputProps, {
   style?: CSSProperties,
-  label?: string,
   error?: any,
   onUpdate?: (value: string) => void,
   passRef?: LegacyRef<HTMLInputElement>
@@ -43,7 +42,6 @@ export function useInput({ onChange, onUpdate }: InputConfig) {
 export default function Input(props: InputProps) {
   //separate component related props from field attributes
   const {   
-    label, 
     error, 
     className,
     onChange,

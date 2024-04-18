@@ -64,6 +64,21 @@ const MainMenu: React.FC<{
         <Link href="/field/input" className={`${pathname.indexOf('/field/input') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Inputs')}</span>
         </Link>
+        <Link href="/field/date" className={`${pathname.indexOf('/field/date') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Dates')}</span>
+        </Link>
+        <Link href="/field/mask" className={`${pathname.indexOf('/field/mask') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Masks')}</span>
+        </Link>
+        <Link href="/field/number" className={`${pathname.indexOf('/field/number') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Numbers')}</span>
+        </Link>
+        <Link href="/field/password" className={`${pathname.indexOf('/field/password') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Passwords')}</span>
+        </Link>
+        <Link href="/field/slug" className={`${pathname.indexOf('/field/slug') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Slugs')}</span>
+        </Link>
         <Link href="/field/file" className={`${pathname.indexOf('/field/file') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Files')}</span>
         </Link>

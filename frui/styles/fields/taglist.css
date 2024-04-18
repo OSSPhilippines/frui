@@ -1,4 +1,5 @@
 .field-taglist {
+  background-color: var(--white);
   border-color: var(--black);
   border-style: solid;
   border-width: 1px;
@@ -13,10 +14,6 @@
 
 .field-taglist-tag {
   align-items: center;
-  background-color: var(--secondary);
-  border-color: var(--secondary);
-  border-style: solid;
-  border-width: 1px;
   border-radius: 5px;
   color: var(--white);
   display: flex;

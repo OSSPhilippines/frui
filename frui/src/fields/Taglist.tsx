@@ -8,6 +8,8 @@ import { useState, useEffect } from 'react';
  * Taglist Config
  */
 export type TaglistConfig = {
+  value?: string[],
+  defaultValue?: string[],
   onChange?: Function, 
   onUpdate?: Function
 };
@@ -17,6 +19,12 @@ export type TaglistConfig = {
  */
 export type TaglistProps = ExtendsType<HTMLInputProps, {
   error?: any,
+  color?: string,
+  info?: boolean, 
+  warning?: boolean, 
+  success?: boolean, 
+  danger?: boolean, 
+  muted?: boolean, 
   onUpdate?: (value: string) => void,
   className?: string, 
   style?: CSSProperties
@@ -25,14 +33,26 @@ export type TaglistProps = ExtendsType<HTMLInputProps, {
 /**
  * Taglist Hook Aggregate
  */
-export function useTaglist({ onChange, onUpdate }: TaglistConfig) {
+export function useTaglist(config: TaglistConfig) {
+  const { value, defaultValue, onChange, onUpdate } = config;
   const [ input, setInput ] = useState('');
   const [ isKeyReleased, setIsKeyReleased ] = useState(false);
-  const [ tags, setTags ] = useState<string[]>([]);
+  const [ tags, setTags ] = useState<string[]>(defaultValue || []);
   
   useEffect(() => {
+    //prevent inf looping
+    if (Array.isArray(value) 
+      && JSON.stringify(value) === JSON.stringify(tags)
+    ) return;
     onUpdate && onUpdate(tags);
   }, [ tags ]);
+
+  //for controlled states we should update 
+  //the values when the value prop changes
+  useEffect(() => {
+    if (!Array.isArray(value)) return;
+    setTags(value)
+  }, [ value ]);
   
   return {
     input,
@@ -78,7 +98,15 @@ export function useTaglist({ onChange, onUpdate }: TaglistConfig) {
  */
 export default function Taglist(props: TaglistProps) {
   //separate component related props from field attributes
-  const {  
+  const { 
+    value,
+    defaultValue, 
+    color,
+    info, 
+    warning, 
+    success, 
+    danger, 
+    muted, 
     error, 
     className,
     style,
@@ -87,7 +115,20 @@ export default function Taglist(props: TaglistProps) {
     ...attributes 
   } = props;
   //hooks
-  const { input, tags, handlers } = useTaglist({ onChange, onUpdate });
+  const { input, tags, handlers } = useTaglist({ 
+    onChange, 
+    onUpdate,
+    value: Array.isArray(value) 
+      ? value 
+      : typeof value === 'string' 
+      ? value.split(',') 
+      : undefined,
+    defaultValue: Array.isArray(defaultValue) 
+      ? defaultValue 
+      : typeof defaultValue === 'string' 
+      ? defaultValue.split(',') 
+      : undefined,
+  });
 
   const classNames = [ 'field-taglist' ];
   if (error) {
@@ -97,11 +138,29 @@ export default function Taglist(props: TaglistProps) {
     classNames.push(className);
   }
 
+  const tagClasses = [ 'field-taglist-tag' ];
+  const tagStyle: CSSProperties = {};
+  if (color) {
+    tagStyle.backgroundColor = color;
+  } else if (info) {
+    tagClasses.push('bg-info');
+  } else if (warning) {
+    tagClasses.push('bg-warning');
+  } else if (success) {
+    tagClasses.push('bg-success');
+  } else if (error) {
+    tagClasses.push('bg-error');
+  } else if (muted) {
+    tagClasses.push('bg-muted');
+  } else {
+    tagClasses.push('bg-warning');
+  }
+
   //render
   return (
     <div {...attributes} className={classNames.join(' ')}>
       {tags.map((tag, i) => (
-        <div key={i} className="field-taglist-tag">
+        <div key={i} className={tagClasses.join(' ')} style={tagStyle}>
           {tag}
           <button 
             className="field-taglist-remove"

@@ -4,6 +4,9 @@ import type { RadioProps, InputConfig } from '../types/fields';
 //hooks
 import { useState, useEffect } from 'react';
 
+/**
+ * Currency Hook Aggregate
+ */
 export function useRadio(config: InputConfig) {
   const { onChange, onUpdate, defaultChecked, checked } = config;
   const [ isChecked, check ] = useState(Boolean(defaultChecked || checked));

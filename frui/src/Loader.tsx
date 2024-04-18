@@ -1,7 +1,18 @@
 //types
-import type { LoaderProps } from './types/components';
+import type { CSSProperties } from 'react';
 //react
 import React from 'react';
+
+/**
+ * Loader Props
+ */
+export type LoaderProps = {
+  color?: string,
+  show?: boolean,
+  label?: string,
+  style?: CSSProperties,
+  className?: string,
+};
 
 /**
  * Loader Component (Main)

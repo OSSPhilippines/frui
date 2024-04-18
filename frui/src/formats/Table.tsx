@@ -1,8 +1,17 @@
-//types
-import type { TableProps } from '../types/formats';
 //components
 import { Table, Thead, Tcol, Trow } from '../Table';
 
+/**
+ * Table Props
+ */
+export type TableProps = { 
+  value: Record<string, string|number>[],
+  stripes?: [ [ string, string ], [ string, string ], [ string, string ] ]
+};
+
+/**
+ * Table Format Component (Main)
+ */
 export default function TableFormat({ value, stripes }: TableProps) {
   if (!value || !value.length) return null;
   const styles = {

@@ -1,13 +1,30 @@
 //types
-import type { 
-  CurrencyProps, 
-  CurrencyOption, 
-  CurrencyConfig 
-} from '../types/fields';
+import type { ExtendsType } from '../types';
+import type { CountryData, CountryConfig } from './Country';
+import type { SelectProps, SelectOption } from './Select';
 //components
 import Select from './Select';
 //data
 import countries from '../data/intl.json';
+
+/**
+ * Currency Option
+ */
+export type CurrencyOption = SelectOption<CountryData>;
+
+/**
+ * Currency Config
+ */
+export type CurrencyConfig = CountryConfig;
+
+/**
+ * Currency Props
+ */
+export type CurrencyProps = ExtendsType<SelectProps, {
+  options?: undefined,
+  value?: CurrencyOption|string,
+  defaultValue?: CurrencyOption|string
+}>;
 
 /**
  * Currency Hook Aggregate

@@ -1,16 +1,55 @@
 //types
-import type { ModalContextProps, ModalProviderProps, ModalProps } from './types/components';
+import type { ReactNode, CSSProperties } from 'react';
 //react
 import React, { createContext } from 'react';
 //hooks
 import { useState, useEffect, useContext } from 'react'; 
 
-export const modal: Record<string, any> = {};
+/**
+ * Modal Context Props
+ */
+export type ModalContextProps = { 
+  _title: string,
+  _className: string,
+  _body?: ReactNode,
+  _color?: string,
+  opened: boolean,
+  curved: boolean,
+  rounded: boolean,
+  pill: boolean,
+  round: (size: 'none'|'rounded'|'curved'|'pill') => void,
+  title: (title: string) => void,
+  color: (color: string) => void,
+  open: (opened: boolean) => void,
+  className: (className: string) => void,
+  body: (body: ReactNode) => void
+};
 
-export function useModal() {
-  const { className, title, body, round, color, open } = useContext(ModalContext);
-  return { className, title, body, round, color, open };
-}
+export type ModalProviderProps = { 
+  title?: string,
+  color?: string,
+  opened?: boolean,
+  curved?: boolean,
+  rounded?: boolean,
+  pill?: boolean,
+  className?: string,
+  children: ReactNode
+};
+
+export type ModalProps = {
+  opened?: boolean,
+  fixed?: boolean,
+  absolute?: boolean,
+  onClose?: Function,
+  title?: string,
+  curved?: boolean,
+  rounded?: boolean,
+  pill?: boolean,
+  style?: CSSProperties,
+  color?: string,
+  className?: string,
+  children?: React.ReactNode
+};
 
 export const ModalContext = createContext<ModalContextProps>({ 
   _title: '', 
@@ -82,6 +121,11 @@ export function ModalProvider({ children, ...config }: ModalProviderProps) {
     </ModalContext.Provider>
   );
 };
+
+export function useModal() {
+  const { className, title, body, round, color, open } = useContext(ModalContext);
+  return { className, title, body, round, color, open };
+}
 
 export default function Modal(props: ModalProps) {
   const { 

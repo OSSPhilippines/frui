@@ -1,5 +1,13 @@
-//types
-import type { NumberProps } from '../types/formats';
+/**
+ * Number Props
+ */
+export type NumberProps = { 
+  value: string|number,
+  separator?: string,
+  decimal?: string,
+  decimals?: number,
+  absolute?: boolean 
+};
 
 //function to format a number given the separator, decimal, and number of decimals to show
 const formatNumber = (
@@ -27,6 +35,9 @@ const formatNumber = (
   return (value < 0 ? '-' : '') + integerString + decimalString;
 };
 
+/**
+ * Number Format Component (Main)
+ */
 export default function NumberFormat(props: NumberProps) {
   const {
     value,

@@ -1,8 +1,26 @@
 //types
-import type { ChangeEvent, MouseEvent } from 'react';
-import type { RadioProps, InputConfig } from '../types/fields';
+import type { ChangeEvent, MouseEvent, CSSProperties } from 'react';
+import type { HTMLInputProps } from '../types';
+import type { InputConfig } from './Input';
 //hooks
 import { useState, useEffect } from 'react';
+
+/**
+ * Radio Props
+ */
+export type RadioProps = HTMLInputProps & {
+  label?: string,
+  error?: any,
+  check?: boolean,
+  circle?: boolean,
+  square?: boolean,
+  rounded?: boolean,
+  blue?: boolean,
+  orange?: boolean,
+  style?: CSSProperties,
+  className?: string,
+  onUpdate?: (value: string|number|undefined, checked: boolean) => void
+};
 
 /**
  * Currency Hook Aggregate

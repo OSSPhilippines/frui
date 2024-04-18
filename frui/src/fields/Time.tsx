@@ -1,7 +1,28 @@
 //types
-import type { TimeProps, TimeConfig } from '../types/fields';
+import type { ExtendsType } from '../types';
+import type { InputProps } from './Input';
 //components
 import Input from './Input';
+
+/**
+ * Time Input
+ */
+export type TimeInput = string|number|Date;
+
+/**
+ * Time Config
+ */
+export type TimeConfig = {
+  defaultValue?: TimeInput, 
+  onUpdate?: (value: string) => void
+};
+
+/**
+ * Time Props
+ */
+export type TimeProps = ExtendsType<InputProps, {
+  defaultValue?: TimeInput
+}>;
 
 /**
  * Time Hook Aggregate

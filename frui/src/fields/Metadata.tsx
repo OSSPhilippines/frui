@@ -1,6 +1,5 @@
 //types
-import type { MetadataType, MetadataConfig } from '../types/fields';
-import type { FieldsProps, FieldsetProps } from '../types/components';
+import type { FieldsProps, FieldsetProps } from '../Fieldset';
 //components
 import Button from '../Button';
 import make from '../Fieldset';
@@ -9,6 +8,26 @@ import Number from './Number';
 import Date from './Date';
 import Datetime from './Datetime';
 import Time from './Time';
+
+/**
+ * Metadata Type
+ */
+export type MetadataType = [ string, string|number|Date ];
+
+/**
+ * Metadata Config
+ */
+export type MetadataConfig = {
+  type?: string,
+  values?: (MetadataType|undefined)[],
+  index: number,
+  set: (values: (MetadataType|undefined)[]) => void
+};
+
+/**
+ * Metadata Props
+ */
+export type MetadataProps = FieldsetProps<MetadataType>;
 
 /**
  * Metadata Hook Aggregate
@@ -48,7 +67,7 @@ export function useMetadata(config: MetadataConfig) {
 /**
  * Key/Value Component 
  */
-export function Fields(props: FieldsProps<MetadataType>) {
+export function MetadataFields(props: FieldsProps<MetadataType>) {
   const {
     data = {},
     values, 
@@ -148,7 +167,7 @@ export function Fields(props: FieldsProps<MetadataType>) {
   );
 };
 
-const Fieldset = make<MetadataType>(Fields);
+const Fieldset = make<MetadataType>(MetadataFields);
 
 /**
  * Metadata set Component (Main)

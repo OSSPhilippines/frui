@@ -1,6 +1,15 @@
-//types
-import type { FormulaProps } from '../types/formats';
+/**
+ * Formula Props
+ */
+export type FormulaProps = { 
+  value: string, 
+  formula: string,
+  data?: Record<string, any> 
+};
 
+/**
+ * Formula Format Component (Main)
+ */
 export default function Formula(props: FormulaProps) {
   const { value, data = {}, formula } = props;
   let calculations = formula.replace(/\{this\}/, String(Number(value) || 0));

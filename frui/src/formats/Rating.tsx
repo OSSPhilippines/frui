@@ -1,6 +1,14 @@
 //types
-import type { RatingProps } from '../types/formats';
+export type RatingProps = { 
+  value: string|number,
+  max?: number,
+  remainder?: boolean,
+  round?: 'round'|'ceil'|'floor'
+};
 
+/**
+ * Rating Format Component (Main)
+ */
 export default function Rating(props: RatingProps) {
   const {
     value,

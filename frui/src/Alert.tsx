@@ -1,5 +1,25 @@
 //types
-import type { AlertProps } from './types/components';
+import type { ReactNode, CSSProperties } from 'react';
+
+/**
+ * Alert Props
+ */
+export type AlertProps = {
+  color?: string,
+  info?: boolean, 
+  warning?: boolean, 
+  success?: boolean, 
+  error?: boolean, 
+  muted?: boolean, 
+  solid?: boolean, 
+  outline?: boolean,
+  curved?: boolean,
+  rounded?: boolean, 
+  pill?: boolean,
+  style?: CSSProperties,
+  className?: string,
+  children?: ReactNode
+};
 
 /**
  * Alert Component (Main)

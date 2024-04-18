@@ -1,8 +1,25 @@
 //types
-import type { CountryProps } from '../types/formats';
+import type { CSSProperties } from 'react';
 //helpers
 import countries from '../data/intl.json';
 
+/**
+ * Country Props
+ */
+export type CountryProps = { 
+  value: string, 
+  flag?: boolean, 
+  text?: boolean,
+  sm?: boolean,
+  md?: boolean,
+  lg?: boolean,
+  className?: string, 
+  style?: CSSProperties
+};
+
+/**
+ * Country Format Component (Main)
+ */
 export default function Country(props: CountryProps) {
   const { 
     value, 

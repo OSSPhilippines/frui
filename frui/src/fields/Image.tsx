@@ -1,5 +1,5 @@
 //types
-import type { FileProps } from '../types/fields';
+import type { FileProps } from './File';
 //hooks
 import { useFile } from './File';
 //components

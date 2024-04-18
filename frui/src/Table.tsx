@@ -1,15 +1,90 @@
 //types
-import type { 
-  TableColProps,
-  TableFootProps,
-  TableHeadProps,
-  TableRowProps,
-  TableRuleProps,
-  TableProps
-} from './types/components';
-import { ReactNode } from 'react';
+import type { ReactNode, CSSProperties } from 'react';
+import type { AnyReactChildren } from './types';
 //react
 import React from 'react';
+
+/**
+ * Table Rule Props
+ */
+export type TableRuleProps = { width: string };
+
+/**
+ * Table Column Props
+ */
+export type TableColProps = {
+  style?: CSSProperties,
+  className?: string,
+  children?: AnyReactChildren,
+  stickyBottom?: boolean,
+  stickyLeft?: boolean,
+  stickyRight?: boolean,
+  stickyTop?: boolean,
+  noWrap?: boolean,
+  rowSpan?: number,
+  colSpan?: number,
+  wrap1?: boolean,
+  wrap2?: boolean,
+  wrap3?: boolean,
+  wrap4?: boolean,
+  wrap5?: boolean
+};
+
+/**
+ * Table Footer Props
+ */
+export type TableFootProps = {
+  style?: CSSProperties,
+  className?: string,
+  children?: AnyReactChildren,
+  stickyBottom?: boolean,
+  stickyLeft?: boolean,
+  stickyRight?: boolean,
+  noWrap?: boolean,
+  rowSpan?: number,
+  colSpan?: number,
+};
+
+/**
+ * Table Header Props
+ */
+export type TableHeadProps = {
+  style?: CSSProperties,
+  className?: string,
+  children?: AnyReactChildren,
+  stickyLeft?: boolean,
+  stickyRight?: boolean,
+  stickyTop?: boolean,
+  noWrap?: boolean,
+  rowSpan?: number,
+  colSpan?: number,
+  wrap1?: boolean,
+  wrap2?: boolean,
+  wrap3?: boolean,
+  wrap4?: boolean,
+  wrap5?: boolean
+};
+
+/**
+ * Table Row Props
+ */
+export type TableRowProps = {
+  style?: CSSProperties,
+  className?: string,
+  children?: AnyReactChildren,
+  noWrap?: boolean,
+  rowSpan?: number,
+  colSpan?: number,
+};
+
+/**
+ * Table Props
+ */
+export type TableProps = {
+  style?: CSSProperties,
+  className?: string,
+  children?: ReactNode|ReactNode[]
+};
 
 /**
  * Invisible Rule Component

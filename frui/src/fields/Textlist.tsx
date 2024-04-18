@@ -1,10 +1,29 @@
 //types
-import type { TextlistType, TextlistConfig } from '../types/fields';
-import type { FieldsProps, FieldsetProps } from '../types/components';
+import type { FieldsProps, FieldsetProps } from '../Fieldset';
 //components
 import Input from './Input';
 import Button from '../Button';
 import make from '../Fieldset';
+
+/**
+ * Textlist Type
+ */
+export type TextlistType = string;
+
+/**
+ * Textlist Config
+ */
+export type TextlistConfig = {
+  type?: string,
+  values?: (TextlistType|undefined)[],
+  index: number,
+  set: (values: (TextlistType|undefined)[]) => void
+};
+
+/**
+ * Textlist Props
+ */
+export type TextlistProps = FieldsetProps<TextlistType>;
 
 /**
  * Textlist Hook Aggregate
@@ -31,7 +50,7 @@ export function useTextlists(config: TextlistConfig) {
 /**
  * Text Item Component 
  */
-export function Fields(props: FieldsProps<TextlistType>) {
+export function TextlistFields(props: FieldsProps<TextlistType>) {
   const { 
     data,
     values, 
@@ -66,7 +85,7 @@ export function Fields(props: FieldsProps<TextlistType>) {
   );
 };
 
-const Fieldset = make<TextlistType>(Fields);
+const Fieldset = make<TextlistType>(TextlistFields);
 
 /**
  * Textlist set Component (Main)

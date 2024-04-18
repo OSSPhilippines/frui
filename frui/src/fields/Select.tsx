@@ -1,15 +1,59 @@
 //types
-import type { KeyboardEvent } from 'react';
-import type { 
-  SelectDropdownProps, 
-  SelectOption, 
-  SelectProps,
-  SelectConfig
-} from '../types/fields';
+import type { ReactNode, KeyboardEvent, CSSProperties } from 'react';
 //hooks
 import { useState, useEffect } from 'react';
 //components
 import Input from './Input';
+
+/**
+ * Select Option
+ */
+export type SelectOption<T = any> = {
+  label: ReactNode,
+  value?: T,
+  keyword?: string|Function
+};
+
+/**
+ * Select Config
+ */
+export type SelectConfig = {
+  value?: SelectOption,
+  defaultValue?: SelectOption,
+  onDropdown?: (show: boolean) => void,
+  onSelected?: (value: SelectOption) => void,
+  onUpdate?: (value: string|number) => void
+};
+
+/**
+ * Select Dropdown Props
+ */
+export type SelectDropdownProps = { 
+  options: SelectOption[]|Record<string, string>
+  show: boolean,
+  error?: boolean,
+  searchable?: boolean,
+  select: (value: SelectOption) => void,
+  search: (e: KeyboardEvent) => void,
+  match: (option: SelectOption) => void
+};
+
+/**
+ * Select Props
+ */
+export type SelectProps = {
+  value?: SelectOption,
+  defaultValue?: SelectOption,
+  options: SelectOption[]|Record<string, string>,
+  searchable?: boolean,
+  placeholder?: string,
+  error?: boolean,
+  style?: CSSProperties,
+  className?: string,
+  onDropdown?: (show: boolean) => void,
+  onSelected?: (value: SelectOption) => void,
+  onUpdate?: (value: string|number) => void
+};
 
 /**
  * Select Hook Aggregate
@@ -90,7 +134,7 @@ export function useSelect(config: SelectConfig) {
 /**
  * Select Dropdown
  */
-export function Dropdown(props: SelectDropdownProps) {
+export function SelectDropdown(props: SelectDropdownProps) {
   const { 
     show, 
     searchable,
@@ -178,7 +222,7 @@ export default function Select(props: SelectProps) {
           </span>
         )}
       </div>
-      <Dropdown 
+      <SelectDropdown 
         options={options} 
         show={showing} 
         error={error}

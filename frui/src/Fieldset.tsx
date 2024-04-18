@@ -1,10 +1,52 @@
 //types
-import type { FieldsetProps, FieldsProps, FieldsetConfig } from './types/components';
+import type { ExtendsType } from './types';
+import type { ButtonProps } from './Button';
 //hooks
 import React, { useState, useEffect } from 'react';
 //components
 import Button from './Button';
 
+/**
+ * Fieldset Config
+ */
+export type FieldsetConfig<ValueType = any> = {
+  value?: ValueType[],
+  defaultValue?: ValueType[],
+  emptyValue?: ValueType,
+  onChange?: (values: ValueType[]) => void,
+  onUpdate?: (values: ValueType[]) => void
+}
+//use this type in your custom fieldset wrapper
+//ex. const Custom: React.FC<FieldsetProps<YOUR ROW TYPE>> = (props) => {}
+export type FieldsetProps<ValueType = any> = ExtendsType<ButtonProps, {
+  add?: string,
+  data?: Record<string, any>,
+  value?: ValueType[],
+  defaultValue?: ValueType[],
+  emptyValue?: ValueType,
+  error?: boolean,
+  errorColor?: string,
+  onChange?: (values: ValueType[]) => void,
+  onUpdate?: (values: ValueType[]) => void
+}>;
+//use this type in your custom fields component
+//ex. const Fields: React.FC<FieldsProps<YOUR ROW TYPE>> = (props) => {}
+export type FieldsProps<ValueType = any> = {
+  type?: string,
+  data?: Record<string, any>,
+  min?: number|string,
+  max?: number|string,
+  step?: number|string,
+  values?: (ValueType|undefined)[],
+  index: number,
+  error?: boolean,
+  errorColor: string,
+  set: (values: (ValueType|undefined)[]) => void
+};
+
+/**
+ * Fieldset Hook Aggregate
+ */
 export function useFieldset<ValueType = any>(
   config: FieldsetConfig<ValueType>
 ) {
@@ -48,7 +90,8 @@ export function useFieldset<ValueType = any>(
   }, [ value ]);
   
   return { values, handlers };
-}
+};
+
 /**
  * Factory to make a dynamic form fieldset
  * A group of fields that can be multiplied or removed dynamically

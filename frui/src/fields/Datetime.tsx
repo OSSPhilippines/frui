@@ -1,9 +1,30 @@
 //types
-import type { DatetimeProps, DatetimeConfig } from '../types/fields';
+import type { ExtendsType } from '../types';
+import type { InputProps } from './Input';
 //hooks
 import { useDate } from './Date';
 //components
 import Input from './Input';
+
+/**
+ * Datetime Input
+ */
+export type DatetimeInput = string|number|Date;
+
+/**
+ * Datetime Config
+ */
+export type DatetimeConfig = {
+  defaultValue?: DatetimeInput, 
+  onUpdate?: (value: string) => void
+};
+
+/**
+ * Datetime Props
+ */
+export type DatetimeProps = ExtendsType<InputProps, {
+  defaultValue?: DatetimeInput
+}>;
 
 /**
  * Datetime Hook Aggregate

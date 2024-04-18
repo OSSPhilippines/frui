@@ -1,8 +1,28 @@
 //types
 import type { ChangeEvent } from 'react';
-import type { SlugProps, SlugConfig } from '../types/fields';
+import type { InputProps, InputConfig } from './Input';
 //components
 import Input from './Input';
+
+/**
+ * Slug Config
+ */
+export type SlugConfig = InputConfig & {
+  dash?: boolean,
+  line?: boolean,
+  camel?: boolean,
+  value: string|number|readonly string[]|undefined,
+  defaultValue?: string|number|readonly string[]|undefined
+};
+
+/**
+ * Slug Props
+ */
+export type SlugProps = InputProps & {
+  dash?: boolean,
+  line?: boolean,
+  camel?: boolean
+};
 
 /**
  * Converts a string to a slug

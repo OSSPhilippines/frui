@@ -1,6 +1,9 @@
 //types
-import type { TextProps } from '../types/formats';
+export type TextProps = { value: string, format?: 'uppercase'|'lowercase'|'capitalize'|'none' };
 
+/**
+ * Text Format Component (Main)
+ */
 export default function Text({ value, format }: TextProps) {
   const styles: React.CSSProperties = {};
   if (format === 'uppercase') {

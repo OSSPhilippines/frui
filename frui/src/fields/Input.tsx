@@ -1,6 +1,27 @@
 //types
-import type { ChangeEvent } from 'react';
-import type { InputProps, InputConfig } from '../types/fields';
+import type { ChangeEvent, LegacyRef, CSSProperties } from 'react';
+import type { ExtendsType, HTMLInputProps } from '../types';
+
+/**
+ * Input Config
+ */
+export type InputConfig = {
+  checked?: boolean,
+  defaultChecked?: boolean,
+  onChange?: Function, 
+  onUpdate?: Function
+};
+
+/**
+ * Input Props
+ */
+export type InputProps = ExtendsType<HTMLInputProps, {
+  style?: CSSProperties,
+  label?: string,
+  error?: any,
+  onUpdate?: (value: string) => void,
+  passRef?: LegacyRef<HTMLInputElement>
+}>;
 
 /**
  * Input Hook Aggregate

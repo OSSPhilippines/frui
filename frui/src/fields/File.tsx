@@ -1,11 +1,31 @@
 //types
-import type { ChangeEvent } from 'react';
-import type { FileProps, FileConfig } from '../types/fields';
+import type { ChangeEvent, CSSProperties } from 'react';
+import type { InputProps, InputConfig } from './Input';
 //hooks
 import { useState, useEffect } from 'react';
 import { useInput } from './Input';
 //components
 import Input from './Input';
+
+/**
+ * File Config
+ */
+export type FileConfig = InputConfig & {
+  defaultValue?: string,
+  onUpload?: (file: File, update: (url: string) => void) => void
+};
+
+/**
+ * File Props
+ */
+export type FileProps = InputProps & {
+  defaultValue?: string,
+  locale?: Record<string, string>,
+  style?: CSSProperties,
+  className?: string,
+  onUpdate?: (value: string) => void,
+  onUpload?: (file: File, update: (url: string) => void) => void
+};
 
 /**
  * File Hook Aggregate

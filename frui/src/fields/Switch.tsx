@@ -1,8 +1,30 @@
 //types
-import type { ChangeEvent, MouseEvent } from 'react';
-import type { SwitchProps, InputConfig } from '../types/fields';
+import type { ChangeEvent, MouseEvent, CSSProperties } from 'react';
+import type { InputConfig } from './Input';
+import type { HTMLInputProps } from '../types';
 //hooks
 import { useState, useEffect } from 'react';
+
+/**
+ * Switch Props
+ */
+export type SwitchProps = HTMLInputProps & {
+  label?: string,
+  error?: any,
+  rounded?: boolean,
+  onoff?: boolean,
+  yesno?: boolean,
+  checkex?: boolean,
+  sunmoon?: boolean,
+  ridge?: boolean,
+  blue?: boolean,
+  orange?: boolean,
+  green?: boolean,
+  theme?: string|number,
+  style?: CSSProperties,
+  className?: string,
+  onUpdate?: (value: string|number|undefined, checked: boolean) => void
+};
 
 /**
  * Switch Hook Aggregate

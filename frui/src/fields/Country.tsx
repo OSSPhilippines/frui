@@ -1,13 +1,46 @@
 //types
-import type { 
-  CountryProps, 
-  CountryOption, 
-  CountryConfig 
-} from '../types/fields';
+import type { ExtendsType } from '../types';
+import type { SelectProps, SelectOption } from './Select';
 //components
 import Select from './Select';
 //data
 import countries from '../data/intl.json';
+
+/**
+ * Country Data
+ */
+export type CountryData = {
+  countryCode: string,
+  countryName: string,
+  currencyType: string,
+  currencyCode: string,
+  currencyName: string,
+  currencyPlural: string,
+  currencySymbol: string,
+  language: string
+};
+
+/**
+ * Country Option
+ */
+export type CountryOption = SelectOption<CountryData>;
+
+/**
+ * Country Config
+ */
+export type CountryConfig = {
+  value?: string | CountryOption | undefined,
+  defaultValue?: string | CountryOption | undefined,
+  map: (country: CountryData) => CountryOption
+};
+
+/**
+ * Country Props
+ */
+export type CountryProps = ExtendsType<SelectProps, {
+  options?: undefined,
+  value?: CountryOption|string
+}>;
 
 /**
  * Country Hook Aggregate

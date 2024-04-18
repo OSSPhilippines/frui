@@ -1,9 +1,26 @@
 //types
-import type { TaglistProps } from '../types/fields';
-import type { ChangeEvent, KeyboardEvent } from 'react';
-import type { TaglistConfig } from '../types/fields';
+import type { ChangeEvent, KeyboardEvent, CSSProperties } from 'react';
+import type { ExtendsType, HTMLInputProps } from '../types';
 //hooks
 import { useState, useEffect } from 'react';
+
+/**
+ * Taglist Config
+ */
+export type TaglistConfig = {
+  onChange?: Function, 
+  onUpdate?: Function
+};
+
+/**
+ * Taglist Props
+ */
+export type TaglistProps = ExtendsType<HTMLInputProps, {
+  error?: any,
+  onUpdate?: (value: string) => void,
+  className?: string, 
+  style?: CSSProperties
+}>;
 
 /**
  * Taglist Hook Aggregate

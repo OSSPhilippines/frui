@@ -1,9 +1,16 @@
 //types
-import type { PasswordProps } from '../types/fields';
+import type { InputProps } from './Input';
 //hooks
 import { useState } from 'react';
 //components
 import Input from './Input';
+
+/**
+ * Password Props
+ */
+export type PasswordProps = InputProps & {
+  error?: boolean
+};
 
 /**
  * Password Hook Aggregate

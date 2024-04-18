@@ -1,8 +1,25 @@
 //types
-import type { CurrencyProps } from '../types/formats';
+import type { CSSProperties } from 'react';
 //helpers
 import countries from '../data/intl.json';
 
+/**
+ * Currency Props
+ */
+export type CurrencyProps = {
+  value: string, 
+  flag?: boolean, 
+  text?: boolean,
+  sm?: boolean,
+  md?: boolean,
+  lg?: boolean,
+  className?: string, 
+  style?: CSSProperties
+};
+
+/**
+ * Currency Format Component (Main)
+ */
 export default function Currency(props: CurrencyProps) {
   const { 
     value, 

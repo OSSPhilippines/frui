@@ -1,51 +1,23 @@
-import Color from './Color';
-import Country from './Country';
-import Currency from './Currency';
-import Date from './Date'; 
-import Email from './Email';
-import Formula from './Formula';
-import HTML from './HTML';
-import Image from './Image';
-import Imagelist from './Imagelist';
-import JSON from './JSON'; //pretty
-import Link from './Link';
-import List from './List';
-import Markdown from './Markdown';
-import Metadata from './Metadata';
-import Number from './Number';
-import Overflow from './Overflow';
-import Phone from './Phone';
-import Rating from './Rating';
-import Separated from './Separated';
-import Table from './Table';
-import Taglist from './Taglist';
-import Text from './Text';
-import Yesno from './Yesno';
-
-export type * from '../types/formats';
-
-export {
-  Color,
-  Country,
-  Currency,
-  Date,
-  Email,
-  Formula,
-  HTML,
-  Image,
-  Imagelist,
-  JSON,
-  Link,
-  List,
-  Markdown,
-  Metadata,
-  Number,
-  Overflow,
-  Phone,
-  Rating,
-  Separated,
-  Table,
-  Taglist,
-  Text,
-  Yesno,
-};
+export * from './Color';
+export * from './Country';
+export * from './Currency';
+export * from './Date'; 
+export * from './Email';
+export * from './Formula';
+export * from './HTML';
+export * from './Image';
+export * from './Imagelist';
+export * from './JSON';
+export * from './Link';
+export * from './List';
+export * from './Markdown';
+export * from './Metadata';
+export * from './Number';
+export * from './Overflow';
+export * from './Phone';
+export * from './Rating';
+export * from './Separated';
+export * from './Table';
+export * from './Taglist';
+export * from './Text';
+export * from './Yesno';

@@ -2,18 +2,53 @@
 import type { 
   ChangeEvent, 
   FocusEvent, 
-  KeyboardEvent 
+  KeyboardEvent, 
+  CSSProperties 
 } from 'react';
-import type { 
-  AutocompleteDropdownProps, 
-  AutocompleteProps,
-  AutocompleteConfig, 
-  SelectOption
-} from '../types/fields';
+import type { InputProps } from './Input';
+import type { SelectOption } from './Select';
 //hooks
 import { useState } from 'react';
 //components
 import Input from './Input';
+
+/**
+ * Autocomplete Config
+ */
+export type AutocompleteConfig = {
+  defaultValue?: string|number|readonly string[],
+  onSelected?: (option: SelectOption) => void,
+  onQuery?: (query: string) => void,
+  onDropdown?: (show: boolean) => void,
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
+  onUpdate?: (value: string) => void
+};
+
+/**
+ * Autocomplete Dropdown Props
+ */
+export type AutocompleteDropdownProps = { 
+  options: SelectOption[],
+  show: boolean,
+  styles?: Record<string, CSSProperties|false|undefined>|false,
+  classNames?: Record<string, string|false|undefined>|false,
+  select: (option: SelectOption) => void,
+  match: (option: SelectOption) => void
+};
+
+/**
+ * Autocomplete Props
+ */
+export type AutocompleteProps = InputProps & {
+  options: SelectOption[],
+  error?: boolean,
+  errorColor?: string,
+  styles?: Record<string, CSSProperties|false|undefined>|false,
+  classNames?: Record<string, string|false|undefined>|false,
+  onSelected?: (option: SelectOption) => void,
+  onQuery?: (query: string) => void,
+  onDropdown?: (show: boolean) => void
+};
 
 /**
  * Autocomplete Hook Aggregate
@@ -83,7 +118,7 @@ export function useAutocomplete(config: AutocompleteConfig) {
 /**
  * Autocomplete Dropdown
  */
-export function Dropdown(props: AutocompleteDropdownProps) {
+export function AutocompleteDropdown(props: AutocompleteDropdownProps) {
   const { 
     options, 
     show, 
@@ -148,7 +183,7 @@ export default function Autocomplete(props: AutocompleteProps) {
         {...attributes}
         value={value}
       />
-      <Dropdown 
+      <AutocompleteDropdown 
         options={options} 
         show={showing} 
         select={handlers.select} 

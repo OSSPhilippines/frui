@@ -1,5 +1,16 @@
 //types
-import type { ControlProps } from './types/components';
+import type { ReactNode, CSSProperties } from 'react';
+
+/**
+ * Control Props
+ */
+export type ControlProps = {
+  label?: string,
+  error?: string,
+  style?: CSSProperties,
+  className?: string,
+  children?: ReactNode
+};
 
 /**
  * Form Control Component (Main)

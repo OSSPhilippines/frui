@@ -1,5 +1,25 @@
 //types
-import type { BadgeProps } from './types/components';
+import type { ReactNode, CSSProperties } from 'react';
+
+/**
+ * Badge Props
+ */
+export type BadgeProps = {
+  color?: string,
+  info?: boolean, 
+  warning?: boolean, 
+  success?: boolean, 
+  error?: boolean, 
+  muted?: boolean, 
+  solid?: boolean, 
+  outline?: boolean,
+  curved?: boolean,
+  rounded?: boolean,
+  pill?: boolean,
+  style?: CSSProperties,
+  className?: string,
+  children?: ReactNode
+};
 
 /**
  * Badge Component (Main)

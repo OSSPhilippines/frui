@@ -1,10 +1,34 @@
 //types
 import type { ChangeEvent } from 'react';
-import type { NumberProps, NumberOptions } from '../types/fields';
+import type { InputProps } from './Input';
 //hooks
 import { useState, useEffect } from 'react';
 //components
 import Input from './Input';
+
+/**
+ * Number Options
+ */
+export type NumberOptions = {
+  min?: number,
+  max?: number,
+  separator?: string,
+  decimal?: string,
+  decimals?: number,
+  absolute?: boolean
+};
+
+/**
+ * Number Props
+ */
+export type NumberProps = InputProps & {
+  separator?: string,
+  decimal?: string,
+  absolute?: boolean,
+  width?: string,
+  controls?: Function,
+  onUpdate?: Function
+};
 
 /**
  * Toggles the negative sign

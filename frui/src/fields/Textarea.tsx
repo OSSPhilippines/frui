@@ -1,6 +1,24 @@
 //types
-import type { ChangeEvent } from 'react';
-import type { TextareaProps, TextareaConfig } from '../types/fields';
+import type { ChangeEvent, LegacyRef, CSSProperties } from 'react';
+import type { ExtendsType, HTMLTextareaProps } from '../types';
+
+/**
+ * Textarea Config
+ */
+export type TextareaConfig = {
+  onChange?: Function, 
+  onUpdate?: Function
+};
+
+/**
+ * Textarea Props
+ */
+export type TextareaProps = ExtendsType<HTMLTextareaProps, {
+  style?: CSSProperties,
+  error?: any,
+  onUpdate?: (value: string) => void,
+  passRef?: LegacyRef<HTMLTextAreaElement>
+}>;
 
 /**
  * Textarea Hook Aggregate

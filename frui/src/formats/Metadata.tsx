@@ -1,6 +1,9 @@
 //types
-import type { MetadataProps } from '../types/formats';
+export type MetadataProps = { value: Record<string, string|number> };
 
+/**
+ * Metadata Format Component (Main)
+ */
 export default function Metadata({ value }: MetadataProps) {
   return (
     <table>

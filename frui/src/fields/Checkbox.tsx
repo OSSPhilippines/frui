@@ -1,8 +1,26 @@
 //types
-import type { ChangeEvent, MouseEvent } from 'react';
-import type { InputConfig, CheckboxProps } from '../types/fields';
+import type { ChangeEvent, MouseEvent, CSSProperties } from 'react';
+import type { HTMLInputProps } from '../types';
+import type { InputConfig } from './Input';
 //hooks
 import { useState, useEffect } from 'react';
+
+/**
+ * Checkbox Props
+ */
+export type CheckboxProps = HTMLInputProps & {
+  label?: string,
+  error?: any,
+  check?: boolean,
+  circle?: boolean,
+  square?: boolean,
+  rounded?: boolean,
+  blue?: boolean,
+  orange?: boolean,
+  style?: CSSProperties,
+  className?: string,
+  onUpdate?: (value: string|number|undefined, checked: boolean) => void
+};
 
 /**
  * Checkbox Hook Aggregate

@@ -1,6 +1,24 @@
 //types
-import type { ColorProps } from '../types/formats';
+import type { CSSProperties } from 'react';
 
+/**
+ * Color Props
+ */
+export type ColorProps = { 
+  value: string, 
+  box?: boolean, 
+  text?: boolean,
+  sm?: boolean,
+  md?: boolean,
+  lg?: boolean,
+  className?: string, 
+  style?: CSSProperties
+};
+
+
+/**
+ * Color Format Component (Main)
+ */
 export default function Color(props: ColorProps) {
   const { 
     value, 

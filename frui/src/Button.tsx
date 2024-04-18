@@ -1,5 +1,36 @@
 //types
-import type { ButtonProps } from './types/components';
+import type { CSSProperties } from 'react';
+import type { HTMLButtonProps } from './types';
+
+/**
+ * Button Props
+ */
+export type ButtonProps = HTMLButtonProps & {
+  block?: boolean,
+  full?: boolean,
+  color?: string,
+  xs?: boolean, 
+  sm?: boolean, 
+  md?: boolean, 
+  lg?: boolean, 
+  xl?: boolean, 
+  xl2?: boolean, 
+  xl3?: boolean, 
+  xl4?: boolean, 
+  xl5?: boolean, 
+  curved?: boolean,
+  rounded?: boolean,
+  pill?: boolean,
+  info?: boolean, 
+  warning?: boolean, 
+  success?: boolean, 
+  error?: boolean, 
+  muted?: boolean, 
+  outline?: boolean, 
+  transparent?: boolean, 
+  solid?: boolean, 
+  style?: CSSProperties|false
+};
 
 /**
  * Generic Button Component (Main)

@@ -1,5 +1,5 @@
 //types
-import type { FilelistProps } from '../types/fields';
+import type { FilelistProps } from './Filelist';
 //hooks
 import { useFilelist } from './Filelist';
 //components

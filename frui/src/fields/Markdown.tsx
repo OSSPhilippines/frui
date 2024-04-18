@@ -1,5 +1,5 @@
 //types
-import type { MarkdownProps, MarkdownConfig } from '../types/fields';
+import type { TextareaProps } from './Textarea';
 //hooks
 import { useState } from 'react';
 //components
@@ -8,6 +8,19 @@ import Textarea from './Textarea';
 import Button from '../Button';
 //using react-dom/server to render markdown... on the client side
 import { renderToStaticMarkup } from 'react-dom/server';
+
+/**
+ * Markdown Config
+ */
+export type MarkdownConfig = {
+  defaultValue?: string,
+  onUpdate?: Function
+};
+
+/**
+ * Markdown Props
+ */
+export type MarkdownProps = TextareaProps;
 
 /**
  * Markdown Hook Aggregate

@@ -1,6 +1,14 @@
 //types
-import type { ListProps } from '../types/formats';
+import type { HTMLLinkProps } from '../types';
 
+/**
+ * List Props
+ */
+export type ListProps = HTMLLinkProps & { value: (string|number)[], ordered?: boolean };
+
+/**
+ * List Format Component (Main)
+ */
 export default function List(props: ListProps) {
   const { value, ordered, className, style = {} } = props;
   const classNames = ['format-list'];

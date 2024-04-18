@@ -1,8 +1,16 @@
-//types
-import type { DateProps } from '../types/formats';
 //helpers
 import moment from 'moment';
 
+/**
+ * Date Props
+ */
+export type DateProps = { 
+  value: string|number|Date, 
+  locale?: string,
+  format?: string 
+};
+
+//moment configuration
 moment.locale('short', { 
   parentLocale: 'en',
   relativeTime: { 
@@ -25,6 +33,9 @@ moment.locale('short', {
   }
 });
 
+/**
+ * Date Format Component (Main)
+ */
 export default function DateFormat(props: DateProps) {
   const { 
     value, 

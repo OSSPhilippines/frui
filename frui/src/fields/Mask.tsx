@@ -1,7 +1,22 @@
 //types
-import type { MaskProps } from '../types/fields';
+import type { InputProps } from './Input';
 //components
 import Input from './Input';
+
+/**
+ * Mask Props
+ */
+export type MaskProps = InputProps & { 
+  mask?: string,
+  regex?: string,
+  alias?: string,
+  repeat?: number,
+  greedy?: boolean,
+  numericInput?: boolean,
+  rightAlign?: boolean,
+  definitions?: Record<string, any>
+  onReady?: Function
+};
 
 /**
  * Mask  Component (Main)

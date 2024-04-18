@@ -1,13 +1,33 @@
 //types
-import type { MarkdownProps } from '../types/fields';
-//using react-dom/server to render markdown... on the client side
-import { renderToStaticMarkup } from 'react-dom/server';
+import type { MarkdownProps, MarkdownConfig } from '../types/fields';
 //hooks
-import useMarkdown from '../hooks/useMarkdown';
+import { useState } from 'react';
 //components
 import MarkdownFrame from 'markdown-to-jsx';
 import Textarea from './Textarea';
 import Button from '../Button';
+//using react-dom/server to render markdown... on the client side
+import { renderToStaticMarkup } from 'react-dom/server';
+
+/**
+ * Markdown Hook Aggregate
+ */
+export function useMarkdown({ onUpdate, defaultValue }: MarkdownConfig) {
+  const [ mode, setMode ] = useState<'preview'|'edit'>('edit');
+  const [ value, setValue ] = useState(defaultValue || '');
+  
+  return {
+    mode,
+    value,
+    handlers: {
+      mode: setMode,
+      update: (value: string) => {
+        setValue(value)
+        onUpdate && onUpdate(value);
+      }
+    }
+  };
+}
 
 /**
  * Form Markdown Component (Main)

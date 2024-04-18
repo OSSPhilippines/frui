@@ -61,14 +61,11 @@ const MainMenu: React.FC<{
         <span className="inline-block pl-2">{_('Fields')}</span>
       </Link>
       <div>
-        <Link href="/field/fieldset" className={`${pathname.indexOf('/field/fieldset') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
-          <span className="inline-block pl-2">{_('Fieldsets')}</span>
+        <Link href="/field/input" className={`${pathname.indexOf('/field/input') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Inputs')}</span>
         </Link>
         <Link href="/field/file" className={`${pathname.indexOf('/field/file') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Files')}</span>
-        </Link>
-        <Link href="/field/input" className={`${pathname.indexOf('/field/input') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
-          <span className="inline-block pl-2">{_('Inputs')}</span>
         </Link>
         <Link href="/field/options" className={`${pathname.indexOf('/field/options') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Options')}</span>
@@ -78,6 +75,9 @@ const MainMenu: React.FC<{
         </Link>
         <Link href="/field/textarea" className={`${pathname.indexOf('/field/textarea') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Textarea')}</span>
+        </Link>
+        <Link href="/field/fieldset" className={`${pathname.indexOf('/field/fieldset') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Fieldsets')}</span>
         </Link>
       </div>
       <Link href="/format" className={`${pathname.indexOf('/format') === 0 ? 'text-white' : ''} block px-3 py-2 border-t border-solid border-b0 cursor-pointer`}>

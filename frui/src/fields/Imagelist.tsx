@@ -1,9 +1,9 @@
 //types
 import type { FilelistProps } from '../types/fields';
+//hooks
+import { useFilelist } from './Filelist';
 //components
 import Input from './Input';
-//hooks
-import useFilelist from '../hooks/useFilelist';
 
 /**
  * Generic File  Component (Main)

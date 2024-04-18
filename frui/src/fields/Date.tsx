@@ -1,9 +1,21 @@
 //types
-import type { DateProps } from '../types/fields';
+import type { DateProps, DateConfig } from '../types/fields';
 //components
 import Input from './Input';
-//hooks
-import useDate from '../hooks/useDate';
+
+/**
+ * Date Hook Aggregate
+ */
+export function useDate({ onUpdate }: DateConfig) {
+  return (value: string) => {
+    if (onUpdate && value) {
+      try {
+        const utc = new Date(value).toUTCString();
+        onUpdate(new Date(utc).toISOString());
+      } catch(e) {} 
+    }
+  };
+};
 
 /**
  * Date  Component

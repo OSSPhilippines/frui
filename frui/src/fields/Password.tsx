@@ -1,9 +1,18 @@
 //types
 import type { PasswordProps } from '../types/fields';
+//hooks
+import { useState } from 'react';
 //components
 import Input from './Input';
-//hooks
-import usePassword from '../hooks/usePassword';
+
+/**
+ * Password Hook Aggregate
+ */
+export function usePassword() {
+  const [ showing, show ] = useState(false);
+  const toggle = () => show(!showing);
+  return { toggle, showing };
+}
 
 /**
  * Password  Component (Main)

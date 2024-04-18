@@ -1,9 +1,48 @@
 //types
-import type { FileProps } from '../types/fields';
+import type { ChangeEvent } from 'react';
+import type { FileProps, FileConfig } from '../types/fields';
+//hooks
+import { useState, useEffect } from 'react';
+import { useInput } from './Input';
 //components
 import Input from './Input';
-//hooks
-import useFile from '../hooks/useFile';
+
+/**
+ * File Hook Aggregate
+ */
+export function useFile(config: FileConfig) {
+  const {
+    defaultValue,
+    onChange, 
+    onUpdate,
+    onUpload
+  } = config;
+  const [ uploading, setUploading ] = useState(false);
+  const [ url, setURL ] = useState<string|undefined>(defaultValue);
+  useEffect(() => {
+    onUpdate && onUpdate(url);
+  }, [ url ]);
+  const handlers = {
+    change: (e: ChangeEvent<HTMLInputElement>) => {
+      if (onUpload && e.target.files?.length) {
+        setUploading(true);
+        onUpload(e.target.files[0], url => {
+          setURL(url);
+          setUploading(false);
+        });
+      }
+      
+      onChange && onChange(e);
+    },
+    reset: () => {
+      setUploading(false);
+      setURL(undefined);
+    }
+  }
+  useInput({ onChange: handlers.change, onUpdate })
+
+  return { uploading, url, handlers };   
+};
 
 /**
  * Generic File  Component (Main)

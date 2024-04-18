@@ -1,5 +1,5 @@
 //types
-import type { MetadataType } from '../types/fields';
+import type { MetadataType, MetadataConfig } from '../types/fields';
 import type { FieldsProps, FieldsetProps } from '../types/components';
 //components
 import Button from '../Button';
@@ -9,8 +9,41 @@ import Number from './Number';
 import Date from './Date';
 import Datetime from './Datetime';
 import Time from './Time';
-//hooks
-import useMetadata from '../hooks/useMetadata';
+
+/**
+ * Metadata Hook Aggregate
+ */
+export function useMetadata(config: MetadataConfig) {
+  const { type, values, index, set } = config;
+  const isNumber = type === 'number';
+  const isDate = ['date', 'time', 'datetime'].includes(type || '');
+  const isText = !isDate && !isNumber;
+  //handlers
+  const handlers = {
+    update: (key: 'name'|'value', input: any) => {
+      const newValues = [ ...(values || []) ];
+      const entry: [string, string|number|Date] = [ '', '' ];
+      const current = newValues[index];
+      entry[0] = current ? current[0] : '';
+      entry[1] = current ? current[1] : '';
+      if (key === 'name') {
+        entry[0] = input;
+      } else {
+        entry[1] = input;
+      }
+
+      newValues[index] = entry
+      set(newValues);
+    },
+    remove: () => {
+      const newValues = [ ...(values || []) ];
+      newValues[index] = undefined;
+      set(newValues);
+    }
+  };
+  
+  return { handlers, input: { isDate, isText, isNumber } };
+}
 
 /**
  * Key/Value Component 

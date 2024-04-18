@@ -1,9 +1,39 @@
 //types
-import type { CurrencyProps } from '../types/fields';
+import type { 
+  CurrencyProps, 
+  CurrencyOption, 
+  CurrencyConfig 
+} from '../types/fields';
 //components
 import Select from './Select';
-//hooks
-import useSelectCurrency from '../hooks/useCurrency';
+//data
+import countries from '../data/intl.json';
+
+/**
+ * Currency Hook Aggregate
+ */
+export function useCurrency(config: CurrencyConfig) {
+  const { value, defaultValue, map } = config;
+  //generate options
+  const options = countries
+    .filter(country => country.currencyType === 'fiat')
+    .filter(country => country.currencyCode !== 'USD' || country.countryCode === 'US')
+    .map(map);
+
+  const selected = typeof value === 'string' 
+    ? options.filter(
+        option => option.value?.currencyCode === value
+      )[0] as CurrencyOption
+    : undefined;
+
+  const selectedDefault = typeof defaultValue === 'string' 
+    ? options.filter(
+        option => option.value?.currencyCode === defaultValue
+      )[0] as CurrencyOption
+    : undefined;
+
+  return { selected, selectedDefault, options };
+};
 
 /**
  * Styled Currency  Component (Main)
@@ -15,7 +45,7 @@ export default function Currency(props: CurrencyProps) {
     placeholder = 'Choose a Currency', 
     ...attributes 
   } = props;
-  const { selected, selectedDefault, options } = useSelectCurrency({
+  const { selected, selectedDefault, options } = useCurrency({
     value, 
     defaultValue, 
     map: country => ({

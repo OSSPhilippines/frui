@@ -1,9 +1,9 @@
 //types
 import type { FileProps } from '../types/fields';
+//hooks
+import { useFile } from './File';
 //components
 import Input from './Input';
-//hooks
-import useFile from '../hooks/useFile';
 
 /**
  * Generic Image  Component (Main)

@@ -1,7 +1,20 @@
 //types
-import type { TextareaProps } from '../types/fields';
-//hooks
-import useTextarea from '../hooks/useTextarea';
+import type { ChangeEvent } from 'react';
+import type { TextareaProps, TextareaConfig } from '../types/fields';
+
+/**
+ * Textarea Hook Aggregate
+ */
+export function useTextarea({ onChange, onUpdate }: TextareaConfig) {
+  return {
+    handlers: {
+      change: (e: ChangeEvent<HTMLTextAreaElement>) => {
+        onChange && onChange(e);
+        onUpdate && onUpdate(e.target.value);
+      }
+    }
+  };
+}
 
 /**
  * Generic Textarea  Component (Main)

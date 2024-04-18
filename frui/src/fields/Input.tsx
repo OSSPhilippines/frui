@@ -1,7 +1,20 @@
 //types
-import type { InputProps } from '../types/fields';
-//hooks
-import useInput from '../hooks/useInput';
+import type { ChangeEvent } from 'react';
+import type { InputProps, InputConfig } from '../types/fields';
+
+/**
+ * Input Hook Aggregate
+ */
+export function useInput({ onChange, onUpdate }: InputConfig) {
+  return {
+    handlers: {
+      change: (e: ChangeEvent<HTMLInputElement>) => {
+        onChange && onChange(e);
+        onUpdate && onUpdate(e.target.value);
+      }
+    }
+  };
+}
 
 /**
  * Generic Input  Component (Main)

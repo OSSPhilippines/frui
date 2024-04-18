@@ -19,18 +19,18 @@ const codeBasic = `
   <Thead className="bg-b3 text-right">Created</Thead>
   <Thead className="bg-b3 text-right">Updated</Thead>
   <Trow>
-    <Tcol className="bg-b2">1</Tcol>
-    <Tcol className="bg-b2">John Doe</Tcol>
-    <Tcol className="bg-b2 text-center">Yes</Tcol>
-    <Tcol className="bg-b2 text-right">2021-01-01</Tcol>
-    <Tcol className="bg-b2 text-right">2021-01-01</Tcol>
+    <Tcol className="bg-b1">1</Tcol>
+    <Tcol className="bg-b1">John Doe</Tcol>
+    <Tcol className="bg-b1 text-center">Yes</Tcol>
+    <Tcol className="bg-b1 text-right">2021-01-01</Tcol>
+    <Tcol className="bg-b1 text-right">2021-01-01</Tcol>
   </Trow>
   <Trow>
-    <Tcol className="bg-b4">2</Tcol>
-    <Tcol className="bg-b4">Jane Doe</Tcol>
-    <Tcol className="bg-b4 text-center">No</Tcol>
-    <Tcol className="bg-b4 text-right">2021-01-01</Tcol>
-    <Tcol className="bg-b4 text-right">2021-01-01</Tcol>
+    <Tcol className="bg-b2">2</Tcol>
+    <Tcol className="bg-b2">Jane Doe</Tcol>
+    <Tcol className="bg-b2 text-center">No</Tcol>
+    <Tcol className="bg-b2 text-right">2021-01-01</Tcol>
+    <Tcol className="bg-b2 text-right">2021-01-01</Tcol>
   </Trow>
 </Table>`.trim();
 
@@ -42,8 +42,8 @@ const codeWrap = `
   <Thead className="bg-b3 text-right">Created</Thead>
   <Thead className="bg-b3 text-right">Updated</Thead>
   <Trow>
-    <Tcol className="bg-b2">1</Tcol>
-    <Tcol wrap3 className="bg-b2">
+    <Tcol className="bg-b1">1</Tcol>
+    <Tcol wrap3 className="bg-b1">
       Duis id ante leo. Morbi orci ex, porttitor nec 
       turpis ac, rutrum laoreet tellus. Cras nulla 
       justo, consectetur eget ante non, faucibus 
@@ -56,13 +56,13 @@ const codeWrap = `
       vel semper sagittis, velit nulla hendrerit justo, 
       in ultrices lorem magna vitae quam.
     </Tcol>
-    <Tcol className="bg-b2 text-center">Yes</Tcol>
-    <Tcol noWrap className="bg-b2 text-right">2021-01-01</Tcol>
-    <Tcol noWrap className="bg-b2 text-right">2021-01-01</Tcol>
+    <Tcol className="bg-b1 text-center">Yes</Tcol>
+    <Tcol noWrap className="bg-b1 text-right">2021-01-01</Tcol>
+    <Tcol noWrap className="bg-b1 text-right">2021-01-01</Tcol>
   </Trow>
   <Trow>
-    <Tcol className="bg-b4">2</Tcol>
-    <Tcol wrap3 className="bg-b4">
+    <Tcol className="bg-b2">2</Tcol>
+    <Tcol wrap3 className="bg-b2">
       Maecenas enim nibh, tincidunt lacinia molestie 
       id, dictum vel felis. Cras laoreet laoreet arcu 
       eu tincidunt. Aenean hendrerit mi purus, id 
@@ -79,9 +79,9 @@ const codeWrap = `
       volutpat ac in magna. Curabitur a magna at sem lacinia 
       tristique ac ut nibh. Nulla erat nulla, mollis at 
       finibus eget, mollis eu felis.</Tcol>
-    <Tcol className="bg-b4 text-center">No</Tcol>
-    <Tcol noWrap className="bg-b4 text-right">2021-01-01</Tcol>
-    <Tcol noWrap className="bg-b4 text-right">2021-01-01</Tcol>
+    <Tcol className="bg-b2 text-center">No</Tcol>
+    <Tcol noWrap className="bg-b2 text-right">2021-01-01</Tcol>
+    <Tcol noWrap className="bg-b2 text-right">2021-01-01</Tcol>
   </Trow>
 </Table>`.trim();
 
@@ -95,52 +95,52 @@ const codeSticky = `
     <Thead stickyTop className="bg-b3 text-right">Created</Thead>
     <Thead stickyTop className="bg-b3 text-right">Updated</Thead>
     <Trow>
-      <Tcol stickyLeft className="bg-b2">1</Tcol>
-      <Tcol className="bg-b2">John</Tcol>
-      <Tcol className="bg-b2">Doe</Tcol>
-      <Tcol className="bg-b2 text-center">Yes</Tcol>
-      <Tcol noWrap className="bg-b2 text-right">2021-01-01</Tcol>
-      <Tcol noWrap className="bg-b2 text-right">2021-01-02</Tcol>
+      <Tcol stickyLeft className="bg-b1">1</Tcol>
+      <Tcol className="bg-b1">John</Tcol>
+      <Tcol className="bg-b1">Doe</Tcol>
+      <Tcol className="bg-b1 text-center">Yes</Tcol>
+      <Tcol noWrap className="bg-b1 text-right">2021-01-01</Tcol>
+      <Tcol noWrap className="bg-b1 text-right">2021-01-02</Tcol>
     </Trow>
     <Trow>
-      <Tcol stickyLeft className="bg-b4">2</Tcol>
-      <Tcol className="bg-b4">Jane</Tcol>
-      <Tcol className="bg-b4">Doe</Tcol>
-      <Tcol className="bg-b4 text-center">No</Tcol>
-      <Tcol noWrap className="bg-b4 text-right">2021-02-03</Tcol>
-      <Tcol noWrap className="bg-b4 text-right">2021-02-04</Tcol>
-    </Trow>
-    <Trow>
-      <Tcol stickyLeft className="bg-b2">3</Tcol>
-      <Tcol className="bg-b2">Jack</Tcol>
+      <Tcol stickyLeft className="bg-b2">2</Tcol>
+      <Tcol className="bg-b2">Jane</Tcol>
       <Tcol className="bg-b2">Doe</Tcol>
       <Tcol className="bg-b2 text-center">No</Tcol>
-      <Tcol noWrap className="bg-b2 text-right">2021-03-05</Tcol>
-      <Tcol noWrap className="bg-b2 text-right">2021-03-06</Tcol>
+      <Tcol noWrap className="bg-b2 text-right">2021-02-03</Tcol>
+      <Tcol noWrap className="bg-b2 text-right">2021-02-04</Tcol>
     </Trow>
     <Trow>
-      <Tcol stickyLeft className="bg-b4">4</Tcol>
-      <Tcol className="bg-b4">Jan</Tcol>
-      <Tcol className="bg-b4">Doe</Tcol>
-      <Tcol className="bg-b4 text-center">No</Tcol>
-      <Tcol noWrap className="bg-b4 text-right">2021-04-07</Tcol>
-      <Tcol noWrap className="bg-b4 text-right">2021-04-08</Tcol>
+      <Tcol stickyLeft className="bg-b1">3</Tcol>
+      <Tcol className="bg-b1">Jack</Tcol>
+      <Tcol className="bg-b1">Doe</Tcol>
+      <Tcol className="bg-b1 text-center">No</Tcol>
+      <Tcol noWrap className="bg-b1 text-right">2021-03-05</Tcol>
+      <Tcol noWrap className="bg-b1 text-right">2021-03-06</Tcol>
     </Trow>
     <Trow>
-      <Tcol stickyLeft className="bg-b2">5</Tcol>
-      <Tcol className="bg-b2">Jimmy</Tcol>
+      <Tcol stickyLeft className="bg-b2">4</Tcol>
+      <Tcol className="bg-b2">Jan</Tcol>
       <Tcol className="bg-b2">Doe</Tcol>
-      <Tcol className="bg-b2 text-center">Yes</Tcol>
-      <Tcol noWrap className="bg-b2 text-right">2021-05-09</Tcol>
-      <Tcol noWrap className="bg-b2 text-right">2021-05-10</Tcol>
+      <Tcol className="bg-b2 text-center">No</Tcol>
+      <Tcol noWrap className="bg-b2 text-right">2021-04-07</Tcol>
+      <Tcol noWrap className="bg-b2 text-right">2021-04-08</Tcol>
     </Trow>
     <Trow>
-      <Tcol stickyLeft className="bg-b4">6</Tcol>
-      <Tcol className="bg-b4">Jenny</Tcol>
-      <Tcol className="bg-b4">Doe</Tcol>
-      <Tcol className="bg-b4 text-center">No</Tcol>
-      <Tcol noWrap className="bg-b4 text-right">2021-06-11</Tcol>
-      <Tcol noWrap className="bg-b4 text-right">2021-06-12</Tcol>
+      <Tcol stickyLeft className="bg-b1">5</Tcol>
+      <Tcol className="bg-b1">Jimmy</Tcol>
+      <Tcol className="bg-b1">Doe</Tcol>
+      <Tcol className="bg-b1 text-center">Yes</Tcol>
+      <Tcol noWrap className="bg-b1 text-right">2021-05-09</Tcol>
+      <Tcol noWrap className="bg-b1 text-right">2021-05-10</Tcol>
+    </Trow>
+    <Trow>
+      <Tcol stickyLeft className="bg-b2">6</Tcol>
+      <Tcol className="bg-b2">Jenny</Tcol>
+      <Tcol className="bg-b2">Doe</Tcol>
+      <Tcol className="bg-b2 text-center">No</Tcol>
+      <Tcol noWrap className="bg-b2 text-right">2021-06-11</Tcol>
+      <Tcol noWrap className="bg-b2 text-right">2021-06-12</Tcol>
     </Trow>
   </Table>
 </div>`.trim();
@@ -273,18 +273,18 @@ export default function Home() {
                   <Thead className="bg-b3 text-right">Created</Thead>
                   <Thead className="bg-b3 text-right">Updated</Thead>
                   <Trow>
-                    <Tcol className="bg-b2">1</Tcol>
-                    <Tcol className="bg-b2">John Doe</Tcol>
-                    <Tcol className="bg-b2 text-center">Yes</Tcol>
-                    <Tcol className="bg-b2 text-right">2021-01-01</Tcol>
-                    <Tcol className="bg-b2 text-right">2021-01-01</Tcol>
+                    <Tcol className="bg-b1">1</Tcol>
+                    <Tcol className="bg-b1">John Doe</Tcol>
+                    <Tcol className="bg-b1 text-center">Yes</Tcol>
+                    <Tcol className="bg-b1 text-right">2021-01-01</Tcol>
+                    <Tcol className="bg-b1 text-right">2021-01-01</Tcol>
                   </Trow>
                   <Trow>
-                    <Tcol className="bg-b4">2</Tcol>
-                    <Tcol className="bg-b4">Jane Doe</Tcol>
-                    <Tcol className="bg-b4 text-center">No</Tcol>
-                    <Tcol className="bg-b4 text-right">2021-01-01</Tcol>
-                    <Tcol className="bg-b4 text-right">2021-01-01</Tcol>
+                    <Tcol className="bg-b2">2</Tcol>
+                    <Tcol className="bg-b2">Jane Doe</Tcol>
+                    <Tcol className="bg-b2 text-center">No</Tcol>
+                    <Tcol className="bg-b2 text-right">2021-01-01</Tcol>
+                    <Tcol className="bg-b2 text-right">2021-01-01</Tcol>
                   </Trow>
                 </Table>
               </div>
@@ -323,8 +323,8 @@ export default function Home() {
                   <Thead className="bg-b3 text-right">Created</Thead>
                   <Thead className="bg-b3 text-right">Updated</Thead>
                   <Trow>
-                    <Tcol className="bg-b2">1</Tcol>
-                    <Tcol wrap3 className="bg-b2">
+                    <Tcol className="bg-b1">1</Tcol>
+                    <Tcol wrap3 className="bg-b1">
                       Duis id ante leo. Morbi orci ex, porttitor nec 
                       turpis ac, rutrum laoreet tellus. Cras nulla 
                       justo, consectetur eget ante non, faucibus 
@@ -337,13 +337,13 @@ export default function Home() {
                       vel semper sagittis, velit nulla hendrerit justo, 
                       in ultrices lorem magna vitae quam.
                     </Tcol>
-                    <Tcol className="bg-b2 text-center">Yes</Tcol>
-                    <Tcol noWrap className="bg-b2 text-right">2021-01-01</Tcol>
-                    <Tcol noWrap className="bg-b2 text-right">2021-01-01</Tcol>
+                    <Tcol className="bg-b1 text-center">Yes</Tcol>
+                    <Tcol noWrap className="bg-b1 text-right">2021-01-01</Tcol>
+                    <Tcol noWrap className="bg-b1 text-right">2021-01-01</Tcol>
                   </Trow>
                   <Trow>
-                    <Tcol className="bg-b4">2</Tcol>
-                    <Tcol wrap3 className="bg-b4">
+                    <Tcol className="bg-b2">2</Tcol>
+                    <Tcol wrap3 className="bg-b2">
                       Maecenas enim nibh, tincidunt lacinia molestie 
                       id, dictum vel felis. Cras laoreet laoreet arcu 
                       eu tincidunt. Aenean hendrerit mi purus, id 
@@ -360,9 +360,9 @@ export default function Home() {
                       volutpat ac in magna. Curabitur a magna at sem lacinia 
                       tristique ac ut nibh. Nulla erat nulla, mollis at 
                       finibus eget, mollis eu felis.</Tcol>
-                    <Tcol className="bg-b4 text-center">No</Tcol>
-                    <Tcol noWrap className="bg-b4 text-right">2021-01-01</Tcol>
-                    <Tcol noWrap className="bg-b4 text-right">2021-01-01</Tcol>
+                    <Tcol className="bg-b2 text-center">No</Tcol>
+                    <Tcol noWrap className="bg-b2 text-right">2021-01-01</Tcol>
+                    <Tcol noWrap className="bg-b2 text-right">2021-01-01</Tcol>
                   </Trow>
                 </Table>
                 </div>
@@ -400,52 +400,52 @@ export default function Home() {
                     <Thead stickyTop className="bg-b3 text-right">Created</Thead>
                     <Thead stickyTop className="bg-b3 text-right">Updated</Thead>
                     <Trow>
-                      <Tcol stickyLeft className="bg-b2">1</Tcol>
-                      <Tcol className="bg-b2">John</Tcol>
-                      <Tcol className="bg-b2">Doe</Tcol>
-                      <Tcol className="bg-b2 text-center">Yes</Tcol>
-                      <Tcol noWrap className="bg-b2 text-right">2021-01-01</Tcol>
-                      <Tcol noWrap className="bg-b2 text-right">2021-01-02</Tcol>
+                      <Tcol stickyLeft className="bg-b1">1</Tcol>
+                      <Tcol className="bg-b1">John</Tcol>
+                      <Tcol className="bg-b1">Doe</Tcol>
+                      <Tcol className="bg-b1 text-center">Yes</Tcol>
+                      <Tcol noWrap className="bg-b1 text-right">2021-01-01</Tcol>
+                      <Tcol noWrap className="bg-b1 text-right">2021-01-02</Tcol>
                     </Trow>
                     <Trow>
-                      <Tcol stickyLeft className="bg-b4">2</Tcol>
-                      <Tcol className="bg-b4">Jane</Tcol>
-                      <Tcol className="bg-b4">Doe</Tcol>
-                      <Tcol className="bg-b4 text-center">No</Tcol>
-                      <Tcol noWrap className="bg-b4 text-right">2021-02-03</Tcol>
-                      <Tcol noWrap className="bg-b4 text-right">2021-02-04</Tcol>
-                    </Trow>
-                    <Trow>
-                      <Tcol stickyLeft className="bg-b2">3</Tcol>
-                      <Tcol className="bg-b2">Jack</Tcol>
+                      <Tcol stickyLeft className="bg-b2">2</Tcol>
+                      <Tcol className="bg-b2">Jane</Tcol>
                       <Tcol className="bg-b2">Doe</Tcol>
                       <Tcol className="bg-b2 text-center">No</Tcol>
-                      <Tcol noWrap className="bg-b2 text-right">2021-03-05</Tcol>
-                      <Tcol noWrap className="bg-b2 text-right">2021-03-06</Tcol>
+                      <Tcol noWrap className="bg-b2 text-right">2021-02-03</Tcol>
+                      <Tcol noWrap className="bg-b2 text-right">2021-02-04</Tcol>
                     </Trow>
                     <Trow>
-                      <Tcol stickyLeft className="bg-b4">4</Tcol>
-                      <Tcol className="bg-b4">Jan</Tcol>
-                      <Tcol className="bg-b4">Doe</Tcol>
-                      <Tcol className="bg-b4 text-center">No</Tcol>
-                      <Tcol noWrap className="bg-b4 text-right">2021-04-07</Tcol>
-                      <Tcol noWrap className="bg-b4 text-right">2021-04-08</Tcol>
+                      <Tcol stickyLeft className="bg-b1">3</Tcol>
+                      <Tcol className="bg-b1">Jack</Tcol>
+                      <Tcol className="bg-b1">Doe</Tcol>
+                      <Tcol className="bg-b1 text-center">No</Tcol>
+                      <Tcol noWrap className="bg-b1 text-right">2021-03-05</Tcol>
+                      <Tcol noWrap className="bg-b1 text-right">2021-03-06</Tcol>
                     </Trow>
                     <Trow>
-                      <Tcol stickyLeft className="bg-b2">5</Tcol>
-                      <Tcol className="bg-b2">Jimmy</Tcol>
+                      <Tcol stickyLeft className="bg-b2">4</Tcol>
+                      <Tcol className="bg-b2">Jan</Tcol>
                       <Tcol className="bg-b2">Doe</Tcol>
-                      <Tcol className="bg-b2 text-center">Yes</Tcol>
-                      <Tcol noWrap className="bg-b2 text-right">2021-05-09</Tcol>
-                      <Tcol noWrap className="bg-b2 text-right">2021-05-10</Tcol>
+                      <Tcol className="bg-b2 text-center">No</Tcol>
+                      <Tcol noWrap className="bg-b2 text-right">2021-04-07</Tcol>
+                      <Tcol noWrap className="bg-b2 text-right">2021-04-08</Tcol>
                     </Trow>
                     <Trow>
-                      <Tcol stickyLeft className="bg-b4">6</Tcol>
-                      <Tcol className="bg-b4">Jenny</Tcol>
-                      <Tcol className="bg-b4">Doe</Tcol>
-                      <Tcol className="bg-b4 text-center">No</Tcol>
-                      <Tcol noWrap className="bg-b4 text-right">2021-06-11</Tcol>
-                      <Tcol noWrap className="bg-b4 text-right">2021-06-12</Tcol>
+                      <Tcol stickyLeft className="bg-b1">5</Tcol>
+                      <Tcol className="bg-b1">Jimmy</Tcol>
+                      <Tcol className="bg-b1">Doe</Tcol>
+                      <Tcol className="bg-b1 text-center">Yes</Tcol>
+                      <Tcol noWrap className="bg-b1 text-right">2021-05-09</Tcol>
+                      <Tcol noWrap className="bg-b1 text-right">2021-05-10</Tcol>
+                    </Trow>
+                    <Trow>
+                      <Tcol stickyLeft className="bg-b2">6</Tcol>
+                      <Tcol className="bg-b2">Jenny</Tcol>
+                      <Tcol className="bg-b2">Doe</Tcol>
+                      <Tcol className="bg-b2 text-center">No</Tcol>
+                      <Tcol noWrap className="bg-b2 text-right">2021-06-11</Tcol>
+                      <Tcol noWrap className="bg-b2 text-right">2021-06-12</Tcol>
                     </Trow>
                   </Table>
                 </div>

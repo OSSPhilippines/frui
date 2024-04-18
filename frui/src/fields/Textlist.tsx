@@ -1,12 +1,32 @@
 //types
-import type { TextlistType } from '../types/fields';
+import type { TextlistType, TextlistConfig } from '../types/fields';
 import type { FieldsProps, FieldsetProps } from '../types/components';
 //components
 import Input from './Input';
 import Button from '../Button';
 import make from '../Fieldset';
-//hooks
-import useTextlists from '../hooks/useTextlist';
+
+/**
+ * Textlist Hook Aggregate
+ */
+export function useTextlists(config: TextlistConfig) {
+  const { values, index, set } = config;
+  //handlers
+  const handlers = {
+    update: (value: string) => {
+      const newValues = [ ...(values || []) ]
+      newValues[index] = value;
+      set(newValues);
+    },
+    remove: () => {
+      const newValues = [ ...(values || []) ];
+      newValues[index] = undefined;
+      set(newValues);
+    }
+  };
+  
+  return { handlers };
+}
 
 /**
  * Text Item Component 

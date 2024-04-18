@@ -1,7 +1,7 @@
 //types
 import type { CurrencyProps } from '../types/formats';
 //helpers
-import countries from '../utils/intl.json';
+import countries from '../data/intl.json';
 
 export default function Currency(props: CurrencyProps) {
   const { 

@@ -1,7 +1,7 @@
 //types
 import type { CountryProps } from '../types/formats';
 //helpers
-import countries from '../utils/intl.json';
+import countries from '../data/intl.json';
 
 export default function Country(props: CountryProps) {
   const { 

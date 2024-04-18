@@ -1,9 +1,23 @@
 //types
-import type { DatetimeProps } from '../types/fields';
+import type { DatetimeProps, DatetimeConfig } from '../types/fields';
+//hooks
+import { useDate } from './Date';
 //components
 import Input from './Input';
-//hooks
-import useDatetime from '../hooks/useDatetime';
+
+/**
+ * Datetime Hook Aggregate
+ */
+export function useDatetime({ defaultValue, onUpdate }: DatetimeConfig) {
+  const update = useDate({ onUpdate });
+  let value: string|undefined = undefined;
+  if (defaultValue) {
+    try {
+      value = new Date(defaultValue).toISOString().replace('Z', '');
+    } catch(e) {}
+  }
+  return { value, update };
+};
 
 /**
  * Datetime  Component

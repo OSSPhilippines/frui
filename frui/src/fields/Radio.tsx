@@ -82,29 +82,29 @@ export default function Radio(props: RadioProps) {
     defaultChecked 
   });
 
-  const classNames = [ 'field-option' ];
+  const classNames = [ 'frui-field-option' ];
   if (rounded) {
-    classNames.push('field-option-rounded');
+    classNames.push('frui-field-option-rounded');
   }
 
   if (check) {
-    classNames.push('field-option-check');
+    classNames.push('frui-field-option-check');
   } else if (square) {
-    classNames.push('field-option-square');
+    classNames.push('frui-field-option-square');
   } else {
-    classNames.push('field-option-circle');
+    classNames.push('frui-field-option-circle');
   }
 
   if (blue) {
-    classNames.push('field-option-blue');
+    classNames.push('frui-field-option-blue');
   } else if (orange) {
-    classNames.push('field-option-orange');
+    classNames.push('frui-field-option-orange');
   } else {
-    classNames.push('field-option-default');
+    classNames.push('frui-field-option-default');
   }
 
   if (error) {
-    classNames.push('tx-error');
+    classNames.push('frui-tx-error');
   }
 
   if (className) {
@@ -120,11 +120,11 @@ export default function Radio(props: RadioProps) {
         onMouseOut={handlers.out}
         onMouseOver={handlers.over}
         type="radio" 
-        className="field-option-control"
+        className="frui-field-option-control"
         checked={checked}
         defaultChecked={defaultChecked}
       />
-      <span className="field-option-label">
+      <span className="frui-field-option-label">
         {label}
       </span>
     </label>

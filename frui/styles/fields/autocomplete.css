@@ -1,8 +1,8 @@
-.field-autocomplete {
+.frui-field-autocomplete {
   position: relative;
 }
 
-.field-autocomplete-dropdown {
+.frui-field-autocomplete-dropdown {
   background-color: var(--white);
   border-color: var(--black);
   border-style: solid;
@@ -13,12 +13,12 @@
   width: 100%;
 }
 
-.field-autocomplete-options {
+.frui-field-autocomplete-options {
   max-height: 256px;
   overflow: auto;
 }
 
-.field-autocomplete-option {
+.frui-field-autocomplete-option {
   align-items: center;
   border-color: #AAAAAA;
   border-style: solid;

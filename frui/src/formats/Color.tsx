@@ -37,20 +37,20 @@ export default function Color(props: ColorProps) {
     width: size
   };
   if (box && text) {
-    const classNames = ['format-color'];
+    const classNames = ['frui-format-color'];
     if (className) {
       classNames.push(className);
     }
     return (
       <span className={classNames.join(' ')} style={style}>
-        <span className="format-color-box" style={boxStyles} />
-        <span className="format-color-text">
+        <span className="frui-format-color-box" style={boxStyles} />
+        <span className="frui-format-color-text">
           {value}
         </span>
       </span>
     );
   } else if (box) {
-    const classNames = ['format-color-box'];
+    const classNames = ['frui-format-color-box'];
     if (className) {
       classNames.push(className);
     }
@@ -62,7 +62,7 @@ export default function Color(props: ColorProps) {
     );
   }
   //text
-  const classNames = ['format-color-text'];
+  const classNames = ['frui-format-color-text'];
   if (className) {
     classNames.push(className);
   }

@@ -1,9 +1,9 @@
-.field-textlist-row {
+.frui-field-textlist-row {
   display: flex;
   margin-bottom: 4px;
 }
 
-.field-textlist-remove {
+.frui-field-textlist-remove {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -14,7 +14,7 @@
   padding-top: 2px;
 }
 
-.field-textlist-input {
+.frui-field-textlist-input {
   border-color: var(--black);
   border-style: solid;
   border-width: 1px;

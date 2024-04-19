@@ -6,6 +6,26 @@ import { dark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 //others
 import notify from '../notify';
 
+export function InlineCode(props: { 
+  l?: boolean,
+  r?: boolean,
+  value?: string, 
+  quote?: boolean, 
+  children?: string 
+}) {
+  const { value, quote, l, r, children } = props;
+  const body = value || children;
+  return (
+    <>
+      {l?(<span>&nbsp;</span>):''}
+      <code className="text-sm text-t2 bg-b1 font-semibold inline-block p-0.5">
+        {quote?'`':''}{body}{quote?'`':''}
+      </code>
+      {r?(<span>&nbsp;</span>):''}
+    </>
+  );
+}
+
 export default function Code(props: { 
   language: string,
   className?: string, 
@@ -26,7 +46,7 @@ export default function Code(props: {
       <SyntaxHighlighter className="flex-grow !p-4 !bg-transparent" language={language} style={dark}>
         {children}
       </SyntaxHighlighter>
-      <div className="text-sm p-4 cursor-pointer whitespace-nowrap" onClick={copy}>
+      <div className="text-sm p-4 text-gray-400 cursor-pointer whitespace-nowrap" onClick={copy}>
         <i className="fas fa-copy"></i> {_('Copy')}
       </div>
     </div>

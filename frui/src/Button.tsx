@@ -71,15 +71,15 @@ export default function Button(props: ButtonProps) {
     classes: string[],
     styles: Record<string, string>
   } = {
-    classes: [ 'btn' ],
+    classes: [ 'frui-btn' ],
     styles: {}
   }
 
   if (block) {
-    defaults.classes.push('block');
+    defaults.classes.push('frui-block');
   }
   if (full) {
-    defaults.classes.push('full');
+    defaults.classes.push('frui-full');
   }
 
   //determine size
@@ -93,7 +93,7 @@ export default function Button(props: ButtonProps) {
     : xl4 ? '4xl' 
     : xl5 ? '5xl' 
     : 'md';
-  defaults.classes.push(`btn-${size}`);
+  defaults.classes.push(`frui-btn-${size}`);
 
   const layout = outline 
     ? 'outline' 
@@ -104,46 +104,46 @@ export default function Button(props: ButtonProps) {
     : 'solid';
 
   if (curved) {
-    defaults.classes.push('curved');
+    defaults.classes.push('frui-curved');
   } else if (rounded) {
-    defaults.classes.push('rounded');
+    defaults.classes.push('frui-rounded');
   } else if (pill) {
-    defaults.classes.push('pill');
+    defaults.classes.push('frui-pill');
   }
 
   if (layout === 'outline' || layout === 'transparent') {
-    defaults.classes.push('solid', 'thin');
+    defaults.classes.push('frui-solid', 'frui-thin');
     if (layout === 'outline') {
-      defaults.classes.push('bg-white');
+      defaults.classes.push('frui-bg-white');
     }
     if (color) {
       defaults.styles.borderColor = color;
       defaults.styles.color = color;
     } else if (info) {
-      defaults.classes.push('bd-info', 'tx-info');
+      defaults.classes.push('frui-bd-info', 'frui-tx-info');
     } else if (warning) {
-      defaults.classes.push('bd-warning', 'tx-warning');
+      defaults.classes.push('frui-bd-warning', 'frui-tx-warning');
     } else if (success) {
-      defaults.classes.push('bd-success', 'tx-success');
+      defaults.classes.push('frui-bd-success', 'frui-tx-success');
     } else if (error) {
-      defaults.classes.push('bd-error', 'tx-error');
+      defaults.classes.push('frui-bd-error', 'frui-tx-error');
     } else if (muted) {
-      defaults.classes.push('bd-muted', 'tx-muted');
+      defaults.classes.push('frui-bd-muted', 'frui-tx-muted');
     }
   } else {
-    defaults.classes.push('tx-white');
+    defaults.classes.push('frui-tx-white');
     if (color) {
       defaults.styles.backgroundColor = color;
     } else if (info) {
-      defaults.classes.push('bg-info');
+      defaults.classes.push('frui-bg-info');
     } else if (warning) {
-      defaults.classes.push('bg-warning');
+      defaults.classes.push('frui-bg-warning');
     } else if (success) {
-      defaults.classes.push('bg-success');
+      defaults.classes.push('frui-bg-success');
     } else if (error) {
-      defaults.classes.push('bg-error');
+      defaults.classes.push('frui-bg-error');
     } else if (muted) {
-      defaults.classes.push('bg-muted');
+      defaults.classes.push('frui-bg-muted');
     }
   } 
 

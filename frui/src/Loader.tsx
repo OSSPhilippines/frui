@@ -24,7 +24,7 @@ const Loader: React.FC<LoaderProps> = (props) => {
   if (show === false) {
     container.display = 'none';
   }
-  const classNames = ['loader'];
+  const classNames = ['frui-loader'];
   if (className) {
     classNames.push(className);
   }

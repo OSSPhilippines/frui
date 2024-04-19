@@ -1,53 +1,53 @@
-.tbl {
+.frui-tbl {
   border-collapse: collapse;
   display: table;
   width: 100%;
 }
 
-.tbl-scroll {
+.frui-tbl-scroll {
   overflow: auto;
   flex-grow: 1;
   height: 100%;
   width: 100%;
 }
 
-.tbl-nowrap {
+.frui-tbl-nowrap {
   white-space: nowrap;
 }
 
-.tbl-z0 {
+.frui-tbl-z0 {
   z-index: 0;
 }
-.tbl-z1 {
+.frui-tbl-z1 {
   z-index: 1;
 }
-.tbl-z2 {
+.frui-tbl-z2 {
   z-index: 2;
 }
-.tbl-z3 {
+.frui-tbl-z3 {
   z-index: 3;
 }
-.tbl-z4 {
+.frui-tbl-z4 {
   z-index: 4;
 }
 
-.tbl-sticky {
+.frui-tbl-sticky {
   position: sticky;
 }
-.tbl-sticky-b {
+.frui-tbl-sticky-b {
   bottom: 0;
 }
-.tbl-sticky-l {
+.frui-tbl-sticky-l {
   left: 0;
 }
-.tbl-sticky-t {
+.frui-tbl-sticky-t {
   top: 0;
 }
-.tbl-sticky-r {
+.frui-tbl-sticky-r {
   right: 0;
 }
 
-.tbl-col {
+.frui-tbl-col {
   border-color: black;
   border-style: solid;
   border-top-width: 1px;
@@ -57,7 +57,7 @@
   padding-top: 16px;
 }
 
-.tbl-foot {
+.frui-tbl-foot {
   border-color: black;
   border-style: solid;
   border-top-width: 1px;
@@ -67,14 +67,14 @@
   padding-top: 16px;
 }
 
-.tbl-row {
+.frui-tbl-row {
   padding-bottom: 16px;
   padding-left: 12px;
   padding-right: 12px;
   padding-top: 16px;
 }
 
-.tbl-head {
+.frui-tbl-head {
   border-color: black;
   border-style: solid;
   border-top-width: 1px;

@@ -70,7 +70,7 @@ export default function Home() {
             </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/input')} 
+              onClick={() => router.push('/field/mask')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full bg-black px-3">
@@ -83,7 +83,7 @@ export default function Home() {
             </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/input')} 
+              onClick={() => router.push('/field/number')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full bg-black px-3">
@@ -96,7 +96,7 @@ export default function Home() {
             </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/input')} 
+              onClick={() => router.push('/field/password')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full bg-black px-3">
@@ -109,7 +109,7 @@ export default function Home() {
             </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/input')} 
+              onClick={() => router.push('/field/slug')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full bg-black px-3">

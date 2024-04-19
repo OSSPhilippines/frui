@@ -130,30 +130,30 @@ export default function Taglist(props: TaglistProps) {
       : undefined,
   });
 
-  const classNames = [ 'field-taglist' ];
+  const classNames = [ 'frui-field-taglist' ];
   if (error) {
-    classNames.push('tx-error');
+    classNames.push('frui-tx-error');
   }
   if (className) {
     classNames.push(className);
   }
 
-  const tagClasses = [ 'field-taglist-tag' ];
+  const tagClasses = [ 'frui-field-taglist-tag' ];
   const tagStyle: CSSProperties = {};
   if (color) {
     tagStyle.backgroundColor = color;
   } else if (info) {
-    tagClasses.push('bg-info');
+    tagClasses.push('frui-bg-info');
   } else if (warning) {
-    tagClasses.push('bg-warning');
+    tagClasses.push('frui-bg-warning');
   } else if (success) {
-    tagClasses.push('bg-success');
+    tagClasses.push('frui-bg-success');
   } else if (error) {
-    tagClasses.push('bg-error');
+    tagClasses.push('frui-bg-error');
   } else if (muted) {
-    tagClasses.push('bg-muted');
+    tagClasses.push('frui-bg-muted');
   } else {
-    tagClasses.push('bg-warning');
+    tagClasses.push('frui-bg-warning');
   }
 
   //render
@@ -163,7 +163,7 @@ export default function Taglist(props: TaglistProps) {
         <div key={i} className={tagClasses.join(' ')} style={tagStyle}>
           {tag}
           <button 
-            className="field-taglist-remove"
+            className="frui-field-taglist-remove"
             onClick={() => handlers.remove(i)}
           >
             &times;
@@ -171,7 +171,7 @@ export default function Taglist(props: TaglistProps) {
         </div>
       ))}
       <input
-        className="field-taglist-input"
+        className="frui-field-taglist-input"
         value={input}
         onKeyDown={handlers.edit}
         onKeyUp={handlers.save}

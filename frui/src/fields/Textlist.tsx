@@ -64,9 +64,9 @@ export function TextlistFields(props: FieldsProps<TextlistType>) {
   const { handlers } = useTextlists({ values, index, set });
 
   return (
-    <div className="field-textlist-row">
+    <div className="frui-field-textlist-row">
       <Input
-        className="field-textlist-input"
+        className="frui-field-textlist-input"
         placeholder={placeholder}
         defaultValue={values ? values[index]: undefined}
         onUpdate={handlers.update}
@@ -77,7 +77,7 @@ export function TextlistFields(props: FieldsProps<TextlistType>) {
         outline
         error
         onClick={handlers.remove}
-        className="field-textlist-remove"
+        className="frui-field-textlist-remove"
       >
         &times;
       </Button>

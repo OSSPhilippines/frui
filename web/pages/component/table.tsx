@@ -9,7 +9,7 @@ import { Translate } from 'r22n';
 import Table, { Thead, Trow, Tcol } from 'frui/dist/Table';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
-import Code from 'modules/components/Code';
+import Code, { InlineCode as C } from 'modules/components/Code';
 
 const codeBasic = `
 <Table className="w-full">
@@ -207,6 +207,11 @@ export default function Home() {
                     {_('Sticky')}
                   </Link>
                 </li>
+                <li className="pl-3 pb-1">
+                  <Link href="#styles">
+                    {_('Custom Styles')}
+                  </Link>
+                </li>
               </ul>
             </div>
           </aside>
@@ -256,11 +261,8 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                Tables do not need: <code 
-                  className="text-sm text-t2"
-                >`thead`</code>, and <code 
-                  className="text-sm text-t2"
-                >`tbody`</code> elements as in the following basic 
+                Tables do not need: <C value="thead" />, and 
+                <C l value="tbody" /> elements as in the following basic 
                 example.
               </Translate>
             </p>
@@ -298,19 +300,10 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                Headers and cell width can be manipulated using <code 
-                  className="text-sm text-t2"
-                >`noWrap`</code>, <code 
-                  className="text-sm text-t2"
-                >`wrap1`</code>, <code 
-                  className="text-sm text-t2"
-                >`wrap2`</code>, <code 
-                  className="text-sm text-t2"
-                >`wrap3`</code>, <code 
-                  className="text-sm text-t2"
-                >`wrap4`</code>, and <code 
-                  className="text-sm text-t2"
-                >`wrap5`</code>.
+                Headers and cell width can be manipulated using 
+                <C l value="noWrap" />, <C value="wrap1" />, 
+                <C l value="wrap2" />, <C value="wrap3" />, 
+                <C l value="wrap4" />, and <C value="wrap5" />.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -377,15 +370,10 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                Headers and cells can use a combination of <code 
-                  className="text-sm text-t2"
-                >`stickLeft`</code>, <code 
-                  className="text-sm text-t2"
-                >`stickyTop`</code>, <code 
-                  className="text-sm text-t2"
-                >`stickyBottom`</code>, <code 
-                  className="text-sm text-t2"
-                >`stickyRight`</code> to make tables in the mobile view 
+                Headers and cells can use a combination of 
+                <C l value="stickLeft" />, <C value="stickyTop" />, 
+                <C l value="stickyBottom" />, <C value="stickyRight" r /> 
+                to make tables in the mobile view 
                 responsive.
               </Translate>
             </p>
@@ -454,6 +442,24 @@ export default function Home() {
                 {codeSticky}
               </Code>
             </div>
+
+            <h2 id="styles" className="uppercase font-bold text-lg mt-8">
+              {_('Custom Styles')}
+            </h2>
+            <p className="py-4">
+              <Translate>
+                You can add your own custom class to table components
+                or use any combination of <C 
+                  value="frui-tbl-col" 
+                />, <C 
+                  value="frui-tbl-row" 
+                />, <C 
+                  value="frui-tbl-head" 
+                />, and <C 
+                  value="frui-tbl-foot" 
+                /> CSS classes.
+              </Translate>
+            </p>
 
             <div className="flex items-center border-t border-b1 my-8 py-8">
               <Link className="text-t2" href="/component/modal">

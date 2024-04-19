@@ -142,7 +142,7 @@ export default function make<ValueType = any>(
           onClick={handlers.add}
           type="button"
         >
-          <span className="fieldset-plus">&#43;</span>
+          <span className="frui-fieldset-add">&#43;</span>
           {add || 'Add'}
         </Button>
       </>

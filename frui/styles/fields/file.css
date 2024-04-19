@@ -1,4 +1,4 @@
-.field-file-control {
+.frui-field-file-control {
   border-color: var(--black);
   border-style: solid;
   border-width: 1px;
@@ -10,14 +10,14 @@
   width: 100%;
 }
 
-.field-file-reset {
+.frui-field-file-reset {
   color: var(--error);
   cursor: pointer;
   font-size: 20px;
   margin-top: -2px;
 }
 
-.field-file-file {
+.frui-field-file-file {
   align-items: center;
   border-color: gray;
   border-style: solid;
@@ -33,7 +33,7 @@
   width: 100%;
 }
 
-.field-file-link {
-  display: flex;
+.frui-field-file-link {
+  flex-grow: 1;
   overflow: hidden;
 }

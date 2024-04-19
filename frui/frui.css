@@ -12,6 +12,7 @@
 @import url('./styles/formats/country.css');
 @import url('./styles/formats/imagelist.css');
 @import url('./styles/formats/list.css');
+@import url('./styles/formats/taglist.css');
 
 @import url('./styles/fields/autocomplete.css');
 @import url('./styles/fields/date.css');

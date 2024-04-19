@@ -146,22 +146,22 @@ export default function Modal(props: ModalProps) {
     style.display = 'flex';
   }
 
-  const classNames = ['modal'];
+  const classNames = ['frui-modal'];
   if (absolute) {
-    classNames.push('modal-absolute');
+    classNames.push('frui-modal-absolute');
   } else {
-    classNames.push('modal-fixed');
+    classNames.push('frui-modal-fixed');
   }
   if (className) {
     classNames.push(className);
   }
-  const overlay = ['modal-overlay'];
+  const overlay = ['frui-modal-overlay'];
   if (curved) {
-    overlay.push('curved');
+    overlay.push('frui-curved');
   } else if (rounded) {
-    overlay.push('rounded');
+    overlay.push('frui-rounded');
   } else if (pill) {
-    overlay.push('pill');
+    overlay.push('frui-pill');
   }
 
   const headStyle = color ? { backgroundColor: color } : undefined;
@@ -169,17 +169,20 @@ export default function Modal(props: ModalProps) {
   return (
     <div className={classNames.join(' ')} style={style}>
       <section className={overlay.join(' ')}>
-        <header className="modal-head" style={headStyle}>
-          <h6 className="modal-title">
+        <header className="frui-modal-head" style={headStyle}>
+          <h6 className="frui-modal-title">
             {title}
           </h6>
           {typeof onClose === 'function' && (
-            <button className="modal-close" onClick={() => { onClose() }}>
-              <i className="fas fa-times"></i>
+            <button 
+              className="frui-modal-close" 
+              onClick={() => { onClose() }}
+            >
+              &times;
             </button>
           )}
         </header>
-        <main className="modal-body">
+        <main className="frui-modal-body">
           {children}
         </main>
       </section>

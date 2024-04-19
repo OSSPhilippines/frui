@@ -9,7 +9,7 @@ import Button from 'frui/dist/Button';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
-import Code from 'modules/components/Code';
+import Code, { InlineCode as C } from 'modules/components/Code';
 
 export default function Home() {
   //hooks
@@ -116,17 +116,9 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                Buttons have the following types: <code 
-                  className="text-sm text-t2"
-                >`info`</code>, <code 
-                  className="text-sm text-t2"
-                >`warning`</code>, <code 
-                  className="text-sm text-t2"
-                >`success`</code>, <code 
-                  className="text-sm text-t2"
-                >`error`</code>, and <code 
-                  className="text-sm text-t2"
-                >`muted`</code>.
+                Buttons have the following types: <C value="info" />, 
+                <C l value="warning" />, <C value="success" />, 
+                <C l value="error" />, and <C value="muted" />.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -193,13 +185,8 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                Buttons can be rounded in three ways: <code 
-                  className="text-sm text-t2"
-                >`curved`</code>, <code 
-                  className="text-sm text-t2"
-                >`rounded`</code>, and <code 
-                  className="text-sm text-t2"
-                >`pill`</code>.
+                Buttons can be rounded in three ways: <C value="curved" />, 
+                <C l value="rounded" />, and <C value="pill" />.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -232,11 +219,9 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                Buttons have two stretching options: Turning it into a <code 
-                  className="text-sm text-t2"
-                >`block`</code>, and/or stretch the width to <code 
-                  className="text-sm text-t2"
-                >`full`</code>. 
+                Buttons have two stretching options: Turning it into a 
+                <C l value="block" />, and/or stretch the width to 
+                <C l value="full" />. 
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -253,25 +238,10 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                Buttons have sizes including: <code 
-                  className="text-sm text-t2"
-                >`xs`</code>, <code 
-                  className="text-sm text-t2"
-                >`sm`</code>, <code 
-                  className="text-sm text-t2"
-                >`md`</code>, <code 
-                  className="text-sm text-t2"
-                >`lg`</code>, <code 
-                  className="text-sm text-t2"
-                >`xl`</code>, <code 
-                  className="text-sm text-t2"
-                >`xl2`</code>, <code 
-                  className="text-sm text-t2"
-                >`xl3`</code>, <code 
-                  className="text-sm text-t2"
-                >`xl4`</code>, and <code 
-                  className="text-sm text-t2"
-                >`xl5`</code>.
+                Buttons have sizes including: <C value="xs" />, 
+                <C l value="sm" />, <C value="md" />, <C value="lg" />, 
+                <C l value="xl" />, <C value="xl2" />, <C value="xl3" />, 
+                <C l value="xl4" />, and <C value="xl5" />.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -353,9 +323,7 @@ export default function Home() {
             <p className="py-4">
               <Translate>
                 You can add your own custom class to the button component 
-                or use the <code 
-                  className="text-sm text-t2"
-                >`button`</code> CSS class.
+                or use the <C value="frui-btn" /> CSS class.
               </Translate>
             </p>
 

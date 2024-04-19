@@ -11,7 +11,7 @@ import Modal, { useModal } from 'frui/dist/Modal';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
-import Code from 'modules/components/Code';
+import Code, { InlineCode as C } from 'modules/components/Code';
 
 const codeBasic = `
 <Modal opened absolute color="salmon" title="Delete Item" className="text-white">
@@ -201,11 +201,8 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                By default, modal wont show until <code 
-                  className="text-sm text-t2"
-                >`opened`</code> is set to <code 
-                  className="text-sm text-t2"
-                >true</code>.
+                By default, modal wont show until <C value="opened" r /> 
+                is set to <C value="true" />.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -226,11 +223,8 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                Modals can be rounded in three ways: <code 
-                  className="text-sm text-t2"
-                >`curved`</code>, and <code 
-                  className="text-sm text-t2"
-                >`rounded`</code>.
+                Modals can be rounded in three ways: <C value="curved" />, 
+                and <C value="rounded" />.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -259,14 +253,10 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                To open and close modals, you can use <code 
-                  className="text-sm text-t2"
-                >useState</code> from react, then pass the <code 
-                  className="text-sm text-t2"
-                >`opened`</code>, and the <code 
-                  className="text-sm text-t2"
-                >open</code> function to the modal like the following 
-                code example.
+                To open and close modals, you can use <C value="useState" r /> 
+                from react, then pass the <C value="opened" />, and the 
+                <C l value="open" /> function to the modal like the 
+                following code example.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -287,14 +277,10 @@ export default function Home() {
             <p className="py-4">
               <Translate>
                 Absolute modals shows within the container closest to 
-                position <code 
-                  className="text-sm text-t2"
-                >relative</code> in your HTML. Fixed modals shows on a 
-                page level. You can toggle between the two by adding <code 
-                  className="text-sm text-t2"
-                >`fixed`</code>, or <code 
-                  className="text-sm text-t2"
-                >`absolute`</code> in the modal like the following 
+                position <C value="relative" /> in your HTML. Fixed 
+                modals shows on a page level. You can toggle between 
+                the two by adding <C value="fixed" />, or 
+                <C l value="absolute" /> in the modal like the following 
                 code example. By default modals are fixed.
               </Translate>
             </p>
@@ -317,9 +303,7 @@ export default function Home() {
               <Translate>
                 Most of the time you want one modal up at a time. To do 
                 this we need to first setup a global modal provider in
-                the project <code 
-                  className="text-sm text-t2"
-                >App</code> page.
+                the project <C value="App" /> page.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -327,14 +311,10 @@ export default function Home() {
             </div>
             <p className="py-4">
               <Translate>
-                Then in your page, import <code 
-                  className="text-sm text-t2"
-                >useModal</code>, define a <code 
-                  className="text-sm text-t2"
-                >ModelBody</code>, and then connect it all in your <code 
-                  className="text-sm text-t2"
-                >Page</code> component. The following shows how this can 
-                be done.
+                Then in your page, import <C value="useModal" />, define 
+                a <C value="ModelBody" />, and then connect it all in 
+                your <C value="Page" /> component. The following shows 
+                how this can be done.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -350,17 +330,12 @@ export default function Home() {
             <p className="py-4">
               <Translate>
                 You can add your own custom class to the modal component 
-                or set any combination of the following CSS classes: <code 
-                  className="text-sm text-t2"
-                >`modal`</code>, <code 
-                  className="text-sm text-t2"
-                >`modal-overlay`</code>, <code 
-                  className="text-sm text-t2"
-                >`modal-head`</code>, <code 
-                  className="text-sm text-t2"
-                >`modal-title`</code>, <code 
-                  className="text-sm text-t2"
-                >`modal-body`</code>
+                or set any combination of the following CSS classes: 
+                <C l value="frui-modal" />, 
+                <C l value="frui-modal-overlay" />, 
+                <C l value="frui-modal-head" />, 
+                <C l value="frui-modal-title" />, 
+                <C l value="frui-modal-body" />
               </Translate>
             </p>
 

@@ -9,7 +9,7 @@ import Badge from 'frui/dist/Badge';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
-import Code from 'modules/components/Code';
+import Code, { InlineCode as C } from 'modules/components/Code';
 
 export default function Home() {
   //hooks
@@ -95,17 +95,9 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                Badges have the following types: <code 
-                  className="text-sm text-t2"
-                >`info`</code>, <code 
-                  className="text-sm text-t2"
-                >`warning`</code>, <code 
-                  className="text-sm text-t2"
-                >`success`</code>, <code 
-                  className="text-sm text-t2"
-                >`error`</code>, and <code 
-                  className="text-sm text-t2"
-                >`muted`</code>.
+                Badges have the following types: <C value="info" />, 
+                <C l value="warning" />, <C value="success" />, 
+                <C l value="error" />, and <C value="muted" />.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -172,13 +164,9 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                Badges can be rounded in three ways: <code 
-                  className="text-sm text-t2"
-                >`curved`</code>, <code 
-                  className="text-sm text-t2"
-                >`rounded`</code>, and <code 
-                  className="text-sm text-t2"
-                >`pill`</code>.
+                Badges can be rounded in three ways: <C value="curved" />, <C 
+                  value="rounded" 
+                />, and <C value="pill" />.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -212,9 +200,7 @@ export default function Home() {
             <p className="py-4">
               <Translate>
                 You can add your own custom class to the badge component 
-                or use the <code 
-                  className="text-sm text-t2"
-                >`badge`</code> CSS class.
+                or use the <C value="frui-badge" /> CSS class.
               </Translate>
             </p>
 

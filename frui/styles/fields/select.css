@@ -1,8 +1,8 @@
-.field-select {
+.frui-field-select {
   position: relative;
 }
 
-.field-select-control {
+.frui-field-select-control {
   align-items: center;
   background-color: white;
   border-color: var(--black);
@@ -19,11 +19,11 @@
   width: 100%;
 }
 
-.field-select-placeholder {
+.frui-field-select-placeholder {
   color: #666666;
 }
 
-.field-select-dropdown {
+.frui-field-select-dropdown {
   background-color: var(--white);
   border-color: var(--black);
   border-style: solid;
@@ -36,7 +36,7 @@
   width: 100%;
 }
 
-.field-select-search {
+.frui-field-select-search {
   padding-bottom: 4px;
   padding-left: 4px;
   padding-right: 4px;
@@ -44,11 +44,11 @@
   position: relative;
 }
 
-.field-select-search-control {
+.frui-field-select-search-control {
   padding-right: 32px;
 }
 
-.field-select-search-icon {
+.frui-field-select-search-icon {
   background-color: var(--white);
   color: var(--black);
   padding: 4px;
@@ -57,12 +57,12 @@
   top: 9px;
 }
 
-.field-select-options {
+.frui-field-select-options {
   max-height: 256px;
   overflow: auto;
 }
 
-.field-select-option {
+.frui-field-select-option {
   align-items: center;
   border-color: #AAAAAA;
   border-style: solid;
@@ -76,4 +76,9 @@
   padding-left: 12px;
   padding-right: 12px;
   padding-top: 8px;
+}
+
+.frui-field-select-label { 
+  display: inline-block; 
+  margin-left: 4px; 
 }

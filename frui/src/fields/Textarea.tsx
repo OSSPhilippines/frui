@@ -50,9 +50,9 @@ export default function Textarea(props: TextareaProps) {
   //hooks
   const { handlers } = useTextarea({ onChange, onUpdate });
   //variables
-  const classNames = [ 'field-textarea' ];
+  const classNames = [ 'frui-field-textarea' ];
   if (error) {
-    classNames.push('tx-error', 'bd-error');
+    classNames.push('frui-tx-error', 'frui-bd-error');
   }
   if (className) {
     classNames.push(className);

@@ -8,7 +8,7 @@ import { Translate } from 'r22n';
 import Crumbs from 'modules/components/Crumbs';
 import { LayoutPanel } from 'modules/theme';
 import Loader from 'frui/dist/Loader';
-import Code from 'modules/components/Code';
+import Code, { InlineCode as C } from 'modules/components/Code';
 
 export default function Home() {
   //hooks
@@ -31,11 +31,8 @@ export default function Home() {
           </h1>
           <p className="py-4">
             <Translate>
-              By default, loaders wont show until <code 
-                className="text-sm text-t2"
-              >`show`</code> is set to <code 
-                className="text-sm text-t2"
-              >true</code>.
+              By default, loaders wont show until <C value="show" /> is 
+              set to <C value="true" />.
             </Translate>
           </p>
           <div className="curved overflow-hidden">
@@ -71,9 +68,7 @@ export default function Home() {
           <p className="py-4">
             <Translate>
               You can add your own custom class to the loader component 
-              or use the <code 
-                className="text-sm text-t2"
-              >`loader`</code> CSS class.
+              or use the <C value="frui-loader" /> CSS class.
             </Translate>
           </p>
 

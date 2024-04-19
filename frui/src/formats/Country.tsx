@@ -41,7 +41,7 @@ export default function Country(props: CountryProps) {
     country => country.countryCode === value
   );
   if (!country) {
-    const classNames = ['format-country-text'];
+    const classNames = ['frui-format-country-text'];
     if (className) {
       classNames.push(className);
     }
@@ -53,26 +53,26 @@ export default function Country(props: CountryProps) {
   }
 
   if (flag && text) {
-    const classNames = ['format-country'];
+    const classNames = ['frui-format-country'];
     if (className) {
       classNames.push(className);
     }
     return (
       <span className={classNames.join(' ')} style={style}>
         <img 
-          className="format-country-flag"
+          className="frui-format-country-flag"
           style={flagStyles}
           alt={`${country.countryName} Flag`} 
           src={`https://flagcdn.com/w80/${country.countryCode.toLowerCase()}.png`} 
           loading="lazy"
         />
-        <span className="format-country-text">
+        <span className="frui-format-country-text">
           {country.countryName}
         </span>
       </span>
     );  
   } else if (flag) {
-    const classNames = ['format-country-flag'];
+    const classNames = ['frui-format-country-flag'];
     if (className) {
       classNames.push(className);
     }
@@ -87,7 +87,7 @@ export default function Country(props: CountryProps) {
     );
   }
 
-  const classNames = ['format-country-text'];
+  const classNames = ['frui-format-country-text'];
     if (className) {
       classNames.push(className);
     }

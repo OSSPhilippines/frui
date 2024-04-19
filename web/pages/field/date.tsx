@@ -11,7 +11,7 @@ import Time from 'frui/dist/fields/Time';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
-import Code from 'modules/components/Code';
+import Code, { InlineCode as C } from 'modules/components/Code';
 
 export default function Home() {
   //hooks
@@ -28,8 +28,6 @@ export default function Home() {
     [ _('style'), _('CSS Object'), _('No'), _('Standard CSS input') ],
     [ _('className'), _('string'), _('No'), _('Standard class name input') ],
   ];
-
-  //https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
   //render
   return (
     <LayoutPanel>
@@ -58,6 +56,11 @@ export default function Home() {
                 <li className="pl-3 pb-1">
                   <Link href="#errors">
                     {_('Errors')}
+                  </Link>
+                </li>
+                <li className="pl-3 pb-1">
+                  <Link href="#styles">
+                    {_('Custom Styles')}
                   </Link>
                 </li>
               </ul>
@@ -97,17 +100,13 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                Date fields use the default <code 
-                  className="text-sm text-t2"
-                >{'`<input type="date">`'}</code> element, but normalizes 
-                values to ISO strings using <code 
-                  className="text-sm text-t2"
-                >{'`toISOString()`'}</code>. <code 
-                  className="text-sm text-t2"
-                >{'`onUpdate`'}</code> is like <code 
-                  className="text-sm text-t2"
-                >{'`onChange`'}</code> except the value is passed instead of 
-                the change event.
+                Date fields use the default <C 
+                  quote={true}
+                  value={`<input type="date" />`}
+                /> element, but normalizes 
+                values to ISO strings using <C value="toISOString()" />. 
+                <C l value="onUpdate" /> is like <C value="onChange" r /> 
+                except the value is passed instead of the change event.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -140,10 +139,8 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                You can pass the <code 
-                  className="text-sm text-t2"
-                >{'`error`'}</code> prop to highlight the input field 
-                red.
+                You can pass the <C value="error" /> prop to highlight 
+                the input field red.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -154,6 +151,19 @@ export default function Home() {
                 {`<Date error={string|true} value="Invalid Date." />`}
               </Code>
             </div>
+
+            <h2 id="styles" className="uppercase font-bold text-lg mt-8">
+              {_('Custom Styles')}
+            </h2>
+            <p className="py-4">
+              <Translate>
+                You can add your own custom class to date, datetime, and 
+                time components or use any of the respective 
+                <C l value="frui-field-date" />, 
+                <C l value="frui-field-time" />, and 
+                <C l value="frui-field-datetime" /> CSS classes.
+              </Translate>
+            </p>
 
             <div className="flex items-center border-t border-b1 my-8 pt-8">
               <Link className="text-t2" href="/field/input">

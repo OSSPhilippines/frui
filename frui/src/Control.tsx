@@ -25,7 +25,7 @@ export default function Control(props: ControlProps) {
     ...atributes
   } = props;
 
-  const classNames = ['control'];
+  const classNames = ['frui-control'];
   if (className) {
     classNames.push(className);
   }
@@ -33,11 +33,11 @@ export default function Control(props: ControlProps) {
   return (
     <div className={classNames.join(' ')} {...atributes}>
       {!!label && (
-        <label className="control-label">{label}</label>
+        <label className="frui-control-label">{label}</label>
       )}
-      <div className="control-field">{children}</div>
+      <div className="frui-control-field">{children}</div>
       {!!error && error?.length > 0 && (
-        <div className="control-error">{error}</div>
+        <div className="frui-control-error">{error}</div>
       )}
     </div>
   );

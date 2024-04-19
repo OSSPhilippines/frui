@@ -1,4 +1,4 @@
-.field-filelist-control {
+.frui-field-filelist-control {
   border-color: var(--black);
   border-style: solid;
   border-width: 1px;
@@ -10,7 +10,7 @@
   width: 100%;
 }
 
-.field-filelist-file {
+.frui-field-filelist-file {
   align-items: center;
   border-color: gray;
   border-style: solid;
@@ -26,13 +26,14 @@
   width: 100%;
 }
  
-.field-filelist-link {
+.frui-field-filelist-link {
   display: flex;
+  flex-grow: 1;
   overflow: hidden;
 }
 
-.field-filelist-remove {
-  color: gray;
+.frui-field-filelist-remove {
+  color: var(--error);
   cursor: pointer;
   font-size: 20px;
   margin-top: -2px;

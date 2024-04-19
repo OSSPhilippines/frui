@@ -46,7 +46,7 @@ export function useDatetime({ defaultValue, onUpdate }: DatetimeConfig) {
 export default function Datetime(props: DatetimeProps) {
   const { defaultValue, className, onUpdate, ...attributes } = props;
   const { value, update } = useDatetime({ defaultValue, onUpdate });
-  const classNames = [ 'field-datetime' ];
+  const classNames = [ 'frui-field-datetime' ];
   if (className) {
     classNames.push(className);
   }

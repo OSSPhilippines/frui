@@ -16,7 +16,7 @@ import Slug from 'frui/dist/fields/Slug';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
-import Code from 'modules/components/Code';
+import Code, { InlineCode as C } from 'modules/components/Code';
 
 export default function Home() {
   //hooks
@@ -33,8 +33,6 @@ export default function Home() {
     [ _('style'), _('CSS Object'), _('No'), _('Standard CSS input') ],
     [ _('className'), _('string'), _('No'), _('Standard class name input') ],
   ];
-
-  //https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
   //render
   return (
     <LayoutPanel>
@@ -119,12 +117,8 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                <code 
-                  className="text-sm text-t2"
-                >{'`onUpdate`'}</code> is like <code 
-                  className="text-sm text-t2"
-                >{'`onChange`'}</code> except the value is passed instead of 
-                the change event.
+                <C value="onUpdate" /> is like <C value="onChange" r /> 
+                except the value is passed instead of the change event.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
@@ -141,10 +135,8 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                You can pass the <code 
-                  className="text-sm text-t2"
-                >{'`error`'}</code> prop to highlight the input field 
-                red.
+                You can pass the <C value="error" /> prop to highlight 
+                the input field red.
               </Translate>
             </p>
             <div className="curved overflow-hidden">

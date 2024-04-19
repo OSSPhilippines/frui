@@ -1,4 +1,4 @@
-.modal {
+.frui-modal {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
   bottom: 0;
@@ -12,28 +12,28 @@
   z-index: 10000 ;
 }
 
-.modal-fixed {
+.frui-modal-fixed {
   position: fixed;
 }
 
-.modal-absolute {
+.frui-modal-absolute {
   position: absolute;
 }
 
-.modal-overlay {
+.frui-modal-overlay {
   overflow: hidden;
   max-width: 32rem;
   margin: auto;
   position: relative;
 }
 
-.modal-head {
+.frui-modal-head {
   align-items: center;
   display: flex;
   padding: 10px;
 }
 
-.modal-title {
+.frui-modal-title {
   flex-grow: 1;
   font-weight: bold;
 }

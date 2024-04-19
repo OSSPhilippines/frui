@@ -11,7 +11,7 @@ export type ListProps = HTMLLinkProps & { value: (string|number)[], ordered?: bo
  */
 export default function List(props: ListProps) {
   const { value, ordered, className, style = {} } = props;
-  const classNames = ['format-list'];
+  const classNames = ['frui-format-list'];
   if (className) {
     classNames.push(className);
   }

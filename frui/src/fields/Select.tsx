@@ -153,12 +153,12 @@ export function SelectDropdown(props: SelectDropdownProps) {
   const style = !show ? { display: 'none' }: undefined;
 
   return (
-    <div className="field-select-dropdown" style={style}>
+    <div className="frui-field-select-dropdown" style={style}>
       {searchable && (
-        <div className="field-select-search">
-          <Input className="field-select-search-control" onKeyUp={search} />
-          <span className="field-select-search-icon">
-            <i className="fas fa-search"></i>
+        <div className="frui-field-select-search">
+          <Input className="frui-field-select-search-control" onKeyUp={search} />
+          <span className="frui-field-select-search-icon">
+            &#x1F50E;
           </span>
         </div>
       )}
@@ -167,7 +167,7 @@ export function SelectDropdown(props: SelectDropdownProps) {
           <div 
             key={i} 
             onClick={_ => select(option)} 
-            className="field-select-option"
+            className="frui-field-select-option"
           >
             {option.label}
           </div>
@@ -203,19 +203,19 @@ export default function Select(props: SelectProps) {
     onUpdate
   });
 
-  const classNames = [ 'field-select' ];
+  const classNames = [ 'frui-field-select' ];
   if (className) {
     classNames.push(className);
   }
 
-  const placeholderClass = [ 'field-select-placeholder' ];
+  const placeholderClass = [ 'frui-field-select-placeholder' ];
   if (error) {
-    placeholderClass.push('tx-error', 'bd-error');
+    placeholderClass.push('frui-tx-error', 'frui-bd-error');
   }
 
   return (
     <div className={classNames.join(' ')} style={style}>
-      <div className="field-select-control" onClick={handlers.toggle}>
+      <div className="frui-field-select-control" onClick={handlers.toggle}>
         {value?.label || selected?.label || (
           <span className={placeholderClass.join(' ')}>
             {placeholder}

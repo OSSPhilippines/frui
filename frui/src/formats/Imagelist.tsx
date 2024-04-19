@@ -11,7 +11,7 @@ export type ImagelistProps = HTMLImageProps & { value: string[] };
  */
 export default function Imagelist(props: ImagelistProps) {
   const { value, className, ...attributes } = props;
-  const classNames = ['format-imagelist'];
+  const classNames = ['frui-format-imagelist'];
   if (className) {
     classNames.push(className);
   }

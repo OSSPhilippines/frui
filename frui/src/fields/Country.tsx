@@ -88,7 +88,9 @@ export default function Country(props: CountryProps) {
             src={`https://flagcdn.com/w40/${country.countryCode.toLowerCase()}.png`} 
             loading="lazy"
           />
-          <span style={{ display: 'inline-block', marginLeft: '4px' }}>{country.countryName}</span>  
+          <span className="frui-field-select-label">
+            {country.countryName}
+          </span>  
         </>
       ),
       value: country,

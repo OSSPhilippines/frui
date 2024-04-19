@@ -1,4 +1,4 @@
-.field-image-control {
+.frui-field-image-control {
   border-color: var(--black);
   border-style: solid;
   border-width: 1px;
@@ -10,14 +10,14 @@
   width: 100%;
 }
 
-.field-image-reset {
+.frui-field-image-reset {
   color: var(--error);
   cursor: pointer;
   font-size: 20px;
   margin-top: -2px;
 }
 
-.field-image-file {
+.frui-field-image-file {
   align-items: center;
   border-color: gray;
   border-style: solid;
@@ -33,7 +33,7 @@
   width: 100%;
 }
 
-.field-image-link {
+.frui-field-image-link {
   align-items: center;
   display: flex;
   flex-grow: 1;
@@ -41,7 +41,7 @@
   overflow: hidden;
 }
 
-.field-image-image {
+.frui-field-image-image {
   height: 20px;
   margin-right: 8px;
 }

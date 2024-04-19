@@ -1,9 +1,9 @@
-.field-switch {
+.frui-field-switch {
   position: relative;
   margin: 0;
 }
 
-.field-switch-label {
+.frui-field-switch-label {
   display: inline-block;
   font-weight: normal;
   line-height: 20px;
@@ -14,7 +14,7 @@
   z-index: 11;
 }
 
-.field-switch-label::before {
+.frui-field-switch-label::before {
   -webkit-box-shadow: inset 0px 2px 2px 0px rgba(0, 0, 0, .2);
   -webkit-transition: text-indent .4s ease;
   font-family: Arial, Helvetica, sans-serif;
@@ -36,7 +36,7 @@
   width: 52px;
 }
 
-.field-switch-label::after {
+.frui-field-switch-label::after {
   -webkit-box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, .3);
   -webkit-transition: left .4s ease;
   box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, .3);
@@ -55,43 +55,43 @@
   width: 22px;
 }
 
-.field-switch-onoff .field-switch-label::before {
+.frui-field-switch-onoff .frui-field-switch-label::before {
   content: "ON\a0\a0\a0\a0\a0\a0\a0\a0OFF";
   font-size: 11px;
 }
 
-.field-switch-yesno .field-switch-label::before {
+.frui-field-switch-yesno .frui-field-switch-label::before {
   content: "YES\a0\a0\a0\a0\a0\a0\a0\a0\a0NO";
   font-size: 10px;
 }
 
-.field-switch-checkex .field-switch-label::before {
+.frui-field-switch-checkex .frui-field-switch-label::before {
   content: "\a0\2713\a0\a0\a0\a0\a0\a0\a0\a0\a0\2716";
   font-size: 13px;
 }
 
-.field-switch-sunmoon .field-switch-label::before {
+.frui-field-switch-sunmoon .frui-field-switch-label::before {
   content: "\263C\a0\a0\a0\a0\a0\a0\263D";
   font-size: 18px;
 }
 
-.field-switch-rounded .field-switch-label::before {
+.frui-field-switch-rounded .frui-field-switch-label::before {
   border-radius: 12px;
 }
   
-.field-switch-rounded .field-switch-label::after {
+.frui-field-switch-rounded .frui-field-switch-label::after {
   border-radius: 100%;
 }
 
-.field-switch-ridge .field-switch-label::after {
+.frui-field-switch-ridge .frui-field-switch-label::after {
   content: '|||';
 }
 
-.field-switch-smooth .field-switch-label::after {
+.frui-field-switch-smooth .frui-field-switch-label::after {
   content: ' ';
 }
 
-.field-switch-control {
+.frui-field-switch-control {
   cursor: pointer;
   height: 25px;
   opacity: 0;
@@ -100,98 +100,98 @@
   z-index: 12;
 }
 
-.field-switch-control:checked + .field-switch-label::before {
+.frui-field-switch-control:checked + .frui-field-switch-label::before {
   text-indent: 9px;
 }
 
-.field-switch-control:checked + .field-switch-label::after {
+.frui-field-switch-control:checked + .frui-field-switch-label::after {
   left: 34px;
 }
 
-.field-switch-default .field-switch-label::before {
+.frui-field-switch-default .frui-field-switch-label::before {
   background-color: #F5F5F5;
   border-color: #CCCCCC;
   color: #999999;
 }
 
-.field-switch-default .field-switch-label::after {
+.frui-field-switch-default .frui-field-switch-label::after {
   background-color: #FFFFFF;
   color: #D5D5D5;
 }
 
-.field-switch-default .field-switch-control:checked + .field-switch-label::before {
+.frui-field-switch-default .frui-field-switch-control:checked + .frui-field-switch-label::before {
   background-color: #8AB2C9;
   border-color: #468FCC;
   color: #FFFFFF;
 }
 
-.field-switch-default .field-switch-control:checked + .field-switch-label::after {
+.frui-field-switch-default .frui-field-switch-control:checked + .frui-field-switch-label::after {
   background-color: #FFFFFF;
   color: #8AB2C9;
 }
 
-.field-switch-green .field-switch-label::before {
+.frui-field-switch-green .frui-field-switch-label::before {
   background-color: #DC3545;
   border-color: #DC3545;
   color: #FFFFFF;
 }
 
-.field-switch-green .field-switch-label::after {
+.frui-field-switch-green .frui-field-switch-label::after {
   background-color: #F9F9F9;
   color: #DC3545;
 }
 
-.field-switch-green .field-switch-control:checked + .field-switch-label::before {
+.frui-field-switch-green .frui-field-switch-control:checked + .frui-field-switch-label::before {
   background-color: #28A745;
   border-color: #28A745;
   color: #FFFFFF;
 }
 
-.field-switch-green .field-switch-control:checked + .field-switch-label::after {
+.frui-field-switch-green .frui-field-switch-control:checked + .frui-field-switch-label::after {
   background-color: #F9F9F9;
   color: #28A745;
 }
 
-.field-switch-orange .field-switch-label::before {
+.frui-field-switch-orange .frui-field-switch-label::before {
   background-color: #888888;
   border-color: #CCCCCC;
   color: #DDDDDD;
 }
 
-.field-switch-orange .field-switch-label::after {
+.frui-field-switch-orange .frui-field-switch-label::after {
   background-color: #FFFFFF;
   color: #D5D5D5;
 }
 
-.field-switch-orange .field-switch-control:checked + .field-switch-label::before {
+.frui-field-switch-orange .frui-field-switch-control:checked + .frui-field-switch-label::before {
   background-color: #FF893C;
   border-color: #FF893C;
   color: #FFFFFF;
 }
 
-.field-switch-orange .field-switch-control:checked + .field-switch-label::after {
+.frui-field-switch-orange .frui-field-switch-control:checked + .frui-field-switch-label::after {
   background-color: #FFFFFF;
   color: #FF893C;
 }
 
-.field-switch-blue .field-switch-label::before {
+.frui-field-switch-blue .frui-field-switch-label::before {
   background-color: #8B9AA3;
   border-color: #8B9AA3;
   color: #FFFFFF;
 }
 
-.field-switch-blue .field-switch-label::after {
+.frui-field-switch-blue .frui-field-switch-label::after {
   background-color: #FFFFFF;
   color: #D5D5D5;
 }
 
-.field-switch-blue .field-switch-control:checked + .field-switch-label::before {
+.frui-field-switch-blue .frui-field-switch-control:checked + .frui-field-switch-label::before {
   background-color: #468FCC;
   border-color: #468FCC;
   color: #FFFFFF;
 }
 
-.field-switch-blue .field-switch-control:checked + .field-switch-label::after {
+.frui-field-switch-blue .frui-field-switch-control:checked + .frui-field-switch-label::after {
   background-color: #F9F9F9;
   color: #468FCC;
 }

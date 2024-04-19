@@ -41,7 +41,7 @@ export default function Currency(props: CurrencyProps) {
     || (value.toUpperCase() === 'USD' && country.countryCode === 'US')
   ));
   if (!currency) {
-    const classNames = ['format-country-text'];
+    const classNames = ['frui-format-country-text'];
     if (className) {
       classNames.push(className);
     }
@@ -53,26 +53,26 @@ export default function Currency(props: CurrencyProps) {
   }
 
   if (flag && text) {
-    const classNames = ['format-country'];
+    const classNames = ['frui-format-country'];
     if (className) {
       classNames.push(className);
     }
     return (
       <span className={classNames.join(' ')} style={style}>
         <img 
-          className="format-country-flag"
+          className="frui-format-country-flag"
           style={flagStyles}
           alt={`${currency.countryName} Flag`} 
           src={`https://flagcdn.com/w80/${currency.countryCode.toLowerCase()}.png`} 
           loading="lazy"
         />
-        <span className="format-country-text">
+        <span className="frui-format-country-text">
           {currency.currencyName}
         </span>
       </span>
     );  
   } else if (flag) {
-    const classNames = ['format-country-flag'];
+    const classNames = ['frui-format-country-flag'];
     if (className) {
       classNames.push(className);
     }
@@ -87,7 +87,7 @@ export default function Currency(props: CurrencyProps) {
     );
   }
 
-  const classNames = ['format-country-text'];
+  const classNames = ['frui-format-country-text'];
   if (className) {
     classNames.push(className);
   }

@@ -11,7 +11,7 @@ import Input from './Input';
 export default function Image(props: FileProps) {
   //separate component related props from field attributes
   const { 
-    locale = { uploading: 'Uploading...' },
+    uploading: locale = 'Uploading...',
     defaultValue,
     error,
     style,
@@ -41,21 +41,21 @@ export default function Image(props: FileProps) {
           type="file" 
           accept="image/*"
           error={error}
-          className="field-image-control"
+          className="frui-field-image-control"
           onChange={handlers.change} 
         />
       )}
       {!url && uploading && (
-        <div className="field-image-file">
-          <span className="field-image-link">
-            {locale.uploading}
+        <div className="frui-field-image-file">
+          <span className="frui-field-image-link">
+            {locale}
           </span>
         </div>
       )}
       {url && (
-        <div className="field-image-file">
+        <div className="frui-field-image-file">
           <a 
-            className="field-image-link"
+            className="frui-field-image-link"
             href={url} 
             target="_blank" 
             rel="noreferrer"
@@ -63,12 +63,12 @@ export default function Image(props: FileProps) {
             <img 
               src={url} 
               alt="preview" 
-              className="field-image-image" 
+              className="frui-field-image-image" 
             />
             {url}
           </a>
           <div 
-            className="field-image-reset"
+            className="frui-field-image-reset"
             onClick={() => handlers.reset()}
           >
             &times;

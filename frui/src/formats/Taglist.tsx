@@ -14,7 +14,7 @@ export type TaglistProps = BadgeProps & { value: (string|number)[] };
 export default function Taglist(props: TaglistProps) {
   const { value, ...attributes } = props;
   return (
-    <span style={{ display: 'inline-flex', gap: '2px' }}>
+    <span className="frui-format-taglist">
       {value.map((value, i) => (
         <Badge key={i} {...attributes}>{value}</Badge>
       ))}

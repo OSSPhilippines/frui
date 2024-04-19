@@ -1,7 +1,7 @@
-.control-label {
+.frui-control-label {
   display: block;
 }
 
-.control-error {
+.frui-control-error {
   color: var(--error);
 }

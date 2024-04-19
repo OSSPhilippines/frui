@@ -119,25 +119,25 @@ class TableCol extends React.Component<TableColProps> {
       children,
       ...attributes
     } = this.props;
-    const classNames = [ 'tbl-col' ];
+    const classNames = [ 'frui-tbl-col' ];
     if (stickyBottom || stickyLeft || stickyRight || stickyTop) { 
-      classNames.push('tbl-sticky');
+      classNames.push('frui-tbl-sticky');
       if (stickyBottom) {
-        classNames.push('tbl-sticky-b', 'tbl-z1');
+        classNames.push('frui-tbl-sticky-b', 'frui-tbl-z1');
       } 
       if (stickyLeft) {
-        classNames.push('tbl-sticky-l', 'tbl-z2');
+        classNames.push('frui-tbl-sticky-l', 'frui-tbl-z2');
       }
       if (stickyRight) {
-        classNames.push('tbl-sticky-r', 'tbl-z2');
+        classNames.push('frui-tbl-sticky-r', 'frui-tbl-z2');
       }
       if (stickyTop) {
-        classNames.push('tbl-sticky-t', 'tbl-z1');
+        classNames.push('frui-tbl-sticky-t', 'frui-tbl-z1');
       }
     }
 
     if (noWrap) {
-      classNames.push('tbl-nowrap');
+      classNames.push('frui-tbl-nowrap');
     }
 
     const extras: Record<string, number> = {};
@@ -194,20 +194,20 @@ class TableFoot extends React.Component<TableFootProps> {
       children,
       ...attributes
     } = this.props;
-    const classNames = [ 'tbl-foot' ];
+    const classNames = [ 'frui-tbl-foot' ];
     if (stickyBottom || stickyLeft || stickyRight) { 
-      classNames.push('tbl-sticky');
+      classNames.push('frui-tbl-sticky');
       if (stickyBottom) {
-        classNames.push('tbl-sticky-b', 'tbl-z1');
+        classNames.push('frui-tbl-sticky-b', 'frui-tbl-z1');
       } 
       if (stickyLeft) {
-        classNames.push('tbl-sticky-l', 'tbl-z2');
+        classNames.push('frui-tbl-sticky-l', 'frui-tbl-z2');
       }
       if (stickyRight) {
-        classNames.push('tbl-sticky-r', 'tbl-z2');
+        classNames.push('frui-tbl-sticky-r', 'frui-tbl-z2');
       }
       if (noWrap) {
-        classNames.push('tbl-nowrap');
+        classNames.push('frui-tbl-nowrap');
       }
     }
 
@@ -261,9 +261,9 @@ class TableRow extends React.Component<TableRowProps> {
       children,
       ...attributes
     } = this.props;
-    const classNames = [ 'tbl-row' ];
+    const classNames = [ 'frui-tbl-row' ];
     if (noWrap) {
-      classNames.push('tbl-nowrap');
+      classNames.push('frui-tbl-nowrap');
     }
     const extras: Record<string, number> = {};
     if (rowSpan) {
@@ -310,7 +310,7 @@ class TableHead extends React.Component<TableHeadProps> {
       children,
       ...attributes
     } = this.props;
-    const classNames = [ 'tbl-head' ];
+    const classNames = [ 'frui-tbl-head' ];
     if (stickyLeft || stickyRight || stickyTop) { 
       classNames.push('tbl-sticky');
       if (stickyTop) {
@@ -331,7 +331,7 @@ class TableHead extends React.Component<TableHeadProps> {
       }
     }
     if (noWrap) {
-      classNames.push('tbl-nowrap');
+      classNames.push('frui-tbl-nowrap');
     }
     const extras: Record<string, number> = {};
     if (rowSpan) {
@@ -446,14 +446,14 @@ export default function Table(props: TableProps) {
   const body = getBody(children);
   const foot = getFoot(children);
 
-  const classNames = [ 'tbl-overflow' ];
+  const classNames = [ 'frui-tbl-overflow' ];
   if (props.className) {
     classNames.push(props.className);
   }
 
   return (
     <div className={classNames.join(' ')} style={props.style}>
-      <table className="tbl">
+      <table className="frui-tbl">
         {head && <thead><tr>{head}</tr></thead>}
         {body && <tbody>{body}</tbody>}
         {foot && <tfoot><tr>{foot}</tr></tfoot>}

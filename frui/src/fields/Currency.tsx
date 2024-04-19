@@ -73,7 +73,7 @@ export default function Currency(props: CurrencyProps) {
             src={`https://flagcdn.com/w40/${country.countryCode.toLowerCase()}.png`} 
             loading="lazy"
           />
-          <span className="inline-block ml-2">
+          <span className="frui-field-select-label">
             {country.currencyName} ({country.currencyCode})
           </span>  
         </>

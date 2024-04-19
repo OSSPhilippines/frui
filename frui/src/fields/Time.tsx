@@ -45,7 +45,7 @@ export function useTime({ defaultValue }: TimeConfig) {
 export default function Time(props: TimeProps) {
   const { defaultValue, className, ...attributes } = props;
   const value = useTime({ defaultValue });
-  const classNames = [ 'field-time' ];
+  const classNames = [ 'frui-field-time' ];
   if (className) {
     classNames.push(className);
   }

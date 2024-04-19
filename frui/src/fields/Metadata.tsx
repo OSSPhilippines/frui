@@ -89,9 +89,9 @@ export function MetadataFields(props: FieldsProps<MetadataType>) {
   
   //render
   return (
-    <div className="field-metadata-row">
+    <div className="frui-field-metadata-row">
       <Input 
-        className="field-metadata-name"
+        className="frui-field-metadata-name"
         placeholder={Array.isArray(placeholder) ? placeholder[0]: undefined}
         defaultValue={Array.isArray(value) ? value[0]: undefined}
         onUpdate={name => handlers.update('name', name)}
@@ -101,7 +101,7 @@ export function MetadataFields(props: FieldsProps<MetadataType>) {
       {input.isText && (
         <Input 
           type={type}
-          className="field-metadata-value"
+          className="frui-field-metadata-value"
           placeholder={Array.isArray(placeholder) ? placeholder[1]: undefined}
           defaultValue={Array.isArray(value) ? value[1] as string|number: undefined}
           onUpdate={value => handlers.update('value', value)}
@@ -114,7 +114,7 @@ export function MetadataFields(props: FieldsProps<MetadataType>) {
           min={min}
           max={max}
           step={step}
-          className="field-metadata-value"
+          className="frui-field-metadata-value"
           placeholder={Array.isArray(placeholder) ? placeholder[1]: undefined}
           defaultValue={Array.isArray(value) ? value[1] as string|number: undefined}
           onUpdate={(value: string) => handlers.update('value', value)}
@@ -125,7 +125,7 @@ export function MetadataFields(props: FieldsProps<MetadataType>) {
       {input.isDate && type === 'date' && (
         <Date 
           type="date"
-          className="field-metadata-value"
+          className="frui-field-metadata-value"
           placeholder={Array.isArray(placeholder) ? placeholder[1]: undefined}
           defaultValue={Array.isArray(value) ? value[1]: undefined}
           onUpdate={value => handlers.update('value', value)}
@@ -136,7 +136,7 @@ export function MetadataFields(props: FieldsProps<MetadataType>) {
       {input.isDate && type === 'time' && (
         <Time 
           type="time"
-          className="field-metadata-value"
+          className="frui-field-metadata-value"
           placeholder={Array.isArray(placeholder) ? placeholder[1]: undefined}
           defaultValue={Array.isArray(value) ? value[1]: undefined}
           onUpdate={(value: string) => handlers.update('value', value)}
@@ -147,7 +147,7 @@ export function MetadataFields(props: FieldsProps<MetadataType>) {
       {input.isDate && (type === 'datetime' || type === 'datetime-local') && (
         <Datetime 
           type="datetime-local"
-          className="field-metadata-value"
+          className="frui-field-metadata-value"
           placeholder={Array.isArray(placeholder) ? placeholder[1]: undefined}
           defaultValue={Array.isArray(value) ? value[1]: undefined}
           onUpdate={(value) => handlers.update('value', value)}
@@ -159,7 +159,7 @@ export function MetadataFields(props: FieldsProps<MetadataType>) {
         outline
         error
         onClick={handlers.remove}
-        className="field-metadata-remove"
+        className="frui-field-metadata-remove"
       >
         &times;
       </Button>

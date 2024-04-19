@@ -20,7 +20,7 @@ export type FileConfig = InputConfig & {
  */
 export type FileProps = InputProps & {
   defaultValue?: string,
-  locale?: Record<string, string>,
+  uploading?: string,
   style?: CSSProperties,
   className?: string,
   onUpdate?: (value: string) => void,
@@ -40,7 +40,7 @@ export function useFile(config: FileConfig) {
   const [ uploading, setUploading ] = useState(false);
   const [ url, setURL ] = useState<string|undefined>(defaultValue);
   useEffect(() => {
-    onUpdate && onUpdate(url);
+    url && url.length > 0 && onUpdate && onUpdate(url);
   }, [ url ]);
   const handlers = {
     change: (e: ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +70,8 @@ export function useFile(config: FileConfig) {
 export default function File(props: FileProps) {
   //separate component related props from field attributes
   const { 
-    locale = { uploading: 'Uploading...' },
+    uploading: locale = 'Uploading...',
+    value,
     defaultValue,
     error,
     style,
@@ -82,12 +83,15 @@ export default function File(props: FileProps) {
   } = props;
   //hooks
   const { uploading, url, handlers } = useFile({ 
-    defaultValue,
+    //files are not controllable because it relies on the file object
+    //not the value attribute. Therefore, defaultValue is used instead
+    //and value and defaultValue are used interchangeably.
+    defaultValue: defaultValue || value as string|undefined,
     onChange, 
     onUpdate, 
     onUpload 
   });
-  const classNames = [ 'field-file' ];
+  const classNames = [ 'frui-field-file' ];
   if (className) {
     classNames.push(className);
   }
@@ -99,21 +103,21 @@ export default function File(props: FileProps) {
           {...attributes} 
           type="file" 
           error={error}
-          className="field-file-control"
+          className="frui-field-file-control"
           onChange={handlers.change} 
         />
       )}
       {!url && uploading && (
-        <div className="field-file-file">
-          <span className="field-file-link">
-            {locale.uploading}
+        <div className="frui-field-file-file">
+          <span className="frui-field-file-link">
+            {locale}
           </span>
         </div>
       )}
       {url && (
-        <div className="field-file-file">
+        <div className="frui-field-file-file">
           <a 
-            className="field-file-link"
+            className="frui-field-file-link"
             href={url} 
             target="_blank" 
             rel="noreferrer"
@@ -121,7 +125,7 @@ export default function File(props: FileProps) {
             {url}
           </a>
           <div 
-            className="field-file-reset"
+            className="frui-field-file-reset"
             onClick={() => handlers.reset()}
           >
             &times;

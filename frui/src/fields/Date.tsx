@@ -44,7 +44,7 @@ export function useDate({ onUpdate }: DateConfig) {
 export default function DateField(props: DateProps) {
   const { defaultValue, className, onUpdate, ...attributes } = props;
   const update = useDate({ onUpdate });
-  const classNames = [ 'field-datetime' ];
+  const classNames = [ 'frui-field-date' ];
   if (className) {
     classNames.push(className);
   }

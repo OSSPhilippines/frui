@@ -1,30 +1,30 @@
-.btn {
+.frui-btn {
   text-align: center;
 }
-.btn-xs {
+.frui-btn-xs {
   padding: 2px 4px;
 }
-.btn-sm {
+.frui-btn-sm {
   padding: 4px 8px;
 }
-.btn-md {
+.frui-btn-md {
   padding: 6px 12px;
 }
-.btn-lg {
+.frui-btn-lg {
   padding: 8px 16px;
 }
-.btn-xl {
+.frui-btn-xl {
   padding: 10px 20px;
 }
-.btn-2xl {
+.frui-btn-2xl {
   padding: 12px 24px;
 }
-.btn-3xl {
+.frui-btn-3xl {
   padding: 14px 28px;
 }
-.btn-4xl {
+.frui-btn-4xl {
   padding: 16px 32px;
 }
-.btn-5xl {
+.frui-btn-5xl {
   padding: 18px 36px;
 }

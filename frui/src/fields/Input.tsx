@@ -51,9 +51,9 @@ export default function Input(props: InputProps) {
   } = props;
   //hooks
   const { handlers } = useInput({ onChange, onUpdate });
-  const classNames = [ 'field-input' ];
+  const classNames = [ 'frui-field-input' ];
   if (error) {
-    classNames.push('tx-error', 'bd-error');
+    classNames.push('frui-tx-error', 'frui-bd-error');
   }
   if (className) {
     classNames.push(className);

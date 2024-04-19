@@ -67,8 +67,8 @@ export default function Markdown(props: MarkdownProps) {
   );
 
   return (
-    <div className="field-markdown">
-      <div className="field-markdown-nav">
+    <div className="frui-field-markdown">
+      <div className="frui-field-markdown-nav">
         <Button 
           muted={mode === 'edit'} 
           onClick={() => handlers.mode('edit')}
@@ -87,7 +87,7 @@ export default function Markdown(props: MarkdownProps) {
         />
       </div>
       <iframe 
-        className="field-markdown-preview" 
+        className="frui-field-markdown-preview" 
         style={previewStyles} 
         srcDoc={markdown} 
       />

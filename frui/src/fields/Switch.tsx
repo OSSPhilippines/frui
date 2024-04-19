@@ -88,35 +88,35 @@ export default function Switch(props: SwitchProps) {
     defaultChecked 
   });
 
-  const classNames = [ 'field-switch' ];
+  const classNames = [ 'frui-field-switch' ];
   if (rounded) {
-    classNames.push('field-switch-rounded');
+    classNames.push('frui-field-switch-rounded');
   }
 
   if (onoff) {
-    classNames.push('field-switch-onoff');
+    classNames.push('frui-field-switch-onoff');
   } else if (yesno) {
-    classNames.push('field-switch-yesno');
+    classNames.push('frui-field-switch-yesno');
   } else if (sunmoon) {
-    classNames.push('field-switch-sunmoon');
+    classNames.push('frui-field-switch-sunmoon');
   } else {
-    classNames.push('field-switch-checkex');
+    classNames.push('frui-field-switch-checkex');
   }
 
   if (ridge) {
-    classNames.push('field-switch-ridge');
+    classNames.push('frui-field-switch-ridge');
   } else {
-    classNames.push('field-switch-smooth');
+    classNames.push('frui-field-switch-smooth');
   }
 
   if (blue) {
-    classNames.push('field-switch-blue');
+    classNames.push('frui-field-switch-blue');
   } else if (orange) {
-    classNames.push('field-switch-orange');
+    classNames.push('frui-field-switch-orange');
   } else if (green) {
-    classNames.push('field-switch-green');
+    classNames.push('frui-field-switch-green');
   } else {
-    classNames.push('field-switch-default');
+    classNames.push('frui-field-switch-default');
   }
 
   if (className) {
@@ -132,11 +132,11 @@ export default function Switch(props: SwitchProps) {
         onMouseOut={handlers.out}
         onMouseOver={handlers.over}
         type="checkbox" 
-        className="field-switch-control"
+        className="frui-field-switch-control"
         checked={checked}
         defaultChecked={defaultChecked}
       />
-      <span className="field-switch-label">
+      <span className="frui-field-switch-label">
         {label}
       </span>
     </label>

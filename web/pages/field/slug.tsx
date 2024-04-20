@@ -5,14 +5,8 @@ import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
-import Input from 'frui/dist/fields/Input';
-import Date from 'frui/dist/fields/Date';
-import Datetime from 'frui/dist/fields/Datetime';
-import Time from 'frui/dist/fields/Time';
-import Mask from 'frui/dist/fields/Mask';
-import Number from 'frui/dist/fields/Number';
-import Password from 'frui/dist/fields/Password';
 import Slug from 'frui/dist/fields/Slug';
+import Table, { Tcol, Thead, Trow } from 'frui/dist/Table';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
@@ -41,37 +35,39 @@ export default function Home() {
           <Crumbs crumbs={crumbs} />
         </div>
         <div className="flex-grow relative h-full">
-          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-52 border-l border-b1">
-            <h4 className="p-3 border-b border-b1 bg-b1 text-sm uppercase font-semibold">
-              {_('Contents')}
+          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l border-b1 text-sm">
+            <h4 className="p-3 border-b border-b1 bg-b1 uppercase font-semibold">
+              <Link href="#top">{_('Slug')}</Link>
             </h4>
-            <div className="p-3">
-              <Link className="block pb-1" href="#top">Slugs</Link>
-              <ul className="list-disc pl-3">
-                <li className="pl-3 pb-1">
-                  <Link href="#props">
-                    {_('Props')}
-                  </Link>
-                </li>
-                <li className="pl-3 pb-1">
-                  <Link href="#basic">
-                    {_('Basics')}
-                  </Link>
-                </li>
-                <li className="pl-3 pb-1">
-                  <Link href="#update">
-                    {_('On Update')}
-                  </Link>
-                </li>
-                <li className="pl-3 pb-1">
-                  <Link href="#errors">
-                    {_('Errors')}
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            <ul className="list-disc py-3 pr-3 pl-6">
+              <li className="pl-3 pb-1">
+                <Link href="#props">
+                  {_('Props')}
+                </Link>
+              </li>
+              <li className="pl-3 pb-1">
+                <Link href="#basic">
+                  {_('Basics')}
+                </Link>
+              </li>
+              <li className="pl-3 pb-1">
+                <Link href="#events">
+                  {_('Events')}
+                </Link>
+              </li>
+              <li className="pl-3 pb-1">
+                <Link href="#errors">
+                  {_('Errors')}
+                </Link>
+              </li>
+              <li className="pl-3 pb-1">
+                <Link href="#styles">
+                  {_('Custom Styles')}
+                </Link>
+              </li>
+            </ul>
           </aside>
-          <div className="lg:absolute top-0 bottom-0 left-0 right-52 px-3 pt-3 pb-5 h-full overflow-auto">
+          <div className="absolute top-0 bottom-0 left-0 right-0 lg:right-56 px-3 pt-3 pb-5 h-full overflow-auto">
             <h1 id="top" className="flex items-center uppercase font-bold text-xl">
               {_('Slugs')}
             </h1>
@@ -112,8 +108,8 @@ export default function Home() {
               </Code>
             </div>
 
-            <h2 id="update" className="uppercase font-bold text-lg mt-8">
-              {_('On Update')}
+            <h2 id="events" className="uppercase font-bold text-lg mt-8">
+              {_('Events')}
             </h2>
             <p className="py-4">
               <Translate>
@@ -129,6 +125,63 @@ export default function Home() {
                 {`<Slug defaultValue="I am a Title" onUpdate={value => alert(value)} />`}
               </Code>
             </div>
+
+            <h3 className="font-semibold text-md mt-8">
+              {_('On Change')}
+            </h3>
+            <p className="py-4">
+              <Translate>
+                The <C value="onChange" /> event is triggered when the
+                value has changed. The following arguments are passed
+                to the event handler:
+              </Translate>
+            </p>
+            <Table>
+              <Thead className="bg-b3 text-left">{_('Name')}</Thead>
+              <Thead className="bg-b3 text-left">{_('Type')}</Thead>
+              <Thead className="bg-b3 text-left">{_('Sample')}</Thead>
+              <Trow>
+                <Tcol className="bg-b1 text-left">
+                  {_('event')}
+                </Tcol>
+                <Tcol className="bg-b1 text-left">
+                  {_('Event Object')}
+                </Tcol>
+                <Tcol className="bg-b1 text-left">
+                  see: <a 
+                    href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
+                    target="_blank"
+                  >Change Event</a>
+                </Tcol>
+              </Trow>
+            </Table>
+
+            <h3 className="font-semibold text-md mt-8">
+              {_('On Update')}
+            </h3>
+            <p className="py-4">
+              <Translate>
+                The <C value="onUpdate" /> event is triggered when the
+                value has been updated. The following arguments are
+                passed to the event handler:
+              </Translate>
+            </p>
+            <Table>
+              <Thead className="bg-b3 text-left">{_('Name')}</Thead>
+              <Thead className="bg-b3 text-left">{_('Type')}</Thead>
+              <Thead className="bg-b3 text-left">{_('Sample')}</Thead>
+              <Trow>
+                <Tcol className="bg-b1 text-left">
+                  {_('value')}
+                </Tcol>
+                <Tcol className="bg-b1 text-left">
+                  {_('string')}
+                </Tcol>
+                <Tcol className="bg-b1 text-left">
+                  <C value="foobar" quote />
+                </Tcol>
+              </Trow>
+            </Table>
 
             <h2 id="errors" className="uppercase font-bold text-lg mt-8">
               {_('Errors')}
@@ -148,14 +201,14 @@ export default function Home() {
               </Code>
             </div>
 
-            <div className="flex items-center border-t border-b1 my-8 pt-8">
-              <Link className="text-t2" href="/field/password">
+            <div className="flex items-center border-t border-b2 mt-8 pt-4">
+              <Link className="text-t2" href="/field/select">
                 <i className="fas fa-arrow-left mr-2"></i>
-                {_('Passwords')}
+                {_('Select')}
               </Link>
               <div className="flex-grow"></div>
-              <Link className="text-t2" href="/field/file">
-                {_('Files')}
+              <Link className="text-t2" href="/field/switch">
+                {_('Switch')}
                 <i className="fas fa-arrow-right ml-2"></i>
               </Link>
             </div>

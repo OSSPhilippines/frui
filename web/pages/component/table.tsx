@@ -153,24 +153,24 @@ export default function Home() {
   //variables
   const crumbs: Crumb[] = [
     { icon: 'icons', label: 'Components', href: '/component' },
-    { label: 'Tables' }
+    { label: 'Table' }
   ];
 
   const props = [
+    [ _('className'), _('string'), _('No'), _('Standard HTML class names') ],
+    [ _('colSpan'), _('boolean'), 'Thead, Tfoot, Tcol',  _('No'), _('How many columns this cell will cover') ],
     [ _('noWrap'), _('boolean'), 'Thead, Tfoot, Tcol',  _('No'), _('Keeps all text in one line') ],
     [ _('rowSpan'), _('boolean'), 'Tcol',  _('No'), _('How many rows this cell will cover') ],
-    [ _('colSpan'), _('boolean'), 'Thead, Tfoot, Tcol',  _('No'), _('How many columns this cell will cover') ],
     [ _('stickyBottom'), _('boolean'), 'Tfoot',  _('No'), _('Always show on the bottom, even on overflow') ],
     [ _('stickyLeft'), _('boolean'), 'Thead, Tfoot, Tcol',  _('No'), _('Always show on the left, even on overflow') ],
     [ _('stickyRight'), _('boolean'), 'Thead, Tfoot, Tcol',  _('No'), _('Always show on the right, even on overflow') ],
     [ _('stickyTop'), _('boolean'), 'Thead',  _('No'), _('Always show on the top, even on overflow') ],
+    [ _('style'), _('CSS Object'), 'All',  _('No'), _('Standard CSS input') ],
     [ _('wrap1'), _('boolean'), 'Thead, Tfoot, Tcol',  _('No'), _('Keeps the cell size a minimum of 100px') ],
     [ _('wrap2'), _('boolean'), 'Thead, Tfoot, Tcol',  _('No'), _('Keeps the cell size a minimum of 200px') ],
     [ _('wrap3'), _('boolean'), 'Thead, Tfoot, Tcol',  _('No'), _('Keeps the cell size a minimum of 300px') ],
     [ _('wrap4'), _('boolean'), 'Thead, Tfoot, Tcol',  _('No'), _('Keeps the cell size a minimum of 400px') ],
     [ _('wrap5'), _('boolean'), 'Thead, Tfoot, Tcol',  _('No'), _('Keeps the cell size a minimum of 500px') ],
-    [ _('style'), _('CSS Object'), 'All',  _('No'), _('Standard CSS input') ],
-    [ _('className'), _('string'), 'All',  _('No'), _('Standard class name input') ],
   ];
   //render
   return (
@@ -180,12 +180,12 @@ export default function Home() {
           <Crumbs crumbs={crumbs} />
         </div>
         <section className="flex-grow relative h-full">
-          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-52 border-l border-b1">
+          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l border-b1 text-sm">
             <h4 className="p-3 border-b border-b1 bg-b1 text-sm uppercase font-semibold">
               {_('Contents')}
             </h4>
             <div className="p-3">
-              <Link className="block pb-1" href="#top">Tables</Link>
+              <Link className="block pb-1" href="#top">Table</Link>
               <ul className="list-disc pl-3">
                 <li className="pl-3 pb-1">
                   <Link href="#props">
@@ -215,9 +215,9 @@ export default function Home() {
               </ul>
             </div>
           </aside>
-          <div className="lg:absolute top-0 bottom-0 left-0 right-52 px-3 pt-3 pb-5 h-full overflow-auto">
+          <div className="absolute top-0 bottom-0 left-0 right-0 lg:right-56 px-3 pt-3 pb-5 h-full overflow-auto">
             <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-              {_('Tables')}
+              {_('Table')}
             </h1>
             <Code language="typescript" className="mt-2">
               {`import Table, { Thead, Trow, Tcol } from 'frui/Table';`}

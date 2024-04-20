@@ -19,8 +19,9 @@ export type FilelistConfig = InputConfig & {
  * Filelist Props
  */
 export type FilelistProps = InputProps & {
-  locale?: Record<string, string>,
+  uploading?: string,
   defaultValue?: string[],
+  value?: string[],
   style?: CSSProperties,
   className?: string,
   onUpdate?: (value: string[]) => void,
@@ -81,12 +82,9 @@ export function useFilelist(config: FilelistConfig) {
 export default function Filelist(props: FilelistProps) {
   //separate component related props from field attributes
   const { 
-    locale = {
-      uploading: 'Uploading...',
-      progress: '%s of %s uploaded',
-      complete: '%s files uploaded'
-    },
+    uploading = 'Uploading...',
     defaultValue,
+    value,
     error,
     style,
     className,
@@ -97,7 +95,7 @@ export default function Filelist(props: FilelistProps) {
   } = props;
   //hooks
   const { queued, uploaded, handlers } = useFilelist({ 
-    defaultValue,
+    defaultValue: value || defaultValue,
     onChange, 
     onUpdate, 
     onUpload 
@@ -139,7 +137,7 @@ export default function Filelist(props: FilelistProps) {
       {queued > 0 && (
         <div className="frui-field-filelist-file">
           <span className="frui-field-filelist-link">
-            {locale.uploading}
+            {uploading}
           </span>
         </div>
       )}

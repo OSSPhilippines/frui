@@ -29,8 +29,8 @@ export type CountryOption = SelectOption<CountryData>;
  * Country Config
  */
 export type CountryConfig = {
-  value?: string | CountryOption | undefined,
-  defaultValue?: string | CountryOption | undefined,
+  value?: string,
+  defaultValue?: string,
   map: (country: CountryData) => CountryOption
 };
 
@@ -39,7 +39,8 @@ export type CountryConfig = {
  */
 export type CountryProps = ExtendsType<SelectProps, {
   options?: undefined,
-  value?: CountryOption|string
+  defaultValue?: string,
+  value?: string
 }>;
 
 /**
@@ -101,7 +102,7 @@ export default function Country(props: CountryProps) {
   });
 
   return (
-    <Select 
+    <Select<CountryData>
       {...attributes} 
       placeholder={placeholder} 
       value={selected} 

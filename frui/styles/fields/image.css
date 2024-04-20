@@ -10,38 +10,36 @@
   width: 100%;
 }
 
-.frui-field-image-reset {
-  color: var(--error);
-  cursor: pointer;
-  font-size: 20px;
-  margin-top: -2px;
-}
-
 .frui-field-image-file {
   align-items: center;
   border-color: gray;
   border-style: solid;
-  border-top-width: 0;
   border-width: 1px;
-  box-sizing: border-box;
   color: var(--black);
   display: flex;
   padding-bottom: 6px;
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 6px;
-  width: 100%;
 }
 
 .frui-field-image-link {
-  align-items: center;
-  display: flex;
+  display: block;
   flex-grow: 1;
-  flex-wrap: nowrap;
+  max-width: 100%;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .frui-field-image-image {
   height: 20px;
   margin-right: 8px;
+}
+
+.frui-field-image-reset {
+  color: var(--error);
+  cursor: pointer;
+  font-size: 20px;
+  margin-top: -2px;
 }

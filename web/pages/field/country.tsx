@@ -5,12 +5,45 @@ import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
-import Number from 'frui/dist/fields/Number';
+import Country from 'frui/dist/fields/Country';
 import Table, { Tcol, Thead, Trow } from 'frui/dist/Table';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
 import Code, { InlineCode as C } from 'modules/components/Code';
+
+const codeEvents = `
+<Country 
+  className="w-full z-20 text-black" 
+  onDropdown={open => console.log('dropdown', open)}
+  onSelected={option => console.log('selected', option)}
+  onUpdate={value => alert(JSON.stringify(value))}
+/>`.trim();
+
+const codeOption = `{
+  label: 'United States',
+  value: {
+    countryCode: 'US',
+    countryName: 'United States',
+    currencyType: 'fiat',
+    currencyCode: 'USD',
+    currencyName: 'US Dollar',
+    currencyPlural: 'US Dollars',
+    currencySymbol: '$',
+    language: 'en'
+  }
+}`;
+
+const codeCountry = `{
+  countryCode: 'US',
+  countryName: 'United States',
+  currencyType: 'fiat',
+  currencyCode: 'USD',
+  currencyName: 'US Dollar',
+  currencyPlural: 'US Dollars',
+  currencySymbol: '$',
+  language: 'en'
+}`;
 
 export default function Home() {
   //hooks
@@ -18,18 +51,22 @@ export default function Home() {
   //variables
   const crumbs: Crumb[] = [
     { icon: 'rectangle-list', label: 'Fields', href: '/field' },
-    { label: 'Number' }
+    { label: 'Country' }
   ];
+
   const props = [
     [ _('className'), _('string'), _('No'), _('Standard HTML class names') ],
-    [ _('defaultValue'), _('string'), _('No'), _('Default value (Uncontrolled)') ],
+    [ _('defaultValue'), _('string'), _('No'), _('Alias to value') ],
     [ _('error'), _('string|boolean'), _('No'), _('Any error message') ],
     [ _('name'), _('string'), _('No'), _('Used for react server components.') ],
-    [ _('onChange'), _('Function'), _('No'), _('Event handler when value has changed') ],
+    [ _('onDropdown'), _('Function'), _('No'), _('Event handler when dropdown opens/closes') ],
+    [ _('onSelected'), _('Function'), _('No'), _('Event handler when an option has been selected') ],
     [ _('onUpdate'), _('Function'), _('No'), _('Update event handler') ],
-    [ _('passRef'), _('LegacyRef'), _('No'), _('Passes ref to html input') ],
+    [ _('options'), _('string[]'), _('No'), _('List of select options.') ],
+    [ _('placeholder'), _('string'), _('No'), _('Display text when no value set') ],
+    [ _('searchable'), _('boolean'), _('No'), _('Add a search field') ],
     [ _('style'), _('CSS Object'), _('No'), _('Standard CSS object') ],
-    [ _('value'), _('string'), _('No'), _('Default value (Controlled)') ],
+    [ _('value'), _('string'), _('No'), _('Selected value from the options') ],
   ];
   //render
   return (
@@ -41,7 +78,7 @@ export default function Home() {
         <div className="flex-grow relative h-full">
           <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l border-b1 text-sm">
             <h4 className="p-3 border-b border-b1 bg-b1 uppercase font-semibold">
-              <Link href="#top">{_('Number')}</Link>
+              <Link href="#top">{_('Country')}</Link>
             </h4>
             <ul className="list-disc py-3 pr-3 pl-6">
               <li className="pl-3 pb-1">
@@ -73,44 +110,37 @@ export default function Home() {
           </aside>
           <div className="absolute top-0 bottom-0 left-0 right-0 lg:right-56 px-3 pt-3 pb-5 h-full overflow-auto">
             <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-              {_('Number')}
+              {_('Country')}
             </h1>
             <Code language="typescript" className="mt-2">
-              {`import Number from 'frui/fields/Number';`}
+              {`import Country from 'frui/fields/Country';`}
             </Code>
             
             <h2 id="props" className="uppercase font-bold text-lg mt-8">
               {_('Props')}
             </h2>
-            <p>
+            <p className="py-4">
               <Translate>
-                Numbers accepts all props of a standard HTML Input 
-                element. See <a 
-                  className="text-t2 underline"
-                  href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"
-                  target="_blank"
-                >Moz</a> for standard input attributes.
+                The following props are accepted by <C value="Country" />.
               </Translate>
             </p>
             <Props props={props} />
 
-            <h2 id="types" className="uppercase font-bold text-lg mt-8">
-              {_('Basic')}
+            <h2 id="basic" className="uppercase font-bold text-lg mt-8">
+              {_('Basics')}
             </h2>
             <p className="py-4">
               <Translate>
-                Number fields display commas and can limit decimal length.
-                The value for numbers removes commas.
+                The following is a basic example of an 
+                <C l value="Country" /> field.
               </Translate>
             </p>
-            <div className="curved overflow-hidden">
+            <div className="curved">
               <div className="flex items-center justify-center p-3 bg-b1">
-                <div className="w-full">
-                  <Number min="0" max="10000" step="0.01" defaultValue="12345.67" />
-                </div>
+                <Country className="w-full z-30 text-black" placeholder="Select Country" searchable value="US" />
               </div>
               <Code language="typescript">
-                {`<Number min="0" max="10000" step="0.01" defaultValue="12345.67" />`}
+                {`<Country className="w-full z-30 text-black" placeholder="Select Country" searchable />`}
               </Code>
             </div>
 
@@ -119,27 +149,32 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                <C value="onUpdate" /> is like <C value="onChange" r /> 
-                except the value is passed instead of the change event.
+                The following example makes use of all the possible 
+                events for <C value="Country" />.
               </Translate>
             </p>
-            <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1">
-                <Number min="0" max="10000" step="0.01" defaultValue="1234.56" onUpdate={value => alert(value)} />
+            <div className="curved">
+              <div className="relative flex items-center justify-center p-3 bg-b1">
+                <Country 
+                  className="w-full z-20 text-black" 
+                  onDropdown={open => console.log('dropdown', open)}
+                  onSelected={option => console.log('selected', option)}
+                  onUpdate={value => alert(JSON.stringify(value))}
+                />
               </div>
               <Code language="typescript">
-                {`<Number min="0" max="10000" step="0.01" defaultValue="1234.56" onUpdate={value => alert(value)} />`}
+                {codeEvents}
               </Code>
             </div>
-
+            
             <h3 className="font-semibold text-md mt-8">
-              {_('On Change')}
+              {_('On Dropdown')}
             </h3>
             <p className="py-4">
               <Translate>
-                The <C value="onChange" /> event is triggered when the
-                value has changed. The following arguments are passed
-                to the event handler:
+                The <C value="onDropdown" /> event is triggered when the 
+                dropdown opens or closes. The following arguments are
+                passed to the event handler:
               </Translate>
             </p>
             <Table>
@@ -148,16 +183,40 @@ export default function Home() {
               <Thead className="bg-b3 text-left">{_('Sample')}</Thead>
               <Trow>
                 <Tcol className="bg-b1 text-left">
-                  {_('event')}
+                  {_('open')}
                 </Tcol>
                 <Tcol className="bg-b1 text-left">
-                  {_('Event Object')}
+                  {_('boolean')}
                 </Tcol>
                 <Tcol className="bg-b1 text-left">
-                  see: <a 
-                    href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
-                    target="_blank"
-                  >Change Event</a>
+                  <C value="true" />
+                </Tcol>
+              </Trow>
+            </Table>
+
+            <h3 className="font-semibold text-md mt-8">
+              {_('On Selected')}
+            </h3>
+            <p className="py-4">
+              <Translate>
+                The <C value="onSelected" /> event is triggered when an
+                option has been selected. The following arguments are
+                passed to the event handler:
+              </Translate>
+            </p>
+            <Table>
+              <Thead className="bg-b3 text-left">{_('Name')}</Thead>
+              <Thead className="bg-b3 text-left">{_('Type')}</Thead>
+              <Thead className="bg-b3 text-left">{_('Sample')}</Thead>
+              <Trow>
+                <Tcol className="bg-b1 text-left">
+                  {_('option')}
+                </Tcol>
+                <Tcol className="bg-b1 text-left">
+                  {_('SelectOption')}
+                </Tcol>
+                <Tcol className="bg-b1 text-left">
+                  <Code language="json" copy={false}>{codeOption}</Code>
                 </Tcol>
               </Trow>
             </Table>
@@ -181,10 +240,10 @@ export default function Home() {
                   {_('value')}
                 </Tcol>
                 <Tcol className="bg-b1 text-left">
-                  {_('string')}
+                  {_('CountryData')}
                 </Tcol>
                 <Tcol className="bg-b1 text-left">
-                  <C value="foobar" quote />
+                  <Code language="json" copy={false}>{codeCountry}</Code>
                 </Tcol>
               </Trow>
             </Table>
@@ -195,26 +254,26 @@ export default function Home() {
             <p className="py-4">
               <Translate>
                 You can pass the <C value="error" /> prop to highlight 
-                the input field red.
+                the Country field red.
               </Translate>
             </p>
-            <div className="curved overflow-hidden">
+            <div className="curved">
               <div className="flex items-center justify-center p-3 bg-b1">
-                <Number error min="0" max="10000" step="0.01" value="1234.56" />
+                <Country className="w-full z-10 text-black" error value="US" />
               </div>
               <Code language="typescript">
-                {`<Input error={string|true} min="0" max="10000" step="0.01" value="1234.56" />`}
+                {`<Country className="w-full z-10 text-black" error={string|true} value="US" />`}
               </Code>
             </div>
 
             <div className="flex items-center border-t border-b2 mt-8 pt-4">
-              <Link className="text-t2" href="/field/metadata">
+              <Link className="text-t2" href="/field/checkbox">
                 <i className="fas fa-arrow-left mr-2"></i>
-                {_('Metadata')}
+                {_('Checkbox')}
               </Link>
               <div className="flex-grow"></div>
-              <Link className="text-t2" href="/field/password">
-                {_('Password')}
+              <Link className="text-t2" href="/field/currency">
+                {_('Currency')}
                 <i className="fas fa-arrow-right ml-2"></i>
               </Link>
             </div>

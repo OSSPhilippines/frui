@@ -10,84 +10,96 @@ import Input from './Input';
  */
 export type SelectOption<T = any> = {
   label: ReactNode,
-  value?: T,
+  value: T,
   keyword?: string|Function
 };
 
 /**
  * Select Config
  */
-export type SelectConfig = {
-  value?: SelectOption,
-  defaultValue?: SelectOption,
+export type SelectConfig<T = any> = {
+  options: SelectOption<T>[],
+  value?: T,
+  defaultValue?: T,
   onDropdown?: (show: boolean) => void,
-  onSelected?: (value: SelectOption) => void,
-  onUpdate?: (value: string|number) => void
+  onSelected?: (value: SelectOption<T>) => void,
+  onUpdate?: (value: T) => void
 };
 
 /**
  * Select Dropdown Props
  */
-export type SelectDropdownProps = { 
-  options: SelectOption[]|Record<string, string>
+export type SelectDropdownProps<T = any> = { 
+  options: SelectOption<T>[]
   show: boolean,
   error?: boolean,
   searchable?: boolean,
-  select: (value: SelectOption) => void,
+  select: (value: SelectOption<T>) => void,
   search: (e: KeyboardEvent) => void,
-  match: (option: SelectOption) => void
+  match: (option: SelectOption<T>) => void
 };
 
 /**
  * Select Props
  */
-export type SelectProps = {
-  value?: SelectOption,
-  defaultValue?: SelectOption,
-  options: SelectOption[]|Record<string, string>,
+export type SelectProps<T = any> = {
+  value?: T,
+  defaultValue?: T,
+  options: SelectOption<T>[]|Record<string, T>,
   searchable?: boolean,
   placeholder?: string,
   error?: boolean,
   style?: CSSProperties,
   className?: string,
   onDropdown?: (show: boolean) => void,
-  onSelected?: (value: SelectOption) => void,
-  onUpdate?: (value: string|number) => void
+  onSelected?: (value: SelectOption<T>) => void,
+  onUpdate?: (value: T) => void
 };
 
 /**
  * Select Hook Aggregate
  */
-export function useSelect(config: SelectConfig) {
+export function useSelect<T = any>(config: SelectConfig<T>) {
   const { 
+    options,
     value,
     defaultValue,
     onDropdown,
     onSelected,
     onUpdate
   } = config;
+  //get the current value
+  const currentValue = typeof defaultValue !== 'undefined'
+    ? defaultValue
+    : typeof value !== 'undefined'
+    ? value
+    : undefined;
+  //get the default selected option based on the current value
+  const defaultSelected = options.find(
+    option => option.value === currentValue
+  );
   //hooks
   //search query string
   const [ query, setQuery ] = useState('');
   //selected option
-  const [ selected, setSelected ] = useState(defaultValue);
+  const [ selected, setSelected ] = useState(defaultSelected);
   //whether to show dropdown
   const [ showing, show ] = useState(false);
   //handlers
   const handlers = {
-    toggle: () => {
+    toggle() {
       show(!showing);
       onDropdown && onDropdown(!showing);
     },
     //updates query string
-    search: (e: KeyboardEvent) => {
+    search(e: KeyboardEvent) {
       setTimeout(() => {
         const input = e.target as HTMLInputElement;
         setQuery(input.value);
       });
     },
     //matches options with query string
-    match: (option: SelectOption) => {
+    match(option: SelectOption<T>) {
       const keyword = (query || '').toLowerCase();
       if (typeof option.keyword === 'string') {
         return option.keyword
@@ -101,7 +113,7 @@ export function useSelect(config: SelectConfig) {
         return option.value
           .toString()
           .toLowerCase()
-          .indexOf(keyword) >= 0 ;
+          .indexOf(keyword) >= 0;
       } else if (typeof option.label === 'string') {
         return option.label
           .toLowerCase()
@@ -111,7 +123,7 @@ export function useSelect(config: SelectConfig) {
       return true;
     },
     //selests an option from the dropdown
-    select: (option: SelectOption) => {
+    select(option: SelectOption<T>) {
       show(false);
       setSelected(option);
       onDropdown && onDropdown(false);
@@ -124,7 +136,10 @@ export function useSelect(config: SelectConfig) {
   //the values when the value prop changes
   useEffect(() => {
     if (!value) return;
-    setSelected(value)
+    const selected = options.find(
+      option => option.value === value
+    );
+    setSelected(selected);
   }, [ value ]);
 
   return { selected, showing, handlers };
@@ -135,20 +150,14 @@ export function useSelect(config: SelectConfig) {
  * Select Dropdown
  */
 export function SelectDropdown(props: SelectDropdownProps) {
-  const { 
+  const {
+    options, 
     show, 
     searchable,
     select, 
     search, 
     match 
   } = props;
-
-  //we need to change from {k:v} to [{value: k, label: v}]
-  const options: SelectOption[] = (
-    typeof props.options === 'object' && !Array.isArray(props.options)
-  ) ? Object.keys(props.options).map(value => ({ 
-    value, label: (props.options as Record<string, string>)[value] 
-  })) : props.options;
 
   const style = !show ? { display: 'none' }: undefined;
 
@@ -162,7 +171,7 @@ export function SelectDropdown(props: SelectDropdownProps) {
           </span>
         </div>
       )}
-      <div className="field-select-options">
+      <div className="frui-field-select-options">
         {options.filter(match).map((option, i) => (
           <div 
             key={i} 
@@ -180,7 +189,7 @@ export function SelectDropdown(props: SelectDropdownProps) {
 /**
  * Styled Select  Component (Main)
  */
-export default function Select(props: SelectProps) {
+export default function Select<T = any>(props: SelectProps) {
   const { 
     options,
     searchable,
@@ -195,7 +204,15 @@ export default function Select(props: SelectProps) {
     onUpdate
   } = props;
 
-  const { selected, showing, handlers } = useSelect({
+  //we need to change from {k:v} to [{value: k, label: v}]
+  const entries = (
+    typeof options === 'object' && !Array.isArray(options)
+  ) ? Object.keys(options).map(value => ({ 
+    value, label: (options as Record<string, string>)[value] 
+  })): options;
+
+  const { selected, showing, handlers } = useSelect<T>({
+    options: entries,
     value,
     defaultValue,
     onDropdown,
@@ -216,14 +233,14 @@ export default function Select(props: SelectProps) {
   return (
     <div className={classNames.join(' ')} style={style}>
       <div className="frui-field-select-control" onClick={handlers.toggle}>
-        {value?.label || selected?.label || (
+        {selected?.label || (
           <span className={placeholderClass.join(' ')}>
             {placeholder}
           </span>
         )}
       </div>
       <SelectDropdown 
-        options={options} 
+        options={entries} 
         show={showing} 
         error={error}
         searchable={searchable} 

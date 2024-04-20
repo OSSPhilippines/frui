@@ -28,11 +28,12 @@ export function InlineCode(props: {
 
 export default function Code(props: { 
   language: string,
+  copy?: boolean,
   className?: string, 
   children: string 
 }) {
   //props
-  const { className, children, language } = props;
+  const { className, copy: canCopy = true, children, language } = props;
   //hooks
   const { _ } = useLanguage();
   //variables
@@ -46,9 +47,11 @@ export default function Code(props: {
       <SyntaxHighlighter className="flex-grow !p-4 !bg-transparent" language={language} style={dark}>
         {children}
       </SyntaxHighlighter>
-      <div className="text-sm p-4 text-gray-400 cursor-pointer whitespace-nowrap" onClick={copy}>
-        <i className="fas fa-copy"></i> {_('Copy')}
-      </div>
+      {canCopy && (
+        <div className="text-sm p-4 text-gray-400 cursor-pointer whitespace-nowrap" onClick={copy}>
+          <i className="fas fa-copy"></i> {_('Copy')}
+        </div>
+      )}
     </div>
   )
 }

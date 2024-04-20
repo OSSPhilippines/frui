@@ -22,8 +22,8 @@ export type CurrencyConfig = CountryConfig;
  */
 export type CurrencyProps = ExtendsType<SelectProps, {
   options?: undefined,
-  value?: CurrencyOption|string,
-  defaultValue?: CurrencyOption|string
+  value?: string,
+  defaultValue?: string
 }>;
 
 /**
@@ -86,7 +86,7 @@ export default function Currency(props: CurrencyProps) {
   });
 
   return (
-    <Select 
+    <Select<CountryData>
       {...attributes} 
       placeholder={placeholder} 
       value={selected} 

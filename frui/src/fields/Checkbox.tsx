@@ -1,5 +1,5 @@
 //types
-import type { ChangeEvent, MouseEvent, CSSProperties } from 'react';
+import type { ChangeEvent, CSSProperties } from 'react';
 import type { HTMLInputProps } from '../types';
 import type { InputConfig } from './Input';
 //hooks
@@ -28,7 +28,6 @@ export type CheckboxProps = HTMLInputProps & {
 export function useCheckbox(config: InputConfig) {
   const { onChange, onUpdate, defaultChecked, checked } = config;
   const [ isChecked, check ] = useState(Boolean(defaultChecked || checked));
-  const [ isHovering, hover ] = useState(false);
   useEffect(() => {
     if (typeof checked === 'undefined') return;
     if (checked !== isChecked) {
@@ -36,17 +35,17 @@ export function useCheckbox(config: InputConfig) {
     }
   }, [ checked ]);
   return {
-    isHovering,
     isChecked,
     handlers: {
-      out: (e: MouseEvent<HTMLInputElement>) => hover(false),
-      over: (e: MouseEvent<HTMLInputElement>) => hover(true),
       change: (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.checked !== checked) {
           check(e.target.checked);
         }
         onChange && onChange(e);
-        onUpdate && onUpdate(e.target.value, e.target.checked);
+        onUpdate && onUpdate(
+          e.target.checked ? e.target.value: undefined, 
+          e.target.checked
+        );
       }
     }
   };
@@ -104,7 +103,7 @@ export default function Checkbox(props: CheckboxProps) {
   }
 
   if (error) {
-    classNames.push('frui-tx-error');
+    classNames.push('frui-tx-error', 'frui-bd-error');
   }
 
   if (className) {
@@ -117,8 +116,6 @@ export default function Checkbox(props: CheckboxProps) {
       <input 
         {...attributes} 
         onChange={handlers.change} 
-        onMouseOut={handlers.out}
-        onMouseOver={handlers.over}
         type="checkbox" 
         className="frui-field-option-control"
         checked={checked}

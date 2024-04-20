@@ -11,12 +11,9 @@ import Input from './Input';
 export default function Filelist(props: FilelistProps) {
   //separate component related props from field attributes
   const { 
-    locale = {
-      uploading: 'Uploading...',
-      progress: '%s of %s uploaded',
-      complete: '%s files uploaded'
-    },
+    uploading = 'Uploading...',
     defaultValue,
+    value,
     error,
     style,
     className,
@@ -27,7 +24,7 @@ export default function Filelist(props: FilelistProps) {
   } = props;
   //hooks
   const { queued, uploaded, handlers } = useFilelist({ 
-    defaultValue,
+    defaultValue: defaultValue || value,
     onChange, 
     onUpdate, 
     onUpload 
@@ -71,7 +68,7 @@ export default function Filelist(props: FilelistProps) {
       {queued > 0 && (
         <div className="frui-field-imagelist-file">
           <span className="frui-field-imagelist-link">
-            {locale.uploading}
+            {uploading}
           </span>
         </div>
       )}

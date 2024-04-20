@@ -6,7 +6,6 @@ import type {
   CSSProperties 
 } from 'react';
 import type { InputProps } from './Input';
-import type { SelectOption } from './Select';
 //hooks
 import { useState } from 'react';
 //components
@@ -16,9 +15,10 @@ import Input from './Input';
  * Autocomplete Config
  */
 export type AutocompleteConfig = {
+  options?: string[],
   defaultValue?: string|number|readonly string[],
-  onSelected?: (option: SelectOption) => void,
-  onQuery?: (query: string) => void,
+  onSelected?: (option: string) => void,
+  onQuery?: (query: string, set: Function) => void,
   onDropdown?: (show: boolean) => void,
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
   onUpdate?: (value: string) => void
@@ -28,25 +28,23 @@ export type AutocompleteConfig = {
  * Autocomplete Dropdown Props
  */
 export type AutocompleteDropdownProps = { 
-  options: SelectOption[],
+  options?: string[],
   show: boolean,
   styles?: Record<string, CSSProperties|false|undefined>|false,
   classNames?: Record<string, string|false|undefined>|false,
-  select: (option: SelectOption) => void,
-  match: (option: SelectOption) => void
+  select: (option: string) => void,
+  match: (option: string) => void
 };
 
 /**
  * Autocomplete Props
  */
 export type AutocompleteProps = InputProps & {
-  options: SelectOption[],
-  error?: boolean,
-  errorColor?: string,
+  options?: string[],
   styles?: Record<string, CSSProperties|false|undefined>|false,
   classNames?: Record<string, string|false|undefined>|false,
-  onSelected?: (option: SelectOption) => void,
-  onQuery?: (query: string) => void,
+  onSelected?: (option: string) => void,
+  onQuery?: (query: string, set: Function) => void,
   onDropdown?: (show: boolean) => void
 };
 
@@ -55,6 +53,7 @@ export type AutocompleteProps = InputProps & {
  */
 export function useAutocomplete(config: AutocompleteConfig) {
   const { 
+    options: defaultOptions,
     defaultValue,
     onSelected,
     onQuery,
@@ -65,6 +64,8 @@ export function useAutocomplete(config: AutocompleteConfig) {
   //hooks
   //controlled input value
   const [ value, setValue ] = useState(defaultValue || '');
+  //options
+  const [ options, setOptions ] = useState(defaultOptions || []);
   //search query string
   const [ query, setQuery ] = useState('');
   //whether to show dropdown
@@ -78,7 +79,7 @@ export function useAutocomplete(config: AutocompleteConfig) {
       setTimeout(() => {
         const input = e.target as HTMLInputElement;
         setQuery(input.value);
-        onQuery && onQuery(input.value);
+        onQuery && onQuery(input.value, setOptions);
       });
     },
     //send the input value on input change
@@ -88,20 +89,20 @@ export function useAutocomplete(config: AutocompleteConfig) {
       setValue(e.target.value);
     },
     //matches options with query string
-    match: (option: SelectOption) => {
+    match: (option: string) => {
       const keyword = (query || '').toLowerCase();
-      const phrase = option.keyword || option.label || option.value;
+      const phrase = option;
       return query.length && phrase.toLowerCase().indexOf(keyword) >= 0;
     },
     //selects an option from the dropdown
-    select: (option: SelectOption) => {
+    select: (option: string) => {
       show(false);
       onDropdown && onDropdown(false);
-      onUpdate && onUpdate(option.label || option.value);
-      setValue(option.label || option.value);
+      onUpdate && onUpdate(option);
+      setValue(option);
       if (onChange) {
         //simulate input change event
-        const e = { target: { value: option.value || option.label } };
+        const e = { target: { value: option } };
         onChange(e as ChangeEvent<HTMLInputElement>);
       }
       onSelected && onSelected(option);
@@ -112,7 +113,7 @@ export function useAutocomplete(config: AutocompleteConfig) {
     }
   };
 
-  return { value, showing, handlers };
+  return { value, options, showing, handlers };
 };
 
 /**
@@ -128,16 +129,20 @@ export function AutocompleteDropdown(props: AutocompleteDropdownProps) {
 
   const style = !show ? { display: 'none' }: undefined;
 
+  if (!options || options.filter(match).length === 0) {
+    return null;
+  }
+
   return (
     <div className="frui-field-autocomplete-dropdown" style={style}>
       <div className="frui-field-autocomplete-options">
-        {options.filter(match).map((option, i) => (
+        {options && options.filter(match).map((option, i) => (
           <div 
             key={i} 
             onClick={_ => select(option)} 
             className="frui-field-autocomplete-option"
           >
-            {option.label || option.value}
+            {option}
           </div>
         ))}
       </div>
@@ -150,19 +155,20 @@ export function AutocompleteDropdown(props: AutocompleteDropdownProps) {
  */
 export default function Autocomplete(props: AutocompleteProps) {
   const { 
-    options,
-    error, 
+    options: defaultOptions,
     className,
     style,
     defaultValue,
+    value: _value,
     onQuery,
     onDropdown,
     onChange,
     onUpdate,
     ...attributes
   } = props;
-  const { value, showing, handlers } = useAutocomplete({
-    defaultValue,
+  const { value, options, showing, handlers } = useAutocomplete({
+    defaultValue: defaultValue || _value,
+    options: defaultOptions,
     onQuery,
     onDropdown,
     onChange,

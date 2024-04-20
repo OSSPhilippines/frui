@@ -1,3 +1,8 @@
+.frui-field-option {
+  font-family: Arial, Helvetica, sans-serif;
+  height: 18px;
+  position: relative;
+}
 .frui-field-option-control {
   cursor: pointer;
   height: 18px;
@@ -68,17 +73,17 @@
 .frui-field-option-circle .frui-field-option-control:checked + .frui-field-option-label::before {
   content: "\25CF";
   font-size: 24px;
-  line-height: 16px;
+  line-height: 13.5px;
 }
 .frui-field-option-square .frui-field-option-control:checked + .frui-field-option-label::before {
   content: "\25A0";
-  font-size: 24px;
-  line-height: 16px;
+  font-size: 20px;
+  line-height: 13.5px;
 }
 .frui-field-option-check .frui-field-option-control:checked + .frui-field-option-label::before {
   content: "\2713";
   font-size: 14px;
-  line-height: 19px;
+  line-height: 17px;
 }
 
 .frui-field-option-default .frui-field-option-label::before {

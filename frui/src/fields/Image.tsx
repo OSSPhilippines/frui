@@ -12,6 +12,7 @@ export default function Image(props: FileProps) {
   //separate component related props from field attributes
   const { 
     uploading: locale = 'Uploading...',
+    value,
     defaultValue,
     error,
     style,
@@ -23,7 +24,10 @@ export default function Image(props: FileProps) {
   } = props;
   //hooks
   const { uploading, url, handlers } = useFile({ 
-    defaultValue,
+    //files are not controllable because it relies on the file object
+    //not the value attribute. Therefore, defaultValue is used instead
+    //and value and defaultValue are used interchangeably.
+    defaultValue: defaultValue || value as string|undefined,
     onChange, 
     onUpdate, 
     onUpload 
@@ -54,17 +58,17 @@ export default function Image(props: FileProps) {
       )}
       {url && (
         <div className="frui-field-image-file">
+          <img 
+            src={url} 
+            alt="preview" 
+            className="frui-field-image-image" 
+          />
           <a 
             className="frui-field-image-link"
             href={url} 
             target="_blank" 
             rel="noreferrer"
           >
-            <img 
-              src={url} 
-              alt="preview" 
-              className="frui-field-image-image" 
-            />
             {url}
           </a>
           <div 

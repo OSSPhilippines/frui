@@ -92,6 +92,9 @@ export default function Switch(props: SwitchProps) {
   if (rounded) {
     classNames.push('frui-field-switch-rounded');
   }
+  if (error) {
+    classNames.push('frui-tx-error');
+  }
 
   if (onoff) {
     classNames.push('frui-field-switch-onoff');

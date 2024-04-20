@@ -4,7 +4,7 @@ import useStripe from 'modules/hooks/useStripe';
 //components
 import Table, { Thead, Trow, Tcol } from 'frui/dist/Table';
 
-export default function Props({ props }: { props: string[][] }) {
+export default function Props({ props }: { props: (string|JSX.Element)[][] }) {
   const { _ } = useLanguage();
   const stripe = useStripe('bg-b2', 'bg-b1');
   return (

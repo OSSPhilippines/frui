@@ -48,7 +48,7 @@ export default function Home() {
                   </Alert>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Alerts')}
+                  {_('Alert')}
                 </h2>
               </div>
             </div>
@@ -61,7 +61,7 @@ export default function Home() {
                   <Badge success pill className="text-xs my-3 inline-block">99</Badge>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Badges')}
+                  {_('Badge')}
                 </h2>
               </div>
             </div>
@@ -74,7 +74,7 @@ export default function Home() {
                   <Button error rounded className="my-1">Submit</Button>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Buttons')}
+                  {_('Button')}
                 </h2>
               </div>
             </div>
@@ -87,7 +87,7 @@ export default function Home() {
                   <Loader show={true} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Loaders')}
+                  {_('Loader')}
                 </h2>
               </div>
             </div>
@@ -106,7 +106,7 @@ export default function Home() {
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Modals')}
+                  {_('Modal')}
                 </h2>
               </div>
             </div>
@@ -128,7 +128,7 @@ export default function Home() {
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Tables')}
+                  {_('Table')}
                 </h2>
               </div>
             </div>
@@ -148,7 +148,7 @@ export default function Home() {
                   Unlocks at 2,000 downloads
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Bread Crumbs')}
+                  {_('Bread Crumb')}
                 </h2>
               </div>
             </div>
@@ -168,7 +168,7 @@ export default function Home() {
                   Unlocks at 6,000 downloads
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Progress Bars')}
+                  {_('Progress Bar')}
                 </h2>
               </div>
             </div>
@@ -188,7 +188,7 @@ export default function Home() {
                   Unlocks at 10,000 downloads
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Accordions')}
+                  {_('Accordion')}
                 </h2>
               </div>
             </div>
@@ -198,7 +198,7 @@ export default function Home() {
                   Unlocks at 12,000 downloads
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Tooltips')}
+                  {_('Tooltip')}
                 </h2>
               </div>
             </div>
@@ -208,7 +208,7 @@ export default function Home() {
                   Unlocks at 14,000 downloads
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Toasts')}
+                  {_('Toast')}
                 </h2>
               </div>
             </div>

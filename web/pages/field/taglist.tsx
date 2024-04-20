@@ -31,7 +31,7 @@ export default function Home() {
           <Crumbs crumbs={crumbs} />
         </div>
         <div className="flex-grow relative h-full">
-          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-52 border-l border-b1">
+          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l border-b1 text-sm">
             <h4 className="p-3 border-b border-b1 bg-b1 text-sm uppercase font-semibold">
               {_('Contents')}
             </h4>
@@ -46,7 +46,7 @@ export default function Home() {
               </ul>
             </div>
           </aside>
-          <div className="lg:absolute top-0 bottom-0 left-0 right-52 px-3 pt-3 pb-5 h-full overflow-auto">
+          <div className="absolute top-0 bottom-0 left-0 right-0 lg:right-56 px-3 pt-3 pb-5 h-full overflow-auto">
             <h1 className="flex items-center uppercase font-bold text-xl">
               {_('Tags')}
             </h1>
@@ -78,7 +78,7 @@ export default function Home() {
               </Code>
             </div>
 
-            <div className="flex items-center border-t border-b1 my-8 pt-8">
+            <div className="flex items-center border-t border-b2 mt-8 pt-4">
               <Link className="text-t2" href="/field/option">
                 <i className="fas fa-arrow-left mr-2"></i>
                 {_('Options')}

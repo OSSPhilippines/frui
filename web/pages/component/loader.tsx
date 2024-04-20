@@ -16,7 +16,7 @@ export default function Home() {
   //variables
   const crumbs: Crumb[] = [
     { icon: 'icons', label: 'Components', href: '/component' },
-    { label: 'Loaders' }
+    { label: 'Loader' }
   ];
   //render
   return (
@@ -27,7 +27,7 @@ export default function Home() {
         </div>
         <div className="flex-grow px-3 pt-3 pb-5 overflow-auto">
           <h1 className="flex items-center uppercase font-bold text-xl">
-            {_('Loaders')}
+            {_('Loader')}
           </h1>
           <p className="py-4">
             <Translate>
@@ -72,7 +72,7 @@ export default function Home() {
             </Translate>
           </p>
 
-          <div className="flex items-center border-t border-b1 my-8 pt-8">
+          <div className="flex items-center border-t border-b2 mt-8 pt-4">
             <Link className="text-t2" href="/component/button">
               <i className="fas fa-arrow-left mr-2"></i>
               {_('Buttons')}

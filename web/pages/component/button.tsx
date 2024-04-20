@@ -17,22 +17,24 @@ export default function Home() {
   //variables
   const crumbs: Crumb[] = [
     { icon: 'icons', label: 'Components', href: '/component' },
-    { label: 'Buttons' }
+    { label: 'Button' }
   ];
   const props = [
+    [ _('className'), _('string'), _('No'), _('Standard HTML class names') ],
     [ _('block'), _('boolean'), _('No'), _('button display block') ],
-    [ _('full'), _('boolean'), _('No'), _('button width 100%') ],
     [ _('color'), _('string'), _('No'), _('Custom CSS hex or name') ],
-    [ _('info'), _('boolean'), _('No'), _('Blue badge') ],
-    [ _('warning'), _('boolean'), _('No'), _('Orange badge') ],
-    [ _('error'), _('boolean'), _('No'), _('Red badge') ],
-    [ _('success'), _('boolean'), _('No'), _('Green badge') ],
-    [ _('muted'), _('boolean'), _('No'), _('Gray badge') ],
-    [ _('solid'), _('boolean'), _('No'), _('Fills badge with color') ],
-    [ _('outline'), _('boolean'), _('No'), _('Border and text with color') ],
     [ _('curved'), _('boolean'), _('No'), _('Slight curved corners') ],
-    [ _('rounded'), _('boolean'), _('No'), _('Rounded corners') ],
+    [ _('error'), _('boolean'), _('No'), _('Red badge') ],
+    [ _('full'), _('boolean'), _('No'), _('button width 100%') ],
+    [ _('info'), _('boolean'), _('No'), _('Blue badge') ],
+    [ _('muted'), _('boolean'), _('No'), _('Gray badge') ],
+    [ _('outline'), _('boolean'), _('No'), _('Border and text with color') ],
     [ _('pill'), _('boolean'), _('No'), _('Max rounded corners') ],
+    [ _('solid'), _('boolean'), _('No'), _('Fills badge with color') ],
+    [ _('success'), _('boolean'), _('No'), _('Green badge') ],
+    [ _('style'), _('CSS Object'), _('No'), _('Standard CSS input') ],
+    [ _('warning'), _('boolean'), _('No'), _('Orange badge') ],
+    [ _('rounded'), _('boolean'), _('No'), _('Rounded corners') ],
     [ _('xs'), _('boolean'), _('No'), _('Extra small button') ],
     [ _('sm'), _('boolean'), _('No'), _('Small button') ],
     [ _('md'), _('boolean'), _('No'), _('Medium button') ],
@@ -42,8 +44,6 @@ export default function Home() {
     [ _('xl3'), _('boolean'), _('No'), _('XXXL button') ],
     [ _('xl4'), _('boolean'), _('No'), _('XXXXL button') ],
     [ _('xl5'), _('boolean'), _('No'), _('XXXXXL button') ],
-    [ _('style'), _('CSS Object'), _('No'), _('Standard CSS input') ],
-    [ _('className'), _('string'), _('No'), _('Standard class name input') ],
   ];
   //render
   return (
@@ -53,12 +53,12 @@ export default function Home() {
           <Crumbs crumbs={crumbs} />
         </div>
         <div className="flex-grow relative h-full">
-          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-52 border-l border-b1">
+          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l border-b1 text-sm">
             <h4 className="p-3 border-b border-b1 bg-b1 text-sm uppercase font-semibold">
               {_('Contents')}
             </h4>
             <div className="p-3">
-              <Link className="block pb-1" href="#top">Buttons</Link>
+              <Link className="block pb-1" href="#top">Button</Link>
               <ul className="list-disc pl-3">
                 <li className="pl-3 pb-1">
                   <Link href="#props">
@@ -98,9 +98,9 @@ export default function Home() {
               </ul>
             </div>
           </aside>
-          <div className="lg:absolute top-0 bottom-0 left-0 right-52 px-3 pt-3 pb-5 h-full overflow-auto">
+          <div className="absolute top-0 bottom-0 left-0 right-0 lg:right-56 px-3 pt-3 pb-5 h-full overflow-auto">
             <h1 className="flex items-center uppercase font-bold text-xl">
-              {_('Buttons')}
+              {_('Button')}
             </h1>
             <Code language="typescript" className="mt-2">
               {`import Button from 'frui/Button';`}
@@ -327,7 +327,7 @@ export default function Home() {
               </Translate>
             </p>
 
-            <div className="flex items-center border-t border-b1 my-8 pt-8">
+            <div className="flex items-center border-t border-b2 mt-8 pt-4">
               <Link className="text-t2" href="/component/badge">
                 <i className="fas fa-arrow-left mr-2"></i>
                 {_('Badges')}

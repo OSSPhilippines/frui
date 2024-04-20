@@ -62,22 +62,22 @@ export default function Home() {
   //variables
   const crumbs: Crumb[] = [
     { icon: 'icons', label: 'Components', href: '/component' },
-    { label: 'Alerts' }
+    { label: 'Alert' }
   ];
   const props = [
+    [ _('className'), _('string'), _('No'), _('Standard HTML class names') ],
     [ _('color'), _('string'), _('No'), _('Custom CSS hex or name') ],
-    [ _('info'), _('boolean'), _('No'), _('Blue alert') ],
-    [ _('warning'), _('boolean'), _('No'), _('Orange alert') ],
-    [ _('error'), _('boolean'), _('No'), _('Red alert') ],
-    [ _('success'), _('boolean'), _('No'), _('Green alert') ],
-    [ _('muted'), _('boolean'), _('No'), _('Gray alert') ],
-    [ _('solid'), _('boolean'), _('No'), _('Fills alert with color') ],
-    [ _('outline'), _('boolean'), _('No'), _('Border and text with color') ],
     [ _('curved'), _('boolean'), _('No'), _('Slight curved corners') ],
-    [ _('rounded'), _('boolean'), _('No'), _('Rounded corners') ],
+    [ _('error'), _('boolean'), _('No'), _('Red alert') ],
+    [ _('info'), _('boolean'), _('No'), _('Blue alert') ],
+    [ _('muted'), _('boolean'), _('No'), _('Gray alert') ],
+    [ _('outline'), _('boolean'), _('No'), _('Border and text with color') ],
     [ _('pill'), _('boolean'), _('No'), _('Max rounded corners') ],
+    [ _('rounded'), _('boolean'), _('No'), _('Rounded corners') ],
+    [ _('solid'), _('boolean'), _('No'), _('Fills alert with color') ],
     [ _('style'), _('CSS Object'), _('No'), _('Standard CSS input') ],
-    [ _('className'), _('string'), _('No'), _('Standard class name input') ],
+    [ _('success'), _('boolean'), _('No'), _('Green alert') ],
+    [ _('warning'), _('boolean'), _('No'), _('Orange alert') ],
   ];
   //render
   return (
@@ -87,12 +87,12 @@ export default function Home() {
           <Crumbs crumbs={crumbs} />
         </div>
         <section className="flex-grow relative h-full">
-          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-52 border-l border-b1">
+          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l border-b1 text-sm">
             <h4 className="p-3 border-b border-b1 bg-b1 text-sm uppercase font-semibold">
               {_('Contents')}
             </h4>
             <div className="p-3">
-              <Link className="block pb-1" href="#top">Alerts</Link>
+              <Link className="block pb-1" href="#top">Alert</Link>
               <ul className="list-disc pl-3">
                 <li className="pl-3 pb-1">
                   <Link href="#props">
@@ -122,9 +122,9 @@ export default function Home() {
               </ul>
             </div>
           </aside>
-          <div className="lg:absolute top-0 bottom-0 left-0 right-52 px-3 pt-3 pb-5 h-full overflow-auto">
+          <div className="absolute top-0 bottom-0 left-0 right-0 lg:right-56 px-3 pt-3 pb-5 h-full overflow-auto">
             <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-              {_('Alerts')}
+              {_('Alert')}
             </h1>
             <Code language="typescript" className="mt-2">
               {`import Alert from 'frui/Alert';`}
@@ -244,7 +244,7 @@ export default function Home() {
               </Translate>
             </p>
 
-            <div className="flex items-center border-t border-b1 my-8 pt-8">
+            <div className="flex items-center border-t border-b2 mt-8 pt-4">
               <Link className="text-t2" href="/component">
                 <i className="fas fa-arrow-left mr-2"></i>
                 {_('Components')}

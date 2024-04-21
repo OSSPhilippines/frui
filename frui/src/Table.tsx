@@ -312,22 +312,22 @@ class TableHead extends React.Component<TableHeadProps> {
     } = this.props;
     const classNames = [ 'frui-tbl-head' ];
     if (stickyLeft || stickyRight || stickyTop) { 
-      classNames.push('tbl-sticky');
+      classNames.push('frui-tbl-sticky');
       if (stickyTop) {
-        classNames.push('tbl-sticky-t');
+        classNames.push('frui-tbl-sticky-t');
         if (stickyLeft && stickyRight) {
-          classNames.push('tbl-z4');
+          classNames.push('frui-tbl-z4');
         } else if (stickyLeft || stickyRight) {
-          classNames.push('tbl-z3');
+          classNames.push('frui-tbl-z3');
         } else {
-          classNames.push('tbl-z1');
+          classNames.push('frui-tbl-z1');
         }
       }
       if (stickyLeft) {
-        classNames.push('tbl-sticky-l', 'tbl-z1');
+        classNames.push('frui-tbl-sticky-l', 'frui-tbl-z1');
       }
       if (stickyRight) {
-        classNames.push('tbl-sticky-r', 'tbl-z1');
+        classNames.push('frui-tbl-sticky-r', 'frui-tbl-z1');
       }
     }
     if (noWrap) {

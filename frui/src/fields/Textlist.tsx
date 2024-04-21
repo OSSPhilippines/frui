@@ -23,7 +23,9 @@ export type TextlistConfig = {
 /**
  * Textlist Props
  */
-export type TextlistProps = FieldsetProps<TextlistType>;
+export type TextlistProps = FieldsetProps<TextlistType> & {
+  placeholder?: string
+};
 
 /**
  * Textlist Hook Aggregate
@@ -52,14 +54,14 @@ export function useTextlists(config: TextlistConfig) {
  */
 export function TextlistFields(props: FieldsProps<TextlistType>) {
   const { 
-    data,
+    config,
     values, 
     index, 
     error,
     set
   } = props;
   //variables
-  const placeholder = data?.placeholder as string | undefined;
+  const placeholder = config?.placeholder as string | undefined;
   //handlers
   const { handlers } = useTextlists({ values, index, set });
 
@@ -90,6 +92,10 @@ const Fieldset = make<TextlistType>(TextlistFields);
 /**
  * Textlist set Component (Main)
  */
-export default function Textlist(props: FieldsetProps<TextlistType>) {
-  return (<Fieldset {...props} emptyValue={''} />);
+export default function Textlist(props: TextlistProps) {
+  const { placeholder, ...attributes } = props;
+  const config = { placeholder };
+  return (
+    <Fieldset {...attributes} config={config} emptyValue="" />
+  );
 };

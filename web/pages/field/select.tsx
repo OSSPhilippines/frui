@@ -5,11 +5,53 @@ import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
-import Input from 'frui/dist/fields/Input';
+import Select from 'frui/dist/fields/Select';
+import Table, { Tcol, Thead, Trow } from 'frui/dist/Table';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
 import Code, { InlineCode as C } from 'modules/components/Code';
+
+const codeBasic = `
+<Select 
+  className="w-full z-20 text-black" 
+  options={[
+    { label: 'Foo', value: 'foo', keyword: 'foo' },
+    { label: 'Bar', value: 'bar', keyword: 'bar' }
+  ]}
+/>`.trim();
+
+const codeStyle = `
+<Select 
+  className="w-full z-30 text-black" 
+  options={[
+    { 
+      label: (<strong className="font-bold">Foo</strong>), 
+      value: 'foo', 
+      keyword: 'foo' 
+    },
+    { 
+      label: (<strong className="font-bold">Bar</strong>), 
+      value: 'bar', 
+      keyword: 'bar' 
+    }
+  ]}
+/>`.trim();
+
+const codeEvents = `
+<Select 
+  className="w-full z-30 text-black" 
+  options={{ foo: 'Foo', bar: 'Bar' }}
+  onDropdown={open => console.log('dropdown', open)}
+  onSelected={option => console.log('selected', option)}
+  onUpdate={value => alert(JSON.stringify(value))}
+/>`.trim();
+
+const codeOption = `{
+  label: 'Foo',
+  value: 'foo',
+  keyword: 'foo'
+}`;
 
 export default function Home() {
   //hooks
@@ -17,14 +59,22 @@ export default function Home() {
   //variables
   const crumbs: Crumb[] = [
     { icon: 'rectangle-list', label: 'Fields', href: '/field' },
-    { label: 'Inputs' }
+    { label: 'Select' }
   ];
+
   const props = [
-    [ _('error'), _('string'), _('No'), _('Standard error input') ],
+    [ _('className'), _('string'), _('No'), _('Standard HTML class names') ],
+    [ _('defaultValue'), _('string'), _('No'), _('Alias to value') ],
+    [ _('error'), _('string|boolean'), _('No'), _('Any error message') ],
+    [ _('name'), _('string'), _('No'), _('Used for react server components.') ],
+    [ _('onDropdown'), _('Function'), _('No'), _('Event handler when dropdown opens/closes') ],
+    [ _('onSelected'), _('Function'), _('No'), _('Event handler when an option has been selected') ],
     [ _('onUpdate'), _('Function'), _('No'), _('Update event handler') ],
-    [ _('passRef'), _('LegacyRef'), _('No'), _('Standard ref input') ],
-    [ _('style'), _('CSS Object'), _('No'), _('Standard CSS input') ],
-    [ _('className'), _('string'), _('No'), _('Standard class name input') ],
+    [ _('options'), _('Option[]'), _('Yes'), _('List of select options.') ],
+    [ _('placeholder'), _('string'), _('No'), _('Display text when no value set') ],
+    [ _('searchable'), _('boolean'), _('No'), _('Add a search field') ],
+    [ _('style'), _('CSS Object'), _('No'), _('Standard CSS object') ],
+    [ _('value'), _('string'), _('No'), _('Selected value from the options') ],
   ];
   //render
   return (
@@ -35,54 +85,51 @@ export default function Home() {
         </div>
         <div className="flex-grow relative h-full">
           <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l border-b1 text-sm">
-            <h4 className="p-3 border-b border-b1 bg-b1 text-sm uppercase font-semibold">
-              {_('Contents')}
+            <h4 className="p-3 border-b border-b1 bg-b1 uppercase font-semibold">
+              <Link href="#top">{_('Select')}</Link>
             </h4>
-            <div className="p-3">
-              <Link className="block pb-1" href="#top">Inputs</Link>
-              <ul className="list-disc pl-3">
-                <li className="pl-3 pb-1">
-                  <Link href="#props">
-                    {_('Props')}
-                  </Link>
-                </li>
-                <li className="pl-3 pb-1">
-                  <Link href="#basic">
-                    {_('Basics')}
-                  </Link>
-                </li>
-                <li className="pl-3 pb-1">
-                  <Link href="#update">
-                    {_('On Update')}
-                  </Link>
-                </li>
-                <li className="pl-3 pb-1">
-                  <Link href="#errors">
-                    {_('Errors')}
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            <ul className="list-disc py-3 pr-3 pl-6">
+              <li className="pl-3 pb-1">
+                <Link href="#props">
+                  {_('Props')}
+                </Link>
+              </li>
+              <li className="pl-3 pb-1">
+                <Link href="#basic">
+                  {_('Basics')}
+                </Link>
+              </li>
+              <li className="pl-3 pb-1">
+                <Link href="#events">
+                  {_('Events')}
+                </Link>
+              </li>
+              <li className="pl-3 pb-1">
+                <Link href="#errors">
+                  {_('Errors')}
+                </Link>
+              </li>
+              <li className="pl-3 pb-1">
+                <Link href="#styles">
+                  {_('Custom Styles')}
+                </Link>
+              </li>
+            </ul>
           </aside>
           <div className="absolute top-0 bottom-0 left-0 right-0 lg:right-56 px-3 pt-3 pb-5 h-full overflow-auto">
             <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-              {_('Inputs')}
+              {_('Select')}
             </h1>
             <Code language="typescript" className="mt-2">
-              {`import Input from 'frui/fields/Input';`}
+              {`import Select from 'frui/fields/Select';`}
             </Code>
             
             <h2 id="props" className="uppercase font-bold text-lg mt-8">
               {_('Props')}
             </h2>
-            <p>
+            <p className="py-4">
               <Translate>
-                Input accepts all props of a standard HTML Input 
-                element. See <a 
-                  className="text-t2 underline"
-                  href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"
-                  target="_blank"
-                >Moz</a> for standard input attributes.
+                The following props are accepted by <C value="Select" />.
               </Translate>
             </p>
             <Props props={props} />
@@ -92,38 +139,156 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                Input wraps the HTML standard <code 
-                  className="text-sm text-t2"
-                >{'`<input />`'}</code> element. Therefore, you can 
-                use any input attributes as props.
+                The following is a basic example of a 
+                <C l value="Select" /> field.
+              </Translate>
+            </p>
+            <div className="curved">
+              <div className="flex items-center justify-center p-3 bg-b1">
+                <Select className="w-full z-40 text-black" options={{ foo: 'Foo', bar: 'Bar' }} placeholder="Select Option" searchable />
+              </div>
+              <Code language="typescript">
+                {`<Select className="w-full z-40 text-black" options={{ foo: 'Foo', bar: 'Bar' }} placeholder="Select Option" searchable />`}
+              </Code>
+            </div>
+            <p className="py-4">
+              <Translate>
+                You can also express options as an array of objects.
               </Translate>
             </p>
             <div className="curved overflow-hidden">
+              <Code language="typescript">{codeBasic}</Code>
+            </div>
+            <p className="py-4">
+              <Translate>
+                With array options, you can use React on labels.
+              </Translate>
+            </p>
+            <div className="curved">
               <div className="flex items-center justify-center p-3 bg-b1">
-                <Input name="name" placeholder="Enter name.." value="John Doe" />
+                <Select 
+                  className="w-full z-30 text-black" 
+                  options={[
+                    { 
+                      label: (<strong className="font-bold">Foo</strong>), 
+                      value: 'foo', 
+                      keyword: 'foo' 
+                    },
+                    { 
+                      label: (<strong className="font-bold">Bar</strong>), 
+                      value: 'bar', 
+                      keyword: 'bar' 
+                    }
+                  ]}
+                />
               </div>
-              <Code language="typescript">
-                {`<Input name="name" placeholder="Enter name.." value="John Doe" />`}
-              </Code>
+              <Code language="typescript">{codeStyle}</Code>
             </div>
 
-            <h2 id="update" className="uppercase font-bold text-lg mt-8">
-              {_('On Update')}
+            <h2 id="events" className="uppercase font-bold text-lg mt-8">
+              {_('Events')}
             </h2>
             <p className="py-4">
               <Translate>
-                <C value="onUpdate" /> is like <C value="onChange" r /> 
-                except the value is passed instead of the change event.
+                The following example makes use of all the possible 
+                events for <C value="Select" />.
               </Translate>
             </p>
-            <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1">
-                <Input placeholder="Enter name.." onUpdate={value => alert(value)} />
+            <div className="curved">
+              <div className="relative flex items-center justify-center p-3 bg-b1">
+                <Select 
+                  className="w-full z-20 text-black" 
+                  options={{ foo: 'Foo', bar: 'Bar' }}
+                  onDropdown={open => console.log('dropdown', open)}
+                  onSelected={option => console.log('selected', option)}
+                  onUpdate={value => alert(JSON.stringify(value))}
+                />
               </div>
               <Code language="typescript">
-                {`<Input placeholder="Enter name.." onUpdate={value => alert(value)} />`}
+                {codeEvents}
               </Code>
             </div>
+            
+            <h3 className="font-semibold text-md mt-8">
+              {_('On Dropdown')}
+            </h3>
+            <p className="py-4">
+              <Translate>
+                The <C value="onDropdown" /> event is triggered when the 
+                dropdown opens or closes. The following arguments are
+                passed to the event handler:
+              </Translate>
+            </p>
+            <Table>
+              <Thead className="bg-b3 text-left">{_('Name')}</Thead>
+              <Thead className="bg-b3 text-left">{_('Type')}</Thead>
+              <Thead className="bg-b3 text-left">{_('Sample')}</Thead>
+              <Trow>
+                <Tcol className="bg-b1 text-left">
+                  {_('open')}
+                </Tcol>
+                <Tcol className="bg-b1 text-left">
+                  {_('boolean')}
+                </Tcol>
+                <Tcol className="bg-b1 text-left">
+                  <C value="true" />
+                </Tcol>
+              </Trow>
+            </Table>
+
+            <h3 className="font-semibold text-md mt-8">
+              {_('On Selected')}
+            </h3>
+            <p className="py-4">
+              <Translate>
+                The <C value="onSelected" /> event is triggered when an
+                option has been selected. The following arguments are
+                passed to the event handler:
+              </Translate>
+            </p>
+            <Table>
+              <Thead className="bg-b3 text-left">{_('Name')}</Thead>
+              <Thead className="bg-b3 text-left">{_('Type')}</Thead>
+              <Thead className="bg-b3 text-left">{_('Sample')}</Thead>
+              <Trow>
+                <Tcol className="bg-b1 text-left">
+                  {_('option')}
+                </Tcol>
+                <Tcol className="bg-b1 text-left">
+                  {_('SelectOption')}
+                </Tcol>
+                <Tcol className="bg-b1 text-left">
+                  <Code language="json" copy={false}>{codeOption}</Code>
+                </Tcol>
+              </Trow>
+            </Table>
+
+            <h3 className="font-semibold text-md mt-8">
+              {_('On Update')}
+            </h3>
+            <p className="py-4">
+              <Translate>
+                The <C value="onUpdate" /> event is triggered when the
+                value has been updated. The following arguments are
+                passed to the event handler:
+              </Translate>
+            </p>
+            <Table>
+              <Thead className="bg-b3 text-left">{_('Name')}</Thead>
+              <Thead className="bg-b3 text-left">{_('Type')}</Thead>
+              <Thead className="bg-b3 text-left">{_('Sample')}</Thead>
+              <Trow>
+                <Tcol className="bg-b1 text-left">
+                  {_('value')}
+                </Tcol>
+                <Tcol className="bg-b1 text-left">
+                  {_('string')}
+                </Tcol>
+                <Tcol className="bg-b1 text-left">
+                  <C value="foo" quote />
+                </Tcol>
+              </Trow>
+            </Table>
 
             <h2 id="errors" className="uppercase font-bold text-lg mt-8">
               {_('Errors')}
@@ -131,26 +296,46 @@ export default function Home() {
             <p className="py-4">
               <Translate>
                 You can pass the <C value="error" /> prop to highlight 
-                the input field red.
+                the Select field red.
               </Translate>
             </p>
-            <div className="curved overflow-hidden">
+            <div className="curved">
               <div className="flex items-center justify-center p-3 bg-b1">
-                <Input error value="Not a hotdog." />
+                <Select options={{ foo: 'Foo', bar: 'Bar' }} className="w-full z-10 text-black" error value="US" />
               </div>
               <Code language="typescript">
-                {`<Input error={string|true} value="Not a hotdog." />`}
+                {`<Select options={{ foo: 'Foo', bar: 'Bar' }} className="w-full z-10 text-black" error={string|true} value="US" />`}
               </Code>
             </div>
 
+            <h2 id="styles" className="uppercase font-bold text-lg mt-8">
+              {_('Custom Styles')}
+            </h2>
+            <p className="py-4">
+              <Translate>
+                You can add your own custom class to selects
+                or use any of the respective 
+                <C l value="frui-field-select" />, 
+                <C l value="frui-field-select-control" />, 
+                <C l value="frui-field-select-placeholder" />, 
+                <C l value="frui-field-select-dropdown" />,  
+                <C l value="frui-field-select-search" />,  
+                <C l value="frui-field-select-search-control" />,  
+                <C l value="frui-field-select-search-icon" />,  
+                <C l value="frui-field-select-options" />,  
+                <C l value="frui-field-select-option" />, and 
+                <C l value="frui-field-select-label" /> CSS classes. 
+              </Translate>
+            </p>
+
             <div className="flex items-center border-t border-b2 mt-8 pt-4">
-              <Link className="text-t2" href="/field">
+              <Link className="text-t2" href="/field/radio">
                 <i className="fas fa-arrow-left mr-2"></i>
-                {_('Fields')}
+                {_('Radio')}
               </Link>
               <div className="flex-grow"></div>
-              <Link className="text-t2" href="/field/date">
-                {_('Dates')}
+              <Link className="text-t2" href="/field/slug">
+                {_('Slug')}
                 <i className="fas fa-arrow-right ml-2"></i>
               </Link>
             </div>

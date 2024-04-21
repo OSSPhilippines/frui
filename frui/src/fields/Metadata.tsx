@@ -1,4 +1,5 @@
 //types
+import type { ExtendsType } from '../types';
 import type { FieldsProps, FieldsetProps } from '../Fieldset';
 //components
 import Button from '../Button';
@@ -27,7 +28,13 @@ export type MetadataConfig = {
 /**
  * Metadata Props
  */
-export type MetadataProps = FieldsetProps<MetadataType>;
+export type MetadataProps = ExtendsType<FieldsetProps<MetadataType>, {
+  type?: string,
+  min?: number|string,
+  max?: number|string,
+  step?: number|string,
+  placeholder?: string|string[]
+}>;
 
 /**
  * Metadata Hook Aggregate
@@ -69,14 +76,14 @@ export function useMetadata(config: MetadataConfig) {
  */
 export function MetadataFields(props: FieldsProps<MetadataType>) {
   const {
-    data = {},
+    config = {},
     values, 
     index, 
     error,
     set
   } = props;
   //props
-  const { type, min, max, step, placeholder } = data;
+  const { type, min, max, step, placeholder } = config;
   //hooks
   const { handlers, input } = useMetadata({ 
     type,
@@ -172,6 +179,13 @@ const Fieldset = make<MetadataType>(MetadataFields);
 /**
  * Metadata set Component (Main)
  */
-export default function Metadata(props: FieldsetProps<MetadataType>) {
-  return (<Fieldset {...props} emptyValue={['', '']} />);
+export default function Metadata(props: MetadataProps) {
+  const { type, min, max, step, placeholder, ...attributes } = props;
+  const placeholders = Array.isArray(placeholder) 
+    ? placeholder
+    : [placeholder, placeholder];
+  const config = { type, min, max, step, placeholder: placeholders };
+  return (
+    <Fieldset {...attributes} config={config} emptyValue={['', '']} />
+  );
 }

@@ -20,27 +20,21 @@ export type FieldsetConfig<ValueType = any> = {
 //ex. const Custom: React.FC<FieldsetProps<YOUR ROW TYPE>> = (props) => {}
 export type FieldsetProps<ValueType = any> = ExtendsType<ButtonProps, {
   add?: string,
-  data?: Record<string, any>,
+  config?: Record<string, any>,
   value?: ValueType[],
   defaultValue?: ValueType[],
   emptyValue?: ValueType,
   error?: boolean,
-  errorColor?: string,
   onChange?: (values: ValueType[]) => void,
   onUpdate?: (values: ValueType[]) => void
 }>;
 //use this type in your custom fields component
 //ex. const Fields: React.FC<FieldsProps<YOUR ROW TYPE>> = (props) => {}
 export type FieldsProps<ValueType = any> = {
-  type?: string,
-  data?: Record<string, any>,
-  min?: number|string,
-  max?: number|string,
-  step?: number|string,
+  config?: Record<string, any>,
   values?: (ValueType|undefined)[],
   index: number,
   error?: boolean,
-  errorColor: string,
   set: (values: (ValueType|undefined)[]) => void
 };
 
@@ -104,12 +98,11 @@ export default function make<ValueType = any>(
     //extract props
     const { 
       add,
-      data,
+      config,
       value, 
       defaultValue,
       emptyValue, 
       error,
-      errorColor = '#DC3545',
       onChange, 
       onUpdate,
       ...attributes 
@@ -127,12 +120,11 @@ export default function make<ValueType = any>(
       <>
         {values.map((value, index) => (
           typeof value !== 'undefined' ? <Fields 
-            data={data}
+            config={config}
             key={index} 
             index={index}
             values={values}
             error={error}
-            errorColor={errorColor}
             set={handlers.set}
           /> : null
         ))}

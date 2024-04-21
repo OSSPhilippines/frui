@@ -5,7 +5,8 @@ import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
-import Input from 'frui/dist/fields/Input';
+import Textlist from 'frui/dist/fields/Textlist';
+import Table, { Tcol, Thead, Trow } from 'frui/dist/Table';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
@@ -17,14 +18,19 @@ export default function Home() {
   //variables
   const crumbs: Crumb[] = [
     { icon: 'rectangle-list', label: 'Fields', href: '/field' },
-    { label: 'Inputs' }
+    { label: 'Textlist' }
   ];
+
   const props = [
-    [ _('error'), _('string'), _('No'), _('Standard error input') ],
-    [ _('onUpdate'), _('Function'), _('No'), _('Update event handler') ],
-    [ _('passRef'), _('LegacyRef'), _('No'), _('Standard ref input') ],
-    [ _('style'), _('CSS Object'), _('No'), _('Standard CSS input') ],
-    [ _('className'), _('string'), _('No'), _('Standard class name input') ],
+    [ _('add'), _('string'), _('No'), _('Add button text') ],
+    [ _('className'), _('string'), _('No'), _('Standard HTML class names applied to the add button') ],
+    [ _('defaultValue'), _('string[]'), _('No'), _('Default value (uncontrolled)') ],
+    [ _('error'), _('string|boolean'), _('No'), _('Any error message') ],
+    [ _('name'), _('string'), _('No'), _('Used for react server components.') ],
+    [ _('placeholder'), _('string'), _('No'), _('Placeholders for input values.') ],
+    [ _('onUpdate'), _('Function'), _('No'), _('Event handler when value updates') ],
+    [ _('style'), _('CSS Object'), _('No'), _('Standard CSS object applied to the add button') ],
+    [ _('value'), _('string[]'), _('No'), _('Default value (controlled)') ],
   ];
   //render
   return (
@@ -35,54 +41,51 @@ export default function Home() {
         </div>
         <div className="flex-grow relative h-full">
           <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l border-b1 text-sm">
-            <h4 className="p-3 border-b border-b1 bg-b1 text-sm uppercase font-semibold">
-              {_('Contents')}
+            <h4 className="p-3 border-b border-b1 bg-b1 uppercase font-semibold">
+              <Link href="#top">{_('Textlist')}</Link>
             </h4>
-            <div className="p-3">
-              <Link className="block pb-1" href="#top">Inputs</Link>
-              <ul className="list-disc pl-3">
-                <li className="pl-3 pb-1">
-                  <Link href="#props">
-                    {_('Props')}
-                  </Link>
-                </li>
-                <li className="pl-3 pb-1">
-                  <Link href="#basic">
-                    {_('Basics')}
-                  </Link>
-                </li>
-                <li className="pl-3 pb-1">
-                  <Link href="#update">
-                    {_('On Update')}
-                  </Link>
-                </li>
-                <li className="pl-3 pb-1">
-                  <Link href="#errors">
-                    {_('Errors')}
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            <ul className="list-disc py-3 pr-3 pl-6">
+              <li className="pl-3 pb-1">
+                <Link href="#props">
+                  {_('Props')}
+                </Link>
+              </li>
+              <li className="pl-3 pb-1">
+                <Link href="#basic">
+                  {_('Basics')}
+                </Link>
+              </li>
+              <li className="pl-3 pb-1">
+                <Link href="#events">
+                  {_('Events')}
+                </Link>
+              </li>
+              <li className="pl-3 pb-1">
+                <Link href="#errors">
+                  {_('Errors')}
+                </Link>
+              </li>
+              <li className="pl-3 pb-1">
+                <Link href="#styles">
+                  {_('Custom Styles')}
+                </Link>
+              </li>
+            </ul>
           </aside>
           <div className="absolute top-0 bottom-0 left-0 right-0 lg:right-56 px-3 pt-3 pb-5 h-full overflow-auto">
             <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-              {_('Inputs')}
+              {_('Textlist')}
             </h1>
             <Code language="typescript" className="mt-2">
-              {`import Input from 'frui/fields/Input';`}
+              {`import Textlist from 'frui/fields/Textlist';`}
             </Code>
             
             <h2 id="props" className="uppercase font-bold text-lg mt-8">
               {_('Props')}
             </h2>
-            <p>
+            <p className="py-4">
               <Translate>
-                Input accepts all props of a standard HTML Input 
-                element. See <a 
-                  className="text-t2 underline"
-                  href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"
-                  target="_blank"
-                >Moz</a> for standard input attributes.
+                The following props are accepted by <C value="Textlist" />.
               </Translate>
             </p>
             <Props props={props} />
@@ -92,38 +95,71 @@ export default function Home() {
             </h2>
             <p className="py-4">
               <Translate>
-                Input wraps the HTML standard <code 
-                  className="text-sm text-t2"
-                >{'`<input />`'}</code> element. Therefore, you can 
-                use any input attributes as props.
+                The following is a basic example of a 
+                <C l value="Textlist" /> field.
               </Translate>
             </p>
-            <div className="curved overflow-hidden">
+            <div className="curved">
               <div className="flex items-center justify-center p-3 bg-b1">
-                <Input name="name" placeholder="Enter name.." value="John Doe" />
+                <div className="w-full">
+                  <Textlist 
+                    add="Add Value" 
+                    placeholder="Enter Value"
+                    value={['foo', 'bar']} 
+                  />
+                </div>
               </div>
               <Code language="typescript">
-                {`<Input name="name" placeholder="Enter name.." value="John Doe" />`}
+                {`<Textlist add="Add Value" placeholder="Enter Value" value={['foo', 'bar']} />`}
               </Code>
             </div>
 
-            <h2 id="update" className="uppercase font-bold text-lg mt-8">
-              {_('On Update')}
+            <h2 id="events" className="uppercase font-bold text-lg mt-8">
+              {_('Events')}
             </h2>
             <p className="py-4">
               <Translate>
-                <C value="onUpdate" /> is like <C value="onChange" r /> 
-                except the value is passed instead of the change event.
+                The following example makes use of all the possible 
+                events for <C value="Textlist" />.
               </Translate>
             </p>
-            <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1">
-                <Input placeholder="Enter name.." onUpdate={value => alert(value)} />
+            <div className="curved">
+              <div className="relative flex items-center justify-center p-3 bg-b1">
+                <div className="w-full">
+                  <Textlist add="Add Value" onUpdate={value => alert(JSON.stringify(value))} />
+                </div>
               </div>
               <Code language="typescript">
-                {`<Input placeholder="Enter name.." onUpdate={value => alert(value)} />`}
+                {`<Textlist add="Add Value" onUpdate={value => alert(JSON.stringify(value))} />`}
               </Code>
             </div>
+
+            <h3 className="font-semibold text-md mt-8">
+              {_('On Update')}
+            </h3>
+            <p className="py-4">
+              <Translate>
+                The <C value="onUpdate" /> event is triggered when the
+                value has been updated. The following arguments are
+                passed to the event handler:
+              </Translate>
+            </p>
+            <Table>
+              <Thead className="bg-b3 text-left">{_('Name')}</Thead>
+              <Thead className="bg-b3 text-left">{_('Type')}</Thead>
+              <Thead className="bg-b3 text-left">{_('Sample')}</Thead>
+              <Trow>
+                <Tcol className="bg-b1 text-left">
+                  {_('value')}
+                </Tcol>
+                <Tcol className="bg-b1 text-left">
+                  {_('string[]')}
+                </Tcol>
+                <Tcol className="bg-b1 text-left">
+                  <C value="['foo', 'bar']" quote />
+                </Tcol>
+              </Trow>
+            </Table>
 
             <h2 id="errors" className="uppercase font-bold text-lg mt-8">
               {_('Errors')}
@@ -131,26 +167,42 @@ export default function Home() {
             <p className="py-4">
               <Translate>
                 You can pass the <C value="error" /> prop to highlight 
-                the input field red.
+                the Textlist field red.
               </Translate>
             </p>
-            <div className="curved overflow-hidden">
+            <div className="curved">
               <div className="flex items-center justify-center p-3 bg-b1">
-                <Input error value="Not a hotdog." />
+                <div className="w-full">
+                  <Textlist error value={['foo', 'bar']} />
+                </div>
               </div>
               <Code language="typescript">
-                {`<Input error={string|true} value="Not a hotdog." />`}
+                {`<Textlist error value={['foo', 'bar']} />`}
               </Code>
             </div>
 
+            <h2 id="styles" className="uppercase font-bold text-lg mt-8">
+              {_('Custom Styles')}
+            </h2>
+            <p className="py-4">
+              <Translate>
+                You can add your own custom class to selects
+                or use any of the respective 
+                <C l value="frui-field-textlist-row" />, 
+                <C l value="frui-field-textlist-remove" />, 
+                <C l value="frui-field-textlist-value" />, and
+                <C l value="frui-fieldset-add" /> CSS classes. 
+              </Translate>
+            </p>
+
             <div className="flex items-center border-t border-b2 mt-8 pt-4">
-              <Link className="text-t2" href="/field">
+              <Link className="text-t2" href="/field/textarea">
                 <i className="fas fa-arrow-left mr-2"></i>
-                {_('Fields')}
+                {_('Textarea')}
               </Link>
               <div className="flex-grow"></div>
-              <Link className="text-t2" href="/field/date">
-                {_('Dates')}
+              <Link className="text-t2" href="/field/time">
+                {_('Time')}
                 <i className="fas fa-arrow-right ml-2"></i>
               </Link>
             </div>

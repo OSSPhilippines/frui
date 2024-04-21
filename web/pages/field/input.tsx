@@ -64,11 +64,6 @@ export default function Home() {
                   {_('Errors')}
                 </Link>
               </li>
-              <li className="pl-3 pb-1">
-                <Link href="#styles">
-                  {_('Custom Styles')}
-                </Link>
-              </li>
             </ul>
           </aside>
           <div className="absolute top-0 bottom-0 left-0 right-0 lg:right-56 px-3 pt-3 pb-5 h-full overflow-auto">

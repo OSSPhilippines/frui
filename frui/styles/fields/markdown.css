@@ -3,6 +3,7 @@
   text-align: right;
 }
 .frui-field-markdown-preview {
+  background-color: var(--white);
   border-color: var(--black);
   border-style: solid;
   border-width: 1px;

@@ -248,6 +248,26 @@ export default function Home() {
               </Trow>
             </Table>
 
+            <h2 id="styles" className="uppercase font-bold text-lg mt-8">
+              {_('Custom Styles')}
+            </h2>
+            <p className="py-4">
+              <Translate>
+                You can add your own custom class to selects
+                or use any of the respective 
+                <C l value="frui-field-select" />, 
+                <C l value="frui-field-select-control" />, 
+                <C l value="frui-field-select-placeholder" />, 
+                <C l value="frui-field-select-dropdown" />,  
+                <C l value="frui-field-select-search" />,  
+                <C l value="frui-field-select-search-control" />,  
+                <C l value="frui-field-select-search-icon" />,  
+                <C l value="frui-field-select-options" />,  
+                <C l value="frui-field-select-option" />, and 
+                <C l value="frui-field-select-label" /> CSS classes. 
+              </Translate>
+            </p>
+
             <h2 id="errors" className="uppercase font-bold text-lg mt-8">
               {_('Errors')}
             </h2>

@@ -48,13 +48,13 @@ export default function Filelist(props: FilelistProps) {
       />
       {uploaded.length > 0 && uploaded.map((url, i) => (
         <div key={i} className="frui-field-imagelist-file">
+          <img src={url} alt="preview" className="frui-field-imagelist-preview" />
           <a 
             className="frui-field-imagelist-link"
             href={url} 
             target="_blank" 
             rel="noreferrer"
           >
-            <img src={url} alt="preview" className="frui-field-imagelist-preview" />
             {url}
           </a>
           <div 

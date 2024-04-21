@@ -41,7 +41,7 @@ export default function Home() {
               onClick={() => router.push('/component/alert')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[100px] w-full bg-black px-3">
+                <div className="flex items-center justify-center h-[100px] w-full bg-b1 px-3">
                   <Alert curved info className="w-full">
                     <i className="fas fa-check-circle mr-2"></i>
                     {_('Success')}
@@ -57,7 +57,7 @@ export default function Home() {
               onClick={() => router.push('/component/badge')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[100px] w-full bg-black">
+                <div className="flex items-center justify-center h-[100px] w-full bg-b1">
                   <Badge success pill className="text-xs my-3 inline-block">99</Badge>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
@@ -70,7 +70,7 @@ export default function Home() {
               onClick={() => router.push('/component/button')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[100px] w-full bg-black">
+                <div className="flex items-center justify-center h-[100px] w-full bg-b1">
                   <Button error rounded className="my-1">Submit</Button>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
@@ -83,7 +83,7 @@ export default function Home() {
               onClick={() => router.push('/component/loader')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[100px] w-full bg-black">
+                <div className="flex items-center justify-center h-[100px] w-full bg-b1">
                   <Loader show={true} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">

@@ -32,11 +32,11 @@ const MainMenu: React.FC<{
         <i className={`text-t2 fas fa-fw fa-compass`}></i>
         <span className="inline-block pl-2">{_('Getting Started')}</span>
       </Link>
-      <Link href="/component" className={`${pathname.indexOf('/component') === 0 ? 'text-white' : ''} block px-3 py-2 border-t border-solid border-b0 cursor-pointer`}>
+      <Link href="/component" className={`${pathname.indexOf('/component') === 0 ? 'text-white' : ''} block px-3 py-2 cursor-pointer`}>
         <i className={`text-t2 fas fa-fw fa-icons`}></i>
         <span className="inline-block pl-2">{_('Components')}</span>
       </Link>
-      <div>
+      <div className={pathname.indexOf('/component') === 0 ? 'block' : 'hidden'}>
         <Link href="/component/alert" className={`${pathname.indexOf('/component/alert') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Alert')}</span>
         </Link>
@@ -56,11 +56,11 @@ const MainMenu: React.FC<{
           <span className="inline-block pl-2">{_('Table')}</span>
         </Link>
       </div>
-      <Link href="/field" className={`${pathname.indexOf('/field') === 0 ? 'text-white' : ''} block px-3 py-2 border-t border-solid border-b0 cursor-pointer`}>
+      <Link href="/field" className={`${pathname.indexOf('/field') === 0 ? 'text-white' : ''} block px-3 py-2`}>
         <i className={`text-t2 fas fa-fw fa-rectangle-list`}></i>
         <span className="inline-block pl-2">{_('Fields')}</span>
       </Link>
-      <div>
+      <div className={pathname.indexOf('/field') === 0 ? 'block' : 'hidden'}>
         <Link href="/field/autocomplete" className={`${pathname.indexOf('/field/autocomplete') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Autocomplete')}</span>
         </Link>
@@ -137,11 +137,11 @@ const MainMenu: React.FC<{
           <span className="inline-block pl-2">{_('Time')}</span>
         </Link>
       </div>
-      <Link href="/format" className={`${pathname.indexOf('/format') === 0 ? 'text-white' : ''} block px-3 py-2 border-t border-solid border-b0 cursor-pointer`}>
+      <Link href="/format" className={`${pathname.indexOf('/format') === 0 ? 'text-white' : ''} block px-3 py-2`}>
         <i className={`text-t2 fas fa-fw fa-text-height`}></i>
         <span className="inline-block pl-2">{_('Formats')}</span>
       </Link>
-      <div>
+      <div className={pathname.indexOf('/format') === 0 ? 'block' : 'hidden'}>
         <Link href="/format/color" className={`${pathname.indexOf('/format/color') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Color')}</span>
         </Link>
@@ -160,7 +160,7 @@ const MainMenu: React.FC<{
         <Link href="/format/html" className={`${pathname.indexOf('/format/html') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('HTML')}</span>
         </Link>
-        <Link href="/format/image" className={`${pathname.indexOf('/format/image') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+        <Link href="/format/image" className={`${pathname === '/format/image' ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Image')}</span>
         </Link>
         <Link href="/format/imagelist" className={`${pathname.indexOf('/format/imagelist') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>

@@ -1,17 +1,23 @@
 //types
-export type MetadataProps = { value: Record<string, string|number> };
+import type { CSSProperties } from 'react';
+
+export type MetadataProps = { 
+  style?: CSSProperties,
+  className?: string,
+  value: Record<string, string|number>
+};
 
 /**
  * Metadata Format Component (Main)
  */
-export default function Metadata({ value }: MetadataProps) {
+export default function Metadata({ className, style, value }: MetadataProps) {
   return (
     <table>
       <tbody>
         {Object.entries(value).map(([key, value]) => (
           <tr key={key}>
-            <td style={{paddingRight: '10px'}}>{key}</td>
-            <td style={{paddingLeft: '10px'}}>{value}</td>
+            <td className={className} style={style}>{key}</td>
+            <td className={className} style={style}>{value}</td>
           </tr>
         ))}
       </tbody>

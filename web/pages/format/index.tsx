@@ -6,30 +6,29 @@ import { useRouter } from 'next/router';
 //fields
 import Crumbs from 'modules/components/Crumbs';
 import { LayoutPanel } from 'modules/theme';
-import Autocomplete from 'frui/dist/fields/Autocomplete';
-import Checkbox from 'frui/dist/fields/Checkbox';
-import Country from 'frui/dist/fields/Country';
-import Currency from 'frui/dist/fields/Currency';
-import Date from 'frui/dist/fields/Date';
-import Datetime from 'frui/dist/fields/Datetime';
-import File from 'frui/dist/fields/File';
-import Filelist from 'frui/dist/fields/Filelist';
-import ImageField from 'frui/dist/fields/Image';
-import Imagelist from 'frui/dist/fields/Imagelist';
-import Input from 'frui/dist/fields/Input';
-import Markdown from 'frui/dist/fields/Markdown';
-import Mask from 'frui/dist/fields/Mask';
-import Metadata from 'frui/dist/fields/Metadata';
-import Number from 'frui/dist/fields/Number';
-import Password from 'frui/dist/fields/Password';
-import Radio from 'frui/dist/fields/Radio';
-import Select from 'frui/dist/fields/Select';
-import Slug from 'frui/dist/fields/Slug';
-import Switch from 'frui/dist/fields/Switch';
-import Taglist from 'frui/dist/fields/Taglist';
-import Textarea from 'frui/dist/fields/Textarea';
-import Textlist from 'frui/dist/fields/Textlist';
-import Time from 'frui/dist/fields/Time';
+import Color from 'frui/dist/formats/Color';
+import Country from 'frui/dist/formats/Country';
+import Currency from 'frui/dist/formats/Currency';
+import Date from 'frui/dist/formats/Date';
+import Email from 'frui/dist/formats/Email';
+import Formula from 'frui/dist/formats/Formula';
+import HTML from 'frui/dist/formats/HTML';
+import ImageFormat from 'frui/dist/formats/Image';
+import Imagelist from 'frui/dist/formats/Imagelist';
+import JSON from 'frui/dist/formats/JSON';
+import Link from 'frui/dist/formats/Link';
+import List from 'frui/dist/formats/List';
+import Markdown from 'frui/dist/formats/Markdown';
+import Metadata from 'frui/dist/formats/Metadata';
+import Number from 'frui/dist/formats/Number';
+import Overflow from 'frui/dist/formats/Overflow';
+import Phone from 'frui/dist/formats/Phone';
+import Rating from 'frui/dist/formats/Rating';
+import Separated from 'frui/dist/formats/Separated';
+import Table from 'frui/dist/formats/Table';
+import Taglist from 'frui/dist/formats/Taglist';
+import Text from 'frui/dist/formats/Text';
+import Yesno from 'frui/dist/formats/Yesno';
 
 export default function Home() {
   //hooks
@@ -37,7 +36,7 @@ export default function Home() {
   const router = useRouter();
   //variables
   const crumbs: Crumb[] = [
-    { icon: 'rectangle-list', label: 'Fields' }
+    { icon: 'text-height', label: 'Formats' }
   ];
   //render
   return (
@@ -48,46 +47,33 @@ export default function Home() {
         </div>
         <div className="flex-grow pt-3 pb-5 overflow-auto">
           <h1 className="px-3 flex items-center uppercase font-bold text-xl">
-            {_('Fields')}
+            {_('Formats')}
           </h1>
           <p className="px-3 pt-3">
             Thanks to our sponsors, contributors, and users. The 
-            following fields have been unlocked and are free to use.
+            following formats have been unlocked and are free to use.
           </p>
           <div className="flex flex-wrap mt-4">
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/autocomplete')} 
+              onClick={() => router.push('/format/color')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Autocomplete options={[ 'foo', 'bar' ]} value="bar" />
+                  <Color lg value="salmon" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Autocomplete')}
+                  {_('Color')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/checkbox')} 
+              onClick={() => router.push('/format/country')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Checkbox checked label="Enable" className="text-white" />
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Checkbox')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/country')} 
-            >
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Country className="w-full" value="US" />
+                  <Country value="US" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Country')}
@@ -96,11 +82,11 @@ export default function Home() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/currency')} 
+              onClick={() => router.push('/format/currency')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Currency className="w-full" value="USD" />
+                  <Currency value="USD" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Currency')}
@@ -109,11 +95,11 @@ export default function Home() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/date')} 
+              onClick={() => router.push('/format/date')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Date />
+                  <Date value="2024-02-03" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Date')}
@@ -122,67 +108,50 @@ export default function Home() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/datetime')} 
+              onClick={() => router.push('/format/email')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Datetime />
+                  <Email className="text-t2" value="john@doe.com" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Datetime')}
+                  {_('Email')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/fieldset')} 
+              onClick={() => router.push('/format/formula')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <div className="text-left">
-                    <Textlist value={['foobar']} add="Add More" />
-                  </div>
+                  x + y + z = <Formula value="29" formula="{x} + {this} + {y}" data={{ x: 4, y: 5 }} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Fieldset')}
+                  {_('Formula')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/file')} 
+              onClick={() => router.push('/format/html')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <File className="bg-white w-[150px]" />
+                  <HTML value='<h1><strong style="color: green">Hello</strong> World</h1>' />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('File')}
+                  {_('HTML')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/filelist')} 
+              onClick={() => router.push('/format/image')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Filelist className="bg-white w-[150px]" defaultValue={[
-                    'https://images.wsj.net/8SR.pdf'
-                  ]} />
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Filelist')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/image')} 
-            >
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] bg-b1 px-3">
-                  <ImageField className="bg-white w-[150px]" value="https://images.wsj.net/im-580612/8SR" />
+                  <ImageFormat value="https://images.wsj.net/im-580612/8SR" width="100" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Image')}
@@ -191,13 +160,14 @@ export default function Home() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/imagelist')} 
+              onClick={() => router.push('/format/imagelist')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Imagelist className="bg-white w-[150px]" defaultValue={[
+                  <Imagelist className="flex" value={[
+                    'https://images.wsj.net/im-580612/8SR', 
                     'https://images.wsj.net/im-580612/8SR'
-                  ]} />
+                  ]} width="50" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Imagelist')}
@@ -206,24 +176,58 @@ export default function Home() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/input')} 
+              onClick={() => router.push('/format/json')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Input placeholder="Basic Input" />
+                  <div className="text-left">
+                    <JSON value={{foo: 'foo', bar: 'bar'}} />
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Input')}
+                  {_('JSON')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/markdown')} 
+              onClick={() => router.push('/format/json')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Markdown rows={2} defaultValue="# FRUI" />
+                  <div className="text-left">
+                    <Link className="text-t2" value="https://images.wsj.net/im-580612/8SR" />
+                  </div>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Link')}
+                </h2>
+              </div>
+            </div>
+            <div 
+              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => router.push('/format/list')} 
+            >
+              <div className="m-2 border border-b2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
+                  <div className="text-left">
+                    <List value={['electronics', 'laptops']} />
+                  </div>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('List')}
+                </h2>
+              </div>
+            </div>
+            <div 
+              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => router.push('/format/markdown')} 
+            >
+              <div className="m-2 border border-b2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
+                  <div className="text-left">
+                    <Markdown value="# Hello **World**" />
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Markdown')}
@@ -232,25 +236,15 @@ export default function Home() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/mask')} 
-            >
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Mask mask="999-999-9999" placeholder="999-999-9999" />
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Mask')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/metadata')} 
+              onClick={() => router.push('/format/metadata')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
                   <div className="text-left">
-                    <Metadata add="Add More" value={Object.entries({ foo: 'bar' })} />
+                    <Metadata 
+                      className="p-2 border-t border-b0" 
+                      value={{ id: '12345', upc: '67890' }} 
+                    />
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
@@ -260,11 +254,13 @@ export default function Home() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/number')} 
+              onClick={() => router.push('/format/number')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Number defaultValue="1234.56" />
+                  <div className="text-left">
+                    <Number value="12345.67" separator="," decimal="." decimals={2} />
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Number')}
@@ -273,87 +269,84 @@ export default function Home() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/password')} 
+              onClick={() => router.push('/format/overflow')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Password value="1234567890" />
+                  <div className="text-left">
+                    <Overflow value="Lorem Ipsum" length={8} hellip />
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Password')}
+                  {_('Overflow')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/radio')} 
+              onClick={() => router.push('/format/phone')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Radio rounded checked className="text-white" label="Yes" />
-                  <Radio rounded checked={false} className="text-white ml-2" label="No" />
+                  <Phone className="text-t2" value="+1 (410) 555-2424" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Radio')}
+                  {_('Phone')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/select')} 
+              onClick={() => router.push('/format/rating')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Select className="w-full" options={[]} value={{
-                    label: (
-                      <div className="flex items-center w-full">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img alt="foobar" height="30" width="30" src="https://e7.pngegg.com/pngimages/971/854/png-clipart-white-and-gray-illustration-angle-symbol-snout-fictional-character-black-metroui-apps-foobar-angle-logo-thumbnail.png" />
-                          <div className="ml-2 text-left flex-grow">Foobar</div>
-                          <i className="fas fa-chevron-down"></i>
-                      </div>
-                    ),
-                    value: 'bar'
-                  }} />
+                  <div className="text-t-warning">
+                    <Rating value="3.5" max={5} remainder round="floor" />
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Select')}
+                  {_('Rating')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/slug')} 
+              onClick={() => router.push('/format/separated')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Slug value="I am a Title" />
+                  <Separated value={['Foo', 'bar']} separator=" - " />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Slug')}
+                  {_('Separated')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/switch')} 
+              onClick={() => router.push('/format/table')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Switch ridge checked rounded />
+                  <div className="text-left text-black w-full">
+                    <Table value={[
+                      { id: 1, name: 'John Doe' },
+                    ]} stripes={['#CCCCCC', '#EFEFEF', '#FCFCFC']} />
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Switch')}
+                  {_('Table')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/taglist')} 
+              onClick={() => router.push('/format/taglist')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Taglist value={['foo', 'bar']} />
+                  <Taglist className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Taglist')}
@@ -362,42 +355,27 @@ export default function Home() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/textarea')} 
+              onClick={() => router.push('/format/text')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Textarea placeholder="Morbi tincidunt, dolor at sodales auctor, magna eros sagittis enim, ut aliquet velit nulla vel metus." />
+                  <Text format="capitalize" value="i am a title" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Textarea')}
+                  {_('Text')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/textlist')} 
+              onClick={() => router.push('/format/yesno')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <div className="text-left">
-                    <Textlist value={['foobar']} add="Add More" />
-                  </div>
+                  <Yesno value={true} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Textlist')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/time')} 
-            >
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Time />
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Time')}
+                  {_('Yesno')}
                 </h2>
               </div>
             </div>
@@ -407,107 +385,27 @@ export default function Home() {
             {_('Locked')}
           </h2>
           <p className="px-3 pt-3">
-            The following fields have are locked until enough there are 
-            enough users and demand for such fields.
+            The following formats have are locked until enough there are 
+            enough users and demand for such formats.
           </p>
           <div className="flex flex-wrap mt-4">
             <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 1,000 downloads
+                  Unlocks at 1,500 downloads
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Color')}
+                  {_('Code')}
                 </h2>
               </div>
             </div>
             <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 3,000 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Rating')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 5,000 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('WYSIWYG')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 7,000 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Checklist')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 9,000 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Radio Group')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 12,000 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Multi Select')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 15,000 downloads
+                  Unlocks at 2,500 downloads
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('JSON')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 18,000 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Range Slider')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 21,000 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Knob')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 25,000 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Code Editor')}
                 </h2>
               </div>
             </div>

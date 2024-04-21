@@ -27,9 +27,10 @@
 }
  
 .frui-field-filelist-link {
-  display: flex;
   flex-grow: 1;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .frui-field-filelist-remove {

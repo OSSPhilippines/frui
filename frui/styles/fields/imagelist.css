@@ -28,10 +28,10 @@
 
 .frui-field-imagelist-link {
   align-items: center;
-  display: flex;
   flex-grow: 1;
-  flex-wrap: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .frui-field-imagelist-remove {

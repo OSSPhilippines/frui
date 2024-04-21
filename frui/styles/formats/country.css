@@ -1,0 +1,9 @@
+.frui-format-country {
+  align-items: center; 
+  display: flex
+}
+
+.frui-format-country-flag {
+  display: inline-block; 
+  margin-right: 4px; 
+}

@@ -26,7 +26,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/format/metadata"
+      title="Metadata Format"
+      description="Metadata formats in FRUI, are ReactJS components that convert values to key value tables."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

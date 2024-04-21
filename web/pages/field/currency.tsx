@@ -70,7 +70,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/currency"
+      title="Currency Field"
+      description="Currency fields in FRUI, allow users select from a list of currencies around the world."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

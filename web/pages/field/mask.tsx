@@ -34,7 +34,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/mask"
+      title="Mask Field"
+      description="Mask fields in FRUI, are ReactJS components that hint users an accepted value format."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

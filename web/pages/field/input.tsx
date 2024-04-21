@@ -33,7 +33,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/input"
+      title="Input Field"
+      description="Input fields in FRUI, are general short value form inputs."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

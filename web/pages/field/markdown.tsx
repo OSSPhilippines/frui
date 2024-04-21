@@ -34,7 +34,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/markdown"
+      title="Markdown Field"
+      description="Markdown fields in FRUI, are ReactJS components that formats markdown to HTML."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

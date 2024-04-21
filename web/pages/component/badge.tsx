@@ -11,7 +11,7 @@ import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
 import Code, { InlineCode as C } from 'modules/components/Code';
 
-export default function Home() {
+export default function Page() {
   //hooks
   const { _ } = useLanguage();
   //variables
@@ -36,7 +36,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/component/badge"
+      title="Badge Component"
+      description="Badges in FRUI, are ReactJS components that convey unread notifications to users."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

@@ -3,10 +3,11 @@ import { useState } from 'react';
 import { useLanguage } from 'r22n';
 import { useTheme } from '../../theme';
 //components
-import Header from './components/Header';
 import Link from 'next/link';
 import Image from 'next/image';
 import Toggle from '../Toggle';
+import Head from './components/Head';
+import Header from './components/Header';
 
 export function useToggle(ison = false) {
   const [ on, isOn ] = useState(ison);
@@ -15,18 +16,20 @@ export function useToggle(ison = false) {
 };
 
 const LayoutHome: React.FC<{
-  head?: React.FC,
+  uri?: string,
+  title?: string,
+  description?: string,
   children?: React.ReactNode
 }> = props => {
   //props
-  const { head: Head, children } = props;
+  const { uri, title, description, children } = props;
   //hooks
   const { _ } = useLanguage();
   const [ opened, toggle ] = useToggle();
   const { theme, mode } = useTheme();
   return (
     <section className={`${theme}-${mode} bg-b0 text-t1 relative w-full h-full overflow-hidden`}>
-      <>{Head && <Head />}</>
+      <Head uri={uri} title={title} description={description} />
       <header className="absolute top-0 left-0 right-0">
         <div className="px-3 flex items-center h-16 py-2">
           <div className="pr-3 md:pr-8 flex items-center h-16 text-white">

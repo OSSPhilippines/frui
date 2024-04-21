@@ -27,7 +27,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/format/rating"
+      title="Rating Format"
+      description="Raing formats in FRUI, are ReactJS components that convert values to star ratings."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

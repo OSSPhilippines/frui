@@ -25,7 +25,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/format/text"
+      title="Text Format"
+      description="Text formats in FRUI, are ReactJS components that capitalizes, uppercase or lowercases values."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

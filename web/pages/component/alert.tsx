@@ -56,7 +56,7 @@ const codePill = `
   Successfully saved !
 </Alert>`.trim();
 
-export default function Home() {
+export default function Page() {
   //hooks
   const { _ } = useLanguage();
   //variables
@@ -81,7 +81,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/component/alert"
+      title="Alert Component"
+      description="Alerts in FRUI, are interactive ReactJS components that convey important information, warnings, or notifications to users."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

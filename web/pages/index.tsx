@@ -11,11 +11,14 @@ import Alert from 'frui/dist/Alert';
 import Table, { Thead, Trow, Tcol } from 'frui/dist/Table';
 import { LayoutHome } from 'modules/theme';
 
-
-export default function Home() {
+export default function Page() {
   const { _ } = useLanguage();
   return (
-    <LayoutHome>
+    <LayoutHome 
+      uri=""
+      title="Free ReactJS UI - FRUI"
+      description="FRUI is a suite of free react components you can use without the commitments."
+    >
       <main className="border-t border-b1 w-full h-full">
         <section className="md:flex items-center border-b1 border-y h-full">
           <div className="basis-1/2 px-8 h-full flex flex-col justify-center text-center">

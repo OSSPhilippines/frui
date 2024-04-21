@@ -36,7 +36,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/format/table"
+      title="Table Format"
+      description="Table formats in FRUI, are ReactJS components that format values into a table."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

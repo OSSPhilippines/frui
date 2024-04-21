@@ -78,7 +78,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/fieldset"
+      title="Fieldets"
+      description="Fieldsets in FRUI, are a set of fields grouped together to be copied and processed as one field. "
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

@@ -24,7 +24,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/format/markdown"
+      title="Markdown Format"
+      description="Markdown formats in FRUI, are ReactJS components that convert markdown values to raw HTML."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

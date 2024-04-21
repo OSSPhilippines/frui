@@ -33,7 +33,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/password"
+      title="Password Field"
+      description="Password fields in FRUI, are ReactJS components that input values from prying eyes."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

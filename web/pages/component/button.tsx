@@ -11,7 +11,7 @@ import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
 import Code, { InlineCode as C } from 'modules/components/Code';
 
-export default function Home() {
+export default function Page() {
   //hooks
   const { _ } = useLanguage();
   //variables
@@ -47,7 +47,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/component/button"
+      title="Button Component"
+      description="Buttons in FRUI, are ReactJS components used to submit forms and start call-to-actions."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

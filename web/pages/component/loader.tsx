@@ -10,7 +10,7 @@ import { LayoutPanel } from 'modules/theme';
 import Loader from 'frui/dist/Loader';
 import Code, { InlineCode as C } from 'modules/components/Code';
 
-export default function Home() {
+export default function Page() {
   //hooks
   const { _ } = useLanguage();
   //variables
@@ -20,7 +20,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/component/loader"
+      title="Loader Component"
+      description="Loaders in FRUI, are ReactJS components that let users know that is app is processing something and they just need to wait."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

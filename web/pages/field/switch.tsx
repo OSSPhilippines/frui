@@ -47,7 +47,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/switch"
+      title="Switch Field"
+      description="Switch fields in FRUI, are ReactJS components that allow users to click and enable/disable actions."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

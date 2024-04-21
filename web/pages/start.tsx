@@ -10,7 +10,7 @@ import Code from 'modules/components/Code';
 import Terminal from 'modules/components/Terminal';
 import { LayoutPanel } from 'modules/theme';
 
-export default function Home() {
+export default function Page() {
   //hooks
   const { _ } = useLanguage();
   const [ install, setInstall ] = useState('npm');
@@ -20,7 +20,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/start"
+      title="Getting Started"
+      description="Learn how to install and easily setup FRUI, a suite of free react components."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

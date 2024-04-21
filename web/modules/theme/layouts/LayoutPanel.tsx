@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useTheme } from '../../theme';
 //components
 import { ToastContainer, unload } from '../../notify';
+import Head from './components/Head';
 import Header from './components/Header';
 import MainMenu from './components/MainMenu';
 import UserMenu from './components/UserMenu';
@@ -14,11 +15,13 @@ export function useToggle(ison = false) {
 };
 
 const LayoutPanel: React.FC<{
-  head?: React.FC,
+  uri?: string,
+  title?: string,
+  description?: string,
   children?: React.ReactNode
 }> = props => {
   //props
-  const { head: Head, children } = props;
+  const { uri, title, description, children } = props;
   //hooks
   const [ opened, toggle ] = useToggle();
   const { theme, mode } = useTheme();
@@ -26,7 +29,7 @@ const LayoutPanel: React.FC<{
   useEffect(unload, []);
   return (
     <section className={`${theme}-${mode} bg-b0 text-t1 relative w-full h-full overflow-hidden`}>
-      <>{Head && <Head />}</>
+      <Head uri={uri} title={title} description={description} />
       <Header 
         toggle={toggle} 
       />

@@ -27,7 +27,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/format/overflow"
+      title="Overflow Format"
+      description="Overflow formats in FRUI, are ReactJS components that convert clip values."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

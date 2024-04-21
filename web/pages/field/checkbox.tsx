@@ -42,7 +42,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/autocomplete"
+      title="Checkbox Field"
+      description="Checkbox fields in FRUI, allow users to click and enable/disable actions."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

@@ -64,7 +64,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/autocomplete"
+      title="Autocomplete Field"
+      description="Autocomplete fields in FRUI, suggests values as the user enters more information."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

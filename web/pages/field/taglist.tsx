@@ -39,7 +39,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/taglist"
+      title="Taglist Field"
+      description="Taglist fields in FRUI, are ReactJS components that allow users to enter multiple short values in one field."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

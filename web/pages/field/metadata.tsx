@@ -45,7 +45,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/metadata"
+      title="Metadata Field"
+      description="Metadata fields in FRUI, are ReactJS components that allow users to input a set of key values."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

@@ -33,7 +33,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/number"
+      title="Number Field"
+      description="Number fields in FRUI, are ReactJS components that automatically formats values into integers and floats."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

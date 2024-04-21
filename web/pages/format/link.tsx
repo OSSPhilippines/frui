@@ -27,7 +27,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/format/link"
+      title="Link Format"
+      description="Link formats in FRUI, are ReactJS components that convert values to clickable actions."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

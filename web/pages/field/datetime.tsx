@@ -38,7 +38,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/dateitme"
+      title="Datetime Field"
+      description="Datetime fields in FRUI, helps users format datetime based inputs."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

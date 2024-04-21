@@ -22,7 +22,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/component"
+      title="Components"
+      description="Components in FRUI, are compounded interfaces built on top of ReactJS native components and HTML elements."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

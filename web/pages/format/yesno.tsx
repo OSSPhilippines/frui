@@ -26,7 +26,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/format/yesno"
+      title="Yesno Format"
+      description="Yesno formats in FRUI, are ReactJS components that convert values to yes or no."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

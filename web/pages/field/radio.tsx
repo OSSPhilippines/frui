@@ -68,7 +68,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/radio"
+      title="Radio Field"
+      description="Radio fields in FRUI, are ReactJS components that allow users to select from a list of values."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

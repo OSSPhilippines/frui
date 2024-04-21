@@ -50,7 +50,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/filelist"
+      title="File List Field"
+      description="File list fields in FRUI, helps users upload a list of files to the server."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

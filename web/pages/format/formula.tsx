@@ -26,7 +26,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/format/formula"
+      title="Formula Format"
+      description="Formula formats in FRUI, are ReactJS components that display an evaluated formula."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

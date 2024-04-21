@@ -34,7 +34,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/field/textlist"
+      title="Textlist Field"
+      description="Textlist fields in FRUI, are ReactJS components that allow users to enter multiple values in a fieldset."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

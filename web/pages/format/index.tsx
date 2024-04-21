@@ -40,7 +40,11 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/format"
+      title="Formats"
+      description="Formats in FRUI, are ReactJS components designed to map with database data types and integrate easily with ORMs."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

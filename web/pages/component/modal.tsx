@@ -99,7 +99,7 @@ function ModalBody() {
   );
 }
 
-export default function Home() {
+export default function Page() {
   //hooks
   const { _ } = useLanguage();
   const modal = useModal();
@@ -132,7 +132,11 @@ export default function Home() {
   };
   //render
   return (
-    <LayoutPanel>
+    <LayoutPanel 
+      uri="/component/modal"
+      title="Modal Component"
+      description="Modals in FRUI, are ReactJS components that popup allowing users to interact with."
+    >
       <main className="flex flex-col h-full w-full">
         <div className="p-3 bg-b2">
           <Crumbs crumbs={crumbs} />

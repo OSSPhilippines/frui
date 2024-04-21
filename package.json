@@ -8,7 +8,8 @@
     "build": "yarn build:frui && yarn build:web",
     "build:frui": "yarn --cwd frui build",
     "build:web": "yarn --cwd web build",
-    "dev": "yarn --cwd web dev"
+    "dev": "yarn --cwd web dev",
+    "start": "yarn --cwd web start"
   },
   "devDependencies": {
     "concurrently": "7.6.0"

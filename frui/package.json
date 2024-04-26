@@ -1,6 +1,6 @@
 {
   "name": "frui",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "description": "A collection of vanilla react components written in typescript.",
   "author": "Chris <chris@incept.asia>",

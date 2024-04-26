@@ -21,16 +21,16 @@ export default function Head(props: {
       <meta name="description" content={_(description)} />
       <meta property="og:title" content={_(title)} />
       <meta property="og:description" content={_(description)} />
-      <meta property="og:image" content="https://ossphilippines.github.io/frui/frui-icon.png" />
-      <meta property="og:url" content={`https://ossphilippines.github.io/frui${uri}`} />
+      <meta property="og:image" content="https://frui.js.org/frui-icon.png" />
+      <meta property="og:url" content={`https://frui.js.org${uri}`} />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:site" content="@OSSPhilippines" />
       <meta name="twitter:title" content={_(title)} />
       <meta name="twitter:description" content={_(description)} />
-      <meta name="twitter:image" content="https://ossphilippines.github.io/frui/frui-icon.png" />
-      <link rel="shortcut icon" href="https://ossphilippines.github.io/frui/favicon.ico" type="image/png" />
-      <link rel="icon" href="https://ossphilippines.github.io/frui/favicon.ico" type="image/png" />
+      <meta name="twitter:image" content="https://frui.js.org/frui-icon.png" />
+      <link rel="shortcut icon" href="https://frui.js.org/favicon.ico" type="image/png" />
+      <link rel="icon" href="https://frui.js.org/favicon.ico" type="image/png" />
     </HTMLHead>
   );
 }

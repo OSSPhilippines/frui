@@ -34,10 +34,10 @@ const LayoutHome: React.FC<{
         <div className="px-3 flex items-center h-16 py-2">
           <div className="pr-3 md:pr-8 flex items-center h-16 text-white">
             <Link href="/">
-              <Image alt="logo" className="logo-img" src="/frui/frui-icon.png" height="35" width="35" />
+              <Image alt="logo" className="logo-img" src="/frui-icon.png" height="35" width="35" />
             </Link>
             <Link className="ml-2 uppercase flex-grow hidden md:block" href="/">
-              <Image alt="text" className="logo-img relative top-0.5" src="/frui/frui-text.png" height="25" width="67" />
+              <Image alt="text" className="logo-img relative top-0.5" src="/frui-text.png" height="25" width="67" />
             </Link>
           </div>
           <div className="flex-grow">

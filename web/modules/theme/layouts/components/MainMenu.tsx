@@ -19,10 +19,10 @@ const MainMenu: React.FC<{
     <aside className={`${theme}-dark w-52 duration-200 absolute top-0 bottom-0 z-50 bg-b1 border-r border-b0 text-gray-400 text-sm overflow-auto md:left-0 ${open? 'left-0': '-left-64' }`}>
       <div className="px-3 flex items-center h-16 text-white">
         <Link href="/">
-          <Image alt="logo" className="logo-img" src="/frui/frui-icon.png" height="35" width="35" />
+          <Image alt="logo" className="logo-img" src="/frui-icon.png" height="35" width="35" />
         </Link>
         <Link className="ml-2 uppercase flex-grow" href="/">
-          <Image alt="text" className="logo-img relative top-0.5" src="/frui/frui-text.png" height="25" width="67" />
+          <Image alt="text" className="logo-img relative top-0.5" src="/frui-text.png" height="25" width="67" />
         </Link>
         <button className="md:hidden ml-3" onClick={toggle}>
           <i className="fas fa-chevron-left"></i>

@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://ossphilippines.github.io/frui/frui-icon.png" width="100" />
+  <img src="https://frui.js.org/frui-icon.png" width="100" />
   <h1>Free React UI (FRUI)</h1>
   <a href="https://www.npmjs.com/package/frui"><img src="https://img.shields.io/npm/v/frui.svg?style=flat" /></a>
   <a href="https://github.com/OSSPhilippines/frui/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" /></a>
@@ -7,7 +7,7 @@
   <a href="https://github.com/OSSPhilippines/frui/blob/main/README.md#contributing"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" /></a>
   <br />
   <br />
-  <a href="https://ossphilippines.github.io/frui/">Documentation</a>
+  <a href="https://frui.js.org/">Documentation</a>
   <br />
   <hr />
 </div>

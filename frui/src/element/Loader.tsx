@@ -1,7 +1,5 @@
 //types
 import type { CSSProperties } from 'react';
-//react
-import React from 'react';
 
 /**
  * Loader Props
@@ -17,7 +15,7 @@ export type LoaderProps = {
 /**
  * Loader Component (Main)
  */
-const Loader: React.FC<LoaderProps> = (props) => {
+const Loader = (props: LoaderProps): JSX.Element => {
   const { show, color, label, style = {}, className } = props;
   style.borderColor = color || '#666666';
   const container: Record<string, string> = {};

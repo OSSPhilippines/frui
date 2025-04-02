@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 //types
 import type { AppProps } from 'next/app';
 //components
-import { ModalProvider } from 'frui/dist/Modal';
+import { ModalProvider } from 'frui/element/Modal';
 import { ThemeProvider } from 'modules/theme';
 
 export default function App({ Component, pageProps }: AppProps) {

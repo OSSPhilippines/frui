@@ -1,17 +1,16 @@
 //types
-import type { FieldsProps, FieldsetProps } from 'frui/dist/Fieldset';
+import type { FieldsProps, FieldsetProps } from 'frui/element/Fieldset';
 import type { Crumb } from 'modules/components/Crumbs';
 //hooks
 import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
-import Table, { Tcol, Thead, Trow } from 'frui/dist/Table';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
 import Code, { InlineCode as C } from 'modules/components/Code';
-import make from 'frui/dist/Fieldset';
+import make from 'frui/element/Fieldset';
 
 const codeBasic = `
 //types
@@ -182,7 +181,8 @@ export default function Home() {
 };
 
 export function InputFields(props: FieldsProps<string>) {
-  const { values, index, error, set } = props;
+  // const { values, index, error, set } = props;
+  const { values, index, set } = props;
   const handlers = {
     update: (value: string) => {
       const newValues = [ ...(values || []) ]

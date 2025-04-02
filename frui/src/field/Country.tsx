@@ -4,26 +4,29 @@ import type { SelectProps, SelectOption } from './Select';
 //components
 import Select from './Select';
 //data
-import countries from '../data/intl.json';
+import countries from '../data/countries';
 
 /**
  * Country Data
  */
 export type CountryData = {
-  countryCode: string,
-  countryName: string,
-  currencyType: string,
-  currencyCode: string,
-  currencyName: string,
-  currencyPlural: string,
-  currencySymbol: string,
-  language: string
+  type: string,
+  iso2: string,
+  iso3: string,
+  name: string,
+  flag: string,
+  ne: [ number, number ],
+  sw: [ number, number ],
+  cur: string,
+  tel: string,
+  lang: string,
+  num: [ string, string ]
 };
 
 /**
  * Country Option
  */
-export type CountryOption = SelectOption<CountryData>;
+export type CountryOption = SelectOption<string>;
 
 /**
  * Country Config
@@ -49,19 +52,17 @@ export type CountryProps = ExtendsType<SelectProps, {
 export function useCountry(config: CountryConfig) {
   const { value, defaultValue, map } = config;
   //generate options
-  const options = countries
-    .filter(country => country.currencyType === 'fiat')
-    .map(map);
+  const options = (countries as CountryData[]).map(map);
 
   const selected = typeof value === 'string' 
     ? options.filter(
-        option => option.value?.countryCode === value
+        option => option.value === value
       )[0] as CountryOption
     : undefined;
   
   const selectedDefault = typeof defaultValue === 'string' 
     ? options.filter(
-        option => option.value?.countryCode === defaultValue
+        option => option.value === defaultValue
       )[0] as CountryOption
     : undefined;
 
@@ -84,20 +85,16 @@ export default function Country(props: CountryProps) {
     map: country => ({
       label: (
         <>
-          <img 
-            alt={`${country.countryName} Flag`} 
-            src={`https://flagcdn.com/w40/${country.countryCode.toLowerCase()}.png`} 
-            loading="lazy"
-          />
+          <span className="text-lg">{country.flag}</span>
           <span className="frui-field-select-label">
-            {country.countryName}
+            {country.name}
           </span>  
         </>
       ),
-      value: country,
-      keyword: (keyword: string) => country.countryCode.toLowerCase().indexOf(keyword) >= 0
-        || country.countryName.toLowerCase().indexOf(keyword) >= 0
-        || country.currencyCode.toLowerCase().indexOf(keyword) >= 0
+      value: country.iso3,
+      keyword: (keyword: string) => country.iso3.toLowerCase().indexOf(keyword) >= 0
+        || country.name.toLowerCase().indexOf(keyword) >= 0
+        || country.iso3.toLowerCase().indexOf(keyword) >= 0
     })
   });
 

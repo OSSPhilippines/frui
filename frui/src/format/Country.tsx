@@ -1,7 +1,7 @@
 //types
 import type { CSSProperties } from 'react';
 //helpers
-import countries from '../data/intl.json';
+import countries from '../data/countries';
 
 /**
  * Country Props
@@ -25,20 +25,15 @@ export default function Country(props: CountryProps) {
     value, 
     flag = true, 
     text = true,
-    sm,
-    md,
-    lg,
+    // sm,
+    // md,
+    // lg,
     className, 
     style = {}
   } = props;
-  const flagStyles = { width: sm ? '20px'
-    : md ? '40px' 
-    : lg ? '60px' 
-    : '40px' 
-  };
 
   const country = countries.find(
-    country => country.countryCode === value
+    country => country.iso3 === value
   );
   if (!country) {
     const classNames = ['frui-format-country-text'];
@@ -59,15 +54,11 @@ export default function Country(props: CountryProps) {
     }
     return (
       <span className={classNames.join(' ')} style={style}>
-        <img 
-          className="frui-format-country-flag"
-          style={flagStyles}
-          alt={`${country.countryName} Flag`} 
-          src={`https://flagcdn.com/w80/${country.countryCode.toLowerCase()}.png`} 
-          loading="lazy"
-        />
+        <span className="frui-format-country-flag">
+          {country.flag}
+        </span>
         <span className="frui-format-country-text">
-          {country.countryName}
+          {country.name}
         </span>
       </span>
     );  
@@ -77,23 +68,19 @@ export default function Country(props: CountryProps) {
       classNames.push(className);
     }
     return (
-      <img 
-        className={classNames.join(' ')} 
-        style={{ ...style, ...flagStyles }}
-        alt={`${country.countryName} Flag`} 
-        src={`https://flagcdn.com/w40/${country.countryCode.toLowerCase()}.png`} 
-        loading="lazy"
-      />
+      <span className="frui-format-country-flag">
+        {country.flag}
+      </span>
     );
   }
 
   const classNames = ['frui-format-country-text'];
-    if (className) {
-      classNames.push(className);
-    }
+  if (className) {
+    classNames.push(className);
+  }
   return (
     <span className={classNames.join(' ')} style={style}>
-      {country.countryName}
+      {country.name}
     </span>
   );
 };

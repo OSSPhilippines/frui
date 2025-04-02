@@ -1,9 +1,9 @@
 //types
 import type { ExtendsType } from '../types';
-import type { FieldsProps, FieldsetProps } from '../Fieldset';
+import type { FieldsProps, FieldsetProps } from '../element/Fieldset';
 //components
-import Button from '../Button';
-import make from '../Fieldset';
+import Button from '../element/Button';
+import make from '../element/Fieldset';
 import Input from './Input';
 import Number from './Number';
 import Date from './Date';
@@ -76,6 +76,7 @@ export function useMetadata(config: MetadataConfig) {
  */
 export function MetadataFields(props: FieldsProps<MetadataType>) {
   const {
+    name,
     config = {},
     values, 
     index, 
@@ -170,6 +171,14 @@ export function MetadataFields(props: FieldsProps<MetadataType>) {
       >
         &times;
       </Button>
+      {value && value[0].length > 0 && (<input 
+        type="hidden" 
+        name={`${name}[${value[0]}]`} 
+        value={value[1] instanceof Date 
+          ? value[1].toISOString()
+          : String(value[1])
+        } 
+      />)}
     </div>
   );
 };

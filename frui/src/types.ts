@@ -1,4 +1,4 @@
-import type { ReactNode, ReactElement } from 'react';
+import type { JSX, ReactNode, ReactElement } from 'react';
 
 // General types
 export type ExtendsType<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;

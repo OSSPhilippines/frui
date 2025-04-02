@@ -108,7 +108,7 @@ export function useAutocomplete(config: AutocompleteConfig) {
       onSelected && onSelected(option);
     },
     //hide dropdown on blur
-    blur: (e: FocusEvent<HTMLInputElement>) => {
+    blur: (_e: FocusEvent<HTMLInputElement>) => {
       setTimeout(() => show(false), 10)
     }
   };

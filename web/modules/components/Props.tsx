@@ -2,7 +2,7 @@
 import { useLanguage } from 'r22n';
 import useStripe from 'modules/hooks/useStripe';
 //components
-import Table, { Thead, Trow, Tcol } from 'frui/dist/Table';
+import Table, { Thead, Trow, Tcol } from 'frui/element/Table';
 
 export default function Props({ props }: { props: (string|JSX.Element)[][] }) {
   const { _ } = useLanguage();

@@ -1,7 +1,8 @@
 //types
 import type { CSSProperties } from 'react';
 //helpers
-import countries from '../data/intl.json';
+import currencies from '../data/currencies';
+import countries from '../data/countries';
 
 /**
  * Currency Props
@@ -25,21 +26,24 @@ export default function Currency(props: CurrencyProps) {
     value, 
     flag = true, 
     text = true,
-    sm,
-    md,
-    lg,
+    // sm,
+    // md,
+    // lg,
     className, 
     style = {}
   } = props;
-  const flagStyles = { width: sm ? '20px'
-    : md ? '40px' 
-    : lg ? '60px' 
-    : '40px' 
-  };
-  const currency = countries.find(country => (
-    (value.toUpperCase() !== 'USD' && country.currencyCode === value)
-    || (value.toUpperCase() === 'USD' && country.countryCode === 'US')
-  ));
+  const currency = currencies
+    .filter(currency => currency.type === 'fiat')
+    .map(currency => ({ 
+      ...currency, 
+      flag: countries.find(
+        country => country.cur === currency.code
+      )?.flag 
+    }))
+    .filter(currency => !!currency.flag)
+    .find(currency => (
+      currency.code === value
+    ));
   if (!currency) {
     const classNames = ['frui-format-country-text'];
     if (className) {
@@ -59,15 +63,11 @@ export default function Currency(props: CurrencyProps) {
     }
     return (
       <span className={classNames.join(' ')} style={style}>
-        <img 
-          className="frui-format-country-flag"
-          style={flagStyles}
-          alt={`${currency.countryName} Flag`} 
-          src={`https://flagcdn.com/w80/${currency.countryCode.toLowerCase()}.png`} 
-          loading="lazy"
-        />
+        <span className="frui-format-country-flag">
+          {currency.flag}
+        </span>
         <span className="frui-format-country-text">
-          {currency.currencyName}
+          {currency.name}
         </span>
       </span>
     );  
@@ -77,13 +77,9 @@ export default function Currency(props: CurrencyProps) {
       classNames.push(className);
     }
     return (
-      <img 
-        className={classNames.join(' ')} 
-        style={{ ...style, ...flagStyles }}
-        alt={`${currency.countryName} Flag`} 
-        src={`https://flagcdn.com/w40/${currency.countryCode.toLowerCase()}.png`} 
-        loading="lazy"
-      />
+      <span className="frui-format-country-flag">
+        {currency.flag}
+      </span>
     );
   }
 
@@ -93,7 +89,7 @@ export default function Currency(props: CurrencyProps) {
   }
   return (
     <span className={classNames.join(' ')} style={style}>
-      {currency.currencyName}
+      {currency.name}
     </span>
   );
 };

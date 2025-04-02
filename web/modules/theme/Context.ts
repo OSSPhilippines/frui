@@ -18,7 +18,7 @@ const ThemeContext = createContext<ThemeContextProps>({
   theme: 'blue',
   languages: {},
   toggle: () => {},
-  change: (theme: string) => {}
+  change: (_theme: string) => {}
 });
 
 export default ThemeContext;

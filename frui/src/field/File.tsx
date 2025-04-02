@@ -71,6 +71,7 @@ export default function File(props: FileProps) {
   //separate component related props from field attributes
   const { 
     uploading: locale = 'Uploading...',
+    name,
     value,
     defaultValue,
     error,
@@ -130,6 +131,7 @@ export default function File(props: FileProps) {
           >
             &times;
           </div>
+          <input type="hidden" name={name} value={url} />
         </div>
       )}
     </div>

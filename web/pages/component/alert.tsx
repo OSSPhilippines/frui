@@ -5,7 +5,7 @@ import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
-import Alert from 'frui/dist/Alert';
+import Alert from 'frui/element/Alert';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';

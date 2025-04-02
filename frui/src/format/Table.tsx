@@ -1,7 +1,7 @@
 //types
 import type { CSSProperties } from 'react';
 //components
-import { Table, Thead, Tcol, Trow } from '../Table';
+import { Table, Thead, Tcol, Trow } from '../element/Table';
 
 /**
  * Table Props

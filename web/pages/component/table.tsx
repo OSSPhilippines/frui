@@ -6,7 +6,7 @@ import useStripe from 'modules/hooks/useStripe';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
-import Table, { Thead, Trow, Tcol } from 'frui/dist/Table';
+import Table, { Thead, Trow, Tcol } from 'frui/element/Table';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Code, { InlineCode as C } from 'modules/components/Code';

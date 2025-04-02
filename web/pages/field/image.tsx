@@ -5,8 +5,8 @@ import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
-import ImageField from 'frui/dist/fields/Image';
-import Table, { Tcol, Thead, Trow } from 'frui/dist/Table';
+import ImageField from 'frui/field/Image';
+import Table, { Tcol, Thead, Trow } from 'frui/element/Table';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
@@ -141,7 +141,7 @@ export default function Home() {
             </p>
             <div className="curved overflow-hidden">
               <div className="flex items-center justify-center p-3 bg-b1">
-                <ImageField className="bg-white w-full" onUpload={(image, next) => {
+                <ImageField className="bg-white w-full" onUpload={(_image, next) => {
                   //just a mock call
                   setTimeout(() => {
                     next('https://images.wsj.net/im-580612/8SR')

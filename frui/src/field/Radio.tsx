@@ -39,8 +39,8 @@ export function useRadio(config: InputConfig) {
     isHovering,
     isChecked,
     handlers: {
-      out: (e: MouseEvent<HTMLInputElement>) => hover(false),
-      over: (e: MouseEvent<HTMLInputElement>) => hover(true),
+      out: (_e: MouseEvent<HTMLInputElement>) => hover(false),
+      over: (_e: MouseEvent<HTMLInputElement>) => hover(true),
       change: (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.checked !== checked) {
           check(e.target.checked);

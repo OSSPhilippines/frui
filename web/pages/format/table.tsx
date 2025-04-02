@@ -4,7 +4,7 @@ import type { Crumb } from 'modules/components/Crumbs';
 import { Translate, useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
-import Table from 'frui/dist/formats/Table';
+import Table from 'frui/format/Table';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';

@@ -6,6 +6,9 @@ import type { HTMLButtonProps } from '../types';
  * Button Props
  */
 export type ButtonProps = HTMLButtonProps & {
+  href?: string,
+  target?: string,
+  title?: string,
   block?: boolean,
   full?: boolean,
   color?: string,
@@ -38,6 +41,9 @@ export type ButtonProps = HTMLButtonProps & {
 export default function Button(props: ButtonProps) {
   // Separate component related props from field attributes
   const { 
+    href,
+    target,
+    title,
     block,
     full,
     color,
@@ -152,8 +158,27 @@ export default function Button(props: ButtonProps) {
     styles: { ...defaults.styles, ...style }
   };
 
+  if (href) {
+    return (
+      <a 
+        href={href} 
+        target={target}
+        title={title}
+        className={map.classes} 
+        style={map.styles}
+      >
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <button className={map.classes} style={map.styles} {...attributes}>
+    <button 
+      title={title}
+      className={map.classes} 
+      style={map.styles} 
+      {...attributes}
+    >
       {children}
     </button>
   );

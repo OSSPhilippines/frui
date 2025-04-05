@@ -1,5 +1,5 @@
 //types
-import type { FieldsProps, FieldsetProps } from 'frui/element/Fieldset';
+import type { FieldsProps, FieldsetProps } from 'frui/form/Fieldset';
 import type { Crumb } from 'modules/components/Crumbs';
 //hooks
 import { useLanguage } from 'r22n';
@@ -10,7 +10,7 @@ import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
 import Code, { InlineCode as C } from 'modules/components/Code';
-import make from 'frui/element/Fieldset';
+import make from 'frui/form/Fieldset';
 
 const codeBasic = `
 //types

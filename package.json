@@ -10,8 +10,5 @@
     "build:web": "yarn --cwd web build && cp .nojekyll docs/.nojekyll && cp CNAME docs/CNAME",
     "dev": "yarn --cwd web dev",
     "start": "yarn --cwd web start"
-  },
-  "devDependencies": {
-    "concurrently": "7.6.0"
   }
 }

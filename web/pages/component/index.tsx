@@ -8,7 +8,7 @@ import Crumbs from 'modules/components/Crumbs';
 import { LayoutPanel } from 'modules/theme';
 import Alert from 'frui/element/Alert';
 import Badge from 'frui/element/Badge';
-import Button from 'frui/element/Button';
+import Button from 'frui/form/Button';
 import Loader from 'frui/element/Loader';
 import Table, { Thead, Trow, Tcol } from 'frui/element/Table';
 

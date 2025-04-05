@@ -5,7 +5,7 @@ import { type ReactNode, useState } from 'react';
 //components
 import MarkdownFrame from 'markdown-to-jsx';
 import Textarea from './Textarea';
-import Button from '../element/Button';
+import Button from '../form/Button';
 //using react-dom/server to render markdown... on the client side
 import { renderToStaticMarkup } from 'react-dom/server';
 

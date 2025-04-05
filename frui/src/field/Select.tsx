@@ -18,12 +18,16 @@ export type SelectOption<T = any> = {
  * Select Config
  */
 export type SelectConfig<T = any> = {
-  options: SelectOption<T>[],
   value?: T,
   defaultValue?: T,
+  defaultOptions?: SelectOption<T>[],
   onDropdown?: (show: boolean) => void,
   onSelected?: (value: SelectOption<T>) => void,
-  onUpdate?: (value: T) => void
+  onUpdate?: (value: T) => void,
+  onQuery?: (
+    query: string, 
+    update: (options: SelectOption<T>[]) => void
+  ) => void
 };
 
 /**
@@ -54,7 +58,11 @@ export type SelectProps<T = any> = {
   className?: string,
   onDropdown?: (show: boolean) => void,
   onSelected?: (value: SelectOption<T>) => void,
-  onUpdate?: (value: T) => void
+  onUpdate?: (value: T) => void,
+  onQuery?: (
+    query: string, 
+    update: (options: SelectOption<T>[]) => void
+  ) => void
 };
 
 /**
@@ -62,12 +70,13 @@ export type SelectProps<T = any> = {
  */
 export function useSelect<T = any>(config: SelectConfig<T>) {
   const { 
-    options,
     value,
     defaultValue,
+    defaultOptions = [],
     onDropdown,
     onSelected,
-    onUpdate
+    onUpdate,
+    onQuery
   } = config;
   //get the current value
   const currentValue = typeof defaultValue !== 'undefined'
@@ -76,10 +85,11 @@ export function useSelect<T = any>(config: SelectConfig<T>) {
     ? value
     : undefined;
   //get the default selected option based on the current value
-  const defaultSelected = options.find(
+  const defaultSelected = defaultOptions.find(
     option => option.value === currentValue
   );
   //hooks
+  const [ options, setOptions ] = useState(defaultOptions);
   //search query string
   const [ query, setQuery ] = useState('');
   //selected option
@@ -97,9 +107,10 @@ export function useSelect<T = any>(config: SelectConfig<T>) {
       setTimeout(() => {
         const input = e.target as HTMLInputElement;
         setQuery(input.value);
+        onQuery && onQuery(input.value, setOptions);
       });
     },
-    //matches options with query string
+    //(internally) matches options with query string
     match(option: SelectOption<T>) {
       const keyword = (query || '').toLowerCase();
       if (typeof option.keyword === 'string') {
@@ -143,7 +154,7 @@ export function useSelect<T = any>(config: SelectConfig<T>) {
     setSelected(selected);
   }, [ value ]);
 
-  return { selected, showing, handlers };
+  return { selected, options, showing, handlers };
   
 };
 
@@ -193,14 +204,15 @@ export function SelectDropdown(props: SelectDropdownProps) {
 export default function Select<T = any>(props: SelectProps) {
   const { 
     name,
-    options,
     searchable,
     value,
     defaultValue,
+    options: defaultOptions,
     placeholder = 'Choose an Option',
     error, 
     className,
     style,
+    onQuery,
     onDropdown,
     onSelected,
     onUpdate
@@ -208,15 +220,16 @@ export default function Select<T = any>(props: SelectProps) {
 
   //we need to change from {k:v} to [{value: k, label: v}]
   const entries = (
-    typeof options === 'object' && !Array.isArray(options)
-  ) ? Object.keys(options).map(value => ({ 
-    value, label: (options as Record<string, string>)[value] 
-  })): options;
+    typeof defaultOptions === 'object' && !Array.isArray(defaultOptions)
+  ) ? Object.keys(defaultOptions).map(value => ({ 
+    value, label: (defaultOptions as Record<string, string>)[value] 
+  })): defaultOptions;
 
-  const { selected, showing, handlers } = useSelect<T>({
-    options: entries,
+  const { selected, options, showing, handlers } = useSelect<T>({
     value,
     defaultValue,
+    defaultOptions: entries,
+    onQuery,
     onDropdown,
     onSelected,
     onUpdate
@@ -252,7 +265,7 @@ export default function Select<T = any>(props: SelectProps) {
         )}
       </div>
       <SelectDropdown 
-        options={entries} 
+        options={options} 
         show={showing} 
         error={error}
         searchable={searchable} 

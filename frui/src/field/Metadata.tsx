@@ -1,9 +1,9 @@
 //types
 import type { ExtendsType } from '../types';
-import type { FieldsProps, FieldsetProps } from '../element/Fieldset';
+import type { FieldsProps, FieldsetProps } from '../form/Fieldset';
 //components
-import Button from '../element/Button';
-import make from '../element/Fieldset';
+import Button from '../form/Button';
+import make from '../form/Fieldset';
 import Input from './Input';
 import Number from './Number';
 import Date from './Date';

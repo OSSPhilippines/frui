@@ -15,7 +15,7 @@ export type LoaderProps = {
 /**
  * Loader Component (Main)
  */
-const Loader = (props: LoaderProps): JSX.Element => {
+export default function Loader(props: LoaderProps) {
   const { show, color, label, style = {}, className } = props;
   style.borderColor = color || '#666666';
   const container: Record<string, string> = {};
@@ -32,6 +32,4 @@ const Loader = (props: LoaderProps): JSX.Element => {
       {label}
     </div>
   );
-};
-
-export default Loader;
+}

@@ -6,7 +6,7 @@ import { useState } from 'react';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
-import Button from 'frui/element/Button';
+import Button from 'frui/form/Button';
 import Modal, { useModal } from 'frui/element/Modal';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';

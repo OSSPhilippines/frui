@@ -20,6 +20,7 @@ export type FieldsetConfig<ValueType = any> = {
 //ex. const Custom: React.FC<FieldsetProps<YOUR ROW TYPE>> = (props) => {}
 export type FieldsetProps<ValueType = any> = ExtendsType<ButtonProps, {
   add?: string,
+  limit?: number,
   config?: Record<string, any>,
   value?: ValueType[],
   defaultValue?: ValueType[],
@@ -32,6 +33,7 @@ export type FieldsetProps<ValueType = any> = ExtendsType<ButtonProps, {
 //ex. const Fields: React.FC<FieldsProps<YOUR ROW TYPE>> = (props) => {}
 export type FieldsProps<ValueType = any> = {
   name?: string,
+  limit?: number,
   config?: Record<string, any>,
   values?: (ValueType|undefined)[],
   index: number,
@@ -55,7 +57,9 @@ export function useFieldset<ValueType = any>(
   } = config;
 
   //make sure we have an array
-  const safeValues: (ValueType|undefined)[] = Array.isArray(defaultValue) ? [ ...defaultValue ] : [];
+  const safeValues: (ValueType|undefined)[] = Array.isArray(
+    defaultValue
+  ) ? [ ...defaultValue ] : [];
   //hooks
   const [ values, setValues ] = useState(safeValues);
   //handlers
@@ -102,6 +106,7 @@ export default function make<ValueType = any>(
       add,
       config,
       value, 
+      limit = 0,
       defaultValue,
       emptyValue, 
       error,
@@ -118,28 +123,37 @@ export default function make<ValueType = any>(
       onUpdate
     });
 
+    const size = values.filter(
+      value => typeof value !== 'undefined'
+    ).length;
+
     return (
       <>
         {values.map((value, index) => (
-          typeof value !== 'undefined' ? <Fields 
-            name={name}
-            config={config}
-            key={index} 
-            index={index}
-            values={values}
-            error={error}
-            set={handlers.set}
-          /> : null
+          typeof value !== 'undefined' ? (
+            <Fields 
+              name={name}
+              config={config}
+              key={index} 
+              index={index}
+              values={values}
+              limit={limit}
+              error={error}
+              set={handlers.set}
+            />
+          ) : null
         ))}
-        <Button 
-          muted
-          {...attributes}
-          onClick={handlers.add}
-          type="button"
-        >
-          <span className="frui-fieldset-add">&#43;</span>
-          {add || 'Add'}
-        </Button>
+        {(!limit || size < limit) && (
+          <Button 
+            muted
+            {...attributes}
+            onClick={handlers.add}
+            type="button"
+          >
+            <span className="frui-fieldset-add">&#43;</span>
+            {add || 'Add'}
+          </Button>
+        )}
       </>
     );
   };

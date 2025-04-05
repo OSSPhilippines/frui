@@ -18,6 +18,7 @@
     "./data/*": "./dist/data/*.js",
     "./element/*": "./dist/element/*.js",
     "./field/*": "./dist/field/*.js",
+    "./form/*": "./dist/form/*.js",
     "./format/*": "./dist/format/*.js"
   },
   "typesVersions": {
@@ -27,7 +28,8 @@
       "data/*": [ "./dist/data/*.d.ts" ],
       "element/*": [ "./dist/element/*.d.ts" ],
       "field/*": [ "./dist/field/*.d.ts" ],
-      "format/*": [ "./dist/format/*.d.ts" ]
+      "format/*": [ "./dist/format/*.d.ts" ],
+      "form/*": [ "./dist/form/*.d.ts" ]
     }
   },
   "files": [

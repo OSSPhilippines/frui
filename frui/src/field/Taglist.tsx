@@ -18,6 +18,7 @@ export type TaglistConfig = {
  * Taglist Props
  */
 export type TaglistProps = ExtendsType<HTMLInputProps, {
+  name?: string,
   error?: any,
   color?: string,
   info?: boolean, 
@@ -64,7 +65,7 @@ export function useTaglist(config: TaglistConfig) {
         onChange && onChange(e);
       },
       remove: (index: number) => {
-        setTags(prevState => prevState.filter((tag, i) => i !== index))
+        setTags(prevState => prevState.filter((_tag, i) => i !== index))
       },
       edit: (e: KeyboardEvent<HTMLInputElement>) => {
         const { key } = e;
@@ -99,6 +100,7 @@ export function useTaglist(config: TaglistConfig) {
 export default function Taglist(props: TaglistProps) {
   //separate component related props from field attributes
   const { 
+    name,
     value,
     defaultValue, 
     color,
@@ -168,6 +170,7 @@ export default function Taglist(props: TaglistProps) {
           >
             &times;
           </button>
+          <input type="hidden" name={name} value={tag} />
         </div>
       ))}
       <input

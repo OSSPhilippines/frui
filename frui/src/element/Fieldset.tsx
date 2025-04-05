@@ -1,5 +1,5 @@
 //types
-import type { ExtendsType } from './types';
+import type { ExtendsType } from '../types';
 import type { ButtonProps } from './Button';
 //hooks
 import React, { useState, useEffect } from 'react';
@@ -31,6 +31,7 @@ export type FieldsetProps<ValueType = any> = ExtendsType<ButtonProps, {
 //use this type in your custom fields component
 //ex. const Fields: React.FC<FieldsProps<YOUR ROW TYPE>> = (props) => {}
 export type FieldsProps<ValueType = any> = {
+  name?: string,
   config?: Record<string, any>,
   values?: (ValueType|undefined)[],
   index: number,
@@ -96,7 +97,8 @@ export default function make<ValueType = any>(
   //renders a dynamic form fieldset
   return function Fieldset (props: FieldsetProps<ValueType>) {
     //extract props
-    const { 
+    const {
+      name, 
       add,
       config,
       value, 
@@ -120,6 +122,7 @@ export default function make<ValueType = any>(
       <>
         {values.map((value, index) => (
           typeof value !== 'undefined' ? <Fields 
+            name={name}
             config={config}
             key={index} 
             index={index}

@@ -25,7 +25,7 @@ const LayoutHome: React.FC<{
   const { uri, title, description, children } = props;
   //hooks
   const { _ } = useLanguage();
-  const [ opened, toggle ] = useToggle();
+  const [ _opened, _toggle ] = useToggle();
   const { theme, mode } = useTheme();
   return (
     <section className={`${theme}-${mode} bg-b0 text-t1 relative w-full h-full overflow-hidden`}>

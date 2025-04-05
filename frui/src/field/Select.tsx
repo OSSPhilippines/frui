@@ -43,6 +43,7 @@ export type SelectDropdownProps<T = any> = {
  * Select Props
  */
 export type SelectProps<T = any> = {
+  name?: string,
   value?: T,
   defaultValue?: T,
   options: SelectOption<T>[]|Record<string, T>,
@@ -122,7 +123,7 @@ export function useSelect<T = any>(config: SelectConfig<T>) {
 
       return true;
     },
-    //selests an option from the dropdown
+    //selects an option from the dropdown
     select(option: SelectOption<T>) {
       show(false);
       setSelected(option);
@@ -191,6 +192,7 @@ export function SelectDropdown(props: SelectDropdownProps) {
  */
 export default function Select<T = any>(props: SelectProps) {
   const { 
+    name,
     options,
     searchable,
     value,
@@ -230,6 +232,16 @@ export default function Select<T = any>(props: SelectProps) {
     placeholderClass.push('frui-tx-error', 'frui-bd-error');
   }
 
+  const inputValue = typeof selected?.value === 'string' 
+    ? selected.value 
+    : typeof selected?.value === 'number'
+    ? String(selected.value)
+    : typeof selected?.value === 'boolean'
+    ? String(selected.value)
+    : selected?.value && typeof selected.value === 'object'
+    ? JSON.stringify(selected.value)
+    : '';
+
   return (
     <div className={classNames.join(' ')} style={style}>
       <div className="frui-field-select-control" onClick={handlers.toggle}>
@@ -248,6 +260,7 @@ export default function Select<T = any>(props: SelectProps) {
         search={handlers.search} 
         match={handlers.match} 
       />
+      <input name={name} type="hidden" value={inputValue} />
     </div>
   );
 };

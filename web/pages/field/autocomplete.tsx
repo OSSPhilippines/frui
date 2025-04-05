@@ -5,8 +5,8 @@ import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
-import Autocomplete from 'frui/dist/fields/Autocomplete';
-import Table, { Tcol, Thead, Trow } from 'frui/dist/Table';
+import Autocomplete from 'frui/field/Autocomplete';
+import Table, { Tcol, Thead, Trow } from 'frui/element/Table';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
@@ -160,7 +160,7 @@ export default function Home() {
                 <Autocomplete 
                   className="w-full" 
                   options={['foo', 'bar']}
-                  onQuery={(query, set) => setTimeout(
+                  onQuery={(_query, set) => setTimeout(
                     () => set(['boo', 'bar', 'baz']), 
                     1000
                   )}

@@ -1,21 +1,37 @@
 //types
 import type { ExtendsType } from '../types';
-import type { CountryData, CountryConfig } from './Country';
 import type { SelectProps, SelectOption } from './Select';
 //components
 import Select from './Select';
 //data
-import countries from '../data/intl.json';
+import currencies from '../data/currencies';
+import countries from '../data/countries';
+
+/**
+ * Currency Data
+ */
+export type CurrencyData = {
+  flag: string,
+  type: string,
+  code: string,
+  name: string,
+  plural: string,
+  symbol: string
+}
 
 /**
  * Currency Option
  */
-export type CurrencyOption = SelectOption<CountryData>;
+export type CurrencyOption = SelectOption<string>;
 
 /**
  * Currency Config
  */
-export type CurrencyConfig = CountryConfig;
+export type CurrencyConfig = {
+  value?: string,
+  defaultValue?: string,
+  map: (country: CurrencyData) => CurrencyOption
+};
 
 /**
  * Currency Props
@@ -32,20 +48,27 @@ export type CurrencyProps = ExtendsType<SelectProps, {
 export function useCurrency(config: CurrencyConfig) {
   const { value, defaultValue, map } = config;
   //generate options
-  const options = countries
-    .filter(country => country.currencyType === 'fiat')
-    .filter(country => country.currencyCode !== 'USD' || country.countryCode === 'US')
-    .map(map);
+  const options = currencies
+    .filter(currency => currency.type === 'fiat')
+    .map(currency => ({ 
+      ...currency, 
+      flag: countries.find(
+        country => (currency.code === 'USD' && country.iso3 === 'USA')
+          || (currency.code !== 'USD' && country.cur === currency.code)
+      )?.flag 
+    }))
+    .filter(currency => !!currency.flag)
+    .map(currency => map(currency as CurrencyData));
 
   const selected = typeof value === 'string' 
     ? options.filter(
-        option => option.value?.currencyCode === value
+        option => option.value === value
       )[0] as CurrencyOption
     : undefined;
 
   const selectedDefault = typeof defaultValue === 'string' 
     ? options.filter(
-        option => option.value?.currencyCode === defaultValue
+        option => option.value === defaultValue
       )[0] as CurrencyOption
     : undefined;
 
@@ -65,28 +88,24 @@ export default function Currency(props: CurrencyProps) {
   const { selected, selectedDefault, options } = useCurrency({
     value, 
     defaultValue, 
-    map: country => ({
+    map: currency => ({
       label: (
         <>
-          <img 
-            alt={`${country.countryName} Flag`} 
-            src={`https://flagcdn.com/w40/${country.countryCode.toLowerCase()}.png`} 
-            loading="lazy"
-          />
+          <span className="text-lg">{currency.flag}</span>
           <span className="frui-field-select-label">
-            {country.currencyName} ({country.currencyCode})
+            {currency.name} ({currency.code})
           </span>  
         </>
       ),
-      value: country,
-      keyword: (keyword: string) => country.countryCode.toLowerCase().indexOf(keyword) >= 0
-        || country.countryName.toLowerCase().indexOf(keyword) >= 0
-        || country.currencyCode.toLowerCase().indexOf(keyword) >= 0
+      value: currency.code,
+      keyword: (keyword: string) => currency.code.toLowerCase().indexOf(keyword) >= 0
+        || currency.name.toLowerCase().indexOf(keyword) >= 0
+        || currency.code.toLowerCase().indexOf(keyword) >= 0
     })
   });
 
   return (
-    <Select<CountryData>
+    <Select<CurrencyData>
       {...attributes} 
       placeholder={placeholder} 
       value={selected} 

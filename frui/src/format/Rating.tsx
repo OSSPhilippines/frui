@@ -1,3 +1,5 @@
+import type { JSX } from 'react';
+
 //types
 export type RatingProps = { 
   value: string|number,

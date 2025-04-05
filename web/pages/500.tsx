@@ -2,7 +2,7 @@
 import { useRouter } from 'next/router';
 import { useLanguage } from 'r22n';
 //components
-import Button from 'frui/dist/Button';
+import Button from 'frui/element/Button';
 import { LayoutHome } from 'modules/theme';
 
 export default function Page() {

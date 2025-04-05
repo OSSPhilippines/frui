@@ -5,8 +5,8 @@ import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
-import File from 'frui/dist/fields/File';
-import Table, { Tcol, Thead, Trow } from 'frui/dist/Table';
+import File from 'frui/field/File';
+import Table, { Tcol, Thead, Trow } from 'frui/element/Table';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
@@ -141,7 +141,7 @@ export default function Home() {
             </p>
             <div className="curved overflow-hidden">
               <div className="flex items-center justify-center p-3 bg-b1">
-                <File className="bg-white w-full" onUpload={(file, next) => {
+                <File className="bg-white w-full" onUpload={(_file, next) => {
                   //just a mock call
                   setTimeout(() => {
                     next('https://images.wsj.net/im-580612/8SR')

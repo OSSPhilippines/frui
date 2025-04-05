@@ -4,7 +4,7 @@ import type { Crumb } from 'modules/components/Crumbs';
 import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
-import JSON from 'frui/dist/formats/JSON';
+import JSON from 'frui/format/JSON';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';

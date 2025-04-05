@@ -2,13 +2,13 @@
 import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
-import Mask from 'frui/dist/fields/Mask';
-import Country from 'frui/dist/fields/Country';
-import Switch from 'frui/dist/fields/Switch';
-import Control from 'frui/dist/Control';
-import Button from 'frui/dist/Button';
-import Alert from 'frui/dist/Alert';
-import Table, { Thead, Trow, Tcol } from 'frui/dist/Table';
+import Mask from 'frui/field/Mask';
+import Country from 'frui/field/Country';
+import Switch from 'frui/field/Switch';
+import Control from 'frui/element/Control';
+import Button from 'frui/element/Button';
+import Alert from 'frui/element/Alert';
+import Table, { Thead, Trow, Tcol } from 'frui/element/Table';
 import { LayoutHome } from 'modules/theme';
 
 export default function Page() {

@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Translate } from 'r22n';
 import Crumbs from 'modules/components/Crumbs';
 import { LayoutPanel } from 'modules/theme';
-import Loader from 'frui/dist/Loader';
+import Loader from 'frui/element/Loader';
 import Code, { InlineCode as C } from 'modules/components/Code';
 
 export default function Page() {

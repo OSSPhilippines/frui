@@ -1,9 +1,9 @@
 //types
-import type { FieldsProps, FieldsetProps } from '../Fieldset';
+import type { FieldsProps, FieldsetProps } from '../element/Fieldset';
 //components
 import Input from './Input';
-import Button from '../Button';
-import make from '../Fieldset';
+import Button from '../element/Button';
+import make from '../element/Fieldset';
 
 /**
  * Textlist Type
@@ -54,6 +54,7 @@ export function useTextlists(config: TextlistConfig) {
  */
 export function TextlistFields(props: FieldsProps<TextlistType>) {
   const { 
+    name,
     config,
     values, 
     index, 
@@ -64,6 +65,8 @@ export function TextlistFields(props: FieldsProps<TextlistType>) {
   const placeholder = config?.placeholder as string | undefined;
   //handlers
   const { handlers } = useTextlists({ values, index, set });
+  //variables
+  const value = values ? values[index]: undefined;
 
   return (
     <div className="frui-field-textlist-row">
@@ -83,6 +86,12 @@ export function TextlistFields(props: FieldsProps<TextlistType>) {
       >
         &times;
       </Button>
+      {typeof value === 'string' && (<input 
+        type="hidden" 
+        name={name} 
+        value={String(value)
+        } 
+      />)}
     </div>
   );
 };

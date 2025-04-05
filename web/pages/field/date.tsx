@@ -5,9 +5,9 @@ import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
-import Alert from 'frui/dist/Alert';
-import DateField from 'frui/dist/fields/Date';
-import Table, { Tcol, Thead, Trow } from 'frui/dist/Table';
+import Alert from 'frui/element/Alert';
+import DateField from 'frui/field/Date';
+import Table, { Tcol, Thead, Trow } from 'frui/element/Table';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';

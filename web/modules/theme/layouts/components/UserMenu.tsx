@@ -2,7 +2,7 @@
 import type { MouseEventHandler } from 'react';
 //components
 import Link from 'next/link';
-import Badge from 'frui/dist/Badge';
+import Badge from 'frui/element/Badge';
 //hooks
 import { useEffect } from 'react';
 import { useLanguage } from 'r22n';

@@ -1,6 +1,6 @@
 //types
 import type { CSSProperties } from 'react';
-import type { HTMLButtonProps } from './types';
+import type { HTMLButtonProps } from '../types';
 
 /**
  * Button Props

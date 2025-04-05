@@ -5,8 +5,8 @@ import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
-import Textarea from 'frui/dist/fields/Textarea';
-import Table, { Tcol, Thead, Trow } from 'frui/dist/Table';
+import Textarea from 'frui/field/Textarea';
+import Table, { Tcol, Thead, Trow } from 'frui/element/Table';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';

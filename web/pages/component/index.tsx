@@ -6,11 +6,11 @@ import { useRouter } from 'next/router';
 //components
 import Crumbs from 'modules/components/Crumbs';
 import { LayoutPanel } from 'modules/theme';
-import Alert from 'frui/dist/Alert';
-import Badge from 'frui/dist/Badge';
-import Button from 'frui/dist/Button';
-import Loader from 'frui/dist/Loader';
-import Table, { Thead, Trow, Tcol } from 'frui/dist/Table';
+import Alert from 'frui/element/Alert';
+import Badge from 'frui/element/Badge';
+import Button from 'frui/element/Button';
+import Loader from 'frui/element/Loader';
+import Table, { Thead, Trow, Tcol } from 'frui/element/Table';
 
 export default function Home() {
   //hooks

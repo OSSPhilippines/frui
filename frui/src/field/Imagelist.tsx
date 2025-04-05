@@ -12,6 +12,7 @@ export default function Filelist(props: FilelistProps) {
   //separate component related props from field attributes
   const { 
     uploading = 'Uploading...',
+    name,
     defaultValue,
     value,
     error,
@@ -63,6 +64,7 @@ export default function Filelist(props: FilelistProps) {
           >
             &times;
           </div>
+          <input type="hidden" name={name} value={url} />
         </div>
       ))}
       {queued > 0 && (

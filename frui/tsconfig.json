@@ -1,23 +1,27 @@
 {
   "compilerOptions": {
-    "declaration": true,
+    "allowJs": true,
+    "lib": [ "es2022", "dom", "dom.iterable" ],
+    "module": "esnext",
+  
     "esModuleInterop": true,
-    "lib": ["es2021", "es7", "es6", "dom"],
-    "module": "commonjs",
-    "noUnusedLocals": true,
-    "outDir": "./dist/",
     "preserveConstEnums": true,
-    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+
+    "declaration": true,
     "removeComments": true,
     "sourceMap": false,
-    "strict": true,
-    "target": "es6",
-    "skipLibCheck": true,
-    "jsx": "react-jsx"
+    "target": "es2022",
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "outDir": "dist/",
+    "baseUrl": ".",
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
-  ],
-  "exclude": ["dist", "node_modules", "test"]
+  "include": [ "src/**/*.ts", "src/**/*.tsx" ],
+  "exclude": [ "dist", "node_modules", "tests" ]
 }

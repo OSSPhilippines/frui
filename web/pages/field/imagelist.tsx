@@ -5,8 +5,8 @@ import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
-import Imagelist from 'frui/dist/fields/Imagelist';
-import Table, { Tcol, Thead, Trow } from 'frui/dist/Table';
+import Imagelist from 'frui/field/Imagelist';
+import Table, { Tcol, Thead, Trow } from 'frui/element/Table';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
@@ -153,7 +153,7 @@ export default function Home() {
                 onUpload={(files, next) => {
                   //just a mock call
                   setTimeout(() => {
-                    next(files.map((file, i) => 'https://images.wsj.net/im-580612/8SR'))
+                    next(files.map((_file, _i) => 'https://images.wsj.net/im-580612/8SR'))
                   }, 1000)
                 }}
                 onUpdate={console.log}

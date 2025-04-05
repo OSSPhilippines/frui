@@ -1,11 +1,11 @@
 //types
 import type { TextareaProps } from './Textarea';
 //hooks
-import { useState } from 'react';
+import { type ReactNode, useState } from 'react';
 //components
 import MarkdownFrame from 'markdown-to-jsx';
 import Textarea from './Textarea';
-import Button from '../Button';
+import Button from '../element/Button';
 //using react-dom/server to render markdown... on the client side
 import { renderToStaticMarkup } from 'react-dom/server';
 
@@ -64,7 +64,7 @@ export default function Markdown(props: MarkdownProps) {
   ) as string;
 
   const markdown = renderToStaticMarkup(
-    <MarkdownFrame children={current} />
+    <MarkdownFrame children={current} /> as ReactNode
   );
 
   return (

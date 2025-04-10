@@ -4,8 +4,9 @@ const nextConfig = {
   output: 'export',
   distDir: '../docs',
   images: {
-    unoptimized: true
-  }
-}
+    unoptimized: true,
+  },
+  devIndicators: false,
+};
 
-export default nextConfig
+export default nextConfig;

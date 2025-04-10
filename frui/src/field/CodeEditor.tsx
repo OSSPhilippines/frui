@@ -1384,7 +1384,7 @@ async function getLanguageExtension(
 /**
  * Code Editor Component
  */
-export function CodeEditor(props: CodeEditorProps) {
+export default function CodeEditor(props: CodeEditorProps) {
   const {
     defaultValue,
     extensions = [],

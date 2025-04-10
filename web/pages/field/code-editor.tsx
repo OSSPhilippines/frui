@@ -9,7 +9,7 @@ import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
 import Code, { InlineCode as C } from 'modules/components/Code';
-import { CodeEditor } from 'frui/field/CodeEditor';
+import CodeEditor from 'frui/field/CodeEditor';
 import Table, { Tcol, Thead, Trow } from 'frui/element/Table';
 import Select from 'frui/field/Select';
 import { useState } from 'react';
@@ -31,7 +31,7 @@ export default function Home() {
   //variables
   const crumbs: Crumb[] = [
     { icon: 'rectangle-list', label: 'Fields', href: '/field' },
-    { label: 'CodeEditor' },
+    { label: 'Code Editor' },
   ];
 
   //state variable for language
@@ -84,7 +84,7 @@ export default function Home() {
   //render
   return (
     <LayoutPanel
-      uri='/field/editor'
+      uri='/field/code-editor'
       title='Code Editor'
       description='A code editor for FRUI, using CodeMirror v6.'
     >
@@ -117,7 +117,7 @@ export default function Home() {
               id='top'
               className='flex items-center uppercase font-bold text-xl'
             >
-              {_('Fieldset')}
+              {_('Code Editor')}
             </h1>
             <Code language='typescript' className='mt-2'>
               {`import CodeEditor from 'frui/fields/CodeEditor';`}
@@ -306,13 +306,13 @@ export default function Home() {
             </Table>
 
             <div className='flex items-center border-t border-b2 mt-8 pt-4'>
-              <Link className='text-t2' href='/field/datetime'>
+              <Link className='text-t2' href='/field/checkbox'>
                 <i className='fas fa-arrow-left mr-2'></i>
-                {_('Datetime')}
+                {_('Checkbox')}
               </Link>
               <div className='flex-grow'></div>
-              <Link className='text-t2' href='/field/file'>
-                {_('File')}
+              <Link className='text-t2' href='/field/country'>
+                {_('Country')}
                 <i className='fas fa-arrow-right ml-2'></i>
               </Link>
             </div>

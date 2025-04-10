@@ -15,7 +15,7 @@ import Select from 'frui/field/Select';
 import { useState } from 'react';
 import { languages } from '@codemirror/language-data';
 
-const codeBasic = `
+const multilineCode1 = `
 <CodeEditor
   value='console.log("Hello world!");'
   name={'code-editor'}
@@ -24,6 +24,13 @@ const codeBasic = `
   className='w-[50%] min-h-40 bg-white'
 />
 `.trim();
+const multilineCode2 = `
+import { cpp } from '@codemirror/lang-cpp';
+
+function CPPCodeEditor () {
+  return <CodeEditor extensions={[ cpp() ]} setup='basic'/>
+}
+`
 
 export default function Home() {
   //hooks
@@ -34,8 +41,9 @@ export default function Home() {
     { label: 'Code Editor' },
   ];
 
-  //state variable for language
+  //state variable for language and code for sample editor
   const [selectedLanguage, setSelectedLanguage] = useState<string>('');
+  const [code, setCode] = useState<string>('');
 
   const props = [
     [_('className'), _('string'), _('No'), _('Standard HTML class names')],
@@ -165,7 +173,7 @@ export default function Home() {
                   </form>
                 </div>
               </div>
-              <Code language='typescript'>{codeBasic}</Code>
+              <Code language='typescript'>{multilineCode1}</Code>
             </div>
 
             <h2 id='languages' className='uppercase font-bold text-lg mt-8'>
@@ -196,6 +204,8 @@ export default function Home() {
                     setup={'basic'}
                     language={selectedLanguage}
                     className='w-[50%] min-h-40 bg-white'
+                    onUpdate={(value) => setCode(value)}
+                    value={code}
                   />
                 </div>
               </div>
@@ -213,9 +223,7 @@ export default function Home() {
                 via the <C l value='extensions' /> prop.
               </Translate>
             </p>
-            <Code language='typescript'>
-              {`import { cpp } from '@codemirror/lang-cpp';\n\nfunction CPPCodeEditor () {\n\treturn <CodeEditor extensions={[ cpp() ]} setup='basic'/>\n}`}
-            </Code>
+            <Code language='typescript'>{multilineCode2}</Code>
             <p className='py-4'>
               <Translate>
                 Other languages might not have language support provided by

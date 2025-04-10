@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 //fields
 import Crumbs from 'modules/components/Crumbs';
 import { LayoutPanel } from 'modules/theme';
+import Code from 'frui/format/Code';
 import Color from 'frui/format/Color';
 import Country from 'frui/format/Country';
 import Currency from 'frui/format/Currency';
@@ -58,6 +59,19 @@ export default function Home() {
             following formats have been unlocked and are free to use.
           </p>
           <div className="flex flex-wrap mt-4">
+            <div 
+              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => router.push('/format/code')} 
+            >
+              <div className="m-2 border border-b2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
+                  <Code language='javascript'>{`console.log("Hello, World!");`}</Code>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Code')}
+                </h2>
+              </div>
+            </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
               onClick={() => router.push('/format/color')} 
@@ -380,36 +394,6 @@ export default function Home() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Yesno')}
-                </h2>
-              </div>
-            </div>
-          </div>
-          <h2 className="px-3 flex items-center uppercase font-bold text-xl mt-4">
-            <i className="fas fa-lock mr-2" />
-            {_('Locked')}
-          </h2>
-          <p className="px-3 pt-3">
-            The following formats have are locked until enough there are 
-            enough users and demand for such formats.
-          </p>
-          <div className="flex flex-wrap mt-4">
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 1,500 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Code')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 2,500 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('JSON')}
                 </h2>
               </div>
             </div>

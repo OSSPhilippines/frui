@@ -210,7 +210,7 @@ export default function Home() {
                 {_('Formats')}
               </Link>
               <div className='flex-grow'></div>
-              <Link className='text-t2' href='/format/currency'>
+              <Link className='text-t2' href='/format/color'>
                 {_('Color')}
                 <i className='fas fa-arrow-right ml-2'></i>
               </Link>

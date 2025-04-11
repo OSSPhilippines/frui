@@ -144,9 +144,9 @@ export default function Home() {
             </p>
 
             <div className="flex items-center border-t border-b2 mt-8 pt-4">
-              <Link className="text-t2" href="/format">
+              <Link className="text-t2" href="/format/code">
                 <i className="fas fa-arrow-left mr-2"></i>
-                {_('Formats')}
+                {_('Code')}
               </Link>
               <div className="flex-grow"></div>
               <Link className="text-t2" href="/format/country">

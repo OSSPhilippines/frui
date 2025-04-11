@@ -8,6 +8,7 @@ import Crumbs from 'modules/components/Crumbs';
 import { LayoutPanel } from 'modules/theme';
 import Autocomplete from 'frui/field/Autocomplete';
 import Checkbox from 'frui/field/Checkbox';
+import CodeEditor from 'frui/field/CodeEditor';
 import Country from 'frui/field/Country';
 import Currency from 'frui/field/Currency';
 import Date from 'frui/field/Date';
@@ -82,6 +83,19 @@ export default function Home() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Checkbox')}
+                </h2>
+              </div>
+            </div>
+            <div 
+              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => router.push('/field/code-editor')} 
+            >
+              <div className="m-2 border border-b2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
+                  <CodeEditor setup='basic' className="w-[60%] h-[50%] bg-white" value='console.log("Hello, World!");' language='ts'/>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Code Editor')}
                 </h2>
               </div>
             </div>
@@ -502,16 +516,6 @@ export default function Home() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Knob')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 25,000 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Code Editor')}
                 </h2>
               </div>
             </div>

@@ -67,6 +67,9 @@ const MainMenu: React.FC<{
         <Link href="/field/checkbox" className={`${pathname.indexOf('/field/checkbox') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Checkbox')}</span>
         </Link>
+        <Link href="/field/code-editor" className={`${pathname.indexOf('/field/code-editor') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Code Editor')}</span>
+        </Link>
         <Link href="/field/country" className={`${pathname.indexOf('/field/country') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Country')}</span>
         </Link>
@@ -142,6 +145,9 @@ const MainMenu: React.FC<{
         <span className="inline-block pl-2">{_('Formats')}</span>
       </Link>
       <div className={pathname.indexOf('/format') === 0 ? 'block' : 'hidden'}>
+        <Link href="/format/code" className={`${pathname.indexOf('/format/code') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Code')}</span>
+        </Link>
         <Link href="/format/color" className={`${pathname.indexOf('/format/color') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Color')}</span>
         </Link>

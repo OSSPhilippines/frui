@@ -57,7 +57,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "codemirror": "^6.0.1",
+    "codemirror": "6.0.1",
     "inputmask": "5.0.9",
     "markdown-to-jsx": "7.7.4",
     "moment": "2.30.1"
@@ -74,7 +74,7 @@
     "typescript": "5.7.2"
   },
   "peerDependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
   }
 }

@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@codemirror/language-data": "6.5.1",
-    "codemirror": "6.0.1",
     "cookies-next": "4.1.1",
     "frui": "0.1.4",
     "next": "15.2.5",

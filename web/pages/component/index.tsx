@@ -7,10 +7,12 @@ import { useRouter } from 'next/router';
 import Crumbs from 'modules/components/Crumbs';
 import { LayoutPanel } from 'modules/theme';
 import Alert from 'frui/element/Alert';
+import { Accordion, AccordionSummary, AccordionDetails } from 'frui/element/Accordion';
 import Badge from 'frui/element/Badge';
 import Button from 'frui/form/Button';
 import Loader from 'frui/element/Loader';
 import Table, { Thead, Trow, Tcol } from 'frui/element/Table';
+const ExpandMoreIconPreview = () => <span style={{ fontSize: '0.8em' }}>▼</span>;
 
 export default function Home() {
   //hooks
@@ -40,6 +42,28 @@ export default function Home() {
             following components have been unlocked and are free to use.
           </p>
           <div className="flex flex-wrap mt-4">
+          <div
+              className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => router.push('/component/accordion')}
+            >
+              <div className="m-2 border border-b2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[100px] w-full bg-b1 px-3">
+                  <div className="w-full">
+                    <Accordion id="preview-accordion">
+                      <AccordionSummary expandIcon={<ExpandMoreIconPreview />}>
+                        {_("Accordion")}
+                      </AccordionSummary>
+                       <AccordionDetails>
+                         {_("Content...")}
+                       </AccordionDetails>
+                    </Accordion>
+                  </div>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Accordion')}
+                </h2>
+              </div>
+            </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
               onClick={() => router.push('/component/alert')} 
@@ -183,16 +207,6 @@ export default function Home() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Tabs')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[100px] w-full bg-b1 px-3">
-                  Unlocks at 10,000 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Accordion')}
                 </h2>
               </div>
             </div>

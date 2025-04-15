@@ -29,7 +29,7 @@ export default function ProgressBar(props: ProgressBarProps) {
 
   if (className) {
     progressClasses.push(className);
-    barClasses.push(className); // Apply className to the bar as well for height modifiers etc.
+    barClasses.push(className); 
   }
 
   const barStyle: CSSProperties = {

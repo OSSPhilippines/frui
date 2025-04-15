@@ -28,3 +28,4 @@ export * from './Textarea';
 export * from './Textlist';
 export * from './Time';
 //export * from './WYSIWYG';
+export * from './MultiSelect';

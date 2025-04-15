@@ -27,4 +27,4 @@ export * from './Taglist';
 export * from './Textarea';
 export * from './Textlist';
 export * from './Time';
-//export * from './WYSIWYG';
+export * from './WYSIWYG';

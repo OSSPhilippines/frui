@@ -161,16 +161,13 @@ export default function Home() {
             <div className='curved'>
               <div className='flex items-center justify-center p-3 bg-b1'>
                 <div className='w-full'>
-                  <form>
-                    <CodeEditor
-                      value='console.log("Hello world!");'
-                      name={'code-editor'}
-                      setup={'basic'}
-                      language='javascript'
-                      className='w-[50%] min-h-40 bg-white'
-                    />
-                    <input type='submit' value='Submit' />
-                  </form>
+                  <CodeEditor
+                    value='console.log("Hello world!");'
+                    name={'code-editor'}
+                    setup={'basic'}
+                    language='javascript'
+                    className='w-[50%] min-h-40 bg-white'
+                  />
                 </div>
               </div>
               <Code language='typescript'>{multilineCode1}</Code>

@@ -109,6 +109,9 @@ const MainMenu: React.FC<{
         <Link href="/field/metadata" className={`${pathname.indexOf('/field/metadata') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Metadata')}</span>
         </Link>
+        <Link href="/field/multiselect" className={`${pathname.indexOf('/field/multiselect') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Multiselect')}</span>
+        </Link>
         <Link href="/field/number" className={`${pathname.indexOf('/field/number') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Number')}</span>
         </Link>

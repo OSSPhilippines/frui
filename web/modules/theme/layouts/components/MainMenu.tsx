@@ -52,8 +52,14 @@ const MainMenu: React.FC<{
         <Link href="/component/modal" className={`${pathname.indexOf('/component/modal') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Modal')}</span>
         </Link>
+        <Link href="/component/progressbar" className={`${pathname.indexOf('/component/progressbar') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Progress Bar')}</span>
+        </Link>
         <Link href="/component/table" className={`${pathname.indexOf('/component/table') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Table')}</span>
+        </Link>
+        <Link href="/component/toast" className={`${pathname.indexOf('/component/toast') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Toast')}</span>
         </Link>
       </div>
       <Link href="/field" className={`${pathname.indexOf('/field') === 0 ? 'text-white' : ''} block px-3 py-2`}>
@@ -117,6 +123,9 @@ const MainMenu: React.FC<{
         </Link>
         <Link href="/field/radio" className={`${pathname.indexOf('/field/radio') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Radio')}</span>
+        </Link>
+        <Link href="/field/radio" className={`${pathname.indexOf('/field/rangeslider') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Range Slider')}</span>
         </Link>
         <Link href="/field/select" className={`${pathname.indexOf('/field/select') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Select')}</span>

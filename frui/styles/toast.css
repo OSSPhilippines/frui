@@ -1,0 +1,64 @@
+.frui-toast {
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+.toast-stack-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1050;
+  
+    display: flex;                  
+    flex-direction: column-reverse;
+    gap: 10px;                      
+  
+    align-items: flex-end;   
+    width: fit-content;        
+    max-width: 400px;         
+  }
+  
+  .frui-toast-info {
+    background-color: #e7f5ff;
+    color: #0c5460;
+    border-color: #b8daff;
+  }
+  
+  .frui-toast-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #ffeeba;
+  }
+  
+  .frui-toast-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+  }
+  
+  .frui-toast-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+  }
+  
+  .frui-toast-muted {
+    background-color: #e9ecef;
+    color: #6c757d;
+    border-color: #dee2e6;
+  }
+  
+  .frui-toast-close-button {
+    margin-left: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1em; 
+    line-height: 1;
+  }

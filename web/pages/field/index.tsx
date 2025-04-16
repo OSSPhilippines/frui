@@ -8,6 +8,7 @@ import Crumbs from 'modules/components/Crumbs';
 import { LayoutPanel } from 'modules/theme';
 import Autocomplete from 'frui/field/Autocomplete';
 import Checkbox from 'frui/field/Checkbox';
+import Checklist, { ChecklistItem } from 'frui/field/Checklist';
 import CodeEditor from 'frui/field/CodeEditor';
 import Country from 'frui/field/Country';
 import Currency from 'frui/field/Currency';
@@ -83,6 +84,23 @@ export default function Home() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Checkbox')}
+                </h2>
+              </div>
+            </div>
+            <div 
+              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => router.push('/field/checklist')} 
+            >
+              <div className="m-2 border border-b2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
+                <Checklist name="Options">
+                  <ChecklistItem label="Option 1" value="option1" />
+                  <ChecklistItem label="Option 2" value="option2" />
+                  <ChecklistItem label="Option 3" value="option3" />
+                </Checklist>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Checklist')}
                 </h2>
               </div>
             </div>
@@ -456,16 +474,6 @@ export default function Home() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('WYSIWYG')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 7,000 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Checklist')}
                 </h2>
               </div>
             </div>

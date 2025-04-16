@@ -7,3 +7,4 @@ export * from './form/Fieldset';
 export * from './element/Loader';
 export * from './element/Modal';
 export *  from './element/Table';
+export * from './element/Tabs';

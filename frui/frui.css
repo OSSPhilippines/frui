@@ -17,6 +17,7 @@
 
 @import url('./styles/fields/autocomplete.css');
 @import url('./styles/fields/date.css');
+@import url('./styles/fields/colorpicker.css');
 @import url('./styles/fields/datetime.css');
 @import url('./styles/fields/file.css');
 @import url('./styles/fields/filelist.css');
@@ -27,6 +28,7 @@
 @import url('./styles/fields/metadata.css');
 @import url('./styles/fields/option.css');
 @import url('./styles/fields/password.css');
+@import url('./styles/fields/rating.css');
 @import url('./styles/fields/select.css');
 @import url('./styles/fields/switch.css');
 @import url('./styles/fields/taglist.css');

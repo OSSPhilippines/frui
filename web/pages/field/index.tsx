@@ -1,6 +1,7 @@
 //types
 import type { Crumb } from 'modules/components/Crumbs';
 //hooks
+import { useState } from 'react';
 import { useLanguage } from 'r22n';
 import { useRouter } from 'next/router';
 //fields
@@ -9,6 +10,7 @@ import { LayoutPanel } from 'modules/theme';
 import Autocomplete from 'frui/field/Autocomplete';
 import Checkbox from 'frui/field/Checkbox';
 import CodeEditor from 'frui/field/CodeEditor';
+import ColorPicker from 'frui/field/ColorPicker';
 import Country from 'frui/field/Country';
 import Currency from 'frui/field/Currency';
 import Date from 'frui/field/Date';
@@ -24,6 +26,7 @@ import Metadata from 'frui/field/Metadata';
 import Number from 'frui/field/Number';
 import Password from 'frui/field/Password';
 import Radio from 'frui/field/Radio';
+import Rating from 'frui/field/Rating';
 import Select from 'frui/field/Select';
 import Slug from 'frui/field/Slug';
 import Switch from 'frui/field/Switch';
@@ -40,6 +43,7 @@ export default function Home() {
   const crumbs: Crumb[] = [
     { icon: 'rectangle-list', label: 'Fields' }
   ];
+  const [previewColor, setPreviewColor] = useState('rgba(74, 144, 226, 0.75)');
   //render
   return (
     <LayoutPanel 
@@ -96,6 +100,40 @@ export default function Home() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Code Editor')}
+                </h2>
+              </div>
+            </div>
+            <div className="m-2 border border-b2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
+                  <Checkbox checked label="Enable" className="text-white" />
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Checkbox')}
+                </h2>
+              </div>
+            </div>
+            <div
+              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={(e) => {
+                  if ((e.target as HTMLElement).closest('.frui-colorpicker-popover')) {
+                      return;
+                  }
+                  router.push('/field/colorpicker');
+              }}
+            >
+              <div className="m-2 border border-b2 rounded overflow-hidden">
+                <div className="flex flex-col items-center justify-center h-[130px] w-full bg-b1 px-3">
+                  <ColorPicker
+                    value={previewColor}
+                    onChange={setPreviewColor}
+                    showInputs={false}
+                    showAlpha={true}
+                    md
+                  />
+                  <span className="text-xs mt-1 opacity-75">{previewColor}</span>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Color Picker')}
                 </h2>
               </div>
             </div>
@@ -316,6 +354,19 @@ export default function Home() {
                 </h2>
               </div>
             </div>
+            <div
+              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => router.push('/field/rating')}
+            >
+              <div className="m-2 border border-b2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
+                  <Rating name="preview-rating" defaultValue={3} readOnly />
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Rating')}
+                </h2>
+              </div>
+            </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
               onClick={() => router.push('/field/select')} 
@@ -442,16 +493,6 @@ export default function Home() {
             <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 3,000 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Rating')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
                   Unlocks at 5,000 downloads
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
@@ -520,7 +561,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
       </main>
     </LayoutPanel>
   );

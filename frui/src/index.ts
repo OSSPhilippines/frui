@@ -1,6 +1,7 @@
 export * as FieldType from './field';
 export * as FormatType from './format';
 export * from './element/Alert';
+export * from './element/Accordion';
 export * from './element/Badge';
 export * from './form/Button';
 export * from './form/Fieldset';

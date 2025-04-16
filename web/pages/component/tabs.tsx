@@ -17,119 +17,132 @@ import type { TabsProps } from 'frui/element/Tabs';
 const Tabs = TabsComponent as React.FC<TabsProps>;
 
 const codeBasicExample = `
-const tabData = [
-  { label: 'Tab 1' },
-  { label: 'Tab 2' },
-  { label: 'Tab 3' },
-];
-const panelData = [
-  <p>Content 1</p>,
-  <p>Content 2</p>,
-  <p>Content 3</p>,
-];
-<Tabs tabs={tabData} panels={panelData} />
+<Tabs
+  tabs={[
+    { label: 'Tab 1' },
+    { label: 'Tab 2' },
+    { label: 'Tab 3' },
+  ]}
+  panels={[
+    <div key="1">{_('Content for Tab 1')}</div>,
+    <div key="2">{_('Content for Tab 2')}</div>,
+    <div key="3">{_('Content for Tab 3')}</div>,
+  ]}
+/>
 `.trim();
 
 const codeScrollableExample = `
-const tabData = [
-  { label: 'Tab 1' },
-  { label: 'Tab 2' },
-  { label: 'Tab 3' },
-  { label: 'Tab 4' },
-  { label: 'Tab 5' },
-];
-const panelData = [
-  <p>Content 1</p>,
-  <p>Content 2</p>,
-  <p>Content 3</p>,
-  <p>Content 4</p>,
-  <p>Content 5</p>,
-];
-<Tabs tabs={tabData} panels={panelData} scrollable={true} />
+<Tabs
+  tabs={[
+    { label: 'Tab 1' },
+    { label: 'Tab 2' },
+    { label: 'Tab 3' },
+    { label: 'Tab 4' },
+    { label: 'Tab 5' },
+  ]}
+  panels={[
+    <p key="1">{_('Content 1')}</p>,
+    <p key="2">{_('Content 2')}</p>,
+    <p key="3">{_('Content 3')}</p>,
+    <p key="4">{_('Content 4')}</p>,
+    <p key="5">{_('Content 5')}</p>,
+  ]}
+  scrollable
+/>
 `.trim();
 
 const codeDisabledExample = `
-const tabData = [
-  { label: 'Tab 1' },
-  { label: 'Tab 2', disabled: true },
-  { label: 'Tab 3' },
-];
-const panelData = [
-  <p>Content 1</p>,
-  <p>Content 2 (disabled)</p>,
-  <p>Content 3</p>,
-];
-<Tabs tabs={tabData} panels={panelData} />
+<Tabs
+  tabs={[
+    { label: 'Tab 1' },
+    { label: 'Tab 2', disabled: true },
+    { label: 'Tab 3' },
+  ]}
+  panels={[
+    <p key="1">{_('Content 1')}</p>,
+    <p key="2">{_('Content 2 (disabled)')}</p>,
+    <p key="3">{_('Content 3')}</p>,
+  ]}
+/>
 `.trim();
 
 const codeIconExample = `
-const tabData = [
-  { label: 'Home', icon: <i className="fas fa-home"></i> },
-  { label: 'User', icon: <i className="fas fa-user"></i> },
-  { label: 'Settings', icon: <i className="fas fa-cog"></i> },
-];
-const panelData = [
-  <p>Home Content</p>,
-  <p>User Content</p>,
-  <p>Settings Content</p>,
-];
-<Tabs tabs={tabData} panels={panelData} />
+<Tabs
+  tabs={[
+    { label: 'Home', icon: <i className="fas fa-home"></i> },
+    { label: 'User', icon: <i className="fas fa-user"></i> },
+    { label: 'Settings', icon: <i className="fas fa-cog"></i> },
+  ]}
+  panels={[
+    <p key="1">{_('Home Content')}</p>,
+    <p key="2">{_('User Content')}</p>,
+    <p key="3">{_('Settings Content')}</p>,
+  ]}
+/>
 `.trim();
 
 const codeVerticalExample = `
-const tabData = [
-  { label: 'Tab 1' },
-  { label: 'Tab 2' },
-  { label: 'Tab 3' },
-];
-const panelData = [
-  <p>Content 1</p>,
-  <p>Content 2</p>,
-  <p>Content 3</p>,
-];
-<Tabs tabs={tabData} panels={panelData} vertical={true} />
+<Tabs
+  tabs={[
+    { label: 'Tab 1' },
+    { label: 'Tab 2' },
+    { label: 'Tab 3' },
+  ]}
+  panels={[
+    <p key="1">{_('Content 1')}</p>,
+    <p key="2">{_('Content 2')}</p>,
+    <p key="3">{_('Content 3')}</p>,
+  ]}
+  vertical
+/>
 `.trim();
 
 const codeCenteredExample = `
-const tabData = [
-  { label: 'Tab 1' },
-  { label: 'Tab 2' },
-  { label: 'Tab 3' },
-];
-const panelData = [
-  <p>Content 1</p>,
-  <p>Content 2</p>,
-  <p>Content 3</p>,
-];
-<Tabs tabs={tabData} panels={panelData} centered={true} />
+<Tabs
+  tabs={[
+    { label: 'Tab 1' },
+    { label: 'Tab 2' },
+    { label: 'Tab 3' },
+  ]}
+  panels={[
+    <p key="1">{_('Content 1')}</p>,
+    <p key="2">{_('Content 2')}</p>,
+    <p key="3">{_('Content 3')}</p>,
+  ]}
+  centered
+/>
 `.trim();
 
 const codeFullWidthExample = `
-const tabData = [
-  { label: 'Tab 1' },
-  { label: 'Tab 2' },
-  { label: 'Tab 3' },
-];
-const panelData = [
-  <p>Content 1</p>,
-  <p>Content 2</p>,
-  <p>Content 3</p>,
-];
-<Tabs tabs={tabData} panels={panelData} fullWidth={true} />
+<Tabs
+  tabs={[
+    { label: 'Tab 1' },
+    { label: 'Tab 2' },
+    { label: 'Tab 3' },
+  ]}
+  panels={[
+    <p key="1">{_('Content 1')}</p>,
+    <p key="2">{_('Content 2')}</p>,
+    <p key="3">{_('Content 3')}</p>,
+  ]}
+  fullWidth
+/>
 `.trim();
 
 const codeWrapExample = `
-const tabData = [
-  { label: 'Tab with a Very Long Label That Needs Wrapping' },
-  { label: 'Tab 2' },
-  { label: 'Tab 3' },
-];
-const panelData = [
-  <p>Content 1</p>,
-  <p>Content 2</p>,
-  <p>Content 3</p>,
-];
-<Tabs tabs={tabData} panels={panelData} wrap={true} />
+<Tabs
+  tabs={[
+    { label: 'Tab with a Very Long Label That Needs Wrapping' },
+    { label: 'Tab 2' },
+    { label: 'Tab 3' },
+  ]}
+  panels={[
+    <p key="1">{_('Content 1')}</p>,
+    <p key="2">{_('Content 2')}</p>,
+    <p key="3">{_('Content 3')}</p>,
+  ]}
+  wrap
+/>
 `.trim();
 
 export default function Page() {

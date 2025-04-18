@@ -321,8 +321,8 @@ export default function Home() {
                 {_('Autocomplete')}
               </Link>
               <div className="flex-grow"></div>
-              <Link className="text-t2" href="/field/code-editor">
-                {_('Code Editor')}
+              <Link className="text-t2" href="/field/checklist">
+                {_('Checklist')}
                 <i className="fas fa-arrow-right ml-2"></i>
               </Link>
             </div>

@@ -1,14 +1,11 @@
-import {
-  useState,
-  ReactNode,
-  Children,
-  isValidElement,
-  cloneElement,
-  useEffect,
-} from 'react';
-import type { CSSProperties, ChangeEvent } from 'react';
+// types
+import type { ChangeEvent, CSSProperties, ReactNode } from 'react';
 import type { HTMLInputProps } from '../types';
 import type { InputConfig } from './Input';
+// hooks
+import { useState, useEffect } from 'react';
+// utils
+import { Children, isValidElement, cloneElement } from 'react';
 
 export type ChecklistProps = {
   children: ReactNode;

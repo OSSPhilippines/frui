@@ -1,4 +1,3 @@
-//types
 import type { CSSProperties, ReactNode } from 'react';
 
 /**
@@ -47,12 +46,12 @@ const Item: React.FC<BreadcrumbItem & { isLast: boolean; separator?: ReactNode; 
 }) => {
   const content = href ? (
     <a href={href} className={`frui-breadcrumb-link ${sizeClass}`}>
-      {icon && <i className={`fas fa-fw fa-${icon} mr-1`} />}
+      {icon && <i className={`fas fa-fw fa-${icon} frui-icon-margin`} />}
       {label}
     </a>
   ) : (
     <span className={`frui-breadcrumb-label ${sizeClass}`}>
-      {icon && <i className={`fas fa-fw fa-${icon} mr-1`} />}
+      {icon && <i className={`fas fa-fw fa-${icon} frui-icon-margin`} />}
       {label}
     </span>
   );
@@ -60,7 +59,7 @@ const Item: React.FC<BreadcrumbItem & { isLast: boolean; separator?: ReactNode; 
   return (
     <>
       {content}
-      {!isLast && <span className={`frui-breadcrumb-separator mx-2 ${sizeClass}`}>{separator}</span>}
+      {!isLast && <span className={`frui-breadcrumb-separator frui-separator-margin ${sizeClass}`}>{separator}</span>}
     </>
   );
 };
@@ -94,7 +93,7 @@ export default function Breadcrumb(props: BreadcrumbProps) {
     classes: string[],
     styles: Record<string, string>
   } = {
-    classes: ['frui-breadcrumb', 'flex items-center'],
+    classes: ['frui-breadcrumb', 'frui-flex-center'],
     styles: {}
   };
 

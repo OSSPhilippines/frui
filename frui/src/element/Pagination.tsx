@@ -175,7 +175,7 @@ export default function Pagination(props: PaginationProps) {
     const activeStyle = isCustomColor && currentPage === content ? { 
       backgroundColor: color, 
       borderColor: color, 
-      color: '#ffffff' 
+      color: '#FFFFFF' 
     } : {};
 
     return (

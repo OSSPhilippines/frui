@@ -1,21 +1,22 @@
+/* Base styles */
 .frui-pagination {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 8px;
   white-space: nowrap;
 }
 
 .frui-pagination-btn,
 .frui-pagination-span {
-  display: inline-flex;
   align-items: center;
+  background-color: var(--bg, #ffffff);
+  border: 1px solid var(--border, #cccccc);
+  color: var(--fg-default, #222222);
+  display: inline-flex;
+  height: 32px;
   justify-content: center;
   min-width: 32px;
-  height: 32px;
   padding: 0 8px;
-  border: 1px solid var(--border, #cccccc);
-  background-color: var(--bg, #ffffff);
-  color: var(--fg-default, #222222);
   text-decoration: none;
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
 }
@@ -41,8 +42,8 @@
 
 .frui-pagination-span.active {
   background-color: var(--primary, #1474FC);
-  color: var(--white, #ffffff);
   border-color: var(--primary, #1474FC);
+  color: var(--white, #ffffff);
   font-weight: bold;
 }
 
@@ -102,85 +103,85 @@
 
 .frui-pagination-btn:not(.control):hover {
   background-color: var(--bg-hover, #f5f5f5);
-  color: var(--fg-primary, #007BFF);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: var(--fg-primary, #007BFF);
   transform: translateY(-1px);
 }
 
 .frui-pagination-btn[disabled] {
-  opacity: 0.5;
   cursor: not-allowed;
+  opacity: 0.5;
   transform: none;
 }
 
 .frui-pagination.frui-text-xs .frui-pagination-btn,
 .frui-pagination.frui-text-xs .frui-pagination-span {
-  min-width: 24px;
-  height: 24px;
   font-size: 12px;
+  height: 24px;
+  min-width: 24px;
 }
 
 .frui-pagination.frui-text-sm .frui-pagination-btn,
 .frui-pagination.frui-text-sm .frui-pagination-span {
-  min-width: 28px;
-  height: 28px;
   font-size: 14px;
+  height: 28px;
+  min-width: 28px;
 }
 
 .frui-pagination.frui-text-md .frui-pagination-btn,
 .frui-pagination.frui-text-md .frui-pagination-span {
-  min-width: 32px;
-  height: 32px;
   font-size: 16px;
+  height: 32px;
+  min-width: 32px;
 }
 
 .frui-pagination.frui-text-lg .frui-pagination-btn,
 .frui-pagination.frui-text-lg .frui-pagination-span {
-  min-width: 36px;
-  height: 36px;
   font-size: 18px;
+  height: 36px;
+  min-width: 36px;
 }
 
 .frui-pagination.frui-text-xl .frui-pagination-btn,
 .frui-pagination.frui-text-xl .frui-pagination-span {
-  min-width: 40px;
-  height: 40px;
   font-size: 20px;
+  height: 40px;
+  min-width: 40px;
 }
 
 .frui-pagination.frui-text-2xl .frui-pagination-btn,
 .frui-pagination.frui-text-2xl .frui-pagination-span {
-  min-width: 48px;
-  height: 48px;
   font-size: 24px;
+  height: 48px;
+  min-width: 48px;
 }
 
 .frui-pagination.frui-text-3xl .frui-pagination-btn,
 .frui-pagination.frui-text-3xl .frui-pagination-span {
-  min-width: 56px;
-  height: 56px;
   font-size: 30px;
+  height: 56px;
+  min-width: 56px;
 }
 
 .frui-pagination.frui-text-4xl .frui-pagination-btn,
 .frui-pagination.frui-text-4xl .frui-pagination-span {
-  min-width: 64px;
-  height: 64px;
   font-size: 36px;
+  height: 64px;
+  min-width: 64px;
 }
 
 .frui-pagination.frui-text-5xl .frui-pagination-btn,
 .frui-pagination.frui-text-5xl .frui-pagination-span {
-  min-width: 80px;
-  height: 80px;
   font-size: 48px;
+  height: 80px;
+  min-width: 80px;
 }
 
 .frui-pagination.square .frui-pagination-btn,
 .frui-pagination.square .frui-pagination-span {
-  width: var(--square-size);
   height: var(--square-size);
   min-width: unset;
+  width: var(--square-size);
 }
 
 .frui-pagination.radius-0 .frui-pagination-btn,

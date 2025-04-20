@@ -1,5 +1,5 @@
 //types
-import type { HTMLPreProps } from '../types';
+import type { HTMLPreProps } from '../types.js';
 
 /**
  * JSON Props

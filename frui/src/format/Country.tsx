@@ -1,7 +1,7 @@
 //types
 import type { CSSProperties } from 'react';
 //helpers
-import countries from '../data/countries';
+import countries from '../data/countries.js';
 
 /**
  * Country Props

@@ -1,7 +1,7 @@
 //types
-import type { InputProps } from './Input';
+import type { InputProps } from './Input.js';
 //components
-import Input from './Input';
+import Input from './Input.js';
 import 'inputmask';
 
 /**

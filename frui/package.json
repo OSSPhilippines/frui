@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "frui",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "license": "MIT",
   "description": "A collection of vanilla react components written in typescript.",
   "author": "Chris <chris@incept.asia>",
@@ -24,17 +24,33 @@
       "require": "./cjs/data/*.js",
       "import": "./esm/data/*.js"
     },
+    "./element": {
+      "require": "./cjs/element/index.js",
+      "import": "./esm/element/index.js"
+    },
     "./element/*": {
       "require": "./cjs/element/*.js",
       "import": "./esm/element/*.js"
+    },
+    "./field": {
+      "require": "./cjs/field/index.js",
+      "import": "./esm/field/index.js"
     },
     "./field/*": {
       "require": "./cjs/field/*.js",
       "import": "./esm/field/*.js"
     },
+    "./form": {
+      "require": "./cjs/form/index.js",
+      "import": "./esm/form/index.js"
+    },
     "./form/*": {
       "require": "./cjs/form/*.js",
       "import": "./esm/form/*.js"
+    },
+    "./format": {
+      "require": "./cjs/format/index.js",
+      "import": "./esm/format/index.js"
     },
     "./format/*": {
       "require": "./cjs/format/*.js",
@@ -47,9 +63,13 @@
       ".": [ "./cjs/index.d.ts" ],
       "types": [ "./cjs/types.d.ts" ],
       "data/*": [ "./cjs/data/*.d.ts" ],
+      "element": [ "./cjs/element/index.d.ts" ],
       "element/*": [ "./cjs/element/*.d.ts" ],
+      "field": [ "./cjs/field/index.d.ts" ],
       "field/*": [ "./cjs/field/*.d.ts" ],
+      "format": [ "./cjs/format/index.d.ts" ],
       "format/*": [ "./cjs/format/*.d.ts" ],
+      "form": [ "./cjs/form/index.d.ts" ],
       "form/*": [ "./cjs/form/*.d.ts" ]
     }
   },

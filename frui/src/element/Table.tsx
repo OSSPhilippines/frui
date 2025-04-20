@@ -1,6 +1,6 @@
 //types
 import type { JSX, ReactNode, CSSProperties } from 'react';
-import type { AnyReactChildren } from '../types';
+import type { AnyReactChildren } from '../types.js';
 //react
 import React from 'react';
 

@@ -3,7 +3,7 @@ import type { ReactNode, KeyboardEvent, CSSProperties } from 'react';
 //hooks
 import { useState, useEffect } from 'react';
 //components
-import Input from './Input';
+import Input from './Input.js';
 
 /**
  * Select Option

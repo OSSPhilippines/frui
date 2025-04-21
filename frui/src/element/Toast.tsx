@@ -12,7 +12,7 @@ export type ToastProps = {
 };
 
 const defaultToastStyle: CSSProperties = {
-    position: 'relative', 
+    position: 'relative',
     padding: '10px 15px',
     borderRadius: '5px',
     boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
@@ -24,11 +24,11 @@ const defaultToastStyle: CSSProperties = {
   };
 
 const typeStyles: Record<NonNullable<ToastProps['type']>, CSSProperties> = {
-  info: { backgroundColor: '#e7f5ff', color: '#0c5460', borderColor: '#b8daff' },
-  warning: { backgroundColor: '#fff3cd', color: '#856404', borderColor: '#ffeeba' },
-  success: { backgroundColor: '#d4edda', color: '#155724', borderColor: '#c3e6cb' },
-  error: { backgroundColor: '#f8d7da', color: '#721c24', borderColor: '#f5c6cb' },
-  muted: { backgroundColor: '#e9ecef', color: '#6c757d', borderColor: '#dee2e6' },
+  info: { backgroundColor: '#E7F5FF', color: '#0C5460', borderColor: '#B8DAFF' },
+  warning: { backgroundColor: '#FFF3CD', color: '#856404', borderColor: '#FFEEBA' },
+  success: { backgroundColor: '#D4EDDA', color: '#155724', borderColor: '#C3E6CB' },
+  error: { backgroundColor: '#F8D7DA', color: '#721C24', borderColor: '#F5C6CB' },
+  muted: { backgroundColor: '#E9ECEF', color: '#6C757D', borderColor: '#DEE2E6' },
 };
 
 const Toast: React.FC<ToastProps> = ({
@@ -92,7 +92,7 @@ const Toast: React.FC<ToastProps> = ({
             border: 'none',
             background: 'transparent',
             cursor: 'pointer',
-            color: toastStyle.color,
+            color: toastStyle.color, // Inherits color, which might be a hex code
             fontSize: '16px',
           }}
           aria-label="Close toast"

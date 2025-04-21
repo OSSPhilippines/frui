@@ -1,24 +1,24 @@
 .frui-progress {
-    display: block; /* Make it a block-level element to take full width of parent */
-    overflow: hidden; /* Clip content that goes beyond borders */
-    border-radius: 4px; /* Default border-radius */
-    background-color: #e0e0e0; /* Default background color of the track */
-    height: 8px; /* Default height */
-  }
-  
-  .frui-progress-bar {
-    height: 100%;
-    background-color: currentColor; /* Inherits color from parent or the color prop */
-    border-radius: 4px; /* Match track border-radius */
-    transition: width 0.2s ease-in-out; /* Smooth width transition */
-  }
-  
-  /* You can add more modifier classes here if needed, e.g., for different heights */
-  .frui-progress.h-4 {
-    height: 16px; /* Example for h-4 class */
-  }
-  
-  .frui-progress.rounded-full,
-  .frui-progress-bar.rounded-full {
-    border-radius: 9999px; /* Make it fully rounded */
-  }
+  background-color: #e0e0e0; 
+  border-radius: 4px; 
+  display: block; 
+  height: 8px; 
+  overflow: hidden; 
+}
+
+.frui-progress-bar {
+  background-color: currentColor; 
+  border-radius: 4px; 
+  height: 100%;
+  transition: width 0.2s ease-in-out; 
+}
+
+/*example*/
+.frui-progress.h-4 {
+  height: 16px; 
+}
+
+.frui-progress.rounded-full,
+.frui-progress-bar.rounded-full {
+  border-radius: 9999px; 
+}

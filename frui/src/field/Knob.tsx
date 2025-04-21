@@ -1,11 +1,9 @@
-'use client';
-
 import { useRef, useState, useEffect } from 'react';
 
 export type KnobProps = {
-  value?: number; // now optional
-  defaultValue?: number; // for uncontrolled
-  onChange?: (value: number) => void; // now optional
+  value?: number;
+  defaultValue?: number;
+  onChange?: (value: number) => void;
   name?: string;
   min?: number;
   max?: number;

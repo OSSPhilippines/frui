@@ -44,23 +44,64 @@ export default function Page() {
     [_('valueTemplate'), _('string'), _('No'), _('Template for displaying the value.')],
   ];
 
-  const codeBasic = `
-    <Knob value={value} onChange={setValue} />`.trim();
-  const codeMinMax = `
-    <Knob value={min} onChange={setMin} min={10} max={80} />
-    `.trim();
-  const codeStep = `<Knob value={stepped} onChange={setStepped} step={10} />
-  `.trim();
-  const codeSize = `<Knob value={customSize} onChange={setCustomSize} size={150} />
-  `.trim();
-  const codeStroke = `<Knob value={thickStroke} onChange={setThickStroke} stroke={15} />`
-  .trim();
-  const codeColor = `<Knob value={colorful} onChange={setColorful} 
-    valueColor="#e91e63" textColor="#e91e63" />` .trim();
-  const codeTrack = `<Knob value={tracked} onChange={setTracked}
-    rangeColor="#ccc" valueColor="#4caf50" />` .trim();
-  const codeValue = `<Knob value={value} onChange={setValue}
-    valueTemplate="{}%" textColor="#333" />` .trim();
+const codeBasic = `
+  <Knob defaultValue={35} />
+`.trim();
+
+const codeMinMax = `
+<Knob 
+  value={min} 
+  onChange={setMin} 
+  min={10} 
+  max={80} 
+/>
+`.trim();
+
+const codeStep = `
+<Knob 
+  value={stepped} 
+  onChange={setStepped} 
+  step={10} 
+/>
+`.trim();
+
+const codeSize = `
+<Knob 
+  value={customSize} 
+  onChange={setCustomSize} 
+  size={150} 
+/>`.trim();
+
+const codeStroke = `
+<Knob 
+  value={thickStroke} 
+  onChange={setThickStroke} 
+  stroke={15} 
+/>`.trim();
+
+const codeColor = `
+<Knob 
+  value={colorful} 
+  onChange={setColorful} 
+  valueColor="#e91e63" 
+  textColor="#e91e63" 
+/>`.trim();
+
+const codeTrack = `
+<Knob 
+  value={tracked} 
+  onChange={setTracked} 
+  rangeColor="#ccc" 
+  valueColor="#4caf50" 
+/>`.trim();
+
+const codeValue = `
+<Knob 
+  value={value} 
+  onChange={setValue} 
+  valueTemplate="{}%" 
+  textColor="#333" 
+/>`.trim();
 
   return (
     <LayoutPanel
@@ -90,6 +131,7 @@ export default function Page() {
                 <li className="pl-3 pb-1"><Link href="#color">{_('Color')}</Link></li>
                 <li className="pl-3 pb-1"><Link href="#track">{_('Track')}</Link></li>
                 <li className="pl-3 pb-1"><Link href="#value">{_('Value')}</Link></li>
+                <li className="pl-3 pb-1"><Link href="#styles">{_('Custom Styles')}</Link></li>
               </ul>
             </div>
           </aside>
@@ -278,6 +320,16 @@ export default function Page() {
               </div>
               <Code language="tsx">{codeValue}</Code>
             </div>
+
+            <h2 id="styles" className="uppercase font-bold text-lg mt-8">
+              {_('Custom Styles')}
+            </h2>
+            <p className="py-4">
+              <Translate>
+                You can add your own custom class to knob
+                or use the <C l value="frui-field-knob" /> CSS class. 
+              </Translate>
+            </p>
 
             <div className="flex items-center border-t border-b2 mt-8 pt-4">
               <Link className="text-t2" href="/field/input">

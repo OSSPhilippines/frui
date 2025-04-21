@@ -32,6 +32,7 @@ export type {
 export type { FileConfig, FileProps } from './File.js';
 export type { FilelistConfig, FilelistProps } from './Filelist.js';
 export type { InputConfig, InputProps } from './Input.js';
+export type { KnobProps } from './Knob.js';
 //export type {} from './JSON.js';
 export type { MarkdownConfig, MarkdownProps } from './Markdown.js';
 export type { MaskProps } from './Mask.js';
@@ -116,6 +117,7 @@ import Filelist from './Filelist.js';
 import Image from './Image.js';
 import Imagelist from './Imagelist.js';
 import Input from './Input.js';
+import Knob from './Knob.js';
 //import Json from './JSON.js';
 import Markdown from './Markdown.js';
 import Mask from './Mask.js';
@@ -146,6 +148,7 @@ export {
   Image,
   Imagelist,
   Input,
+  Knob,
   Markdown,
   Mask,
   Metadata,

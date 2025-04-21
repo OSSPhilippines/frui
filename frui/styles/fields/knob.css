@@ -1,0 +1,21 @@
+.frui-field-knob {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .frui-field-knob__svg {
+    cursor: pointer;
+    transform: rotate(145deg);
+  }
+  
+  .frui-field-knob__label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    pointer-events: none;
+  }
+  

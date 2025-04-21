@@ -19,6 +19,7 @@ import Filelist from 'frui/field/Filelist';
 import ImageField from 'frui/field/Image';
 import Imagelist from 'frui/field/Imagelist';
 import Input from 'frui/field/Input';
+import Knob from 'frui/field/Knob';
 import Markdown from 'frui/field/Markdown';
 import Mask from 'frui/field/Mask';
 import Metadata from 'frui/field/Metadata';
@@ -250,6 +251,19 @@ export default function Home() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Input')}
+                </h2>
+              </div>
+            </div>
+            <div 
+              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => router.push('/field/knob')} 
+            >
+              <div className="m-2 border border-b2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
+                  <Knob defaultValue={30} />
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Knob')}
                 </h2>
               </div>
             </div>

@@ -1,28 +1,28 @@
 .frui-rating-root {
-  display: inline-flex;
+  -webkit-tap-highlight-color: transparent;
   align-items: center;
   color: #faaf00;
-  font-size: 1.5rem;
   cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+  display: inline-flex;
+  font-size: 1.5rem;
 }
 
 .frui-rating-icon-label {
   display: inline-block;
-  position: relative;
   padding: 0 2px;
+  position: relative;
 }
 
 .frui-rating-icon {
-  display: flex; 
   align-items: center;
+  display: flex;
   justify-content: center;
+  pointer-events: none;
   transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none; 
 }
 
 .frui-rating-icon-filled {
-  color: inherit; 
+  color: inherit;
 }
 
 .frui-rating-icon-empty {
@@ -46,22 +46,24 @@
 }
 
 .frui-rating-sizeSmall {
-  font-size: 1.125rem; 
+  font-size: 1.125rem;
 }
+
 .frui-rating-sizeMedium {
-  font-size: 1.5rem; 
+  font-size: 1.5rem;
 }
+
 .frui-rating-sizeLarge {
-  font-size: 1.875rem; 
+  font-size: 1.875rem;
 }
 
 .frui-rating-disabled {
-  opacity: 0.5;
-  pointer-events: none; 
   cursor: default;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .frui-rating-readOnly {
-  pointer-events: none; 
-  cursor: default; 
+  cursor: default;
+  pointer-events: none;
 }

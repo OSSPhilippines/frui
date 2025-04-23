@@ -130,6 +130,9 @@ const MainMenu: React.FC<{
         <Link href="/field/radio" className={`${pathname.indexOf('/field/radio') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Radio')}</span>
         </Link>
+        <Link href="/field/radiogroup" className={`${pathname.indexOf('/field/radiogroup') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Radio Group')}</span>
+        </Link>
         <Link href="/field/select" className={`${pathname.indexOf('/field/select') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Select')}</span>
         </Link>

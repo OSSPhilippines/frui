@@ -12,6 +12,7 @@ import Button from 'frui/form/Button';
 import Loader from 'frui/element/Loader';
 import Table, { Thead, Trow, Tcol } from 'frui/element/Table';
 import Tabs from 'frui/element/Tabs';
+import Tooltip from 'frui/element/Tooltip';
 
 export default function Home() {
   //hooks
@@ -159,7 +160,24 @@ export default function Home() {
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Tabs')}
+                  {_('Tabs')}                
+                </h2>
+              </div>
+            </div>
+            <div
+              className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => router.push('/component/tooltip')} 
+            >
+              <div className="m-2 border border-b2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[100px] w-full bg-b1">
+                  <Tooltip text="Hello World">
+                    <Button warning rounded className="my-1">
+                      Hover over me
+                    </Button>
+                  </Tooltip>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Tooltip')}
                 </h2>
               </div>
             </div>
@@ -210,16 +228,6 @@ export default function Home() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Accordion')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[100px] w-full bg-b1 px-3">
-                  Unlocks at 12,000 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Tooltip')}
                 </h2>
               </div>
             </div>

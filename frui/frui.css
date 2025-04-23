@@ -8,6 +8,7 @@
 @import url('./styles/modal.css');
 @import url('./styles/table.css');
 @import url('./styles/tabs.css');
+@import url('./styles/tooltip.css');
 
 @import url('./styles/formats/color.css');
 @import url('./styles/formats/country.css');
@@ -25,6 +26,7 @@
 @import url('./styles/fields/input.css');
 @import url('./styles/fields/markdown.css');
 @import url('./styles/fields/metadata.css');
+@import url('./styles/fields/multiselect.css');
 @import url('./styles/fields/option.css');
 @import url('./styles/fields/password.css');
 @import url('./styles/fields/select.css');

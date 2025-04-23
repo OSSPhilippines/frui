@@ -1,0 +1,110 @@
+.frui-field-multiselect {
+  color: var(--black);
+  position: relative;
+  width: 100%; /* Ensure spans container by default */
+}
+
+.frui-field-multiselect-control {
+  align-items: center;
+  background-color: white;
+  border-color: var(--black);
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap; /* Needed for tags */
+  gap: 4px; /* Space between tags */
+  min-height: 38px; /* Ensures height consistency with Select */
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.frui-field-multiselect-dropdown {
+  background-color: var(--white);
+  border-bottom-width: 1px;
+  border-color: var(--black);
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-style: solid;
+  border-top-width: 0;
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  z-index: 1000; /* Matches Select’s layering */
+}
+
+.frui-field-multiselect-option {
+  align-items: center;
+  border-bottom-width: 0;
+  border-color: #AAAAAA;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-style: solid;
+  border-top-width: 1px;
+  color: var(--black);
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 8px;
+}
+
+.frui-field-multiselect-options {
+  margin: 0;
+  max-height: 256px;
+  overflow: auto;
+  padding: 0;
+}
+
+.frui-field-multiselect-placeholder {
+  color: #666666;
+  font-size: 14px;
+  padding: 0 4px;
+}
+
+.frui-field-multiselect-search {
+  padding-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 4px;
+  position: relative;
+}
+
+.frui-field-multiselect-search-control {
+  background: var(--white);
+  border: none;
+  box-sizing: border-box;
+  font-size: 14px;
+  outline: none;
+  padding: 4px 32px 4px 8px; /* Matches Select’s right padding for icon */
+  width: 100%;
+}
+
+.frui-field-multiselect-tag {
+  align-items: center;
+  background-color: #e0f2fe; /* Light blue, inspired by original MultiSelect */
+  border: 1px solid #60a5fa; /* Blue-400 border for contrast */
+  border-radius: 4px;
+  color: #1e40af; /* Blue-800 for readable text */
+  display: inline-flex;
+  font-size: 13px;
+  margin: 2px;
+  padding: 2px 6px;
+}
+
+.frui-field-multiselect-tag-remove {
+  background: none;
+  border: none;
+  color: var(--black);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  margin-left: 4px;
+  padding: 0;
+}

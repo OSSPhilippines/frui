@@ -40,6 +40,7 @@ export type {
   MetadataConfig,
   MetadataProps
 } from './Metadata.js';
+export type { MultiSelectProps } from './MultiSelect.js';
 export type { NumberOptions, NumberProps } from './Number.js';
 export type { PasswordProps } from './Password.js';
 export type { RadioProps } from './Radio.js';
@@ -120,6 +121,7 @@ import Input from './Input.js';
 import Markdown from './Markdown.js';
 import Mask from './Mask.js';
 import Metadata from './Metadata.js';
+import MultiSelect from './MultiSelect.js';
 import Number from './Number.js';
 import Password from './Password.js';
 import Radio from './Radio.js';
@@ -149,6 +151,7 @@ export {
   Markdown,
   Mask,
   Metadata,
+  MultiSelect,
   Number,
   Password,
   Radio,

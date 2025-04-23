@@ -1,4 +1,7 @@
-import React, { useState, useRef, useEffect, CSSProperties, ReactNode } from "react";
+// types
+import type { CSSProperties, ReactNode } from 'react';
+// hooks
+import { useState, useRef, useEffect } from 'react';
 
 // Types
 export type TooltipProps = {

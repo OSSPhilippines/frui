@@ -1,5 +1,5 @@
 //types
-import type { HTMLLinkProps } from '../types';
+import type { HTMLLinkProps } from '../types.js';
 
 /**
  * Link Props

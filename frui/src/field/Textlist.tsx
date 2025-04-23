@@ -1,9 +1,9 @@
 //types
-import type { FieldsProps, FieldsetProps } from '../form/Fieldset';
+import type { FieldsProps, FieldsetProps } from '../form/Fieldset.js';
 //components
-import Input from './Input';
-import Button from '../form/Button';
-import make from '../form/Fieldset';
+import Input from './Input.js';
+import Button from '../form/Button.js';
+import make from '../form/Fieldset.js';
 
 /**
  * Textlist Type

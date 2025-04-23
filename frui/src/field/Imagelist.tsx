@@ -1,14 +1,14 @@
 //types
-import type { FilelistProps } from './Filelist';
+import type { FilelistProps } from './Filelist.js';
 //hooks
-import { useFilelist } from './Filelist';
+import { useFilelist } from './Filelist.js';
 //components
-import Input from './Input';
+import Input from './Input.js';
 
 /**
  * Generic File  Component (Main)
  */
-export default function Filelist(props: FilelistProps) {
+export default function Imagelist(props: FilelistProps) {
   //separate component related props from field attributes
   const { 
     uploading = 'Uploading...',

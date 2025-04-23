@@ -1,11 +1,11 @@
 //types
-import type { ExtendsType } from '../types';
-import type { SelectProps, SelectOption } from './Select';
+import type { ExtendsType } from '../types.js';
+import type { SelectProps, SelectOption } from './Select.js';
 //components
-import Select from './Select';
+import Select from './Select.js';
 //data
-import currencies from '../data/currencies';
-import countries from '../data/countries';
+import currencies from '../data/currencies.js';
+import countries from '../data/countries.js';
 
 /**
  * Currency Data

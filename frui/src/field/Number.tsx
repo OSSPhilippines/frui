@@ -1,10 +1,10 @@
 //types
 import type { ChangeEvent } from 'react';
-import type { InputProps } from './Input';
+import type { InputProps } from './Input.js';
 //hooks
 import { useState, useEffect } from 'react';
 //components
-import Input from './Input';
+import Input from './Input.js';
 
 /**
  * Number Options

@@ -226,7 +226,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   return (
     <div
       ref={buttonRef}
-      className="frui-tooltip-container relative inline-block"
+      className="frui-tooltip-container"
       onMouseEnter={() => setIsVisible(true)}
       onMouseLeave={() => setIsVisible(false)}
     >
@@ -234,7 +234,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
       {isVisible && (
         <div
           ref={tooltipRef}
-          className={`${map.classes} absolute text-white rounded-md shadow-md z-10 min-w-[200px] text-center whitespace-normal ${
+          className={`${map.classes} ${
             arrow ? "frui-tooltip-arrow-container" : ""
           }`}
           style={{

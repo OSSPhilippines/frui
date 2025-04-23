@@ -25,6 +25,7 @@ import Metadata from 'frui/field/Metadata';
 import Number from 'frui/field/Number';
 import Password from 'frui/field/Password';
 import Radio from 'frui/field/Radio';
+import RadioGroup, { RadioGroupItem } from 'frui/field/RadioGroup'
 import Select from 'frui/field/Select';
 import Slug from 'frui/field/Slug';
 import Switch from 'frui/field/Switch';
@@ -336,6 +337,23 @@ export default function Home() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => router.push('/field/radiogroup')} 
+            >
+              <div className="m-2 border border-b2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
+                  <RadioGroup name="myRadioGroup" orientation="row">
+                    <RadioGroupItem label="Yes" value="yes" />
+                    <RadioGroupItem label="No" value="no" />
+                    <RadioGroupItem label="Maybe" value="maybe" />
+                  </RadioGroup>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Radio Group')}
+                </h2>
+              </div>
+            </div>
+            <div 
+              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
               onClick={() => router.push('/field/select')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
@@ -474,16 +492,6 @@ export default function Home() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('WYSIWYG')}
-                </h2>
-              </div>
-            </div>
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 9,000 downloads
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Radio Group')}
                 </h2>
               </div>
             </div>

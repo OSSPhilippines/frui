@@ -11,8 +11,8 @@ import Badge from 'frui/element/Badge';
 import Button from 'frui/form/Button';
 import Loader from 'frui/element/Loader';
 import Table, { Thead, Trow, Tcol } from 'frui/element/Table';
-// import Toast from 'frui/element/Toast';
 import ProgressBar from 'frui/element/ProgressBar';
+import Tabs from 'frui/element/Tabs';
 
 export default function Home() {
   //hooks
@@ -155,6 +155,32 @@ export default function Home() {
                 </h2>
               </div>
             </div>
+                        <div 
+              className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => router.push('/component/tabs')} 
+            >
+              <div className="m-2 border border-b2 rounded overflow-auto">
+                <div className="flex items-center justify-center h-[100px] w-full bg-b1 px-3">
+                  <div className="overflow-auto w-full">
+                    <Tabs
+                      tabs={[
+                        { label: 'Tab 1' },
+                        { label: 'Tab 2' },
+                        { label: 'Tab 3' },
+                      ]}
+                      panels={[
+                        <div key="1">{_('Content for Tab 1')}</div>,
+                        <div key="2">{_('Content for Tab 2')}</div>,
+                        <div key="3">{_('Content for Tab 3')}</div>,
+                      ]}
+                    />
+                  </div>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Tabs')}
+                </h2>
+              </div>
+            </div>
             <div
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
               onClick={() => router.push('/component/toast')}
@@ -217,7 +243,8 @@ export default function Home() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Tabs')}
-                </h2>
+                  Unlocks at 6,000 downloads
+                </div>
               </div>
             </div>
             <div className="block basis-1/2 md:basis-1/3 text-center cursor-pointer">

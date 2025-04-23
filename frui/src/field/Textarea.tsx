@@ -1,6 +1,6 @@
 //types
 import type { ChangeEvent, LegacyRef, CSSProperties } from 'react';
-import type { ExtendsType, HTMLTextareaProps } from '../types';
+import type { ExtendsType, HTMLTextareaProps } from '../types.js';
 
 /**
  * Textarea Config

@@ -1,9 +1,9 @@
 //types
-import type { InputProps } from './Input';
+import type { InputProps } from './Input.js';
 //hooks
 import { useState } from 'react';
 //components
-import Input from './Input';
+import Input from './Input.js';
 
 /**
  * Password Props

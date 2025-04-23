@@ -1,7 +1,7 @@
 //types
 import type { ChangeEvent, CSSProperties } from 'react';
-import type { HTMLInputProps } from '../types';
-import type { InputConfig } from './Input';
+import type { HTMLInputProps } from '../types.js';
+import type { InputConfig } from './Input.js';
 //hooks
 import { useState, useEffect } from 'react';
 

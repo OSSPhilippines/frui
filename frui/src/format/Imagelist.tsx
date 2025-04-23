@@ -1,5 +1,5 @@
 //types
-import type { HTMLImageProps } from '../types';
+import type { HTMLImageProps } from '../types.js';
 
 /**
  * Imagelist Props

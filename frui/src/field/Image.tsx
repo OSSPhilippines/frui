@@ -1,9 +1,9 @@
 //types
-import type { FileProps } from './File';
+import type { FileProps } from './File.js';
 //hooks
-import { useFile } from './File';
+import { useFile } from './File.js';
 //components
-import Input from './Input';
+import Input from './Input.js';
 
 /**
  * Generic Image  Component (Main)

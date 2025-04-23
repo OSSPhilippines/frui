@@ -1,8 +1,8 @@
 //types
 import type { ChangeEvent } from 'react';
-import type { InputProps, InputConfig } from './Input';
+import type { InputProps, InputConfig } from './Input.js';
 //components
-import Input from './Input';
+import Input from './Input.js';
 
 /**
  * Slug Config

@@ -1,6 +1,6 @@
 //types
 import type { ChangeEvent, KeyboardEvent, CSSProperties } from 'react';
-import type { ExtendsType, HTMLInputProps } from '../types';
+import type { ExtendsType, HTMLInputProps } from '../types.js';
 //hooks
 import { useState, useEffect } from 'react';
 

@@ -2,9 +2,9 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { minimalSetup, basicSetup } from 'codemirror';
 import { EditorView, lineNumbers } from '@codemirror/view';
 import { EditorState, Extension } from '@codemirror/state';
-import Input from './Input';
-import type { InputProps } from './Input';
-import { ExtendsType } from '../types';
+import Input from './Input.js';
+import type { InputProps } from './Input.js';
+import { ExtendsType } from '../types.js';
 import {
   LanguageSupport,
   LanguageDescription,

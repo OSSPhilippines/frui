@@ -1,11 +1,11 @@
 //types
 import type { ChangeEvent, CSSProperties } from 'react';
-import type { InputProps, InputConfig } from './Input';
+import type { InputProps, InputConfig } from './Input.js';
 //hooks
 import { useState, useEffect } from 'react';
-import { useInput } from './Input';
+import { useInput } from './Input.js';
 //components
-import Input from './Input';
+import Input from './Input.js';
 
 /**
  * File Config

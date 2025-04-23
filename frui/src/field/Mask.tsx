@@ -1,7 +1,8 @@
 //types
-import type { InputProps } from './Input';
+import type { InputProps } from './Input.js';
 //components
-import Input from './Input';
+import Input from './Input.js';
+import 'inputmask';
 
 /**
  * Mask Props
@@ -36,20 +37,18 @@ export default function InputMask(props: MaskProps) {
   } = props;
   const ref = (ref: HTMLInputElement) => {
     if (!ref) return;
-    import('inputmask').then(Inputmask => {
-      onReady && onReady(Inputmask.default);
-      const im = new Inputmask.default({
-        mask,
-        regex,
-        alias,
-        repeat,
-        greedy,
-        numericInput,
-        rightAlign,
-        definitions
-      });
-      im.mask(ref);
+    
+    const im = new Inputmask({
+      mask,
+      regex,
+      alias,
+      repeat,
+      greedy,
+      numericInput,
+      rightAlign,
+      definitions
     });
+    im.mask(ref);
   }
 
   return <Input passRef={ref} {...attributes} />

@@ -5,11 +5,11 @@ import type {
   KeyboardEvent, 
   CSSProperties 
 } from 'react';
-import type { InputProps } from './Input';
+import type { InputProps } from './Input.js';
 //hooks
 import { useState } from 'react';
 //components
-import Input from './Input';
+import Input from './Input.js';
 
 /**
  * Autocomplete Config

@@ -1,10 +1,10 @@
 //types
-import type { ExtendsType } from '../types';
-import type { ButtonProps } from './Button';
+import type { ExtendsType } from '../types.js';
+import type { ButtonProps } from './Button.js';
 //hooks
 import React, { useState, useEffect } from 'react';
 //components
-import Button from './Button';
+import Button from './Button.js';
 
 /**
  * Fieldset Config

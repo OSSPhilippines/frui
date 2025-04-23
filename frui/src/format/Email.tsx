@@ -1,7 +1,7 @@
 //types
-import type { LinkProps } from './Link';
+import type { LinkProps } from './Link.js';
 //components
-import Link from './Link';
+import Link from './Link.js';
 
 /**
  * Email Props

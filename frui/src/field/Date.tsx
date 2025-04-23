@@ -1,8 +1,8 @@
 //types
-import type { ExtendsType } from '../types';
-import type { InputProps } from './Input';
+import type { ExtendsType } from '../types.js';
+import type { InputProps } from './Input.js';
 //components
-import Input from './Input';
+import Input from './Input.js';
 
 /**
  * Date Input

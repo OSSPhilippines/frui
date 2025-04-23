@@ -1,10 +1,10 @@
 //types
-import type { ExtendsType } from '../types';
-import type { InputProps } from './Input';
+import type { ExtendsType } from '../types.js';
+import type { InputProps } from './Input.js';
 //hooks
-import { useDate } from './Date';
+import { useDate } from './Date.js';
 //components
-import Input from './Input';
+import Input from './Input.js';
 
 /**
  * Datetime Input

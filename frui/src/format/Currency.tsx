@@ -1,8 +1,8 @@
 //types
 import type { CSSProperties } from 'react';
 //helpers
-import currencies from '../data/currencies';
-import countries from '../data/countries';
+import currencies from '../data/currencies.js';
+import countries from '../data/countries.js';
 
 /**
  * Currency Props

@@ -1,14 +1,14 @@
 //types
-import type { ExtendsType } from '../types';
-import type { FieldsProps, FieldsetProps } from '../form/Fieldset';
+import type { ExtendsType } from '../types.js';
+import type { FieldsProps, FieldsetProps } from '../form/Fieldset.js';
 //components
-import Button from '../form/Button';
-import make from '../form/Fieldset';
-import Input from './Input';
-import Number from './Number';
-import Date from './Date';
-import Datetime from './Datetime';
-import Time from './Time';
+import Button from '../form/Button.js';
+import make from '../form/Fieldset.js';
+import Input from './Input.js';
+import Number from './Number.js';
+import Date from './Date.js';
+import Datetime from './Datetime.js';
+import Time from './Time.js';
 
 /**
  * Metadata Type

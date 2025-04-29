@@ -62,14 +62,13 @@ export default function Home() {
           <div className="flex flex-wrap mt-4">
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/autocomplete')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
                   <Autocomplete options={[ 'foo', 'bar' ]} value="bar" />
                 </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Autocomplete')}
+                <h2 onClick={() => router.push('/field/autocomplete')}  className="my-2 font-semibold text-center uppercase">
+                  {_('Autocomplete')} 
                 </h2>
               </div>
             </div>

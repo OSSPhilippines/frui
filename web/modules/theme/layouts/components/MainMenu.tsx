@@ -37,11 +37,17 @@ const MainMenu: React.FC<{
         <span className="inline-block pl-2">{_('Components')}</span>
       </Link>
       <div className={pathname.indexOf('/component') === 0 ? 'block' : 'hidden'}>
+        <Link href="" className={`${pathname.indexOf('/component/accordion') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Accordion')}</span>
+        </Link>
         <Link href="/component/alert" className={`${pathname.indexOf('/component/alert') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Alert')}</span>
         </Link>
         <Link href="/component/badge" className={`${pathname.indexOf('/component/badge') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Badge')}</span>
+        </Link>
+        <Link href="" className={`${pathname.indexOf('/component/bread-crumb') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Bread Crumb')}</span>
         </Link>
         <Link href="/component/button" className={`${pathname.indexOf('/component/button') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Button')}</span>
@@ -52,8 +58,23 @@ const MainMenu: React.FC<{
         <Link href="/component/modal" className={`${pathname.indexOf('/component/modal') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Modal')}</span>
         </Link>
+        <Link href="" className={`${pathname.indexOf('/component/pagination') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Pagination')}</span>
+        </Link>
+        <Link href="" className={`${pathname.indexOf('/component/progress-bar') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Progress Bar')}</span>
+        </Link>
         <Link href="/component/table" className={`${pathname.indexOf('/component/table') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Table')}</span>
+        </Link>
+        <Link href="" className={`${pathname.indexOf('/component/tabs') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Tabs')}</span>
+        </Link>
+        <Link href="" className={`${pathname.indexOf('/component/toast') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Toast')}</span>
+        </Link>
+        <Link href="" className={`${pathname.indexOf('/component/tooltip') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Tooltip')}</span>
         </Link>
       </div>
       <Link href="/field" className={`${pathname.indexOf('/field') === 0 ? 'text-white' : ''} block px-3 py-2`}>
@@ -67,8 +88,14 @@ const MainMenu: React.FC<{
         <Link href="/field/checkbox" className={`${pathname.indexOf('/field/checkbox') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Checkbox')}</span>
         </Link>
+        <Link href="" className={`${pathname.indexOf('/field/checklist') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Checklist')}</span>
+        </Link>
         <Link href="/field/code-editor" className={`${pathname.indexOf('/field/code-editor') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Code Editor')}</span>
+        </Link>
+        <Link href="" className={`${pathname.indexOf('/field/color') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Color')}</span>
         </Link>
         <Link href="/field/country" className={`${pathname.indexOf('/field/country') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Country')}</span>
@@ -100,6 +127,12 @@ const MainMenu: React.FC<{
         <Link href="/field/input" className={`${pathname.indexOf('/field/input') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Input')}</span>
         </Link>
+        <Link href="" className={`${pathname.indexOf('/field/json') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('JSON')}</span>
+        </Link>
+        <Link href="" className={`${pathname.indexOf('/field/knob') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Knob')}</span>
+        </Link>
         <Link href="/field/markdown" className={`${pathname.indexOf('/field/markdown') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Markdown')}</span>
         </Link>
@@ -109,6 +142,9 @@ const MainMenu: React.FC<{
         <Link href="/field/metadata" className={`${pathname.indexOf('/field/metadata') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Metadata')}</span>
         </Link>
+        <Link href="" className={`${pathname.indexOf('/field/multi-select') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Multi Select')}</span>
+        </Link>
         <Link href="/field/number" className={`${pathname.indexOf('/field/number') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Number')}</span>
         </Link>
@@ -117,6 +153,15 @@ const MainMenu: React.FC<{
         </Link>
         <Link href="/field/radio" className={`${pathname.indexOf('/field/radio') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Radio')}</span>
+        </Link>
+        <Link href="" className={`${pathname.indexOf('/field/radio-group') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Radio Group')}</span>
+        </Link>
+        <Link href="" className={`${pathname.indexOf('/field/range-slider') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Range Slider')}</span>
+        </Link>
+        <Link href="" className={`${pathname.indexOf('/field/rating') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Rating')}</span>
         </Link>
         <Link href="/field/select" className={`${pathname.indexOf('/field/select') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Select')}</span>
@@ -139,6 +184,9 @@ const MainMenu: React.FC<{
         <Link href="/field/time" className={`${pathname.indexOf('/field/time') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Time')}</span>
         </Link>
+        <Link href="" className={`${pathname.indexOf('/field/wysiwyg') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('WYSIWYG')}</span>
+        </Link>
       </div>
       <Link href="/format" className={`${pathname.indexOf('/format') === 0 ? 'text-white' : ''} block px-3 py-2`}>
         <i className={`text-t2 fas fa-fw fa-text-height`}></i>
@@ -153,6 +201,9 @@ const MainMenu: React.FC<{
         </Link>
         <Link href="/format/country" className={`${pathname.indexOf('/format/country') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Country')}</span>
+        </Link>
+        <Link href="/format/currency" className={`${pathname.indexOf('/format/currency') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Currency')}</span>
         </Link>
         <Link href="/format/date" className={`${pathname.indexOf('/format/date') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Date')}</span>
@@ -212,7 +263,7 @@ const MainMenu: React.FC<{
           <span className="inline-block pl-2">{_('Text')}</span>
         </Link>
         <Link href="/format/yesno" className={`${pathname.indexOf('/format/yesno') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
-          <span className="inline-block pl-2">{_('Yes/No')}</span>
+          <span className="inline-block pl-2">{_('Yesno')}</span>
         </Link>
       </div>
     </aside>

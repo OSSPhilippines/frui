@@ -1,0 +1,220 @@
+/* Base styles */
+.frui-pagination {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.frui-pagination-btn,
+.frui-pagination-span {
+  align-items: center;
+  background-color: var(--bg, #FFFFFF);
+  border: 1px solid var(--border, #CCCCCC);
+  color: var(--fg-default, #222222);
+  display: inline-flex;
+  height: 32px;
+  justify-content: center;
+  min-width: 32px;
+  padding: 0 8px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.frui-pagination.link .frui-pagination-btn:not(.control) {
+  text-decoration: underline;
+}
+
+.frui-pagination.control .frui-pagination-btn.control {
+  background-color: var(--muted, #777777);
+  color: var(--white, #FFFFFF);
+}
+
+.frui-pagination.no-border .frui-pagination-btn,
+.frui-pagination.no-border .frui-pagination-span {
+  border: none;
+}
+
+.frui-pagination.no-background .frui-pagination-btn,
+.frui-pagination.no-background .frui-pagination-span {
+  background-color: transparent;
+}
+
+.frui-pagination-span.active {
+  background-color: var(--primary, #1474FC);
+  border-color: var(--primary, #1474FC);
+  color: var(--white, #FFFFFF);
+  font-weight: bold;
+}
+
+.frui-pagination.frui-tx-white .frui-pagination-span.active {
+  background-color: var(--white, #FFFFFF);
+  border-color: var(--white, #FFFFFF);
+  color: var(--black, #222222);
+}
+
+.frui-pagination.frui-tx-black .frui-pagination-span.active {
+  background-color: var(--black, #000000);
+  border-color: var(--black, #000000);
+  color: var(--white, #FFFFFF);
+}
+
+.frui-pagination.frui-tx-info .frui-pagination-span.active {
+  background-color: var(--info, #17A2B8);
+  border-color: var(--info, #17A2B8);
+  color: var(--white, #FFFFFF);
+}
+
+.frui-pagination.frui-tx-warning .frui-pagination-span.active {
+  background-color: var(--warning, #FFC107);
+  border-color: var(--warning, #FFC107);
+  color: var(--black, #222222);
+}
+
+.frui-pagination.frui-tx-success .frui-pagination-span.active {
+  background-color: var(--success, #28A745);
+  border-color: var(--success, #28A745);
+  color: var(--white, #FFFFFF);
+}
+
+.frui-pagination.frui-tx-error .frui-pagination-span.active {
+  background-color: var(--error, #DC3545);
+  border-color: var(--error, #DC3545);
+  color: var(--white, #FFFFFF);
+}
+
+.frui-pagination.frui-tx-muted .frui-pagination-span.active {
+  background-color: var(--muted, #6C757D);
+  border-color: var(--muted, #6C757D);
+  color: var(--white, #FFFFFF);
+}
+
+.frui-pagination.frui-tx-primary .frui-pagination-span.active {
+  background-color: var(--primary, #007BFF);
+  border-color: var(--primary, #007BFF);
+  color: var(--white, #FFFFFF);
+}
+
+.frui-pagination.frui-tx-secondary .frui-pagination-span.active {
+  background-color: var(--secondary, #6C757D);
+  border-color: var(--secondary, #6C757D);
+  color: var(--white, #FFFFFF);
+}
+
+.frui-pagination-btn:not(.control):hover {
+  background-color: var(--bg-hover, #F5F5F5);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: var(--fg-primary, #007BFF);
+  transform: translateY(-1px);
+}
+
+.frui-pagination-btn[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
+.frui-pagination.frui-text-xs .frui-pagination-btn,
+.frui-pagination.frui-text-xs .frui-pagination-span {
+  font-size: 12px;
+  height: 24px;
+  min-width: 24px;
+}
+
+.frui-pagination.frui-text-sm .frui-pagination-btn,
+.frui-pagination.frui-text-sm .frui-pagination-span {
+  font-size: 14px;
+  height: 28px;
+  min-width: 28px;
+}
+
+.frui-pagination.frui-text-md .frui-pagination-btn,
+.frui-pagination.frui-text-md .frui-pagination-span {
+  font-size: 16px;
+  height: 32px;
+  min-width: 32px;
+}
+
+.frui-pagination.frui-text-lg .frui-pagination-btn,
+.frui-pagination.frui-text-lg .frui-pagination-span {
+  font-size: 18px;
+  height: 36px;
+  min-width: 36px;
+}
+
+.frui-pagination.frui-text-xl .frui-pagination-btn,
+.frui-pagination.frui-text-xl .frui-pagination-span {
+  font-size: 20px;
+  height: 40px;
+  min-width: 40px;
+}
+
+.frui-pagination.frui-text-2xl .frui-pagination-btn,
+.frui-pagination.frui-text-2xl .frui-pagination-span {
+  font-size: 24px;
+  height: 48px;
+  min-width: 48px;
+}
+
+.frui-pagination.frui-text-3xl .frui-pagination-btn,
+.frui-pagination.frui-text-3xl .frui-pagination-span {
+  font-size: 30px;
+  height: 56px;
+  min-width: 56px;
+}
+
+.frui-pagination.frui-text-4xl .frui-pagination-btn,
+.frui-pagination.frui-text-4xl .frui-pagination-span {
+  font-size: 36px;
+  height: 64px;
+  min-width: 64px;
+}
+
+.frui-pagination.frui-text-5xl .frui-pagination-btn,
+.frui-pagination.frui-text-5xl .frui-pagination-span {
+  font-size: 48px;
+  height: 80px;
+  min-width: 80px;
+}
+
+.frui-pagination.square .frui-pagination-btn,
+.frui-pagination.square .frui-pagination-span {
+  height: var(--square-size);
+  min-width: unset;
+  width: var(--square-size);
+}
+
+.frui-pagination.radius-0 .frui-pagination-btn,
+.frui-pagination.radius-0 .frui-pagination-span {
+  border-radius: 0;
+}
+
+.frui-pagination.radius-1 .frui-pagination-btn,
+.frui-pagination.radius-1 .frui-pagination-span {
+  border-radius: 4px;
+}
+
+.frui-pagination.radius-2 .frui-pagination-btn,
+.frui-pagination.radius-2 .frui-pagination-span {
+  border-radius: 8px;
+}
+
+.frui-pagination.radius-3 .frui-pagination-btn,
+.frui-pagination.radius-3 .frui-pagination-span {
+  border-radius: 12px;
+}
+
+.frui-pagination.radius-4 .frui-pagination-btn,
+.frui-pagination.radius-4 .frui-pagination-span {
+  border-radius: 16px;
+}
+
+.frui-pagination.square .frui-pagination-btn,
+.frui-pagination.square .frui-pagination-span {
+  border-radius: 0;
+}
+
+.custom-pagination .frui-pagination-btn:hover:not(.control) {
+  background-color: #D0E8D9;
+  color: #00A352;
+}

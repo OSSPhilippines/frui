@@ -131,7 +131,7 @@ export default function WYSIWYG({
   const handleListUnordered = () => execCommand('insertUnorderedList');
   const handleUndo = () => execCommand('undo');
   const handleRedo = () => execCommand('redo');
-  
+
   const handleFont = (e: React.ChangeEvent<HTMLSelectElement>) => {
     execCommand('fontName', e.target.value);
     e.target.value = '';
@@ -371,10 +371,10 @@ export default function WYSIWYG({
         )}
         {font && (
           <div className="frui-wysiwyg-btn-module">
-            <select 
-              className="frui-wysiwyg-btn-select" 
-              onChange={handleFont} 
-              title="Font" 
+            <select
+              className="frui-wysiwyg-btn-select"
+              onChange={handleFont}
+              title="Font"
               aria-label="Font"
               defaultValue=""
               disabled={isCodeView}
@@ -393,10 +393,10 @@ export default function WYSIWYG({
         )}
         {size && (
           <div className="frui-wysiwyg-btn-module">
-            <select 
-              className="frui-wysiwyg-btn-select" 
-              onChange={handleSize} 
-              title="Size" 
+            <select
+              className="frui-wysiwyg-btn-select"
+              onChange={handleSize}
+              title="Size"
               aria-label="Font Size"
               defaultValue=""
               disabled={isCodeView}
@@ -423,10 +423,10 @@ export default function WYSIWYG({
         )}
         {format && (
           <div className="frui-wysiwyg-btn-module">
-            <select 
-              className="frui-wysiwyg-btn-select" 
-              onChange={handleFormat} 
-              title="Format" 
+            <select
+              className="frui-wysiwyg-btn-select"
+              onChange={handleFormat}
+              title="Format"
               aria-label="Block Format"
               defaultValue=""
               disabled={isCodeView}
@@ -509,21 +509,21 @@ export default function WYSIWYG({
         )}
         {textStyle && (
           <div className="frui-wysiwyg-btn-module">
-            <select 
-              className="frui-wysiwyg-btn-select" 
-              onChange={handleTextStyle} 
-              title="Text Style" 
+            <select
+              className="frui-wysiwyg-btn-select"
+              onChange={handleTextStyle}
+              title="Text Style"
               aria-label="Text Style"
               defaultValue=""
               disabled={isCodeView}
             >
               <option value="" disabled>T Style</option>
-              <option value="code" style={{ backgroundColor: '#f9f9f9', border: '1px solid #e1e1e1', padding: '0 4px' }}>Code</option>
+              <option value="code" style={{ backgroundColor: '#F9F9F9', border: '1px solid #E1E1E1', padding: '0 4px' }}>Code</option>
               <option value="translucent" style={{ opacity: 0.6 }}>Translucent</option>
-              <option value="shadow" style={{ textShadow: '2px 2px 2px #b1b1b1' }}>Shadow</option>
+              <option value="shadow" style={{ textShadow: '2px 2px 2px #B1B1B1' }}>Shadow</option>
               <option value="spaced" style={{ letterSpacing: '2px', wordSpacing: '4px' }}>Spaced</option>
-              <option value="bordered" style={{ border: '2px solid #000', padding: '2px 6px' }}>Bordered</option>
-              <option value="neon" style={{ textShadow: '0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00de', color: '#fff', backgroundColor: '#000', padding: '2px 6px' }}>NEON</option>
+              <option value="bordered" style={{ border: '2px solid #000000', padding: '2px 6px' }}>Bordered</option>
+              <option value="neon" style={{ textShadow: '0 0 5px #FFFFFF, 0 0 10px #FFFFFF, 0 0 20px #FF00DE', color: '#FFFFFF', backgroundColor: '#000000', padding: '2px 6px' }}>NEON</option>
             </select>
           </div>
         )}
@@ -576,10 +576,10 @@ export default function WYSIWYG({
         )}
         {lineheight && (
           <div className="frui-wysiwyg-btn-module">
-            <select 
-              className="frui-wysiwyg-btn-select" 
-              onChange={handleLineHeight} 
-              title="Line Height" 
+            <select
+              className="frui-wysiwyg-btn-select"
+              onChange={handleLineHeight}
+              title="Line Height"
               aria-label="Line Height"
               defaultValue="1"
               disabled={isCodeView}
@@ -673,10 +673,10 @@ export default function WYSIWYG({
         )}
         {code && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={handleCodeViewToggle} 
-              title={isCodeView ? "WYSIWYG View" : "Code View"} 
+            <button
+              className="frui-wysiwyg-btn"
+              onClick={handleCodeViewToggle}
+              title={isCodeView ? "WYSIWYG View" : "Code View"}
               aria-label={isCodeView ? "Switch to WYSIWYG View" : "Switch to Code View"}
             >
               <i className={`fas fa-fw ${isCodeView ? 'fa-eye' : 'fa-code'}`}></i>
@@ -706,10 +706,10 @@ export default function WYSIWYG({
         )}
         {template && (
           <div className="frui-wysiwyg-btn-module">
-            <select 
-              className="frui-wysiwyg-btn-select" 
-              onChange={handleTemplate} 
-              title="Template" 
+            <select
+              className="frui-wysiwyg-btn-select"
+              onChange={handleTemplate}
+              title="Template"
               aria-label="Insert Template"
               defaultValue=""
               disabled={isCodeView}
@@ -749,19 +749,19 @@ export default function WYSIWYG({
         dir={dir}
         aria-label="Rich Text Editor"
       />
-      <textarea 
-        ref={textareaRef} 
-        style={{ 
+      <textarea
+        ref={textareaRef}
+        style={{
           display: isCodeView ? 'block' : 'none',
           width: '100%',
           minHeight: '200px',
           padding: '16px',
           fontFamily: 'monospace',
           fontSize: '13px',
-          backgroundColor: '#f9f9f9',
+          backgroundColor: '#F9F9F9',
           border: 'none',
           resize: 'vertical'
-        }} 
+        }}
         onChange={(e) => {
           if (isCodeView && hiddenInputRef.current) {
             hiddenInputRef.current.value = e.target.value;
@@ -774,4 +774,4 @@ export default function WYSIWYG({
       />
     </div>
   );
-}
+} 

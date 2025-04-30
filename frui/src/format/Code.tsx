@@ -1,25 +1,37 @@
-import { useLanguage } from 'r22n';
+import type { CSSProperties } from 'react';
 import { useEffect, useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atomOneDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
 // copy should reveal the copy button, but onCopy should be defined to modify its behavior
 // meanwhile, the presence of onCopy should be enough to show the copy button
 
 export default function Code(props: {
-  copy?: boolean;
+  children: string;
   className?: string;
-  value?: string;
+  copy?: boolean;
+  onCopy?: () => void;
   language?: string;
   numbers?: boolean;
-  onCopy?: () => void;
-  children: string;
-  syntaxStyle?: { [key: string]: React.CSSProperties };
+  presetTheme?: { [key: string]: React.CSSProperties } | undefined,
+  style?: CSSProperties;
+  value?: string;
 }) {
-  const [mounted, setMounted] = useState(false);
-  const { children, className, copy, onCopy, language, numbers, syntaxStyle } =
-    props;
-  const { _ } = useLanguage();
+  const [ mounted, setMounted ] = useState(false);
+  const { 
+    children, 
+    className, 
+    copy, 
+    onCopy, 
+    language = 'javascript', 
+    numbers, 
+    presetTheme,
+    style = {
+      background: 'transparent',
+      color: 'inherit',
+      padding: '0 10px 10px',
+      width: '100%'
+    }
+  } = props;
 
   const body = children
     .split('\n')
@@ -54,40 +66,27 @@ export default function Code(props: {
   }
 
   return (
-    <div className={`flex text-sm bg-black ${className || ''}`}>
+    <div className={className} style={{ position: 'relative' }}>
+      {copy && (
+        <div style={{
+          textAlign: 'right',
+          padding: '10px 10px 0 0',
+          color: 'inherit',
+          cursor: 'pointer',
+          whiteSpace: 'nowrap'
+        }} onClick={copy && handleCopy}>
+          <span>❐</span> Copy
+        </div>
+      )}
       {mounted && (
         <SyntaxHighlighter
-          className='flex-grow !p-4 !bg-transparent'
           language={language}
-          style={syntaxStyle || atomOneDark}
+          style={presetTheme}
           showLineNumbers={numbers}
+          customStyle={style}
         >
           {body}
         </SyntaxHighlighter>
-      )}
-
-      {!mounted && (
-        <pre
-          className='flex-grow !p-4 !bg-transparent'
-          style={{
-            display: 'block',
-            overflowX: 'auto',
-            padding: '0.5em',
-            color: 'rgb(171, 178, 191)',
-            background: 'rgb(40, 44, 52)',
-          }}
-        >
-          <code style={{ whiteSpace: 'pre' }}>{body}</code>
-        </pre>
-      )}
-
-      {copy && (
-        <div
-          className='text-sm p-4 text-gray-400 cursor-pointer whitespace-nowrap'
-          onClick={copy && handleCopy}
-        >
-          <i className='fas fa-copy'></i> {_('Copy')}
-        </div>
       )}
     </div>
   );

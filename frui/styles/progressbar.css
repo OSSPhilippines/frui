@@ -1,0 +1,24 @@
+.frui-progress {
+  background-color: #e0e0e0; 
+  border-radius: 4px; 
+  display: block; 
+  height: 8px; 
+  overflow: hidden; 
+}
+
+.frui-progress-bar {
+  background-color: currentColor; 
+  border-radius: 4px; 
+  height: 100%;
+  transition: width 0.2s ease-in-out; 
+}
+
+/*example*/
+.frui-progress.h-4 {
+  height: 16px; 
+}
+
+.frui-progress.rounded-full,
+.frui-progress-bar.rounded-full {
+  border-radius: 9999px; 
+}

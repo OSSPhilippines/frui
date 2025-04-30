@@ -362,8 +362,8 @@ export default function Home() {
                 {_('Password')}
               </Link>
               <div className="flex-grow"></div>
-              <Link className="text-t2" href="/field/select">
-                {_('Select')}
+              <Link className="text-t2" href="/field/radiogroup">
+                {_('Radio Group')}
                 <i className="fas fa-arrow-right ml-2"></i>
               </Link>
             </div>

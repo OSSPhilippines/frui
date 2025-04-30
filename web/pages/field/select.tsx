@@ -333,9 +333,9 @@ export default function Home() {
             </p>
 
             <div className="flex items-center border-t border-b2 mt-8 pt-4">
-              <Link className="text-t2" href="/field/radio">
+              <Link className="text-t2" href="/field/radiogroup">
                 <i className="fas fa-arrow-left mr-2"></i>
-                {_('Radio')}
+                {_('Radio Group')}
               </Link>
               <div className="flex-grow"></div>
               <Link className="text-t2" href="/field/slug">

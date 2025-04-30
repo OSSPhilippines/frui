@@ -109,6 +109,9 @@ const MainMenu: React.FC<{
         <Link href="/field/input" className={`${pathname.indexOf('/field/input') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Input')}</span>
         </Link>
+        <Link href="/field/knob" className={`${pathname.indexOf('/field/knob') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Knob')}</span>
+        </Link>
         <Link href="/field/markdown" className={`${pathname.indexOf('/field/markdown') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Markdown')}</span>
         </Link>

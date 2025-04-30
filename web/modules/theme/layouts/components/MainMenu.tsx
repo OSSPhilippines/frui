@@ -40,6 +40,9 @@ const MainMenu: React.FC<{
         <Link href="/component/alert" className={`${pathname.indexOf('/component/alert') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Alert')}</span>
         </Link>
+        <Link href="/component/accordion" className={`${pathname.indexOf('/component/accordion') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Accordion')}</span>
+        </Link>
         <Link href="/component/badge" className={`${pathname.indexOf('/component/badge') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Badge')}</span>
         </Link>
@@ -78,6 +81,9 @@ const MainMenu: React.FC<{
         </Link>
         <Link href="/field/code-editor" className={`${pathname.indexOf('/field/code-editor') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Code Editor')}</span>
+        </Link>
+        <Link href="/field/colorpicker" className={`${pathname.indexOf('/field/colorpicker') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Color Picker')}</span>
         </Link>
         <Link href="/field/country" className={`${pathname.indexOf('/field/country') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Country')}</span>
@@ -132,6 +138,9 @@ const MainMenu: React.FC<{
         </Link>
         <Link href="/field/radio" className={`${pathname.indexOf('/field/radio') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Radio')}</span>
+        </Link>
+        <Link href="/field/rating" className={`${pathname.indexOf('/field/rating') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Rating')}</span>
         </Link>
         <Link href="/field/select" className={`${pathname.indexOf('/field/select') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Select')}</span>

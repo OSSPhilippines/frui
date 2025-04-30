@@ -1,11 +1,13 @@
 @import url('./styles/globals.css');
 @import url('./styles/alert.css');
 @import url('./styles/badge.css');
+@import url('./styles/breadcrumb.css');
 @import url('./styles/button.css');
 @import url('./styles/control.css');
 @import url('./styles/fieldset.css');
 @import url('./styles/loader.css');
 @import url('./styles/modal.css');
+@import url('./styles/pagination.css');
 @import url('./styles/table.css');
 @import url('./styles/tabs.css');
 @import url('./styles/tooltip.css');
@@ -36,3 +38,4 @@
 @import url('./styles/fields/textarea.css');
 @import url('./styles/fields/textlist.css');
 @import url('./styles/fields/time.css');
+@import url('./styles/fields/wysiwyg.css');

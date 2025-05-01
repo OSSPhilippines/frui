@@ -1,4 +1,4 @@
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { atomOneDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { useEffect, useState } from 'react';
 
@@ -17,6 +17,7 @@ export default function Code(props: {
   onCopy?: () => void;
   language?: string;
   numbers?: boolean;
+  presetTheme?: { [key: string]: React.CSSProperties } | undefined;
 }) {
   const [mounted, setMounted] = useState(false);
   const {
@@ -27,6 +28,7 @@ export default function Code(props: {
     onCopy,
     language,
     numbers,
+    presetTheme = atomOneDark
   } = props;
 
   const body = children
@@ -73,7 +75,7 @@ export default function Code(props: {
         <SyntaxHighlighter
           language={language}
           showLineNumbers={numbers}
-          style={atomOneDark}
+          style={presetTheme}
           customStyle={{background: "transparent !important"}}
           className={codeClassNames.join(' ')}
         >

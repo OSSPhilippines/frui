@@ -13,6 +13,7 @@ import Crumbs from 'modules/components/Crumbs';
 import Props from 'modules/components/Props';
 //other
 import notify from '../../modules/notify';
+import { atelierCaveLight } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
 export default function Home() {
   //hooks
@@ -44,8 +45,9 @@ export default function Home() {
       _('No'),
       _('Additional behavior for copy button'),
     ],
-    [_('language'), _('string'), _('Yes'), _('Set programming language')],
-    [_('numbers'), _('boolean'), _('No'), _('Show line numbers')]
+    [_('language'), _('string'), _('No'), _('Set programming language')],
+    [_('numbers'), _('boolean'), _('No'), _('Show line numbers')],
+    [_('presetTheme'), _('Object'), _('No'), _('Set different preset theme from react-syntax-highlighter')]
   ];
   //render
   return (
@@ -192,13 +194,14 @@ export default function Home() {
             <h3 className='font-semibold text-md mt-8'>{_('Styling')}</h3>
             <p className='py-4'>
               <Translate>
-                Styling the component can be done with CSS classes. It should be noted, however, that the text colors used in syntax highlighting are under the purview of a preset <C>ReactSyntaxHighlighter</C> theme and cannot be modified.
+                Styling the component can be done with CSS classes. It should be noted, however, that the text colors used in syntax highlighting are under the purview of a preset <C>ReactSyntaxHighlighter</C> theme, which can only be modified by passing a <C>presetTheme</C> prop.
               </Translate>
             </p>
             <div className='curved overflow-hidden'>
               <div className='flex items-center justify-center p-3 bg-b1'>
                 <Code
-                  className='!bg-black'
+                  className='!bg-white'
+                  presetTheme={atelierCaveLight}
                   language='typescript'
                   copy
                   onCopy={() => alert('Code copied!')}
@@ -214,7 +217,7 @@ export default function Home() {
                   notify('success', _('Copied to clipboard'));
                 }}
               >
-                {`<Code className='!bg-black'\n  language="typescript"\n  copy onCopy={() => alert("Code copied!")}\n>\n  console.log("Hello, world!");\n</Code>`}
+                {`<Code className='!bg-white'\n  presetTheme={atelierCaveLight}\n  language="typescript"\n  copy onCopy={() => alert("Code copied!")}\n>\n  console.log("Hello, world!");\n</Code>`}
               </Code>
             </div>
             <p className='py-4'>
@@ -230,7 +233,7 @@ export default function Home() {
             <div className='curved overflow-hidden'>
               <div className='flex items-center justify-center p-3 bg-b1'>
                 <Code
-                  classes = {{root: "!bg-b4", copy: "!text-gray-400", code: '!px-10'}}
+                  classes = {{root: "!bg-black", copy: "!text-gray-400", code: '!px-10'}}
                   language='typescript'
                   copy
                   onCopy={() => alert('Code copied!')}
@@ -246,7 +249,7 @@ export default function Home() {
                   notify('success', _('Copied to clipboard'));
                 }}
               >
-                {`<Code classes = {{root: "!bg-b4", copy: "!text-gray-400", code: '!px-10'}}\n  language="typescript"\n  copy onCopy={() => alert("Code copied!")}\n>\n  console.log("Hello, world!");\n</Code>`}
+                {`<Code classes = {{root: "!bg-black", copy: "!text-gray-400", code: '!px-10'}}\n  language="typescript"\n  copy onCopy={() => alert("Code copied!")}\n>\n  console.log("Hello, world!");\n</Code>`}
               </Code>
             </div>
 

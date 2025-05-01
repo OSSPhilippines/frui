@@ -5,6 +5,8 @@ import { useLanguage } from 'r22n';
 //components
 import Link from 'next/link';
 import { Translate } from 'r22n';
+import { InlineCode as C } from 'modules/components/Code';
+
 import Code from 'frui/format/Code';
 import { LayoutPanel } from 'modules/theme';
 import Crumbs from 'modules/components/Crumbs';
@@ -22,25 +24,28 @@ export default function Home() {
   ];
 
   const props = [
-    [_('children'), _('string'), _('Yes'), _('Get code from children')],
-    [_('language'), _('string'), _('Yes'), _('Set programming language')],
-    [_('copy'), _('boolean'), _('No'), _('Show copy button')],
+    [_('children'), _('string'), _('Yes'), _('Get code from component children')],
     [
-      _('copyFunction'),
-      _('function'),
+      _('classes'),
+      _('Object'),
       _('No'),
-      _('Additional behavior for copy button'),
+      _('Additional classes for specific parts (root, copy button, code block)'),
     ],
     [
       _('className'),
       _('string'),
       _('No'),
-      _('Additional classes to the code block'),
+      _('Additional classes for the code block'),
     ],
-    [_('inline'), _('boolean'), _('No'), _('Inline code block')],
-    [_('numbers'), _('boolean'), _('No'), _('Show line numbers')],
-    [_('syntaxStyle'), _('React Object'), _('No'), _('Custom syntax style')],
-    [_('quote'), _('boolean'), _('No'), _('Wrap inline code block in quotes')],
+    [_('copy'), _('boolean'), _('No'), _('Show copy button')],
+    [
+      _('onCopy'),
+      _('function'),
+      _('No'),
+      _('Additional behavior for copy button'),
+    ],
+    [_('language'), _('string'), _('Yes'), _('Set programming language')],
+    [_('numbers'), _('boolean'), _('No'), _('Show line numbers')]
   ];
   //render
   return (
@@ -113,31 +118,11 @@ export default function Home() {
 
               <p className='py-4'>
                 <Translate>
-                  Defining a code block requires passing a <Code>language</Code>{' '}
+                  Defining a code block with syntax highlighting requires passing a <C>language</C>{' '}
                   prop to the component.
                 </Translate>
               </p>
 
-              <div className='flex items-center justify-center p-3 bg-b1'>
-                <Code>{`attributes: [Object object]`}</Code>
-              </div>
-              <Code
-                copy
-                numbers
-                language='ts'
-                onCopy={() => {
-                  notify('success', _('Copied to clipboard'));
-                }}
-              >
-                {`<Code>{\`attributes: [Object object]\`}</Code>`}
-              </Code>
-
-              <p className='py-4'>
-                <Translate>
-                  Not supplying a <Code>language</Code> prop will instead create
-                  an inline component.
-                </Translate>
-              </p>
             </div>
 
             <h2 id='customize' className='uppercase font-bold text-lg mt-8'>
@@ -153,7 +138,7 @@ export default function Home() {
             <p className='py-4'>
               <Translate>
                 Line numbers can be added to a code block by passing the{' '}
-                <Code>numbers</Code> prop.
+                <C>numbers</C> prop.
               </Translate>
             </p>
             <div className='curved overflow-hidden'>
@@ -178,8 +163,8 @@ export default function Home() {
             <p className='py-4'>
               <Translate>
                 A copy button can be added to a code block by passing the{' '}
-                <Code>copy</Code> prop. To customize the behavior of the copy
-                button, you can pass a function to the <Code>onCopy</Code> prop.
+                <C>copy</C> prop. To customize the behavior of the copy
+                button, you can pass a function to the <C>onCopy</C> prop.
               </Translate>
             </p>
             <div className='curved overflow-hidden'>
@@ -201,6 +186,67 @@ export default function Home() {
                 }}
               >
                 {`<Code language="typescript"\n  copy onCopy={() => alert("Code copied!")}\n>\n  console.log("Hello, world!");\n</Code>`}
+              </Code>
+            </div>
+
+            <h3 className='font-semibold text-md mt-8'>{_('Styling')}</h3>
+            <p className='py-4'>
+              <Translate>
+                Styling the component can be done with CSS classes. It should be noted, however, that the text colors used in syntax highlighting are under the purview of a preset <C>ReactSyntaxHighlighter</C> theme and cannot be modified.
+              </Translate>
+            </p>
+            <div className='curved overflow-hidden'>
+              <div className='flex items-center justify-center p-3 bg-b1'>
+                <Code
+                  className='!bg-black'
+                  language='typescript'
+                  copy
+                  onCopy={() => alert('Code copied!')}
+                >
+                  {'console.log("Hello, world!");'}
+                </Code>
+              </div>
+              <Code
+                copy
+                numbers
+                language='ts'
+                onCopy={() => {
+                  notify('success', _('Copied to clipboard'));
+                }}
+              >
+                {`<Code className='!bg-black'\n  language="typescript"\n  copy onCopy={() => alert("Code copied!")}\n>\n  console.log("Hello, world!");\n</Code>`}
+              </Code>
+            </div>
+            <p className='py-4'>
+              <Translate>
+                By default, the <C>className</C> prop affects the root of
+                the component. However, when specifying styles for other parts
+                of the component, i.e., the copy button and the code container,
+                one should use the <C>classes</C> prop, consisting of
+                three fields: <C>root</C>, <C>copy</C>, and{' '}
+                <C>code</C>.
+              </Translate>
+            </p>
+            <div className='curved overflow-hidden'>
+              <div className='flex items-center justify-center p-3 bg-b1'>
+                <Code
+                  classes = {{root: "!bg-b4", copy: "!text-gray-400", code: '!px-10'}}
+                  language='typescript'
+                  copy
+                  onCopy={() => alert('Code copied!')}
+                >
+                  {'console.log("Hello, world!");'}
+                </Code>
+              </div>
+              <Code
+                copy
+                numbers
+                language='ts'
+                onCopy={() => {
+                  notify('success', _('Copied to clipboard'));
+                }}
+              >
+                {`<Code classes = {{root: "!bg-b4", copy: "!text-gray-400", code: '!px-10'}}\n  language="typescript"\n  copy onCopy={() => alert("Code copied!")}\n>\n  console.log("Hello, world!");\n</Code>`}
               </Code>
             </div>
 

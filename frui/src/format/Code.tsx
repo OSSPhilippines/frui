@@ -1,6 +1,6 @@
-import type { CSSProperties } from 'react';
-import { useEffect, useState } from 'react';
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import SyntaxHighlighter from 'react-syntax-highlighter';
+import { useEffect, useState } from 'react';
 
 // copy should reveal the copy button, but onCopy should be defined to modify its behavior
 // meanwhile, the presence of onCopy should be enough to show the copy button
@@ -8,29 +8,25 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 export default function Code(props: {
   children: string;
   className?: string;
+  classes?: {
+    root?: string;
+    copy?: string;
+    code?: string;
+  };
   copy?: boolean;
   onCopy?: () => void;
   language?: string;
   numbers?: boolean;
-  presetTheme?: { [key: string]: React.CSSProperties } | undefined,
-  style?: CSSProperties;
-  value?: string;
 }) {
-  const [ mounted, setMounted ] = useState(false);
-  const { 
-    children, 
-    className, 
-    copy, 
-    onCopy, 
-    language = 'javascript', 
-    numbers, 
-    presetTheme,
-    style = {
-      background: 'transparent',
-      color: 'inherit',
-      padding: '0 10px 10px',
-      width: '100%'
-    }
+  const [mounted, setMounted] = useState(false);
+  const {
+    children,
+    className,
+    classes = {root: className},
+    copy,
+    onCopy,
+    language,
+    numbers,
   } = props;
 
   const body = children
@@ -52,38 +48,34 @@ export default function Code(props: {
     setMounted(true);
   }, []);
 
-  //renders inline code if language is not provided
-  if (!language) {
-    return (
-      <>
-        <span>&nbsp;</span>
-        <code className='text-sm text-t2 bg-b1 font-semibold inline-block p-0.5'>
-          {body}
-        </code>
-        <span>&nbsp;</span>
-      </>
-    );
+  //classes
+  const rootClassNames = ['frui-format-code-container'];
+  if (classes.root) {
+    rootClassNames.push(classes.root);
+  }
+  const copyClassNames = ['frui-format-code-copy'];
+  if (classes.copy) {
+    copyClassNames.push(classes.copy);
+  }
+  const codeClassNames = ['frui-format-code'];
+  if (classes.code) {
+    codeClassNames.push(classes.code);
   }
 
   return (
-    <div className={className} style={{ position: 'relative' }}>
+    <div className={rootClassNames.join(' ')}>
       {copy && (
-        <div style={{
-          textAlign: 'right',
-          padding: '10px 10px 0 0',
-          color: 'inherit',
-          cursor: 'pointer',
-          whiteSpace: 'nowrap'
-        }} onClick={copy && handleCopy}>
+        <div onClick={copy && handleCopy} className={copyClassNames.join(' ')}>
           <span>❐</span> Copy
         </div>
       )}
       {mounted && (
         <SyntaxHighlighter
           language={language}
-          style={presetTheme}
           showLineNumbers={numbers}
-          customStyle={style}
+          style={atomOneDark}
+          customStyle={{background: "transparent !important"}}
+          className={codeClassNames.join(' ')}
         >
           {body}
         </SyntaxHighlighter>

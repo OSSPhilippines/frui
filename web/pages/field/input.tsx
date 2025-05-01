@@ -212,8 +212,8 @@ export default function Home() {
                 {_('Imagelist')}
               </Link>
               <div className="flex-grow"></div>
-              <Link className="text-t2" href="/field/markdown">
-                {_('Markdown')}
+              <Link className="text-t2" href="/field/knob">
+                {_('Knob')}
                 <i className="fas fa-arrow-right ml-2"></i>
               </Link>
             </div>

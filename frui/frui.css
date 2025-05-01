@@ -10,6 +10,7 @@
 @import url('./styles/tabs.css');
 @import url('./styles/tooltip.css');
 
+@import url('./styles/formats/code.css');
 @import url('./styles/formats/color.css');
 @import url('./styles/formats/country.css');
 @import url('./styles/formats/imagelist.css');

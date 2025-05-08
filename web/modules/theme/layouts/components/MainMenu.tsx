@@ -40,6 +40,9 @@ const MainMenu: React.FC<{
         <Link href="/component/alert" className={`${pathname.indexOf('/component/alert') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Alert')}</span>
         </Link>
+        <Link href="/component/accordion" className={`${pathname.indexOf('/component/accordion') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Accordion')}</span>
+        </Link>
         <Link href="/component/badge" className={`${pathname.indexOf('/component/badge') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Badge')}</span>
         </Link>

@@ -136,7 +136,7 @@ import Taglist from './Taglist.js';
 import Textarea from './Textarea.js';
 import Textlist from './Textlist.js';
 import Time from './Time.js';
-//import WYSIWYG from './WYSIWYG.js';
+import WYSIWYG from './WYSIWYG.js';
 
 export {
   Autocomplete,

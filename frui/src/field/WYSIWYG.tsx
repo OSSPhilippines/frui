@@ -1,370 +1,437 @@
+import type { ChangeEvent, MouseEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-interface WYSIWYGProps {
-  value?: string;
-  history?: boolean;
-  font?: boolean;
-  size?: boolean;
-  format?: boolean;
-  paragraph?: boolean;
-  blockquote?: boolean;
-  style?: boolean;
-  color?: boolean;
-  highlight?: boolean;
-  text?: boolean;
-  textStyle?: boolean;
-  remove?: boolean;
-  indent?: boolean;
-  align?: boolean;
-  rule?: boolean;
-  list?: boolean;
-  lineheight?: boolean;
-  table?: boolean;
-  link?: boolean;
-  image?: boolean;
-  imageGallery?: boolean;
-  video?: boolean;
-  audio?: boolean;
-  math?: boolean;
-  fullscreen?: boolean;
-  showblocks?: boolean;
-  code?: boolean;
-  preview?: boolean;
-  print?: boolean;
-  save?: boolean;
-  template?: boolean;
-  dir?: 'ltr' | 'rtl';
-  onChange?: (value: string) => void;
-  onUpdate?: (state: { value: string; action: string }) => void;
-  [key: string]: any;
+export type WYSIWYGConfig = {
+  value?: string,
+  onChange?: (value: string) => void,
+  onUpdate?: (state: { value: string; action: string }) => void,
+};
+
+export type WYSIWYGProps = {
+  value?: string,
+  history?: boolean,
+  font?: boolean,
+  size?: boolean,
+  format?: boolean,
+  paragraph?: boolean,
+  blockquote?: boolean,
+  style?: boolean,
+  color?: boolean,
+  highlight?: boolean,
+  text?: boolean,
+  textStyle?: boolean,
+  remove?: boolean,
+  indent?: boolean,
+  align?: boolean,
+  rule?: boolean,
+  list?: boolean,
+  lineheight?: boolean,
+  table?: boolean,
+  link?: boolean,
+  image?: boolean,
+  imageGallery?: boolean,
+  video?: boolean,
+  audio?: boolean,
+  math?: boolean,
+  fullscreen?: boolean,
+  showblocks?: boolean,
+  code?: boolean,
+  preview?: boolean,
+  print?: boolean,
+  save?: boolean,
+  template?: boolean,
+  dir?: 'ltr' | 'rtl',
+  onChange?: (value: string) => void,
+  onUpdate?: (state: { value: string; action: string }) => void,
+  [key: string]: any
 }
 
-export default function WYSIWYG({
-  value = '',
-  history,
-  font,
-  size,
-  format,
-  paragraph,
-  blockquote,
-  style,
-  color,
-  highlight,
-  text,
-  textStyle,
-  remove,
-  indent,
-  align,
-  rule,
-  list,
-  lineheight,
-  table,
-  link,
-  image,
-  imageGallery,
-  video,
-  audio,
-  math,
-  fullscreen,
-  showblocks,
-  code,
-  preview,
-  print,
-  save,
-  template,
-  dir,
-  onChange,
-  onUpdate,
-  ...attributes
-}: WYSIWYGProps) {
-  const editorRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const hiddenInputRef = useRef<HTMLInputElement>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const galleryInputRef = useRef<HTMLInputElement>(null);
-  const [isCodeView, setIsCodeView] = useState(false);
-  const [currentValue, setCurrentValue] = useState(value);
+export function useWYSIWYG(config: WYSIWYGConfig) {
+  const { 
+    value = '',
+    onChange,
+    onUpdate
+  } = config;
+  
+  const [ isCodeView, setIsCodeView ] = useState(false);
+  const [ currentValue, setCurrentValue ] = useState(value);
 
   useEffect(() => {
-    if (editorRef.current && value !== editorRef.current.innerHTML && !isCodeView) {
-      editorRef.current.innerHTML = value;
+    if (refs.editor.current 
+      && typeof value === 'string'
+      && value !== refs.editor.current.innerHTML 
+      && !isCodeView
+    ) {
+      refs.editor.current.innerHTML = value;
       setCurrentValue(value);
-      if (hiddenInputRef.current) {
-        hiddenInputRef.current.value = value;
+      if (refs.hidden.current) {
+        refs.hidden.current.value = value;
       }
     }
-  }, [value, isCodeView]);
+  }, [ value, isCodeView ]);
 
-  const handleInput = () => {
-    if (editorRef.current && hiddenInputRef.current) {
-      const content = editorRef.current.innerHTML;
-      hiddenInputRef.current.value = content;
-      setCurrentValue(content);
-      onChange?.(content);
-      onUpdate?.({ value: content, action: 'input' });
-    }
+  const refs = {
+    editor: useRef<HTMLDivElement>(null),
+    textarea: useRef<HTMLTextAreaElement>(null),
+    hidden: useRef<HTMLInputElement>(null),
+    file: useRef<HTMLInputElement>(null),
+    gallery: useRef<HTMLInputElement>(null)
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isCodeView || !editorRef.current) return;
-    const target = e.target as HTMLElement;
-    const link = target.closest('a[href]');
-    if (link && (e.ctrlKey || e.metaKey)) {
-      e.preventDefault();
-      const href = link.getAttribute('href');
-      if (href) {
-        window.open(href, '_blank', 'noopener,noreferrer');
+  const blocks = {
+    listOrdered: () => handlers.execCommand('insertOrderedList'),
+    listUnordered: () => handlers.execCommand('insertUnorderedList'),
+    undo: () => handlers.execCommand('undo'),
+    redo: () => handlers.execCommand('redo'),
+    font(e: ChangeEvent<HTMLSelectElement>) {
+      handlers.execCommand('fontName', e.target.value);
+      e.target.value = '';
+    },
+    size(e: ChangeEvent<HTMLSelectElement>) {
+      handlers.execCommand('fontSize', e.target.value);
+      e.target.value = '';
+    },
+    format(e: ChangeEvent<HTMLSelectElement>) {
+      handlers.execCommand('formatBlock', e.target.value);
+    },
+    paragraph: () => handlers.execCommand('formatBlock', 'p'),
+    blockquote: () => handlers.execCommand('formatBlock', 'blockquote'),
+    bold: () => handlers.execCommand('bold'),
+    italic: () => handlers.execCommand('italic'),
+    underline: () => handlers.execCommand('underline'),
+    color(e: ChangeEvent<HTMLInputElement>) {
+      handlers.execCommand('foreColor', e.target.value);
+    },
+    highlight(e: ChangeEvent<HTMLInputElement>) {
+      handlers.execCommand('hiliteColor', e.target.value);
+    },
+    strikethrough: () => handlers.execCommand('strikeThrough'),
+    subscript: () => handlers.execCommand('subscript'),
+    superscript: () => handlers.execCommand('superscript'),
+    textStyle(e: ChangeEvent<HTMLSelectElement>) {
+      const style = e.target.value;
+      if (!refs.editor.current || isCodeView) return;
+      const selection = window.getSelection();
+      if (selection && selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const fragment = range.extractContents();
+        const styleSpans = fragment.querySelectorAll(
+          'span[class*="__frui-wysiwyg-t-"]'
+        );
+        styleSpans.forEach(span => {
+          const parent = span.parentNode;
+          while (span.firstChild) {
+            parent?.insertBefore(span.firstChild, span);
+          }
+          parent?.removeChild(span);
+        });
+        const span = document.createElement('span');
+        span.className = `__frui-wysiwyg-t-${style}`;
+        span.appendChild(fragment);
+        range.insertNode(span);
+        selection.removeAllRanges();
+        const newRange = document.createRange();
+        newRange.selectNodeContents(span);
+        selection.addRange(newRange);
       }
-    }
-  };
-
-  const execCommand = (command: string, value?: string) => {
-    if (!editorRef.current || isCodeView) return;
-    editorRef.current.focus();
-    document.execCommand(command, false, value);
-    editorRef.current.focus();
-    handleInput();
-    onUpdate?.({ value: editorRef.current.innerHTML || '', action: command });
-  };
-
-  const handleListOrdered = () => execCommand('insertOrderedList');
-  const handleListUnordered = () => execCommand('insertUnorderedList');
-  const handleUndo = () => execCommand('undo');
-  const handleRedo = () => execCommand('redo');
-
-  const handleFont = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    execCommand('fontName', e.target.value);
-    e.target.value = '';
-  };
-
-  const handleSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    execCommand('fontSize', e.target.value);
-    e.target.value = '';
-  };
-
-  const handleFormat = (e: React.ChangeEvent<HTMLSelectElement>) => execCommand('formatBlock', e.target.value);
-  const handleParagraph = () => execCommand('formatBlock', 'p');
-  const handleBlockquote = () => execCommand('formatBlock', 'blockquote');
-  const handleBold = () => execCommand('bold');
-  const handleItalic = () => execCommand('italic');
-  const handleUnderline = () => execCommand('underline');
-  const handleColor = (e: React.ChangeEvent<HTMLInputElement>) => execCommand('foreColor', e.target.value);
-  const handleHighlight = (e: React.ChangeEvent<HTMLInputElement>) => execCommand('hiliteColor', e.target.value);
-  const handleStrikethrough = () => execCommand('strikeThrough');
-  const handleSubscript = () => execCommand('subscript');
-  const handleSuperscript = () => execCommand('superscript');
-
-  const handleTextStyle = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const style = e.target.value;
-    if (!editorRef.current || isCodeView) return;
-    const selection = window.getSelection();
-    if (selection && selection.rangeCount > 0) {
-      const range = selection.getRangeAt(0);
-      const fragment = range.extractContents();
-      const styleSpans = fragment.querySelectorAll('span[class*="__frui-wysiwyg-t-"]');
-      styleSpans.forEach(span => {
-        const parent = span.parentNode;
-        while (span.firstChild) {
-          parent?.insertBefore(span.firstChild, span);
+      handlers.input();
+      e.target.value = '';
+    },
+    removeFormat: () => {
+      if (!refs.editor.current || isCodeView) return;
+      const selection = window.getSelection();
+      if (selection && selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const container = document.createElement('div');
+        container.appendChild(range.cloneContents());
+        const styledElements = container.querySelectorAll(
+          'b, i, u, strike, sub, sup, font, span[style], '
+          + 'span[class*="__frui-wysiwyg-t-"]'
+        );
+        styledElements.forEach(element => {
+          const textNode = document.createTextNode(element.textContent || '');
+          element.parentNode?.replaceChild(textNode, element);
+        });
+        container.normalize();
+        const p = document.createElement('p');
+        p.innerHTML = container.innerHTML || ' ';
+        range.deleteContents();
+        range.insertNode(p);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+      handlers.input();
+      onUpdate && onUpdate({ 
+        value: refs.editor.current.innerHTML || '', 
+        action: 'removeFormat' 
+      });
+    },
+    indent: () => handlers.execCommand('indent'),
+    outdent: () => handlers.execCommand('outdent'),
+    alignLeft: () => handlers.execCommand('justifyLeft'),
+    alignCenter: () => handlers.execCommand('justifyCenter'),
+    alignRight: () => handlers.execCommand('justifyRight'),
+    rule: () => handlers.execCommand('insertHorizontalRule'),
+    lineHeight(e: ChangeEvent<HTMLSelectElement>) {
+      if (refs.editor.current && !isCodeView) {
+        refs.editor.current.style.lineHeight = e.target.value;
+        handlers.input();
+      }
+    },
+    table() {
+      if (isCodeView) return;
+      const rows = prompt('Enter number of rows', '2');
+      const cols = prompt('Enter number of columns', '2');
+      if (rows && cols && !isNaN(+rows) && !isNaN(+cols)) {
+        const tableHTML = `<table border="1">${Array.from({ length: parseInt(rows) }, () =>
+          `<tr>${Array.from({ length: parseInt(cols) }, () => '<td> </td>').join('')}</tr>`
+        ).join('')}</table>`;
+        handlers.execCommand('insertHTML', tableHTML);
+      }
+    },
+    link() {
+      if (isCodeView) return;
+      const url = prompt('Enter URL', 'https://');
+      if (url && /^https?:\/\//.test(url)) handlers.execCommand('createLink', url);
+    },
+    image: () => refs.file.current?.click(),
+    imageUpload(e: ChangeEvent<HTMLInputElement>) {
+      if (isCodeView) return;
+      const file = e.target.files?.[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = () => handlers.execCommand('insertImage', reader.result as string);
+        reader.readAsDataURL(file);
+      }
+    },
+    imageGallery: () => refs.gallery.current?.click(),
+    galleryUpload(e: ChangeEvent<HTMLInputElement>) {
+      if (isCodeView) return;
+      const files = e.target.files;
+      if (files) {
+        Array.from(files).forEach((file) => {
+          if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = () => handlers.execCommand('insertImage', reader.result as string);
+            reader.readAsDataURL(file);
+          }
+        });
+      }
+    },
+    video() {
+      if (isCodeView) return;
+      const url = prompt('Enter video URL (e.g., YouTube embed)', '');
+      if (url && /^https?:\/\//.test(url)) {
+        handlers.execCommand('insertHTML', `<iframe src="${url}" width="560" height="315" frameborder="0" allowfullscreen></iframe>`);
+      }
+    },
+    audio() {
+      if (isCodeView) return;
+      const url = prompt('Enter audio URL', '');
+      if (url && /^https?:\/\//.test(url)) {
+        handlers.execCommand('insertHTML', `<audio controls src="${url}"></audio>`);
+      }
+    },
+    math() {
+      if (isCodeView) return;
+      const expr = prompt('Enter math expression (e.g., x^2)', '');
+      if (expr) {
+        handlers.execCommand('insertHTML', `<span class="frui-wysiwyg-math">[Math: ${expr}]</span>`);
+      }
+    },
+    fullscreen: () => {
+      if (refs.editor.current) {
+        if (!document.fullscreenElement) {
+          refs.editor.current.requestFullscreen();
+        } else {
+          document.exitFullscreen();
         }
-        parent?.removeChild(span);
-      });
-      const span = document.createElement('span');
-      span.className = `__frui-wysiwyg-t-${style}`;
-      span.appendChild(fragment);
-      range.insertNode(span);
-      selection.removeAllRanges();
-      const newRange = document.createRange();
-      newRange.selectNodeContents(span);
-      selection.addRange(newRange);
-    }
-    handleInput();
-    e.target.value = '';
-  };
-
-  const handleRemoveFormat = () => {
-    if (!editorRef.current || isCodeView) return;
-    const selection = window.getSelection();
-    if (selection && selection.rangeCount > 0) {
-      const range = selection.getRangeAt(0);
-      const container = document.createElement('div');
-      container.appendChild(range.cloneContents());
-      const styledElements = container.querySelectorAll('b, i, u, strike, sub, sup, font, span[style], span[class*="__frui-wysiwyg-t-"]');
-      styledElements.forEach(element => {
-        const textNode = document.createTextNode(element.textContent || '');
-        element.parentNode?.replaceChild(textNode, element);
-      });
-      container.normalize();
-      const p = document.createElement('p');
-      p.innerHTML = container.innerHTML || ' ';
-      range.deleteContents();
-      range.insertNode(p);
-      selection.removeAllRanges();
-      selection.addRange(range);
-    }
-    handleInput();
-    onUpdate?.({ value: editorRef.current.innerHTML || '', action: 'removeFormat' });
-  };
-
-  const handleIndent = () => execCommand('indent');
-  const handleOutdent = () => execCommand('outdent');
-  const handleAlignLeft = () => execCommand('justifyLeft');
-  const handleAlignCenter = () => execCommand('justifyCenter');
-  const handleAlignRight = () => execCommand('justifyRight');
-  const handleRule = () => execCommand('insertHorizontalRule');
-  const handleLineHeight = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (editorRef.current && !isCodeView) {
-      editorRef.current.style.lineHeight = e.target.value;
-      handleInput();
-    }
-  };
-  const handleTable = () => {
-    if (isCodeView) return;
-    const rows = prompt('Enter number of rows', '2');
-    const cols = prompt('Enter number of columns', '2');
-    if (rows && cols && !isNaN(+rows) && !isNaN(+cols)) {
-      const tableHTML = `<table border="1">${Array.from({ length: parseInt(rows) }, () =>
-        `<tr>${Array.from({ length: parseInt(cols) }, () => '<td> </td>').join('')}</tr>`
-      ).join('')}</table>`;
-      execCommand('insertHTML', tableHTML);
-    }
-  };
-  const handleLink = () => {
-    if (isCodeView) return;
-    const url = prompt('Enter URL', 'https://');
-    if (url && /^https?:\/\//.test(url)) execCommand('createLink', url);
-  };
-  const handleImage = () => fileInputRef.current?.click();
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (isCodeView) return;
-    const file = e.target.files?.[0];
-    if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = () => execCommand('insertImage', reader.result as string);
-      reader.readAsDataURL(file);
-    }
-  };
-  const handleImageGallery = () => galleryInputRef.current?.click();
-  const handleGalleryUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (isCodeView) return;
-    const files = e.target.files;
-    if (files) {
-      Array.from(files).forEach((file) => {
-        if (file.type.startsWith('image/')) {
-          const reader = new FileReader();
-          reader.onload = () => execCommand('insertImage', reader.result as string);
-          reader.readAsDataURL(file);
+      }
+    },
+    showBlocks() {
+      if (refs.editor.current && !isCodeView) {
+        refs.editor.current.classList.toggle('frui-wysiwyg-show-block');
+      }
+    },
+    codeViewToggle() {
+      if (refs.editor.current && refs.textarea.current && refs.hidden.current) {
+        if (!isCodeView) {
+          refs.textarea.current.value = refs.editor.current.innerHTML;
+          refs.hidden.current.value = refs.editor.current.innerHTML;
+          refs.textarea.current.style.display = 'block';
+          refs.editor.current.style.display = 'none';
+        } else {
+          refs.editor.current.innerHTML = refs.textarea.current.value;
+          refs.hidden.current.value = refs.textarea.current.value;
+          refs.textarea.current.style.display = 'none';
+          refs.editor.current.style.display = 'block';
         }
-      });
-    }
-  };
-  const handleVideo = () => {
-    if (isCodeView) return;
-    const url = prompt('Enter video URL (e.g., YouTube embed)', '');
-    if (url && /^https?:\/\//.test(url)) {
-      execCommand('insertHTML', `<iframe src="${url}" width="560" height="315" frameborder="0" allowfullscreen></iframe>`);
-    }
-  };
-  const handleAudio = () => {
-    if (isCodeView) return;
-    const url = prompt('Enter audio URL', '');
-    if (url && /^https?:\/\//.test(url)) {
-      execCommand('insertHTML', `<audio controls src="${url}"></audio>`);
-    }
-  };
-  const handleMath = () => {
-    if (isCodeView) return;
-    const expr = prompt('Enter math expression (e.g., x^2)', '');
-    if (expr) {
-      execCommand('insertHTML', `<span class="frui-wysiwyg-math">[Math: ${expr}]</span>`);
-    }
-  };
-  const handleFullscreen = () => {
-    if (editorRef.current) {
-      if (!document.fullscreenElement) {
-        editorRef.current.requestFullscreen();
-      } else {
-        document.exitFullscreen();
+        setIsCodeView(!isCodeView);
+        setCurrentValue(!isCodeView ? refs.textarea.current.value : refs.editor.current.innerHTML);
+        onChange && onChange(!isCodeView ? refs.textarea.current.value : refs.editor.current.innerHTML);
+        onUpdate && onUpdate({ value: !isCodeView ? refs.textarea.current.value : refs.editor.current.innerHTML, action: 'codeViewToggle' });
+      }
+    },
+    preview() {
+      if (refs.editor.current) {
+        const win = window.open('', '_blank');
+        win?.document.write(`<html><body>${refs.editor.current.innerHTML}</body></html>`);
+        win?.document.close();
+      }
+    },
+    print: () => window.print(),
+    save() {
+      if (refs.editor.current) {
+        const blob = new Blob([refs.editor.current.innerHTML], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'editor-content.html';
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+    },
+    template(e: ChangeEvent<HTMLSelectElement>) {
+      const templateHTML = e.target.value;
+      if (templateHTML && !isCodeView) handlers.execCommand('insertHTML', templateHTML);
+      e.target.value = '';
+    },
+    dirToggle() {
+      if (refs.editor.current && !isCodeView) {
+        const currentDir = refs.editor.current.getAttribute('dir') || 'ltr';
+        refs.editor.current.setAttribute('dir', currentDir === 'ltr' ? 'rtl' : 'ltr');
+        handlers.input();
+      }
+    },
+    dirLTR() {
+      if (refs.editor.current && !isCodeView) {
+        refs.editor.current.setAttribute('dir', 'ltr');
+        handlers.input();
+      }
+    },
+    dirRTL() {
+      if (refs.editor.current && !isCodeView) {
+        refs.editor.current.setAttribute('dir', 'rtl');
+        handlers.input();
       }
     }
   };
-  const handleShowBlocks = () => {
-    if (editorRef.current && !isCodeView) {
-      editorRef.current.classList.toggle('frui-wysiwyg-show-block');
-    }
-  };
-  const handleCodeViewToggle = () => {
-    if (editorRef.current && textareaRef.current && hiddenInputRef.current) {
-      if (!isCodeView) {
-        textareaRef.current.value = editorRef.current.innerHTML;
-        hiddenInputRef.current.value = editorRef.current.innerHTML;
-        textareaRef.current.style.display = 'block';
-        editorRef.current.style.display = 'none';
-      } else {
-        editorRef.current.innerHTML = textareaRef.current.value;
-        hiddenInputRef.current.value = textareaRef.current.value;
-        textareaRef.current.style.display = 'none';
-        editorRef.current.style.display = 'block';
+
+  const handlers = {
+    change(e: ChangeEvent<HTMLTextAreaElement>) {
+      if (isCodeView && refs.hidden.current) {
+        refs.hidden.current.value = e.target.value;
+        setCurrentValue(e.target.value);
+        onChange?.(e.target.value);
+        onUpdate?.({ value: e.target.value, action: 'input' });
+      }  
+    },
+    input() {
+      if (refs.editor.current && refs.hidden.current) {
+        const content = refs.editor.current.innerHTML;
+        refs.hidden.current.value = content;
+        setCurrentValue(content);
+        onChange?.(content);
+        onUpdate?.({ value: content, action: 'input' });
       }
-      setIsCodeView(!isCodeView);
-      setCurrentValue(!isCodeView ? textareaRef.current.value : editorRef.current.innerHTML);
-      onChange?.(!isCodeView ? textareaRef.current.value : editorRef.current.innerHTML);
-      onUpdate?.({ value: !isCodeView ? textareaRef.current.value : editorRef.current.innerHTML, action: 'codeViewToggle' });
+    },
+    click(e: MouseEvent<HTMLDivElement>) {
+      if (isCodeView || !refs.editor.current) return;
+      const target = e.target as HTMLElement;
+      const link = target.closest('a[href]');
+      if (link && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        if (href) {
+          window.open(href, '_blank', 'noopener,noreferrer');
+        }
+      }
+    },
+    execCommand(command: string, value?: string) {
+      if (!refs.editor.current || isCodeView) return;
+      refs.editor.current.focus();
+      document.execCommand(command, false, value);
+      refs.editor.current.focus();
+      handlers.input();
+      onUpdate?.({ value: refs.editor.current.innerHTML || '', action: command });
     }
   };
-  const handlePreview = () => {
-    if (editorRef.current) {
-      const win = window.open('', '_blank');
-      win?.document.write(`<html><body>${editorRef.current.innerHTML}</body></html>`);
-      win?.document.close();
-    }
-  };
-  const handlePrint = () => window.print();
-  const handleSave = () => {
-    if (editorRef.current) {
-      const blob = new Blob([editorRef.current.innerHTML], { type: 'text/html' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'editor-content.html';
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-  };
-  const handleTemplate = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const templateHTML = e.target.value;
-    if (templateHTML && !isCodeView) execCommand('insertHTML', templateHTML);
-    e.target.value = '';
-  };
-  const handleDirToggle = () => {
-    if (editorRef.current && !isCodeView) {
-      const currentDir = editorRef.current.getAttribute('dir') || 'ltr';
-      editorRef.current.setAttribute('dir', currentDir === 'ltr' ? 'rtl' : 'ltr');
-      handleInput();
-    }
-  };
-  const handleDirLTR = () => {
-    if (editorRef.current && !isCodeView) {
-      editorRef.current.setAttribute('dir', 'ltr');
-      handleInput();
-    }
-  };
-  const handleDirRTL = () => {
-    if (editorRef.current && !isCodeView) {
-      editorRef.current.setAttribute('dir', 'rtl');
-      handleInput();
-    }
-  };
+
+  return { refs, blocks, handlers, isCodeView, value: currentValue };
+};
+
+export default function WYSIWYG(props: WYSIWYGProps) {
+  const {
+    history,
+    font,
+    size,
+    format,
+    paragraph,
+    blockquote,
+    style,
+    color,
+    highlight,
+    text,
+    textStyle,
+    remove,
+    indent,
+    align,
+    rule,
+    list,
+    lineheight,
+    table,
+    link,
+    image,
+    imageGallery,
+    video,
+    audio,
+    math,
+    fullscreen,
+    showblocks,
+    code,
+    preview,
+    print,
+    save,
+    template,
+    dir,
+    onChange,
+    onUpdate,
+    ...attributes
+  } = props;
+
+  const { 
+    refs, 
+    blocks, 
+    handlers, 
+    value,
+    isCodeView
+  } = useWYSIWYG({
+    value: props.value,
+    onChange,
+    onUpdate
+  });
 
   return (
     <div className={`frui-wysiwyg ${dir === 'rtl' ? 'frui-wysiwyg-rtl' : ''}`}>
       <div className="frui-wysiwyg-toolbar">
         {history && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleUndo} title="Undo" aria-label="Undo" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.undo} 
+              title="Undo" 
+              aria-label="Undo" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-undo"></i>
             </button>
-            <button className="frui-wysiwyg-btn" onClick={handleRedo} title="Redo" aria-label="Redo" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.redo} 
+              title="Redo" 
+              aria-label="Redo" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-redo"></i>
             </button>
           </div>
@@ -373,21 +440,39 @@ export default function WYSIWYG({
           <div className="frui-wysiwyg-btn-module">
             <select
               className="frui-wysiwyg-btn-select"
-              onChange={handleFont}
+              onChange={blocks.font}
               title="Font"
               aria-label="Font"
               defaultValue=""
               disabled={isCodeView}
             >
-              <option value="" disabled>Font</option>
-              <option value="Arial" style={{ fontFamily: 'Arial' }}>Arial</option>
-              <option value="Comic Sans MS" style={{ fontFamily: 'Comic Sans MS' }}>Comic Sans MS</option>
-              <option value="Courier New" style={{ fontFamily: 'Courier New' }}>Courier New</option>
-              <option value="Impact" style={{ fontFamily: 'Impact' }}>Impact</option>
-              <option value="Georgia" style={{ fontFamily: 'Georgia' }}>Georgia</option>
-              <option value="Tahoma" style={{ fontFamily: 'Tahoma' }}>Tahoma</option>
-              <option value="Trebuchet MS" style={{ fontFamily: 'Trebuchet MS' }}>Trebuchet MS</option>
-              <option value="Verdana" style={{ fontFamily: 'Verdana' }}>Verdana</option>
+              <option value="" disabled>
+                Font
+              </option>
+              <option value="Arial" style={{ fontFamily: 'Arial' }}>
+                Arial
+              </option>
+              <option value="Comic Sans MS" style={{ fontFamily: 'Comic Sans MS' }}>
+                Comic Sans MS
+              </option>
+              <option value="Courier New" style={{ fontFamily: 'Courier New' }}>
+                Courier New
+              </option>
+              <option value="Impact" style={{ fontFamily: 'Impact' }}>
+                Impact
+              </option>
+              <option value="Georgia" style={{ fontFamily: 'Georgia' }}>
+                Georgia
+              </option>
+              <option value="Tahoma" style={{ fontFamily: 'Tahoma' }}>
+                Tahoma
+              </option>
+              <option value="Trebuchet MS" style={{ fontFamily: 'Trebuchet MS' }}>
+                Trebuchet MS
+              </option>
+              <option value="Verdana" style={{ fontFamily: 'Verdana' }}>
+                Verdana
+              </option>
             </select>
           </div>
         )}
@@ -395,7 +480,7 @@ export default function WYSIWYG({
           <div className="frui-wysiwyg-btn-module">
             <select
               className="frui-wysiwyg-btn-select"
-              onChange={handleSize}
+              onChange={blocks.size}
               title="Size"
               aria-label="Font Size"
               defaultValue=""
@@ -425,7 +510,7 @@ export default function WYSIWYG({
           <div className="frui-wysiwyg-btn-module">
             <select
               className="frui-wysiwyg-btn-select"
-              onChange={handleFormat}
+              onChange={blocks.format}
               title="Format"
               aria-label="Block Format"
               defaultValue=""
@@ -445,27 +530,57 @@ export default function WYSIWYG({
         )}
         {paragraph && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleParagraph} title="Paragraph" aria-label="Paragraph" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.paragraph} 
+              title="Paragraph" 
+              aria-label="Paragraph" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-paragraph"></i>
             </button>
           </div>
         )}
         {blockquote && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleBlockquote} title="Blockquote" aria-label="Blockquote" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.blockquote} 
+              title="Blockquote" 
+              aria-label="Blockquote" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-quote-right"></i>
             </button>
           </div>
         )}
         {style && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleBold} title="Bold" aria-label="Bold" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.bold} 
+              title="Bold" 
+              aria-label="Bold" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-bold"></i>
             </button>
-            <button className="frui-wysiwyg-btn" onClick={handleItalic} title="Italic" aria-label="Italic" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.italic} 
+              title="Italic" 
+              aria-label="Italic" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-italic"></i>
             </button>
-            <button className="frui-wysiwyg-btn" onClick={handleUnderline} title="Underline" aria-label="Underline" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.underline} 
+              title="Underline" 
+              aria-label="Underline" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-underline"></i>
             </button>
           </div>
@@ -474,7 +589,7 @@ export default function WYSIWYG({
           <div className="frui-wysiwyg-btn-module">
             <input
               type="color"
-              onChange={handleColor}
+              onChange={blocks.color}
               title="Text Color"
               aria-label="Text Color"
               style={{ width: '34px', height: '34px', padding: 0, border: 'none' }}
@@ -486,7 +601,7 @@ export default function WYSIWYG({
           <div className="frui-wysiwyg-btn-module">
             <input
               type="color"
-              onChange={handleHighlight}
+              onChange={blocks.highlight}
               title="Highlight"
               aria-label="Highlight"
               style={{ width: '34px', height: '34px', padding: 0, border: 'none' }}
@@ -496,13 +611,31 @@ export default function WYSIWYG({
         )}
         {text && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleStrikethrough} title="Strikethrough" aria-label="Strikethrough" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.strikethrough} 
+              title="Strikethrough" 
+              aria-label="Strikethrough" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-strikethrough"></i>
             </button>
-            <button className="frui-wysiwyg-btn" onClick={handleSubscript} title="Subscript" aria-label="Subscript" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.subscript} 
+              title="Subscript" 
+              aria-label="Subscript" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-subscript"></i>
             </button>
-            <button className="frui-wysiwyg-btn" onClick={handleSuperscript} title="Superscript" aria-label="Superscript" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.superscript} 
+              title="Superscript" 
+              aria-label="Superscript" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-superscript"></i>
             </button>
           </div>
@@ -511,65 +644,161 @@ export default function WYSIWYG({
           <div className="frui-wysiwyg-btn-module">
             <select
               className="frui-wysiwyg-btn-select"
-              onChange={handleTextStyle}
+              onChange={blocks.textStyle}
               title="Text Style"
               aria-label="Text Style"
               defaultValue=""
               disabled={isCodeView}
             >
               <option value="" disabled>T Style</option>
-              <option value="code" style={{ backgroundColor: '#F9F9F9', border: '1px solid #E1E1E1', padding: '0 4px' }}>Code</option>
-              <option value="translucent" style={{ opacity: 0.6 }}>Translucent</option>
-              <option value="shadow" style={{ textShadow: '2px 2px 2px #B1B1B1' }}>Shadow</option>
-              <option value="spaced" style={{ letterSpacing: '2px', wordSpacing: '4px' }}>Spaced</option>
-              <option value="bordered" style={{ border: '2px solid #000000', padding: '2px 6px' }}>Bordered</option>
-              <option value="neon" style={{ textShadow: '0 0 5px #FFFFFF, 0 0 10px #FFFFFF, 0 0 20px #FF00DE', color: '#FFFFFF', backgroundColor: '#000000', padding: '2px 6px' }}>NEON</option>
+              <option 
+                value="code" 
+                style={{ backgroundColor: '#F9F9F9', 
+                border: '1px solid #E1E1E1', padding: '0 4px' }}
+              >
+                Code
+              </option>
+              <option 
+                value="translucent" 
+                style={{ opacity: 0.6 }}
+              >
+                Translucent
+              </option>
+              <option 
+                value="shadow" 
+                style={{ textShadow: '2px 2px 2px #B1B1B1' }}
+              >
+                Shadow
+              </option>
+              <option 
+                value="spaced" 
+                style={{ 
+                  letterSpacing: '2px', 
+                  wordSpacing: '4px' 
+                }}
+              >
+                  Spaced
+              </option>
+              <option 
+                value="bordered" 
+                style={{ 
+                  border: '2px solid #000000', 
+                  padding: '2px 6px' 
+                }}
+              >
+                Bordered
+              </option>
+              <option 
+                value="neon" 
+                style={{ 
+                  textShadow: '0 0 5px #FFFFFF, 0 0 10px #FFFFFF, 0 0 20px #FF00DE', 
+                  color: '#FFFFFF', 
+                  backgroundColor: '#000000', 
+                  padding: '2px 6px' 
+                }}
+              >
+                NEON
+              </option>
             </select>
           </div>
         )}
         {remove && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleRemoveFormat} title="Remove Format" aria-label="Remove Format" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.removeFormat} 
+              title="Remove Format" 
+              aria-label="Remove Format" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-eraser"></i>
             </button>
           </div>
         )}
         {indent && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleIndent} title="Indent" aria-label="Indent" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.indent} 
+              title="Indent" 
+              aria-label="Indent" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-indent"></i>
             </button>
-            <button className="frui-wysiwyg-btn" onClick={handleOutdent} title="Outdent" aria-label="Outdent" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.outdent} 
+              title="Outdent" 
+              aria-label="Outdent" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-outdent"></i>
             </button>
           </div>
         )}
         {align && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleAlignLeft} title="Align Left" aria-label="Align Left" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.alignLeft} 
+              title="Align Left" 
+              aria-label="Align Left" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-align-left"></i>
             </button>
-            <button className="frui-wysiwyg-btn" onClick={handleAlignCenter} title="Align Center" aria-label="Align Center" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.alignCenter} 
+              title="Align Center" 
+              aria-label="Align Center" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-align-center"></i>
             </button>
-            <button className="frui-wysiwyg-btn" onClick={handleAlignRight} title="Align Right" aria-label="Align Right" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.alignRight} 
+              title="Align Right" 
+              aria-label="Align Right" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-align-right"></i>
             </button>
           </div>
         )}
         {rule && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleRule} title="Horizontal Rule" aria-label="Horizontal Rule" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.rule} 
+              title="Horizontal Rule" 
+              aria-label="Horizontal Rule" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-minus"></i>
             </button>
           </div>
         )}
         {list && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleListOrdered} title="Ordered List" aria-label="Ordered List" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.listOrdered} 
+              title="Ordered List" 
+              aria-label="Ordered List" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-list-ol"></i>
             </button>
-            <button className="frui-wysiwyg-btn" onClick={handleListUnordered} title="Unordered List" aria-label="Unordered List" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.listUnordered} 
+              title="Unordered List" 
+              aria-label="Unordered List" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-list-ul"></i>
             </button>
           </div>
@@ -578,7 +807,7 @@ export default function WYSIWYG({
           <div className="frui-wysiwyg-btn-module">
             <select
               className="frui-wysiwyg-btn-select"
-              onChange={handleLineHeight}
+              onChange={blocks.lineHeight}
               title="Line Height"
               aria-label="Line Height"
               defaultValue="1"
@@ -593,27 +822,43 @@ export default function WYSIWYG({
         )}
         {table && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleTable} title="Table" aria-label="Insert Table" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.table} 
+              title="Table" 
+              aria-label="Insert Table" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-table"></i>
             </button>
           </div>
         )}
         {link && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleLink} title="Link" aria-label="Insert Link" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.link} 
+              title="Link" 
+              aria-label="Insert Link" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-link"></i>
             </button>
           </div>
         )}
         {image && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleImage} title="Image" aria-label="Insert Image" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.image} 
+              title="Image" 
+              aria-label="Insert Image" disabled={isCodeView}>
               <i className="fas fa-fw fa-image"></i>
             </button>
             <input
               type="file"
-              ref={fileInputRef}
-              onChange={handleImageUpload}
+              ref={refs.file}
+              onChange={blocks.imageUpload}
               accept="image/*"
               style={{ display: 'none' }}
               aria-hidden="true"
@@ -622,13 +867,19 @@ export default function WYSIWYG({
         )}
         {imageGallery && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleImageGallery} title="Image Gallery" aria-label="Insert from Gallery" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.imageGallery} 
+              title="Image Gallery" 
+              aria-label="Insert from Gallery" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-images"></i>
             </button>
             <input
               type="file"
-              ref={galleryInputRef}
-              onChange={handleGalleryUpload}
+              ref={refs.gallery}
+              onChange={blocks.galleryUpload}
               accept="image/*"
               multiple
               style={{ display: 'none' }}
@@ -638,35 +889,64 @@ export default function WYSIWYG({
         )}
         {video && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleVideo} title="Video" aria-label="Insert Video" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.video} 
+              title="Video" 
+              aria-label="Insert Video" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-video"></i>
             </button>
           </div>
         )}
         {audio && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleAudio} title="Audio" aria-label="Insert Audio" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.audio} 
+              title="Audio" 
+              aria-label="Insert Audio" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-volume-up"></i>
             </button>
           </div>
         )}
         {math && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleMath} title="Math" aria-label="Insert Math" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.math} 
+              title="Math" 
+              aria-label="Insert Math" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-square-root-alt"></i>
             </button>
           </div>
         )}
         {fullscreen && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleFullscreen} title="Fullscreen" aria-label="Toggle Fullscreen">
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.fullscreen} 
+              title="Fullscreen" 
+              aria-label="Toggle Fullscreen"
+            >
               <i className="fas fa-fw fa-expand"></i>
             </button>
           </div>
         )}
         {showblocks && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleShowBlocks} title="Show Blocks" aria-label="Toggle Block Visibility" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.showBlocks} 
+              title="Show Blocks" 
+              aria-label="Toggle Block Visibility" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-border-all"></i>
             </button>
           </div>
@@ -675,9 +955,12 @@ export default function WYSIWYG({
           <div className="frui-wysiwyg-btn-module">
             <button
               className="frui-wysiwyg-btn"
-              onClick={handleCodeViewToggle}
-              title={isCodeView ? "WYSIWYG View" : "Code View"}
-              aria-label={isCodeView ? "Switch to WYSIWYG View" : "Switch to Code View"}
+              onClick={blocks.codeViewToggle}
+              title={isCodeView ? 'WYSIWYG View' : 'Code View'}
+              aria-label={isCodeView 
+                ? 'Switch to WYSIWYG View' 
+                : 'Switch to Code View'
+              }
             >
               <i className={`fas fa-fw ${isCodeView ? 'fa-eye' : 'fa-code'}`}></i>
             </button>
@@ -685,21 +968,36 @@ export default function WYSIWYG({
         )}
         {preview && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handlePreview} title="Preview" aria-label="Preview Content">
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.preview} 
+              title="Preview" 
+              aria-label="Preview Content"
+            >
               <i className="fas fa-fw fa-eye"></i>
             </button>
           </div>
         )}
         {print && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handlePrint} title="Print" aria-label="Print">
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.print} 
+              title="Print" 
+              aria-label="Print"
+            >
               <i className="fas fa-fw fa-print"></i>
             </button>
           </div>
         )}
         {save && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleSave} title="Save" aria-label="Save as HTML">
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.save} 
+              title="Save" 
+              aria-label="Save as HTML"
+            >
               <i className="fas fa-fw fa-save"></i>
             </button>
           </div>
@@ -708,27 +1006,49 @@ export default function WYSIWYG({
           <div className="frui-wysiwyg-btn-module">
             <select
               className="frui-wysiwyg-btn-select"
-              onChange={handleTemplate}
+              onChange={blocks.template}
               title="Template"
               aria-label="Insert Template"
               defaultValue=""
               disabled={isCodeView}
             >
               <option value="" disabled>Template</option>
-              <option value="<p><strong>Header</strong><br>Content</p>">Simple Block</option>
-              <option value="<table border='1'><tr><td>Cell</td></tr></table>">Table Block</option>
+              <option value="<p><strong>Header</strong><br>Content</p>">
+                Simple Block
+              </option>
+              <option value="<table border='1'><tr><td>Cell</td></tr></table>">
+                Table Block
+              </option>
             </select>
           </div>
         )}
         {dir && (
           <div className="frui-wysiwyg-btn-module">
-            <button className="frui-wysiwyg-btn" onClick={handleDirToggle} title="Toggle Direction" aria-label="Toggle Text Direction" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.dirToggle} 
+              title="Toggle Direction" 
+              aria-label="Toggle Text Direction" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-exchange-alt"></i>
             </button>
-            <button className="frui-wysiwyg-btn" onClick={handleDirLTR} title="Left to Right" aria-label="Left to Right" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.dirLTR} 
+              title="Left to Right" 
+              aria-label="Left to Right" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-long-arrow-alt-left"></i>
             </button>
-            <button className="frui-wysiwyg-btn" onClick={handleDirRTL} title="Right to Left" aria-label="Right to Left" disabled={isCodeView}>
+            <button 
+              className="frui-wysiwyg-btn" 
+              onClick={blocks.dirRTL} 
+              title="Right to Left" 
+              aria-label="Right to Left" 
+              disabled={isCodeView}
+            >
               <i className="fas fa-fw fa-long-arrow-alt-right"></i>
             </button>
           </div>
@@ -736,21 +1056,21 @@ export default function WYSIWYG({
       </div>
       <input
         type="hidden"
-        ref={hiddenInputRef}
-        value={currentValue}
+        ref={refs.hidden}
+        value={value}
         {...attributes}
       />
       <div
-        ref={editorRef}
+        ref={refs.editor}
         className="frui-wysiwyg-editable"
         contentEditable={!isCodeView}
-        onInput={handleInput}
-        onClick={handleClick}
+        onInput={handlers.input}
+        onClick={handlers.click}
         dir={dir}
         aria-label="Rich Text Editor"
       />
       <textarea
-        ref={textareaRef}
+        ref={refs.textarea}
         style={{
           display: isCodeView ? 'block' : 'none',
           width: '100%',
@@ -762,16 +1082,9 @@ export default function WYSIWYG({
           border: 'none',
           resize: 'vertical'
         }}
-        onChange={(e) => {
-          if (isCodeView && hiddenInputRef.current) {
-            hiddenInputRef.current.value = e.target.value;
-            setCurrentValue(e.target.value);
-            onChange?.(e.target.value);
-            onUpdate?.({ value: e.target.value, action: 'input' });
-          }
-        }}
+        onChange={handlers.change}
         defaultValue={value}
       />
     </div>
   );
-}
+};

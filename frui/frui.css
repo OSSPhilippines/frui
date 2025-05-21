@@ -1,5 +1,6 @@
 @import url('./styles/globals.css');
 @import url('./styles/alert.css');
+@import url('./styles/accordion.css');
 @import url('./styles/badge.css');
 @import url('./styles/breadcrumb.css');
 @import url('./styles/button.css');
@@ -20,6 +21,7 @@
 
 @import url('./styles/fields/autocomplete.css');
 @import url('./styles/fields/date.css');
+@import url('./styles/fields/colorpicker.css');
 @import url('./styles/fields/datetime.css');
 @import url('./styles/fields/file.css');
 @import url('./styles/fields/filelist.css');
@@ -32,6 +34,7 @@
 @import url('./styles/fields/multiselect.css');
 @import url('./styles/fields/option.css');
 @import url('./styles/fields/password.css');
+@import url('./styles/fields/rating.css');
 @import url('./styles/fields/select.css');
 @import url('./styles/fields/switch.css');
 @import url('./styles/fields/taglist.css');

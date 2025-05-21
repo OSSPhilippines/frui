@@ -1,0 +1,18 @@
+.frui-format-code {
+  color: inherit;
+  padding: 10px 10px;
+  width: 100%;
+}
+
+.frui-format-code-container {
+  position: relative;
+  background: rgb(40, 40, 40);
+}
+
+.frui-format-code-copy {
+  text-align: right;
+  padding: 10px 10px 0 0;
+  color: white;
+  cursor: pointer;
+  white-space: nowrap;
+}

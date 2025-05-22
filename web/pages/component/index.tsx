@@ -11,6 +11,7 @@ import Badge from 'frui/element/Badge';
 import Button from 'frui/form/Button';
 import Loader from 'frui/element/Loader';
 import Table, { Thead, Trow, Tcol } from 'frui/element/Table';
+import ProgressBar from 'frui/element/ProgressBar';
 import Tabs from 'frui/element/Tabs';
 import Tooltip from 'frui/element/Tooltip';
 
@@ -116,6 +117,23 @@ export default function Home() {
                 </h2>
               </div>
             </div>
+            <div
+              className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => router.push('/component/progressbar')}
+            >
+              <div className="m-2 border border-b2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[100px] w-full bg-b1">
+                  <div className="w-full px-3">
+                    <div className="relative w-full h-4 bg-gray-300 rounded">
+                      <ProgressBar value={60} max={100} color="blue" className="h-4 rounded" />
+                    </div>
+                  </div>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Progress Bar')}
+                </h2>
+              </div>
+            </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
               onClick={() => router.push('/component/table')} 
@@ -138,7 +156,7 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div 
+                        <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
               onClick={() => router.push('/component/tabs')} 
             >
@@ -181,6 +199,31 @@ export default function Home() {
                 </h2>
               </div>
             </div>
+            <div
+              className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => router.push('/component/toast')}
+            >
+              <div className="m-2 border border-b2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[100px] w-full bg-b1 relative p-3">
+                  <div
+                    className="inline-flex items-center justify-between w-auto max-w-full p-[10px_15px] rounded-[5px] shadow-[0_2px_5px_rgba(0,0,0,0.2)] bg-[#d4edda] text-[#155724] border border-[#c3e6cb]"
+                  >
+                    <span className="truncate">
+                      {_('Successful! Your action was completed.')}
+                    </span>
+                    <span
+                      className="ml-2 text-[16px] leading-none" 
+                      aria-hidden="true" 
+                    >
+                      &times;
+                    </span>
+                  </div>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Toast')}
+                </h2>
+              </div>
+            </div>
           </div>
           <h2 className="px-3 flex items-center uppercase font-bold text-xl mt-4">
             <i className="fas fa-lock mr-2" />
@@ -214,11 +257,12 @@ export default function Home() {
             <div className="block basis-1/2 md:basis-1/3 text-center cursor-pointer">
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full bg-b1 px-3">
-                  Unlocks at 6,000 downloads
+                  Unlocks at 8,000 downloads
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Progress Bar')}
-                </h2>
+                  {_('Tabs')}
+                  Unlocks at 6,000 downloads
+                </div>
               </div>
             </div>
             <div className="block basis-1/2 md:basis-1/3 text-center cursor-pointer">
@@ -234,6 +278,10 @@ export default function Home() {
             <div className="block basis-1/2 md:basis-1/3 text-center cursor-pointer">
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full bg-b1 px-3">
+                  Unlocks at 12,000 downloads
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Tooltip')}
                   Unlocks at 14,000 downloads
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">

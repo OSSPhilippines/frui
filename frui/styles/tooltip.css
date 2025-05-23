@@ -18,19 +18,6 @@
   white-space: nowrap;
 }
 
-/* Shape variations */
-.frui-curved {
-  border-radius: 12px;
-}
-
-.frui-rounded {
-  border-radius: 4px;
-}
-
-.frui-pill {
-  border-radius: 20px;
-}
-
 /* Arrow styling */
 .frui-tooltip-arrow-container {
   position: relative;

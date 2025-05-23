@@ -108,7 +108,7 @@ export default function Knob({
           setDragging(true);
           handleInteraction(e.clientX, e.clientY);
         }}
-        className="frui-field-knob__svg"
+        className="frui-field-knob-svg"
       >
         <circle
           cx={radius}
@@ -142,7 +142,7 @@ export default function Knob({
           dominantBaseline="middle"
           fontSize={size * 0.2}
           fill={textColor}
-          className="frui-field-knob__label"
+          className="frui-field-knob-label"
         >
           {formatValue(valueTemplate, actualValue)}
         </text>

@@ -3,12 +3,11 @@
     display: inline-block;
   }
   
-  .frui-field-knob__svg {
+  .frui-field-knob-svg {
     cursor: pointer;
-    transform: rotate(145deg);
   }
   
-  .frui-field-knob__label {
+  .frui-field-knob-label {
     position: absolute;
     top: 0;
     left: 0;

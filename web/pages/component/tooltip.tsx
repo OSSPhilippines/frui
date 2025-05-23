@@ -1,16 +1,16 @@
 //types
-import type { Crumb } from "modules/components/Crumbs";
+import type { Crumb } from 'modules/components/Crumbs';
 //hooks
-import { useLanguage } from "r22n";
+import { useLanguage } from 'r22n';
 //components
-import Link from "next/link";
-import { Translate } from "r22n";
-import Button from "frui/form/Button";
-import Tooltip from "frui/element/Tooltip";
-import { LayoutPanel } from "modules/theme";
-import Crumbs from "modules/components/Crumbs";
-import Props from "modules/components/Props";
-import Code, { InlineCode as C } from "modules/components/Code";
+import Link from 'next/link';
+import { Translate } from 'r22n';
+import Button from 'frui/form/Button';
+import Tooltip from 'frui/element/Tooltip';
+import { LayoutPanel } from 'modules/theme';
+import Crumbs from 'modules/components/Crumbs';
+import Props from 'modules/components/Props';
+import Code, { InlineCode as C } from 'modules/components/Code';
 
 const codeDefault = `
 // Default
@@ -55,7 +55,7 @@ const codePill = `
 </Tooltip>`.trim();
 const codeArrow = `
 <Tooltip text="Submit" arrow>
-<Button color="#333">Submit</Button>
+  <Button color="#333">Submit</Button>
 </Tooltip>`.trim();
 const codePlacement = `
 // top, bottom, left, right, topLeft, topRight, bottomLeft, and bottomRight
@@ -84,8 +84,6 @@ export default function Page() {
   const props = [
     [_("arrow"), _("boolean"), _("No"), _("Displays an arrow on the tooltip")],
     [_("bottom"), _("boolean"), _("No"), _("Places in bottom")],
-    [_("bottomLeft"), _("boolean"), _("No"), _("Places in bottom left")],
-    [_("bottomRight"), _("boolean"), _("No"), _("Places in bottom right")],
     [_("children"), _("ReactNode"), _("Yes"), _("Content that triggers tooltip")],
     [_("className"), _("string"), _("No"), _("Standard HTML class names")],
     [_("color"), _("string"), _("No"), _("Custom CSS hex or name")],
@@ -102,8 +100,6 @@ export default function Page() {
     [_("success"), _("boolean"), _("No"), _("Green tooltip")],
     [_("text"), _("string"), _("Yes"), _("Text displayed inside the tooltip")],
     [_("top"), _("boolean"), _("No"), _("Places in top (default)")],
-    [_("topLeft"), _("boolean"), _("No"), _("Places in top left")],
-    [_("topRight"), _("boolean"), _("No"), _("Places in top right")],
     [_("warning"), _("boolean"), _("No"), _("Orange tooltip")],
   ];
   //render
@@ -272,16 +268,15 @@ export default function Page() {
             <p className="py-4">
               <Translate>
                 Change the placement using: <C value="top" />, <C value="bottom" />, <C value="left" />
-                , <C value="right" />, <C value="topLeft" />, <C value="topRight" />, <C value="bottomLeft" />
-                , and <C value="bottomRight" />.
+                , <C value="right" />.
               </Translate>
             </p>
 
             <div className="flex items-center justify-center">
               <div className="grid grid-cols-3 gap-2">
-                <Tooltip text="top-left" topLeft>
+                <Tooltip text="top left" top left arrow>
                   <Button className="flex items-center justify-center w-32 h-11 p-3" info rounded>
-                    topLeft
+                    top left
                   </Button>
                 </Tooltip>
                 <Tooltip text="top" arrow>
@@ -289,9 +284,9 @@ export default function Page() {
                     top
                   </Button>
                 </Tooltip>
-                <Tooltip text="top-right" topRight>
+                <Tooltip text="top right" top right arrow>
                   <Button className="flex items-center justify-center w-32 h-11 p-3" info rounded>
-                    topRight
+                    top right
                   </Button>
                 </Tooltip>
                 <Tooltip text="left" left arrow>
@@ -305,9 +300,9 @@ export default function Page() {
                     right
                   </Button>
                 </Tooltip>
-                <Tooltip text="bottom-left" bottomLeft>
+                <Tooltip text="bottom left" bottom left arrow>
                   <Button className="flex items-center justify-center w-32 h-11 p-3" info rounded>
-                    bottomLeft
+                    bottom left
                   </Button>
                 </Tooltip>
                 <Tooltip text="bottom" bottom arrow>
@@ -315,9 +310,9 @@ export default function Page() {
                     bottom
                   </Button>
                 </Tooltip>
-                <Tooltip text="bottom-right" bottomRight>
+                <Tooltip text="bottom right" bottom right arrow>
                   <Button className="flex items-center justify-center w-32 h-11 p-3" info rounded>
-                    bottomRight
+                    bottom right
                   </Button>
                 </Tooltip>
               </div>
@@ -330,7 +325,7 @@ export default function Page() {
             </div>
 
             <h2 id="rounded" className="uppercase font-bold text-lg mt-8">
-              {_("Rounded")}
+              {_('Rounded')}
             </h2>
             <p className="py-4">
               <Translate>
@@ -371,7 +366,7 @@ export default function Page() {
             </div>     
 
             <h2 id="padding" className="uppercase font-bold text-lg mt-8">
-              {_("Padding")}
+              {_('Padding')}
             </h2>
             <p className="py-4">
               <Translate>
@@ -391,7 +386,7 @@ export default function Page() {
             </div>
 
             <h2 id="opacity" className="uppercase font-bold text-lg mt-8">
-              {_("Opacity")}
+              {_('Opacity')}
             </h2>
             <p className="py-4">
               <Translate>
@@ -411,7 +406,7 @@ export default function Page() {
             </div>       
 
             <h2 id="custom" className="uppercase font-bold text-lg mt-8">
-              {_("Custom Color")}
+              {_('Custom Color')}
             </h2>
             <p className="py-4">
               <Translate>
@@ -432,7 +427,7 @@ export default function Page() {
             </div>   
 
             <h2 id="styles" className="uppercase font-bold text-lg mt-8">
-              {_("Custom Styles")}
+              {_('Custom Styles')}
             </h2>
             <p className="py-4">
               <Translate>
@@ -443,11 +438,11 @@ export default function Page() {
             <div className="flex items-center border-t border-b2 mt-8 pt-4">
               <Link className="text-t2" href="/component">
                 <i className="fas fa-arrow-left mr-2"></i>
-                {_("Components")}
+                {_('Components')}
               </Link>
               <div className="flex-grow"></div>
               <Link className="text-t2" href="/field">
-                {_("Fields")}
+                {_('Fields')}
                 <i className="fas fa-arrow-right ml-2"></i>
               </Link>
             </div>

@@ -291,9 +291,9 @@ export default function Home() {
             </p>
 
             <div className="flex items-center border-t border-b2 mt-8 pt-4">
-              <Link className="text-t2" href="/field/code-editor">
+              <Link className="text-t2" href="/field/color-picker">
                 <i className="fas fa-arrow-left mr-2"></i>
-                {_('Code Editor')}
+                {_('Color Picker')}
               </Link>
               <div className="flex-grow"></div>
               <Link className="text-t2" href="/field/currency">

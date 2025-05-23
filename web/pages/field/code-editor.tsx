@@ -316,8 +316,8 @@ export default function Home() {
                 {_('Checklist')}
               </Link>
               <div className='flex-grow'></div>
-              <Link className='text-t2' href='/field/country'>
-                {_('Country')}
+              <Link className='text-t2' href='/field/color-picker'>
+                {_('Color Picker')}
                 <i className='fas fa-arrow-right ml-2'></i>
               </Link>
             </div>

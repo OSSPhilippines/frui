@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-interface MultiSelectProps extends React.HTMLAttributes<HTMLDivElement> {
+export type MultiSelectProps = React.HTMLAttributes<HTMLDivElement> & {
   options: string[];
   custom?: boolean;
   searchable?: boolean;
   name?: string;
   placeholder?: string;
-}
+};
 
 export default function MultiSelect({
   options = [],

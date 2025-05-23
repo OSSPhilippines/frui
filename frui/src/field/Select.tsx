@@ -199,7 +199,7 @@ export function SelectDropdown(props: SelectDropdownProps) {
 };
 
 /**
- * Styled Select  Component (Main)
+ * Styled Select Component (Main)
  */
 export default function Select<T = any>(props: SelectProps) {
   const { 

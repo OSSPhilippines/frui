@@ -19,6 +19,7 @@ export type {
   TableRowProps,
   TableRuleProps
 } from './element/Table';
+export type { TooltipProps, TooltipDirection } from './element/Tooltip';
 export type { ButtonProps } from './form/Button';
 export type { ControlProps } from './form/Control';
 export type { 
@@ -42,6 +43,7 @@ import Badge from './element/Badge';
 import Loader from './element/Loader';
 import Modal from './element/Modal';
 import Table from './element/Table';
+import Tooltip from './element/Tooltip';
 import Button from './form/Button';
 import Control from './form/Control';
 import Fieldset from './form/Fieldset';
@@ -56,6 +58,7 @@ export {
   Loader,
   Modal,
   Table,
+  Tooltip,
   Button,
   Control,
   Fieldset

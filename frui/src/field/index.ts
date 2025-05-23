@@ -5,8 +5,14 @@ export type {
 } from './Autocomplete.js';
 export type { CheckboxProps } from './Checkbox.js';
 //export type {} from './Checklist.js';
-//export type {} from './Code.js';
-//export type {} from './Color.js';
+export type {
+  CodeEditorConfig,
+  CodeEditorProps
+} from './CodeEditor.js';
+export type {
+  ColorPickerConfig,
+  ColorPickerProps
+} from './ColorPicker.js';
 export type {
   CountryData,
   CountryOption,
@@ -45,6 +51,7 @@ export type { MultiSelectProps } from './MultiSelect.js';
 export type { NumberOptions, NumberProps } from './Number.js';
 export type { PasswordProps } from './Password.js';
 export type { RadioProps } from './Radio.js';
+export type { RatingConfig, RatingProps } from './Rating.js';
 //export type {} from './Radiolist.js';
 export type {
   SelectOption,
@@ -70,7 +77,10 @@ export type {
   TimeConfig,
   TimeProps
 } from './Time.js';
-//export type {} from './WYSIWYG.js';
+export type {
+  WYSIWYGConfig,
+  WYSIWYGProps
+} from './WYSIWYG.js';
 
 export { 
   useAutocomplete, 
@@ -78,8 +88,14 @@ export {
 } from './Autocomplete.js';
 export { useCheckbox } from './Checkbox.js';
 //export {} from './Checklist.js';
-//export {} from './Code.js';
-//export {} from './Color.js';
+export { useCodeEditor } from './CodeEditor.js';
+export { 
+  useColorPicker,
+  hsvaToRgba,
+  rgbaToHsva,
+  rgbaToString,
+  parseColorString
+} from './ColorPicker.js';
 export { useCountry } from './Country.js';
 export { useCurrency } from './Currency.js';
 export { useDate } from './Date.js';
@@ -93,6 +109,7 @@ export { useMetadata, MetadataFields } from './Metadata.js';
 export { useNumber } from './Number.js';
 export { usePassword } from './Password.js';
 export { useRadio } from './Radio.js';
+export { useRating, Star } from './Rating.js';
 //export {} from './Radiolist.js';
 export { useSelect, SelectDropdown } from './Select.js';
 //export {} from './Slider.js';
@@ -102,13 +119,13 @@ export { useTaglist } from './Taglist.js';
 export { useTextarea } from './Textarea.js';
 export { useTextlists } from './Textlist.js';
 export { useTime } from './Time.js';
-//export WYSIWYG from './WYSIWYG.js';
+export { useWYSIWYG } from './WYSIWYG.js';
 
 import Autocomplete from './Autocomplete.js';
 import Checkbox from './Checkbox.js';
 //import Checklist from './Checklist.js';
-//import Code from './Code.js';
-//import Color from './Color.js';
+import CodeEditor from './CodeEditor.js';
+import ColorPicker from './ColorPicker.js';
 import Country from './Country.js';
 import Currency from './Currency.js';
 import Date from './Date.js';
@@ -128,6 +145,7 @@ import Number from './Number.js';
 import Password from './Password.js';
 import Radio from './Radio.js';
 //import Radiolist from './Radiolist.js';
+import Rating from './Radio.js';
 import Select from './Select.js';
 //import Slider from './Slider.js';
 import Slug from './Slug.js';
@@ -141,6 +159,8 @@ import WYSIWYG from './WYSIWYG.js';
 export {
   Autocomplete,
   Checkbox,
+  CodeEditor,
+  ColorPicker,
   Country,
   Currency,
   Date,
@@ -158,11 +178,13 @@ export {
   Number,
   Password,
   Radio,
+  Rating,
   Select,
   Slug,
   Switch,
   Taglist,
   Textarea,
   Textlist,
-  Time
+  Time,
+  WYSIWYG
 }

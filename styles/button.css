@@ -1,0 +1,30 @@
+.frui-btn {
+  text-align: center;
+}
+.frui-btn-xs {
+  padding: 2px 4px;
+}
+.frui-btn-sm {
+  padding: 4px 8px;
+}
+.frui-btn-md {
+  padding: 6px 12px;
+}
+.frui-btn-lg {
+  padding: 8px 16px;
+}
+.frui-btn-xl {
+  padding: 10px 20px;
+}
+.frui-btn-2xl {
+  padding: 12px 24px;
+}
+.frui-btn-3xl {
+  padding: 14px 28px;
+}
+.frui-btn-4xl {
+  padding: 16px 32px;
+}
+.frui-btn-5xl {
+  padding: 18px 36px;
+}

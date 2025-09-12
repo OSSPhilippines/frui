@@ -1,6 +1,5 @@
 import type { PageProps } from '../../app/types.js';
-import { ThemeProvider } from '../../app/theme';
-import { ModalProvider } from '../../../components/element/Modal.js';
+import { LayoutProvider, ThemeHead } from '../../app';
 import Loader from '../../../components/element/Loader.js';
 
 export function Body(props: PageProps) {
@@ -32,25 +31,23 @@ export function Body(props: PageProps) {
 
 export function Head(props: PageProps) {
   const { styles = [] } = props;
+  const uri = '/';
+  const title  = 'Frui';
+  const description = 'The React Framework for Building Modern Web Apps';
   return (
-    <>
-      <title>Stackpress</title>
-      <meta name="description" content="Stackpress" />
-      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-      <link rel="stylesheet" type="text/css" href="/styles/global.css" />
-      {styles.map((href, index) => (
-        <link key={index} rel="stylesheet" type="text/css" href={href} />
-      ))}
-    </>
-  )
+    <ThemeHead
+      uri={uri}
+      title={title}
+      description={description}
+      styles={styles}
+    />
+  );
 };
 
 export default function Page(props: PageProps) {
   return (
-    <ThemeProvider>
-      <ModalProvider color="salmon" rounded className="text-white">
-        <Body {...props} />
-      </ModalProvider>
-    </ThemeProvider>
+    <LayoutProvider>
+      <Body {...props} />
+    </LayoutProvider>
   );
 };

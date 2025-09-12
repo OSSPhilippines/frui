@@ -388,8 +388,8 @@ export function MenuSection(props: SectionItem & { pathname: string }) {
   //render
   return (
     <div>
-      <a href={href} className={`${pathname.indexOf(search) === 0 ? 'text-white' : ''} block px-3 py-2 border-t border-solid border-b0 cursor-pointer`}>
-        <i className={`text-t2 fas fa-fw ${icon}`}></i>
+      <a href={href} className={`${pathname.indexOf(search) === 0 ? 'text-white' : ''} block px-3 py-2 border-t border-solid theme-bc-0 cursor-pointer`}>
+        <i className={`theme-2 fas fa-fw ${icon}`}></i>
         <span className="inline-block pl-2">{_(label)}</span>
       </a>
       {children.length && pathname.indexOf(search) === 0 ? (
@@ -408,13 +408,13 @@ export default function MainMenu(props: MainMenuProps) {
   const { theme } = useTheme();
   //render
   return (
-    <aside className={`${theme}-dark w-52 duration-200 absolute top-0 bottom-0 z-50 bg-b1 border-r border-b0 text-gray-400 text-sm overflow-auto md:left-0 ${open? 'left-0': '-left-64' }`}>
+    <aside className={`${theme}-dark w-52 duration-200 absolute top-0 bottom-0 z-50 theme-bg-1 border-r theme-bc-0 text-gray-400 text-sm overflow-auto md:left-0 ${open? 'left-0': '-left-64' }`}>
       <div className="px-3 flex items-center h-16 text-white">
         <a href="/">
-          <img alt="logo" className="logo-img" src="/frui-icon.png" height="35" width="35" />
+          <img alt="logo" className="logo-img" src="/images/frui-icon.png" height="35" width="35" />
         </a>
         <a className="ml-2 uppercase flex-grow" href="/">
-          <img alt="text" className="logo-img relative top-0.5" src="/frui-text.png" height="25" width="67" />
+          <img alt="text" className="logo-img relative top-0.5" src="/images/frui-text.png" height="25" width="67" />
         </a>
         <button className="md:hidden ml-3" onClick={toggle}>
           <i className="fas fa-chevron-left"></i>

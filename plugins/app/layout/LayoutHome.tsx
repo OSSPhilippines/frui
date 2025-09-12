@@ -15,15 +15,15 @@ export default function LayoutHome({ children }: LayoutHomeProps) {
   const [ _opened, _toggle ] = useToggle();
   const { theme, mode } = useTheme();
   return (
-    <section className={`${theme}-${mode} bg-b0 text-t1 relative w-full h-full overflow-hidden`}>
+    <section className={`${theme}-${mode} theme-bg-0 theme-1 relative w-full h-full overflow-hidden`}>
       <header className="absolute top-0 left-0 right-0">
         <div className="px-3 flex items-center h-16 py-2">
           <div className="pr-3 md:pr-8 flex items-center h-16 text-white">
             <a href="/">
-              <img alt="logo" className="logo-img" src="/frui-icon.png" height="35" width="35" />
+              <img alt="logo" className="logo-img" src="/images/frui-icon.png" height="35" width="35" />
             </a>
             <a className="ml-2 uppercase flex-grow hidden md:block" href="/">
-              <img alt="text" className="logo-img relative top-0.5" src="/frui-text.png" height="25" width="67" />
+              <img alt="text" className="logo-img relative top-0.5" src="/images/frui-text.png" height="25" width="67" />
             </a>
           </div>
           <div className="flex-grow">

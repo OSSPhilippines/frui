@@ -1,14 +1,13 @@
-//types
+//modules
 import type { 
   ChangeEvent, 
   FocusEvent, 
   KeyboardEvent, 
   CSSProperties 
 } from 'react';
-import type { InputProps } from './Input.js';
-//hooks
 import { useState } from 'react';
-//components
+//src
+import type { InputProps } from './Input.js';
 import Input from './Input.js';
 
 /**

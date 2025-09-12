@@ -1,9 +1,7 @@
-// types
+//modules
 import type { CSSProperties, ReactNode } from 'react';
-// hooks
 import { useState, useRef, useEffect } from 'react';
 
-// Types
 export type TooltipProps = {
   text: string,
   children: ReactNode,

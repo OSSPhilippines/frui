@@ -1,5 +1,5 @@
 //node
-//import path from 'node:path';
+import path from 'node:path';
 import Terminal from '@stackpress/lib/Terminal';
 //modules
 import unocss from 'unocss/vite';
@@ -8,9 +8,11 @@ import { server as http } from '@stackpress/ingest/http';
 
 type Config = typeof config;
 
+const cwd = process.cwd();
 const config = {
-  cwd: process.cwd(),
+  cwd,
   env: 'development',
+  assets: path.join(cwd, 'public'),
   view: {
     //base path (used in vite)
     basePath: '/',
@@ -23,7 +25,7 @@ const config = {
     cssFiles: [ 
       'virtual:uno.css',
       //'react-toastify/dist/ReactToastify.css',
-      //path.join(process.cwd(), '../frui/frui.css')
+      path.join(cwd, 'frui.css')
     ],
     //vite plugins
     plugins: [ unocss() ]

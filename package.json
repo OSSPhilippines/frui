@@ -83,7 +83,9 @@
   ],
   "plugins": [
     "./plugins/app/plugin",
-    "./plugins/components/plugin",
+    "./plugins/elements/plugin",
+    "./plugins/fields/plugin",
+    "./plugins/formats/plugin",
     "./plugins/home/plugin"
   ],
   "scripts": {

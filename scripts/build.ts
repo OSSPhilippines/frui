@@ -17,6 +17,7 @@ const docs = path.join(cwd, 'docs');
 const config = {
   cwd,
   env: 'production',
+  assets: path.join(cwd, 'public'),
   view: {
     //path where to save assets (css, images, etc)
     assetPath: path.join(docs, 'assets'),

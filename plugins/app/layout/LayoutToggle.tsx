@@ -26,7 +26,7 @@ export default function LayoutToggle() {
         onClick={() => change('orange')}
       ></div>
       <div
-        className="flex justify-center items-center w-7 h-7 rounded-full text-white bg-b3"
+        className="flex justify-center items-center w-7 h-7 rounded-full text-white theme-bg-3"
         onClick={() => toggle()}
       >
         <i className={`fas fa-${mode === 'dark' ? 'moon': 'sun'}`}></i>

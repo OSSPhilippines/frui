@@ -9,7 +9,7 @@ export type LayoutBlankProps = {
 export default function LayoutBlank({ children }: LayoutBlankProps) {
   const { theme, mode } = useTheme();
   return (
-    <section className={`${theme}-${mode} bg-b1 text-t1 relative w-full h-full overflow-hidden`}>
+    <section className={`${theme}-${mode} theme-bg-1 theme-1 relative w-full h-full overflow-hidden`}>
       <header className="flex items-center p-2">
         <div className="flex-grow flex items-center">
           {mode === 'dark' ? (

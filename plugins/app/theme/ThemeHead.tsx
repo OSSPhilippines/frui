@@ -35,6 +35,8 @@ export default function ThemeHead(props: ThemeHeadProps) {
       <meta name="twitter:image" content="https://frui.js.org/frui-icon.png" />
       <link rel="shortcut icon" href="https://frui.js.org/favicon.ico" type="image/png" />
       <link rel="icon" href="https://frui.js.org/favicon.ico" type="image/png" />
+      <link rel="stylesheet" type="text/css" href="/styles/reset.css" />
+      <link rel="stylesheet" type="text/css" href="/styles/globals.css" />
       {styles.map((href, index) => (
         <link key={index} rel="stylesheet" type="text/css" href={href} />
       ))}

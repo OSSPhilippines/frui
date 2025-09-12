@@ -1,8 +1,8 @@
-//types
+//modules
 import type { JSX, ReactNode, CSSProperties } from 'react';
-import type { AnyReactChildren } from '../types.js';
-//react
 import React from 'react';
+//src
+import type { AnyReactChildren } from '../types.js';
 
 /**
  * Table Rule Props

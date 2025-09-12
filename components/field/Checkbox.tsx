@@ -1,9 +1,9 @@
-//types
+//modules
 import type { ChangeEvent, CSSProperties } from 'react';
+import { useState, useEffect } from 'react';
+//src
 import type { HTMLInputProps } from '../types.js';
 import type { InputConfig } from './Input.js';
-//hooks
-import { useState, useEffect } from 'react';
 
 /**
  * Checkbox Props

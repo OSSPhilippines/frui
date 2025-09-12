@@ -1,25 +1,33 @@
-//types
+//modules
 import type { ReactNode, CSSProperties } from 'react';
-//react
-import React, { createContext } from 'react';
-//hooks
-import { useState, useEffect, useContext } from 'react'; 
+import { 
+  createContext, 
+  createElement,
+  useContext, 
+  useState, 
+  useEffect
+} from 'react';
+//src
+import Button from '../form/Button.js';
+import { useNotify } from './Notify.js';
 
-/**
- * Modal Context Props
- */
+//--------------------------------------------------------------------//
+// Types
+
+export type ModalConfirmProps = { 
+  open: Function,
+  message: ReactNode
+  confirmed: Function,
+  confirm?: string,
+  cancel?: string
+};
+
 export type ModalContextProps = { 
   _title: string,
   _className: string,
   _body?: ReactNode,
-  _color?: string,
   opened: boolean,
-  curved: boolean,
-  rounded: boolean,
-  pill: boolean,
-  round: (size: 'none'|'rounded'|'curved'|'pill') => void,
   title: (title: string) => void,
-  color: (color: string) => void,
   open: (opened: boolean) => void,
   className: (className: string) => void,
   body: (body: ReactNode) => void
@@ -27,11 +35,6 @@ export type ModalContextProps = {
 
 export type ModalProviderProps = { 
   title?: string,
-  color?: string,
-  opened?: boolean,
-  curved?: boolean,
-  rounded?: boolean,
-  pill?: boolean,
   className?: string,
   children: ReactNode
 };
@@ -51,33 +54,25 @@ export type ModalProps = {
   children?: React.ReactNode
 };
 
+//--------------------------------------------------------------------//
+// Context & Provider
+
 export const ModalContext = createContext<ModalContextProps>({ 
   _title: '', 
   _className: '', 
   _body: undefined,
-  _color: '',
-  opened: false,
-  curved: false,
-  rounded: false,
-  pill: false,
+  opened: false, 
   title: () => {},
   className: () => {},
-  round: () => {},
-  color: () => {},
   body: () => {},
   open: () => {},
 });
 
+// (this is what to put in app.tsx)
 export function ModalProvider({ children, ...config }: ModalProviderProps) {
   const [ ready, isReady ] = useState(false);
   const [ opened, open ] = useState(false);
-  const [ _round, round ] = useState(config.curved 
-    ? 'curved' : config.rounded 
-    ? 'rounded' : config.pill
-    ? 'pill': 'none'
-  );
   const [ _title, title ] = useState(config.title || '');
-  const [ _color, color ] = useState(config.color);
   const [ _className, className ] = useState(config.className || '');
   const [ _body, body ] = useState<React.ReactNode>();
 
@@ -85,14 +80,9 @@ export function ModalProvider({ children, ...config }: ModalProviderProps) {
     _title,
     _className, 
     _body, 
-    opened,
-    curved: _round === 'curved',
-    rounded: _round === 'rounded',
-    pill: _round === 'pill', 
+    opened, 
     className, 
-    round,
     title,
-    color,
     body,
     open 
   };
@@ -106,10 +96,6 @@ export function ModalProvider({ children, ...config }: ModalProviderProps) {
       {children}
       {ready && (
         <Modal 
-          curved={_round === 'curved'}
-          rounded={_round === 'rounded'}
-          pill={_round === 'pill'}
-          color={_color || undefined}
           title={_title} 
           className={_className} 
           opened={opened} 
@@ -122,10 +108,8 @@ export function ModalProvider({ children, ...config }: ModalProviderProps) {
   );
 };
 
-export function useModal() {
-  const { className, title, body, round, color, open } = useContext(ModalContext);
-  return { className, title, body, round, color, open };
-}
+//--------------------------------------------------------------------//
+// Components
 
 export default function Modal(props: ModalProps) {
   const { 
@@ -146,7 +130,7 @@ export default function Modal(props: ModalProps) {
     style.display = 'flex';
   }
 
-  const classNames = ['frui-modal'];
+  const classNames = [ 'frui-modal' ];
   if (absolute) {
     classNames.push('frui-modal-absolute');
   } else {
@@ -188,4 +172,65 @@ export default function Modal(props: ModalProps) {
       </section>
     </div>
   )
+};
+
+export function ModalConfirm(props: ModalConfirmProps) {
+  const { 
+    open, 
+    message, 
+    confirmed, 
+    confirm = 'Confirm', 
+    cancel = 'Cancel' 
+  } = props;
+  return (
+    <div className="modal-confirm">
+      <p className="message">{message}</p>
+      <Button success className="confirm" onClick={() => {
+        open(false);
+        confirmed();
+      }}>
+        <i className="icon fas fa-fw fa-check"></i>
+        {confirm}
+      </Button>
+      <Button error className="cancel" onClick={() => open(false)}>
+        <i className="icon fas fa-fw fa-ban"></i>
+        {cancel}
+      </Button>
+    </div>
+  )
+};
+
+//--------------------------------------------------------------------//
+// Hooks
+
+export function useModal() {
+  const { className, title, body, open } = useContext(ModalContext);
+  return { className, title, body, open };
+};
+
+export function useConfirm(config: {
+  label: () => string,
+  message: () => ReactNode,
+  action: () => Promise<void>
+}) {
+  const { label, message, action } = config;
+  const { open, title, body } = useModal();
+  const { notify } = useNotify();
+  const confirmed = () => action().then(() => {
+    open(false);
+  }).catch(e => {
+    open(false);
+    notify('error', e.message);
+  });
+  const confirm = () => {
+    title(label());
+    body(createElement(ModalConfirm, { 
+      open, 
+      message: message(), 
+      confirmed
+    }));
+    open(true);
+  };
+
+  return { confirm };
 };

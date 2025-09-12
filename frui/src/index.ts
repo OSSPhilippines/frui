@@ -27,6 +27,20 @@ export type {
   FieldsetConfig, 
   FieldsetProps
 } from './form/Fieldset';
+export type {
+  ColorProps,
+  ColorPropType,
+  BackgroundColorProps,
+  BorderColorProps,
+  TextColorProps,
+  DisplayProps,
+  AlignProps,
+  RadiusProps,
+  SizeProps,
+  FillProps,
+  HTMLProps,
+  ChildrenProps
+} from './types.js'
 
 export { ModalContext, ModalProvider, useModal } from './element/Modal';
 export {
@@ -48,6 +62,15 @@ import Button from './form/Button';
 import Control from './form/Control';
 import Fieldset from './form/Fieldset';
 
+import setColorClass from './helpers/color/all.js';
+import setBackgroundColorClass from './helpers/color/background.js';
+import setBorderColorClass from './helpers/color/border.js';
+import setTextColorClass from './helpers/color/text.js';
+import setTextAlignClass from './helpers/align.js';
+import setDisplayClass from './helpers/display.js';
+import setRadiusClass from './helpers/radius.js';
+import setTextSizeClass from './helpers/size.js';
+
 export {
   Element,
   Field,
@@ -61,5 +84,13 @@ export {
   Tooltip,
   Button,
   Control,
-  Fieldset
+  Fieldset,
+  setColorClass,
+  setBackgroundColorClass,
+  setBorderColorClass,
+  setTextColorClass,
+  setTextAlignClass,
+  setDisplayClass,
+  setRadiusClass,
+  setTextSizeClass
 };

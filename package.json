@@ -5,10 +5,10 @@
     "web"
   ],
   "scripts": {
+    "frui": "yarn --cwd frui",
+    "web": "yarn --cwd web",
     "build": "yarn build:frui && yarn build:web",
     "build:frui": "yarn --cwd frui build",
-    "build:web": "yarn --cwd web build && cp .nojekyll docs/.nojekyll && cp CNAME docs/CNAME",
-    "dev": "yarn --cwd web dev",
-    "start": "yarn --cwd web start"
+    "build:web": "yarn --cwd web build && cp .nojekyll docs/.nojekyll && cp CNAME docs/CNAME"
   }
 }

@@ -1,37 +1,36 @@
 {
   "name": "frui-web",
-  "version": "0.1.4",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
+  "plugins": [
+    "./plugins/app/plugin",
+    "./plugins/components/plugin",
+    "./plugins/home/plugin"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "tsx scripts/develop.ts"
   },
   "dependencies": {
     "@codemirror/language-data": "6.5.1",
-    "cookies-next": "4.1.1",
-    "frui": "0.1.4",
-    "next": "15.2.5",
+    "@stackpress/ingest": "0.6.2",
     "r22n": "1.0.7",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-syntax-highlighter": "15.6.1",
-    "react-toastify": "11.0.5"
+    "react-toastify": "11.0.5",
+    "reactus": "0.6.2",
+    "universal-cookie": "8.0.1"
   },
   "devDependencies": {
     "@types/node": "20.11.16",
     "@types/react": "19.1.0",
     "@types/react-dom": "19.1.0",
     "@types/react-syntax-highlighter": "15.5.13",
-    "autoprefixer": "10.4.17",
-    "dotenv-cli": "7.3.0",
-    "eslint": "8.56.0",
-    "eslint-config-next": "14.1.0",
-    "postcss": "8.4.33",
-    "tailwindcss": "3.4.1",
-    "ts-node": "10.9.2",
-    "typescript": "5.7.2"
+    "@vitejs/plugin-react": "4.3.4",
+    "tsx": "4.20.5",
+    "typescript": "5.7.2",
+    "unocss": "66.0.0",
+    "vite": "6.1.1"
   }
 }

@@ -15,9 +15,11 @@ export type LayoutPanelProps = {
 export default function LayoutPanel({ children }: LayoutPanelProps) {
   //hooks
   const [ opened, toggle ] = useToggle();
-  const { theme, mode } = useTheme();
+  const { ready, theme, mode } = useTheme();
   //unload flash message
   useEffect(unload, []);
+  if (!ready) return null;
+  //render
   return (
     <section className={`${theme}-${mode} theme-bg-0 theme-1 relative w-full h-full overflow-hidden`}>
       <LayoutHead toggle={toggle} />

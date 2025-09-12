@@ -2,12 +2,12 @@
 import type { ReactNode } from 'react';
 import { useState, useEffect } from 'react';
 import UniversalCookie from 'universal-cookie';
-//app
-import type { LanguageProp } from './ThemeContext.js';
+//src
 import ThemeContext from './ThemeContext.js';
 
 export type ThemeProviderProps = { 
-  languages?: LanguageProp
+  mode?: string,
+  theme?: string,
   children: ReactNode 
 };
 
@@ -15,22 +15,30 @@ const cookie = new UniversalCookie();
 
 // (this is what to put in app.tsx)
 export default function ThemeProvider(props: ThemeProviderProps) {
-  const { languages = {}, children } = props;
-  const [ theme, setTheme ] = useState('blue');
-  const [ mode, setMode ] = useState('light');
-  const change = (theme: string) => {
-    setTheme(theme);
-    cookie.set('theme', theme);
+  const { 
+    mode: defaultMode = 'light', 
+    theme: defaultTheme = 'blue',
+    children 
+  } = props;
+  const [ mode, setMode ] = useState(defaultMode);
+  const [ theme, setTheme ] = useState(defaultTheme);
+  const [ ready, setReady ] = useState(false);
+  const change = ({ theme, mode }: { theme?: string, mode?: string }) => {
+    if (theme) {
+      setTheme(theme);
+      cookie.set('theme', theme);
+    }
+    if (mode) {
+      const newMode = mode === 'light' ? 'dark' : 'light';
+      setMode(newMode);
+      cookie.set('mode', newMode);
+    }
   };
-  const toggle = () => {
-    const newMode = mode === 'light' ? 'dark' : 'light';
-    setMode(newMode);
-    cookie.set('mode', newMode);
-  };
-  const value = { mode, theme, languages, toggle, change };
+  const value = { mode, theme, change, ready };
   useEffect(() => {
     setMode(cookie.get('mode') as string || 'light');
     setTheme(cookie.get('theme') as string || 'blue');
+    setReady(true);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

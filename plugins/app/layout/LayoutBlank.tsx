@@ -1,3 +1,7 @@
+//modules
+import { useEffect } from 'react';
+//frui
+import { unload } from '../../../components/element/Notify.js';
 //app
 import { useTheme } from '../theme/hooks.js';
 import LayoutToggle from './LayoutToggle.js';
@@ -7,7 +11,10 @@ export type LayoutBlankProps = {
 };
 
 export default function LayoutBlank({ children }: LayoutBlankProps) {
-  const { theme, mode } = useTheme();
+  const { ready, theme, mode } = useTheme();
+  //unload flash message
+  useEffect(unload, []);
+  if (!ready) return null;
   return (
     <section className={`${theme}-${mode} theme-bg-1 theme-1 relative w-full h-full overflow-hidden`}>
       <header className="flex items-center p-2">

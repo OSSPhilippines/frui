@@ -1,24 +1,17 @@
 import { createContext } from 'react';
 
-export type LanguageProp = Record<string, {
-  label: string,
-  translations: Record<string, string>
-}>;
-
 export type ThemeContextProps = { 
+  ready: boolean,
   mode: string,
   theme: string,
-  languages: LanguageProp,
-  toggle: () => void
-  change: (theme: string) => void
+  change: (options: { theme?: string, mode?: string }) => void
 };
 
 const ThemeContext = createContext<ThemeContextProps>({
+  ready: false,
   mode: 'light', 
   theme: 'blue',
-  languages: {},
-  toggle: () => {},
-  change: (_theme: string) => {}
+  change: () => {}
 });
 
 export default ThemeContext;

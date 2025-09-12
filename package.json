@@ -87,7 +87,7 @@
     "./plugins/home/plugin"
   ],
   "scripts": {
-    "build": "yarn build:tsc && yarn build:pkg",
+    "build": "yarn build:tsc && yarn build:pkg && yarn build:docs",
     "build:pkg": "yarn build:pkg:cjs && yarn build:pkg:esm",
     "build:pkg:cjs": "echo '{\"type\": \"commonjs\"}' > cjs/package.json",
     "build:pkg:esm": "echo '{\"type\": \"module\"}' > esm/package.json",

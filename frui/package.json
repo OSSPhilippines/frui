@@ -90,26 +90,22 @@
     "build:tsc:cjs": "tsc -p ./tsconfig.cjs.json",
     "build:tsc:esm": "tsc -p ./tsconfig.esm.json"
   },
-  "dependencies": {
-    "codemirror": "6.0.1",
-    "inputmask": "5.0.9",
-    "markdown-to-jsx": "7.7.4",
-    "moment": "2.30.1",
-    "react-syntax-highlighter": "15.6.1"
-  },
   "devDependencies": {
-    "@types/inputmask": "5.0.3",
-    "@types/node": "22.9.3",
-    "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.0",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "ts-loader": "9.5.2",
-    "ts-node": "10.9.2",
-    "typescript": "5.7.2"
+    "@types/inputmask": "5.0.7",
+    "@types/node": "24.3.1",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
+    "codemirror": "6.0.2",
+    "inputmask": "5.0.9",
+    "markdown-to-jsx": "7.7.13",
+    "moment": "2.30.1",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-syntax-highlighter": "15.6.6",
+    "typescript": "5.9.2"
   },
   "peerDependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
   }
 }

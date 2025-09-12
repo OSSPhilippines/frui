@@ -1,4 +1,4 @@
-import type { PageProps } from '../../app/theme';
+import type { PageProps } from '../../app/types.js';
 import { ModalProvider } from 'frui/element/Modal';
 import { ThemeProvider } from '../../app/theme';
 

@@ -9,28 +9,29 @@
     "./plugins/home/plugin"
   ],
   "scripts": {
-    "dev": "tsx scripts/develop.ts"
+    "dev": "tsx scripts/develop.ts",
+    "build": "tsx scripts/build.ts"
   },
   "dependencies": {
-    "@codemirror/language-data": "6.5.1",
     "@stackpress/ingest": "0.6.2",
-    "r22n": "1.0.7",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-syntax-highlighter": "15.6.1",
+    "r22n": "1.0.10",
+    "react-syntax-highlighter": "15.6.6",
     "react-toastify": "11.0.5",
-    "reactus": "0.6.2",
     "universal-cookie": "8.0.1"
   },
   "devDependencies": {
-    "@types/node": "20.11.16",
-    "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.0",
+    "@codemirror/language-data": "6.5.1",
+    "@types/node": "24.3.1",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
     "@types/react-syntax-highlighter": "15.5.13",
-    "@vitejs/plugin-react": "4.3.4",
+    "@vitejs/plugin-react": "5.0.2",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "reactus": "0.6.2",
     "tsx": "4.20.5",
-    "typescript": "5.7.2",
-    "unocss": "66.0.0",
-    "vite": "6.1.1"
+    "typescript": "5.9.2",
+    "unocss": "66.5.1",
+    "vite": "7.1.5"
   }
 }

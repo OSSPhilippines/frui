@@ -1,5 +1,5 @@
 //node
-import path from 'path';
+//import path from 'path';
 //modules
 import type { 
   HttpServer, 
@@ -9,18 +9,16 @@ import type {
 } from '@stackpress/ingest';
 import Status from '@stackpress/lib/Status';
 import reactus, { Server } from 'reactus';
+import type { Config } from '../../config/develop';
+import type { ViewPlugin } from './types';
 
-export function config(server: HttpServer) {
-  //get current working directory
-  const cwd = server.config.path('cwd', process.cwd());
+export function config(server: HttpServer<Config>) {
+  const config = server.config.data;
   //create reactus engine
   const engine = reactus(Server.configure({ 
-    cwd, 
-    production: false,
-    cssFiles: [
-      'react-toastify/dist/ReactToastify.css',
-      path.join(cwd, '../frui/frui.css')
-    ]
+    cwd: config.cwd,
+    production: config.env === 'production',
+    ...config.view
   }));
   //register the reactus engine
   server.register('reactus', engine);
@@ -76,7 +74,7 @@ export async function route(
   res: HttpResponse, 
   ctx: HttpServer
 ) {
-  const reactus = ctx.plugin<any>('reactus');
+  const reactus = ctx.plugin<ViewPlugin>('reactus');
   //handles public, assets and hmr
   await reactus.http(req.resource, res.resource);
   //if middleware was triggered

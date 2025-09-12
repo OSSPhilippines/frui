@@ -1,4 +1,3 @@
-'use client';
 //hooks
 import { useTheme } from '../theme/hooks.js';
 

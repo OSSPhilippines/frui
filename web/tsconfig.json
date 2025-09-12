@@ -4,6 +4,10 @@
     "moduleResolution": "node",
     "jsx": "react-jsx"
   },
-  "include": [ "plugins/**/*.ts", "scripts/**/*.ts" ],
+  "include": [ 
+    "config/**/*.ts",
+    "plugins/**/*.ts", 
+    "scripts/**/*.ts" 
+  ],
   "exclude": [ "esm", "cjs", "node_modules", "tests" ]
 }

@@ -1,24 +1,13 @@
-import { server } from '@stackpress/ingest/http';
+import Terminal from '@stackpress/lib/Terminal';
+import bootstrap from '../config/develop.js';
 
 async function main() {
-  const app = server();
-  //set config
-  app.config.set({
-    env: process.env.SERVER_ENV || 'development',
-    cwd: process.cwd()
-  });
-  //load the plugins
-  await app.bootstrap();
-  //initialize the plugins
-  await app.resolve('config');
-  //add events
-  await app.resolve('listen');
-  //add routes
-  await app.resolve('route');
+  const cli = new Terminal([]);
+  const server = await bootstrap();
   //start the server
-  app.create().listen(3000, () => {
-    console.log('Server is running on port 3000');
-    console.log('------------------------------');
+  server.create().listen(3000, () => {
+    cli.control.system('Server is running on port 3000');
+    cli.control.system('------------------------------');
   });
 }
 

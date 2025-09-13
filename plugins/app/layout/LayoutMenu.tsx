@@ -388,8 +388,8 @@ export function MenuSection(props: SectionItem & { pathname: string }) {
   //render
   return (
     <div>
-      <a href={href} className={`${pathname.indexOf(search) === 0 ? 'text-white' : ''} block px-3 py-2 border-t border-solid theme-bc-0 cursor-pointer`}>
-        <i className={`theme-2 fas fa-fw ${icon}`}></i>
+      <a href={href} className={`${pathname.indexOf(search) === 0 ? 'theme-white' : ''} block px-3 py-2 border-t border-solid theme-bc-0 cursor-pointer`}>
+        <i className={`theme-2 fas fa-fw fa-${icon}`}></i>
         <span className="inline-block pl-2">{_(label)}</span>
       </a>
       {children.length && pathname.indexOf(search) === 0 ? (

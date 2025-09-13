@@ -9,10 +9,11 @@ import LayoutMenu from './LayoutMenu.js';
 import { useToggle } from './hooks.js';
 
 export type LayoutPanelProps = {
+  pathname?: string,
   children?: React.ReactNode
 };
 
-export default function LayoutPanel({ children }: LayoutPanelProps) {
+export default function LayoutPanel({ children, pathname }: LayoutPanelProps) {
   //hooks
   const [ opened, toggle ] = useToggle();
   const { ready, theme, mode } = useTheme();
@@ -23,7 +24,7 @@ export default function LayoutPanel({ children }: LayoutPanelProps) {
   return (
     <section className={`${theme}-${mode} theme-bg-0 theme-1 relative w-full h-full overflow-hidden`}>
       <LayoutHead toggle={toggle} />
-      <LayoutMenu open={opened} toggle={toggle} />
+      <LayoutMenu pathname={pathname} open={opened} toggle={toggle} />
       <section className="absolute top-16 bottom-0 left-0 md:left-52 right-0">
         {children}
       </section>

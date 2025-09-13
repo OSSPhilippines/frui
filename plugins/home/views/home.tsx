@@ -95,14 +95,11 @@ export function Body() {
 
 export function Head(props: PageProps) {
   const { styles = [] } = props;
-  const uri = '/';
-  const title  = 'Frui';
-  const description = 'The React Framework for Building Modern Web Apps';
   return (
     <ThemeHead
-      uri={uri}
-      title={title}
-      description={description}
+      uri="/"
+      title="Frui"
+      description="The React Framework for Building Modern Web Apps"
       styles={styles}
     />
   );

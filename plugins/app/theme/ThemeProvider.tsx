@@ -29,9 +29,8 @@ export default function ThemeProvider(props: ThemeProviderProps) {
       cookie.set('theme', theme);
     }
     if (mode) {
-      const newMode = mode === 'light' ? 'dark' : 'light';
-      setMode(newMode);
-      cookie.set('mode', newMode);
+      setMode(mode);
+      cookie.set('mode', mode);
     }
   };
   const value = { mode, theme, change, ready };

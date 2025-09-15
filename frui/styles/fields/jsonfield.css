@@ -1,0 +1,168 @@
+/* JsonField Base Container */
+.frui-field-json {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+}
+
+.frui-field-json * {
+  box-sizing: border-box;
+}
+
+/* JsonField Container */
+.frui-field-json-container {
+  position: relative;
+  width: 100%;
+}
+
+/* JsonField Textarea */
+.frui-field-json-textarea {
+  background-color: var(--white);
+  border-color: var(--black);
+  border-style: solid;
+  border-width: var(--thin);
+  border-radius: var(--curved);
+  box-sizing: border-box;
+  color: var(--black);
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: var(--sm);
+  line-height: 1.4;
+  min-height: 120px;
+  padding: var(--xs);
+  resize: vertical;
+  width: 100%;
+}
+
+.frui-field-json-textarea:focus {
+  border-color: var(--info);
+  box-shadow: 0 0 0 2px rgba(20, 116, 252, 0.1);
+  outline: none;
+}
+
+/* State variations */
+.frui-field-json-textarea:disabled {
+  background-color: #F5F5F5;
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.frui-field-json-textarea:read-only {
+  background-color: #F9F9F9;
+  cursor: default;
+}
+
+/* Error state */
+.frui-field-json-textarea.border-red-500 {
+  border-color: var(--error);
+}
+
+.frui-field-json-textarea.border-red-500:focus {
+  border-color: var(--error);
+  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.1);
+}
+
+/* Format Button */
+.frui-field-json-format-btn {
+  background-color: var(--info);
+  border: none;
+  border-radius: var(--curved);
+  color: var(--white);
+  cursor: pointer;
+  font-size: 10px;
+  line-height: 1;
+  padding: 4px 8px;
+  position: absolute;
+  right: var(--xs);
+  top: var(--xs);
+  transition: background-color 0.2s ease;
+  z-index: 1;
+}
+
+.frui-field-json-format-btn:hover:enabled {
+  background-color: #0056b3;
+}
+
+.frui-field-json-format-btn:active:enabled {
+  background-color: #004085;
+  transform: translateY(1px);
+}
+
+.frui-field-json-format-btn:disabled {
+  background-color: var(--muted);
+  cursor: not-allowed;
+}
+
+/* Error Message */
+.frui-field-json-error {
+  color: var(--error);
+  font-size: var(--sm);
+  margin-top: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .frui-field-json-textarea {
+    font-size: var(--xs);
+    min-height: 100px;
+  }
+  
+  .frui-field-json-format-btn {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
+}
+
+/* Dark theme support (if needed) */
+@media (prefers-color-scheme: dark) {
+  .frui-field-json-textarea {
+    background-color: #1a1a1a;
+    border-color: #404040;
+    color: #e0e0e0;
+  }
+  
+  .frui-field-json-textarea:focus {
+    border-color: var(--info);
+    box-shadow: 0 0 0 2px rgba(20, 116, 252, 0.2);
+  }
+  
+  .frui-field-json-textarea:disabled {
+    background-color: #2a2a2a;
+    color: #666666;
+  }
+  
+  .frui-field-json-textarea:read-only {
+    background-color: #252525;
+  }
+  
+  .frui-field-json-error {
+    color: #ff6b6b;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .frui-field-json-textarea {
+    border-width: 2px;
+  }
+  
+  .frui-field-json-textarea:focus {
+    box-shadow: 0 0 0 3px rgba(20, 116, 252, 0.3);
+  }
+  
+  .frui-field-json-format-btn {
+    border: 2px solid var(--white);
+  }
+}
+
+/* Print styles */
+@media print {
+  .frui-field-json-format-btn {
+    display: none;
+  }
+  
+  .frui-field-json-textarea {
+    border: 1px solid #000;
+    background: white !important;
+    color: black !important;
+  }
+}

@@ -47,24 +47,6 @@ const defaultSwatches = ['#D0021B'];
   pickerStyle={{ background: '#f0f0f0', width: '280px' }}
 />`,
 //4-------------------------------------------------------------------//
-`<form onSubmit={handleSubmit}>
-  <ColorPicker 
-    name="themeColor" 
-    defaultValue="rgba(74, 144, 226, 1)"
-    onUpdate={color => console.log('Color changed:', color)}
-  />
-  <button type="submit">Submit</button>
-</form>
-
-// Using with ref for imperative access
-const colorRef = useRef<HTMLInputElement>(null);
-
-<ColorPicker
-  name="backgroundColor"
-  passRef={colorRef}
-  onUpdate={setSelectedColor}
-/>`,
-//5-------------------------------------------------------------------//
 ];
 
 export default function ColorPickerDemoPage() {
@@ -81,9 +63,6 @@ export default function ColorPickerDemoPage() {
     [ _('value'), _('string'), _('No'), _('Current color (hex, rgba). If undefined, component is uncontrolled.') ],
     [ _('defaultValue'), _('string'), _('No'), _('Initial color if `value` is undefined (uncontrolled).') ],
     [ _('onChange'), _('function'), _('No'), _('Callback `(color: string) => void` returning rgba string.') ],
-    [ _('onUpdate'), _('function'), _('No'), _('Update callback `(color: string) => void` - like onChange but passes value directly.') ],
-    [ _('name'), _('string'), _('No'), _('Used for form integration and react server components.') ],
-    [ _('passRef'), _('LegacyRef'), _('No'), _('Passes ref to the hidden input element for form integration.') ],
     [ _('showAlpha'), _('boolean'), _('No (true)'), _('Show alpha slider and input.') ],
     [ _('showInputs'), _('boolean'), _('No (true)'), _('Show RGBA input fields.') ],
     [ _('swatches'), _('string[]'), _('No'), _('Array of hex/rgba colors for swatches.') ],
@@ -146,11 +125,6 @@ export default function ColorPickerDemoPage() {
                   {_('Layout & Style')}
                 </Link>
               </li>
-              <li>
-                <Link href="#form" className="block pb-1 hover:text-link">
-                  {_('Form Integration')}
-                </Link>
-              </li>
             </ul>
           </aside>
 
@@ -159,7 +133,7 @@ export default function ColorPickerDemoPage() {
                <i className="fas fa-palette mr-2"></i> {_('Color Picker')}
             </h1>
             <Code language="typescript" className="mt-2">
-              {`import ColorPicker from 'frui/field/ColorPicker';`}
+              {`import ColorPicker from 'frui/field/Color;`}
             </Code>
 
             <h2 id="props" className="uppercase font-bold text-lg mt-8 mb-2">
@@ -310,38 +284,6 @@ export default function ColorPickerDemoPage() {
               </div>
               <Code language="typescript">{examples[3]}</Code>
             </div>
-
-            <h2 id="form" className="uppercase font-bold text-lg mt-8 mb-2">
-              {_('Form Integration')}
-            </h2>
-            <p className="py-2">
-              <Translate>
-                Use <C value="name"/> prop for form submission, <C value="onUpdate"/> 
-                for value-based callbacks, and <C value="passRef"/> for imperative access.
-                The component includes a hidden input that automatically gets the current color value.
-              </Translate>
-            </p>
-            <div className="curved">
-              <div className="flex flex-wrap items-center justify-center p-3 bg-b1 gap-4">
-                <div>
-                  <div className="text-xs text-center mb-1">Form Field</div>
-                  <ColorPicker 
-                    name="formColor" 
-                    defaultValue="rgba(74, 144, 226, 1)"
-                    onUpdate={color => console.log('Form color:', color)}
-                  />
-                </div>
-                <div>
-                  <div className="text-xs text-center mb-1">With onUpdate</div>
-                  <ColorPicker
-                    defaultValue="rgba(255, 107, 107, 0.8)"
-                    onUpdate={color => alert(`Selected: ${color}`)}
-                  />
-                </div>
-              </div>
-              <Code language="typescript">{examples[4]}</Code>
-            </div>
-            
             <div className="flex items-center border-t border-b2 mt-8 pt-4">
               <Link className="text-t2 hover:text-link" href="/fields/code-editor">
                 <i className="fas fa-arrow-left mr-2"></i>

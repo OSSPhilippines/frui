@@ -1,4 +1,4 @@
-import type { CSSProperties, LegacyRef } from 'react';
+import type { CSSProperties } from 'react';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import ColorDisplay, { ColorProps } from '../format/Color';
 
@@ -9,17 +9,13 @@ export type Dragging = 'palette' | 'hue' | 'alpha' | null;
 export type ColorPickerConfig = {
   value?: string,
   defaultValue?: string,
-  onChange?: (color: string) => void,
-  onUpdate?: (color: string) => void
+  onChange?: (color: string) => void
 };
 
 export type ColorPickerProps = Omit<ColorProps, 'value'> & {
   value?: string,
   defaultValue?: string,
   onChange?: (color: string) => void,
-  onUpdate?: (color: string) => void,
-  name?: string,
-  passRef?: LegacyRef<HTMLInputElement>,
   showAlpha?: boolean,
   showInputs?: boolean,
   swatches?: string[],
@@ -135,8 +131,7 @@ export function useColorPicker(config: ColorPickerConfig) {
   const {
     value,
     defaultValue = defaultRgbaString,
-    onChange,
-    onUpdate
+    onChange
   } = config;
 
   const isControlled = value !== undefined;
@@ -304,9 +299,6 @@ export function useColorPicker(config: ColorPickerConfig) {
     if (onChange && newRgbaString !== notifyValue) {
       onChange(newRgbaString);
     }
-    if (onUpdate && newRgbaString !== notifyValue) {
-      onUpdate(newRgbaString);
-    }
   };
 
   return {
@@ -330,9 +322,6 @@ export default function ColorPicker(props: ColorPickerProps) {
     value,
     defaultValue = defaultRgbaString,
     onChange,
-    onUpdate,
-    name,
-    passRef,
     showAlpha = true,
     showInputs = true,
     swatches = [],
@@ -357,8 +346,7 @@ export default function ColorPicker(props: ColorPickerProps) {
   } = useColorPicker({
     value,
     defaultValue,
-    onChange,
-    onUpdate
+    onChange
   });
 
   const colorProps = { value: currentRgbaString, box, text, sm, md, lg };
@@ -563,14 +551,6 @@ export default function ColorPicker(props: ColorPickerProps) {
           )}
         </div>
       )}
-      
-      {/* Hidden input for form integration */}
-      <input 
-        type="hidden" 
-        name={name} 
-        value={currentRgbaString} 
-        ref={passRef}
-      />
     </div>
   );
 };

@@ -10,7 +10,6 @@ import Autocomplete from 'frui/field/Autocomplete';
 import Checkbox from 'frui/field/Checkbox';
 import Checklist, { ChecklistItem } from 'frui/field/Checklist';
 import CodeEditor from 'frui/field/CodeEditor';
-import ColorPicker from 'frui/field/ColorPicker';
 import Country from 'frui/field/Country';
 import Currency from 'frui/field/Currency';
 import Date from 'frui/field/Date';
@@ -45,7 +44,7 @@ export default function Home() {
   ];
   //render
   return (
-    <LayoutPanel
+    <LayoutPanel 
       uri="/field"
       title="Fields"
       description="Choose from over 25 ReactJS field components to use in your application."
@@ -59,26 +58,26 @@ export default function Home() {
             {_('Fields')}
           </h1>
           <p className="px-3 pt-3">
-            Thanks to our sponsors, contributors, and users. The
+            Thanks to our sponsors, contributors, and users. The 
             following fields have been unlocked and are free to use.
           </p>
           <div className="flex flex-wrap mt-4">
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/autocomplete')}
+              onClick={() => router.push('/field/autocomplete')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Autocomplete options={['foo', 'bar']} value="bar" />
+                  <Autocomplete options={[ 'foo', 'bar' ]} value="bar" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Autocomplete')}
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/checkbox')}
+              onClick={() => router.push('/field/checkbox')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -89,52 +88,39 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/checklist')}
+              onClick={() => router.push('/field/checklist')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <Checklist name="Options">
-                    <ChecklistItem label="Option 1" value="option1" />
-                    <ChecklistItem label="Option 2" value="option2" />
-                    <ChecklistItem label="Option 3" value="option3" />
-                  </Checklist>
+                <Checklist name="Options">
+                  <ChecklistItem label="Option 1" value="option1" />
+                  <ChecklistItem label="Option 2" value="option2" />
+                  <ChecklistItem label="Option 3" value="option3" />
+                </Checklist>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Checklist')}
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/code-editor')}
+              onClick={() => router.push('/field/code-editor')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <CodeEditor setup='basic' className="w-[60%] h-[50%] bg-white" value='console.log("Hello, World!");' language='ts' />
+                  <CodeEditor setup='basic' className="w-[60%] h-[50%] bg-white" value='console.log("Hello, World!");' language='ts'/>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Code Editor')}
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/color-picker')}
-            >
-              <div className="m-2 border border-b2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  <ColorPicker value="rgba(74, 144, 226, 0.8)" />
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Color Picker')}
-                </h2>
-              </div>
-            </div>
-            <div
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/country')}
+              onClick={() => router.push('/field/country')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -145,9 +131,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/currency')}
+              onClick={() => router.push('/field/currency')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -158,9 +144,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/date')}
+              onClick={() => router.push('/field/date')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -171,9 +157,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/datetime')}
+              onClick={() => router.push('/field/datetime')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -184,9 +170,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/fieldset')}
+              onClick={() => router.push('/field/fieldset')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -199,9 +185,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/file')}
+              onClick={() => router.push('/field/file')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -212,9 +198,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/filelist')}
+              onClick={() => router.push('/field/filelist')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -227,9 +213,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/image')}
+              onClick={() => router.push('/field/image')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] bg-b1 px-3">
@@ -240,9 +226,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/imagelist')}
+              onClick={() => router.push('/field/imagelist')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -255,9 +241,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/input')}
+              onClick={() => router.push('/field/input')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -268,9 +254,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/knob')}
+              onClick={() => router.push('/field/knob')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -281,9 +267,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/markdown')}
+              onClick={() => router.push('/field/markdown')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -294,9 +280,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/mask')}
+              onClick={() => router.push('/field/mask')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -307,9 +293,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/metadata')}
+              onClick={() => router.push('/field/metadata')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -322,9 +308,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/number')}
+              onClick={() => router.push('/field/number')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -335,9 +321,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/password')}
+              onClick={() => router.push('/field/password')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -348,9 +334,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/radio')}
+              onClick={() => router.push('/field/radio')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -362,19 +348,19 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/select')}
+              onClick={() => router.push('/field/select')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
                   <Select className="w-full" options={[]} value={{
                     label: (
                       <div className="flex items-center w-full">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img alt="foobar" height="30" width="30" src="https://e7.pngegg.com/pngimages/971/854/png-clipart-white-and-gray-illustration-angle-symbol-snout-fictional-character-black-metroui-apps-foobar-angle-logo-thumbnail.png" />
-                        <div className="ml-2 text-left flex-grow">Foobar</div>
-                        <i className="fas fa-chevron-down"></i>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img alt="foobar" height="30" width="30" src="https://e7.pngegg.com/pngimages/971/854/png-clipart-white-and-gray-illustration-angle-symbol-snout-fictional-character-black-metroui-apps-foobar-angle-logo-thumbnail.png" />
+                          <div className="ml-2 text-left flex-grow">Foobar</div>
+                          <i className="fas fa-chevron-down"></i>
                       </div>
                     ),
                     value: 'bar'
@@ -385,9 +371,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/slug')}
+              onClick={() => router.push('/field/slug')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -398,9 +384,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/switch')}
+              onClick={() => router.push('/field/switch')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -411,9 +397,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/taglist')}
+              onClick={() => router.push('/field/taglist')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -424,9 +410,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/textarea')}
+              onClick={() => router.push('/field/textarea')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -437,9 +423,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/textlist')}
+              onClick={() => router.push('/field/textlist')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -452,9 +438,9 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
+            <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => router.push('/field/time')}
+              onClick={() => router.push('/field/time')} 
             >
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
@@ -471,7 +457,7 @@ export default function Home() {
             {_('Locked')}
           </h2>
           <p className="px-3 pt-3">
-            The following fields have are locked until enough there are
+            The following fields have are locked until enough there are 
             enough users and demand for such fields.
           </p>
           <div className="flex flex-wrap mt-4">
@@ -485,20 +471,17 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-            >
+            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
-                  Unlocks at 12,000 downloads
+                  Unlocks at 15,000 downloads
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('JSON')}
                 </h2>
               </div>
             </div>
-            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-            >
+            <div className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer">
               <div className="m-2 border border-b2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full bg-b1 px-3">
                   Unlocks at 18,000 downloads

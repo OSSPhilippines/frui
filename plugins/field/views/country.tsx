@@ -32,7 +32,7 @@ const props = [
   [ 'placeholder', 'string', 'No', 'Display text when no value set' ],
   [ 'searchable', 'boolean', 'No', 'Add a search field' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
-  [ 'value', 'string', 'No', 'Selected value from the options' ],
+  [ 'value', 'string', 'No', 'Selected value from the options' ]
 ];
 
 const examples = [

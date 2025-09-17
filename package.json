@@ -85,8 +85,7 @@
     "./plugins/app/plugin",
     "./plugins/elements/plugin",
     "./plugins/fields/plugin",
-    "./plugins/formats/plugin",
-    "./plugins/home/plugin"
+    "./plugins/formats/plugin"
   ],
   "scripts": {
     "build": "yarn build:tsc && yarn build:pkg && yarn build:docs",

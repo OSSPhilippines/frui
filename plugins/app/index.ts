@@ -9,9 +9,15 @@ export {
   LayoutToggle
 } from './layout';
 
+import Code, { InlineCode as C } from './components/Code.js';
+import Props from './components/Props.js';
+import Terminal from './components/Terminal.js';
+
 export {
   ThemeHead,
   ThemeContext,
   ThemeProvider,
   useTheme
 } from './theme';
+
+export { Code, Props, Terminal, C };

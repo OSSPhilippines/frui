@@ -1,7 +1,7 @@
 //modules
 import { useLanguage } from 'r22n';
 //frui
-import { notify } from '../../../components/element/Notify.js';
+import { notify } from 'components/element/Notify.js';
 
 export default function Terminal(props: { 
   className?: string, 
@@ -18,7 +18,7 @@ export default function Terminal(props: {
   }
   //render
   return (
-    <div className={`flex bg-black text-white p-4 ${className || ''}`}>
+    <div className={`flex theme-bg-black text-white p-4 ${className || ''}`}>
       <pre className="text-sm flex-grow">
         <code>
           $ {children}

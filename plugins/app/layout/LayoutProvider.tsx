@@ -3,8 +3,8 @@ import type { ReactNode } from 'react';
 import { R22nProvider } from 'r22n';
 //src
 import ThemeProvider from '../theme/ThemeProvider.js';
-import { NotifyContainer } from '../../../components/element/Notify.js';
-import { ModalProvider } from '../../../components/element/Modal.js';
+import { NotifyContainer } from 'components/element/Notify.js';
+import { ModalProvider } from 'components/element/Modal.js';
 
 export type LayoutProviderProps = { children: ReactNode };
 

@@ -16,6 +16,7 @@
     "target": "es6",
 
     "noUnusedLocals": true,
+    "baseUrl": ".",
     "outDir": "cjs/"
   },
   "include": [ "components/**/*.ts", "components/**/*.tsx" ],

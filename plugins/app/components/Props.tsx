@@ -8,7 +8,7 @@ import {
   Trow, 
   Tcol, 
   useStripe 
-} from '../../../components/element/Table.js';
+} from 'components/element/Table.js';
 
 export default function Props({ props }: { props: (string|JSX.Element)[][] }) {
   const { _ } = useLanguage();

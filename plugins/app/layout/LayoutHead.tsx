@@ -32,7 +32,7 @@ export default function LayoutHeader({ toggle }: LayoutHeaderProps) {
             <i className="fab fa-npm text-white"></i>
           </a>
           <a 
-            className="flex items-center justify-center h-7 w-7 rounded-full bg-blue-700" 
+            className="flex items-center justify-center h-7 w-7 rounded-full theme-bg-lue-700" 
             href="https://discord.gg/open-source-software-ph-905496362982981723"
             target="_blank"
           >

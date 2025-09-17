@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 
-import type { PageProps } from '../../app/types.js';
+import type { PageProps } from 'plugins/app/types.js';
 import { 
   LayoutPanel, 
   LayoutProvider, 
@@ -9,12 +9,12 @@ import {
   Props, 
   Code, 
   C 
-} from '../../app/index.js';
-import type { Crumb } from '../../../components/element/Crumbs.js';
-import Crumbs from '../../../components/element/Crumbs.js';
+} from 'plugins/app/index.js';
+import type { Crumb } from 'components/element/Crumbs.js';
+import Crumbs from 'components/element/Crumbs.js';
 
-import Button from '../../../components/form/Button.js';
-import Modal, { useModal } from '../../../components/element/Modal.js';
+import Button from 'components/form/Button.js';
+import Modal, { useModal } from 'components/element/Modal.js';
 
 const crumbs: Crumb[] = [
   { icon: 'icons', label: 'Components', href: '/component' },
@@ -137,12 +137,12 @@ export function Body() {
   return (
     <LayoutPanel pathname="/component/modal">
       <main className="flex flex-col h-full w-full">
-        <div className="p-3 bg-b2">
+        <div className="p-3 theme-bg-2">
           <Crumbs crumbs={crumbs} />
         </div>
         <section className="flex-grow relative h-full">
-          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l border-b1 text-sm">
-            <h4 className="p-3 border-b border-b1 bg-b1 text-sm uppercase font-semibold">
+          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l theme-bc-1 text-sm">
+            <h4 className="p-3 border-b theme-bc-1 theme-bg-1 text-sm uppercase font-semibold">
               {_('Contents')}
             </h4>
             <div className="p-3">
@@ -209,7 +209,7 @@ export function Body() {
               </Translate>
             </p>
             <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1 relative h-48">
+              <div className="flex items-center justify-center p-3 theme-bg-1 relative h-48">
                 <Modal opened absolute color="salmon" title="Delete Item" className="text-white">
                   <div className="bg-white p-3 text-black">
                     Are you sure you want to delete this item ?
@@ -231,7 +231,7 @@ export function Body() {
               </Translate>
             </p>
             <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1 relative h-48">
+              <div className="flex items-center justify-center p-3 theme-bg-1 relative h-48">
                 <Modal curved opened absolute color="salmon" title="Delete Item" className="text-white">
                   <div className="bg-white p-3 text-black">
                     Are you sure you want to delete this item ?
@@ -241,7 +241,7 @@ export function Body() {
               <Code language="typescript">{examples[1]}</Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1 relative h-48">
+              <div className="flex items-center justify-center p-3 theme-bg-1 relative h-48">
                 <Modal rounded opened absolute color="salmon" title="Delete Item" className="text-white">
                   <div className="bg-white p-3 text-black">
                     Are you sure you want to delete this item ?
@@ -264,7 +264,7 @@ export function Body() {
             </p>
             <div className="curved overflow-hidden">
               <Code language="typescript">{examples[3]}</Code>
-              <div className="flex items-center justify-center p-3 bg-b1 relative h-48">
+              <div className="flex items-center justify-center p-3 theme-bg-1 relative h-48">
                 <Button warning onClick={() => setOpened(true)}>Open Modal</Button>
                 <Modal curved opened={opened} absolute color="salmon" title="Delete Item" className="text-white" onClose={() => setOpened(false)}>
                   <div className="bg-white p-3 text-black">
@@ -289,7 +289,7 @@ export function Body() {
             </p>
             <div className="curved overflow-hidden">
               <Code language="typescript">{examples[4]}</Code>
-              <div className="flex items-center justify-center p-3 bg-b1 relative">
+              <div className="flex items-center justify-center p-3 theme-bg-1 relative">
                 <Button warning onClick={() => setOpenedF(true)}>Open Modal</Button>
                 <Modal fixed opened={openedF} color="salmon" title="Delete Item" className="text-white" onClose={() => setOpenedF(false)}>
                   <div className="bg-white p-3 text-black">
@@ -322,7 +322,7 @@ export function Body() {
             </p>
             <div className="curved overflow-hidden">
               <Code language="typescript">{examples[6]}</Code>
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button warning onClick={open}>Open Modal</Button>
               </div>
             </div>
@@ -342,7 +342,7 @@ export function Body() {
               </Translate>
             </p>
 
-            <div className="flex items-center border-t border-b2 mt-8 pt-4">
+            <div className="flex items-center border-t theme-bg-2 mt-8 pt-4">
               <a className="text-t2" href="/component/loader">
                 <i className="fas fa-arrow-left mr-2"></i>
                 {_('Loaders')}

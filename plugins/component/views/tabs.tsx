@@ -1,6 +1,6 @@
 import { useLanguage, Translate } from 'r22n';
 
-import type { PageProps } from '../../app/types.js';
+import type { PageProps } from 'plugins/app/types.js';
 import { 
   LayoutPanel, 
   LayoutProvider, 
@@ -8,11 +8,11 @@ import {
   Code, 
   C, 
   Props
-} from '../../app/index.js';
-import type { Crumb } from '../../../components/element/Crumbs.js';
-import Crumbs from '../../../components/element/Crumbs.js';
+} from 'plugins/app/index.js';
+import type { Crumb } from 'components/element/Crumbs.js';
+import Crumbs from 'components/element/Crumbs.js';
 
-import Tabs from '../../../components/element/Tabs.js';
+import Tabs from 'components/element/Tabs.js';
 
 const crumbs: Crumb[] = [
   { icon: 'icons', label: 'Components', href: '/component' },
@@ -156,7 +156,7 @@ export function Body() {
   return (
     <LayoutPanel pathname="/component/tabs">
       <main className="flex flex-col h-full w-full">
-        <div className="p-3 bg-b2">
+        <div className="p-3 theme-bg-2">
           <Crumbs crumbs={crumbs} />
         </div>
         <section className="flex-grow relative h-full">
@@ -254,7 +254,7 @@ export function Body() {
             </Translate>
           </p>
 
-          <div className="flex items-center border-t border-b2 mt-8 pt-4">
+          <div className="flex items-center border-t theme-bg-2 mt-8 pt-4">
             <a className="text-t2" href="/component/table">
               <i className="fas fa-arrow-left mr-2"></i>
               {_('Table')}

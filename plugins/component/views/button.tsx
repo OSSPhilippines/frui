@@ -1,6 +1,6 @@
 import { useLanguage, Translate } from 'r22n';
 
-import type { PageProps } from '../../app/types.js';
+import type { PageProps } from 'plugins/app/types.js';
 import { 
   LayoutPanel, 
   LayoutProvider, 
@@ -8,11 +8,11 @@ import {
   Props, 
   Code, 
   C 
-} from '../../app/index.js';
-import type { Crumb } from '../../../components/element/Crumbs.js';
-import Crumbs from '../../../components/element/Crumbs.js';
+} from 'plugins/app/index.js';
+import type { Crumb } from 'components/element/Crumbs.js';
+import Crumbs from 'components/element/Crumbs.js';
 
-import Button from '../../../components/form/Button.js';
+import Button from 'components/form/Button.js';
 
 const crumbs: Crumb[] = [
   { icon: 'icons', label: 'Components', href: '/component' },
@@ -53,12 +53,12 @@ export function Body() {
   return (
     <LayoutPanel pathname="/component/button">
       <main className="flex flex-col h-full w-full">
-        <div className="p-3 bg-b2">
+        <div className="p-3 theme-bg-2">
           <Crumbs crumbs={crumbs} />
         </div>
         <section className="flex-grow relative h-full">
-          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l border-b1 text-sm">
-            <h4 className="p-3 border-b border-b1 bg-b1 text-sm uppercase font-semibold">
+          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l theme-bc-1 text-sm">
+            <h4 className="p-3 border-b theme-bc-1 theme-bg-1 text-sm uppercase font-semibold">
               {_('Contents')}
             </h4>
             <div className="p-3">
@@ -126,7 +126,7 @@ export function Body() {
               </Translate>
             </p>
             <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button info>Submit Info</Button>
               </div>
               <Code language="typescript">
@@ -134,7 +134,7 @@ export function Body() {
               </Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button warning>Submit Warning</Button>
               </div>
               <Code language="typescript">
@@ -142,7 +142,7 @@ export function Body() {
               </Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button success>Submit Success</Button>
               </div>
               <Code language="typescript">
@@ -150,7 +150,7 @@ export function Body() {
               </Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button error>Submit Error</Button>
               </div>
               <Code language="typescript">
@@ -158,7 +158,7 @@ export function Body() {
               </Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button muted>Submit Muted</Button>
               </div>
               <Code language="typescript">
@@ -176,7 +176,7 @@ export function Body() {
               </Translate>
             </p>
             <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button color="salmon">Submit Custom</Button>
               </div>
               <Code language="typescript">
@@ -194,7 +194,7 @@ export function Body() {
               </Translate>
             </p>
             <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button info curved>Submit Curved</Button>
               </div>
               <Code language="typescript">
@@ -202,7 +202,7 @@ export function Body() {
               </Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button warning rounded>Submit Rounded</Button>
               </div>
               <Code language="typescript">
@@ -210,7 +210,7 @@ export function Body() {
               </Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button success pill>Submit Pill</Button>
               </div>
               <Code language="typescript">
@@ -229,7 +229,7 @@ export function Body() {
               </Translate>
             </p>
             <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button info block full pill>Submit Block</Button>
               </div>
               <Code language="typescript">
@@ -249,7 +249,7 @@ export function Body() {
               </Translate>
             </p>
             <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button info xs pill className="text-xs">Submit Extra Small</Button>
               </div>
               <Code language="typescript">
@@ -257,7 +257,7 @@ export function Body() {
               </Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button warning sm pill className="text-sm">Submit Small</Button>
               </div>
               <Code language="typescript">
@@ -265,7 +265,7 @@ export function Body() {
               </Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button success md pill className="text-md">Submit Medium</Button>
               </div>
               <Code language="typescript">
@@ -273,7 +273,7 @@ export function Body() {
               </Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button error lg pill className="text-lg">Submit Large</Button>
               </div>
               <Code language="typescript">
@@ -281,7 +281,7 @@ export function Body() {
               </Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button muted xl pill className="text-xl">Submit Extra Large</Button>
               </div>
               <Code language="typescript">
@@ -289,7 +289,7 @@ export function Body() {
               </Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button info xl2 pill className="text-2xl">Submit XXL</Button>
               </div>
               <Code language="typescript">
@@ -297,7 +297,7 @@ export function Body() {
               </Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button warning xl3 pill className="text-3xl">Submit XXXL</Button>
               </div>
               <Code language="typescript">
@@ -305,7 +305,7 @@ export function Body() {
               </Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button success xl4 pill className="text-4xl">Submit IVL</Button>
               </div>
               <Code language="typescript">
@@ -313,7 +313,7 @@ export function Body() {
               </Code>
             </div>
             <div className="curved overflow-hidden mt-5">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Button error xl5 pill className="text-5xl">Submit VL</Button>
               </div>
               <Code language="typescript">
@@ -331,7 +331,7 @@ export function Body() {
               </Translate>
             </p>
 
-            <div className="flex items-center border-t border-b2 mt-8 pt-4">
+            <div className="flex items-center border-t theme-bg-2 mt-8 pt-4">
               <a className="text-t2" href="/component/badge">
                 <i className="fas fa-arrow-left mr-2"></i>
                 {_('Badges')}

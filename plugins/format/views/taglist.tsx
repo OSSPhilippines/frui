@@ -1,16 +1,16 @@
 import { useLanguage } from 'r22n';
 
-import type { PageProps } from '../../app/types.js';
+import type { PageProps } from 'plugins/app/types.js';
 import { 
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead, 
   Props, 
   Code
-} from '../../app/index.js';
-import type { Crumb } from '../../../components/element/Crumbs.js';
-import Crumbs from '../../../components/element/Crumbs.js';
-import Taglist from '../../../components/format/Taglist.js';
+} from 'plugins/app/index.js';
+import type { Crumb } from 'components/element/Crumbs.js';
+import Crumbs from 'components/element/Crumbs.js';
+import Taglist from 'components/format/Taglist.js';
 
 const crumbs: Crumb[] = [
   { icon: 'text-height', label: 'Formats', href: '/format' },
@@ -30,12 +30,12 @@ export function Body() {
   return (
     <LayoutPanel pathname="/format/taglist">
       <main className="flex flex-col h-full w-full">
-        <div className="p-3 bg-b2">
+        <div className="p-3 theme-bg-2">
           <Crumbs crumbs={crumbs} />
         </div>
         <div className="flex-grow relative h-full">
-          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l border-b1 text-sm">
-            <h4 className="p-3 border-b border-b1 bg-b1 uppercase font-semibold">
+          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l theme-bc-1 text-sm">
+            <h4 className="p-3 border-b theme-bc-1 theme-bg-1 uppercase font-semibold">
               <a href="#top">{_('Taglist')}</a>
             </h4>
             <ul className="list-disc py-3 pr-3 pl-6">
@@ -68,7 +68,7 @@ export function Body() {
               {_('Basics')}
             </h2>
             <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <div className="text-left text-black w-full">
                   <Taglist className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />
                 </div>
@@ -78,7 +78,7 @@ export function Body() {
               </Code>
             </div>
 
-            <div className="flex items-center border-t border-b2 mt-8 pt-4">
+            <div className="flex items-center border-t theme-bg-2 mt-8 pt-4">
               <a className="text-t2" href="/format/table">
                 <i className="fas fa-arrow-left mr-2"></i>
                 {_('Table')}

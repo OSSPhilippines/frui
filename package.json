@@ -83,9 +83,9 @@
   ],
   "plugins": [
     "./plugins/app/plugin",
-    "./plugins/elements/plugin",
-    "./plugins/fields/plugin",
-    "./plugins/formats/plugin"
+    "./plugins/component/plugin",
+    "./plugins/field/plugin",
+    "./plugins/format/plugin"
   ],
   "scripts": {
     "build": "yarn build:tsc && yarn build:pkg && yarn build:docs",
@@ -121,7 +121,8 @@
     "typescript": "5.9.2",
     "universal-cookie": "8.0.1",
     "unocss": "66.5.1",
-    "vite": "7.1.5"
+    "vite": "7.1.5",
+    "vite-tsconfig-paths": "5.1.4"
   },
   "peerDependencies": {
     "react": "19.1.1",

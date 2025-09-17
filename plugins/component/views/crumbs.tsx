@@ -1,13 +1,13 @@
 //import { useLanguage } from 'r22n';
 
-import type { PageProps } from '../../app/types.js';
+import type { PageProps } from 'plugins/app/types.js';
 import { 
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead
-} from '../../app/index.js';
-import type { Crumb } from '../../../components/element/Crumbs.js';
-import Crumbs from '../../../components/element/Crumbs.js';
+} from 'plugins/app/index.js';
+import type { Crumb } from 'components/element/Crumbs.js';
+import Crumbs from 'components/element/Crumbs.js';
 
 const crumbs: Crumb[] = [
   { icon: 'icons', label: 'Components', href: '/component' },
@@ -21,7 +21,7 @@ export function Body() {
   return (
     <LayoutPanel pathname="/component/crumbs">
       <main className="flex flex-col h-full w-full">
-        <div className="p-3 bg-b2">
+        <div className="p-3 theme-bg-2">
           <Crumbs crumbs={crumbs} />
         </div>
         <section className="flex-grow relative h-full">

@@ -3,6 +3,7 @@ import path from 'node:path';
 import Terminal from '@stackpress/lib/Terminal';
 //modules
 import unocss from 'unocss/vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 //stackpress
 import { server as http } from '@stackpress/ingest/http';
 
@@ -28,7 +29,7 @@ const config = {
       path.join(cwd, 'frui.css')
     ],
     //vite plugins
-    plugins: [ unocss() ]
+    plugins: [ unocss(), tsconfigPaths() ]
   }
 };
 

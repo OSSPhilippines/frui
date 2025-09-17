@@ -2,12 +2,12 @@
 import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 //frui
-import type { Crumb } from '../../../components/element/Crumbs';
-import Crumbs from '../../../components/element/Crumbs';
+import type { Crumb } from 'components/element/Crumbs';
+import Crumbs from 'components/element/Crumbs';
 //app
-import type { PageProps } from '../../app/types.js';
-import Code from '../../app/components/Code';
-import Terminal from '../../app/components/Terminal';
+import type { PageProps } from 'plugins/app/types.js';
+import Code from 'plugins/app/components/Code';
+import Terminal from 'plugins/app/components/Terminal';
 import { LayoutProvider, LayoutPanel, ThemeHead } from '../../app';
 
 export function Body() {

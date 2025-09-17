@@ -1,17 +1,17 @@
 import { useLanguage } from 'r22n';
 
-import type { PageProps } from '../../app/types.js';
+import type { PageProps } from 'plugins/app/types.js';
 import { 
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead, 
   Code, 
   Props 
-} from '../../app/index.js';
-import type { Crumb } from '../../../components/element/Crumbs.js';
-import Crumbs from '../../../components/element/Crumbs.js';
+} from 'plugins/app/index.js';
+import type { Crumb } from 'components/element/Crumbs.js';
+import Crumbs from 'components/element/Crumbs.js';
 
-import make, { type FieldsProps, type FieldsetProps } from '../../../components/form/Fieldset.js';
+import make, { type FieldsProps, type FieldsetProps } from 'components/form/Fieldset.js';
 
 export type ContactType = { name: string };
 export type ContactsProps = FieldsetProps<ContactType> & {};
@@ -52,12 +52,12 @@ export function Body() {
   return (
     <LayoutPanel pathname="/component/fieldset">
       <main className="flex flex-col h-full w-full">
-        <div className="p-3 bg-b2">
+        <div className="p-3 theme-bg-2">
           <Crumbs crumbs={crumbs} />
         </div>
         <section className="flex-grow relative h-full">
-          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l border-b1 text-sm">
-            <h4 className="p-3 border-b border-b1 bg-b1 text-sm uppercase font-semibold">
+          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l theme-bc-1 text-sm">
+            <h4 className="p-3 border-b theme-bc-1 theme-bg-1 text-sm uppercase font-semibold">
               {_('Contents')}
             </h4>
             <div className="p-3">
@@ -98,7 +98,7 @@ export function Body() {
               <Contacts limit={1} />
             </div>
 
-            <div className="flex items-center border-t border-b2 mt-8 pt-4">
+            <div className="flex items-center border-t theme-bg-2 mt-8 pt-4">
               <a className="text-t2" href="/component">
                 <i className="fas fa-arrow-left mr-2"></i>
                 {_('Components')}

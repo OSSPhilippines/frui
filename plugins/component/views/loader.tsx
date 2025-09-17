@@ -1,6 +1,6 @@
-import type { PageProps } from '../../app/types.js';
-import { LayoutProvider, ThemeHead } from '../../app/index.js';
-import Loader from '../../../components/element/Loader.js';
+import type { PageProps } from 'plugins/app/types.js';
+import { LayoutProvider, ThemeHead } from 'plugins/app/index.js';
+import Loader from 'components/element/Loader.js';
 
 export function Body(props: PageProps) {
   return (

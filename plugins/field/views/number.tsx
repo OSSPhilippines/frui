@@ -1,6 +1,6 @@
 import { useLanguage, Translate } from 'r22n';
 
-import type { PageProps } from '../../app/types.js';
+import type { PageProps } from 'plugins/app/types.js';
 import { 
   LayoutPanel, 
   LayoutProvider, 
@@ -8,12 +8,12 @@ import {
   Props, 
   Code, 
   C 
-} from '../../app/index.js';
-import type { Crumb } from '../../../components/element/Crumbs.js';
-import Crumbs from '../../../components/element/Crumbs.js';
-import { Table, Thead, Trow, Tcol } from '../../../components/element/Table.js';
+} from 'plugins/app/index.js';
+import type { Crumb } from 'components/element/Crumbs.js';
+import Crumbs from 'components/element/Crumbs.js';
+import { Table, Thead, Trow, Tcol } from 'components/element/Table.js';
 
-import Number from '../../../components/field/Number.js';
+import Number from 'components/field/Number.js';
 
 const crumbs: Crumb[] = [
   { icon: 'rectangle-list', label: 'Fields', href: '/field' },
@@ -48,12 +48,12 @@ export function Body() {
   return (
     <LayoutPanel pathname="/field/number">
       <main className="flex flex-col h-full w-full">
-        <div className="p-3 bg-b2">
+        <div className="p-3 theme-bg-2">
           <Crumbs crumbs={crumbs} />
         </div>
         <section className="flex-grow relative h-full">
-          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l border-b1 text-sm">
-            <h4 className="p-3 border-b border-b1 bg-b1 uppercase font-semibold">
+          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l theme-bc-1 text-sm">
+            <h4 className="p-3 border-b theme-bc-1 theme-bg-1 uppercase font-semibold">
               <a href="#top">{_('Number')}</a>
             </h4>
             <ul className="list-disc py-3 pr-3 pl-6">
@@ -117,7 +117,7 @@ export function Body() {
               </Translate>
             </p>
             <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <div className="w-full">
                   <Number min="0" max="10000" step="0.01" defaultValue="12345.67" />
                 </div>
@@ -137,7 +137,7 @@ export function Body() {
               </Translate>
             </p>
             <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Number min="0" max="10000" step="0.01" defaultValue="1234.56" onUpdate={value => alert(value)} />
               </div>
               <Code language="typescript">
@@ -156,17 +156,17 @@ export function Body() {
               </Translate>
             </p>
             <Table>
-              <Thead className="bg-b3 text-left">{_('Name')}</Thead>
-              <Thead className="bg-b3 text-left">{_('Type')}</Thead>
-              <Thead className="bg-b3 text-left">{_('Sample')}</Thead>
+              <Thead className="theme-bg-3 text-left">{_('Name')}</Thead>
+              <Thead className="theme-bg-3 text-left">{_('Type')}</Thead>
+              <Thead className="theme-bg-3 text-left">{_('Sample')}</Thead>
               <Trow>
-                <Tcol className="bg-b1 text-left">
+                <Tcol className="theme-bg-1 text-left">
                   {_('event')}
                 </Tcol>
-                <Tcol className="bg-b1 text-left">
+                <Tcol className="theme-bg-1 text-left">
                   {_('Event Object')}
                 </Tcol>
-                <Tcol className="bg-b1 text-left">
+                <Tcol className="theme-bg-1 text-left">
                   see: <a 
                     href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
                     target="_blank"
@@ -186,17 +186,17 @@ export function Body() {
               </Translate>
             </p>
             <Table>
-              <Thead className="bg-b3 text-left">{_('Name')}</Thead>
-              <Thead className="bg-b3 text-left">{_('Type')}</Thead>
-              <Thead className="bg-b3 text-left">{_('Sample')}</Thead>
+              <Thead className="theme-bg-3 text-left">{_('Name')}</Thead>
+              <Thead className="theme-bg-3 text-left">{_('Type')}</Thead>
+              <Thead className="theme-bg-3 text-left">{_('Sample')}</Thead>
               <Trow>
-                <Tcol className="bg-b1 text-left">
+                <Tcol className="theme-bg-1 text-left">
                   {_('value')}
                 </Tcol>
-                <Tcol className="bg-b1 text-left">
+                <Tcol className="theme-bg-1 text-left">
                   {_('string')}
                 </Tcol>
-                <Tcol className="bg-b1 text-left">
+                <Tcol className="theme-bg-1 text-left">
                   <C value="foobar" quote />
                 </Tcol>
               </Trow>
@@ -212,7 +212,7 @@ export function Body() {
               </Translate>
             </p>
             <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <Number error min="0" max="10000" step="0.01" value="1234.56" />
               </div>
               <Code language="typescript">
@@ -220,7 +220,7 @@ export function Body() {
               </Code>
             </div>
 
-            <div className="flex items-center border-t border-b2 mt-8 pt-4">
+            <div className="flex items-center border-t theme-bg-2 mt-8 pt-4">
               <a className="text-t2" href="/field/metadata">
                 <i className="fas fa-arrow-left mr-2"></i>
                 {_('Metadata')}

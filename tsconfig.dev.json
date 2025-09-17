@@ -19,6 +19,7 @@
     "noUnusedParameters": true,
 
     "moduleResolution": "node",
+    "baseUrl": ".",
     "outDir": "esm/"
   },
   "include": [ 

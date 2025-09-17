@@ -1,7 +1,7 @@
 //modules
 import { useEffect } from 'react';
 //frui
-import { unload } from '../../../components/element/Notify.js';
+import { unload } from 'components/element/Notify.js';
 //app
 import { useTheme } from '../theme/hooks.js';
 import LayoutToggle from './LayoutToggle.js';

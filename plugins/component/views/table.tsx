@@ -1,17 +1,17 @@
 import { useLanguage } from 'r22n';
 
-import type { PageProps } from '../../app/types.js';
+import type { PageProps } from 'plugins/app/types.js';
 import { 
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead, 
   Code, 
   Props
-} from '../../app/index.js';
-import type { Crumb } from '../../../components/element/Crumbs.js';
-import Crumbs from '../../../components/element/Crumbs.js';
+} from 'plugins/app/index.js';
+import type { Crumb } from 'components/element/Crumbs.js';
+import Crumbs from 'components/element/Crumbs.js';
 
-import Table, { Thead, Trow, Tcol, useStripe } from '../../../components/element/Table.js';
+import Table, { Thead, Trow, Tcol, useStripe } from 'components/element/Table.js';
 
 const crumbs: Crumb[] = [
   { icon: 'icons', label: 'Components', href: '/component' },
@@ -38,57 +38,57 @@ const props = [
 const examples = [
 //0
 `<Table className="w-full">
-  <Thead className="bg-b3 text-left">ID</Thead>
-  <Thead className="bg-b3 text-left">Name</Thead>
-  <Thead className="bg-b3 text-center">Active</Thead>
-  <Thead className="bg-b3 text-right">Created</Thead>
-  <Thead className="bg-b3 text-right">Updated</Thead>
+  <Thead className="theme-bg-3 text-left">ID</Thead>
+  <Thead className="theme-bg-3 text-left">Name</Thead>
+  <Thead className="theme-bg-3 text-center">Active</Thead>
+  <Thead className="theme-bg-3 text-right">Created</Thead>
+  <Thead className="theme-bg-3 text-right">Updated</Thead>
   <Trow>
-    <Tcol className="bg-b1">1</Tcol>
-    <Tcol className="bg-b1">John Doe</Tcol>
-    <Tcol className="bg-b1 text-center">Yes</Tcol>
-    <Tcol className="bg-b1 text-right">2021-01-01</Tcol>
-    <Tcol className="bg-b1 text-right">2021-01-01</Tcol>
+    <Tcol className="theme-bg-1">1</Tcol>
+    <Tcol className="theme-bg-1">John Doe</Tcol>
+    <Tcol className="theme-bg-1 text-center">Yes</Tcol>
+    <Tcol className="theme-bg-1 text-right">2021-01-01</Tcol>
+    <Tcol className="theme-bg-1 text-right">2021-01-01</Tcol>
   </Trow>
   <Trow>
-    <Tcol className="bg-b2">2</Tcol>
-    <Tcol className="bg-b2">Jane Doe</Tcol>
-    <Tcol className="bg-b2 text-center">No</Tcol>
-    <Tcol className="bg-b2 text-right">2021-01-01</Tcol>
-    <Tcol className="bg-b2 text-right">2021-01-01</Tcol>
+    <Tcol className="theme-bg-2">2</Tcol>
+    <Tcol className="theme-bg-2">Jane Doe</Tcol>
+    <Tcol className="theme-bg-2 text-center">No</Tcol>
+    <Tcol className="theme-bg-2 text-right">2021-01-01</Tcol>
+    <Tcol className="theme-bg-2 text-right">2021-01-01</Tcol>
   </Trow>
 </Table>`,
 //1
 `<Table>
-  <Thead className="bg-b3 text-left">ID</Thead>
-  <Thead className="bg-b3 text-left">Name</Thead>
-  <Thead className="bg-b3 text-center">Active</Thead>
-  <Thead className="bg-b3 text-right">Created</Thead>
-  <Thead className="bg-b3 text-right">Updated</Thead>
+  <Thead className="theme-bg-3 text-left">ID</Thead>
+  <Thead className="theme-bg-3 text-left">Name</Thead>
+  <Thead className="theme-bg-3 text-center">Active</Thead>
+  <Thead className="theme-bg-3 text-right">Created</Thead>
+  <Thead className="theme-bg-3 text-right">Updated</Thead>
   <Trow>
-    <Tcol className="bg-b1">1</Tcol>
-    <Tcol wrap3 className="bg-b1">Duis id ante leo...</Tcol>
-    <Tcol className="bg-b1 text-center">Yes</Tcol>
-    <Tcol noWrap className="bg-b1 text-right">2021-01-01</Tcol>
-    <Tcol noWrap className="bg-b1 text-right">2021-01-01</Tcol>
+    <Tcol className="theme-bg-1">1</Tcol>
+    <Tcol wrap3 className="theme-bg-1">Duis id ante leo...</Tcol>
+    <Tcol className="theme-bg-1 text-center">Yes</Tcol>
+    <Tcol noWrap className="theme-bg-1 text-right">2021-01-01</Tcol>
+    <Tcol noWrap className="theme-bg-1 text-right">2021-01-01</Tcol>
   </Trow>
 </Table>`,
 //2
 `<div className="h-64 w-72 overflow-auto">
   <Table className="w-full">
-    <Thead stickyTop stickyLeft className="bg-b3 text-left">ID</Thead>
-    <Thead stickyTop noWrap className="bg-b3 text-left">First Name</Thead>
-    <Thead stickyTop noWrap className="bg-b3 text-left">Last Name</Thead>
-    <Thead stickyTop className="bg-b3 text-center">Active</Thead>
-    <Thead stickyTop className="bg-b3 text-right">Created</Thead>
-    <Thead stickyTop className="bg-b3 text-right">Updated</Thead>
+    <Thead stickyTop stickyLeft className="theme-bg-3 text-left">ID</Thead>
+    <Thead stickyTop noWrap className="theme-bg-3 text-left">First Name</Thead>
+    <Thead stickyTop noWrap className="theme-bg-3 text-left">Last Name</Thead>
+    <Thead stickyTop className="theme-bg-3 text-center">Active</Thead>
+    <Thead stickyTop className="theme-bg-3 text-right">Created</Thead>
+    <Thead stickyTop className="theme-bg-3 text-right">Updated</Thead>
     <Trow>
-      <Tcol stickyLeft className="bg-b1">1</Tcol>
-      <Tcol className="bg-b1">John</Tcol>
-      <Tcol className="bg-b1">Doe</Tcol>
-      <Tcol className="bg-b1 text-center">Yes</Tcol>
-      <Tcol noWrap className="bg-b1 text-right">2021-01-01</Tcol>
-      <Tcol noWrap className="bg-b1 text-right">2021-01-02</Tcol>
+      <Tcol stickyLeft className="theme-bg-1">1</Tcol>
+      <Tcol className="theme-bg-1">John</Tcol>
+      <Tcol className="theme-bg-1">Doe</Tcol>
+      <Tcol className="theme-bg-1 text-center">Yes</Tcol>
+      <Tcol noWrap className="theme-bg-1 text-right">2021-01-01</Tcol>
+      <Tcol noWrap className="theme-bg-1 text-right">2021-01-02</Tcol>
     </Trow>
   </Table>
 </div>`
@@ -96,11 +96,11 @@ const examples = [
 
 export function Body() {
   const { _ } = useLanguage();
-  const stripe = useStripe('bg-b2', 'bg-b1');
+  const stripe = useStripe('theme-bg-2', 'theme-bg-1');
   return (
     <LayoutPanel pathname="/component/table">
       <main className="flex flex-col h-full w-full">
-        <div className="p-3 bg-b2">
+        <div className="p-3 theme-bg-2">
           <Crumbs crumbs={crumbs} />
         </div>
         <section className="flex-grow relative h-full">
@@ -118,11 +118,11 @@ export function Body() {
 
           <div className="w-full overflow-auto">
             <Table>
-              <Thead className="text-left bg-b3">{_('Name')}</Thead>
-              <Thead className="text-left bg-b3">{_('Type')}</Thead>
-              <Thead noWrap className="text-left bg-b3">{_('For Element')}</Thead>
-              <Thead className="text-center bg-b3">{_('Required')}</Thead>
-              <Thead className="text-left bg-b3">{_('Notes')}</Thead>
+              <Thead className="text-left theme-bg-3">{_('Name')}</Thead>
+              <Thead className="text-left theme-bg-3">{_('Type')}</Thead>
+              <Thead noWrap className="text-left theme-bg-3">{_('For Element')}</Thead>
+              <Thead className="text-center theme-bg-3">{_('Required')}</Thead>
+              <Thead className="text-left theme-bg-3">{_('Notes')}</Thead>
               {props.map((prop, i) => (
                 <Trow key={i}>
                   <Tcol className={`${stripe(i)}`}>{prop[0]}</Tcol>
@@ -140,17 +140,17 @@ export function Body() {
           </h2>
           <div className="curved overflow-hidden">
             <Table className="w-full">
-              <Thead className="bg-b3 text-left">ID</Thead>
-              <Thead className="bg-b3 text-left">Name</Thead>
-              <Thead className="bg-b3 text-center">Active</Thead>
-              <Thead className="bg-b3 text-right">Created</Thead>
-              <Thead className="bg-b3 text-right">Updated</Thead>
+              <Thead className="theme-bg-3 text-left">ID</Thead>
+              <Thead className="theme-bg-3 text-left">Name</Thead>
+              <Thead className="theme-bg-3 text-center">Active</Thead>
+              <Thead className="theme-bg-3 text-right">Created</Thead>
+              <Thead className="theme-bg-3 text-right">Updated</Thead>
               <Trow>
-                <Tcol className="bg-b1">1</Tcol>
-                <Tcol className="bg-b1">John Doe</Tcol>
-                <Tcol className="bg-b1 text-center">Yes</Tcol>
-                <Tcol className="bg-b1 text-right">2021-01-01</Tcol>
-                <Tcol className="bg-b1 text-right">2021-01-01</Tcol>
+                <Tcol className="theme-bg-1">1</Tcol>
+                <Tcol className="theme-bg-1">John Doe</Tcol>
+                <Tcol className="theme-bg-1 text-center">Yes</Tcol>
+                <Tcol className="theme-bg-1 text-right">2021-01-01</Tcol>
+                <Tcol className="theme-bg-1 text-right">2021-01-01</Tcol>
               </Trow>
             </Table>
             <Code language="typescript">{examples[0]}</Code>
@@ -161,17 +161,17 @@ export function Body() {
           </h2>
           <div className="curved overflow-hidden">
             <Table className="w-full">
-              <Thead className="bg-b3 text-left">ID</Thead>
-              <Thead className="bg-b3 text-left">Name</Thead>
-              <Thead className="bg-b3 text-center">Active</Thead>
-              <Thead className="bg-b3 text-right">Created</Thead>
-              <Thead className="bg-b3 text-right">Updated</Thead>
+              <Thead className="theme-bg-3 text-left">ID</Thead>
+              <Thead className="theme-bg-3 text-left">Name</Thead>
+              <Thead className="theme-bg-3 text-center">Active</Thead>
+              <Thead className="theme-bg-3 text-right">Created</Thead>
+              <Thead className="theme-bg-3 text-right">Updated</Thead>
               <Trow>
-                <Tcol className="bg-b1">1</Tcol>
-                <Tcol wrap3 className="bg-b1">Duis id ante leo...</Tcol>
-                <Tcol className="bg-b1 text-center">Yes</Tcol>
-                <Tcol noWrap className="bg-b1 text-right">2021-01-01</Tcol>
-                <Tcol noWrap className="bg-b1 text-right">2021-01-01</Tcol>
+                <Tcol className="theme-bg-1">1</Tcol>
+                <Tcol wrap3 className="theme-bg-1">Duis id ante leo...</Tcol>
+                <Tcol className="theme-bg-1 text-center">Yes</Tcol>
+                <Tcol noWrap className="theme-bg-1 text-right">2021-01-01</Tcol>
+                <Tcol noWrap className="theme-bg-1 text-right">2021-01-01</Tcol>
               </Trow>
             </Table>
             <Code language="typescript">{examples[1]}</Code>
@@ -183,19 +183,19 @@ export function Body() {
           <div className="curved overflow-hidden">
             <div className="h-64 w-72 overflow-auto">
               <Table className="w-full">
-                <Thead stickyTop stickyLeft className="bg-b3 text-left">ID</Thead>
-                <Thead stickyTop noWrap className="bg-b3 text-left">First Name</Thead>
-                <Thead stickyTop noWrap className="bg-b3 text-left">Last Name</Thead>
-                <Thead stickyTop className="bg-b3 text-center">Active</Thead>
-                <Thead stickyTop className="bg-b3 text-right">Created</Thead>
-                <Thead stickyTop className="bg-b3 text-right">Updated</Thead>
+                <Thead stickyTop stickyLeft className="theme-bg-3 text-left">ID</Thead>
+                <Thead stickyTop noWrap className="theme-bg-3 text-left">First Name</Thead>
+                <Thead stickyTop noWrap className="theme-bg-3 text-left">Last Name</Thead>
+                <Thead stickyTop className="theme-bg-3 text-center">Active</Thead>
+                <Thead stickyTop className="theme-bg-3 text-right">Created</Thead>
+                <Thead stickyTop className="theme-bg-3 text-right">Updated</Thead>
                 <Trow>
-                  <Tcol stickyLeft className="bg-b1">1</Tcol>
-                  <Tcol className="bg-b1">John</Tcol>
-                  <Tcol className="bg-b1">Doe</Tcol>
-                  <Tcol className="bg-b1 text-center">Yes</Tcol>
-                  <Tcol noWrap className="bg-b1 text-right">2021-01-01</Tcol>
-                  <Tcol noWrap className="bg-b1 text-right">2021-01-02</Tcol>
+                  <Tcol stickyLeft className="theme-bg-1">1</Tcol>
+                  <Tcol className="theme-bg-1">John</Tcol>
+                  <Tcol className="theme-bg-1">Doe</Tcol>
+                  <Tcol className="theme-bg-1 text-center">Yes</Tcol>
+                  <Tcol noWrap className="theme-bg-1 text-right">2021-01-01</Tcol>
+                  <Tcol noWrap className="theme-bg-1 text-right">2021-01-02</Tcol>
                 </Trow>
               </Table>
             </div>

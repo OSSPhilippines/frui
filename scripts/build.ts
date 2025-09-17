@@ -5,6 +5,7 @@ import path from 'node:path';
 import type Server from '@stackpress/ingest/Server';
 import type { BuildStatus } from 'reactus/types';
 import unocss from 'unocss/vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import Terminal from '@stackpress/lib/Terminal';
 import { server as http } from '@stackpress/ingest/http';
 //src
@@ -32,7 +33,7 @@ const config = {
       //path.join(process.cwd(), '../frui/frui.css')
     ],
     //vite plugins
-    plugins: [ unocss() ],
+    plugins: [ unocss(), tsconfigPaths() ],
     //original vite options (overrides other settings related to vite)
     vite: undefined
   }

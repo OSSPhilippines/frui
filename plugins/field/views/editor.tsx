@@ -1,6 +1,6 @@
 import { useLanguage, Translate } from 'r22n';
 
-import type { PageProps } from '../../app/types.js';
+import type { PageProps } from 'plugins/app/types.js';
 import { 
   LayoutPanel, 
   LayoutProvider, 
@@ -8,13 +8,13 @@ import {
   Props, 
   Code, 
   C 
-} from '../../app/index.js';
-import type { Crumb } from '../../../components/element/Crumbs.js';
-import Crumbs from '../../../components/element/Crumbs.js';
-import { Table, Thead, Trow, Tcol } from '../../../components/element/Table.js';
+} from 'plugins/app/index.js';
+import type { Crumb } from 'components/element/Crumbs.js';
+import Crumbs from 'components/element/Crumbs.js';
+import { Table, Thead, Trow, Tcol } from 'components/element/Table.js';
 
-import CodeEditor from '../../../components/field/CodeEditor.js';
-import Select from '../../../components/field/Select.js';
+import CodeEditor from 'components/field/CodeEditor.js';
+import Select from 'components/field/Select.js';
 import { useState } from 'react';
 import { languages } from '@codemirror/language-data';
 
@@ -70,7 +70,7 @@ export function Body() {
   return (
     <LayoutPanel pathname="/field/editor">
       <main className="flex flex-col h-full w-full">
-        <div className="p-3 bg-b2">
+        <div className="p-3 theme-bg-2">
           <Crumbs crumbs={crumbs} />
         </div>
         <section className="flex-grow relative h-full">
@@ -103,7 +103,7 @@ export function Body() {
               </Translate>
             </p>
             <div className="curved">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <div className="w-full">
                   <CodeEditor
                     value='console.log("Hello world!");'
@@ -128,7 +128,7 @@ export function Body() {
               </Translate>
             </p>
             <div className="curved">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <div className="w-full">
                   <Select
                     className="w-[50%] z-40 text-black"
@@ -177,7 +177,7 @@ export function Body() {
               </Translate>
             </p>
             <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 bg-b1">
+              <div className="flex items-center justify-center p-3 theme-bg-1">
                 <div className="w-full">
                   <CodeEditor
                     className="w-[50%] min-h-40 bg-white"
@@ -202,13 +202,13 @@ export function Body() {
               </Translate>
             </p>
             <Table>
-              <Thead className="bg-b3 text-left">{_('Name')}</Thead>
-              <Thead className="bg-b3 text-left">{_('Type')}</Thead>
-              <Thead className="bg-b3 text-left">{_('Sample')}</Thead>
+              <Thead className="theme-bg-3 text-left">{_('Name')}</Thead>
+              <Thead className="theme-bg-3 text-left">{_('Type')}</Thead>
+              <Thead className="theme-bg-3 text-left">{_('Sample')}</Thead>
               <Trow>
-                <Tcol className="bg-b1 text-left">{_('event')}</Tcol>
-                <Tcol className="bg-b1 text-left">{_('Event Object')}</Tcol>
-                <Tcol className="bg-b1 text-left">
+                <Tcol className="theme-bg-1 text-left">{_('event')}</Tcol>
+                <Tcol className="theme-bg-1 text-left">{_('Event Object')}</Tcol>
+                <Tcol className="theme-bg-1 text-left">
                   see: <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" target="_blank">Change Event</a>
                 </Tcol>
               </Trow>
@@ -223,13 +223,13 @@ export function Body() {
               </Translate>
             </p>
             <Table>
-              <Thead className="bg-b3 text-left">{_('Name')}</Thead>
-              <Thead className="bg-b3 text-left">{_('Type')}</Thead>
-              <Thead className="bg-b3 text-left">{_('Sample')}</Thead>
+              <Thead className="theme-bg-3 text-left">{_('Name')}</Thead>
+              <Thead className="theme-bg-3 text-left">{_('Type')}</Thead>
+              <Thead className="theme-bg-3 text-left">{_('Sample')}</Thead>
               <Trow>
-                <Tcol className="bg-b1 text-left">{_('value')}</Tcol>
-                <Tcol className="bg-b1 text-left">{_('string')}</Tcol>
-                <Tcol className="bg-b1 text-left">
+                <Tcol className="theme-bg-1 text-left">{_('value')}</Tcol>
+                <Tcol className="theme-bg-1 text-left">{_('string')}</Tcol>
+                <Tcol className="theme-bg-1 text-left">
                   <C value="foobar" quote />
                 </Tcol>
               </Trow>

@@ -1,53 +1,53 @@
-.frui-tbl {
+.frui-table {
   border-collapse: collapse;
   display: table;
   width: 100%;
 }
 
-.frui-tbl-scroll {
+.frui-table-scroll {
   overflow: auto;
   flex-grow: 1;
   height: 100%;
   width: 100%;
 }
 
-.frui-tbl-nowrap {
+.frui-table-nowrap {
   white-space: nowrap;
 }
 
-.frui-tbl-z0 {
+.frui-table-z0 {
   z-index: 0;
 }
-.frui-tbl-z1 {
+.frui-table-z1 {
   z-index: 1;
 }
-.frui-tbl-z2 {
+.frui-table-z2 {
   z-index: 2;
 }
-.frui-tbl-z3 {
+.frui-table-z3 {
   z-index: 3;
 }
-.frui-tbl-z4 {
+.frui-table-z4 {
   z-index: 4;
 }
 
-.frui-tbl-sticky {
+.frui-table-sticky {
   position: sticky;
 }
-.frui-tbl-sticky-b {
+.frui-table-sticky-b {
   bottom: 0;
 }
-.frui-tbl-sticky-l {
+.frui-table-sticky-l {
   left: 0;
 }
-.frui-tbl-sticky-t {
+.frui-table-sticky-t {
   top: 0;
 }
-.frui-tbl-sticky-r {
+.frui-table-sticky-r {
   right: 0;
 }
 
-.frui-tbl-col {
+.frui-table-col {
   border-color: black;
   border-style: solid;
   border-top-width: 1px;
@@ -57,7 +57,7 @@
   padding-top: 16px;
 }
 
-.frui-tbl-foot {
+.frui-table-foot {
   border-color: black;
   border-style: solid;
   border-top-width: 1px;
@@ -67,14 +67,14 @@
   padding-top: 16px;
 }
 
-.frui-tbl-row {
+.frui-table-row {
   padding-bottom: 16px;
   padding-left: 12px;
   padding-right: 12px;
   padding-top: 16px;
 }
 
-.frui-tbl-head {
+.frui-table-head {
   border-color: black;
   border-style: solid;
   border-top-width: 1px;

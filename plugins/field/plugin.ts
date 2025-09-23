@@ -2,6 +2,7 @@ import type { HttpServer } from '@stackpress/ingest';
 
 export default function plugin(server: HttpServer) {
   server.on('route', (_, __, ctx) => {
+    ctx.get('/field', '@/plugins/field/views/index');
     ctx.get('/field/autocomplete', '@/plugins/field/views/autocomplete');
     ctx.get('/field/checkbox', '@/plugins/field/views/checkbox');
     ctx.get('/field/checklist', '@/plugins/field/views/checklist');

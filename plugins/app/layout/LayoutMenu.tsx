@@ -38,6 +38,11 @@ export const menu: SectionItem[] = [
     href: '/component',
     children: [
       {
+        label: 'Accordion',
+        search: '/component/accordion',
+        href: '/component/accordion'
+      },
+      {
         label: 'Alerts',
         search: '/component/alert',
         href: '/component/alert'
@@ -53,6 +58,11 @@ export const menu: SectionItem[] = [
         href: '/component/button'
       },
       {
+        label: 'Crumbs',
+        search: '/component/crumbs',
+        href: '/component/crumbs'
+      },
+      {
         label: 'Loaders',
         search: '/component/loader',
         href: '/component/loader'
@@ -61,6 +71,16 @@ export const menu: SectionItem[] = [
         label: 'Modals',
         search: '/component/modal',
         href: '/component/modal'
+      },
+      {
+        label: 'Pager',
+        search: '/component/pager',
+        href: '/component/pager'
+      },
+      {
+        label: 'Progress',
+        search: '/component/progress',
+        href: '/component/progress'
       },
       {
         label: 'Tables',

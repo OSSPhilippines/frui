@@ -10,6 +10,7 @@ export {
 } from './layout';
 
 import Code, { InlineCode as C } from './components/Code.js';
+import Preview from './components/Preview.js';
 import Props from './components/Props.js';
 import Terminal from './components/Terminal.js';
 
@@ -20,4 +21,4 @@ export {
   useTheme
 } from './theme';
 
-export { Code, Props, Terminal, C };
+export { Code, Preview, Props, Terminal, C };

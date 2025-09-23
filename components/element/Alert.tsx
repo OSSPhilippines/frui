@@ -1,4 +1,7 @@
-//src
+//--------------------------------------------------------------------//
+// Imports
+
+//frui
 import type { 
   ColorProps, 
   FillProps, 
@@ -9,19 +12,22 @@ import type {
 import setColorClass from '../helpers/color/all.js';
 import setRadiusClass from '../helpers/radius.js';
 
-/**
- * Alert Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type AlertProps = ColorProps 
   & FillProps 
   & RadiusProps 
   & HTMLProps 
   & ChildrenProps;
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
- * Alert Component (Main)
+ * Alert component (main)
  */
-export default function Alert(props: AlertProps) {
+export function Alert(props: AlertProps) {
   //extract custom props
   const { 
     color,
@@ -72,3 +78,6 @@ export default function Alert(props: AlertProps) {
     </div>
   );
 };
+
+//defaults to alert
+export default Alert;

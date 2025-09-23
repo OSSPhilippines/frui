@@ -37,3 +37,37 @@
   flex-grow: 1;
   font-weight: bold;
 }
+
+.modal-confirm {
+  border: 1px solid var(--bd0);
+  padding: 16px;
+  margin-top: 8px;
+}
+
+.modal-confirm .message {
+  font-size: 26px;
+}
+
+.modal-confirm .alert {
+  color: var(--muted);
+}
+
+.modal-confirm .icon {
+  margin-right: 5px;
+}
+
+.modal-confirm .confirm {
+  border-radius: 8px;
+  font-weight: bold;
+  margin-right: 10px;
+  margin-top: 16px;
+  text-transform: uppercase;
+}
+
+.modal-confirm .cancel {
+  border-radius: 8px;
+  color: var(--tx1);
+  font-weight: bold;
+  margin-top: 16px;
+  text-transform: uppercase;
+}

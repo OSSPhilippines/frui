@@ -1,244 +1,263 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //modules
-import type { CSSProperties, ReactNode } from 'react';
 import { useState, useRef, useEffect } from 'react';
 
-export type TooltipProps = {
+//frui
+import type { 
+  ColorProps, 
+  RadiusProps, 
+  HTMLProps, 
+  ChildrenProps 
+} from '../types';
+import setColorClass from '../helpers/color/all.js';
+import setRadiusClass from '../helpers/radius.js';
+
+//--------------------------------------------------------------------//
+// Types
+
+export type TooltipConfig = {
   text: string,
-  children: ReactNode,
-  color?: string,
-  info?: boolean,
-  warning?: boolean,
-  success?: boolean,
-  error?: boolean,
-  muted?: boolean,
-  curved?: boolean,
-  rounded?: boolean,
-  pill?: boolean,
-  style?: CSSProperties,
-  className?: string,
   top?: boolean,
   bottom?: boolean,
   left?: boolean,
   right?: boolean,
-  topLeft?: boolean,
-  topRight?: boolean,
-  bottomLeft?: boolean,
-  bottomRight?: boolean,
-  opacity?: string | number,
   arrow?: boolean,
-  padding?: string | number
+  show?: boolean,
+  hover?: boolean
 };
+
+export type TooltipProps = ColorProps 
+  & RadiusProps 
+  & HTMLProps 
+  & ChildrenProps 
+  & TooltipConfig
+  & {
+    opacity?: string | number
+  };
 
 export type TooltipDirection = 'top' | 'bottom' | 'left' | 'right' | null;
 
-// Tooltip Component
-export default function Tooltip(props: TooltipProps) {
+//--------------------------------------------------------------------//
+// Helpers
+
+export function getTooltipPosition(
+  container: HTMLDivElement, 
+  tooltip: HTMLDivElement,
+  direction: { top: boolean, bottom: boolean, left: boolean, right: boolean }
+) {
+  const { top, bottom, left, right } = direction;
+  const containerRect = container.getBoundingClientRect();
+  const tooltipRect = tooltip.getBoundingClientRect();
+  const position = { x: 0, y: 0, direction: null as TooltipDirection };
+
+  switch (true) {
+    case bottom && left:
+      //y = container bottom + arrow size
+      //(below the container)
+      position.y = containerRect.height + 5;
+      //x = container left
+      position.x = 0;
+      //set arrow direction to top
+      position.direction = 'top';
+      break;
+    case bottom && right:
+      //y = container bottom + arrow size
+      //(below the container)
+      position.y = containerRect.height + 5;
+      //x = container right - tooltip width
+      position.x = containerRect.width - tooltipRect.width;
+      //set arrow direction to top
+      position.direction = 'top';
+      break;
+    case top && left:
+      //y = container top - tooltip height - arrow size
+      //(above the container)
+      position.y = -(tooltipRect.height + 5);
+      //x = container left - tooltip width - arrow size
+      //(to the left of the container)
+      position.x = 0;
+      //set arrow direction to bottom
+      position.direction = 'bottom';
+      break;
+    case top && right:
+      //y = container top - tooltip height - arrow size
+      //(above the container)
+      position.y = -(tooltipRect.height + 5);
+      //x = container right + arrow size
+      //(to the right of the container)
+      position.x = containerRect.width - tooltipRect.width;
+      //set arrow direction to bottom
+      position.direction = 'bottom';
+      break;
+    case left:
+      //y = container height / 2 - tooltip height / 2
+      //(to center it)
+      position.y = (containerRect.height / 2) - (tooltipRect.height / 2);
+      //x = container left - tooltip width - arrow size
+      //(to the left of the container)
+      position.x = -(tooltipRect.width + 5);
+      //set arrow direction to right
+      position.direction = 'right';
+      break;
+    case right:
+      //y = container height / 2 - tooltip height / 2
+      //(to center it)
+      position.y = (containerRect.height / 2) - (tooltipRect.height / 2);
+      //x = container width + arrow size
+      //(to the right of the container)
+      position.x = containerRect.width + 5;
+      //set arrow direction to left
+      position.direction = 'left';
+      break;
+    case bottom:
+      //y = container bottom + arrow size
+      //(below the container)
+      position.y = containerRect.height + 5;
+      //x = container width / 2 - tooltip width / 2
+      //(to center it)
+      position.x = (containerRect.width / 2) - (tooltipRect.width / 2);
+      //set arrow direction to top
+      position.direction = 'top';
+      break;
+    case top:
+    default:
+      //y = container top - tooltip height - arrow size
+      //(above the container)
+      position.y = -(tooltipRect.height + 5);
+      //x = container width / 2 - tooltip width / 2
+      //(to center it)
+      position.x = (containerRect.width / 2) - (tooltipRect.width / 2);
+      //set arrow direction to bottom
+      position.direction = 'bottom';
+      break;
+  }
+  return position;
+};
+
+//--------------------------------------------------------------------//
+// Hooks
+
+/**
+ * Returns tooltip states
+ */
+export function useTooltip(config: TooltipConfig) {
+  const { text, top, bottom, left, right, show = false } = config;
+  //whether to show the tooltip
+  const [ isVisible, visible ] = useState(show);
+  //position of the tooltip
+  const [ position, setPosition ] = useState<[ number, number ]>([0, 0]);
+  //direction of the tooltip arrow
+  const [ direction, setDirection ] = useState<TooltipDirection>(null);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    //if not visible, or if container or tooltip ref is not set, skip
+    if (!isVisible || !containerRef.current || !tooltipRef.current) {
+      return;
+    }
+
+    const position = getTooltipPosition(
+      containerRef.current, 
+      tooltipRef.current, 
+      { top: !!top, bottom: !!bottom, left: !!left, right: !!right }
+    );
+
+    setDirection(position.direction);
+    setPosition([ position.x, position.y ]);
+  }, [ 
+    isVisible,
+    containerRef,
+    tooltipRef,
+    text, 
+    top, 
+    bottom, 
+    left, 
+    right
+  ]);
+
+  return {
+    position,
+    direction,
+    isVisible, 
+    visible,
+    containerRef,
+    tooltipRef
+  }
+};
+
+//--------------------------------------------------------------------//
+// Components
+
+/**
+ * Tooltip component (main)
+ */
+export function Tooltip(props: TooltipProps) {
   const {
     text,
     children,
     color,
-    info,
-    warning,
-    success,
-    error,
-    muted,
-    curved,
-    rounded,
-    pill,
     style,
     className,
-    top,
-    bottom,
-    left,
-    right,
     opacity,
     arrow,
-    padding, 
+    hover
   } = props;
-  const [ isVisible, visible ] = useState(false);
-  const [ tooltipStyle, setTooltipStyle ] = useState({});
-  const [ direction, setDirection ] = useState<TooltipDirection>(null);
-  const buttonRef = useRef<HTMLDivElement>(null);
-  const tooltipRef = useRef<HTMLDivElement>(null);
 
-  const defaults: {
-    classes: string[];
-    styles: Record<string, string | number>;
-  } = {
-    classes: [ 'frui-tooltip' ],
-    styles: {},
-  };
-
-  if (curved) {
-    defaults.classes.push('frui-curved');
-  } else if (rounded) {
-    defaults.classes.push('frui-rounded');
-  } else if (pill) {
-    defaults.classes.push('frui-pill');
-  }
-
+  const {
+    position,
+    direction,
+    isVisible, 
+    visible,
+    containerRef,
+    tooltipRef
+  } = useTooltip(props);
+  
+  //set default styles and classes
+  const styles = { ...style };
+  styles.left = position[0];
+  styles.top = position[1];
+  const classes = [ 'frui-tooltip' ];
+  //if custom class, add it
+  if (className) classes.push(className);
+  if (arrow) classes.push('frui-tooltip-arrow');
+  if (direction) classes.push(`frui-tooltip-arrow-${direction}`);
+  //determine radius
+  setRadiusClass(props, classes);
+  //determine color
   if (color) {
-    defaults.styles.backgroundColor = color;
-  } else if (info) {
-    defaults.classes.push('frui-bg-info');
-  } else if (warning) {
-    defaults.classes.push('frui-bg-warning');
-  } else if (success) {
-    defaults.classes.push('frui-bg-success');
-  } else if (error) {
-    defaults.classes.push('frui-bg-error');
-  } else if (muted) {
-    defaults.classes.push('frui-bg-muted');
+    styles.backgroundColor = color;
+  } else {
+    setColorClass(props, 'bg', classes);
   }
-
-  const map = {
-    classes: [...defaults.classes, className].join(' '),
-    styles: { ...defaults.styles, ...style },
-  };
-
-  useEffect(() => {
-    //if not visible, or if button or tooltip ref is not set, skip
-    if (!isVisible || !buttonRef.current || !tooltipRef.current) {
-      return;
-    }
-
-    const buttonRect = buttonRef.current.getBoundingClientRect();
-    const tooltipRect = tooltipRef.current.getBoundingClientRect();
-    const position = { x: 0, y: 0 };
-
-    switch (true) {
-      case top && left:
-        position.y = buttonRect.top + window.scrollY - tooltipRect.height - 5;
-        position.x = buttonRect.left + window.scrollX;
-        setDirection('bottom');
-        break;
-      case top && right:
-        position.y = buttonRect.top + window.scrollY - tooltipRect.height - 5;
-        position.x = buttonRect.right + window.scrollX - tooltipRect.width;
-        setDirection('bottom');
-        break;
-      case bottom && left:
-        position.y = buttonRect.bottom + window.scrollY + 5;
-        position.x = buttonRect.left + window.scrollX;
-        setDirection('top');
-        break;
-      case bottom && right:
-        position.y = buttonRect.bottom + window.scrollY + 5;
-        position.x = buttonRect.right + window.scrollX - tooltipRect.width;
-        setDirection('top');
-        break;
-      case bottom:
-        position.y = buttonRect.bottom + window.scrollY + 5;
-        position.x = buttonRect.left 
-          + window.scrollX 
-          + (buttonRect.width / 2) 
-          - (tooltipRect.width / 2);
-        setDirection('top');
-        break;
-      case left:
-        position.y = buttonRect.top 
-          + window.scrollY 
-          + (buttonRect.height / 2) 
-          - (tooltipRect.height / 2);
-        position.x = buttonRect.left + window.scrollX - tooltipRect.width - 5;
-        setDirection('right');
-        break;
-      case right:
-        position.y = buttonRect.top 
-          + window.scrollY 
-          + (buttonRect.height / 2) 
-          - (tooltipRect.height / 2);
-        position.x = buttonRect.right + window.scrollX + 5;
-        setDirection('left');
-        break;
-      case top:
-      default:
-        position.y = buttonRect.top + window.scrollY - tooltipRect.height - 5;
-        position.x = buttonRect.left 
-          + window.scrollX 
-          + (buttonRect.width / 2) 
-          - (tooltipRect.width / 2);
-        setDirection('bottom');
-        break;
-    }
-
-    if (position.y < window.scrollY) {
-      position.y = buttonRect.bottom + window.scrollY + 5;
-      if (top) setDirection('top');
-    }
-    if (position.x < window.scrollX) {
-      position.x = window.scrollX + 10;
-    }
-    const overflowX = window.scrollX + window.innerWidth;
-    const overflowY = window.scrollY + window.innerHeight;
-    if ((position.x + tooltipRect.width) > overflowX) {
-      position.x = overflowX - tooltipRect.width - 10;
-    }
-    if ((position.y + tooltipRect.height) > overflowY) {
-      position.y = overflowY - tooltipRect.height - 10;
-      if (bottom) setDirection('bottom');
-    }
-
-    setTooltipStyle({ 
-      position: 'fixed', 
-      top: position.y, 
-      left: position.x, 
-      zIndex: 10000 
-    });
-  }, [
-    isVisible,
-    top,
-    bottom,
-    left,
-    right,
-    text
-  ]);
-
-  const opacityStyle = !isNaN(Number(opacity)) ? { 
-    opacity: Number(opacity) / 100 
-  } : {};
-
-  const paddingStyle = padding !== undefined ? { padding: padding } : {};
+  //determine opacity
+  if (!isNaN(Number(opacity))) {
+    styles.opacity = Number(opacity) / 100;
+  }
 
   return (
     <div
-      ref={buttonRef}
+      ref={containerRef}
       className="frui-tooltip-container"
-      onMouseEnter={() => visible(true)}
-      onMouseLeave={() => visible(false)}
+      onMouseEnter={() => hover && visible(true)}
+      onMouseLeave={() => hover && visible(false)}
     >
       {children}
       {isVisible && (
-        <div
-          ref={tooltipRef}
-          className={`${map.classes} ${arrow ? 'frui-tooltip-arrow-container' : ''}`}
-          style={{
-            ...map.styles,
-            ...tooltipStyle,
-            ...opacityStyle,
-            ...paddingStyle,
-            ...(color ? { '--arrow-color': color } : {}),
-          }}
+        <div 
+          ref={tooltipRef} 
+          className={classes.join(' ')} 
+          style={styles}
         >
           {text}
-          {arrow && direction && (
-            <div className={`frui-tooltip-arrow ${color
-              ? 'custom-color'
-              : info
-              ? 'info'
-              : warning
-              ? 'warning'
-              : success
-              ? 'success'
-              : error
-              ? 'error'
-              : muted
-              ? 'muted'
-              : ''
-            } ${direction}`}></div>
-          )}
         </div>
       )}
     </div>
   );
 };
+
+//defaults to tooltip
+export default Tooltip;

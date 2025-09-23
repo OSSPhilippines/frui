@@ -20,9 +20,9 @@ export default function setBorderColorClass(
   } else if (props.bdmuted) {
     return setColorClass({ muted: true }, 'bd', classNames);
   } else if (props.bdblack) {
-    return setColorClass({ black: true }, 'bg', classNames);
+    return setColorClass({ black: true }, 'bd', classNames);
   } else if (props.bdwhite) {
-    return setColorClass({ white: true }, 'bg', classNames);
+    return setColorClass({ white: true }, 'bd', classNames);
   } else if (props.bdprimary) {
     return setColorClass({ primary: true }, 'bd', classNames);
   } else if (props.bdsecondary) {

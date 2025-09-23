@@ -1,0 +1,28 @@
+.frui-crumbs {
+  align-items: center;
+  display: flex; 
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.frui-crumbs-item {
+  align-items: center;
+  display: inline-flex;
+  font-weight: bold;
+}
+
+a.frui-crumbs-item {
+  font-weight: normal;
+}
+
+.frui-crumbs-icon {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.frui-crumbs-separator {
+  font-size: 20px;
+  line-height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+}

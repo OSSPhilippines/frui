@@ -2,6 +2,7 @@ import type { HttpServer } from '@stackpress/ingest';
 
 export default function plugin(server: HttpServer) {
   server.on('route', (_, __, ctx) => {
+    ctx.get('/format', '@/plugins/format/views/index');
     ctx.get('/format/code', '@/plugins/format/views/code');
     ctx.get('/format/color', '@/plugins/format/views/color');
     ctx.get('/format/country', '@/plugins/format/views/country');

@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //modules
 import type { ReactNode, CSSProperties } from 'react';
 import { 
@@ -7,7 +10,8 @@ import {
   useState, 
   useEffect
 } from 'react';
-//src
+
+//frui
 import Button from '../form/Button.js';
 import { useNotify } from './Notify.js';
 
@@ -55,8 +59,52 @@ export type ModalProps = {
 };
 
 //--------------------------------------------------------------------//
+// Hooks
+
+/**
+ * Modal hook to access modal context
+ */
+export function useModal() {
+  const { className, title, body, open } = useContext(ModalContext);
+  return { className, title, body, open };
+};
+
+/**
+ * Confirm hook to open a confirm modal
+ */
+export function useConfirm(config: {
+  label: () => string,
+  message: () => ReactNode,
+  action: () => Promise<void>
+}) {
+  const { label, message, action } = config;
+  const { open, title, body } = useModal();
+  const { notify } = useNotify();
+  const confirmed = () => action().then(() => {
+    open(false);
+  }).catch(e => {
+    open(false);
+    notify('error', e.message);
+  });
+  const confirm = () => {
+    title(label());
+    body(createElement(ModalConfirm, { 
+      open, 
+      message: message(), 
+      confirmed
+    }));
+    open(true);
+  };
+
+  return { confirm };
+};
+
+//--------------------------------------------------------------------//
 // Context & Provider
 
+/**
+ * Modal context state
+ */
 export const ModalContext = createContext<ModalContextProps>({ 
   _title: '', 
   _className: '', 
@@ -68,7 +116,10 @@ export const ModalContext = createContext<ModalContextProps>({
   open: () => {},
 });
 
-// (this is what to put in app.tsx)
+/**
+ * Modal provider component
+ * (this is what to put in app.tsx) 
+ */
 export function ModalProvider({ children, ...config }: ModalProviderProps) {
   const [ ready, isReady ] = useState(false);
   const [ opened, open ] = useState(false);
@@ -111,7 +162,39 @@ export function ModalProvider({ children, ...config }: ModalProviderProps) {
 //--------------------------------------------------------------------//
 // Components
 
-export default function Modal(props: ModalProps) {
+/**
+ * Modal confirm component
+ */
+export function ModalConfirm(props: ModalConfirmProps) {
+  const { 
+    open, 
+    message, 
+    confirmed, 
+    confirm = 'Confirm', 
+    cancel = 'Cancel' 
+  } = props;
+  return (
+    <div className="modal-confirm">
+      <p className="message">{message}</p>
+      <Button success className="confirm" onClick={() => {
+        open(false);
+        confirmed();
+      }}>
+        <i className="icon fas fa-fw fa-check"></i>
+        {confirm}
+      </Button>
+      <Button error className="cancel" onClick={() => open(false)}>
+        <i className="icon fas fa-fw fa-ban"></i>
+        {cancel}
+      </Button>
+    </div>
+  )
+};
+
+/**
+ * Modal component (main)
+ */
+export function Modal(props: ModalProps) {
   const { 
     opened = false, 
     absolute,
@@ -174,63 +257,5 @@ export default function Modal(props: ModalProps) {
   )
 };
 
-export function ModalConfirm(props: ModalConfirmProps) {
-  const { 
-    open, 
-    message, 
-    confirmed, 
-    confirm = 'Confirm', 
-    cancel = 'Cancel' 
-  } = props;
-  return (
-    <div className="modal-confirm">
-      <p className="message">{message}</p>
-      <Button success className="confirm" onClick={() => {
-        open(false);
-        confirmed();
-      }}>
-        <i className="icon fas fa-fw fa-check"></i>
-        {confirm}
-      </Button>
-      <Button error className="cancel" onClick={() => open(false)}>
-        <i className="icon fas fa-fw fa-ban"></i>
-        {cancel}
-      </Button>
-    </div>
-  )
-};
-
-//--------------------------------------------------------------------//
-// Hooks
-
-export function useModal() {
-  const { className, title, body, open } = useContext(ModalContext);
-  return { className, title, body, open };
-};
-
-export function useConfirm(config: {
-  label: () => string,
-  message: () => ReactNode,
-  action: () => Promise<void>
-}) {
-  const { label, message, action } = config;
-  const { open, title, body } = useModal();
-  const { notify } = useNotify();
-  const confirmed = () => action().then(() => {
-    open(false);
-  }).catch(e => {
-    open(false);
-    notify('error', e.message);
-  });
-  const confirm = () => {
-    title(label());
-    body(createElement(ModalConfirm, { 
-      open, 
-      message: message(), 
-      confirmed
-    }));
-    open(true);
-  };
-
-  return { confirm };
-};
+//defaults to modal
+export default Modal;

@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //modules
 import type { ReactNode } from 'react';
 import type { ToastOptions } from 'react-toastify';
@@ -36,6 +39,9 @@ export type NotifyProviderProps = {
 //--------------------------------------------------------------------//
 // Constants
 
+const cookieConfig = { path: '/' };
+const cookie = new UniversalCookie();
+
 export const config = {
   position: 'bottom-center',
   autoClose: 5000,
@@ -51,9 +57,15 @@ export const NotifyContainer = ToastContainer;
 //--------------------------------------------------------------------//
 // Context & Provider
 
+/**
+ * Notify context
+ */
 export const NotifyContext = createContext<NotifyContextProps>({ config });
 
-// (this is what to put in app.tsx)
+/**
+ * Notification provider component
+ * (this is what to put in app.tsx)
+ */
 export function NotifyProvider(props: NotifyProviderProps) {
   const { 
     children, 
@@ -77,9 +89,6 @@ export function NotifyProvider(props: NotifyProviderProps) {
 
 //--------------------------------------------------------------------//
 // Hooks and Functions
-
-const cookieConfig = { path: '/' };
-const cookie = new UniversalCookie();
 
 /**
  * No hook notify function

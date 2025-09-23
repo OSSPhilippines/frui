@@ -1,0 +1,12 @@
+.frui-progress-container {
+  min-height: 2px;
+  overflow: hidden;
+}
+
+.frui-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2px;
+  transition: 1s ease width;
+}

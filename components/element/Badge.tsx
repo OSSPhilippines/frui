@@ -1,4 +1,7 @@
-//src
+//--------------------------------------------------------------------//
+// Imports
+
+//frui
 import type { 
   ColorProps, 
   FillProps, 
@@ -9,6 +12,9 @@ import type {
 import setColorClass from '../helpers/color/all.js';
 import setRadiusClass from '../helpers/radius.js';
 
+//--------------------------------------------------------------------//
+// Types
+
 /**
  * Badge Props
  */
@@ -18,10 +24,13 @@ export type BadgeProps = ColorProps
   & HTMLProps 
   & ChildrenProps;
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
- * Badge Component (Main)
+ * Badge component (main)
  */
-export default function Badge(props: BadgeProps) {
+export function Badge(props: BadgeProps) {
   //extract custom props
   const { 
     color,
@@ -72,3 +81,6 @@ export default function Badge(props: BadgeProps) {
     </span>
   );
 };
+
+//defaults to badge
+export default Badge;

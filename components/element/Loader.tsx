@@ -1,10 +1,13 @@
-//src
+//--------------------------------------------------------------------//
+// Imports
+
+//frui
 import type { ColorProps, HTMLProps, ChildrenProps } from '../types.js';
 import setColorClass from '../helpers/color/all.js';
 
-/**
- * Loader Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type LoaderProps = ColorProps & HTMLProps & ChildrenProps & {
   //shape
   size?: number,    
@@ -19,10 +22,13 @@ export type LoaderProps = ColorProps & HTMLProps & ChildrenProps & {
   show?: boolean,
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
- * Loader Component (Main)
+ * Loader component (main)
  */
-export default function Loader(props: LoaderProps) {
+export function Loader(props: LoaderProps) {
   //extract custom props
   const { 
     //shape
@@ -81,8 +87,8 @@ export default function Loader(props: LoaderProps) {
     classes.push('frui-loader-slice-1');
   }
   //show it?
-  if (!show) {
-    classes.push('frui-hidden');
+  if (show === false) {
+    return null;
   }
 
   return (
@@ -91,4 +97,7 @@ export default function Loader(props: LoaderProps) {
       {children}
     </div>
   );
-}
+};
+
+//defaults to loader
+export default Loader;

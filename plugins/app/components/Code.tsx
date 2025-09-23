@@ -42,12 +42,12 @@ export default function Code(props: {
   }
   //render
   return (
-    <div className={`flex text-sm theme-bg-black ${className || ''}`}>
+    <div className={`flex text-sm theme-bg-black relative ${className || ''}`}>
       <SyntaxHighlighter className="flex-grow !p-4 !bg-transparent" language={language} style={dark}>
         {children}
       </SyntaxHighlighter>
       {canCopy && (
-        <div className="text-sm p-4 text-gray-400 cursor-pointer whitespace-nowrap" onClick={copy}>
+        <div className="absolute right-0 top-0 text-sm p-4 text-gray-400 cursor-pointer whitespace-nowrap" onClick={copy}>
           <i className="fas fa-copy"></i> {_('Copy')}
         </div>
       )}

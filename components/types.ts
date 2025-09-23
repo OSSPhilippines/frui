@@ -143,6 +143,8 @@ export type HTMLProps = {
   className?: string
 };
 
+export type ClassStyleProp = string | CSSProperties | [ string, CSSProperties ];
+
 export type ChildrenProps = {
   children?: ReactNode
 };

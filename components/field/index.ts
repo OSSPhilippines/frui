@@ -4,7 +4,10 @@ export type {
   AutocompleteProps
 } from './Autocomplete.js';
 export type { CheckboxProps } from './Checkbox.js';
-//export type {} from './Checklist.js';
+export type {
+  ChecklistItemProps,
+  ChecklistProps
+} from './Checklist.js';
 export type {
   CodeEditorConfig,
   CodeEditorProps
@@ -53,13 +56,13 @@ export type { PasswordProps } from './Password.js';
 export type { RadioProps } from './Radio.js';
 export type { RatingConfig, RatingProps } from './Rating.js';
 //export type {} from './Radiolist.js';
+export type { RangeSliderProps } from './RangeSlider.js';
 export type {
   SelectOption,
   SelectConfig,
   SelectDropdownProps,
   SelectProps
 } from './Select.js';
-//export type {} from './Slider.js';
 export type { SlugConfig, SlugProps } from './Slug.js';
 export type { SwitchProps } from './Switch.js';
 export type { TaglistConfig, TaglistProps } from './Taglist.js';
@@ -87,7 +90,7 @@ export {
   AutocompleteDropdown 
 } from './Autocomplete.js';
 export { useCheckbox } from './Checkbox.js';
-//export {} from './Checklist.js';
+//export { useChecklist } from './Checklist.js';
 export { useCodeEditor } from './CodeEditor.js';
 export { 
   useColorPicker,
@@ -110,9 +113,9 @@ export { useNumber } from './Number.js';
 export { usePassword } from './Password.js';
 export { useRadio } from './Radio.js';
 export { useRating, Star } from './Rating.js';
+//export { useRangeSlider } from './RangeSlider.js';
 //export {} from './Radiolist.js';
 export { useSelect, SelectDropdown } from './Select.js';
-//export {} from './Slider.js';
 export { slugify, camelfy, useSlug } from './Slug.js';
 export { useSwitch } from './Switch.js';
 export { useTaglist } from './Taglist.js';
@@ -123,7 +126,7 @@ export { useWYSIWYG } from './WYSIWYG.js';
 
 import Autocomplete from './Autocomplete.js';
 import Checkbox from './Checkbox.js';
-//import Checklist from './Checklist.js';
+import Checklist, { ChecklistItem } from './Checklist.js';
 import CodeEditor from './CodeEditor.js';
 import ColorPicker from './ColorPicker.js';
 import Country from './Country.js';
@@ -146,8 +149,8 @@ import Password from './Password.js';
 import Radio from './Radio.js';
 //import Radiolist from './Radiolist.js';
 import Rating from './Radio.js';
+import RangeSlider from './RangeSlider.js';
 import Select from './Select.js';
-//import Slider from './Slider.js';
 import Slug from './Slug.js';
 import Switch from './Switch.js';
 import Taglist from './Taglist.js';
@@ -159,6 +162,8 @@ import WYSIWYG from './WYSIWYG.js';
 export {
   Autocomplete,
   Checkbox,
+  Checklist,
+  ChecklistItem,
   CodeEditor,
   ColorPicker,
   Country,
@@ -178,6 +183,7 @@ export {
   Number,
   Password,
   Radio,
+  RangeSlider,
   Rating,
   Select,
   Slug,

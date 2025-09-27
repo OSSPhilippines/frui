@@ -3,25 +3,30 @@
 
 //modules
 import type { JSX, ReactNode } from 'react';
-import React, { createContext, useContext } from 'react';
+import { createContext, useContext } from 'react';
 
 //frui
-import type { HTMLProps, ChildrenProps } from '../types.js';
+import type { 
+  ClassStyleProp, 
+  HTMLProps, 
+  ChildrenProps 
+} from '../types.js';
+import applyClassStyle from '../helpers/style.js';
 
 //--------------------------------------------------------------------//
 // Types
 
 export type TableContextProps = {
-  cols?: string | string[],
-  foots?: string,
-  heads?: string,
+  columnClassStyle?: ClassStyleProp | ClassStyleProp[],
+  footClassStyle?: ClassStyleProp,
+  headClassStyle?: ClassStyleProp,
   index: number
 };
 
 export type TableRuleProps = { width: string };
 
 export type TableColProps = HTMLProps & ChildrenProps & {
-  addClass?: string,
+  addClassStyle?: ClassStyleProp,
   colSpan?: number,
   noWrap?: boolean,
   rowSpan?: number,
@@ -37,7 +42,7 @@ export type TableColProps = HTMLProps & ChildrenProps & {
 };
 
 export type TableFootProps = HTMLProps & ChildrenProps & {
-  addClass?: string,
+  addClassStyle?: ClassStyleProp,
   colSpan?: number,
   noWrap?: boolean,
   rowSpan?: number,
@@ -52,7 +57,7 @@ export type TableFootProps = HTMLProps & ChildrenProps & {
 };
 
 export type TableHeadProps = HTMLProps & ChildrenProps & {
-  addClass?: string,
+  addClassStyle?: ClassStyleProp,
   colSpan?: number,
   noWrap?: boolean,
   rowSpan?: number,
@@ -67,7 +72,7 @@ export type TableHeadProps = HTMLProps & ChildrenProps & {
 };
 
 export type TableRowProps = HTMLProps & ChildrenProps & {
-  cols?: string,
+  columnClassStyle?: ClassStyleProp,
   colSpan?: number,
   noWrap?: boolean,
   rowSpan?: number,
@@ -75,9 +80,9 @@ export type TableRowProps = HTMLProps & ChildrenProps & {
 };
 
 export type TableProps = HTMLProps & ChildrenProps & {
-  cols?: string | string[],
-  foots?: string,
-  heads?: string
+  columnClassStyle?: ClassStyleProp | ClassStyleProp[],
+  footClassStyle?: ClassStyleProp,
+  headClassStyle?: ClassStyleProp
 };
 
 //--------------------------------------------------------------------//
@@ -95,11 +100,12 @@ export function getHead(children: ReactNode) {
       }
       if (Array.isArray(child)) {
         head.push.apply(head, getHead(child));
-      } else if (typeof child === 'object' && child.props && 'thead' in child.props) {
-        head.push(child);
-      } else if (typeof child?.type?.prototype?.table === 'function' 
-        && child.type.prototype.table() === 'TableHead'
+      } else if (typeof child === 'object' 
+        && child.props 
+        && 'thead' in child.props
       ) {
+        head.push(child);
+      } else if (child.type === TableHead) {
         head.push(child);
       }
     }
@@ -117,11 +123,12 @@ export function getFoot(children: ReactNode) {
     for (const child of children) {
       if (Array.isArray(child)) {
         foot.push.apply(foot, getFoot(child));
-      } else if (typeof child === 'object' && child.props && 'tfoot' in child.props) {
-        foot.push(child);
-      } else if (typeof child?.type?.prototype?.table === 'function' 
-        && child.type.prototype.table() === 'TableFoot'
+      } else if (typeof child === 'object' 
+        && child.props 
+        && 'tfoot' in child.props
       ) {
+        foot.push(child);
+      } else if (child.type === TableFoot) {
         foot.push(child);
       }
     }
@@ -139,18 +146,17 @@ export function getBody(children: ReactNode) {
     for (const child of children) {
       if (Array.isArray(child)) {
         body.push.apply(body, getBody(child));
-      } else if (typeof child === 'object' && child.props && 'tbody' in child.props) {
-        body.push(child);
-      } else if (typeof child?.type?.prototype?.table === 'function' 
-        && child.type.prototype.table() === 'TableGroup'
+      } else if (typeof child === 'object' 
+        && child.props 
+        && 'tbody' in child.props
       ) {
+        body.push(child);
+      } else if (child.type === TableGroup) {
         const children = child.props.children || [];
         if (Array.isArray(children) && children.length > 0) {
           body.push(...children);
         }
-      } else if (typeof child?.type?.prototype?.table === 'function' 
-        && child.type.prototype.table() === 'TableRow'
-      ) {
+      } else if (child.type === TableRow) {
         body.push(child);
       }
     }
@@ -166,7 +172,7 @@ export function getBody(children: ReactNode) {
  * Table stripe hook. This returns a function that can be used to get 
  * a color from the list of colors passed in a round-robin fashion.
  */
-export function useStripe(...colors: string[]) {
+export function useStripe(...stripes: ClassStyleProp[]) {
   //hooks
   let active = 0;
   //handler
@@ -188,7 +194,7 @@ export function useStripe(...colors: string[]) {
       active = next;
     }
     //return the color at the next index
-    return colors[next % colors.length];
+    return stripes[next % stripes.length];
   };
 
   return toggle;
@@ -214,294 +220,279 @@ export const TableContext = createContext<TableContextProps>({
 /**
  * Table column component
  */
-export class TableCol extends React.Component<TableColProps> {
-  //set context to table
-  static contextType = TableContext;
-  declare context: React.ContextType<typeof TableContext>;
-
-  /**
-   * This is a marker to identify the component type.
-   * (used in `getBody()`)
-   */
-  table() {
-    return 'TableCol';
-  }
-
-  /**
-   * Render component method
-   */
-  render() {
-    //props
-    const {
-      addClass,
-      children,
-      className,
-      colSpan,
-      noWrap,
-      rowSpan,
-      stickyBottom,
-      stickyLeft,
-      stickyRight,
-      stickyTop,
-      wrap1,
-      wrap2,
-      wrap3,
-      wrap4,
-      wrap5,
-      ...attributes
-    } = this.props;
-    //variables
-    // configure classes
-    const classes = [ 'frui-table-col' ];
-    // if any sticky
-    if (stickyBottom || stickyLeft || stickyRight || stickyTop) { 
-      //add sticky class
-      classes.push('frui-table-sticky');
-      //if sticky bottom
-      if (stickyBottom) {
-        //add sticky bottom class and z-index 1
-        classes.push('frui-table-sticky-b', 'frui-table-z1');
-      } 
-      //if sticky left
-      if (stickyLeft) {
-        //add sticky left class and z-index 1
-        classes.push('frui-table-sticky-l', 'frui-table-z2');
-      }
-      //if sticky right
-      if (stickyRight) {
-        //add sticky right class and z-index 1
-        classes.push('frui-table-sticky-r', 'frui-table-z2');
-      }
-      //if sticky top
-      if (stickyTop) {
-        //add sticky top class and z-index 1
-        classes.push('frui-table-sticky-t', 'frui-table-z1');
-      }
-    }
-    // if no wrap
-    if (noWrap) {
-      //add no wrap class
-      classes.push('frui-table-nowrap');
-    }
-    // if className prop
-    if (className) {
-      //add className prop
-      classes.push(className);
-    // else if context has cols prop
-    } else if (this.context.cols) {
-      if (typeof this.context.cols === 'string') {
-        //add cols prop from context
-        classes.push(this.context.cols);
-      // else if cols is an array
-      } else if (Array.isArray(this.context.cols)) {
-        //add cols prop from context based on index
-        classes.push(this.context.cols[
-          this.context.index % this.context.cols.length
-        ]);
-      }
-      //if there are additional classes
-      if (addClass) {
-        //add additional classes
-        classes.push(addClass);
-      }
-    }
-    // configure attributes
-    const extras: Record<string, number> = {};
-    // - if row span
-    if (rowSpan) {
-      //add row span attribute
-      extras.rowSpan = rowSpan || 0;
-    }
-    // - if col span
-    if (colSpan) {
-      //add col span attribute
-      extras.colSpan = colSpan || 0;
-    }
-    
-    // NOTE: Table sizing is very volatile when doing it organically.
-    // Adding a rule with a specific width forces the browser to
-    // respect the width of the column and wont shrink relative to the
-    // other columns.
-
-    // configure invisible rule
-    let rule = null;
-    // - if wrap 1
-    if (wrap1) {
-      //add wrap 1 rule
-      rule = (<Rule width="100px" />);
-    // - if wrap 2
-    } else if (wrap2) {
-      //add wrap 2 rule
-      rule = (<Rule width="200px" />);
-    // - if wrap 3
-    } else if (wrap3) {
-      //add wrap 3 rule
-      rule = (<Rule width="300px" />);
-    // - if wrap 4
-    } else if (wrap4) {
-      //add wrap 4 rule
-      rule = (<Rule width="400px" />);
-    // - if wrap 5
-    } else if (wrap5) {
-      //add wrap 5 rule
-      rule = (<Rule width="500px" />);
+export function TableCol(props: TableColProps) {
+  //props
+  const {
+    addClassStyle,
+    children,
+    className,
+    colSpan,
+    noWrap,
+    rowSpan,
+    stickyBottom,
+    stickyLeft,
+    stickyRight,
+    stickyTop,
+    style,
+    wrap1,
+    wrap2,
+    wrap3,
+    wrap4,
+    wrap5,
+    ...attributes
+  } = props;
+  //hooks
+  const context = useTableContext();
+  //variables
+  // configure classes and styles
+  const classes = [ 'frui-table-col' ];
+  const styles = { ...style };
+  // if any sticky
+  if (stickyBottom || stickyLeft || stickyRight || stickyTop) { 
+    //add sticky class
+    classes.push('frui-table-sticky');
+    //if sticky bottom
+    if (stickyBottom) {
+      //add sticky bottom class and z-index 1
+      classes.push('frui-table-sticky-b', 'frui-table-z1');
     } 
-    //render
-    return (
-      <td valign="top" {...attributes} className={classes.join(' ')} {...extras}>
-        {children}
-        {rule}
-      </td>
-    );
+    //if sticky left
+    if (stickyLeft) {
+      //add sticky left class and z-index 1
+      classes.push('frui-table-sticky-l', 'frui-table-z2');
+    }
+    //if sticky right
+    if (stickyRight) {
+      //add sticky right class and z-index 1
+      classes.push('frui-table-sticky-r', 'frui-table-z2');
+    }
+    //if sticky top
+    if (stickyTop) {
+      //add sticky top class and z-index 1
+      classes.push('frui-table-sticky-t', 'frui-table-z1');
+    }
   }
+  // if no wrap
+  if (noWrap) {
+    //add no wrap class
+    classes.push('frui-table-nowrap');
+  }
+  // if className prop
+  if (className) {
+    //add className prop
+    classes.push(className);
+  // else if context has col style prop
+  } else if (context.columnClassStyle) {
+    if (!Array.isArray(context.columnClassStyle)) {
+      //add col style prop from context
+      applyClassStyle(classes, styles, context.columnClassStyle);
+    // else col style is an array
+    } else {
+      //add col style prop from context based on index
+      applyClassStyle(classes, styles, context.columnClassStyle[
+        context.index % context.columnClassStyle.length
+      ]);
+    }
+  }
+  //if there are additional classes
+  if (addClassStyle) {
+    //add additional classes
+    applyClassStyle(classes, styles, addClassStyle);
+  }
+  // configure attributes
+  const extras: Record<string, number> = {};
+  // - if row span
+  if (rowSpan) {
+    //add row span attribute
+    extras.rowSpan = rowSpan || 0;
+  }
+  // - if col span
+  if (colSpan) {
+    //add col span attribute
+    extras.colSpan = colSpan || 0;
+  }
+  
+  // NOTE: Table sizing is very volatile when doing it organically.
+  // Adding a rule with a specific width forces the browser to
+  // respect the width of the column and wont shrink relative to the
+  // other columns.
+
+  // configure invisible rule
+  let rule = null;
+  // - if wrap 1
+  if (wrap1) {
+    //add wrap 1 rule
+    rule = (<TableRule width="100px" />);
+  // - if wrap 2
+  } else if (wrap2) {
+    //add wrap 2 rule
+    rule = (<TableRule width="200px" />);
+  // - if wrap 3
+  } else if (wrap3) {
+    //add wrap 3 rule
+    rule = (<TableRule width="300px" />);
+  // - if wrap 4
+  } else if (wrap4) {
+    //add wrap 4 rule
+    rule = (<TableRule width="400px" />);
+  // - if wrap 5
+  } else if (wrap5) {
+    //add wrap 5 rule
+    rule = (<TableRule width="500px" />);
+  } 
+  //render
+  return (
+    <td 
+      valign="top" 
+      {...attributes} 
+      className={classes.join(' ')} 
+      style={styles} 
+      {...extras}
+    >
+      {children}
+      {rule}
+    </td>
+  );
 };
 
 /**
  * Table Footer Component
  */
-export class TableFoot extends React.Component<TableFootProps> {
-  //set context to table
-  static contextType = TableContext;
-  declare context: React.ContextType<typeof TableContext>;
-
-  /**
-   * This is a marker to identify the component type.
-   * (used in `getFoot()`)
-   */
-  table() {
-    return 'TableFoot';
-  }
-
-  /** 
-   * Render component method
-   */
-  render() {
-    //props
-    const {
-      addClass,
-      children,
-      className,
-      colSpan,
-      noWrap,
-      rowSpan,
-      stickyBottom,
-      stickyLeft,
-      stickyRight,
-      wrap1,
-      wrap2,
-      wrap3,
-      wrap4,
-      wrap5,
-      ...attributes
-    } = this.props;
-    //variables
-    // configure classes
-    const classes = [ 'frui-table-foot' ];
-    // if any sticky
-    if (stickyBottom || stickyLeft || stickyRight) {
-      let zSet = false; 
-      //add stick class
-      classes.push('frui-table-sticky');
-      //if stick bottom
-      if (stickyBottom) {
-        //add sticky bottom class
-        classes.push('frui-table-sticky-b');
-        //if also sticky left and right (together)
-        if (stickyLeft && stickyRight) {
-          //add a z-index 4
-          classes.push('frui-table-z4');
-          zSet = true;
-        //if either sticky left or right
-        } else if (stickyLeft || stickyRight) {
-          //add a z-index 3
-          classes.push('frui-table-z3');
-          zSet = true;
-        }
-      } 
-      //if sticky left
-      if (stickyLeft) {
-        //add sticky left class and z-index 1
-        classes.push('frui-table-sticky-l');
+export function TableFoot(props: TableFootProps) {
+  //props
+  const {
+    addClassStyle,
+    children,
+    className,
+    colSpan,
+    noWrap,
+    rowSpan,
+    stickyBottom,
+    stickyLeft,
+    stickyRight,
+    style,
+    wrap1,
+    wrap2,
+    wrap3,
+    wrap4,
+    wrap5,
+    ...attributes
+  } = props;
+  //hooks
+  const context = useTableContext();
+  //variables
+  // configure classes and styles
+  const classes = [ 'frui-table-foot' ];
+  const styles = { ...style };
+  // if any sticky
+  if (stickyBottom || stickyLeft || stickyRight) {
+    let zSet = false; 
+    //add stick class
+    classes.push('frui-table-sticky');
+    //if stick bottom
+    if (stickyBottom) {
+      //add sticky bottom class
+      classes.push('frui-table-sticky-b');
+      //if also sticky left and right (together)
+      if (stickyLeft && stickyRight) {
+        //add a z-index 4
+        classes.push('frui-table-z4');
+        zSet = true;
+      //if either sticky left or right
+      } else if (stickyLeft || stickyRight) {
+        //add a z-index 3
+        classes.push('frui-table-z3');
+        zSet = true;
       }
-      //if sticky right
-      if (stickyRight) {
-        //add sticky right class and z-index 1
-        classes.push('frui-table-sticky-r');
-      }
-      //if no z-index has been set
-      if (!zSet) {
-        //add a z-index 1
-        classes.push('frui-table-z2');
-      }
-    }
-    // if no wrap
-    if (noWrap) {
-      //add no wrap class
-      classes.push('frui-table-nowrap');
-    }
-    // if className prop
-    if (className) {
-      //add className prop
-      classes.push(className);
-    // else if context has foots prop
-    } else if (this.context.foots) {
-      //add heads prop from context
-      classes.push(this.context.foots);
-      //if there are additional classes
-      if (addClass) {
-        //add additional classes
-        classes.push(addClass);
-      }
-    }
-    // configure attributes
-    const extras: Record<string, number> = {};
-    // - if row span
-    if (rowSpan) {
-      //add row span attribute
-      extras.rowSpan = rowSpan || 0;
-    }
-    // - if col span
-    if (colSpan) {
-      //add col span attribute
-      extras.colSpan = colSpan || 0;
-    }
-
-    // NOTE: Table sizing is very volatile when doing it organically.
-    // Adding a rule with a specific width forces the browser to
-    // respect the width of the column and wont shrink relative to the
-    // other columns.
-
-    // configure invisible rule
-    let rule = null;
-    // - if wrap 1
-    if (wrap1) {
-      //add wrap 1 rule
-      rule = (<Rule width="100px" />);
-    // - if wrap 2
-    } else if (wrap2) {
-      //add wrap 2 rule
-      rule = (<Rule width="200px" />);
-    // - if wrap 3
-    } else if (wrap3) {
-      //add wrap 3 rule
-      rule = (<Rule width="300px" />);
-    // - if wrap 4
-    } else if (wrap4) {
-      //add wrap 4 rule
-      rule = (<Rule width="400px" />);
-    // - if wrap 5
-    } else if (wrap5) {
-      //add wrap 5 rule
-      rule = (<Rule width="500px" />);
     } 
-    //render
-    return (
-      <th {...attributes} className={classes.join(' ')} {...extras}>
-        {children}
-        {rule}
-      </th>
-    );
+    //if sticky left
+    if (stickyLeft) {
+      //add sticky left class and z-index 1
+      classes.push('frui-table-sticky-l');
+    }
+    //if sticky right
+    if (stickyRight) {
+      //add sticky right class and z-index 1
+      classes.push('frui-table-sticky-r');
+    }
+    //if no z-index has been set
+    if (!zSet) {
+      //add a z-index 1
+      classes.push('frui-table-z2');
+    }
   }
+  // if no wrap
+  if (noWrap) {
+    //add no wrap class
+    classes.push('frui-table-nowrap');
+  }
+  // if className prop
+  if (className) {
+    //add className prop
+    classes.push(className);
+  // else if context has foot style prop
+  } else if (context.footClassStyle) {
+    //add foot style prop from context
+    applyClassStyle(classes, styles, context.footClassStyle);
+  }
+  //if there are additional classes
+  if (addClassStyle) {
+    //add additional classes
+    applyClassStyle(classes, styles, addClassStyle);
+  }
+  // configure attributes
+  const extras: Record<string, number> = {};
+  // - if row span
+  if (rowSpan) {
+    //add row span attribute
+    extras.rowSpan = rowSpan || 0;
+  }
+  // - if col span
+  if (colSpan) {
+    //add col span attribute
+    extras.colSpan = colSpan || 0;
+  }
+
+  // NOTE: Table sizing is very volatile when doing it organically.
+  // Adding a rule with a specific width forces the browser to
+  // respect the width of the column and wont shrink relative to the
+  // other columns.
+
+  // configure invisible rule
+  let rule = null;
+  // - if wrap 1
+  if (wrap1) {
+    //add wrap 1 rule
+    rule = (<TableRule width="100px" />);
+  // - if wrap 2
+  } else if (wrap2) {
+    //add wrap 2 rule
+    rule = (<TableRule width="200px" />);
+  // - if wrap 3
+  } else if (wrap3) {
+    //add wrap 3 rule
+    rule = (<TableRule width="300px" />);
+  // - if wrap 4
+  } else if (wrap4) {
+    //add wrap 4 rule
+    rule = (<TableRule width="400px" />);
+  // - if wrap 5
+  } else if (wrap5) {
+    //add wrap 5 rule
+    rule = (<TableRule width="500px" />);
+  } 
+  //render
+  return (
+    <th 
+      {...attributes} 
+      className={classes.join(' ')} 
+      style={styles}
+      {...extras}
+    >
+      {children}
+      {rule}
+    </th>
+  );
 };
 
 /**
@@ -509,244 +500,208 @@ export class TableFoot extends React.Component<TableFootProps> {
  * This can be used to group rows together in an iterator instead 
  * of `<></>` which is not detected by `getBody()`.
  */
-export class TableGroup extends React.Component<TableRowProps> {
-  /**
-   * This is a marker to identify the component type.
-   * (used in `getBody()`)
-   */
-  table() {
-    return 'TableGroup';
-  }
-
-  /**
-   * Render component method
-   */
-  render() {
-    return this.props.children;
-  }
+export function TableGroup(props: TableRowProps) {
+  return props.children;
 };
 
 /**
  * Table Row Component
  */
-export class TableRow extends React.Component<TableRowProps> {
-  //set context to table
-  static contextType = TableContext;
-  declare context: React.ContextType<typeof TableContext>;
-
-  /**
-   * This is a marker to identify the component type.
-   * (used in `getBody()`)
-   */
-  table() {
-    return 'TableRow';
+export function TableRow(props: TableRowProps) {
+  //props
+  const {
+    children,
+    className,
+    columnClassStyle,
+    colSpan,
+    noWrap,
+    rowSpan,
+    stripe = 0,
+    ...attributes
+  } = props;
+  //hooks
+  const context = useTableContext();
+  //variables
+  // configure classes
+  const classes = [ 'frui-table-row' ];
+  // if no wrap
+  if (noWrap) {
+    //add no wrap class
+    classes.push('frui-table-nowrap');
   }
-
-  /**
-   * Render component method
-   */
-  render() {
-    //props
-    const {
-      children,
-      className,
-      cols,
-      colSpan,
-      noWrap,
-      rowSpan,
-      stripe = 0,
-      ...attributes
-    } = this.props;
-    //variables
-    // configure classes
-    const classes = [ 'frui-table-row' ];
-    // if no wrap
-    if (noWrap) {
-      //add no wrap class
-      classes.push('frui-table-nowrap');
-    }
-    // if className prop
-    if (className) {
-      //add className prop
-      classes.push(className);
-    }
-    // configure attributes
-    const extras: Record<string, number> = {};
-    if (rowSpan) {
-      extras.rowSpan = rowSpan || 0;
-    }
-    if (colSpan) {
-      extras.colSpan = colSpan || 0;
-    }
-    // configure context provider
-    const provider = {
-      ...this.context,
-      index: stripe,
-      cols: cols || this.context.cols
-    };
-    //render
-    return (
-      <TableContext.Provider value={provider}>
-        <tr {...attributes} className={classes.join(' ')} {...extras}>
-          {children}
-        </tr>
-      </TableContext.Provider>
-    );
+  // if className prop
+  if (className) {
+    //add className prop
+    classes.push(className);
   }
+  // configure attributes
+  const extras: Record<string, number> = {};
+  if (rowSpan) {
+    extras.rowSpan = rowSpan || 0;
+  }
+  if (colSpan) {
+    extras.colSpan = colSpan || 0;
+  }
+  // configure context provider
+  const provider = {
+    ...context,
+    index: stripe,
+    columnClassStyle: columnClassStyle || context.columnClassStyle
+  };
+  //render
+  return (
+    <TableContext.Provider value={provider}>
+      <tr {...attributes} className={classes.join(' ')} {...extras}>
+        {children}
+      </tr>
+    </TableContext.Provider>
+  );
 };
 
 /**
  * Table Header Component
  */
-export class TableHead extends React.Component<TableHeadProps> {
-  //set context to table
-  static contextType = TableContext;
-  declare context: React.ContextType<typeof TableContext>;
-
-  /**
-   * This is a marker to identify the component type.
-   * (used in `getHead()`)
-   */
-  table() {
-    return 'TableHead';
+export function TableHead(props: TableHeadProps) {
+  //props
+  const {
+    addClassStyle,
+    children,
+    className,
+    colSpan,
+    noWrap,
+    rowSpan,
+    stickyTop,
+    stickyLeft,
+    stickyRight,
+    style,
+    wrap1,
+    wrap2,
+    wrap3,
+    wrap4,
+    wrap5,
+    ...attributes
+  } = props;
+  //hooks
+  const context = useTableContext();
+  //variables
+  // configure classes and styles
+  const classes = [ 'frui-table-head' ];
+  const styles = { ...style };
+  // if any sticky
+  if (stickyLeft || stickyRight || stickyTop) { 
+    let zSet = false;
+    //add stick class
+    classes.push('frui-table-sticky');
+    //if stick top
+    if (stickyTop) {
+      //add sticky top class
+      classes.push('frui-table-sticky-t');
+      //if also sticky left and right (together)
+      if (stickyLeft && stickyRight) {
+        //add a z-index 4
+        classes.push('frui-table-z4');
+        zSet = true;
+      //if either sticky left or right
+      } else if (stickyLeft || stickyRight) {
+        //add a z-index 3
+        classes.push('frui-table-z3');
+        zSet = true;
+      }
+    }
+    //if sticky left
+    if (stickyLeft) {
+      //add sticky left class and z-index 1
+      classes.push('frui-table-sticky-l');
+    }
+    //if sticky right
+    if (stickyRight) {
+      //add sticky right class and z-index 1
+      classes.push('frui-table-sticky-r');
+    }
+    //if no z-index has been set
+    if (!zSet) {
+      //add a z-index 1
+      classes.push('frui-table-z2');
+    }
   }
-
-  /**
-   * Render component method
-   */
-  render() {
-    //props
-    const {
-      addClass,
-      children,
-      className,
-      colSpan,
-      noWrap,
-      rowSpan,
-      stickyTop,
-      stickyLeft,
-      stickyRight,
-      wrap1,
-      wrap2,
-      wrap3,
-      wrap4,
-      wrap5,
-      ...attributes
-    } = this.props;
-    //variables
-    // configure classes
-    const classes = [ 'frui-table-head' ];
-    // if any sticky
-    if (stickyLeft || stickyRight || stickyTop) { 
-      let zSet = false;
-      //add stick class
-      classes.push('frui-table-sticky');
-      //if stick top
-      if (stickyTop) {
-        //add sticky top class
-        classes.push('frui-table-sticky-t');
-        //if also sticky left and right (together)
-        if (stickyLeft && stickyRight) {
-          //add a z-index 4
-          classes.push('frui-table-z4');
-          zSet = true;
-        //if either sticky left or right
-        } else if (stickyLeft || stickyRight) {
-          //add a z-index 3
-          classes.push('frui-table-z3');
-          zSet = true;
-        }
-      }
-      //if sticky left
-      if (stickyLeft) {
-        //add sticky left class and z-index 1
-        classes.push('frui-table-sticky-l');
-      }
-      //if sticky right
-      if (stickyRight) {
-        //add sticky right class and z-index 1
-        classes.push('frui-table-sticky-r');
-      }
-      //if no z-index has been set
-      if (!zSet) {
-        //add a z-index 1
-        classes.push('frui-table-z2');
-      }
-    }
-    // if no wrap
-    if (noWrap) {
-      //add no wrap class 
-      classes.push('frui-table-nowrap');
-    }
-    // if className prop
-    if (className) {
-      //add className prop
-      classes.push(className);
-    // else if context has heads prop
-    } else if (this.context.heads) {
-      //add heads prop from context
-      classes.push(this.context.heads);
-      //if there are additional classes
-      if (addClass) {
-        //add additional classes
-        classes.push(addClass);
-      }
-    }
-    // configure attributes
-    const extras: Record<string, number> = {};
-    // - if row span
-    if (rowSpan) {
-      //add row span attribute
-      extras.rowSpan = rowSpan || 0;
-    }
-    // - if col span
-    if (colSpan) {
-      //add col span attribute
-      extras.colSpan = colSpan || 0;
-    }
-    
-    // NOTE: Table sizing is very volatile when doing it organically.
-    // Adding a rule with a specific width forces the browser to
-    // respect the width of the column and wont shrink relative to the
-    // other columns.
-
-    // configure invisible rule
-    let rule = null;
-    // - if wrap 1
-    if (wrap1) {
-      //add wrap 1 rule
-      rule = (<Rule width="100px" />);
-    // - if wrap 2
-    } else if (wrap2) {
-      //add wrap 2 rule
-      rule = (<Rule width="200px" />);
-    // - if wrap 3
-    } else if (wrap3) {
-      //add wrap 3 rule
-      rule = (<Rule width="300px" />);
-    // - if wrap 4
-    } else if (wrap4) {
-      //add wrap 4 rule
-      rule = (<Rule width="400px" />);
-    // - if wrap 5
-    } else if (wrap5) {
-      //add wrap 5 rule
-      rule = (<Rule width="500px" />);
-    } 
-    //render
-    return (
-      <th {...attributes} className={classes.join(' ')} {...extras}>
-        {children}
-        {rule}
-      </th>
-    );
+  // if no wrap
+  if (noWrap) {
+    //add no wrap class 
+    classes.push('frui-table-nowrap');
   }
+  // if className prop
+  if (className) {
+    //add className prop
+    classes.push(className);
+  // else if context has head style prop
+  } else if (context.headClassStyle) {
+    //add head style prop from context
+    applyClassStyle(classes, styles, context.headClassStyle);
+  }
+  //if there are additional classes
+  if (addClassStyle) {
+    //add additional classes
+    applyClassStyle(classes, styles, addClassStyle);
+  }
+  // configure attributes
+  const extras: Record<string, number> = {};
+  // - if row span
+  if (rowSpan) {
+    //add row span attribute
+    extras.rowSpan = rowSpan || 0;
+  }
+  // - if col span
+  if (colSpan) {
+    //add col span attribute
+    extras.colSpan = colSpan || 0;
+  }
+  
+  // NOTE: Table sizing is very volatile when doing it organically.
+  // Adding a rule with a specific width forces the browser to
+  // respect the width of the column and wont shrink relative to the
+  // other columns.
+
+  // configure invisible rule
+  let rule = null;
+  // - if wrap 1
+  if (wrap1) {
+    //add wrap 1 rule
+    rule = (<TableRule width="100px" />);
+  // - if wrap 2
+  } else if (wrap2) {
+    //add wrap 2 rule
+    rule = (<TableRule width="200px" />);
+  // - if wrap 3
+  } else if (wrap3) {
+    //add wrap 3 rule
+    rule = (<TableRule width="300px" />);
+  // - if wrap 4
+  } else if (wrap4) {
+    //add wrap 4 rule
+    rule = (<TableRule width="400px" />);
+  // - if wrap 5
+  } else if (wrap5) {
+    //add wrap 5 rule
+    rule = (<TableRule width="500px" />);
+  } 
+  //render
+  return (
+    <th 
+      {...attributes} 
+      className={classes.join(' ')} 
+      style={styles}
+      {...extras}
+    >
+      {children}
+      {rule}
+    </th>
+  );
 };
 
 /**
  * Invisible rule component
  */
-export function Rule({ width }: TableRuleProps) {
+export function TableRule({ width }: TableRuleProps) {
   //just render
   return (
     <hr style={{ borderWidth: 0, margin: 0, width }} />
@@ -757,6 +712,14 @@ export function Rule({ width }: TableRuleProps) {
  * Table Component (Main)
  */
 export function Table(props: TableProps) {
+  //props
+  const {
+    className,
+    columnClassStyle,
+    footClassStyle,
+    headClassStyle,
+    style
+  } = props;
   //variables
   let children = props.children || []
   if (!Array.isArray(children)) {
@@ -764,14 +727,14 @@ export function Table(props: TableProps) {
   }
   // configure classes
   const classes = [ 'frui-table-overflow' ];
-  if (props.className) {
-    classes.push(props.className);
+  if (className) {
+    classes.push(className);
   }
   // configure context provider
   const provider = { 
-    cols: props.cols,
-    foots: props.foots,
-    heads: props.heads,
+    columnClassStyle,
+    footClassStyle,
+    headClassStyle,
     index: 0
   };
   // collect head, body and foot components
@@ -781,7 +744,7 @@ export function Table(props: TableProps) {
   //render
   return (
     <TableContext.Provider value={provider}>
-      <div className={classes.join(' ')} style={props.style}>
+      <div className={classes.join(' ')} style={style}>
         <table className="frui-table">
           {head && <thead><tr>{head}</tr></thead>}
           {body && <tbody>{body}</tbody>}
@@ -789,7 +752,7 @@ export function Table(props: TableProps) {
         </table>
       </div>
     </TableContext.Provider>
-  )
+  );
 };
 
 //--------------------------------------------------------------------//
@@ -800,7 +763,8 @@ export {
   TableFoot as Tfoot,
   TableCol as Tcol,
   TableRow as Trow,
-  TableGroup as Tgroup
+  TableGroup as Tgroup,
+  TableRule as Trule
 };
 
 //defaults to table
@@ -812,7 +776,8 @@ export default Object.assign(
     Col: TableCol,
     Row: TableRow,
     Group: TableGroup,
-    Rule: Rule,
-    useStripe
+    Rule: TableRule,
+    useStripe,
+    useContext: useTableContext
   }
 );

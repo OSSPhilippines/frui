@@ -2,19 +2,19 @@
 // Imports
 
 //modules
+import type { CSSProperties } from 'react';
 import { 
-  createContext, 
+  createContext,  
   useContext,
   useEffect,
   useState
 } from 'react';
 import { useLanguage } from 'r22n';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { dark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import ShikiHighlighter from 'react-shiki';
 
 //frui
 import type { HTMLProps, ChildrenProps } from 'components/types.js';
-import { notify } from 'components/element/Notify.js';
+import { notify } from 'components/element/Notifier.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -26,6 +26,7 @@ export type PreviewContextProps = {
 };
 
 export type PreviewExampleProps = ChildrenProps & {
+  background?: string,
   center?: boolean,
   padding?: boolean
 };
@@ -46,16 +47,19 @@ export const PreviewContext = createContext<PreviewContextProps>({
 });
 
 export function PreviewExample(props: PreviewExampleProps) {
-  const { center, children, padding } = props;
+  const { background, center, children, padding } = props;
   const { active, height } = useContext(PreviewContext);
   const classes: string[] = [ 'border', 'theme-bc-3' ];
   if (center) classes.push('flex items-center justify-center');
   if (padding) classes.push('p-3');
+  const styles: CSSProperties = {};
+  if (background) styles.backgroundColor = background;
+  if (height) {
+    styles.height = `${height}px`;
+    styles.overflow = 'auto';
+  }
   return active === 'example' ? (
-    <div 
-      className={classes.join(' ')}
-      style={height ? { height: `${height}px`, overflow: 'auto' } : {}}
-    >
+    <div className={classes.join(' ')} style={styles}>
       <div className="w-full">
         {children}
       </div>
@@ -69,13 +73,13 @@ export function PreviewCode(props: PreviewCodeProps) {
   useEffect(() => clip(code), []);
   return active === 'code' ? (
     <div className="theme-bg-black">
-      <SyntaxHighlighter 
-        className="flex-grow !p-4 !bg-transparent" 
-        language="typescript" 
-        style={dark}
+      <ShikiHighlighter 
+        className="flex-grow" 
+        language="tsx" 
+        theme="github-dark"
       >
         {code.trim()}
-      </SyntaxHighlighter>
+      </ShikiHighlighter>
     </div>
   ) : null;
 };

@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useLanguage } from 'r22n';
 //frui
-import { unload } from 'components/element/Notify.js';
+import { unload } from 'components/element/Notifier.js';
 //app
 import { useTheme } from '../theme/hooks.js';
 import LayoutToggle from './LayoutToggle.js';
@@ -18,7 +18,7 @@ export default function LayoutHome({ children }: LayoutHomeProps) {
   const [ _opened, _toggle ] = useToggle();
   const { ready, theme, mode } = useTheme();
   //unload flash message
-  useEffect(unload, []);
+  useEffect(() => { unload() }, []);
   if (!ready) return null;
   return (
     <section className={`${theme}-${mode} theme-bg-0 theme-1 relative w-full h-full overflow-hidden`}>

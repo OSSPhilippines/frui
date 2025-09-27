@@ -5,8 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import type { Crumb } from 'components/element/Crumbs.js';
-import Crumbs from 'components/element/Crumbs.js';
+import Bread from 'components/element/Bread.js';
 import Progress from 'components/element/Progress.js';
 
 //plugins
@@ -17,16 +16,12 @@ import {
   ThemeHead, 
   Code, 
   C, 
-  Props
+  Props,
+  Preview
 } from 'plugins/app/index.js';
 
 //--------------------------------------------------------------------//
 // Constants
-
-const crumbs: Crumb[] = [
-  { icon: 'icons', label: 'Components', href: '/component' },
-  { label: 'Progress Bar' }
-];
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
@@ -54,6 +49,21 @@ const props = [
 // Components
 
 /**
+ * Crumbs component
+ */
+export function Crumbs() {
+  return (
+    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+      <Bread.Slicer />
+      <Bread.Crumb icon="icons" href="/component">
+        Components
+      </Bread.Crumb>
+      <Bread.Crumb>Progress Bar</Bread.Crumb>
+    </Bread>
+  );
+};
+
+/**
  * Aside right menu component
  */
 export function Menu() {
@@ -72,26 +82,242 @@ export function Menu() {
         {_('Contents')}
       </h4>
       <div className="p-3">
-        <a className="block pb-1" href="#top">{_('Progress Bar')}</a>
-        <ul className="list-disc pl-3">
-          <li className="pl-3 pb-1">
-            <a href="#props">{_('Props')}</a>
+        <a className="block pb-1 font-bold" href="#top">
+          {_('Progress Bar')}
+        </a>
+        <ul className="list-disc pl-2">
+          <li className="ml-2 pb-1">
+            <a href="#examples">{_('Examples')}</a>
           </li>
-          <li className="pl-3 pb-1">
-            <a href="#colors">{_('Progress Bar Colors')}</a>
+          <li className="ml-2 pb-1">
+            <a href="#styles">{_('Global Styles')}</a>
           </li>
-          <li className="pl-3 pb-1">
-            <a href="#background">{_('Background Colors')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#rounded">{_('Rounded')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#styles">{_('Custom Styles')}</a>
+          <li className="ml-2 pb-1">
+            <a href="#api">{_('API Reference')}</a>
           </li>
         </ul>
       </div>
     </aside>
+  );
+};
+
+/**
+ * Examples component
+ */
+export function Examples() {
+  return (
+    <div className="flex items-start rmd-block flex-wrap gap-4">
+      {/* Info Example */}
+      <Preview 
+        title="Info Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={10} info className="theme-white">10%</Progress>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={10} info className="theme-white">10%</Progress>`}
+        </Preview.Code>
+      </Preview>
+      {/* Warning Example */}
+      <Preview 
+        title="Warning Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={15} warning className="theme-white">15%</Progress>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={15} warning className="theme-white">15%</Progress>`}
+        </Preview.Code>
+      </Preview>
+      {/* Success Example */}
+      <Preview 
+        title="Success Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={20} success className="theme-white">20%</Progress>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={20} success className="theme-white">20%</Progress>`}
+        </Preview.Code>
+      </Preview>
+      {/* Error Example */}
+      <Preview 
+        title="Error Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={25} error className="theme-white">25%</Progress>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={25} error className="theme-white">25%</Progress>`}
+        </Preview.Code>
+      </Preview>
+      {/* Muted Example */}
+      <Preview
+        title="Muted Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={30} muted className="theme-white">30%</Progress>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={30} muted className="theme-white">30%</Progress>`}
+        </Preview.Code>
+      </Preview>
+      {/* Custom Color Example */}
+      <Preview 
+        title="Custom Color Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={35} color="salmon" className="theme-white">35%</Progress>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={35} color="salmon" className="theme-white">35%</Progress>`}
+        </Preview.Code>
+      </Preview>
+      {/* Info Background Example */}
+      <Preview 
+        title="Info Background Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={40} muted bginfo className="theme-white">40%</Progress>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={40} muted bginfo className="theme-white">40%</Progress>`}
+        </Preview.Code>
+      </Preview>
+      {/* Warning Background Example */}
+      <Preview
+        title="Warning Background Example"
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={45} muted bgwarning className="theme-white">45%</Progress>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={45} muted bgwarning className="theme-white">45%</Progress>`}
+        </Preview.Code>
+      </Preview>
+      {/* Success Background Example */}
+      <Preview 
+        title="Success Background Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={50} muted bgsuccess className="theme-white">50%</Progress>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={50} muted bgsuccess className="theme-white">50%</Progress>`}
+        </Preview.Code>
+      </Preview>
+      {/* Error Background Example */}
+      <Preview 
+        title="Error Background Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={55} muted bgerror className="theme-white">55%</Progress>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={55} muted bgerror className="theme-white">55%</Progress>`}
+        </Preview.Code>
+      </Preview>
+      {/* Muted Background Example */}
+      <Preview 
+        title="Muted Background Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={60} muted bgmuted className="theme-white">60%</Progress>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={60} muted bgmuted className="theme-white">60%</Progress>`}
+        </Preview.Code>
+      </Preview>
+      {/* Custom Background Example */}
+      <Preview 
+        title="Custom Background Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={65} muted bgcolor="salmon" className="theme-white">65%</Progress>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={65} muted bgcolor="salmon" className="theme-white">65%</Progress>`}
+        </Preview.Code>
+      </Preview>
+      {/* Curved Example */}
+      <Preview 
+        title="Curved Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={70} height={20} warning bgmuted curved />
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={70} height={20} warning bgmuted curved></Progress>`}
+        </Preview.Code>
+      </Preview>
+      {/* Rounded Example */}
+      <Preview 
+        title="Rounded Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={75} height={20} success bgmuted rounded />
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={75} height={20} success bgmuted rounded></Progress>`}
+        </Preview.Code>
+      </Preview>
+      {/* Pill Example */}
+      <Preview 
+        title="Pill Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Progress width={80} height={20} info bgmuted pill />
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Progress width={80} height={20} info bgmuted pill></Progress>`}
+        </Preview.Code>
+      </Preview>
+    </div>
   );
 };
 
@@ -110,142 +336,53 @@ export function Body() {
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
         {_('Progress Bar')}
       </h1>
-      <p className="py-2">
-        <Translate>
-          Import the progress bar component like the following.
-        </Translate>
-      </p>
-      <Code language="typescript" className="mt-2">
-        {`import Progress from 'frui/Progress';`}
-      </Code>
-
-      <h2 id="props" className="uppercase font-bold text-lg mt-8">
-        {_('Props')}
-      </h2>
-      <p className="py-2">
-        <Translate>
-          The <C value="Progress" /> component can be passed the 
-          following props.
-        </Translate>
-      </p>
-      <Props props={props} />
-
-      <h2 id="colors" className="uppercase font-bold text-lg mt-8">
-        {_('Progress Bar Colors')}
-      </h2>
-      <p className="py-2">
-        <Translate>
-          The progress bar supports the standard FRUI color props.
-        </Translate>
-      </p>
       <div>
-        <Progress width={25} info className="theme-white">25%</Progress>
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={20} info>20%</Progress>`}
-        </Code>
-
-        <Progress width={40} warning className="theme-white">40%</Progress>
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={40} warning>40%</Progress>`}
-        </Code>
-
-        <Progress width={60} error className="theme-white">60%</Progress>
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={60} error>60%</Progress>`}
-        </Code>
-
-        <Progress width={75} success className="theme-white">75%</Progress>
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={75} success>75%</Progress>`}
-        </Code>
-
-        <Progress width={90} muted className="theme-white">90%</Progress>
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={90} muted>90%</Progress>`}
-        </Code>
-
-        <Progress width={95} color="salmon" className="theme-white">95%</Progress>
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={95} color="salmon">95%</Progress>`}
+        <p className="py-2">
+          <Translate>
+            Import the progress bar component like the following.
+          </Translate>
+        </p>
+        <Code language="typescript" className="mt-2">
+          {`import Progress from 'frui/Progress';`}
         </Code>
       </div>
 
-      <h2 id="background" className="uppercase font-bold text-lg mt-8">
-        {_('Background Colors')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
-      <p className="py-2">
-        <Translate>
-          The progress bar supports the standard FRUI color props.
-        </Translate>
-      </p>
       <div>
-        <Progress width={25} info bgmuted className="theme-white">25%</Progress>
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={20} info bgmuted>20%</Progress>`}
-        </Code>
-
-        <Progress width={40} muted bgwarning className="theme-white">40%</Progress>
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={40} muted bgwarning>40%</Progress>`}
-        </Code>
-
-        <Progress width={60} muted bgerror className="theme-white">60%</Progress>
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={60} muted bgerror>60%</Progress>`}
-        </Code>
-
-        <Progress width={75} muted bgsuccess className="theme-white">75%</Progress>
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={75} muted bgsuccess>75%</Progress>`}
-        </Code>
-
-        <Progress width={90} muted bginfo className="theme-white">90%</Progress>
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={90} muted bginfo>90%</Progress>`}
-        </Code>
-
-        <Progress width={95} muted bgcolor="salmon" className="theme-white">95%</Progress>
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={95} muted bgcolor="salmon">95%</Progress>`}
-        </Code>
-      </div>
-
-      <h2 id="rounded" className="uppercase font-bold text-lg mt-8">
-        {_('Rounded')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          Progress bars can be rounded in three ways: <C value="curved" />, 
-          <C l value="rounded" />, and <C value="pill" />.
-        </Translate>
-      </p>
-      <div>
-        <Progress width={25} height={20} info bgmuted curved />
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={25} height={20} info bgmuted curved></Progress>`}
-        </Code>
-
-        <Progress width={50} height={20} warning bgmuted rounded />
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={50} height={20} warning bgmuted rounded></Progress>`}
-        </Code>
-
-        <Progress width={75} height={20} success bgmuted pill />
-        <Code className="mt-2 mb-8" language="typescript">
-          {`<Progress width={75} height={20} success bgmuted pill></Progress>`}
-        </Code>
+        <p className="py-2">
+          <Translate>
+            The following are some basic examples of badges.
+          </Translate>
+        </p>
+        <Examples />
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
-        {_('Custom Styles')}
+        {_('Global Styles')}
       </h2>
       <p className="py-2">
         <Translate>
-          You can add your own custom class to the tabs component or use 
-          the <C value="frui-progress" />, and <C value="frui-progress-container" /> CSS 
-          class.
+          You can use 
+          the <C value="frui-progress" />, 
+          and <C value="frui-progress-container" /> CSS classes to 
+          globally theme progress bars.
         </Translate>
       </p>
+
+      <h2 id="api" className="uppercase font-bold text-lg mt-8">
+        {_('API Reference')}
+      </h2>
+      <div>
+        <p className="py-2">
+          <Translate>
+            The <C value="Progress" /> component can be passed the 
+            following props.
+          </Translate>
+        </p>
+        <Props props={props} />
+      </div>
 
       <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
         <a className="text-t2" href="/component/pager">
@@ -289,7 +426,7 @@ export function Page() {
       <LayoutPanel pathname="/component/progress">
         <main className="flex flex-col h-full w-full">
           <div className="p-3 theme-bg-2">
-            <Crumbs crumbs={crumbs} />
+            <Crumbs />
           </div>
           <section className="flex-grow relative h-full">
             <Menu />

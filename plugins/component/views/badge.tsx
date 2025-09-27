@@ -5,11 +5,10 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import type { Crumb } from 'components/element/Crumbs.js';
-import Crumbs from 'components/element/Crumbs.js';
+import Bread from 'components/element/Bread.js';
 import Badge from 'components/element/Badge.js';
 
-//modules
+//plugins
 import type { PageProps } from 'plugins/app/types.js';
 import { 
   LayoutPanel, 
@@ -17,17 +16,12 @@ import {
   ThemeHead, 
   Props, 
   Code, 
-  C 
+  C,
+  Preview
 } from 'plugins/app/index.js';
 
 //--------------------------------------------------------------------//
 // Constants
-
-//variables
-const crumbs: Crumb[] = [
-  { icon: 'icons', label: 'Components', href: '/component' },
-  { label: 'Badge' }
-];
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
@@ -49,6 +43,21 @@ const props = [
 // Components
 
 /**
+ * Crumbs component
+ */
+export function Crumbs() {
+  return (
+    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+      <Bread.Slicer />
+      <Bread.Crumb icon="icons" href="/component">
+        Components
+      </Bread.Crumb>
+      <Bread.Crumb>Badges</Bread.Crumb>
+    </Bread>
+  );
+};
+
+/**
  * Aside right menu component
  */
 export function Menu() {
@@ -67,26 +76,242 @@ export function Menu() {
         {_('Contents')}
       </h4>
       <div className="p-3">
-        <a className="block pb-1" href="#top">{_('Badge')}</a>
-        <ul className="list-disc pl-3">
-          <li className="pl-3 pb-1">
-            <a href="#props">{_('Props')}</a>
+        <a className="block pb-1 font-bold" href="#top">
+          {_('Badges')}
+        </a>
+        <ul className="list-disc pl-2">
+          <li className="ml-2 pb-1">
+            <a href="#examples">{_('Examples')}</a>
           </li>
-          <li className="pl-3 pb-1">
-            <a href="#types">{_('Types')}</a>
+          <li className="ml-2 pb-1">
+            <a href="#styles">{_('Global Styles')}</a>
           </li>
-          <li className="pl-3 pb-1">
-            <a href="#custom">{_('Custom Color')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#rounded">{_('Rounded')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#styles">{_('Custom Styles')}</a>
+          <li className="ml-2 pb-1">
+            <a href="#api">{_('API Reference')}</a>
           </li>
         </ul>
       </div>
     </aside>
+  );
+};
+
+/**
+ * Examples component
+ */
+export function Examples() {
+  return (
+    <div className="flex items-start rmd-block flex-wrap gap-4">
+      {/* Info Example */}
+      <Preview 
+        title="Info Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Badge info>123</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge info>123</Badge>`}
+        </Preview.Code>
+      </Preview>
+      {/* Warning Example */}
+      <Preview 
+        title="Warning Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Badge warning>234</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge warning>234</Badge>`}
+        </Preview.Code>
+      </Preview>
+      {/* Success Example */}
+      <Preview 
+        title="Success Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Badge success>345</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge success>345</Badge>`}
+        </Preview.Code>
+      </Preview>
+      {/* Error Example */}
+      <Preview 
+        title="Error Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Badge error>456</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge error>456</Badge>`}
+        </Preview.Code>
+      </Preview>
+      {/* Muted Example */}
+      <Preview 
+        title="Muted Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Badge muted>456</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge muted>456</Badge>`}
+        </Preview.Code>
+      </Preview>
+      {/* Custom Color Example */}
+      <Preview 
+        title="Custom Color Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Badge color="salmon">567</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge color="salmon">567</Badge>`}
+        </Preview.Code>
+      </Preview>
+      {/* Info Outline Example */}
+      <Preview 
+        title="Info Outline Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <div className="text-center">
+            <Badge info outline>123</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge info outline>123</Badge>`}
+        </Preview.Code>
+      </Preview>
+      {/* Warning Outline Example */}
+      <Preview 
+        title="Warning Outline Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <div className="text-center">
+            <Badge warning outline>234</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge warning outline>234</Badge>`}
+        </Preview.Code>
+      </Preview>
+      {/* Success Outline Example */}
+      <Preview 
+        title="Success Outline Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <div className="text-center">
+            <Badge success outline>345</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge success outline>345</Badge>`}
+        </Preview.Code>
+      </Preview>
+      {/* Error Outline Example */}
+      <Preview 
+        title="Error Outline Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <div className="text-center">
+            <Badge error outline>456</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge error outline>456</Badge>`}
+        </Preview.Code>
+      </Preview>
+      {/* Muted Outline Example */}
+      <Preview 
+        title="Muted Outline Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <div className="text-center">
+            <Badge muted outline>567</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge muted outline>567</Badge>`}
+        </Preview.Code>
+      </Preview>
+      {/* Custom Color Outline Example */}
+      <Preview 
+        title="Custom Color Outline Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <div className="text-center">
+            <Badge color="salmon" outline>678</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge color="salmon" outline>678</Badge>`}
+        </Preview.Code>
+      </Preview>
+      {/* Curved Example */}
+      <Preview 
+        title="Curved Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Badge info curved>123</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge info curved>123</Badge>`}
+        </Preview.Code>
+      </Preview>
+      {/* Rounded Example */}
+      <Preview 
+        title="Rounded Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Badge warning rounded>234</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge warning rounded>234</Badge>`}
+        </Preview.Code>
+      </Preview>
+      {/* Pill Example */}
+      <Preview 
+        title="Pill Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <div className="text-center">
+            <Badge success pill outline>345</Badge>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Badge success pill outline>345</Badge>`}
+        </Preview.Code>
+      </Preview>
+    </div>
   );
 };
 
@@ -102,140 +327,63 @@ export function Body() {
       'absolute top-0 bottom-0 left-0 right-0 lg:right-56 px-3 pt-3 '
       + 'pb-5 h-full overflow-auto'
     }>
-      <h1 className="flex items-center uppercase font-bold text-xl">
-        {_('Badge')}
+      <h1 id="top" className="flex items-center uppercase font-bold text-xl">
+        {_('Badges')}
       </h1>
-      <Code language="typescript" className="mt-2">
-        {`import Badge from 'frui/Badge';`}
-      </Code>
-      
-      <h2 id="props" className="uppercase font-bold text-lg mt-8">
-        {_('Props')}
-      </h2>
-      <Props props={props} />
-
-      <h2 id="types" className="uppercase font-bold text-lg mt-8">
-        {_('Types')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          Badges have the following types: <C value="info" />, 
-          <C l value="warning" />, <C value="success" />, 
-          <C l value="error" />, and <C value="muted" />.
-        </Translate>
-      </p>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Badge info className="text-xs">123</Badge>
-        </div>
-        <Code language="typescript">
-          {`<Badge info className="text-xs">123</Badge>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Badge warning className="text-xs">234</Badge>
-        </div>
-        <Code language="typescript">
-          {`<Badge warning className="text-xs">234</Badge>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Badge success className="text-xs">345</Badge>
-        </div>
-        <Code language="typescript">
-          {`<Badge success className="text-xs">345</Badge>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Badge error className="text-xs">456</Badge>
-        </div>
-        <Code language="typescript">
-          {`<Badge error className="text-xs">456</Badge>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Badge muted className="text-xs">567</Badge>
-        </div>
-        <Code language="typescript">
-          {`<Badge muted className="text-xs">567</Badge>`}
+      <div>
+        <p className="py-2">
+          <Translate>
+            Import the badge component like the following.
+          </Translate>
+        </p>
+        <Code language="typescript" className="mt-2">
+          {`import Badge from 'frui/Badge';`}
         </Code>
       </div>
 
-      <h2 id="custom" className="uppercase font-bold text-lg mt-8">
-        {_('Custom Color')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
-      <p className="py-4">
-        <Translate>
-          Badges can have custom CSS compatible colors which 
-          includes hex and color names.
-        </Translate>
-      </p>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Badge color="salmon" className="text-xs">678</Badge>
-        </div>
-        <Code language="typescript">
-          {`<Badge color="salmon" className="text-xs">678</Badge>`}
-        </Code>
-      </div>
-
-      <h2 id="rounded" className="uppercase font-bold text-lg mt-8">
-        {_('Rounded')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          Badges can be rounded in three ways: <C value="curved" />, <C 
-            value="rounded" 
-          />, and <C value="pill" />.
-        </Translate>
-      </p>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Badge info curved className="text-xs">789</Badge>
-        </div>
-        <Code language="typescript">
-          {`<Badge info curved className="text-xs">789</Badge>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Badge warning rounded className="text-xs">890</Badge>
-        </div>
-        <Code language="typescript">
-          {`<Badge warning rounded className="text-xs">890</Badge>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Badge success pill className="text-xs">901</Badge>
-        </div>
-        <Code language="typescript">
-          {`<Badge success pill className="text-xs">901</Badge>`}
-        </Code>
+      <div>
+        <p className="py-2">
+          <Translate>
+            The following are some basic examples of badges.
+          </Translate>
+        </p>
+        <Examples />
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
-        {_('Custom Styles')}
+        {_('Global Styles')}
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to the badge component 
-          or use the <C value="frui-badge" /> CSS class.
+          You can use the <C value="frui-badge" /> CSS class to 
+          globally theme badges.
         </Translate>
       </p>
 
-      <div className="flex items-center border-t theme-bg-2 mt-8 pt-4">
+      <h2 id="api" className="uppercase font-bold text-lg mt-8">
+        {_('API Reference')}
+      </h2>
+      <div>
+        <p className="py-2">
+          <Translate>
+            The <C value="<Badge>" /> component can be passed the 
+            following props.
+          </Translate>
+        </p>
+        <Props props={props} />
+      </div>
+
+      <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
         <a className="text-t2" href="/component/alert">
           <i className="fas fa-arrow-left mr-2"></i>
           {_('Alerts')}
         </a>
         <div className="flex-grow"></div>
-        <a className="text-t2" href="/component/button">
-          {_('Buttons')}
+        <a className="text-t2" href="/component/bread">
+          {_('Bread Crumbs')}
           <i className="fas fa-arrow-right ml-2"></i>
         </a>
       </div>
@@ -269,7 +417,7 @@ export function Page() {
       <LayoutPanel pathname="/component/badge">
         <main className="flex flex-col h-full w-full">
           <div className="p-3 theme-bg-2">
-            <Crumbs crumbs={crumbs} />
+            <Crumbs />
           </div>
           <section className="flex-grow relative h-full">
             <Menu />

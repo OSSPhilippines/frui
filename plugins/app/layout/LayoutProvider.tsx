@@ -1,23 +1,33 @@
 //modules
-import type { ReactNode } from 'react';
 import { R22nProvider } from 'r22n';
-//src
+//frui
+import type { ChildrenProps } from 'components/types.js';
+import Notifier from 'components/element/Notifier.js';
+import Dialog from 'components/element/Dialog.js';
+//plugins
+import { useTheme } from '../theme/hooks.js';
 import ThemeProvider from '../theme/ThemeProvider.js';
-import { NotifyContainer } from 'components/element/Notify.js';
-import { ModalProvider } from 'components/element/Modal.js';
 
-export type LayoutProviderProps = { children: ReactNode };
+export function DialogProvider({ children }: ChildrenProps) {
+  const { theme, mode } = useTheme();
+  return (
+    <Dialog.Provider className={`${theme}-${mode}`}>
+      {children}
+    </Dialog.Provider>
+  );
+};
 
-export default function LayoutProvider(props: LayoutProviderProps) {
+export default function LayoutProvider(props: ChildrenProps) {
   const { children } = props;
   //TODO: add r22n locale provider
   return (
     <ThemeProvider>
       <R22nProvider>
-        <ModalProvider className="text-white">
-          {children}
-          <NotifyContainer />
-        </ModalProvider>
+        <Notifier.Provider>
+          <DialogProvider>
+            {children}
+          </DialogProvider>
+        </Notifier.Provider>
       </R22nProvider>
     </ThemeProvider>
   );

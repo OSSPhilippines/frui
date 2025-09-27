@@ -19,7 +19,7 @@ import setRadiusClass from '../helpers/radius.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type ProgressBarProps = BackgroundColorProps 
+export type ProgressProps = BackgroundColorProps 
   & ColorProps 
   & RadiusProps
   & HTMLProps 
@@ -35,7 +35,7 @@ export type ProgressBarProps = BackgroundColorProps
 /**
  * ProgressBar component (main)
  */
-export function Progress(props: ProgressBarProps) {
+export function Progress(props: ProgressProps) {
   //extract custom props
   const { 
     bgcolor,

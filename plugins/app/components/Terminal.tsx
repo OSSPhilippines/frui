@@ -1,7 +1,7 @@
 //modules
 import { useLanguage } from 'r22n';
 //frui
-import { notify } from 'components/element/Notify.js';
+import { notify } from 'components/element/Notifier.js';
 
 export default function Terminal(props: { 
   className?: string, 

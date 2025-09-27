@@ -5,8 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import type { Crumb } from 'components/element/Crumbs.js';
-import Crumbs from 'components/element/Crumbs.js';
+import Bread from 'components/element/Bread.js';
 import Table from 'components/element/Table.js';
 
 //plugins
@@ -24,86 +23,81 @@ import {
 //--------------------------------------------------------------------//
 // Constants
 
-const crumbs: Crumb[] = [
-  { icon: 'icons', label: 'Components', href: '/component' },
-  { label: 'Table' }
-];
-
 export type TableRuleProps = { width: string };
 
 const props = [
   //table
   [
-    [ 'className', 'string', 'All', 'No', 'Standard HTML class names' ],
-    [ 'cols', 'string | string[]', 'Table', 'No', 'List of class names to use for each column, or a single class name to use for all columns' ],
-    [ 'foots', 'string', 'Table', 'No', 'Class name to use for all foot cells' ],
-    [ 'heads', 'string', 'Table', 'No', 'Class name to use for all head cells' ],
-    [ 'style', 'CSS Object', 'All', 'No', 'Standard CSS input' ]
+    [ 'className', 'string', 'No', 'Standard HTML class names' ],
+    [ 'columnClassStyle', 'string | string[] | React.CSSProperties | React.CSSProperties[]', 'No', 'List of class names or styles to use for each column, or a single class name to use for all columns' ],
+    [ 'footClassStyle', 'string | React.CSSProperties', 'No', 'Class name or styles to use for all foot cells' ],
+    [ 'headClassStyle', 'string | React.CSSProperties', 'No', 'Class name or styles to use for all head cells' ],
+    [ 'style', 'CSS Object', 'No', 'Standard CSS input' ]
   ],
   //table head
   [
-    [ 'addClass', 'string', 'Table.Head', 'No', 'Additional class names to add to the head cell' ],
-    [ 'className', 'string', 'All', 'No', 'Standard HTML class names' ],
-    [ 'colSpan', 'number', 'Table.Head', 'No', 'How many columns this cell will cover' ],
-    [ 'noWrap', 'boolean', 'Table.Head', 'No', 'Keeps all text in one line' ],
-    [ 'rowSpan', 'number', 'Table.Head', 'No', 'How many rows this cell will cover' ],
-    [ 'stickyLeft', 'boolean', 'Table.Head', 'No', 'Always show on the left, even on overflow' ],
-    [ 'stickyRight', 'boolean', 'Table.Head', 'No', 'Always show on the right, even on overflow' ],
-    [ 'stickyTop', 'boolean', 'Table.Head', 'No', 'Always show on the top, even on overflow' ],
-    [ 'style', 'CSS Object', 'All', 'No', 'Standard CSS input' ],
-    [ 'wrap1', 'boolean', 'Table.Head', 'No', 'Keeps the cell size a minimum of 100px' ],
-    [ 'wrap2', 'boolean', 'Table.Head', 'No', 'Keeps the cell size a minimum of 200px' ],
-    [ 'wrap3', 'boolean', 'Table.Head', 'No', 'Keeps the cell size a minimum of 300px' ],
-    [ 'wrap4', 'boolean', 'Table.Head', 'No', 'Keeps the cell size a minimum of 400px' ],
-    [ 'wrap5', 'boolean', 'Table.Head', 'No', 'Keeps the cell size a minimum of 500px' ]
+    [ 'addClassStyle', 'string | React.CSSProperties', 'No', 'Additional class names to add to the head cell' ],
+    [ 'className', 'string', 'No', 'Standard HTML class names' ],
+    [ 'colSpan', 'number', 'No', 'How many columns this cell will cover' ],
+    [ 'noWrap', 'boolean', 'No', 'Keeps all text in one line' ],
+    [ 'rowSpan', 'number', 'No', 'How many rows this cell will cover' ],
+    [ 'stickyLeft', 'boolean', 'No', 'Always show on the left, even on overflow' ],
+    [ 'stickyRight', 'boolean', 'No', 'Always show on the right, even on overflow' ],
+    [ 'stickyTop', 'boolean', 'No', 'Always show on the top, even on overflow' ],
+    [ 'style', 'CSS Object', 'No', 'Standard CSS input' ],
+    [ 'wrap1', 'boolean', 'No', 'Keeps the cell size a minimum of 100px' ],
+    [ 'wrap2', 'boolean', 'No', 'Keeps the cell size a minimum of 200px' ],
+    [ 'wrap3', 'boolean', 'No', 'Keeps the cell size a minimum of 300px' ],
+    [ 'wrap4', 'boolean', 'No', 'Keeps the cell size a minimum of 400px' ],
+    [ 'wrap5', 'boolean', 'No', 'Keeps the cell size a minimum of 500px' ]
   ],
   //table row
   [
-    [ 'className', 'string', 'All', 'No', 'Standard HTML class names' ],
-    [ 'cols', 'string', 'Table.Row', 'No', 'Class name to use for all columns in this row, overrides the cols prop from Table' ],
-    [ 'colSpan', 'number', 'Table.Row', 'No', 'How many columns this cell will cover' ],
-    [ 'noWrap', 'boolean', 'Table.Row', 'No', 'Keeps all text in one line' ],
-    [ 'rowSpan', 'number', 'Table.Row', 'No', 'How many rows this cell will cover' ],
-    [ 'stripe', 'number', 'Table.Row', 'No', 'Which stripe to use for this row' ]
+    [ 'className', 'string', 'No', 'Standard HTML class names' ],
+    [ 'columnStyleClass', 'string | React.CSSProperties', 'No', 'Class name to use for all columns in this row, overrides the columnClassStyle prop from Table' ],
+    [ 'colSpan', 'number', 'No', 'How many columns this cell will cover' ],
+    [ 'noWrap', 'boolean', 'No', 'Keeps all text in one line' ],
+    [ 'rowSpan', 'number', 'No', 'How many rows this cell will cover' ],
+    [ 'stripe', 'number', 'No', 'Which stripe to use for this row' ]
   ],
   //table col
   [
-    [ 'addClass', 'string', 'Table.Col', 'No', 'Additional class names to add to the column cell' ],
-    [ 'className', 'string', 'All', 'No', 'Standard HTML class names' ],
-    [ 'colSpan', 'number', 'Table.Col', 'No', 'How many columns this cell will cover' ],
-    [ 'noWrap', 'boolean', 'Table.Col', 'No', 'Keeps all text in one line' ],
-    [ 'rowSpan', 'number', 'Table.Col', 'No', 'How many rows this cell will cover' ],
-    [ 'stickyBottom', 'boolean', 'Table.Col', 'No', 'Always show on the bottom, even on overflow' ],
-    [ 'stickyLeft', 'boolean', 'Table.Col', 'No', 'Always show on the left, even on overflow' ],
-    [ 'stickyRight', 'boolean', 'Table.Col', 'No', 'Always show on the right, even on overflow' ],
-    [ 'stickyTop', 'boolean', 'Table.Col', 'No', 'Always show on the top, even on overflow' ],
-    [ 'style', 'CSS Object', 'All', 'No', 'Standard CSS input' ],
-    [ 'wrap1', 'boolean', 'Table.Col', 'No', 'Keeps the cell size a minimum of 100px' ],
-    [ 'wrap2', 'boolean', 'Table.Col', 'No', 'Keeps the cell size a minimum of 200px' ],
-    [ 'wrap3', 'boolean', 'Table.Col', 'No', 'Keeps the cell size a minimum of 300px' ],
-    [ 'wrap4', 'boolean', 'Table.Col', 'No', 'Keeps the cell size a minimum of 400px' ],
-    [ 'wrap5', 'boolean', 'Table.Col', 'No', 'Keeps the cell size a minimum of 500px' ]
+    [ 'addClassStyle', 'string | React.CSSProperties', 'No', 'Additional class names or styles to add to the column cell' ],
+    [ 'className', 'string', 'No', 'Standard HTML class names' ],
+    [ 'colSpan', 'number', 'No', 'How many columns this cell will cover' ],
+    [ 'noWrap', 'boolean', 'No', 'Keeps all text in one line' ],
+    [ 'rowSpan', 'number', 'No', 'How many rows this cell will cover' ],
+    [ 'stickyBottom', 'boolean', 'No', 'Always show on the bottom, even on overflow' ],
+    [ 'stickyLeft', 'boolean', 'No', 'Always show on the left, even on overflow' ],
+    [ 'stickyRight', 'boolean', 'No', 'Always show on the right, even on overflow' ],
+    [ 'stickyTop', 'boolean', 'No', 'Always show on the top, even on overflow' ],
+    [ 'style', 'CSS Object', 'No', 'Standard CSS input' ],
+    [ 'wrap1', 'boolean', 'No', 'Keeps the cell size a minimum of 100px' ],
+    [ 'wrap2', 'boolean', 'No', 'Keeps the cell size a minimum of 200px' ],
+    [ 'wrap3', 'boolean', 'No', 'Keeps the cell size a minimum of 300px' ],
+    [ 'wrap4', 'boolean', 'No', 'Keeps the cell size a minimum of 400px' ],
+    [ 'wrap5', 'boolean', 'No', 'Keeps the cell size a minimum of 500px' ]
   ],
   //table foot
   [
-    [ 'addClass', 'string', 'Tfoot', 'No', 'Additional class names to add to the foot cell' ],
-    [ 'className', 'string', 'All', 'No', 'Standard HTML class names' ],
-    [ 'colSpan', 'number', 'Tfoot', 'No', 'How many columns this cell will cover' ],
-    [ 'noWrap', 'boolean', 'Tfoot', 'No', 'Keeps all text in one line' ],
-    [ 'rowSpan', 'number', 'Tfoot', 'No', 'How many rows this cell will cover' ],
-    [ 'stickyBottom', 'boolean', 'Tfoot', 'No', 'Always show on the bottom, even on overflow' ],
-    [ 'stickyLeft', 'boolean', 'Tfoot', 'No', 'Always show on the left, even on overflow' ],
-    [ 'stickyRight', 'boolean', 'Tfoot', 'No', 'Always show on the right, even on overflow' ],
-    [ 'style', 'CSS Object', 'All', 'No', 'Standard CSS input' ],
-    [ 'wrap1', 'boolean', 'Tfoot', 'No', 'Keeps the cell size a minimum of 100px' ],
-    [ 'wrap2', 'boolean', 'Tfoot', 'No', 'Keeps the cell size a minimum of 200px' ],
-    [ 'wrap3', 'boolean', 'Tfoot', 'No', 'Keeps the cell size a minimum of 300px' ],
-    [ 'wrap4', 'boolean', 'Tfoot', 'No', 'Keeps the cell size a minimum of 400px' ],
-    [ 'wrap5', 'boolean', 'Tfoot', 'No', 'Keeps the cell size a minimum of 500px' ]
+    [ 'addClassStyle', 'string | React.CSSProperties', 'No', 'Additional class names or styles to add to the foot cell' ],
+    [ 'className', 'string', 'No', 'Standard HTML class names' ],
+    [ 'colSpan', 'number', 'No', 'How many columns this cell will cover' ],
+    [ 'noWrap', 'boolean', 'No', 'Keeps all text in one line' ],
+    [ 'rowSpan', 'number', 'No', 'How many rows this cell will cover' ],
+    [ 'stickyBottom', 'boolean', 'No', 'Always show on the bottom, even on overflow' ],
+    [ 'stickyLeft', 'boolean', 'No', 'Always show on the left, even on overflow' ],
+    [ 'stickyRight', 'boolean', 'No', 'Always show on the right, even on overflow' ],
+    [ 'style', 'CSS Object', 'No', 'Standard CSS input' ],
+    [ 'wrap1', 'boolean', 'No', 'Keeps the cell size a minimum of 100px' ],
+    [ 'wrap2', 'boolean', 'No', 'Keeps the cell size a minimum of 200px' ],
+    [ 'wrap3', 'boolean', 'No', 'Keeps the cell size a minimum of 300px' ],
+    [ 'wrap4', 'boolean', 'No', 'Keeps the cell size a minimum of 400px' ],
+    [ 'wrap5', 'boolean', 'No', 'Keeps the cell size a minimum of 500px' ]
   ],
   //table rule
   [
-    [ 'width', 'string', 'Table.Rule', 'Yes', 'Width of the rule, e.g. 50%, 100px, etc.' ]
+    [ 'width', 'string', 'Yes', 'Width of the rule, e.g. 50%, 100px, etc.' ]
   ],
 ];
 
@@ -140,100 +134,100 @@ const examples = [
 //1
 `<Table 
   className="w-full"
-  cols={[ 'theme-bg-2', 'theme-bg-1' ]}
-  heads="theme-bg-3"
+  columnClassStyle={[ 'theme-bg-2', 'theme-bg-1' ]}
+  headClassStyle="theme-bg-3"
 >
-  <Table.Head addClass="text-left">ID</Table.Head>
-  <Table.Head addClass="text-left">Name</Table.Head>
-  <Table.Head addClass="text-center">Active</Table.Head>
-  <Table.Head addClass="text-right">Created</Table.Head>
-  <Table.Head addClass="text-right">Updated</Table.Head>
+  <Table.Head addClassStyle="text-left">ID</Table.Head>
+  <Table.Head addClassStyle="text-left">Name</Table.Head>
+  <Table.Head addClassStyle="text-center">Active</Table.Head>
+  <Table.Head addClassStyle="text-right">Created</Table.Head>
+  <Table.Head addClassStyle="text-right">Updated</Table.Head>
   <Table.Row stripe={0}>
     <Table.Col>1</Table.Col>
     <Table.Col>John Doe</Table.Col>
-    <Table.Col addClass="text-center">Yes</Table.Col>
-    <Table.Col addClass="text-right">2025-01-02</Table.Col>
-    <Table.Col addClass="text-right">2025-03-04</Table.Col>
+    <Table.Col addClassStyle="text-center">Yes</Table.Col>
+    <Table.Col addClassStyle="text-right">2025-01-02</Table.Col>
+    <Table.Col addClassStyle="text-right">2025-03-04</Table.Col>
   </Table.Row>
   <Table.Row stripe={1}>
     <Table.Col>2</Table.Col>
     <Table.Col>Jane Doe</Table.Col>
-    <Table.Col addClass="text-center">No</Table.Col>
-    <Table.Col addClass="text-right">2025-04-05</Table.Col>
-    <Table.Col addClass="text-right">2025-05-06</Table.Col>
+    <Table.Col addClassStyle="text-center">No</Table.Col>
+    <Table.Col addClassStyle="text-right">2025-04-05</Table.Col>
+    <Table.Col addClassStyle="text-right">2025-05-06</Table.Col>
   </Table.Row>
   <Table.Row stripe={2}>
     <Table.Col>3</Table.Col>
     <Table.Col>Jack Doe</Table.Col>
-    <Table.Col addClass="text-center">Yes</Table.Col>
-    <Table.Col addClass="text-right">2025-07-08</Table.Col>
-    <Table.Col addClass="text-right">2025-09-01</Table.Col>
+    <Table.Col addClassStyle="text-center">Yes</Table.Col>
+    <Table.Col addClassStyle="text-right">2025-07-08</Table.Col>
+    <Table.Col addClassStyle="text-right">2025-09-01</Table.Col>
   </Table.Row>
 </Table>`,
 //2
-`<Table heads="theme-bg-3 border-t-0!" className="w-full">
-  <Table.Head addClass="text-left" wrap1>ID</Table.Head>
-  <Table.Head addClass="text-left" wrap2>Name</Table.Head>
-  <Table.Head addClass="text-center">Active</Table.Head>
-  <Table.Head addClass="text-right">Created</Table.Head>
-  <Table.Head addClass="text-right">Updated</Table.Head>
-  <Table.Row cols="theme-bg-2">
+`<Table headClassStyle="theme-bg-3 border-t-0!" className="w-full">
+  <Table.Head addClassStyle="text-left" wrap1>ID</Table.Head>
+  <Table.Head addClassStyle="text-left" wrap2>Name</Table.Head>
+  <Table.Head addClassStyle="text-center">Active</Table.Head>
+  <Table.Head addClassStyle="text-right">Created</Table.Head>
+  <Table.Head addClassStyle="text-right">Updated</Table.Head>
+  <Table.Row columnClassStyle="theme-bg-2">
     <Table.Col>1</Table.Col>
     <Table.Col>John Doe</Table.Col>
-    <Table.Col addClass="text-center">Yes</Table.Col>
-    <Table.Col addClass="text-right" noWrap>January 02, 2025</Table.Col>
-    <Table.Col addClass="text-right" noWrap>March 04, 2025</Table.Col>
+    <Table.Col addClassStyle="text-center">Yes</Table.Col>
+    <Table.Col addClassStyle="text-right" noWrap>January 02, 2025</Table.Col>
+    <Table.Col addClassStyle="text-right" noWrap>March 04, 2025</Table.Col>
   </Table.Row>
-  <Table.Row cols="theme-bg-1">
+  <Table.Row columnClassStyle="theme-bg-1">
     <Table.Col>2</Table.Col>
     <Table.Col>Jane Doe</Table.Col>
-    <Table.Col addClass="text-center">No</Table.Col>
-    <Table.Col addClass="text-right" noWrap>April 05, 2025</Table.Col>
-    <Table.Col addClass="text-right" noWrap>May 06, 2025</Table.Col>
+    <Table.Col addClassStyle="text-center">No</Table.Col>
+    <Table.Col addClassStyle="text-right" noWrap>April 05, 2025</Table.Col>
+    <Table.Col addClassStyle="text-right" noWrap>May 06, 2025</Table.Col>
   </Table.Row>
-  <Table.Row cols="theme-bg-2">
+  <Table.Row columnClassStyle="theme-bg-2">
     <Table.Col>3</Table.Col>
     <Table.Col>Jack Doe</Table.Col>
-    <Table.Col addClass="text-center">Yes</Table.Col>
-    <Table.Col addClass="text-right" noWrap>July 08, 2025</Table.Col>
-    <Table.Col addClass="text-right" noWrap>September 01, 2025</Table.Col>
+    <Table.Col addClassStyle="text-center">Yes</Table.Col>
+    <Table.Col addClassStyle="text-right" noWrap>July 08, 2025</Table.Col>
+    <Table.Col addClassStyle="text-right" noWrap>September 01, 2025</Table.Col>
   </Table.Row>
 </Table>`,
 //3
-`<Table className="w-full" heads="theme-bg-3 border-t-0!">
-    <Table.Head addClass="text-left" stickyLeft stickyTop>ID</Table.Head>
-    <Table.Head addClass="text-left" noWrap stickyTop>First Name</Table.Head>
-    <Table.Head addClass="text-left" noWrap stickyTop>Last Name</Table.Head>
-    <Table.Head addClass="text-center" stickyTop>Active</Table.Head>
-    <Table.Head addClass="text-center" stickyTop>Role</Table.Head>
-    <Table.Head addClass="text-center" stickyTop>Rating</Table.Head>
-    <Table.Head addClass="text-right" stickyTop>Created</Table.Head>
-    <Table.Head addClass="text-right" stickyTop>Updated</Table.Head>
-    <Table.Head addClass="text-center" stickyRight stickyTop>Actions</Table.Head>
-    <Table.Row cols="theme-bg-1">
+`<Table className="w-full" headClassStyle="theme-bg-3 border-t-0!">
+    <Table.Head addClassStyle="text-left" stickyLeft stickyTop>ID</Table.Head>
+    <Table.Head addClassStyle="text-left" noWrap stickyTop>First Name</Table.Head>
+    <Table.Head addClassStyle="text-left" noWrap stickyTop>Last Name</Table.Head>
+    <Table.Head addClassStyle="text-center" stickyTop>Active</Table.Head>
+    <Table.Head addClassStyle="text-center" stickyTop>Role</Table.Head>
+    <Table.Head addClassStyle="text-center" stickyTop>Rating</Table.Head>
+    <Table.Head addClassStyle="text-right" stickyTop>Created</Table.Head>
+    <Table.Head addClassStyle="text-right" stickyTop>Updated</Table.Head>
+    <Table.Head addClassStyle="text-center" stickyRight stickyTop>Actions</Table.Head>
+    <Table.Row columnClassStyle="theme-bg-1">
       <Table.Col stickyLeft>1</Table.Col>
       <Table.Col noWrap>John</Table.Col>
       <Table.Col noWrap>Doe</Table.Col>
-      <Table.Col addClass="text-center">Yes</Table.Col>
-      <Table.Col addClass="text-center">Admin</Table.Col>
-      <Table.Col addClass="text-center">⭐⭐⭐⭐⭐</Table.Col>
-      <Table.Col addClass="text-right" noWrap>January 02, 2025</Table.Col>
-      <Table.Col addClass="text-right" noWrap>March 04, 2025</Table.Col>
-      <Table.Col addClass="text-center" noWrap stickyRight>
+      <Table.Col addClassStyle="text-center">Yes</Table.Col>
+      <Table.Col addClassStyle="text-center">Admin</Table.Col>
+      <Table.Col addClassStyle="text-center">⭐⭐⭐⭐⭐</Table.Col>
+      <Table.Col addClassStyle="text-right" noWrap>January 02, 2025</Table.Col>
+      <Table.Col addClassStyle="text-right" noWrap>March 04, 2025</Table.Col>
+      <Table.Col addClassStyle="text-center" noWrap stickyRight>
         <i className="fas fa-edit mr-2 theme-info"></i>
         <i className="fas fa-trash-alt theme-error"></i>
       </Table.Col>
     </Table.Row>
-    <Table.Row cols="theme-bg-1">
+    <Table.Row columnClassStyle="theme-bg-1">
       <Table.Col stickyLeft>2</Table.Col>
       <Table.Col noWrap>Jane</Table.Col>
       <Table.Col noWrap>Doe</Table.Col>
-      <Table.Col addClass="text-center">No</Table.Col>
-      <Table.Col addClass="text-center">User</Table.Col>
-      <Table.Col addClass="text-center">⭐⭐⭐⭐</Table.Col>
-      <Table.Col addClass="text-right" noWrap>April 05, 2025</Table.Col>
-      <Table.Col addClass="text-right" noWrap>May 06, 2025</Table.Col>
-      <Table.Col addClass="text-center" noWrap stickyRight>
+      <Table.Col addClassStyle="text-center">No</Table.Col>
+      <Table.Col addClassStyle="text-center">User</Table.Col>
+      <Table.Col addClassStyle="text-center">⭐⭐⭐⭐</Table.Col>
+      <Table.Col addClassStyle="text-right" noWrap>April 05, 2025</Table.Col>
+      <Table.Col addClassStyle="text-right" noWrap>May 06, 2025</Table.Col>
+      <Table.Col addClassStyle="text-center" noWrap stickyRight>
         <i className="fas fa-edit mr-2 theme-info"></i>
         <i className="fas fa-trash-alt theme-error"></i>
       </Table.Col>
@@ -243,6 +237,21 @@ const examples = [
 
 //--------------------------------------------------------------------//
 // Components
+
+/**
+ * Crumbs component
+ */
+export function Crumbs() {
+  return (
+    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+      <Bread.Slicer />
+      <Bread.Crumb icon="icons" href="/component">
+        Components
+      </Bread.Crumb>
+      <Bread.Crumb>Table</Bread.Crumb>
+    </Bread>
+  );
+};
 
 /**
  * Aside right menu component
@@ -333,34 +342,34 @@ export function Examples() {
         <Preview.Example>
           <Table 
             className="w-full"
-            cols={[ 'theme-bg-2', 'theme-bg-1' ]}
-            heads="theme-bg-3"
+            columnClassStyle={[ 'theme-bg-2', 'theme-bg-1' ]}
+            headClassStyle="theme-bg-3"
           >
-            <Table.Head addClass="text-left">ID</Table.Head>
-            <Table.Head addClass="text-left">Name</Table.Head>
-            <Table.Head addClass="text-center">Active</Table.Head>
-            <Table.Head addClass="text-right">Created</Table.Head>
-            <Table.Head addClass="text-right">Updated</Table.Head>
+            <Table.Head addClassStyle="text-left">ID</Table.Head>
+            <Table.Head addClassStyle="text-left">Name</Table.Head>
+            <Table.Head addClassStyle="text-center">Active</Table.Head>
+            <Table.Head addClassStyle="text-right">Created</Table.Head>
+            <Table.Head addClassStyle="text-right">Updated</Table.Head>
             <Table.Row stripe={0}>
               <Table.Col>1</Table.Col>
               <Table.Col>John Doe</Table.Col>
-              <Table.Col addClass="text-center">Yes</Table.Col>
-              <Table.Col addClass="text-right">2025-01-02</Table.Col>
-              <Table.Col addClass="text-right">2025-03-04</Table.Col>
+              <Table.Col addClassStyle="text-center">Yes</Table.Col>
+              <Table.Col addClassStyle="text-right">2025-01-02</Table.Col>
+              <Table.Col addClassStyle="text-right">2025-03-04</Table.Col>
             </Table.Row>
             <Table.Row stripe={1}>
               <Table.Col>2</Table.Col>
               <Table.Col>Jane Doe</Table.Col>
-              <Table.Col addClass="text-center">No</Table.Col>
-              <Table.Col addClass="text-right">2025-04-05</Table.Col>
-              <Table.Col addClass="text-right">2025-05-06</Table.Col>
+              <Table.Col addClassStyle="text-center">No</Table.Col>
+              <Table.Col addClassStyle="text-right">2025-04-05</Table.Col>
+              <Table.Col addClassStyle="text-right">2025-05-06</Table.Col>
             </Table.Row>
             <Table.Row stripe={2}>
               <Table.Col>3</Table.Col>
               <Table.Col>Jack Doe</Table.Col>
-              <Table.Col addClass="text-center">Yes</Table.Col>
-              <Table.Col addClass="text-right">2025-07-08</Table.Col>
-              <Table.Col addClass="text-right">2025-09-01</Table.Col>
+              <Table.Col addClassStyle="text-center">Yes</Table.Col>
+              <Table.Col addClassStyle="text-right">2025-07-08</Table.Col>
+              <Table.Col addClassStyle="text-right">2025-09-01</Table.Col>
             </Table.Row>
           </Table>
         </Preview.Example>
@@ -373,32 +382,32 @@ export function Examples() {
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example>
-          <Table heads="theme-bg-3 border-t-0!" className="w-full">
-            <Table.Head addClass="text-left" wrap1>ID</Table.Head>
-            <Table.Head addClass="text-left" wrap2>Name</Table.Head>
-            <Table.Head addClass="text-center">Active</Table.Head>
-            <Table.Head addClass="text-right">Created</Table.Head>
-            <Table.Head addClass="text-right">Updated</Table.Head>
-            <Table.Row cols="theme-bg-2">
+          <Table headClassStyle="theme-bg-3 border-t-0!" className="w-full">
+            <Table.Head addClassStyle="text-left" wrap1>ID</Table.Head>
+            <Table.Head addClassStyle="text-left" wrap2>Name</Table.Head>
+            <Table.Head addClassStyle="text-center">Active</Table.Head>
+            <Table.Head addClassStyle="text-right">Created</Table.Head>
+            <Table.Head addClassStyle="text-right">Updated</Table.Head>
+            <Table.Row columnClassStyle="theme-bg-2">
               <Table.Col>1</Table.Col>
               <Table.Col>John Doe</Table.Col>
-              <Table.Col addClass="text-center">Yes</Table.Col>
-              <Table.Col addClass="text-right" noWrap>January 02, 2025</Table.Col>
-              <Table.Col addClass="text-right" noWrap>March 04, 2025</Table.Col>
+              <Table.Col addClassStyle="text-center">Yes</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>January 02, 2025</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>March 04, 2025</Table.Col>
             </Table.Row>
-            <Table.Row cols="theme-bg-1">
+            <Table.Row columnClassStyle="theme-bg-1">
               <Table.Col>2</Table.Col>
               <Table.Col>Jane Doe</Table.Col>
-              <Table.Col addClass="text-center">No</Table.Col>
-              <Table.Col addClass="text-right" noWrap>April 05, 2025</Table.Col>
-              <Table.Col addClass="text-right" noWrap>May 06, 2025</Table.Col>
+              <Table.Col addClassStyle="text-center">No</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>April 05, 2025</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>May 06, 2025</Table.Col>
             </Table.Row>
-            <Table.Row cols="theme-bg-2">
+            <Table.Row columnClassStyle="theme-bg-2">
               <Table.Col>3</Table.Col>
               <Table.Col>Jack Doe</Table.Col>
-              <Table.Col addClass="text-center">Yes</Table.Col>
-              <Table.Col addClass="text-right" noWrap>July 08, 2025</Table.Col>
-              <Table.Col addClass="text-right" noWrap>September 01, 2025</Table.Col>
+              <Table.Col addClassStyle="text-center">Yes</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>July 08, 2025</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>September 01, 2025</Table.Col>
             </Table.Row>
           </Table>
         </Preview.Example>
@@ -411,96 +420,96 @@ export function Examples() {
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example>
-          <Table className="w-full" heads="theme-bg-3 border-t-0!">
-            <Table.Head addClass="text-left" stickyLeft stickyTop>ID</Table.Head>
-            <Table.Head addClass="text-left" noWrap stickyTop>First Name</Table.Head>
-            <Table.Head addClass="text-left" noWrap stickyTop>Last Name</Table.Head>
-            <Table.Head addClass="text-center" stickyTop>Active</Table.Head>
-            <Table.Head addClass="text-center" stickyTop>Role</Table.Head>
-            <Table.Head addClass="text-center" stickyTop>Rating</Table.Head>
-            <Table.Head addClass="text-right" stickyTop>Created</Table.Head>
-            <Table.Head addClass="text-right" stickyTop>Updated</Table.Head>
-            <Table.Head addClass="text-center" stickyRight stickyTop>Actions</Table.Head>
-            <Table.Row cols="theme-bg-1">
+          <Table className="w-full" headClassStyle="theme-bg-3 border-t-0!">
+            <Table.Head addClassStyle="text-left" stickyLeft stickyTop>ID</Table.Head>
+            <Table.Head addClassStyle="text-left" noWrap stickyTop>First Name</Table.Head>
+            <Table.Head addClassStyle="text-left" noWrap stickyTop>Last Name</Table.Head>
+            <Table.Head addClassStyle="text-center" stickyTop>Active</Table.Head>
+            <Table.Head addClassStyle="text-center" stickyTop>Role</Table.Head>
+            <Table.Head addClassStyle="text-center" stickyTop>Rating</Table.Head>
+            <Table.Head addClassStyle="text-right" stickyTop>Created</Table.Head>
+            <Table.Head addClassStyle="text-right" stickyTop>Updated</Table.Head>
+            <Table.Head addClassStyle="text-center" stickyRight stickyTop>Actions</Table.Head>
+            <Table.Row columnClassStyle="theme-bg-1">
               <Table.Col stickyLeft>1</Table.Col>
               <Table.Col noWrap>John</Table.Col>
               <Table.Col noWrap>Doe</Table.Col>
-              <Table.Col addClass="text-center">Yes</Table.Col>
-              <Table.Col addClass="text-center">Admin</Table.Col>
-              <Table.Col addClass="text-center">⭐⭐⭐⭐⭐</Table.Col>
-              <Table.Col addClass="text-right" noWrap>January 02, 2025</Table.Col>
-              <Table.Col addClass="text-right" noWrap>March 04, 2025</Table.Col>
-              <Table.Col addClass="text-center" noWrap stickyRight>
+              <Table.Col addClassStyle="text-center">Yes</Table.Col>
+              <Table.Col addClassStyle="text-center">Admin</Table.Col>
+              <Table.Col addClassStyle="text-center">⭐⭐⭐⭐⭐</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>January 02, 2025</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>March 04, 2025</Table.Col>
+              <Table.Col addClassStyle="text-center" noWrap stickyRight>
                 <i className="fas fa-edit mr-2 theme-info"></i>
                 <i className="fas fa-trash-alt theme-error"></i>
               </Table.Col>
             </Table.Row>
-            <Table.Row cols="theme-bg-1">
+            <Table.Row columnClassStyle="theme-bg-1">
               <Table.Col stickyLeft>2</Table.Col>
               <Table.Col noWrap>Jane</Table.Col>
               <Table.Col noWrap>Doe</Table.Col>
-              <Table.Col addClass="text-center">No</Table.Col>
-              <Table.Col addClass="text-center">User</Table.Col>
-              <Table.Col addClass="text-center">⭐⭐⭐⭐</Table.Col>
-              <Table.Col addClass="text-right" noWrap>April 05, 2025</Table.Col>
-              <Table.Col addClass="text-right" noWrap>May 06, 2025</Table.Col>
-              <Table.Col addClass="text-center" noWrap stickyRight>
+              <Table.Col addClassStyle="text-center">No</Table.Col>
+              <Table.Col addClassStyle="text-center">User</Table.Col>
+              <Table.Col addClassStyle="text-center">⭐⭐⭐⭐</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>April 05, 2025</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>May 06, 2025</Table.Col>
+              <Table.Col addClassStyle="text-center" noWrap stickyRight>
                 <i className="fas fa-edit mr-2 theme-info"></i>
                 <i className="fas fa-trash-alt theme-error"></i>
               </Table.Col>
             </Table.Row>
-            <Table.Row cols="theme-bg-1">
+            <Table.Row columnClassStyle="theme-bg-1">
               <Table.Col stickyLeft>3</Table.Col>
               <Table.Col noWrap>Jack</Table.Col>
               <Table.Col noWrap>Doe</Table.Col>
-              <Table.Col addClass="text-center">Yes</Table.Col>
-              <Table.Col addClass="text-center">Admin</Table.Col>
-              <Table.Col addClass="text-center">⭐⭐</Table.Col>
-              <Table.Col addClass="text-right" noWrap>July 08, 2025</Table.Col>
-              <Table.Col addClass="text-right" noWrap>September 01, 2025</Table.Col>
-              <Table.Col addClass="text-center" noWrap stickyRight>
+              <Table.Col addClassStyle="text-center">Yes</Table.Col>
+              <Table.Col addClassStyle="text-center">Admin</Table.Col>
+              <Table.Col addClassStyle="text-center">⭐⭐</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>July 08, 2025</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>September 01, 2025</Table.Col>
+              <Table.Col addClassStyle="text-center" noWrap stickyRight>
                 <i className="fas fa-edit mr-2 theme-info"></i>
                 <i className="fas fa-trash-alt theme-error"></i>
               </Table.Col>
             </Table.Row>
-            <Table.Row cols="theme-bg-1">
+            <Table.Row columnClassStyle="theme-bg-1">
               <Table.Col stickyLeft>4</Table.Col>
               <Table.Col noWrap>John</Table.Col>
               <Table.Col noWrap>Doe</Table.Col>
-              <Table.Col addClass="text-center">Yes</Table.Col>
-              <Table.Col addClass="text-center">Guest</Table.Col>
-              <Table.Col addClass="text-center">⭐</Table.Col>
-              <Table.Col addClass="text-right" noWrap>January 02, 2025</Table.Col>
-              <Table.Col addClass="text-right" noWrap>March 04, 2025</Table.Col>
-              <Table.Col addClass="text-center" noWrap stickyRight>
+              <Table.Col addClassStyle="text-center">Yes</Table.Col>
+              <Table.Col addClassStyle="text-center">Guest</Table.Col>
+              <Table.Col addClassStyle="text-center">⭐</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>January 02, 2025</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>March 04, 2025</Table.Col>
+              <Table.Col addClassStyle="text-center" noWrap stickyRight>
                 <i className="fas fa-edit mr-2 theme-info"></i>
                 <i className="fas fa-trash-alt theme-error"></i>
               </Table.Col>
             </Table.Row>
-            <Table.Row cols="theme-bg-1">
+            <Table.Row columnClassStyle="theme-bg-1">
               <Table.Col stickyLeft>5</Table.Col>
               <Table.Col noWrap>Jane</Table.Col>
               <Table.Col noWrap>Doe</Table.Col>
-              <Table.Col addClass="text-center">No</Table.Col>
-              <Table.Col addClass="text-center">Manager</Table.Col>
-              <Table.Col addClass="text-center">⭐⭐⭐</Table.Col>
-              <Table.Col addClass="text-right" noWrap>April 05, 2025</Table.Col>
-              <Table.Col addClass="text-right" noWrap>May 06, 2025</Table.Col>
-              <Table.Col addClass="text-center" noWrap stickyRight>
+              <Table.Col addClassStyle="text-center">No</Table.Col>
+              <Table.Col addClassStyle="text-center">Manager</Table.Col>
+              <Table.Col addClassStyle="text-center">⭐⭐⭐</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>April 05, 2025</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>May 06, 2025</Table.Col>
+              <Table.Col addClassStyle="text-center" noWrap stickyRight>
                 <i className="fas fa-edit mr-2 theme-info"></i>
                 <i className="fas fa-trash-alt theme-error"></i>
               </Table.Col>
             </Table.Row>
-            <Table.Row cols="theme-bg-1">
+            <Table.Row columnClassStyle="theme-bg-1">
               <Table.Col stickyLeft>6</Table.Col>
               <Table.Col noWrap>Jack</Table.Col>
               <Table.Col noWrap>Doe</Table.Col>
-              <Table.Col addClass="text-center">Yes</Table.Col>
-              <Table.Col addClass="text-center">User</Table.Col>
-              <Table.Col addClass="text-center">⭐⭐⭐⭐⭐</Table.Col>
-              <Table.Col addClass="text-right" noWrap>July 08, 2025</Table.Col>
-              <Table.Col addClass="text-right" noWrap>September 01, 2025</Table.Col>
-              <Table.Col addClass="text-center" noWrap stickyRight>
+              <Table.Col addClassStyle="text-center">Yes</Table.Col>
+              <Table.Col addClassStyle="text-center">User</Table.Col>
+              <Table.Col addClassStyle="text-center">⭐⭐⭐⭐⭐</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>July 08, 2025</Table.Col>
+              <Table.Col addClassStyle="text-right" noWrap>September 01, 2025</Table.Col>
+              <Table.Col addClassStyle="text-center" noWrap stickyRight>
                 <i className="fas fa-edit mr-2 theme-info"></i>
                 <i className="fas fa-trash-alt theme-error"></i>
               </Table.Col>
@@ -681,7 +690,7 @@ export function Page() {
       <LayoutPanel pathname="/component/table">
         <main className="flex flex-col h-full w-full">
           <div className="p-3 theme-bg-2">
-            <Crumbs crumbs={crumbs} />
+            <Crumbs />
           </div>
           <section className="flex-grow relative h-full">
             <Menu />

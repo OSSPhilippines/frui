@@ -6,8 +6,7 @@ import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import type { Crumb } from 'components/element/Crumbs.js';
-import Crumbs from 'components/element/Crumbs.js';
+import Bread from 'components/element/Bread.js';
 import Tabs from 'components/element/Tabs.js';
 
 //plugins
@@ -25,40 +24,35 @@ import {
 //--------------------------------------------------------------------//
 // Constants
 
-const crumbs: Crumb[] = [
-  { icon: 'icons', label: 'Components', href: '/component' },
-  { label: 'Tabs' }
-];
-
 const props = [
   //tabs
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'active', 'ClassStyleProp', 'No', 'Class/style to apply to active tab' ],
+    [ 'activeClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to active tab' ],
     [ 'onChange', '(value: string) => void', 'No', 'Change value handler' ],
-    [ 'contents', 'ClassStyleProp', 'No', 'Class/style to apply to each content' ],
+    [ 'contentClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to each content' ],
     [ 'defaultValue', 'string', 'No', 'Default active tab value (uncontrolled)' ],
     [ 'style', 'React.CSSProperties', 'No', 'Standard HTML styles' ],
-    [ 'tabs', 'ClassStyleProp', 'No', 'Class/style to apply to each tab' ],
+    [ 'tabClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to each tab' ],
     [ 'value', 'string', 'No', 'Controlled active tab value' ]
   ],
   //tab head
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'active', 'ClassStyleProp', 'No', 'Class/style to apply to active tab' ],
+    [ 'activeClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to active tab' ],
     [ 'style', 'React.CSSProperties', 'No', 'Standard HTML styles' ],
-    [ 'tabs', 'ClassStyleProp', 'No', 'Class/style to apply to each tab' ],
+    [ 'tabClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to each tab' ],
   ],
   //tab body
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
     [ 'style', 'React.CSSProperties', 'No', 'Standard HTML styles' ],
-    [ 'contents', 'ClassStyleProp', 'No', 'Class/style to apply to each content' ],
+    [ 'contentClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to each content' ],
   ],
   //tab label
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'active', 'ClassStyleProp', 'No', 'Class/style to apply if active' ],
+    [ 'activeClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply if active' ],
     [ 'value', 'string', 'Yes', 'Unique name for the tab' ],
     [ 'style', 'React.CSSProperties', 'No', 'Standard HTML styles' ],
   ],
@@ -84,9 +78,9 @@ const examples = [
 //0
 `<Tabs 
   defaultValue="tab1"
-  tabs="border border-b-0 p-2 theme-bc-3 cursor-pointer" 
-  active="border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white"
-  contents="border theme-bc-3 p-4"
+  tabClassStyle="border border-b-0 p-2 theme-bc-3 cursor-pointer" 
+  activeClassStyle="border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white"
+  contentClassStyle="border theme-bc-3 p-4"
 >
   <Tabs.Head className="flex">
     <Tabs.Label value="tab1">Tab 1</Tabs.Label>
@@ -101,8 +95,8 @@ const examples = [
 `<Tabs 
   className="flex"
   defaultValue="tab1"
-  tabs="border border-r-0 p-2 theme-bc-3 cursor-pointer" 
-  active="border border-r-0 p-2 theme-bc-3 theme-bg-3 text-white"
+  tabClassStyle="border border-r-0 p-2 theme-bc-3 cursor-pointer" 
+  activeClassStyle="border border-r-0 p-2 theme-bc-3 theme-bg-3 text-white"
 >
   <Tabs.Head className="w-32">
     <Tabs.Label value="tab1">Tab 1</Tabs.Label>
@@ -117,8 +111,8 @@ const examples = [
 `<Tabs 
   className="flex"
   defaultValue="tab1"
-  tabs="border border-l-0 p-2 theme-bc-3 cursor-pointer" 
-  active="border border-l-0 p-2 theme-bc-3 theme-bg-3 text-white"
+  tabClassStyle="border border-l-0 p-2 theme-bc-3 cursor-pointer" 
+  activeClassStyle="border border-l-0 p-2 theme-bc-3 theme-bg-3 text-white"
 >
   <Tabs.Body className="flex-grow border theme-bc-3 p-4">
     <Tabs.Content value="tab1">Content for Tab 1</Tabs.Content>
@@ -132,9 +126,9 @@ const examples = [
 //3
 `<Tabs 
   defaultValue="tab1"
-  tabs="border border-t-0 p-2 theme-bc-3 cursor-pointer" 
-  active="border border-t-0 p-2 theme-bg-3 text-white"
-  contents="border theme-bc-3 p-4"
+  tabClassStyle="border border-t-0 p-2 theme-bc-3 cursor-pointer" 
+  activeClassStyle="border border-t-0 p-2 theme-bg-3 text-white"
+  contentClassStyle="border theme-bc-3 p-4"
 >
   <Tabs.Body>
     <Tabs.Content value="tab1">Content for Tab 1</Tabs.Content>
@@ -149,13 +143,13 @@ const examples = [
 `<Tabs defaultValue="tab1">
   <Tabs.Head 
     className="flex"
-    tabs="border border-b-0 p-2 theme-bc-3 cursor-pointer" 
-    active="border border-b-0 p-2 theme-bg-3 text-white"
+    tabClassStyle="border border-b-0 p-2 theme-bc-3 cursor-pointer" 
+    activeClassStyle="border border-b-0 p-2 theme-bg-3 text-white"
   >
     <Tabs.Label value="tab1">Tab 1</Tabs.Label>
     <Tabs.Label value="tab2">Tab 2</Tabs.Label>
   </Tabs.Head>
-  <Tabs.Body contents="border theme-bc-3 p-4">
+  <Tabs.Body contentClassStyle="border theme-bc-3 p-4">
     <Tabs.Content value="tab1">
       Content for Tab 1
     </Tabs.Content>
@@ -169,14 +163,14 @@ const examples = [
   <Tabs.Head className="flex">
     <Tabs.Label 
       className="border border-b-0 p-2 theme-bc-3 cursor-pointer"
-      active="border border-b-0 p-2 theme-bg-3 text-white" 
+      activeClassStyle="border border-b-0 p-2 theme-bg-3 text-white" 
       value="tab1"
     >
       Tab 1
     </Tabs.Label>
     <Tabs.Label 
       className="border border-b-0 p-2 theme-bc-3 cursor-pointer"
-      active="border border-b-0 p-2 theme-bg-3 text-white" 
+      activeClassStyle="border border-b-0 p-2 theme-bg-3 text-white" 
       value="tab2"
     >
       Tab 2
@@ -203,9 +197,9 @@ return (
   <div>
     <Tabs 
       value={tabs[tab]}
-      tabs="border border-b-0 p-2 theme-bc-3 cursor-pointer" 
-      active="border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white"
-      contents="border theme-bc-3 p-4"
+      tabClassStyle="border border-b-0 p-2 theme-bc-3 cursor-pointer" 
+      activeClassStyle="border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white"
+      contentClassStyle="border theme-bc-3 p-4"
     >
       <Tabs.Head className="flex">
         <Tabs.Label value="tab1">Tab 1</Tabs.Label>
@@ -243,9 +237,9 @@ return (
 //7
 `<Tabs 
   defaultValue="tab1"
-  tabs="border border-b-0 p-2 theme-bc-3 cursor-pointer" 
-  active="border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white"
-  contents="border theme-bc-3 p-4"
+  tabClassStyle="border border-b-0 p-2 theme-bc-3 cursor-pointer" 
+  activeClassStyle="border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white"
+  contentClassStyle="border theme-bc-3 p-4"
 >
   <Tabs.Head className="flex">
     <Tabs.Label value="tab1">
@@ -270,6 +264,21 @@ return (
 
 //--------------------------------------------------------------------//
 // Components
+
+/**
+ * Crumbs component
+ */
+export function Crumbs() {
+  return (
+    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+      <Bread.Slicer />
+      <Bread.Crumb icon="icons" href="/component">
+        Components
+      </Bread.Crumb>
+      <Bread.Crumb>Tabs</Bread.Crumb>
+    </Bread>
+  );
+};
 
 /**
  * Aside right menu component
@@ -331,9 +340,9 @@ export function Examples() {
         <Preview.Example center padding>
           <Tabs 
             defaultValue="tab1"
-            tabs="border border-b-0 p-2 theme-bc-3 cursor-pointer" 
-            active="border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white"
-            contents="border theme-bc-3 p-4"
+            tabClassStyle="border border-b-0 p-2 theme-bc-3 cursor-pointer" 
+            activeClassStyle="border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white"
+            contentClassStyle="border theme-bc-3 p-4"
           >
             <Tabs.Head className="flex">
               <Tabs.Label value="tab1">Tab 1</Tabs.Label>
@@ -357,8 +366,8 @@ export function Examples() {
           <Tabs 
             className="flex"
             defaultValue="tab1"
-            tabs="border border-r-0 p-2 theme-bc-3 cursor-pointer" 
-            active="border border-r-0 p-2 theme-bc-3 theme-bg-3 text-white"
+            tabClassStyle="border border-r-0 p-2 theme-bc-3 cursor-pointer" 
+            activeClassStyle="border border-r-0 p-2 theme-bc-3 theme-bg-3 text-white"
           >
             <Tabs.Head className="w-32">
               <Tabs.Label value="tab1">Tab 1</Tabs.Label>
@@ -382,8 +391,8 @@ export function Examples() {
           <Tabs 
             className="flex"
             defaultValue="tab1"
-            tabs="border border-l-0 p-2 theme-bc-3 cursor-pointer" 
-            active="border border-l-0 p-2 theme-bc-3 theme-bg-3 text-white"
+            tabClassStyle="border border-l-0 p-2 theme-bc-3 cursor-pointer" 
+            activeClassStyle="border border-l-0 p-2 theme-bc-3 theme-bg-3 text-white"
           >
             <Tabs.Body className="flex-grow border theme-bc-3 p-4">
               <Tabs.Content value="tab1">Content for Tab 1</Tabs.Content>
@@ -406,9 +415,9 @@ export function Examples() {
         <Preview.Example center padding>
           <Tabs 
             defaultValue="tab1"
-            tabs="border border-t-0 p-2 theme-bc-3 cursor-pointer" 
-            active="border border-t-0 p-2 theme-bg-3 text-white"
-            contents="border theme-bc-3 p-4"
+            tabClassStyle="border border-t-0 p-2 theme-bc-3 cursor-pointer" 
+            activeClassStyle="border border-t-0 p-2 theme-bg-3 text-white"
+            contentClassStyle="border theme-bc-3 p-4"
           >
             <Tabs.Body>
               <Tabs.Content value="tab1">Content for Tab 1</Tabs.Content>
@@ -476,8 +485,9 @@ export function Body() {
         <p className="py-2">
           <Translate>
             You can manage the styles of the tabs by passing class names to
-            the <C value="tabs" />, <C value="active" />, and 
-            <C value="contents" /> props in the <C value="Tabs" /> component.
+            the <C value="tabClassStyle" />, <C value="activeClassStyle" />, 
+            and <C value="contentClassStyle" /> props in 
+            the <C value="Tabs" /> component.
           </Translate>
         </p>
         <Code className="my-4" language="typescript">{examples[0]}</Code>
@@ -518,9 +528,9 @@ export function Body() {
           <Preview.Example center padding>
             <Tabs 
               value={tabs[tab]}
-              tabs="border border-b-0 p-2 theme-bc-3 cursor-pointer" 
-              active="border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white"
-              contents="border theme-bc-3 p-4"
+              tabClassStyle="border border-b-0 p-2 theme-bc-3 cursor-pointer" 
+              activeClassStyle="border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white"
+              contentClassStyle="border theme-bc-3 p-4"
             >
               <Tabs.Head className="flex">
                 <Tabs.Label value="tab1">Tab 1</Tabs.Label>
@@ -578,9 +588,9 @@ export function Body() {
           <Preview.Example center padding>
             <Tabs 
               defaultValue="tab1"
-              tabs="border border-b-0 p-2 theme-bc-3 cursor-pointer" 
-              active="border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white"
-              contents="border theme-bc-3 p-4"
+              tabClassStyle="border border-b-0 p-2 theme-bc-3 cursor-pointer" 
+              activeClassStyle="border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white"
+              contentClassStyle="border theme-bc-3 p-4"
             >
               <Tabs.Head className="flex">
                 <Tabs.Label value="tab1">
@@ -737,7 +747,7 @@ export function Page() {
       <LayoutPanel pathname="/component/tabs">
         <main className="flex flex-col h-full w-full">
           <div className="p-3 theme-bg-2">
-            <Crumbs crumbs={crumbs} />
+            <Crumbs />
           </div>
           <section className="flex-grow relative h-full">
             <Menu />

@@ -5,8 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import type { Crumb } from 'components/element/Crumbs.js';
-import Crumbs from 'components/element/Crumbs.js';
+import Bread from 'components/element/Bread.js';
 import Alert from 'components/element/Alert.js';
 
 //plugins
@@ -17,16 +16,12 @@ import {
   ThemeHead, 
   Props, 
   Code, 
-  C 
+  C,
+  Preview
 } from 'plugins/app/index.js';
 
 //--------------------------------------------------------------------//
 // Constants
-
-const crumbs: Crumb[] = [
-  { icon: 'icons', label: 'Components', href: '/component' },
-  { label: 'Alert' }
-];
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
@@ -48,7 +43,7 @@ const examples = [
 //0
 `<Alert info className="flex items-center">
   <i className="fas fa-info-circle mr-2"></i>
-  No results found
+  Something interesting happened!
 </Alert>`,
 //1
 `<Alert warning className="flex items-center">
@@ -75,17 +70,46 @@ const examples = [
   Who likes salmon?
 </Alert>`,
 //6
-`<Alert info curved className="flex items-center">
+`<Alert info outline className="flex items-center">
   <i className="fas fa-info-circle mr-2"></i>
-  No results found
+  Something interesting happened!
 </Alert>`,
 //7
-`<Alert warning rounded className="flex items-center">
+`<Alert warning outline className="flex items-center">
   <i className="fas fa-exclamation-triangle mr-2"></i>
   Are you sure ?
 </Alert>`,
 //8
-`<Alert success pill className="flex items-center">
+`<Alert success outline className="flex items-center">
+  <i className="fas fa-check-circle mr-2"></i>
+  Successfully saved !
+</Alert>`,
+//9
+`<Alert error outline className="flex items-center">
+  <i className="fas fa-exclamation-circle mr-2"></i>
+  Could not save
+</Alert>`,
+//10
+`<Alert muted outline className="flex items-center">
+  I am disabled
+</Alert>`,
+//11
+`<Alert color="salmon" outline className="flex items-center">
+  <i className="fas fa-info-circle mr-2"></i>
+  Who likes salmon?
+</Alert>`,
+//12
+`<Alert info curved className="flex items-center">
+  <i className="fas fa-info-circle mr-2"></i>
+  No results found
+</Alert>`,
+//13
+`<Alert warning rounded className="flex items-center">
+  <i className="fas fa-exclamation-triangle mr-2"></i>
+  Are you sure ?
+</Alert>`,
+//14
+`<Alert success pill outline className="flex items-center">
   <i className="fas fa-check-circle mr-2"></i>
   Successfully saved !
 </Alert>`
@@ -93,6 +117,21 @@ const examples = [
 
 //--------------------------------------------------------------------//
 // Components
+
+/**
+ * Crumbs component
+ */
+export function Crumbs() {
+  return (
+    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+      <Bread.Slicer />
+      <Bread.Crumb icon="icons" href="/component">
+        Components
+      </Bread.Crumb>
+      <Bread.Crumb>Alerts</Bread.Crumb>
+    </Bread>
+  );
+};
 
 /**
  * Aside right menu component
@@ -113,26 +152,240 @@ export function Menu() {
         {_('Contents')}
       </h4>
       <div className="p-3">
-        <a className="block pb-1" href="#top">{_('Alert')}</a>
-        <ul className="list-disc pl-3">
-          <li className="pl-3 pb-1">
-            <a href="#props">{_('Props')}</a>
+        <a className="block pb-1 font-bold" href="#top">
+          {_('Alerts')}
+        </a>
+        <ul className="list-disc pl-2">
+          <li className="ml-2 pb-1">
+            <a href="#examples">{_('Examples')}</a>
           </li>
-          <li className="pl-3 pb-1">
-            <a href="#types">{_('Types')}</a>
+          <li className="ml-2 pb-1">
+            <a href="#styles">{_('Global Styles')}</a>
           </li>
-          <li className="pl-3 pb-1">
-            <a href="#custom">{_('Custom Color')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#rounded">{_('Rounded')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#styles">{_('Custom Styles')}</a>
+          <li className="ml-2 pb-1">
+            <a href="#api">{_('API Reference')}</a>
           </li>
         </ul>
       </div>
     </aside>
+  );
+};
+
+/**
+ * Examples component
+ */
+export function Examples() {
+  return (
+    <div className="flex items-start rmd-block flex-wrap gap-4">
+      {/* Info Example */}
+      <Preview 
+        height={100}
+        title="Info Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <Alert info className="flex items-center">
+            <i className="fas fa-info-circle mr-2"></i>
+            Something interesting happened!
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[0]}</Preview.Code>
+      </Preview>
+      {/* Warning Example */}
+      <Preview 
+        height={100}
+        title="Warning Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <Alert warning className="flex items-center">
+            <i className="fas fa-exclamation-triangle mr-2"></i>
+            Are you sure ?
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[1]}</Preview.Code>
+      </Preview>
+      {/* Success Example */}
+      <Preview 
+        height={100}
+        title="Success Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <Alert success className="flex items-center">
+            <i className="fas fa-check-circle mr-2"></i>
+            Successfully saved !
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[2]}</Preview.Code>
+      </Preview>
+      {/* Error Example */}
+      <Preview 
+        height={100}
+        title="Error Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <Alert error className="flex items-center">
+            <i className="fas fa-exclamation-circle mr-2"></i>
+            Could not save
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[3]}</Preview.Code>
+      </Preview>
+      {/* Muted Example */}
+      <Preview 
+        height={100}
+        title="Muted Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <Alert muted className="flex items-center">
+            I am disabled
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[4]}</Preview.Code>
+      </Preview>
+      {/* Custom Color Example */}
+      <Preview 
+        height={100}
+        title="Custom Color Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <Alert color="salmon" className="flex items-center">
+            <i className="fas fa-info-circle mr-2"></i>
+            Who likes salmon?
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[5]}</Preview.Code>
+      </Preview>
+      {/* Info Outline Example */}
+      <Preview 
+        height={100}
+        title="Info Outline Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <Alert info outline className="flex items-center">
+            <i className="fas fa-info-circle mr-2"></i>
+            Something interesting happened!
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[6]}</Preview.Code>
+      </Preview>
+      {/* Warning Outline Example */}
+      <Preview 
+        height={100}
+        title="Warning Outline Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <Alert warning outline className="flex items-center">
+            <i className="fas fa-exclamation-triangle mr-2"></i>
+            Are you sure ?
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[7]}</Preview.Code>
+      </Preview>
+      {/* Success Outline Example */}
+      <Preview 
+        height={100}
+        title="Success Outline Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <Alert success outline className="flex items-center">
+            <i className="fas fa-check-circle mr-2"></i>
+            Successfully saved !
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[8]}</Preview.Code>
+      </Preview>
+      {/* Error Outline Example */}
+      <Preview 
+        height={100}
+        title="Error Outline Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <Alert error outline className="flex items-center">
+            <i className="fas fa-exclamation-circle mr-2"></i>
+            Could not save
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[9]}</Preview.Code>
+      </Preview>
+      {/* Muted Outline Example */}
+      <Preview 
+        height={100}
+        title="Muted Outline Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <Alert muted outline className="flex items-center">
+            I am disabled
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[10]}</Preview.Code>
+      </Preview>
+      {/* Custom Color Outline Example */}
+      <Preview 
+        height={100}
+        title="Custom Color Outline Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <Alert color="salmon" outline className="flex items-center">
+            <i className="fas fa-info-circle mr-2"></i>
+            Who likes salmon?
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[11]}</Preview.Code>
+      </Preview>
+      {/* Curved Example */}
+      <Preview 
+        height={100}
+        title="Curved Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <Alert info curved className="flex items-center">
+            <i className="fas fa-info-circle mr-2"></i>
+            No results found
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[12]}</Preview.Code>
+      </Preview>
+      {/* Rounded Example */}
+      <Preview 
+        height={100}
+        title="Rounded Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <Alert warning rounded className="flex items-center">
+            <i className="fas fa-exclamation-triangle mr-2"></i>
+            Are you sure ?
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[7]}</Preview.Code>
+      </Preview>
+      {/* Pill Example */}
+      <Preview 
+        height={100}
+        title="Pill Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <Alert success pill outline className="flex items-center">
+            <i className="fas fa-check-circle mr-2"></i>
+            Successfully saved !
+          </Alert>
+        </Preview.Example>
+        <Preview.Code>{examples[14]}</Preview.Code>
+      </Preview>
+    </div>
   );
 };
 
@@ -149,125 +402,53 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Alert')}
+        {_('Alerts')}
       </h1>
-      <Code language="typescript" className="mt-2">
-        {`import Alert from 'frui/Alert';`}
-      </Code>
-
-      <h2 id="props" className="uppercase font-bold text-lg mt-8">
-        {_('Props')}
-      </h2>
-      <Props props={props} />
-
-      <h2 id="types" className="uppercase font-bold text-lg mt-8">
-        {_('Types')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          Alerts have the following types: <C value="info" />, 
-          <C l value="warning" />, <C value="success" />, 
-          <C l value="error" />, and <C value="muted" />.
-        </Translate>
-      </p>
       <div>
-        <Alert info className="flex items-center">
-          <i className="fas fa-info-circle mr-2"></i>
-          {_('No results found')}
-        </Alert>
+        <p className="py-2">
+          <Translate>
+            Import the alert component like the following.
+          </Translate>
+        </p>
         <Code language="typescript" className="mt-2">
-          {examples[0]}
-        </Code>
-        <Alert warning className="flex items-center mt-5">
-          <i className="fas fa-exclamation-triangle mr-2"></i>
-          {_('Are you sure ?')}
-        </Alert>
-        <Code language="typescript" className="mt-2">
-          {examples[1]}
-        </Code>
-        <Alert success className="flex items-center mt-5">
-          <i className="fas fa-check-circle mr-2"></i>
-          {_('Successfully saved !')}
-        </Alert>
-        <Code language="typescript" className="mt-2">
-          {examples[2]}
-        </Code>
-        <Alert error className="flex items-center mt-5">
-          <i className="fas fa-exclamation-circle mr-2"></i>
-          {_('Could not save')}
-        </Alert>
-        <Code language="typescript" className="mt-2">
-          {examples[3]}
-        </Code>
-        <Alert muted className="flex items-center mt-5">
-          {_('I am disabled')}
-        </Alert>
-        <Code language="typescript" className="mt-2">
-          {examples[4]}
+          {`import Alert from 'frui/Alert';`}
         </Code>
       </div>
 
-      <h2 id="custom" className="uppercase font-bold text-lg mt-8">
-        {_('Custom Color')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
-      <p className="py-4">
-        <Translate>
-          Alerts can have custom CSS compatible colors which 
-          includes hex and color names.
-        </Translate>
-      </p>
       <div>
-        <Alert color="salmon" className="flex items-center">
-          <i className="fas fa-info-circle mr-2"></i>
-          {_('Who likes salmon?')}
-        </Alert>
-        <Code language="typescript" className="mt-2">
-          {examples[5]}
-        </Code>
-      </div>
-
-      <h2 id="rounded" className="uppercase font-bold text-lg mt-8">
-        {_('Rounded')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          Alerts can be rounded in three ways: <C value="curved" />, 
-          <C l value="rounded" />, and <C value="pill" />.
-        </Translate>
-      </p>
-      <div>
-        <Alert info curved className="flex items-center">
-          <i className="fas fa-info-circle mr-2"></i>
-          {_('No results found')}
-        </Alert>
-        <Code language="typescript" className="mt-2">
-          {examples[6]}
-        </Code>
-        <Alert warning rounded className="flex items-center mt-5">
-          <i className="fas fa-exclamation-triangle mr-2"></i>
-          {_('Are you sure ?')}
-        </Alert>
-        <Code language="typescript" className="mt-2">
-          {examples[7]}
-        </Code>
-        <Alert success pill className="flex items-center mt-5">
-          <i className="fas fa-check-circle mr-2"></i>
-          {_('Successfully saved !')}
-        </Alert>
-        <Code language="typescript" className="mt-2">
-          {examples[8]}
-        </Code>
+        <p className="py-2">
+          <Translate>
+            The following are some basic examples of alerts.
+          </Translate>
+        </p>
+        <Examples />
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
-        {_('Custom Styles')}
+        {_('Global Styles')}
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to the alert component 
-          or use the <C value="frui-alert" /> CSS class.
+          You can use the <C value="frui-alert" /> CSS class to 
+          globally theme alerts.
         </Translate>
       </p>
+
+      <h2 id="api" className="uppercase font-bold text-lg mt-8">
+        {_('API Reference')}
+      </h2>
+      <div>
+        <p className="py-2">
+          <Translate>
+            The <C value="<Alert>" /> component can be passed the 
+            following props.
+          </Translate>
+        </p>
+        <Props props={props} />
+      </div>
 
       <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
         <a className="text-t2" href="/component">
@@ -312,7 +493,7 @@ export function Page() {
       <LayoutPanel pathname="/component/alert">
         <main className="flex flex-col h-full w-full">
           <div className="p-3 theme-bg-2">
-            <Crumbs crumbs={crumbs} />
+            <Crumbs />
           </div>
           <section className="flex-grow relative h-full">
             <Menu />

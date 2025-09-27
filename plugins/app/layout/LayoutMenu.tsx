@@ -38,7 +38,7 @@ export const menu: SectionItem[] = [
     href: '/component',
     children: [
       {
-        label: 'Accordion',
+        label: 'Accordions',
         search: '/component/accordion',
         href: '/component/accordion'
       },
@@ -53,14 +53,19 @@ export const menu: SectionItem[] = [
         href: '/component/badge'
       },
       {
+        label: 'Bread Crumbs',
+        search: '/component/bread',
+        href: '/component/bread'
+      },
+      {
         label: 'Buttons',
         search: '/component/button',
         href: '/component/button'
       },
       {
-        label: 'Crumbs',
-        search: '/component/crumbs',
-        href: '/component/crumbs'
+        label: 'Dialogs',
+        search: '/component/dialog',
+        href: '/component/dialog'
       },
       {
         label: 'Loaders',
@@ -68,17 +73,17 @@ export const menu: SectionItem[] = [
         href: '/component/loader'
       },
       {
-        label: 'Modals',
-        search: '/component/modal',
-        href: '/component/modal'
+        label: 'Notifiers',
+        search: '/component/notifier',
+        href: '/component/notifier'
       },
       {
-        label: 'Pager',
+        label: 'Pagers',
         search: '/component/pager',
         href: '/component/pager'
       },
       {
-        label: 'Progress',
+        label: 'Progress Bars',
         search: '/component/progress',
         href: '/component/progress'
       },

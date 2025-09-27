@@ -143,17 +143,19 @@ export function getTooltipPosition(
  * Returns tooltip states
  */
 export function useTooltip(config: TooltipConfig) {
+  //config
   const { text, top, bottom, left, right, show = false } = config;
-  //whether to show the tooltip
+  //hooks
+  // whether to show the tooltip
   const [ isVisible, visible ] = useState(show);
-  //position of the tooltip
+  // position of the tooltip
   const [ position, setPosition ] = useState<[ number, number ]>([0, 0]);
-  //direction of the tooltip arrow
+  // direction of the tooltip arrow
   const [ direction, setDirection ] = useState<TooltipDirection>(null);
-
+  //variables
   const containerRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
-
+  //effects
   useEffect(() => {
     //if not visible, or if container or tooltip ref is not set, skip
     if (!isVisible || !containerRef.current || !tooltipRef.current) {
@@ -178,7 +180,10 @@ export function useTooltip(config: TooltipConfig) {
     left, 
     right
   ]);
-
+  useEffect(() => {
+    if (show === isVisible) return;
+    visible(show);
+  }, [ show ]);
   return {
     position,
     direction,

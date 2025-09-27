@@ -5,8 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import type { Crumb } from 'components/element/Crumbs.js';
-import Crumbs from 'components/element/Crumbs.js';
+import Bread from 'components/element/Bread.js';
 import Button from 'components/form/Button.js';
 
 //plugins
@@ -17,16 +16,12 @@ import {
   ThemeHead, 
   Props, 
   Code, 
-  C 
+  C,
+  Preview
 } from 'plugins/app/index.js';
 
 //--------------------------------------------------------------------//
 // Constants
-
-const crumbs: Crumb[] = [
-  { icon: 'icons', label: 'Components', href: '/component' },
-  { label: 'Button' }
-];
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
@@ -59,6 +54,21 @@ const props = [
 // Components
 
 /**
+ * Crumbs component
+ */
+export function Crumbs() {
+  return (
+    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+      <Bread.Slicer />
+      <Bread.Crumb icon="icons" href="/component">
+        Components
+      </Bread.Crumb>
+      <Bread.Crumb>Buttons</Bread.Crumb>
+    </Bread>
+  );
+};
+
+/**
  * Aside right menu component
  */
 export function Menu() {
@@ -77,32 +87,407 @@ export function Menu() {
         {_('Contents')}
       </h4>
       <div className="p-3">
-        <a className="block pb-1" href="#top">{_('Button')}</a>
-        <ul className="list-disc pl-3">
-          <li className="pl-3 pb-1">
-            <a href="#props">{_('Props')}</a>
+        <a className="block pb-1 font-bold" href="#top">
+          {_('Buttons')}
+        </a>
+        <ul className="list-disc pl-2">
+          <li className="ml-2 pb-1">
+            <a href="#examples">{_('Examples')}</a>
           </li>
-          <li className="pl-3 pb-1">
-            <a href="#types">{_('Types')}</a>
+          <li className="ml-2 pb-1">
+            <a href="#styles">{_('Global Styles')}</a>
           </li>
-          <li className="pl-3 pb-1">
-            <a href="#custom">{_('Custom Color')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#rounded">{_('Rounded')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#stretch">{_('Stretch')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#size">{_('Sizes')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#styles">{_('Custom Styles')}</a>
+          <li className="ml-2 pb-1">
+            <a href="#api">{_('API Reference')}</a>
           </li>
         </ul>
       </div>
     </aside>
+  );
+};
+
+/**
+ * Examples component
+ */
+export function Examples() {
+  return (
+    <div className="flex items-start rmd-block flex-wrap gap-4">
+      {/* Info Example */}
+      <Preview 
+        height={110}
+        title="Info Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button info>Submit Info</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info>Submit Info</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Warning Example */}
+      <Preview 
+        height={110}
+        title="Warning Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button warning>Submit Warning</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button warning>Submit Warning</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Success Example */}
+      <Preview 
+        height={110}
+        title="Success Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button success>Submit Success</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button success>Submit Success</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Error Example */}
+      <Preview 
+        height={110}
+        title="Error Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button error>Submit Error</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button error>Submit Error</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Muted Example */}
+      <Preview 
+        height={110}
+        title="Muted Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button muted>Submit Muted</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button muted>Submit Muted</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Custom Color Example */}
+      <Preview 
+        height={110}
+        title="Custom Color Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button color="salmon">Submit Custom</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button color="salmon">Submit Custom</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Info Outline Example */}
+      <Preview 
+        height={110}
+        title="Info Outline Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <div className="text-center">
+            <Button info outline>Submit Info</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info outline>Submit Info</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Warning Outline Example */}
+      <Preview 
+        height={110}
+        title="Warning Outline Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <div className="text-center">
+            <Button warning outline>Submit Warning</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button warning outline>Submit Warning</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Success Outline Example */}
+      <Preview 
+        height={110}
+        title="Success Outline Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <div className="text-center">
+            <Button success outline>Submit Success</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button success outline>Submit Success</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Error Outline Example */}
+      <Preview 
+        height={110}
+        title="Error Outline Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <div className="text-center">
+            <Button error outline>Submit Error</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button error outline>Submit Error</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Muted Outline Example */}
+      <Preview 
+        height={110}
+        title="Muted Outline Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <div className="text-center">
+            <Button muted outline>Submit Muted</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button muted outline>Submit Muted</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Custom Color Outline Example */}
+      <Preview 
+        height={110}
+        title="Custom Color Outline Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding background="#222222">
+          <div className="text-center">
+            <Button color="salmon" outline>Submit Custom</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button color="salmon" outline>Submit Custom</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Curved Example */}
+      <Preview 
+        height={110}
+        title="Curved Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button info curved>Submit Curved</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info curved>Submit Curved</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Rounded Example */}
+      <Preview 
+        height={110}
+        title="Rounded Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button info rounded>Submit Rounded</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info rounded>Submit Rounded</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Pill Example */}
+      <Preview 
+        height={110}
+        title="Pill Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button info pill>Submit Pill</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info pill>Submit Pill</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* Stretch Example */}
+      <Preview 
+        height={110}
+        title="Stretch Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button info block full pill>Submit Block</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info block full pill>Submit Block</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* XS Example */}
+      <Preview 
+        height={110}
+        title="XS Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button info pill xs className="text-xs">Submit XS</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info pill xs className="text-xs">Submit XS</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* SM Example */}
+      <Preview 
+        height={110}
+        title="SM Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button info pill sm className="text-sm">Submit SM</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info pill sm className="text-sm">Submit SM</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* MD Example */}
+      <Preview 
+        height={110}
+        title="MD Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button info pill md className="text-md">Submit MD</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info pill md className="text-md">Submit MD</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* LG Example */}
+      <Preview 
+        height={110}
+        title="LG Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button info pill lg className="text-lg">Submit LG</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info pill lg className="text-lg">Submit LG</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* XL Example */}
+      <Preview 
+        height={110}
+        title="XL Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button info pill xl className="text-xl">Submit XL</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info pill xl className="text-xl">Submit XL</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* XL2 Example */}
+      <Preview 
+        height={110}
+        title="XL2 Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button info pill xl2 className="text-2xl">Submit XXL</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info pill xl2 className="text-2xl">Submit XXL</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* XL3 Example */}
+      <Preview 
+        height={110}
+        title="XL3 Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button info pill xl3 className="text-3xl">Submit XXXL</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info pill xl3 className="text-3xl">Submit XXXL</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* XL4 Example */}
+      <Preview 
+        height={110}
+        title="XL4 Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button info pill xl4 className="text-4xl">Submit IVL</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info pill xl4 className="text-4xl">Submit IVL</Button>`}
+        </Preview.Code>
+      </Preview>
+      {/* XL5 Example */}
+      <Preview 
+        height={110}
+        title="XL5 Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Button info pill xl5 className="text-5xl">Submit VL</Button>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {`<Button info pill xl5 className="text-5xl">Submit VL</Button>`}
+        </Preview.Code>
+      </Preview>
+    </div>
   );
 };
 
@@ -118,242 +503,63 @@ export function Body() {
       'absolute top-0 bottom-0 left-0 right-0 lg:right-56 px-3 pt-3 '
       + 'pb-5 h-full overflow-auto'
     }>
-      <h1 className="flex items-center uppercase font-bold text-xl">
-        {_('Button')}
+      <h1 id="top" className="flex items-center uppercase font-bold text-xl">
+        {_('Buttons')}
       </h1>
-      <Code language="typescript" className="mt-2">
-        {`import Button from 'frui/Button';`}
-      </Code>
-      
-      <h2 id="props" className="uppercase font-bold text-lg mt-8">
-        {_('Props')}
-      </h2>
-      <Props props={props} />
-
-      <h2 id="types" className="uppercase font-bold text-lg mt-8">
-        {_('Types')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          Buttons have the following types: <C value="info" />, 
-          <C l value="warning" />, <C value="success" />, 
-          <C l value="error" />, and <C value="muted" />.
-        </Translate>
-      </p>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button info>Submit Info</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button info>Submit Info</Button>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button warning>Submit Warning</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button warning>Submit Warning</Button>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button success>Submit Success</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button success>Submit Success</Button>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button error>Submit Error</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button error>Submit Error</Button>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button muted>Submit Muted</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button muted>Submit Muted</Button>`}
+      <div>
+        <p className="py-2">
+          <Translate>
+            Import the button component like the following.
+          </Translate>
+        </p>
+        <Code language="typescript" className="mt-2">
+          {`import Button from 'frui/Button';`}
         </Code>
       </div>
 
-      <h2 id="custom" className="uppercase font-bold text-lg mt-8">
-        {_('Custom Color')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
-      <p className="py-4">
-        <Translate>
-          Buttons can have custom CSS compatible colors which 
-          includes hex and color names.
-        </Translate>
-      </p>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button color="salmon">Submit Custom</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button color="salmon">Submit Custom</Button>`}
-        </Code>
-      </div>
-      
-      <h2 id="rounded" className="uppercase font-bold text-lg mt-8">
-        {_('Rounded')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          Buttons can be rounded in three ways: <C value="curved" />, 
-          <C l value="rounded" />, and <C value="pill" />.
-        </Translate>
-      </p>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button info curved>Submit Curved</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button info curved>Submit Curved</Button>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button warning rounded>Submit Rounded</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button warning rounded>Submit Rounded</Button>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button success pill>Submit Pill</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button success pill>Submit Pill</Button>`}
-        </Code>
-      </div>
-
-      <h2 id="stretch" className="uppercase font-bold text-lg mt-8">
-        {_('Stretch')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          Buttons have two stretching options: Turning it into a 
-          <C l value="block" />, and/or stretch the width to 
-          <C l value="full" />. 
-        </Translate>
-      </p>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button info block full pill>Submit Block</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button info block full pill>Submit Block</Button>`}
-        </Code>
-      </div>
-
-      <h2 id="size" className="uppercase font-bold text-lg mt-8">
-        {_('Sizes')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          Buttons have sizes including: <C value="xs" />, 
-          <C l value="sm" />, <C value="md" />, <C value="lg" />, 
-          <C l value="xl" />, <C value="xl2" />, <C value="xl3" />, 
-          <C l value="xl4" />, and <C value="xl5" />.
-        </Translate>
-      </p>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button info xs pill className="text-xs">Submit Extra Small</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button info xs pill className="text-xs">Submit Extra Small</Button>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button warning sm pill className="text-sm">Submit Small</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button warning sm pill className="text-sm">Submit Small</Button>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button success md pill className="text-md">Submit Medium</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button success md pill className="text-md">Submit Medium</Button>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button error lg pill className="text-lg">Submit Large</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button error lg pill className="text-lg">Submit Large</Button>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button muted xl pill className="text-xl">Submit Extra Large</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button muted xl pill className="text-xl">Submit Extra Large</Button>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button info xl2 pill className="text-2xl">Submit XXL</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button info xl2 pill className="text-2xl">Submit XXL</Button>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button warning xl3 pill className="text-3xl">Submit XXXL</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button warning xl3 pill className="text-3xl">Submit XXXL</Button>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button success xl4 pill className="text-4xl">Submit IVL</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button success xl4 pill className="text-4xl">Submit IVL</Button>`}
-        </Code>
-      </div>
-      <div className="curved overflow-hidden mt-5">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Button error xl5 pill className="text-5xl">Submit VL</Button>
-        </div>
-        <Code language="typescript">
-          {`<Button error xl5 pill className="text-5xl">Submit VL</Button>`}
-        </Code>
+      <div>
+        <p className="py-2">
+          <Translate>
+            The following are some basic examples of buttons.
+          </Translate>
+        </p>
+        <Examples />
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
-        {_('Custom Styles')}
+        {_('Global Styles')}
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to the button component 
-          or use the <C value="frui-btn" /> CSS class.
+          You can use the <C value="frui-button" /> CSS class to 
+          globally style buttons.
         </Translate>
       </p>
 
-      <div className="flex items-center border-t theme-bg-2 mt-8 pt-4">
+      <h2 id="api" className="uppercase font-bold text-lg mt-8">
+        {_('API Reference')}
+      </h2>
+      <div>
+        <p className="py-2">
+          <Translate>
+            The <C value="<Button>" /> component can be passed the 
+            following props.
+          </Translate>
+        </p>
+        <Props props={props} />
+      </div>
+
+      <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
         <a className="text-t2" href="/component/badge">
           <i className="fas fa-arrow-left mr-2"></i>
-          {_('Badges')}
+          {_('Buttons')}
         </a>
         <div className="flex-grow"></div>
-        <a className="text-t2" href="/component/crumbs">
-          {_('Crumbs')}
+        <a className="text-t2" href="/component/dialog">
+          {_('Dialogs')}
           <i className="fas fa-arrow-right ml-2"></i>
         </a>
       </div>
@@ -387,7 +593,7 @@ export function Page() {
       <LayoutPanel pathname="/component/button">
         <main className="flex flex-col h-full w-full">
           <div className="p-3 theme-bg-2">
-            <Crumbs crumbs={crumbs} />
+            <Crumbs />
           </div>
           <section className="flex-grow relative h-full">
             <Menu />

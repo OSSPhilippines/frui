@@ -5,8 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import type { Crumb } from 'components/element/Crumbs.js';
-import Crumbs from 'components/element/Crumbs.js';
+import Bread from 'components/element/Bread.js';
 import Loader from 'components/element/Loader.js';
 
 //plugins
@@ -17,16 +16,12 @@ import {
   ThemeHead,
   Props,
   Code,
-  C
+  C,
+  Preview
 } from 'plugins/app/index.js';
 
 //--------------------------------------------------------------------//
 // Constants
-
-const crumbs: Crumb[] = [
-  { icon: 'icons', label: 'Components', href: '/component' },
-  { label: 'Loader' }
-];
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
@@ -50,6 +45,21 @@ const props = [
 // Components
 
 /**
+ * Crumbs component
+ */
+export function Crumbs() {
+  return (
+    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+      <Bread.Slicer />
+      <Bread.Crumb icon="icons" href="/component">
+        Components
+      </Bread.Crumb>
+      <Bread.Crumb>Loaders</Bread.Crumb>
+    </Bread>
+  );
+};
+
+/**
  * Aside right menu component
  */
 export function Menu() {
@@ -68,34 +78,173 @@ export function Menu() {
         {_('Contents')}
       </h4>
       <div className="p-3">
-        <a className="block pb-1" href="#top">
-          {_('Loader')}
+        <a className="block pb-1 font-bold" href="#top">
+          {_('Loaders')}
         </a>
-        <ul className="list-disc pl-3">
-          <li className="pl-3 pb-1">
-            <a href="#props">{_('Props')}</a>
+        <ul className="list-disc pl-2">
+          <li className="ml-2 pb-1">
+            <a href="#examples">{_('Examples')}</a>
           </li>
-          <li className="pl-3 pb-1">
-            <a href="#types">{_('Types')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#custom">{_('Custom Color')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#shapes">{_('Shapes')}</a>
-          </li>
-          <li className="pl-3 pb-1">
+          <li className="ml-2 pb-1">
             <a href="#size">{_('Size and Thickness')}</a>
           </li>
-          <li className="pl-3 pb-1">
+          <li className="ml-2 pb-1">
             <a href="#speed">{_('Speed')}</a>
           </li>
-          <li className="pl-3 pb-1">
-            <a href="#styles">{_('Custom Styles')}</a>
+          <li className="ml-2 pb-1">
+            <a href="#styles">{_('Global Styles')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#api">{_('API Reference')}</a>
           </li>
         </ul>
       </div>
     </aside>
+  );
+};
+
+/**
+ * Examples component
+ */
+export function Examples() {
+  return (
+    <div className="flex items-start rmd-block flex-wrap gap-4">
+      {/* Info Example */}
+      <Preview 
+        height={100}
+        title="Info Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Loader info className="m-2">Loading...</Loader>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Loader info className="m-2">Loading...</Loader>'}
+        </Preview.Code>
+      </Preview>
+      {/* Warning Example */}
+      <Preview 
+        height={100}
+        title="Warning Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Loader warning className="m-2">Loading...</Loader>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Loader warning className="m-2">Loading...</Loader>'}
+        </Preview.Code>
+      </Preview>
+      {/* Success Example */}
+      <Preview 
+        height={100}
+        title="Success Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Loader success className="m-2">Loading...</Loader>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Loader success className="m-2">Loading...</Loader>'}
+        </Preview.Code>
+      </Preview>
+      {/* Error Example */}
+      <Preview 
+        height={100}
+        title="Error Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Loader error className="m-2">Loading...</Loader>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Loader error className="m-2">Loading...</Loader>'}
+        </Preview.Code>
+      </Preview>
+      {/* Muted Example */}
+      <Preview 
+        height={100}
+        title="Muted Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Loader muted className="m-2">Loading...</Loader>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Loader muted className="m-2">Loading...</Loader>'}
+        </Preview.Code>
+      </Preview>
+      {/* Custom Color Example */}
+      <Preview 
+        height={100}
+        title="Custom Color Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Loader color="salmon" className="m-2">Loading...</Loader>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Loader color="salmon" className="m-2">Loading...</Loader>'}
+        </Preview.Code>
+      </Preview>
+      {/* Solid Shape Example */}
+      <Preview 
+        height={100}
+        title="Solid Shape Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Loader solid info slice={1} className="m-2">Loading...</Loader>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Loader solid info slice={1} className="m-2">Loading...</Loader>'}
+        </Preview.Code>
+      </Preview>
+      {/* Dashed Shape Example */}
+      <Preview 
+        height={100}
+        title="Dashed Shape Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Loader dashed warning className="m-2">Loading...</Loader>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Loader dashed warning className="m-2">Loading...</Loader>'}
+        </Preview.Code>
+      </Preview>
+      {/* Dotted Shape Example */}
+      <Preview 
+        height={100}
+        title="Dotted Shape Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Loader dotted success className="m-2">Loading...</Loader>
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Loader dotted success className="m-2">Loading...</Loader>'}
+        </Preview.Code>
+      </Preview>
+    </div>
   );
 };
 
@@ -112,154 +261,174 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Loader')}
+        {_('Loaders')}
       </h1>
-      <Code language="typescript" className="mt-2">
-        {`import Loader from 'frui/Loader';`}
-      </Code>
-
-      <h2 id="props" className="uppercase font-bold text-lg mt-8">
-        {_('Props')}
-      </h2>
-      <Props props={props} />
-
-      <h2 id="types" className="uppercase font-bold text-lg mt-8">
-        {_('Types')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          Loaders have the following types: <C value="info" />, 
-          <C l value="warning" />, <C value="success" />, 
-          <C l value="error" />, and <C value="muted" />.
-        </Translate>
-      </p>
       <div>
-        <Loader info className="m-2">Loading...</Loader>
+        <p className="py-2">
+          <Translate>
+            Import the loader component like the following.
+          </Translate>
+        </p>
         <Code language="typescript" className="mt-2">
-          {'<Loader info className="m-2">Loading...</Loader>'}
-        </Code>
-        <Loader warning className="m-2">Loading...</Loader>
-        <Code language="typescript" className="mt-2">
-          {'<Loader warning className="m-2">Loading...</Loader>'}
-        </Code>
-        <Loader success className="m-2">Loading...</Loader>
-        <Code language="typescript" className="mt-2">
-          {'<Loader success className="m-2">Loading...</Loader>'}
-        </Code>
-        <Loader error className="m-2">Loading...</Loader>
-        <Code language="typescript" className="mt-2">
-          {'<Loader error className="m-2">Loading...</Loader>'}
-        </Code>
-        <Loader muted className="m-2">Loading...</Loader>
-        <Code language="typescript" className="mt-2">
-          {'<Loader muted className="m-2">Loading...</Loader>'}
+          {`import Loader from 'frui/Loader';`}
         </Code>
       </div>
 
-      <h2 id="custom" className="uppercase font-bold text-lg mt-8">
-        {_('Custom Color')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
-      <p className="py-4">
-        <Translate>
-          Loaders can have custom CSS compatible colors which
-          includes hex and color names.
-        </Translate>
-      </p>
       <div>
-        <Loader color="salmon" className="m-2">Loading...</Loader>
-        <Code language="typescript" className="mt-2">
-          {'<Loader color="salmon" className="mt-2">Loading...</Loader>'}
-        </Code>
-      </div>
-
-      <h2 id="shapes" className="uppercase font-bold text-lg mt-8">
-        {_('Shapes')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          Loaders can have custom shapes which 
-          includes <C value="solid" />, <C l value="dashed" />, and <C value="dotted" />.
-        </Translate>
-      </p>
-      <div>
-        <Loader solid info slice={1} className="m-2">Loading...</Loader>
-        <Code language="typescript" className="mt-2">
-          {'<Loader solid className="m-2">Loading...</Loader>'}
-        </Code>
-        <Loader dashed warning className="m-2">Loading...</Loader>
-        <Code language="typescript" className="mt-2">
-          {'<Loader dashed className="m-2">Loading...</Loader>'}
-        </Code>
-        <Loader dotted success className="m-2">Loading...</Loader>
-        <Code language="typescript" className="mt-2">
-          {'<Loader dotted className="m-2">Loading...</Loader>'}
-        </Code>
+        <p className="py-2">
+          <Translate>
+            The following are some basic examples of loaders.
+          </Translate>
+        </p>
+        <Examples />
       </div>
 
       <h2 id="size" className="uppercase font-bold text-lg mt-8">
         {_('Size and Thickness')}
       </h2>
-      <p className="py-4">
-        <Translate>
-          Loaders can have custom sizes and thickness in pixels.
-        </Translate>
-      </p>
       <div>
-        <Loader info size={30} thickness={3} className="m-2">Loading...</Loader>
-        <Code language="typescript" className="mt-2">
-          {'<Loader size={30} thickness={3} className="m-2">Loading...</Loader>'}
-        </Code>
-        <Loader warning size={50} thickness={8} className="m-2">Loading...</Loader>
-        <Code language="typescript" className="mt-2">
-          {'<Loader size={50} thickness={8} className="m-2">Loading...</Loader>'}
-        </Code>
-        <Loader success size={80} thickness={20} className="m-2">Loading...</Loader>
-        <Code language="typescript" className="mt-2">
-          {'<Loader size={80} thickness={20} className="m-2">Loading...</Loader>'}
-        </Code>
+        <p className="py-4">
+          <Translate>
+            Loaders can have custom sizes and thickness in pixels.
+          </Translate>
+        </p>
+        <Preview 
+          height={100}
+          title="Thin Example" 
+          className="border border-2 theme-bc-3 my-4"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Loader info size={30} thickness={3} className="m-2">Loading...</Loader>
+            </div>
+          </Preview.Example>
+          <Preview.Code>
+            {'<Loader info size={30} thickness={3} className="m-2">Loading...</Loader>'}
+          </Preview.Code>
+        </Preview>
+
+        <Preview 
+          height={100}
+          title="Thick Example" 
+          className="border border-2 theme-bc-3 my-4"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Loader warning size={50} thickness={8} className="m-2">Loading...</Loader>
+            </div>
+          </Preview.Example>
+          <Preview.Code>
+            {'<Loader warning size={50} thickness={8} className="m-2">Loading...</Loader>'}
+          </Preview.Code>
+        </Preview>
+
+        <Preview 
+          height={100}
+          title="Thicker Example" 
+          className="border border-2 theme-bc-3 my-4"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Loader success size={80} thickness={20} className="m-2">Loading...</Loader>
+            </div>
+          </Preview.Example>
+          <Preview.Code>
+            {'<Loader success size={80} thickness={20} className="m-2">Loading...</Loader>'}
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="speed" className="uppercase font-bold text-lg mt-8">
         {_('Speed')}
       </h2>
-      <p className="py-4">
-        <Translate>
-          Loaders can have custom speeds in milliseconds. The 
-          larger the number the slower the rotation.
-        </Translate>
-      </p>
       <div>
-        <Loader info speed={500} className="m-2">Loading...</Loader>
-        <Code language="typescript" className="mt-2">
-          {'<Loader speed={500} className="m-2">Loading...</Loader>'}
-        </Code>
-        <Loader warning speed={1000} className="m-2">Loading...</Loader>
-        <Code language="typescript" className="mt-2">
-          {'<Loader speed={1000} className="m-2">Loading...</Loader>'}
-        </Code>
-        <Loader success speed={5000} className="m-2">Loading...</Loader>
-        <Code language="typescript" className="mt-2">
-          {'<Loader speed={5000} className="m-2">Loading...</Loader>'}
-        </Code>
+        <p className="py-4">
+          <Translate>
+            Loaders can have custom speeds in milliseconds. The 
+            larger the number the slower the rotation.
+          </Translate>
+        </p>
+        <Preview 
+          height={100}
+          title="Faster Example" 
+          className="border border-2 theme-bc-3 my-4"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Loader info speed={500} className="m-2">Loading...</Loader>
+            </div>
+          </Preview.Example>
+          <Preview.Code>
+            {'<Loader info speed={500} className="m-2">Loading...</Loader>'}
+          </Preview.Code>
+        </Preview>
+
+        <Preview 
+          height={100}
+          title="Fast Example" 
+          className="border border-2 theme-bc-3 my-4"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Loader warning speed={1000} className="m-2">Loading...</Loader>
+            </div>
+          </Preview.Example>
+          <Preview.Code>
+            {'<Loader warning speed={1000} className="m-2">Loading...</Loader>'}
+          </Preview.Code>
+        </Preview>
+
+        <Preview 
+          height={100}
+          title="Slow Example" 
+          className="border border-2 theme-bc-3 my-4"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Loader success speed={5000} className="m-2">Loading...</Loader>
+            </div>
+          </Preview.Example>
+          <Preview.Code>
+            {'<Loader success speed={5000} className="m-2">Loading...</Loader>'}
+          </Preview.Code>
+        </Preview>
       </div>
+
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
-        {_('Custom Styles')}
+        {_('Global Styles')}
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to the alert component
-          or use the <C value="frui-loader" />, <C value="frui-loader-solid" />, <C value="frui-loader-dashed" />, <C value="frui-loader-dotted" />, <C value="frui-loader-slice-1" />, <C value="frui-loader-slice-2" />, <C value="frui-loader-slice-3" />,
-          and <C value="frui-loader-container" /> CSS class.
+          You can use the <C value="frui-loader" />, <C value="frui-loader-solid" />, <C value="frui-loader-dashed" />, <C value="frui-loader-dotted" />, <C value="frui-loader-slice-1" />, <C value="frui-loader-slice-2" />, <C value="frui-loader-slice-3" />,
+          and <C value="frui-loader-container" /> CSS classes to 
+          globally theme loaders.
         </Translate>
       </p>
+
+      <h2 id="api" className="uppercase font-bold text-lg mt-8">
+        {_('API Reference')}
+      </h2>
+      <div>
+        <p className="py-2">
+          <Translate>
+            The <C value="<Loader>" /> component can be passed the 
+            following props.
+          </Translate>
+        </p>
+        <Props props={props} />
+      </div>
+
       <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
-        <a className="text-t2" href="/component/crumbs">
+        <a className="text-t2" href="/component/dialog">
           <i className="fas fa-arrow-left mr-2"></i>
-          {_('Crumbs')}
+          {_('Dialogs')}
         </a>
         <div className="flex-grow"></div>
-        <a className="text-t2" href="/component/modal">
-          {_('Modal')}
+        <a className="text-t2" href="/component/notifier">
+          {_('Notifiers')}
           <i className="fas fa-arrow-right ml-2"></i>
         </a>
       </div>
@@ -294,7 +463,7 @@ export function Page() {
       <LayoutPanel pathname="/component/loader">
         <main className="flex flex-col h-full w-full">
           <div className="p-3 theme-bg-2">
-            <Crumbs crumbs={crumbs} />
+            <Crumbs />
           </div>
           <section className="flex-grow relative h-full">
             <Menu />

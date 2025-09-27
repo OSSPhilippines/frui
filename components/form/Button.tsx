@@ -30,7 +30,6 @@ export type ButtonProps = HTMLButtonProps & {
   error?: boolean, 
   muted?: boolean, 
   outline?: boolean, 
-  transparent?: boolean, 
   solid?: boolean, 
   style?: CSSProperties|false
 };
@@ -65,7 +64,6 @@ export default function Button(props: ButtonProps) {
     error, 
     muted,
     outline, 
-    transparent, 
     solid, 
     style,
     className,
@@ -77,7 +75,7 @@ export default function Button(props: ButtonProps) {
     classes: string[],
     styles: Record<string, string>
   } = {
-    classes: [ 'frui-btn' ],
+    classes: [ 'frui-button' ],
     styles: {}
   }
 
@@ -99,12 +97,10 @@ export default function Button(props: ButtonProps) {
     : xl4 ? '4xl' 
     : xl5 ? '5xl' 
     : 'md';
-  defaults.classes.push(`frui-btn-${size}`);
+  defaults.classes.push(`frui-button-${size}`);
 
   const layout = outline 
     ? 'outline' 
-    : transparent
-    ? 'transparent'
     : solid 
     ? 'solid'
     : 'solid';
@@ -117,11 +113,8 @@ export default function Button(props: ButtonProps) {
     defaults.classes.push('frui-pill');
   }
 
-  if (layout === 'outline' || layout === 'transparent') {
+  if (layout === 'outline') {
     defaults.classes.push('frui-solid', 'frui-thin');
-    if (layout === 'outline') {
-      defaults.classes.push('frui-bg-white');
-    }
     if (color) {
       defaults.styles.borderColor = color;
       defaults.styles.color = color;

@@ -1,9 +1,8 @@
 //modules
 import { useLanguage } from 'r22n';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { dark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import ShikiHighlighter from 'react-shiki';
 //frui
-import { notify } from 'components/element/Notify.js';
+import { notify } from 'components/element/Notifier.js';
 
 export function InlineCode(props: { 
   l?: boolean,
@@ -23,7 +22,7 @@ export function InlineCode(props: {
       {r?(<span>&nbsp;</span>):''}
     </>
   );
-}
+};
 
 export default function Code(props: { 
   language: string,
@@ -43,11 +42,15 @@ export default function Code(props: {
   //render
   return (
     <div className={`flex text-sm theme-bg-black relative ${className || ''}`}>
-      <SyntaxHighlighter className="flex-grow !p-4 !bg-transparent" language={language} style={dark}>
+      <ShikiHighlighter 
+        className="flex-grow" 
+        language={language} 
+        theme="github-dark"
+      >
         {children}
-      </SyntaxHighlighter>
+      </ShikiHighlighter>
       {canCopy && (
-        <div className="absolute right-0 top-0 text-sm p-4 text-gray-400 cursor-pointer whitespace-nowrap" onClick={copy}>
+        <div className="absolute right-0 top-1 text-sm p-4 text-gray-400 cursor-pointer whitespace-nowrap" onClick={copy}>
           <i className="fas fa-copy"></i> {_('Copy')}
         </div>
       )}

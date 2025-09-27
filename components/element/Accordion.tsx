@@ -22,22 +22,22 @@ import applyClassStyle from '../helpers/style.js';
 
 export type AccordionContextProps = {
   //class/style to apply to active label
-  active?: ClassStyleProp,
+  activeClassStyle?: ClassStyleProp,
   //class/style to apply to each content
-  contents?: ClassStyleProp,
+  contentClassStyle?: ClassStyleProp,
   //accordion item value
   itemValue?: string,
   //change value handler
   onChange: (value: string) => void,
   //class/style to apply to each label
-  labels?: ClassStyleProp,
+  labelClassStyle?: ClassStyleProp,
   //active accordion value
   value?: string
 };
 
 export type AccordionLabelProps = HTMLProps & ChildrenProps & {
   //class/style to apply if active
-  active?: ClassStyleProp
+  activeClassStyle?: ClassStyleProp
 };
 
 export type AccordionContentProps = HTMLProps & ChildrenProps;
@@ -48,15 +48,15 @@ export type AccordionBellowProps = HTMLProps & ChildrenProps & {
 
 export type AccordionProps = HTMLProps & ChildrenProps & {
   //class/style to apply to active label
-  active?: ClassStyleProp,
+  activeClassStyle?: ClassStyleProp,
   //class/style to apply to each content
-  contents?: ClassStyleProp,
+  contentClassStyle?: ClassStyleProp,
   //default active accordion value
   defaultValue?: string,
   //change value handler
   onChange?: (value: string) => void,
   //class/style to apply to each label
-  labels?: ClassStyleProp,
+  labelClassStyle?: ClassStyleProp,
   //controlled value
   value?: string
 };
@@ -132,7 +132,7 @@ export function AccordionLabel(props: AccordionLabelProps) {
   //props
   const {
     //class/style to apply if active
-    active, //?: ClassStyleProp
+    activeClassStyle, //?: ClassStyleProp
     //children nodes
     children, //?: ReactNode
     //tabs class name
@@ -142,7 +142,7 @@ export function AccordionLabel(props: AccordionLabelProps) {
   } = props;
   //hooks
   const context = useAccordionContext();
-  const { value, itemValue, labels, onChange } = context;
+  const { value, itemValue, labelClassStyle, onChange } = context;
   //variables
   const isActive = itemValue && value === itemValue;
   // configure classes and styles
@@ -153,21 +153,21 @@ export function AccordionLabel(props: AccordionLabelProps) {
     //add active class
     classes.push('frui-tabs-label-active');
     //if AccordionLabel has an active prop
-    if (active) {
+    if (activeClassStyle) {
       //use the active prop from AccordionLabel
-      applyClassStyle(classes, styles, active);
+      applyClassStyle(classes, styles, activeClassStyle);
     //if the context has an active prop
-    } else if (context.active) {
+    } else if (context.activeClassStyle) {
       //use the active prop from context
-      applyClassStyle(classes, styles, context.active);
+      applyClassStyle(classes, styles, context.activeClassStyle);
     //there are no active props
     //if AccordionLabel has a className prop
     } else if (className) {
       //use the className prop from AccordionLabel
       classes.push(className);
-    } else if (labels) {
+    } else if (labelClassStyle) {
       //use the labels prop from context
-      applyClassStyle(classes, styles, labels);
+      applyClassStyle(classes, styles, labelClassStyle);
     }
   //not active tab
   //if AccordionLabel has a className prop
@@ -175,9 +175,9 @@ export function AccordionLabel(props: AccordionLabelProps) {
     //use the className prop from AccordionLabel
     classes.push(className);
   //if the context has a labels prop
-  } else if (labels) {
+  } else if (labelClassStyle) {
     //use the labels prop from context
-    applyClassStyle(classes, styles, labels);
+    applyClassStyle(classes, styles, labelClassStyle);
   }
   //render
   return (
@@ -201,15 +201,15 @@ export function AccordionContent(props: AccordionContentProps) {
   //props
   const { className, style, children } = props;
   //hooks
-  const { value, contents, itemValue } = useAccordionContext();
+  const { value, contentClassStyle, itemValue } = useAccordionContext();
   //variables
   // configure classes and styles
   const classes = [ 'frui-accordion-content' ];
   const styles = { ...style };
   if (className) {
     classes.push(className);
-  } else if (contents) {
-    applyClassStyle(classes, styles, contents);
+  } else if (contentClassStyle) {
+    applyClassStyle(classes, styles, contentClassStyle);
   }
   //render
   return itemValue && value === itemValue ? (
@@ -250,7 +250,7 @@ export function Accordion(props: AccordionProps) {
   //props
   const { 
     //class/style to apply to active label
-    active, //?: ClassStyleProp
+    activeClassStyle, //?: ClassStyleProp
     //children nodes
     children, //?: ReactNode
     //accordion class name
@@ -258,13 +258,13 @@ export function Accordion(props: AccordionProps) {
     //change value handler
     onChange, //: (value: string) => void
     //class/style to apply to each content
-    contents, //?: ClassStyleProp
+    contentClassStyle, //?: ClassStyleProp
     //default active accordion value
     defaultValue, //?: string
     //accordion style
     style, //?: CSSProperties
     //class/style to apply to each labels
-    labels, //?: ClassStyleProp
+    labelClassStyle, //?: ClassStyleProp
     //controlled value
     value //?: string
   } = props;
@@ -276,13 +276,13 @@ export function Accordion(props: AccordionProps) {
   if (className) classes.push(className);
   // configure context provider
   const provider = { 
-    active, 
+    activeClassStyle, 
     onChange: (value: string) => {
       change(value);
       onChange && onChange(value);
     },
-    contents, 
-    labels,
+    contentClassStyle, 
+    labelClassStyle,
     value: activeValue
   };
   //effects
@@ -312,6 +312,8 @@ export default Object.assign(
     Label: AccordionLabel,
     Content: AccordionContent,
     Active: AccordionActive,
-    Inactive: AccordionInactive
+    Inactive: AccordionInactive,
+    Context: AccordionContext,
+    useContext: useAccordionContext
   }
 );

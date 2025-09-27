@@ -5,8 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import type { Crumb } from 'components/element/Crumbs.js';
-import Crumbs from 'components/element/Crumbs.js';
+import Bread from 'components/element/Bread.js';
 import Accordion from 'components/element/Accordion.js';
 
 //plugins
@@ -25,20 +24,15 @@ import { useState } from 'react';
 //--------------------------------------------------------------------//
 // Constants
 
-const crumbs: Crumb[] = [
-  { icon: 'icons', label: 'Components', href: '/component' },
-  { label: 'Accordion' }
-];
-
 const props = [
   //accordion
   [
-    [ 'active', 'ClassStyleProp', 'No', 'Class/style to apply to active label' ],
+    [ 'activeClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to active label' ],
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'contents', 'ClassStyleProp', 'No', 'Class/style to apply to each content' ],
+    [ 'contentClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to each content' ],
     [ 'defaultValue', 'string', 'No', 'Default active accordion value' ],
     [ 'onChange', '(value: string) => void', 'No', 'Change value handler' ],
-    [ 'labels', 'ClassStyleProp', 'No', 'Class/style to apply to each label' ],
+    [ 'labelClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to each label' ],
     [ 'style', 'React.CSSProperties', 'No', 'Standard HTML styles' ],
     [ 'value', 'string', 'No', 'Controlled value' ],
   ],
@@ -51,7 +45,7 @@ const props = [
   //accordion label
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'active', 'ClassStyleProp', 'No', 'Class/style to apply if active' ],
+    [ 'activeClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply if active' ],
     [ 'style', 'React.CSSProperties', 'No', 'Standard HTML styles' ]
   ],
   //accordion content
@@ -74,8 +68,8 @@ const props = [
 const examples = [
 //0
 `<Accordion 
-  labels="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-  contents="px-3 py-4 border theme-bc-2"
+  labelClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
+  contentClassStyle="px-3 py-4 border theme-bc-2"
   defaultValue="item1"
 >
   <Accordion.Item value="item1">
@@ -93,9 +87,9 @@ const examples = [
 </Accordion>`,
 //1
 `<Accordion 
-  active="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-  labels="px-3 py-2 border theme-bc-3 theme-bg-1"
-  contents="px-3 py-4 border theme-bc-2"
+  activeClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
+  labelClassStyle="px-3 py-2 border theme-bc-3 theme-bg-1"
+  contentClassStyle="px-3 py-4 border theme-bc-2"
   defaultValue="item1"
 >
   <Accordion.Item value="item1">
@@ -113,8 +107,8 @@ const examples = [
 </Accordion>`,
 //2
 `<Accordion 
-  labels="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-  contents="px-3 py-4 border theme-bc-2"
+  labelClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
+  contentClassStyle="px-3 py-4 border theme-bc-2"
   defaultValue="item1"
 >
   <Accordion.Item value="item1">
@@ -132,8 +126,8 @@ const examples = [
 </Accordion>`,
 //3
 `<Accordion 
-  labels="flex items-center px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-  contents="px-3 py-4 border theme-bc-2"
+  labelClassStyle="flex items-center px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
+  contentClassStyle="px-3 py-4 border theme-bc-2"
   defaultValue="item1"
 >
   <Accordion.Item value="item1">
@@ -208,8 +202,8 @@ const prev = () => setItem(item => (item - 1 + items.length) % items.length);
 
 return (
   <Accordion 
-    labels="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-    contents="px-3 py-4 border theme-bc-2"
+    labelClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
+    contentClassStyle="px-3 py-4 border theme-bc-2"
     value={items[item]}
   >
     <Accordion.Item value="item1">
@@ -304,6 +298,21 @@ return (
 // Components
 
 /**
+ * Crumbs component
+ */
+export function Crumbs() {
+  return (
+    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+      <Bread.Slicer />
+      <Bread.Crumb icon="icons" href="/component">
+        Components
+      </Bread.Crumb>
+      <Bread.Crumb>Accordions</Bread.Crumb>
+    </Bread>
+  );
+};
+
+/**
  * Aside right menu component
  */
 export function Menu() {
@@ -322,8 +331,10 @@ export function Menu() {
         {_('Contents')}
       </h4>
       <div className="p-3">
-        <a className="block pb-1 font-bold" href="#top">{_('Accordion')}</a>
-        <ul className="list-disc pl-3">
+        <a className="block pb-1 font-bold" href="#top">
+          {_('Accordions')}
+        </a>
+        <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
             <a href="#examples">{_('Examples')}</a>
           </li>
@@ -362,8 +373,8 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <Accordion 
-            labels="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-            contents="px-3 py-4 border theme-bc-2"
+            labelClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
+            contentClassStyle="px-3 py-4 border theme-bc-2"
             defaultValue="item1"
           >
             <Accordion.Item value="item1">
@@ -390,9 +401,9 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <Accordion 
-            active="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-            labels="px-3 py-2 border theme-bc-3 theme-bg-1"
-            contents="px-3 py-4 border theme-bc-2"
+            activeClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
+            labelClassStyle="px-3 py-2 border theme-bc-3 theme-bg-1"
+            contentClassStyle="px-3 py-4 border theme-bc-2"
             defaultValue="item1"
           >
             <Accordion.Item value="item1">
@@ -419,8 +430,8 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <Accordion 
-            labels="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-            contents="px-3 py-4 border theme-bc-2"
+            labelClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
+            contentClassStyle="px-3 py-4 border theme-bc-2"
             defaultValue="item1"
           >
             <Accordion.Item value="item1">
@@ -447,8 +458,8 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <Accordion 
-            labels="flex items-center px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-            contents="px-3 py-4 border theme-bc-2"
+            labelClassStyle="flex items-center px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
+            contentClassStyle="px-3 py-4 border theme-bc-2"
             defaultValue="item1"
           >
             <Accordion.Item value="item1">
@@ -513,7 +524,7 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Accordion')}
+        {_('Accordions')}
       </h1>
       <div>
         <p className="py-2">
@@ -545,8 +556,9 @@ export function Body() {
         <p className="py-2">
           <Translate>
             You can manage the styles of the labels by passing class names to
-            the <C value="labels" />, <C value="active" />, and
-            <C value="contents" /> props in the <C value="<Accordion>" /> component.
+            the <C value="labelClassStyle" />, <C value="activeClassStyle" />, 
+            and <C value="contentClassStyle" /> props in 
+            the <C value="<Accordion>" /> component.
           </Translate>
         </p>
         <Code className="my-4" language="typescript">{examples[0]}</Code>
@@ -578,8 +590,8 @@ export function Body() {
         >
           <Preview.Example center padding>
             <Accordion 
-              labels="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-              contents="px-3 py-4 border theme-bc-2"
+              labelClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
+              contentClassStyle="px-3 py-4 border theme-bc-2"
               value={items[item]}
             >
               <Accordion.Item value="item1">
@@ -639,8 +651,8 @@ export function Body() {
         >
           <Preview.Example center padding>
             <Accordion 
-              labels="flex items-center px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-              contents="px-3 py-4 border theme-bc-2"
+              labelClassStyle="flex items-center px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
+              contentClassStyle="px-3 py-4 border theme-bc-2"
               defaultValue="item1"
             >
               <Accordion.Item value="item1">
@@ -708,7 +720,7 @@ export function Body() {
           <Translate>
             You can add use 
             the <C value="frui-accordion" />, <C value="frui-accordion-bellow" />, <C value="frui-accordion-label" />, 
-            and <C value="frui-accordion-content" /> CSS class to 
+            and <C value="frui-accordion-content" /> CSS classes to 
             globally theme accordions.
           </Translate>
         </p>
@@ -823,7 +835,7 @@ export function Page() {
       <LayoutPanel pathname="/component/accordion">
         <main className="flex flex-col h-full w-full">
           <div className="p-3 theme-bg-2">
-            <Crumbs crumbs={crumbs} />
+            <Crumbs />
           </div>
           <section className="flex-grow relative h-full">
             <Menu />

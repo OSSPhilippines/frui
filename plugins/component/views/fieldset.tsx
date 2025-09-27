@@ -5,9 +5,8 @@
 import { useLanguage } from 'r22n';
 
 //frui
-import type { Crumb } from 'components/element/Crumbs.js';
 import type { FieldsProps, FieldsetProps } from 'components/form/Fieldset.js';
-import Crumbs from 'components/element/Crumbs.js';
+import Bread from 'components/element/Bread.js';
 import make from 'components/form/Fieldset.js';
 
 //plugins
@@ -29,11 +28,6 @@ export type ContactsProps = FieldsetProps<ContactType> & {};
 //--------------------------------------------------------------------//
 // Constants
 
-const crumbs: Crumb[] = [
-  { icon: 'icons', label: 'Components', href: '/component' },
-  { label: 'Fieldset' }
-];
-
 const props = [
   [ 'limit', 'number', 'No', 'Maximum number of fieldsets' ],
   [ 'defaultValue', 'array', 'No', 'Default values for the fieldset' ],
@@ -43,6 +37,21 @@ const props = [
 
 //--------------------------------------------------------------------//
 // Components
+
+/**
+ * Crumbs component
+ */
+export function Crumbs() {
+  return (
+    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+      <Bread.Slicer />
+      <Bread.Crumb icon="icons" href="/component">
+        Components
+      </Bread.Crumb>
+      <Bread.Crumb>Fieldset</Bread.Crumb>
+    </Bread>
+  );
+};
 
 /**
  * Example fields component
@@ -182,7 +191,7 @@ export function Page() {
       <LayoutPanel pathname="/component/fieldset">
         <main className="flex flex-col h-full w-full">
           <div className="p-3 theme-bg-2">
-            <Crumbs crumbs={crumbs} />
+            <Crumbs />
           </div>
           <section className="flex-grow relative h-full">
             <Menu />

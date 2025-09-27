@@ -1,7 +1,7 @@
 //modules
 import { useEffect } from 'react';
 //frui
-import { unload } from 'components/element/Notify.js';
+import { unload } from 'components/element/Notifier.js';
 //app
 import { useTheme } from '../theme/hooks.js';
 import LayoutHead from './LayoutHead.js';
@@ -18,7 +18,7 @@ export default function LayoutPanel({ children, pathname }: LayoutPanelProps) {
   const [ opened, toggle ] = useToggle();
   const { ready, theme, mode } = useTheme();
   //unload flash message
-  useEffect(unload, []);
+  useEffect(() => { unload() }, []);
   if (!ready) return null;
   //render
   return (

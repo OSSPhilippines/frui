@@ -2,11 +2,11 @@
 // Imports
 
 //modules
+import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import type { Crumb } from 'components/element/Crumbs.js';
-import Crumbs from 'components/element/Crumbs.js';
+import Bread from 'components/element/Bread.js';
 import Tooltip from 'components/element/Tooltip.js';
 import Button from 'components/form/Button.js';
 
@@ -18,16 +18,12 @@ import {
   ThemeHead, 
   Code, 
   C, 
-  Props
+  Props,
+  Preview
 } from 'plugins/app/index.js';
 
 //--------------------------------------------------------------------//
 // Constants
-
-const crumbs: Crumb[] = [
-  { icon: 'icons', label: 'Components', href: '/component' },
-  { label: 'Tooltip' }
-];
 
 const props = [
   ['arrow', 'boolean', 'No', 'Displays an arrow on the tooltip'],
@@ -56,7 +52,7 @@ const props = [
 const examples = [
 //0
 `<Tooltip text="Submit" hover>
-  <Button color="#333">Submit</Button>
+  <Button color="#333333">Submit</Button>
 </Tooltip>`,
 //1
 `<Tooltip text="Submit info" info hover>
@@ -83,39 +79,59 @@ const examples = [
   <Button color="salmon">Submit Custom</Button>
 </Tooltip>`,
 //7
-`<Tooltip text="Submit Curved" info curved hover>
-  <Button info curved>Submit Curved</Button>
+`<Tooltip text="Submit Curved" curved hover>
+  <Button color="#333333" curved>Submit Curved</Button>
 </Tooltip>`,
 //8
-`<Tooltip text="Submit Rounded" warning rounded hover>
-  <Button warning rounded>Submit Rounded</Button>
+`<Tooltip text="Submit Rounded" rounded hover>
+  <Button color="#333333" warning rounded>Submit Rounded</Button>
 </Tooltip>`,
 //9
-`<Tooltip text="Submit Pill" success pill hover>
-  <Button success pill>Submit Pill</Button>
+`<Tooltip text="Submit Pill" pill hover>
+  <Button color="#333333" success pill>Submit Pill</Button>
 </Tooltip>`,
 //10
 `<Tooltip text="Submit" arrow hover>
-  <Button color="#333">Submit</Button>
+  <Button color="#333333">Submit</Button>
 </Tooltip>`,
 //11
+`<Tooltip text="Submit" opacity={50} hover>
+  <Button color="#333333">Submit</Button>
+</Tooltip>`,
+//12
 `<Tooltip text="top-right" top right hover>
   <Button className="flex items-center justify-center w-32 h-11 p-3" info rounded>
     topRight
   </Button>
 </Tooltip>`,
-//12
-`<Tooltip text="Submit" padding={20} arrow hover>
-  <Button color="#333" rounded>Submit</Button>
-</Tooltip>`,
 //13
-`<Tooltip text="Submit" opacity={50} hover>
-  <Button color="#333">Submit</Button>
-</Tooltip>`
+`const [ show, setShow ] = useState(false);
+return (
+  <Tooltip text="Party Time!" show={show}>
+    <Button color="#333333" onClick={() => setShow(show => !show)}>
+      Click Me
+    </Button>
+  </Tooltip>
+);`
 ];
 
 //--------------------------------------------------------------------//
 // Components
+
+/**
+ * Crumbs component
+ */
+export function Crumbs() {
+  return (
+    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+      <Bread.Slicer />
+      <Bread.Crumb icon="icons" href="/component">
+        Components
+      </Bread.Crumb>
+      <Bread.Crumb>Tooltip</Bread.Crumb>
+    </Bread>
+  );
+};
 
 /**
  * Aside right menu component
@@ -136,38 +152,206 @@ export function Menu() {
         {_('Contents')}
       </h4>
       <div className="p-3">
-        <a className="block pb-1" href="#top">{_('Tooltip')}</a>
-        <ul className="list-disc pl-3">
-          <li className="pl-3 pb-1">
-            <a href="#props">{_('Props')}</a>
+        <a className="block pb-1 font-bold" href="#top">
+          {_('Tooltip')}
+        </a>
+        <ul className="list-disc pl-2">
+          <li className="ml-2 pb-1">
+            <a href="#examples">{_('Examples')}</a>
           </li>
-          <li className="pl-3 pb-1">
-            <a href="#basic">{_('Basic Example')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#types">{_('Types')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#custom">{_('Custom Color')}</a>
-          </li>
-          <li className="pl-3 pb-1">
-            <a href="#arrow">{_('Arrow')}</a>
-          </li>
-          <li className="pl-3 pb-1">
+          <li className="ml-2 pb-1">
             <a href="#placements">{_('Placements')}</a>
           </li>
-          <li className="pl-3 pb-1">
-            <a href="#rounded">{_('Rounded')}</a>
+          <li className="ml-2 pb-1">
+            <a href="#controlled">{_('Controlled State')}</a>
           </li>
-          <li className="pl-3 pb-1">
-            <a href="#opacity">{_('Opacity')}</a>
+          <li className="ml-2 pb-1">
+            <a href="#styles">{_('Global Styles')}</a>
           </li>
-          <li className="pl-3 pb-1">
-            <a href="#styles">{_('Custom Styles')}</a>
+          <li className="ml-2 pb-1">
+            <a href="#api">{_('API Reference')}</a>
           </li>
         </ul>
       </div>
     </aside>
+  );
+};
+
+/**
+ * Examples component
+ */
+export function Examples() {
+  return (
+    <div className="flex items-start rmd-block flex-wrap gap-4">
+      {/* Basic Example */}
+      <Preview 
+        title="Basic Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Tooltip text="Submit" hover>
+              <Button color="#333333">Submit</Button>
+            </Tooltip>
+          </div>
+        </Preview.Example>
+        <Preview.Code>{examples[0]}</Preview.Code>
+      </Preview>
+      {/* Info Example */}
+      <Preview 
+        title="Info Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Tooltip text="Submit info" info hover>
+              <Button info>Submit info</Button>
+            </Tooltip>
+          </div>
+        </Preview.Example>
+        <Preview.Code>{examples[1]}</Preview.Code>
+      </Preview>
+      {/* Warning Example */}
+      <Preview 
+        title="Warning Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Tooltip text="Submit warning" warning hover>
+              <Button warning>Submit warning</Button>
+            </Tooltip>
+          </div>
+        </Preview.Example>
+        <Preview.Code>{examples[2]}</Preview.Code>
+      </Preview>
+      {/* Success Example */}
+      <Preview 
+        title="Success Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Tooltip text="Submit success" success hover>
+              <Button success>Submit success</Button>
+            </Tooltip>
+          </div>
+        </Preview.Example>
+        <Preview.Code>{examples[3]}</Preview.Code>
+      </Preview>
+      {/* Error Example */}
+      <Preview 
+        title="Error Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Tooltip text="Submit error" error hover>
+              <Button error>Submit error</Button>
+            </Tooltip>
+          </div>
+        </Preview.Example>
+        <Preview.Code>{examples[4]}</Preview.Code>
+      </Preview>
+      {/* Muted Example */}
+      <Preview 
+        title="Muted Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Tooltip text="Submit muted" muted hover>
+              <Button muted>Submit muted</Button>
+            </Tooltip>
+          </div>
+        </Preview.Example>
+        <Preview.Code>{examples[5]}</Preview.Code>
+      </Preview>
+      {/* Custom Color Example */}
+      <Preview 
+        title="Custom Color Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Tooltip text="Submit custom" color="salmon" hover>
+              <Button color="salmon">Submit custom</Button>
+            </Tooltip>
+          </div>
+        </Preview.Example>
+        <Preview.Code>{examples[6]}</Preview.Code>
+      </Preview>
+      {/* Curved Example */}
+      <Preview 
+        title="Curved Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Tooltip text="Submit curved" curved hover>
+              <Button color="#333333">Submit curved</Button>
+            </Tooltip>
+          </div>
+        </Preview.Example>
+        <Preview.Code>{examples[7]}</Preview.Code>
+      </Preview>
+      {/* Rounded Example */}
+      <Preview 
+        title="Rounded Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Tooltip text="Submit rounded" rounded hover>
+              <Button color="#333333">Submit rounded</Button>
+            </Tooltip>
+          </div>
+        </Preview.Example>
+        <Preview.Code>{examples[8]}</Preview.Code>
+      </Preview>
+      {/* Pill Example */}
+      <Preview 
+        title="Pill Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Tooltip text="Submit pill" pill hover>
+              <Button color="#333333">Submit pill</Button>
+            </Tooltip>
+          </div>
+        </Preview.Example>
+        <Preview.Code>{examples[9]}</Preview.Code>
+      </Preview>
+      {/* Arrow Example */}
+      <Preview 
+        title="Arrow Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Tooltip text="Submit" arrow hover>
+              <Button color="#333333">Submit arrow</Button>
+            </Tooltip>
+          </div>
+        </Preview.Example>
+        <Preview.Code>{examples[10]}</Preview.Code>
+      </Preview>
+      {/* Opaque Example */}
+      <Preview 
+        title="Opaque Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Tooltip text="Submit" opacity={50} hover>
+              <Button color="#333333">Submit</Button>
+            </Tooltip>
+          </div>
+        </Preview.Example>
+        <Preview.Code>{examples[11]}</Preview.Code>
+      </Preview>
+    </div>
   );
 };
 
@@ -177,6 +361,7 @@ export function Menu() {
 export function Body() {
   //hooks
   const { _ } = useLanguage();
+  const [ show, setShow ] = useState(false);
   //render
   return (
     <div className={
@@ -186,129 +371,41 @@ export function Body() {
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
         {_('Tooltip')}
       </h1>
-      <Code language="typescript" className="mt-2">
-        {`import Tooltip from 'frui/Tooltip';`}
-      </Code>
-
-      <h2 id="props" className="uppercase font-bold text-lg mt-8">
-        {_('Props')}
-      </h2>
-      <Props props={props} />
-
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basic Example')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          Tooltips are interactive ReactJS components that display 
-          informative text when users hover over, focus on, or 
-          tap an element.
-        </Translate>
-      </p>
       <div>
-        <Tooltip text="Submit" hover>
-          <Button color="black">Submit</Button>
-        </Tooltip>
-        <Code language="typescript" className="mt-4">
-          {examples[0]}
+        <p className="py-2">
+          <Translate>
+            Import the tooltip component like the following.
+          </Translate>
+        </p>
+        <Code language="typescript" className="mt-2">
+          {`import Tooltip from 'frui/Tooltip';`}
         </Code>
       </div>
 
-      <h2 id="types" className="uppercase font-bold text-lg mt-8">
-        {_('Types')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
-      <p className="py-4">
-        <Translate>
-          Tooltips have the following types: default, <C value="info" />,
-          <C l value="warning" />, <C value="success" />,
-          <C l value="error" />, and <C value="muted" />.
-        </Translate>
-      </p>
       <div>
-        <Tooltip text="Submit info" info hover>
-          <Button info>Submit info</Button>
-        </Tooltip>
-        <Code language="typescript" className="my-4">
-          {examples[1]}
-        </Code>
-        
-        <Tooltip text="Submit warning" warning hover>
-          <Button warning>Submit Warning</Button>
-        </Tooltip>
-        <Code language="typescript" className="my-4">
-          {examples[2]}
-        </Code>
-        
-        <Tooltip text="Submit success" success hover>
-          <Button success>Submit Success</Button>
-        </Tooltip>
-        <Code language="typescript" className="my-4">
-          {examples[3]}
-        </Code>
-        
-        <Tooltip text="Submit Error" error hover>
-          <Button error>Submit Error</Button>
-        </Tooltip>
-        <Code language="typescript" className="my-4">
-          {examples[4]}
-        </Code>
-        
-        <Tooltip text="Submit Muted" muted hover>
-          <Button muted>Submit Muted</Button>
-        </Tooltip>
-        <Code language="typescript" className="mt-4">
-          {examples[5]}
-        </Code>
+        <p className="py-2">
+          <Translate>
+            The following are some basic examples of badges.
+          </Translate>
+        </p>
+        <Examples />
       </div>
 
-      <h2 id="custom" className="uppercase font-bold text-lg mt-8">
-        {_('Custom Color')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          You can have custom CSS compatible colors which includes
-          hex and color names using the <C value="color" /> prop.
-        </Translate>
-      </p>
-      <div>
-        <Tooltip text="Submit Custom" color="salmon" hover>
-          <Button color="salmon">Submit Custom</Button>
-        </Tooltip>
-        <Code language="typescript" className="mt-4">
-          {examples[6]}
-        </Code>
-      </div>
-
-      <h2 id="arrow" className="uppercase font-bold text-lg mt-8">
-        {_('Arrow')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          You can display an arrow on the tooltip using 
-          the <C value="arrow" /> prop.
-        </Translate>
-      </p>
-      <div>
-        <Tooltip text="Submit" arrow hover>
-          <Button color="black">Submit</Button>
-        </Tooltip>
-        <Code language="typescript" className="mt-4">
-          {examples[10]}
-        </Code>
-      </div>
-
-      <h2 id="place" className="uppercase font-bold text-lg mt-8">
+      <h2 id="placements" className="uppercase font-bold text-lg mt-8">
         {_('Placements')}
       </h2>
-      <p className="py-4">
-        <Translate>
-          Tooltips can be placed in different positions around the
-          target element using the <C value="top" />, <C value="bottom" />,
-          <C value="left" />, and <C value="right" /> props. The default 
-          placement is top.
-        </Translate>
-      </p>
       <div>
+        <p className="py-4">
+          <Translate>
+            Tooltips can be placed in different positions around the
+            target element using the <C value="top" />, <C value="bottom" />,
+            <C value="left" />, and <C value="right" /> props. The default 
+            placement is top.
+          </Translate>
+        </p>
         <Tooltip text="top" top arrow hover>
           <Button className="mr-2" muted>top</Button>
         </Tooltip>
@@ -340,67 +437,57 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="rounded" className="uppercase font-bold text-lg mt-8">
-        {_('Rounded')}
+      <h2 id="controlled" className="uppercase font-bold text-lg mt-8">
+        {_('Controlled State')}
       </h2>
-      <p className="py-4">
-        <Translate>
-          Tooltips can have different corner styles using the
-          <C value="curved" />, <C value="rounded" />, and 
-          <C value="pill" /> props.
-        </Translate>
-      </p>
       <div>
-        <Tooltip text="Submit Curved" info curved arrow show={true}>
-          <Button info curved>Submit Curved</Button>
-        </Tooltip>
-        <Code language="typescript" className="my-4">
-          {examples[7]}
-        </Code>
-
-        <Tooltip text="Submit Rounded" warning rounded arrow hover>
-          <Button warning rounded>Submit Rounded</Button>
-        </Tooltip>
-        <Code language="typescript" className="my-4">
-          {examples[8]}
-        </Code>
-
-        <Tooltip text="Submit Pill" success pill arrow hover>
-          <Button success pill>Submit Pill</Button>
-        </Tooltip>
-        <Code language="typescript" className="mt-4">
-          {examples[9]}
-        </Code>
-      </div>
-
-      <h2 id="opacity" className="uppercase font-bold text-lg mt-8">
-        {_('Opacity')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          You can adjust the tooltip transparency using 
-          the <C value="opacity" /> prop which accepts values 
-          from 0 to 100.
-        </Translate>
-      </p>
-      <div>
-        <Tooltip text="Submit" opacity={50} hover>
-          <Button color="#333">Submit</Button>
-        </Tooltip>
-        <Code language="typescript" className="mt-4">
-          {examples[13]}
-        </Code>
+        <p className="py-4">
+          <Translate>
+            Tooltips can be placed in different positions around the
+            target element using the <C value="top" />, <C value="bottom" />,
+            <C value="left" />, and <C value="right" /> props. The default 
+            placement is top.
+          </Translate>
+        </p>
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Tooltip text="Party Time!" show={show}>
+                <Button color="#333333" onClick={() => setShow(show => !show)}>
+                  Click Me
+                </Button>
+              </Tooltip>
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[13]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
-        {_('Custom Styles')}
+        {_('Global Styles')}
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to the tooltip component or 
-          use the <C value="frui-tooltip" /> CSS class.
+          You can use the <C value="frui-tooltip" /> CSS class to
+          globally theme tooltips.
         </Translate>
       </p>
+
+      <h2 id="api" className="uppercase font-bold text-lg mt-8">
+        {_('API Reference')}
+      </h2>
+      <div>
+        <p className="py-2">
+          <Translate>
+            The <C value="<Tooltip>" /> component can be passed the 
+            following props.
+          </Translate>
+        </p>
+        <Props props={props} />
+      </div>
 
       <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
         <a className="text-t2" href="/component/tabs">
@@ -445,7 +532,7 @@ export function Page() {
       <LayoutPanel pathname="/component/tooltip">
         <main className="flex flex-col h-full w-full">
           <div className="p-3 theme-bg-2">
-            <Crumbs crumbs={crumbs} />
+            <Crumbs />
           </div>
           <section className="flex-grow relative h-full">
             <Menu />

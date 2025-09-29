@@ -1,6 +1,16 @@
+//--------------------------------------------------------------------//
+// Imports
+
 import { useState } from 'react';
+//modules
 import { useLanguage, Translate } from 'r22n';
 
+//frui
+import Bread from 'components/element/Bread.js';
+import Table from 'components/element/Table.js';
+import Rating from 'components/field/Rating.js';
+
+//plugins
 import type { PageProps } from 'plugins/app/types.js';
 import { 
   LayoutPanel, 
@@ -8,18 +18,12 @@ import {
   ThemeHead, 
   Props, 
   Code, 
-  C 
+  C,
+  Preview
 } from 'plugins/app/index.js';
-import type { Crumb } from 'components/element/Crumbs.js';
-import Crumbs from 'components/element/Crumbs.js';
-import { Table, Thead, Trow, Tcol } from 'components/element/Table.js';
 
-import Rating from 'components/field/Rating.js';
-
-const crumbs: Crumb[] = [
-  { icon: 'shapes', label: 'Components', href: '/component' },
-  { label: 'Rating' }
-];
+//--------------------------------------------------------------------//
+// Constants
 
 const propsData: [string, string, string, string][] = [
   [ 'name', 'string', 'No', 'Name attribute for the radio inputs (form submission). Auto-generated if not provided.' ],
@@ -96,6 +100,9 @@ const CircleIcon = (props) => (/* SVG code */);
 />`
 ];
 
+//--------------------------------------------------------------------//
+// Components
+
 // Example Custom Icons
 const HeartIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" height="1em" width="1em" {...props}>
@@ -109,6 +116,83 @@ const CircleIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+/**
+ * Crumbs component
+ */
+export function Crumbs() {
+  return (
+    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+      <Bread.Slicer />
+      <Bread.Crumb icon="rectangle-list" href="/field">
+        Fields
+      </Bread.Crumb>
+      <Bread.Crumb>Rating</Bread.Crumb>
+    </Bread>
+  );
+};
+
+/**
+ * Aside right menu component
+ */
+export function Menu() {
+  //hooks
+  const { _ } = useLanguage();
+  //render
+  return (
+    <aside className={
+      'hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 '
+      + 'border-l theme-bc-1 text-sm'
+    }>
+      <h4 className={
+        'p-3 border-b theme-bc-1 theme-bg-1 text-sm uppercase '
+        + 'font-semibold'
+      }>
+        {_('Contents')}
+      </h4>
+      <div className="p-3">
+        <a className="block pb-1 font-bold" href="#top">
+          {_('Rating')}
+        </a>
+        <ul className="list-disc pl-2">
+          <li className="ml-2 pb-1">
+            <a href="#examples">{_('Examples')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#styles">{_('Global Styles')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#api">{_('API Reference')}</a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+  );
+};
+
+/**
+ * Examples component
+ */
+export function Examples() {
+  return (
+    <div className="flex items-start rmd-block flex-wrap gap-4">
+      {/* Info Example */}
+      <Preview 
+        height={100}
+        title="Info Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          TODO
+        </Preview.Example>
+        <Preview.Code>{''}</Preview.Code>
+      </Preview>
+    </div>
+  );
+};
+
+/**
+ * Documentation body component
+ */
 export function Body() {
   //hooks
   const { _ } = useLanguage();
@@ -116,329 +200,305 @@ export function Body() {
   const [ hoverActiveValue, setHoverActiveValue ] = useState<number | null>(null);
   //render
   return (
-    <LayoutPanel pathname="/field/rating">
-      <main className="flex flex-col h-full w-full">
-        <div className="p-3 theme-bg-2">
-          <Crumbs crumbs={crumbs} />
-        </div>
-        <section className="flex-grow relative h-full">
-          <aside className="hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 border-l theme-bc-1 text-sm">
-            <h4 className="p-3 border-b theme-bc-1 theme-bg-1 uppercase font-semibold">
-              <a href="#top">{_('Rating')}</a>
-            </h4>
-            <ul className="list-disc py-3 pr-3 pl-6">
-              <li className="pl-3 pb-1">
-                <a href="#props">
-                  {_('Props')}
-                </a>
-              </li>
-              <li className="pl-3 pb-1">
-                <a href="#basic">
-                  {_('Basics')}
-                </a>
-              </li>
-              <li className="pl-3 pb-1">
-                <a href="#controlled">
-                  {_('Controlled')}
-                </a>
-              </li>
-               <li className="pl-3 pb-1">
-                <a href="#sizes">
-                  {_('Sizes')}
-                </a>
-              </li>
-               <li className="pl-3 pb-1">
-                <a href="#icons">
-                  {_('Custom Icons')}
-                </a>
-              </li>
-               <li className="pl-3 pb-1">
-                <a href="#highlight">
-                  {_('Highlighting')}
-                </a>
-              </li>
-              <li className="pl-3 pb-1">
-                <a href="#read-only">
-                  {_('Read Only & Disabled')}
-                </a>
-              </li>
-              <li className="pl-3 pb-1">
-                <a href="#events">
-                  {_('Events')}
-                </a>
-              </li>
-            </ul>
-          </aside>
-          <div className="absolute top-0 bottom-0 left-0 right-0 lg:right-56 px-3 pt-3 pb-5 h-full overflow-auto">
-            <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-              <i className="fas fa-star mr-2"></i>
-              {_('Rating')}
-            </h1>
-            <Code language="typescript" className="mt-2">
-              {`import Rating from 'frui/field/Rating';`}
-            </Code>
+    <div className={
+      'absolute top-0 bottom-0 left-0 right-0 lg:right-56 px-3 pt-3 '
+      + 'pb-5 h-full overflow-auto'
+    }>
+      <h1 id="top" className="flex items-center uppercase font-bold text-xl">
+        <i className="fas fa-star mr-2"></i>
+        {_('Rating')}
+      </h1>
+      <div>
+        <p className="py-2">
+          <Translate>
+            Import the rating field like the following.
+          </Translate>
+        </p>
+        <Code language="typescript" className="mt-2">
+          {`import Rating from 'frui/field/Rating';`}
+        </Code>
+      </div>
 
-            <h2 id="props" className="uppercase font-bold text-lg mt-8">
-              {_('Props')}
-            </h2>
-            <p>
-              <Translate>
-                The Rating component wraps visually hidden radio inputs for accessibility and form integration.
-                It accepts the following specific props:
-              </Translate>
-            </p>
-            <Props props={propsData} />
-
-            <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-              {_('Basics')}
-            </h2>
-            <p className="py-4">
-              <Translate>
-                By default, the Rating component is uncontrolled. Use <C value="defaultValue" /> to set an initial value.
-                It renders 5 stars.
-              </Translate>
-            </p>
-            <div className="curved overflow-hidden">
-              <div className="flex items-center justify-center p-3 theme-bg-1">
-                <Rating name="basic-rating" defaultValue={3} />
-              </div>
-              <Code language="typescript">
-                {`<Rating name="basic-rating" defaultValue={3} />`}
-              </Code>
-            </div>
-
-            <h2 id="controlled" className="uppercase font-bold text-lg mt-8">
-              {_('Controlled')}
-            </h2>
-            <p className="py-4">
-              <Translate>
-                For a controlled component, use the <C value="value" />, 
-                and <C value="onChange" r /> props, typically with React 
-                state.
-              </Translate>
-            </p>
-            <div className="curved overflow-hidden">
-              <div className="flex flex-col items-center justify-center p-3 theme-bg-1 space-y-2">
-                <Rating
-                  name="controlled-rating"
-                  value={controlledValue}
-                  onChange={(_, newValue) => {
-                    setControlledValue(newValue);
-                    console.log('Controlled Change:', newValue);
-                  }}
-                />
-                <span>{_('Current Value:')} {controlledValue ?? 'null'}</span>
-              </div>
-              <Code language="typescript">{examples[0]}</Code>
-            </div>
-
-            <h2 id="sizes" className="uppercase font-bold text-lg mt-8">
-              {_('Sizes')}
-            </h2>
-            <p className="py-4">
-              <Translate>
-                Use the <C value="size" /> prop to adjust the icon size. 
-                The sizes correspond to CSS 
-                classes <C l value=".frui-rating-sizeSmall" />, <C l value=".frui-rating-sizeMedium" />, 
-                and <C l value=".frui-rating-sizeLarge" />.
-              </Translate>
-            </p>
-            <div className="curved overflow-hidden">
-              <div className="flex flex-col space-y-2 items-start justify-center p-3 theme-bg-1">
-                <div><C value="small" />: <Rating defaultValue={3} size="small" /></div>
-                <div><C value="medium" /> (default): <Rating defaultValue={3} size="medium" /></div>
-                <div><C value="large" />: <Rating defaultValue={3} size="large" /></div>
-              </div>
-              <Code language="typescript">{examples[1]}</Code>
-            </div>
-
-            <h2 id="icons" className="uppercase font-bold text-lg mt-8">
-              {_('Custom Icons')}
-            </h2>
-            <p className="py-4">
-              <Translate>
-                Provide custom React nodes to the <C value="icon" /> (filled) 
-                and <C value="emptyIcon" /> props. If <C value="emptyIcon" /> is 
-                not provided, a faded version of the <C value="icon" /> is 
-                used. Styles target <C l value=".frui-rating-icon-filled" />, 
-                and <C l value=".frui-rating-icon-empty" />.
-              </Translate>
-            </p>
-            <div className="curved overflow-hidden">
-              <div className="flex flex-col space-y-2 items-start justify-center p-3 theme-bg-1">
-                <Rating 
-                  defaultValue={3.5} 
-                  icon={<HeartIcon />} 
-                  emptyIcon={<HeartIcon 
-                  style={{ opacity: 0.3 }} />} 
-                  max={5} 
-                />
-                <Rating 
-                  defaultValue={4} 
-                  icon={<CircleIcon />} 
-                  emptyIcon={<CircleIcon 
-                  style={{ opacity: 0.3 }} />} 
-                  max={6} 
-                />
-              </div>
-              <Code language="typescript">{examples[2]}</Code>
-            </div>
-
-            <h2 id="highlight" className="uppercase font-bold text-lg mt-8">
-              {_('Highlighting')}
-            </h2>
-            <p className="py-4">
-              <Translate>
-                By default, all icons up to the selected/hovered 
-                value are filled. Use <C value="highlightSelectedOnly" /> to 
-                only fill the single selected/hovered icon.
-              </Translate>
-            </p>
-            <div className="curved overflow-hidden">
-              <div className="flex flex-col space-y-2 items-start justify-center p-3 theme-bg-1">
-                <div>Default: <Rating defaultValue={3} /></div>
-                <div>Highlight Selected Only: <Rating defaultValue={3} highlightSelectedOnly /></div>
-              </div>
-              <Code language="typescript">{examples[3]}</Code>
-            </div>
-
-            <h2 id="read-only" className="uppercase font-bold text-lg mt-8">
-              {_('Read Only & Disabled')}
-            </h2>
-            <p className="py-4">
-              <Translate>
-                Use <C value="readOnly" /> to display a rating that 
-                cannot be changed by the user (<C l value=".frui-rating-readOnly" /> class).
-                Use <C value="disabled" /> to prevent interaction 
-                and apply disabled styling (<C l value=".frui-rating-disabled" /> class).
-              </Translate>
-            </p>
-            <div className="curved overflow-hidden">
-              <div className="flex flex-col space-y-2 items-start justify-center p-3 theme-bg-1">
-                <div>Read Only: <Rating value={4} readOnly /></div>
-                <div>Disabled: <Rating value={2} disabled /></div>
-              </div>
-              <Code language="typescript">{examples[4]}</Code>
-            </div>
-
-            <h2 id="events" className="uppercase font-bold text-lg mt-8">
-              {_('Events')}
-            </h2>
-            <p className="py-4">
-              <Translate>
-                The <C value="onChange" /> callback fires when a 
-                rating is selected. The <C value="onChangeActive" r /> callback 
-                fires when the mouse enters or leaves an icon, 
-                providing the hovered value (or null). Hover styles 
-                are mainly handled via CSS (<C l value=".frui-rating-icon-hover" />).
-              </Translate>
-            </p>
-            <div className="curved overflow-hidden">
-              <div className="flex flex-col items-start justify-center p-3 theme-bg-1 space-y-2">
-                <Rating
-                  name="event-rating"
-                  defaultValue={1}
-                  onChange={(_, v) => alert(`onChange: Value ${v} selected!`)}
-                  onChangeActive={(_, v) => setHoverActiveValue(v)}
-                />
-                <span>{_('Hovered Value (via onChangeActive):')} {hoverActiveValue ?? 'null'}</span>
-              </div>
-              <Code language="typescript">{examples[5]}</Code>
-            </div>
-
-            <h3 className="font-semibold text-md mt-8">
-              {_('onChange')}
-            </h3>
-            <p className="py-4">
-              <Translate>
-                The <C value="onChange" /> event is triggered when the
-                value has changed. The following arguments are passed
-                to the event handler:
-              </Translate>
-            </p>
-            <Table>
-              <Thead className="theme-bg-3 text-left">{_('Name')}</Thead>
-              <Thead className="theme-bg-3 text-left">{_('Type')}</Thead>
-              <Thead className="theme-bg-3 text-left">{_('Description')}</Thead>
-              <Trow>
-                <Tcol className="theme-bg-1 text-left">
-                  <C value="event" />
-                </Tcol>
-                <Tcol className="theme-bg-1 text-left">
-                  <C value="ChangeEvent<HTMLInputElement>" />
-                </Tcol>
-                <Tcol className="theme-bg-1 text-left">
-                  {_('The change event on the underlying radio input.')}
-                </Tcol>
-              </Trow>
-                <Trow>
-                  <Tcol className="theme-bg-1 text-left">
-                    <C value="value" />
-                  </Tcol>
-                  <Tcol className="theme-bg-1 text-left">
-                    <C value="number | null" />
-                  </Tcol>
-                  <Tcol className="theme-bg-1 text-left">
-                    {_('The newly selected rating value.')}
-                  </Tcol>
-              </Trow>
-            </Table>
-
-            <h3 className="font-semibold text-md mt-8">
-              {_('onChangeActive')}
-            </h3>
-            <p className="py-4">
-              <Translate>
-                 The <C value="onChangeActive" /> event is triggered 
-                 when the mouse pointer enters or leaves an icon. The 
-                 following arguments are passed to the event handler:
-              </Translate>
-            </p>
-            <Table>
-                <Thead className="theme-bg-3 text-left">{_('Name')}</Thead>
-                <Thead className="theme-bg-3 text-left">{_('Type')}</Thead>
-                <Thead className="theme-bg-3 text-left">{_('Description')}</Thead>
-                 <Trow>
-                    <Tcol className="theme-bg-1 text-left"><C value="event" /></Tcol>
-                    <Tcol className="theme-bg-1 text-left"><C value="MouseEvent" /></Tcol>
-                    <Tcol className="theme-bg-1 text-left">{_('The native mouse event.')}</Tcol>
-                </Trow>
-                <Trow>
-                    <Tcol className="theme-bg-1 text-left"><C value="value" /></Tcol>
-                    <Tcol className="theme-bg-1 text-left"><C value="number | null" /></Tcol>
-                    <Tcol className="theme-bg-1 text-left">{_('The value of the icon being hovered, or null if the mouse leaves the component.')}</Tcol>
-                </Trow>
-            </Table>
-
-            <p className="py-4 mt-4">
-              <Translate>
-                You can add custom CSS classes via 
-                the <C value="className" /> prop or inline styles via 
-                the <C value="style" /> prop to the 
-                root <C l value=".frui-rating-root" /> element. 
-                Component-specific classes like <C l value=".frui-rating-icon" />, <C l value=".frui-rating-icon-filled" />, <C l value=".frui-rating-icon-empty" />, <C l value=".frui-rating-icon-hover" />, <C l value=".frui-rating-icon-active" />, 
-                and size/state classes are available for more targeted styling.
-              </Translate>
-            </p>
-
-            <div className="flex items-center border-t theme-bg-2 mt-8 pt-4">
-              <a className="text-t2" href="/field/radio">
-                <i className="fas fa-arrow-left mr-2"></i>
-                {_('Radio')}
-              </a>
-              <div className="flex-grow"></div>
-              <a className="text-t2" href="/field/select">
-                {_('Select')}
-                <i className="fas fa-arrow-right ml-2"></i>
-              </a>
-            </div>
+      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
+        {_('Basics')}
+      </h2>
+      <div>
+        <p className="py-4">
+          <Translate>
+            By default, the Rating component is uncontrolled. Use <C value="defaultValue" /> to set an initial value.
+            It renders 5 stars.
+          </Translate>
+        </p>
+        <div className="curved overflow-hidden">
+          <div className="flex items-center justify-center p-3 theme-bg-1">
+            <Rating name="basic-rating" defaultValue={3} />
           </div>
-        </section>
-      </main>
-    </LayoutPanel>
+          <Code language="typescript">
+            {`<Rating name="basic-rating" defaultValue={3} />`}
+          </Code>
+        </div>
+      </div>
+
+      <h2 id="controlled" className="uppercase font-bold text-lg mt-8">
+        {_('Controlled')}
+      </h2>
+      <div>
+        <p className="py-4">
+          <Translate>
+            For a controlled component, use the <C value="value" />, 
+            and <C value="onChange" r /> props, typically with React 
+            state.
+          </Translate>
+        </p>
+        <div className="curved overflow-hidden">
+          <div className="flex flex-col items-center justify-center p-3 theme-bg-1 space-y-2">
+            <Rating
+              name="controlled-rating"
+              value={controlledValue}
+              onChange={(_, newValue) => {
+                setControlledValue(newValue);
+                console.log('Controlled Change:', newValue);
+              }}
+            />
+            <span>{_('Current Value:')} {controlledValue ?? 'null'}</span>
+          </div>
+          <Code language="typescript">{examples[0]}</Code>
+        </div>
+      </div>
+
+      <h2 id="sizes" className="uppercase font-bold text-lg mt-8">
+        {_('Sizes')}
+      </h2>
+      <div>
+        <p className="py-4">
+          <Translate>
+            Use the <C value="size" /> prop to adjust the icon size. 
+            The sizes correspond to CSS 
+            classes <C l value=".frui-rating-sizeSmall" />, <C l value=".frui-rating-sizeMedium" />, 
+            and <C l value=".frui-rating-sizeLarge" />.
+          </Translate>
+        </p>
+        <div className="curved overflow-hidden">
+          <div className="flex flex-col space-y-2 items-start justify-center p-3 theme-bg-1">
+            <div><C value="small" />: <Rating defaultValue={3} size="small" /></div>
+            <div><C value="medium" /> (default): <Rating defaultValue={3} size="medium" /></div>
+            <div><C value="large" />: <Rating defaultValue={3} size="large" /></div>
+          </div>
+          <Code language="typescript">{examples[1]}</Code>
+        </div>
+      </div>
+
+      <h2 id="icons" className="uppercase font-bold text-lg mt-8">
+        {_('Custom Icons')}
+      </h2>
+      <div>
+        <p className="py-4">
+          <Translate>
+            Provide custom React nodes to the <C value="icon" /> (filled) 
+            and <C value="emptyIcon" /> props. If <C value="emptyIcon" /> is 
+            not provided, a faded version of the <C value="icon" /> is 
+            used. Styles target <C l value=".frui-rating-icon-filled" />, 
+            and <C l value=".frui-rating-icon-empty" />.
+          </Translate>
+        </p>
+        <div className="curved overflow-hidden">
+          <div className="flex flex-col space-y-2 items-start justify-center p-3 theme-bg-1">
+            <Rating 
+              defaultValue={3.5} 
+              icon={<HeartIcon />} 
+              emptyIcon={<HeartIcon 
+              style={{ opacity: 0.3 }} />} 
+              max={5} 
+            />
+            <Rating 
+              defaultValue={4} 
+              icon={<CircleIcon />} 
+              emptyIcon={<CircleIcon 
+              style={{ opacity: 0.3 }} />} 
+              max={6} 
+            />
+          </div>
+          <Code language="typescript">{examples[2]}</Code>
+        </div>
+      </div>
+
+      <h2 id="highlight" className="uppercase font-bold text-lg mt-8">
+        {_('Highlighting')}
+      </h2>
+      <div>
+        <p className="py-4">
+          <Translate>
+            By default, all icons up to the selected/hovered 
+            value are filled. Use <C value="highlightSelectedOnly" /> to 
+            only fill the single selected/hovered icon.
+          </Translate>
+        </p>
+        <div className="curved overflow-hidden">
+          <div className="flex flex-col space-y-2 items-start justify-center p-3 theme-bg-1">
+            <div>Default: <Rating defaultValue={3} /></div>
+            <div>Highlight Selected Only: <Rating defaultValue={3} highlightSelectedOnly /></div>
+          </div>
+          <Code language="typescript">{examples[3]}</Code>
+        </div>
+      </div>
+
+      <h2 id="read-only" className="uppercase font-bold text-lg mt-8">
+        {_('Read Only & Disabled')}
+      </h2>
+      <div>
+        <p className="py-4">
+          <Translate>
+            Use <C value="readOnly" /> to display a rating that 
+            cannot be changed by the user (<C l value=".frui-rating-readOnly" /> class).
+            Use <C value="disabled" /> to prevent interaction 
+            and apply disabled styling (<C l value=".frui-rating-disabled" /> class).
+          </Translate>
+        </p>
+        <div className="curved overflow-hidden">
+          <div className="flex flex-col space-y-2 items-start justify-center p-3 theme-bg-1">
+            <div>Read Only: <Rating value={4} readOnly /></div>
+            <div>Disabled: <Rating value={2} disabled /></div>
+          </div>
+          <Code language="typescript">{examples[4]}</Code>
+        </div>
+      </div>
+
+      <h2 id="events" className="uppercase font-bold text-lg mt-8">
+        {_('Events')}
+      </h2>
+      <div>
+        <p className="py-4">
+          <Translate>
+            The <C value="onChange" /> callback fires when a 
+            rating is selected. The <C value="onChangeActive" r /> callback 
+            fires when the mouse enters or leaves an icon, 
+            providing the hovered value (or null). Hover styles 
+            are mainly handled via CSS (<C l value=".frui-rating-icon-hover" />).
+          </Translate>
+        </p>
+        <div className="curved overflow-hidden">
+          <div className="flex flex-col items-start justify-center p-3 theme-bg-1 space-y-2">
+            <Rating
+              name="event-rating"
+              defaultValue={1}
+              onChange={(_, v) => alert(`onChange: Value ${v} selected!`)}
+              onChangeActive={(_, v) => setHoverActiveValue(v)}
+            />
+            <span>{_('Hovered Value (via onChangeActive):')} {hoverActiveValue ?? 'null'}</span>
+          </div>
+          <Code language="typescript">{examples[5]}</Code>
+        </div>
+
+        <h3 className="font-semibold text-md mt-8">
+          {_('onChange')}
+        </h3>
+        <p className="py-4">
+          <Translate>
+            The <C value="onChange" /> event is triggered when the
+            value has changed. The following arguments are passed
+            to the event handler:
+          </Translate>
+        </p>
+        <Table>
+          <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
+          <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
+          <Table.Head className="theme-bg-3 text-left">{_('Description')}</Table.Head>
+          <Table.Row>
+            <Table.Col className="theme-bg-1 text-left">
+              <C value="event" />
+            </Table.Col>
+            <Table.Col className="theme-bg-1 text-left">
+              <C value="ChangeEvent<HTMLInputElement>" />
+            </Table.Col>
+            <Table.Col className="theme-bg-1 text-left">
+              {_('The change event on the underlying radio input.')}
+            </Table.Col>
+          </Table.Row>
+            <Table.Row>
+              <Table.Col className="theme-bg-1 text-left">
+                <C value="value" />
+              </Table.Col>
+              <Table.Col className="theme-bg-1 text-left">
+                <C value="number | null" />
+              </Table.Col>
+              <Table.Col className="theme-bg-1 text-left">
+                {_('The newly selected rating value.')}
+              </Table.Col>
+          </Table.Row>
+        </Table>
+
+        <h3 className="font-semibold text-md mt-8">
+          {_('onChangeActive')}
+        </h3>
+        <p className="py-4">
+          <Translate>
+              The <C value="onChangeActive" /> event is triggered 
+              when the mouse pointer enters or leaves an icon. The 
+              following arguments are passed to the event handler:
+          </Translate>
+        </p>
+        <Table>
+            <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
+            <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
+            <Table.Head className="theme-bg-3 text-left">{_('Description')}</Table.Head>
+              <Table.Row>
+                <Table.Col className="theme-bg-1 text-left"><C value="event" /></Table.Col>
+                <Table.Col className="theme-bg-1 text-left"><C value="MouseEvent" /></Table.Col>
+                <Table.Col className="theme-bg-1 text-left">{_('The native mouse event.')}</Table.Col>
+            </Table.Row>
+            <Table.Row>
+                <Table.Col className="theme-bg-1 text-left"><C value="value" /></Table.Col>
+                <Table.Col className="theme-bg-1 text-left"><C value="number | null" /></Table.Col>
+                <Table.Col className="theme-bg-1 text-left">{_('The value of the icon being hovered, or null if the mouse leaves the component.')}</Table.Col>
+            </Table.Row>
+        </Table>
+      </div>
+
+      <h2 id="styles" className="uppercase font-bold text-lg mt-8">
+        {_('Global Styles')}
+      </h2>
+      <p className="py-4 mt-4">
+        <Translate>
+          You can add custom CSS classes via 
+          the <C value="className" /> prop or inline styles via 
+          the <C value="style" /> prop to the 
+          root <C l value=".frui-rating-root" /> element. 
+          Component-specific classes like <C l value=".frui-rating-icon" />, <C l value=".frui-rating-icon-filled" />, <C l value=".frui-rating-icon-empty" />, <C l value=".frui-rating-icon-hover" />, <C l value=".frui-rating-icon-active" />, 
+          and size/state classes are available for more targeted styling.
+        </Translate>
+      </p>
+
+      <h2 id="api" className="uppercase font-bold text-lg mt-8">
+        {_('API Reference')}
+      </h2>
+      <div>
+        <p>
+          <Translate>
+            The Rating component wraps visually hidden radio inputs for accessibility and form integration.
+            It accepts the following specific props:
+          </Translate>
+        </p>
+        <Props props={propsData} />
+      </div>
+
+      <div className="flex items-center border-t theme-bg-2 mt-8 pt-4">
+        <a className="theme-2" href="/field/radio">
+          <i className="fas fa-arrow-left mr-2"></i>
+          {_('Radio')}
+        </a>
+        <div className="flex-grow"></div>
+        <a className="theme-2" href="/field/select">
+          {_('Select')}
+          <i className="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
   );
 };
 
+/**
+ * Page head (SEO) component
+ */
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (
@@ -451,10 +511,26 @@ export function Head(props: PageProps) {
   );
 };
 
-export default function Page() {
+/**
+ * Main page component
+ */
+export function Page() {
   return (
     <LayoutProvider>
-      <Body />
+      <LayoutPanel pathname="/field/rating">
+        <main className="flex flex-col h-full w-full">
+          <div className="p-3 theme-bg-2">
+            <Crumbs />
+          </div>
+          <section className="flex-grow relative h-full">
+            <Menu />
+            <Body />
+          </section>
+        </main>
+      </LayoutPanel>
     </LayoutProvider>
   );
 };
+
+//defaults to page
+export default Page;

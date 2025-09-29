@@ -6,8 +6,7 @@ import {
   LayoutProvider, 
   ThemeHead
 } from 'plugins/app/index.js';
-import type { Crumb } from 'components/element/Crumbs.js';
-import Crumbs from 'components/element/Crumbs.js';
+import Bread from 'components/element/Bread.js';
 
 import {
   Autocomplete,
@@ -528,6 +527,9 @@ export function Body() {
   );
 };
 
+/**
+ * Page head (SEO) component
+ */
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (

@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 import { useLanguage } from 'r22n';
 
 import type { PageProps } from 'plugins/app/types.js';
@@ -7,8 +10,7 @@ import {
   ThemeHead,
   Code,
 } from 'plugins/app/index.js';
-import type { Crumb } from 'components/element/Crumbs.js';
-import Crumbs from 'components/element/Crumbs.js';
+import Bread from 'components/element/Bread.js';
 
 import {
   //Code,
@@ -37,10 +39,31 @@ import {
   Yesno
 } from 'components/format';
 
+//--------------------------------------------------------------------//
+// Constants
+
 const crumbs: Crumb[] = [
   { icon: 'icons', label: 'Components', href: '/component' },
   { label: 'Crumbs' }
 ];
+
+//--------------------------------------------------------------------//
+// Components
+
+/**
+ * Crumbs component
+ */
+export function Crumbs() {
+  return (
+    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+      <Bread.Slicer />
+      <Bread.Crumb icon="text-height" href="/format">
+        Formats
+      </Bread.Crumb>
+      <Bread.Crumb>Currency</Bread.Crumb>
+    </Bread>
+  );
+};
 
 export function Body() {
   //hooks
@@ -132,7 +155,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Email className="text-t2" value="john@doe.com" />
+                  <Email className="theme-2" value="john@doe.com" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Email')}
@@ -216,7 +239,7 @@ export function Body() {
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <div className="text-left">
-                    <Link className="text-t2" value="https://images.wsj.net/im-580612/8SR" />
+                    <Link className="theme-2" value="https://images.wsj.net/im-580612/8SR" />
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
@@ -308,7 +331,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Phone className="text-t2" value="+1 (410) 555-2424" />
+                  <Phone className="theme-2" value="+1 (410) 555-2424" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Phone')}
@@ -406,6 +429,9 @@ export function Body() {
   );
 };
 
+/**
+ * Page head (SEO) component
+ */
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (

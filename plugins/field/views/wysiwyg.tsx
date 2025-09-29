@@ -607,7 +607,7 @@ export function Body() {
         <Props props={props} />
       </div>
 
-      <div className="flex items-center border-t theme-bg-2 mt-8 pt-4">
+      <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
         <a className="theme-2" href="/field/time">
           {_('Time')}
         </a>

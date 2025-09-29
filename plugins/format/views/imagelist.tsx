@@ -193,7 +193,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/imagelist"
       title="Image List Format"
-      description="Image list formats in FRUI, are ReactJS components that convert values to a list of images."
+      description="Image list formats convert values to a list of images."
       styles={styles}
     />
   );

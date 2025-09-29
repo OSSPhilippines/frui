@@ -422,7 +422,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/select"
       title="Select Field"
-      description="Select fields in FRUI, are ReactJS components that allow users to select from a dropdown of values."
+      description={
+        'Select is a field component that wraps the standard '
+        + 'HTML select element.'
+      }
       styles={styles}
     />
   );

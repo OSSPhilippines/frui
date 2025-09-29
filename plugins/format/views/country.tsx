@@ -240,7 +240,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/country"
       title="Country Format"
-      description="Country formats in FRUI, are ReactJS components that convert values to country displays."
+      description="Country formats convert values to country displays."
       styles={styles}
     />
   );

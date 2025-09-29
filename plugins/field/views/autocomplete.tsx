@@ -180,18 +180,19 @@ export function Body() {
             <C l value="Autocomplete" /> field.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <Autocomplete 
               className="w-full" 
               options={[ 'foo', 'bar' ]} 
               placeholder="Enter foo or bar"
             />
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -204,8 +205,11 @@ export function Body() {
             events for <C value="Autocomplete" />.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="relative flex items-center justify-center p-3 theme-bg-1">
+        <Preview 
+          title="With Events" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <Autocomplete 
               className="w-full" 
               options={['foo', 'bar']}
@@ -218,141 +222,139 @@ export function Body() {
               onUpdate={value => console.log('update', value)}
               placeholder="Enter 'b'"
             />
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
+
+        <h3 className="font-semibold text-md mt-8">
+          {_('On Change')}
+        </h3>
+        <div>
+          <p className="py-4">
+            <Translate>
+              The <C value="onChange" /> event is triggered when the
+              value has changed. The following arguments are passed
+              to the event handler:
+            </Translate>
+          </p>
+          <Table>
+            <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
+            <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
+            <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
+            <Table.Row>
+              <Table.Col className="theme-bg-1 text-left">
+                {_('event')}
+              </Table.Col>
+              <Table.Col className="theme-bg-1 text-left">
+                {_('Event Object')}
+              </Table.Col>
+              <Table.Col className="theme-bg-1 text-left">
+                see: <a 
+                  href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
+                  target="_blank"
+                >Change Event</a>
+              </Table.Col>
+            </Table.Row>
+          </Table>
         </div>
-      </div>
 
-      <h3 className="font-semibold text-md mt-8">
-        {_('On Change')}
-      </h3>
-      <div>
-        <p className="py-4">
-          <Translate>
-            The <C value="onChange" /> event is triggered when the
-            value has changed. The following arguments are passed
-            to the event handler:
-          </Translate>
-        </p>
-        <Table>
-          <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
-          <Table.Row>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('event')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('Event Object')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              see: <a 
-                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
-                target="_blank"
-              >Change Event</a>
-            </Table.Col>
-          </Table.Row>
-        </Table>
-      </div>
+        <h3 className="font-semibold text-md mt-8">
+          {_('On Dropdown')}
+        </h3>
+        <div>
+          <p className="py-4">
+            <Translate>
+              The <C value="onDropdown" /> event is triggered when the 
+              dropdown opens or closes. The following arguments are
+              passed to the event handler:
+            </Translate>
+          </p>
+          <Table>
+            <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
+            <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
+            <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
+            <Table.Row>
+              <Table.Col className="theme-bg-1 text-left">
+                {_('open')}
+              </Table.Col>
+              <Table.Col className="theme-bg-1 text-left">
+                {_('boolean')}
+              </Table.Col>
+              <Table.Col className="theme-bg-1 text-left">
+                <C value="true" />
+              </Table.Col>
+            </Table.Row>
+          </Table>
+        </div>
 
-      <h3 className="font-semibold text-md mt-8">
-        {_('On Dropdown')}
-      </h3>
-      <div>
-        <p className="py-4">
-          <Translate>
-            The <C value="onDropdown" /> event is triggered when the 
-            dropdown opens or closes. The following arguments are
-            passed to the event handler:
-          </Translate>
-        </p>
-        <Table>
-          <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
-          <Table.Row>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('open')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('boolean')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              <C value="true" />
-            </Table.Col>
-          </Table.Row>
-        </Table>
-      </div>
+        <h3 className="font-semibold text-md mt-8">
+          {_('On Query')}
+        </h3>
+        <div>
+          <p className="py-4">
+            <Translate>
+              The <C value="onQuery" /> event is triggered when the
+              user searches for something. The following arguments
+              are passed to the event handler:
+            </Translate>
+          </p>
+          <Table>
+            <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
+            <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
+            <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
+            <Table.Row>
+              <Table.Col className="theme-bg-1 text-left">
+                {_('query')}
+              </Table.Col>
+              <Table.Col className="theme-bg-1 text-left">
+                {_('string')}
+              </Table.Col>
+              <Table.Col className="theme-bg-1 text-left">
+                <C value="foobar" quote />
+              </Table.Col>
+            </Table.Row>
+            <Table.Row>
+              <Table.Col className="theme-bg-2 text-left">
+                {_('setOptions')}
+              </Table.Col>
+              <Table.Col className="theme-bg-2 text-left">
+                {_('Function')}
+              </Table.Col>
+              <Table.Col className="theme-bg-2 text-left">
+                <Code language="json">{`set(['boo', 'bar', 'baz'])`}</Code>
+              </Table.Col>
+            </Table.Row>
+          </Table>
+        </div>
 
-      <h3 className="font-semibold text-md mt-8">
-        {_('On Query')}
-      </h3>
-      <div>
-        <p className="py-4">
-          <Translate>
-            The <C value="onQuery" /> event is triggered when the
-            user searches for something. The following arguments
-            are passed to the event handler:
-          </Translate>
-        </p>
-        <Table>
-          <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
-          <Table.Row>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('query')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('string')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              <C value="foobar" quote />
-            </Table.Col>
-          </Table.Row>
-          <Table.Row>
-            <Table.Col className="theme-bg-2 text-left">
-              {_('setOptions')}
-            </Table.Col>
-            <Table.Col className="theme-bg-2 text-left">
-              {_('Function')}
-            </Table.Col>
-            <Table.Col className="theme-bg-2 text-left">
-              <Code language="json">{`set(['boo', 'bar', 'baz'])`}</Code>
-            </Table.Col>
-          </Table.Row>
-        </Table>
-      </div>
-
-      <h3 className="font-semibold text-md mt-8">
-        {_('On Update')}
-      </h3>
-      <div>
-        <p className="py-4">
-          <Translate>
-            The <C value="onUpdate" /> event is triggered when the
-            value has been updated. The following arguments are
-            passed to the event handler:
-          </Translate>
-        </p>
-        <Table>
-          <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
-          <Table.Row>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('value')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('string')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              <C value="foobar" quote />
-            </Table.Col>
-          </Table.Row>
-        </Table>
+        <h3 className="font-semibold text-md mt-8">
+          {_('On Update')}
+        </h3>
+        <div>
+          <p className="py-4">
+            <Translate>
+              The <C value="onUpdate" /> event is triggered when the
+              value has been updated. The following arguments are
+              passed to the event handler:
+            </Translate>
+          </p>
+          <Table>
+            <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
+            <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
+            <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
+            <Table.Row>
+              <Table.Col className="theme-bg-1 text-left">
+                {_('value')}
+              </Table.Col>
+              <Table.Col className="theme-bg-1 text-left">
+                {_('string')}
+              </Table.Col>
+              <Table.Col className="theme-bg-1 text-left">
+                <C value="foobar" quote />
+              </Table.Col>
+            </Table.Row>
+          </Table>
+        </div>
       </div>
 
       <h2 id="errors" className="uppercase font-bold text-lg mt-8">
@@ -365,19 +367,21 @@ export function Body() {
             the Autocomplete field red.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview 
+          title="With Events" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <Autocomplete 
               error
               className="w-full" 
               options={[ 'foo', 'bar' ]} 
               placeholder="Enter foo or bar"
+              value="Not a hotdog."
             />
-          </div>
-          <Code language="typescript">
-            {examples[2]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[2]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -435,8 +439,11 @@ export function Head(props: PageProps) {
   return (
     <ThemeHead
       uri="/field/autocomplete"
-      title=""
-      description=""
+      title="Autocomplete Field"
+      description={
+        'Autocomplete is a text input field that provides a list of '
+        + 'suggestions as the user types.'
+      }
       styles={styles}
     />
   );

@@ -180,7 +180,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/text"
       title="Text Format"
-      description="Text formats in FRUI, are ReactJS components that capitalizes, uppercase or lowercases values."
+      description="Text formats capitalizes, uppercase or lowercases values."
       styles={styles}
     />
   );

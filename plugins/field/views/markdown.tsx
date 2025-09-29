@@ -316,7 +316,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/markdown"
       title="Markdown Field"
-      description="Markdown fields in FRUI, are ReactJS components that formats markdown to HTML."
+      description={
+        'Markdown is a field component that provides a markdown '
+        + 'editing interface with live preview.'
+      }
       styles={styles}
     />
   );

@@ -339,7 +339,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/mask"
       title="Mask Field"
-      description="Mask fields in FRUI, are ReactJS components that hint users an accepted value format."
+      description={
+        'Mask is a field component that provides an input mask '
+        + 'to format user input according to a specified pattern.'
+      }
       styles={styles}
     />
   );

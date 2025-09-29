@@ -287,8 +287,8 @@ export function Head(props: PageProps) {
   return (
     <ThemeHead
       uri="/format/code"
-      title="Code Block"
-      description="Code blocks in FRUI are ReactJS components that contain code."
+      title="Code Format"
+      description="Code blocks with syntax highlighting and copy functionality."
       styles={styles}
     />
   );

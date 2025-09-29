@@ -309,7 +309,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/textarea"
       title="Textarea Field"
-      description="Textarea fields in FRUI, are ReactJS components that allow users to enter multi-line values."
+      description={
+        'Textarea is a field component that wraps the standard '
+        + 'HTML textarea element for multi-line text input.'
+      }
       styles={styles}
     />
   );

@@ -181,7 +181,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/formula"
       title="Formula Format"
-      description="Formula formats in FRUI, are ReactJS components that display an evaluated formula."
+      description="Formula formats display an evaluated formula."
       styles={styles}
     />
   );

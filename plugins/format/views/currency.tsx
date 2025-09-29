@@ -240,7 +240,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/currency"
       title="Currency Format"
-      description="Currency formats in FRUI, are ReactJS components that convert values to currency displays."
+      description="Currency formats convert values to currency displays."
       styles={styles}
     />
   );

@@ -423,8 +423,8 @@ export function Head(props: PageProps) {
       uri="/component/bread"
       title="Bread Component"
       description={
-        'Bread in FRUI allows users to see their current location '
-        + 'within a websites hierarchy.'
+        'Bread allows users to see their current location within a '
+        + 'websites hierarchy.'
       }
       styles={styles}
     />

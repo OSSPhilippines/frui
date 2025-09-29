@@ -383,7 +383,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/image"
       title="Image Field"
-      description="Image fields in FRUI, helps users upload images to the server."
+      description={
+        'Image is a field component that allows users to upload '
+        + 'and manage images.'
+      }
       styles={styles}
     />
   );

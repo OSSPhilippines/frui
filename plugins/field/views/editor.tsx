@@ -359,8 +359,12 @@ export function Head(props: PageProps) {
   return (
     <ThemeHead
       uri="/field/editor"
-      title=""
-      description=""
+      title="Code Editor Field"
+      description={
+        'Code Editor is a field component that provides a code '
+        + 'editing interface with syntax highlighting and other '
+        + 'features.'
+      }
       styles={styles}
     />
   );

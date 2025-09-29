@@ -182,7 +182,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/overflow"
       title="Overflow Format"
-      description="Overflow formats in FRUI, are ReactJS components that convert clip values."
+      description="Overflow formats convert clip values."
       styles={styles}
     />
   );

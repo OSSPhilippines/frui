@@ -176,7 +176,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/yesno"
       title="Yesno Format"
-      description="Yesno formats in FRUI, are ReactJS components that convert values to yes or no."
+      description="Yesno formats convert values to yes or no."
       styles={styles}
     />
   );

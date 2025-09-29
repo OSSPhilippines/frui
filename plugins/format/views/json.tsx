@@ -181,7 +181,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/json"
       title="JSON Format"
-      description="JSON formats in FRUI, are ReactJS components that convert values to pretty JSON."
+      description="JSON formats convert values to pretty JSON."
       styles={styles}
     />
   );

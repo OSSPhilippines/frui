@@ -506,7 +506,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/rating"
       title="Rating Component"
-      description="Rating components allow users to view and set ratings represented by icons."
+      description={
+        'Rating components allow users to view and set ratings '
+        + 'represented by icons.'
+      }
       styles={styles}
     />
   );

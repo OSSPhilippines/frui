@@ -433,8 +433,8 @@ export function Head(props: PageProps) {
       uri="/component/notifier"
       title="Notifier Component"
       description={
-        'Notifiers in FRUI are React components that allow users to '
-        + 'display notifications with internal state management.'
+        'Notifiers allow users to display notifications with '
+        + 'internal state management.'
       }
       styles={styles}
     />

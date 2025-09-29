@@ -382,7 +382,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/color"
       title="Color Picker Field"
-      description="A field component allowing users to select colors via a popover palette, sliders, and inputs."
+      description={
+        'A field component allowing users to select colors via a '
+        + 'popover palette, sliders, and inputs.'
+      }
       styles={styles}
     />
   );

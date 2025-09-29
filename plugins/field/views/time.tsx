@@ -325,7 +325,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/time"
       title="Time Field"
-      description="Time fields in FRUI, helps users format time based inputs."
+      description={
+        'Time is a field component that wraps the standard '
+        + 'HTML input element for time values.'
+      }
       styles={styles}
     />
   );

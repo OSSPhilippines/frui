@@ -300,7 +300,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/textlist"
       title="Textlist Field"
-      description="Textlist fields in FRUI, are ReactJS components that allow users to enter multiple values in a fieldset."
+      description={
+        'Textlist is a field component that allows users to input '
+        + 'a list of tags or values.'
+      }
       styles={styles}
     />
   );

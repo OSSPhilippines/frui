@@ -347,7 +347,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/metadata"
       title="Metadata Field"
-      description="Metadata fields in FRUI, are ReactJS components that allow users to input a set of key values."
+      description={
+        'Metadata is a field component that allows users to '
+        + 'input a set of key-value pairs.'
+      }
       styles={styles}
     />
   );

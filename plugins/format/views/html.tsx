@@ -179,7 +179,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/html"
       title="HTML Format"
-      description="HTML formats in FRUI, are ReactJS components that convert values to raw HTML."
+      description="HTML formats convert values to raw HTML."
       styles={styles}
     />
   );

@@ -576,9 +576,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/component/button"
       title="Button Component"
-      description={
-        'Buttons in FRUI allow users to trigger actions and events.'
-      }
+      description="Buttons allow users to trigger actions and events."
       styles={styles}
     />
   );

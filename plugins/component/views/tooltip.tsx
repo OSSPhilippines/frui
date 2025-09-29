@@ -514,9 +514,8 @@ export function Head(props: PageProps) {
       uri="/component/tooltip"
       title="Tooltip Component"
       description={
-        'Tooltips in FRUI are interactive ReactJS components that '
-        + 'display informative text when users hover over, focus on, '
-        + 'or tap an element.'
+        'Tooltips display informative text when users hover '
+        + 'over, focus on, or tap an element.'
       }
       styles={styles}
     />

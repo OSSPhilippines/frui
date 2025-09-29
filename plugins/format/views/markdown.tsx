@@ -181,7 +181,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/markdown"
       title="Markdown Format"
-      description="Markdown formats in FRUI, are ReactJS components that convert markdown values to raw HTML."
+      description="Markdown formats convert markdown values to raw HTML."
       styles={styles}
     />
   );

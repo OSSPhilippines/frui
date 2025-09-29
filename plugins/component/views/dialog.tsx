@@ -569,8 +569,8 @@ export function Head(props: PageProps) {
       uri="/component/dialog"
       title="Dialog Component"
       description={
-        'Dialogs in FRUI are React components that allow users to '
-        + 'display modal windows with internal state management.'
+        'Dialogs allow users to display modal windows with '
+        + 'internal state management.'
       }
       styles={styles}
     />

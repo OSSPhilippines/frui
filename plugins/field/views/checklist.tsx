@@ -577,8 +577,11 @@ export function Head(props: PageProps) {
   return (
     <ThemeHead
       uri="/field/checklist"
-      title=""
-      description=""
+      title="Check List Field"
+      description={
+        'A check list is a field component that wraps the standard '
+        + 'HTML checkbox input element.'
+      }
       styles={styles}
     />
   );

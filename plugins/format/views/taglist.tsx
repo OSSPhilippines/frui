@@ -183,7 +183,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/taglist"
       title="Taglist Format"
-      description="Taglist formats in FRUI, are ReactJS components that convert values to tags."
+      description="Taglist formats convert values to tags."
       styles={styles}
     />
   );

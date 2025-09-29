@@ -181,7 +181,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/phone"
       title="Phone Format"
-      description="Phone formats in FRUI, are ReactJS components that convert values to clickable phone displays."
+      description="Phone formats convert values to clickable phone displays."
       styles={styles}
     />
   );

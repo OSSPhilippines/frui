@@ -672,10 +672,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/component/table"
       title="Table Component"
-      description={
-        'Tables in FRUI are ReactJS components used to display '
-        + 'tabular information.'
-      }
+      description="Tables in FRUI used to display tabular information."
       styles={styles}
     />
   );

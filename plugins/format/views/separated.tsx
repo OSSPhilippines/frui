@@ -180,7 +180,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/separated"
       title="Separated Format"
-      description="Separated formats in FRUI, are ReactJS components that inserts a separator between multiple values."
+      description="Separated formats inserts a separator between multiple values."
       styles={styles}
     />
   );

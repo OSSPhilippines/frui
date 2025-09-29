@@ -729,9 +729,8 @@ export function Head(props: PageProps) {
       uri="/component/tabs"
       title="Tabs Component"
       description={
-        'Tabs in FRUI are React components that allow users to '
-        + 'navigate between different content panels with internal '
-        + 'state management.'
+        'Tabs allow users to navigate between different content '
+        + 'panels with internal state management.'
       }
       styles={styles}
     />

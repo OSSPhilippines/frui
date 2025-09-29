@@ -401,7 +401,7 @@ export function Head(props: PageProps) {
       uri="/component/badge"
       title="Badge Component"
       description={
-        'Badges in FRUI are used to display status or information.'
+        'Badges are used to display status or information.'
       }
       styles={styles}
     />

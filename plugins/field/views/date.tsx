@@ -332,7 +332,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/date"
       title="Date Field"
-      description="Date fields in FRUI, helps users format date based inputs."
+      description={
+        'A date field is a component that wraps the standard HTML '
+        + 'date input element.'
+      }
       styles={styles}
     />
   );

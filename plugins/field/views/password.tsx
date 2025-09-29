@@ -306,7 +306,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/password"
       title="Password Field"
-      description="Password fields in FRUI, are ReactJS components that input values from prying eyes."
+      description={
+        'Password is a field component that wraps the standard '
+        + 'HTML input element for password values.'
+      }
       styles={styles}
     />
   );

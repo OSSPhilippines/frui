@@ -182,7 +182,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/rating"
       title="Rating Format"
-      description="Raing formats in FRUI, are ReactJS components that convert values to star ratings."
+      description="Raing formats convert values to star ratings."
       styles={styles}
     />
   );

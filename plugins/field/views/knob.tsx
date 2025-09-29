@@ -437,7 +437,7 @@ export function Head(props: PageProps) {
   return (
     <ThemeHead
       uri="/field/knob"
-      title="Knob Component"
+      title="Knob Field"
       description="Knobs are circular input controls for numeric values."
       styles={styles}
     />

@@ -184,7 +184,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/number"
       title="Number Format"
-      description="Number formats in FRUI, are ReactJS components that convert values to numerical displays."
+      description="Number formats convert values to numerical displays."
       styles={styles}
     />
   );

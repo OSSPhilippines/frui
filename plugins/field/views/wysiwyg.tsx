@@ -629,7 +629,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/wysiwyg"
       title="WYSIWYG Field"
-      description="WYSIWYG fields in FRUI allow users to edit rich text content with extensive formatting options."
+      description={
+        'WYSIWYG is a field component that provides a rich text editor '
+        + 'with various formatting options.'
+      }
       styles={styles}
     />
   );

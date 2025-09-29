@@ -102,27 +102,6 @@ export function Menu() {
 };
 
 /**
- * Examples component
- */
-export function Examples() {
-  return (
-    <div className="flex items-start rmd-block flex-wrap gap-4">
-      {/* Info Example */}
-      <Preview 
-        height={100}
-        title="Info Example" 
-        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          TODO
-        </Preview.Example>
-        <Preview.Code>{''}</Preview.Code>
-      </Preview>
-    </div>
-  );
-};
-
-/**
  * Documentation body component
  */
 export function Body() {
@@ -281,7 +260,7 @@ export function Body() {
         {_('API Reference')}
       </h2>
       <div>
-        <p>
+        <p className="py-2">
           <Translate>
             The <C value="<Input>" /> field accepts all props of 
             a standard HTML Input element. See <a 
@@ -318,7 +297,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/input"
       title="Input Field"
-      description="Input fields in FRUI, are general short value form inputs."
+      description={
+        'Input is a field component that wraps the standard '
+        + 'HTML input element.'
+      }
       styles={styles}
     />
   );

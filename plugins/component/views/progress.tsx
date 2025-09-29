@@ -409,8 +409,8 @@ export function Head(props: PageProps) {
       uri="/component/progress"
       title="Progress Bar Component"
       description={
-        'Progress bar in FRUI is a React component that visually '
-        + 'represents the completion status of a task.'
+        'Progress bar visually represents the completion status '
+        + 'of a task.'
       }
       styles={styles}
     />

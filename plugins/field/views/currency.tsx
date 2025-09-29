@@ -386,7 +386,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/currency"
       title="Currency Field"
-      description="Currency fields in FRUI, allow users select from a list of currencies around the world."
+      description={
+        'Currency is a field component that provides a list of '
+        + 'world currencies for users to select from.'
+      }
       styles={styles}
     />
   );

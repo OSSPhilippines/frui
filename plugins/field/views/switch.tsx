@@ -447,7 +447,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/switch"
       title="Switch Field"
-      description="Switch fields in FRUI, are ReactJS components that allow users to click and enable/disable actions."
+      description={
+        'Switch is a field component that wraps the standard '
+        + 'HTML input element for boolean values.'
+      }
       styles={styles}
     />
   );

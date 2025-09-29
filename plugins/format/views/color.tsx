@@ -240,7 +240,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/color"
       title="Color Format"
-      description="Color formats in FRUI, are ReactJS components that convert values to color displays."
+      description="Color formats convert values to color displays."
       styles={styles}
     />
   );

@@ -382,7 +382,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/file"
       title="File Field"
-      description="File fields in FRUI, helps users upload files to the server."
+      description={
+        'File is a field component that wraps the standard HTML '
+        + 'file input element.'
+      }
       styles={styles}
     />
   );

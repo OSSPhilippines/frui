@@ -475,9 +475,8 @@ export function Head(props: PageProps) {
       uri="/component/alert"
       title="Alert Component"
       description={
-        'Alerts in FRUI, are interactive ReactJS components that '
-        + 'convey important information, warnings, or notifications '
-        + 'to users.'
+        'Alerts convey important information, warnings, or '
+        + 'notifications to users.'
       }
       styles={styles}
     />

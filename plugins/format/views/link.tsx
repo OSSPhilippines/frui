@@ -182,7 +182,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/link"
       title="Link Format"
-      description="Link formats in FRUI, are ReactJS components that convert values to clickable actions."
+      description="Link formats convert values to clickable actions."
       styles={styles}
     />
   );

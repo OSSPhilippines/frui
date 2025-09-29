@@ -302,7 +302,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/slug"
       title="Slug Field"
-      description="Slug fields in FRUI, are ReactJS components that format values into uri friendly values."
+      description={
+        'Slug is a field component that wraps the standard '
+        + 'HTML input element for slug values.'
+      }
       styles={styles}
     />
   );

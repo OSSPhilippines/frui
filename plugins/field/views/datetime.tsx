@@ -325,7 +325,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/datetime"
       title="Datetime Field"
-      description="Datetime fields in FRUI, helps users format datetime based inputs."
+      description={
+        'Datetime is a field component that wraps the standard '
+        + 'HTML datetime-local input element.'
+      }
       styles={styles}
     />
   );

@@ -200,7 +200,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/list"
       title="List Format"
-      description="List formats in FRUI, are ReactJS components that convert values to order or unordered lists."
+      description="List formats convert values to order or unordered lists."
       styles={styles}
     />
   );

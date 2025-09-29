@@ -364,7 +364,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/imagelist"
       title="Image List Field"
-      description="Image list fields in FRUI, helps users upload a list of images to the server."
+      description={
+        'Image list is a field component that allows users to '
+        + 'upload and manage multiple images.'
+      }
       styles={styles}
     />
   );

@@ -817,9 +817,8 @@ export function Head(props: PageProps) {
       uri="/component/accordion"
       title="Accordion Component"
       description={
-        'Accordions in FRUI are React components that allow users to '
-        + 'toggle the visibility of content panels with internal '
-        + 'state management.'
+        'Accordions are used to show and hide sections of '
+        + 'related content.'
       }
       styles={styles}
     />

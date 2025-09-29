@@ -383,7 +383,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/country"
       title="Country Field"
-      description="Country fields in FRUI, allow users select from a list of countries around the world."
+      description={
+        'Country fields in FRUI, allow users select from a list of '
+        + 'countries around the world.'
+      }
       styles={styles}
     />
   );

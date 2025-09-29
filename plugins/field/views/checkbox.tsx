@@ -107,16 +107,117 @@ export function Menu() {
 export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
-      {/* Info Example */}
+      {/* Basic Example */}
       <Preview 
-        height={100}
-        title="Info Example" 
-        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+        title="Basic Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
-          TODO
+          <div className="text-center">
+            <Checkbox name="name" label="Active?" value="yes" defaultChecked />
+          </div>
         </Preview.Example>
-        <Preview.Code>{''}</Preview.Code>
+        <Preview.Code>
+          {'<Checkbox name="name" label="Active?" value="yes" defaultChecked />'}
+        </Preview.Code>
+      </Preview>
+      {/* Rounded Example */}
+      <Preview 
+        title="Rounded Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Checkbox name="name" label="Active?" value="yes" rounded defaultChecked />
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Checkbox name="name" label="Active?" value="yes" rounded defaultChecked />'}
+        </Preview.Code>
+      </Preview>
+      {/* Orange Example */}
+      <Preview 
+        title="Orange Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Checkbox name="name" label="Active?" value="yes" orange defaultChecked />
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Checkbox name="name" label="Active?" value="yes" orange defaultChecked />'}
+        </Preview.Code>
+      </Preview>
+      {/* Circle Shape Example */}
+      <Preview 
+        title="Circle Shape Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Checkbox name="name" label="Active?" value="yes" circle defaultChecked />
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Checkbox name="name" label="Active?" value="yes" circle defaultChecked />'}
+        </Preview.Code>
+      </Preview>
+      {/* Square Shape Example */}
+      <Preview 
+        title="Square Shape Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Checkbox name="name" label="Active?" value="yes" square defaultChecked />
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Checkbox name="name" label="Active?" value="yes" square defaultChecked />'}
+        </Preview.Code>
+      </Preview>
+      {/* Looks Like Radio */}
+      <Preview 
+        title="Looks Like Radio" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Checkbox name="name" label="Active?" value="yes" circle rounded defaultChecked />
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Checkbox name="name" label="Active?" value="yes" circle rounded defaultChecked />'}
+        </Preview.Code>
+      </Preview>
+      {/* Orange Square Example */}
+      <Preview 
+        title="Orange Square Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Checkbox name="name" label="Active?" value="yes" orange square defaultChecked />
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Checkbox name="name" label="Active?" value="yes" orange square defaultChecked />'}
+        </Preview.Code>
+      </Preview>
+      {/* Round Square Example */}
+      <Preview 
+        title="Round Square Example" 
+        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <div className="text-center">
+            <Checkbox name="name" label="Active?" value="yes" rounded square defaultChecked />
+          </div>
+        </Preview.Example>
+        <Preview.Code>
+          {'<Checkbox name="name" label="Active?" value="yes" rounded square defaultChecked />'}
+        </Preview.Code>
       </Preview>
     </div>
   );
@@ -148,8 +249,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
@@ -160,14 +261,7 @@ export function Body() {
             use any input attributes as props.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Checkbox name="name" label="Active?" value="yes" defaultChecked />
-          </div>
-          <Code language="typescript">
-            {`<Checkbox name="name" label="Active?" value="yes" defaultChecked />`}
-          </Code>
-        </div>
+        <Examples />
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -180,75 +274,77 @@ export function Body() {
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Checkbox label="Active?" onUpdate={(value, checked) => alert(`${value} - ${checked}`)} />
-          </div>
-          <Code language="typescript">
+        <Preview title="With Events" className="border border-2 theme-bc-3">
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Checkbox label="Active?" onUpdate={(value, checked) => alert(`${value} - ${checked}`)} />
+            </div>
+          </Preview.Example>
+          <Preview.Code>
             {'<Checkbox label="Active?" onUpdate={(value, checked) => alert(`${value} - ${checked}`)} />'}
-          </Code>
+          </Preview.Code>
+        </Preview>
+
+        <h3 className="font-semibold text-md mt-8">
+          {_('On Change')}
+        </h3>
+        <div>
+          <p className="py-4">
+            <Translate>
+              The <C value="onChange" /> event is triggered when the
+              value has changed. The following arguments are passed
+              to the event handler:
+            </Translate>
+          </p>
+          <Table>
+            <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
+            <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
+            <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
+            <Table.Row>
+              <Table.Col className="theme-bg-1 text-left">
+                {_('event')}
+              </Table.Col>
+              <Table.Col className="theme-bg-1 text-left">
+                {_('Event Object')}
+              </Table.Col>
+              <Table.Col className="theme-bg-1 text-left">
+                see: <a 
+                  href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
+                  target="_blank"
+                >Change Event</a>
+              </Table.Col>
+            </Table.Row>
+          </Table>
         </div>
-      </div>
 
-      <h3 className="font-semibold text-md mt-8">
-        {_('On Change')}
-      </h3>
-      <div>
-        <p className="py-4">
-          <Translate>
-            The <C value="onChange" /> event is triggered when the
-            value has changed. The following arguments are passed
-            to the event handler:
-          </Translate>
-        </p>
-        <Table>
-          <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
-          <Table.Row>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('event')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('Event Object')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              see: <a 
-                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
-                target="_blank"
-              >Change Event</a>
-            </Table.Col>
-          </Table.Row>
-        </Table>
-      </div>
-
-      <h3 className="font-semibold text-md mt-8">
-        {_('On Update')}
-      </h3>
-      <div>
-        <p className="py-4">
-          <Translate>
-            The <C value="onUpdate" /> event is triggered when the
-            value has been updated. The following arguments are
-            passed to the event handler:
-          </Translate>
-        </p>
-        <Table>
-          <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
-          <Table.Row>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('value')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('string')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              <C value="foobar" quote />
-            </Table.Col>
-          </Table.Row>
-        </Table>
+        <h3 className="font-semibold text-md mt-8">
+          {_('On Update')}
+        </h3>
+        <div>
+          <p className="py-4">
+            <Translate>
+              The <C value="onUpdate" /> event is triggered when the
+              value has been updated. The following arguments are
+              passed to the event handler:
+            </Translate>
+          </p>
+          <Table>
+            <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
+            <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
+            <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
+            <Table.Row>
+              <Table.Col className="theme-bg-1 text-left">
+                {_('value')}
+              </Table.Col>
+              <Table.Col className="theme-bg-1 text-left">
+                {_('string')}
+              </Table.Col>
+              <Table.Col className="theme-bg-1 text-left">
+                <C value="foobar" quote />
+              </Table.Col>
+            </Table.Row>
+          </Table>
+        </div>
       </div>
 
       <h2 id="errors" className="uppercase font-bold text-lg mt-8">
@@ -417,8 +513,11 @@ export function Head(props: PageProps) {
   return (
     <ThemeHead
       uri="/field/checkbox"
-      title=""
-      description=""
+      title="Checkbox Field"
+      description={
+        'Checkbox is a field component that wraps the standard HTML '
+        + 'checkbox input element.'
+      }
       styles={styles}
     />
   );

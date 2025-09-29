@@ -184,7 +184,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/image"
       title="Image Format"
-      description="Image formats in FRUI, are ReactJS components that convert values to viewable images."
+      description="Image formats convert values to viewable images."
       styles={styles}
     />
   );

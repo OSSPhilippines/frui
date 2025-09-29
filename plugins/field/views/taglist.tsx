@@ -297,7 +297,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/taglist"
       title="Taglist Field"
-      description="Taglist fields in FRUI, are ReactJS components that allow users to enter multiple short values in one field."
+      description={
+        'Taglist is a field component that allows users to input '
+        + 'a list of tags or values.'
+      }
       styles={styles}
     />
   );

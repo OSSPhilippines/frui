@@ -325,7 +325,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/number"
       title="Number Field"
-      description="Number fields in FRUI, are ReactJS components that automatically formats values into integers and floats."
+      description={
+        'Number is a field component that wraps the standard '
+        + 'HTML input element for numeric values.'
+      }
       styles={styles}
     />
   );

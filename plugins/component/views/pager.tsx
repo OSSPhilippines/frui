@@ -394,10 +394,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/component/pager"
       title="Pager Component"
-      description={
-        'Pager in FRUI is a React component that allows for easy '
-        + 'navigation between pages of content.'
-      }
+      description="Pager allows for easy navigation between pages of content."
       styles={styles}
     />
   );

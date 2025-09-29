@@ -228,7 +228,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/date"
       title="Date Format"
-      description="Date formats in FRUI, are ReactJS components that convert values to date displays."
+      description="Date formats convert values to date displays."
       styles={styles}
     />
   );

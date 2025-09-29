@@ -205,7 +205,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/table"
       title="Table Format"
-      description="Table formats in FRUI, are ReactJS components that format values into a table."
+      description="Table formats format values into a table."
       styles={styles}
     />
   );

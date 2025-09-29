@@ -186,7 +186,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/metadata"
       title="Metadata Format"
-      description="Metadata formats in FRUI, are ReactJS components that convert values to key value tables."
+      description="Metadata formats convert values to key value tables."
       styles={styles}
     />
   );

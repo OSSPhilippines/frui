@@ -181,7 +181,7 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/format/email"
       title="Email Format"
-      description="Email formats in FRUI, are ReactJS components that convert values to clickable email displays."
+      description="Email formats convert values to clickable email displays."
       styles={styles}
     />
   );

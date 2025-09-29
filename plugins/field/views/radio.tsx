@@ -464,7 +464,10 @@ export function Head(props: PageProps) {
     <ThemeHead
       uri="/field/radio"
       title="Radio Field"
-      description="Radio fields in FRUI, are ReactJS components that allow users to select from a list of values."
+      description={
+        'Radio is a field component that wraps the standard '
+        + 'HTML input element for radio values.'
+      }
       styles={styles}
     />
   );

@@ -1,28 +1,31 @@
+//--------------------------------------------------------------------//
+// Imports
+
+//modules
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { minimalSetup, basicSetup } from 'codemirror';
 import { EditorView, lineNumbers } from '@codemirror/view';
 import { EditorState, Extension } from '@codemirror/state';
-import Input from './Input.js';
-import type { InputProps } from './Input.js';
-import { ExtendsType } from '../types.js';
 import {
   LanguageSupport,
   LanguageDescription,
 } from '@codemirror/language';
 import { languages } from '@codemirror/language-data';
 
-/*
- * Code Editor Config
- */
+//frui
+import Input from './Input.js';
+import type { InputProps } from './Input.js';
+import { ExtendsType } from '../types.js';
+
+//--------------------------------------------------------------------//
+// Types
+
 export type CodeEditorConfig = {
   language: string;
   onChange?: Function;
   onUpdate?: Function;
 };
 
-/**
- * Code Editor Props
- */
 export type CodeEditorProps = ExtendsType<
   InputProps,
   {
@@ -35,38 +38,13 @@ export type CodeEditorProps = ExtendsType<
   }
 >;
 
-export function useCodeEditor({
-  language,
-  onUpdate,
-  onChange,
-}: CodeEditorConfig) {
-  const [languageExtension, setLanguageExtension] = useState<
-    LanguageSupport | undefined
-  >(undefined);
-
-  useEffect(() => {
-    getLanguageExtension(language).then((extension) => {
-      setLanguageExtension(extension);
-    });
-  }, [language]);
-
-  return {
-    languageExtension,
-    handlers: {
-      update: (value: string) => {
-        onUpdate && onUpdate(value);
-      },
-      change: (event: ChangeEvent<HTMLInputElement>) => {
-        onChange && onChange(event);
-      },
-    },
-  };
-}
+//--------------------------------------------------------------------//
+// Helpers
 
 /**
  * Defines CodeMirror options.
  */
-function getEditorOptions(
+export function getEditorOptions(
   setup: string,
   numbers: boolean,
   extensions: Extension[]
@@ -97,12 +75,12 @@ function getEditorOptions(
   }
 
   return options;
-}
+};
 
 /**
  * Language extension loader
  */
-async function getLanguageExtension(
+export async function getLanguageExtension(
   language: string
 ): Promise<LanguageSupport | undefined> {
   const langName = language.toLowerCase();
@@ -120,12 +98,47 @@ async function getLanguageExtension(
   }
 
   return undefined;
-}
+};
+
+//--------------------------------------------------------------------//
+// Hooks
+
+export function useCodeEditor({
+  language,
+  onUpdate,
+  onChange,
+}: CodeEditorConfig) {
+  const [languageExtension, setLanguageExtension] = useState<
+    LanguageSupport | undefined
+  >(undefined);
+
+  useEffect(() => {
+    getLanguageExtension(language).then((extension) => {
+      setLanguageExtension(extension);
+    });
+  }, [language]);
+
+  return {
+    languageExtension,
+    handlers: {
+      update: (value: string) => {
+        onUpdate && onUpdate(value);
+      },
+      change: (event: ChangeEvent<HTMLInputElement>) => {
+        onChange && onChange(event);
+      },
+    },
+  };
+};
+
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Code Editor Component
  */
-export default function CodeEditor(props: CodeEditorProps) {
+export function CodeEditor(props: CodeEditorProps) {
   const {
     defaultValue,
     extensions = [],
@@ -214,4 +227,8 @@ export default function CodeEditor(props: CodeEditorProps) {
       <div className='code-editor-container' ref={editorRef}></div>
     </div>
   );
-}
+};
+
+//defaults to code editor
+export default CodeEditor;
+ 

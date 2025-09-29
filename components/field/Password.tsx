@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { InputProps } from './Input.js';
 //hooks
@@ -5,12 +8,15 @@ import { useState } from 'react';
 //components
 import Input from './Input.js';
 
-/**
- * Password Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type PasswordProps = InputProps & {
   error?: boolean
 };
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Password Hook Aggregate
@@ -19,12 +25,15 @@ export function usePassword() {
   const [ showing, show ] = useState(false);
   const toggle = () => show(!showing);
   return { toggle, showing };
-}
+};
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Password  Component (Main)
  */
-export default function Password(props: PasswordProps) {
+export function Password(props: PasswordProps) {
   //remove type
   const { error, className, ...attributes } = props;
   //hooks
@@ -54,3 +63,6 @@ export default function Password(props: PasswordProps) {
     </div>
   );
 };
+
+//defaults to password
+export default Password;

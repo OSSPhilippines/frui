@@ -1,24 +1,28 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ChangeEvent, LegacyRef, CSSProperties } from 'react';
 import type { ExtendsType, HTMLTextareaProps } from '../types.js';
 
-/**
- * Textarea Config
- */
+
+//--------------------------------------------------------------------//
+// Types
+
 export type TextareaConfig = {
   onChange?: Function, 
   onUpdate?: Function
 };
 
-/**
- * Textarea Props
- */
 export type TextareaProps = ExtendsType<HTMLTextareaProps, {
   style?: CSSProperties,
   error?: any,
   onUpdate?: (value: string) => void,
   passRef?: LegacyRef<HTMLTextAreaElement>
 }>;
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Textarea Hook Aggregate
@@ -32,12 +36,15 @@ export function useTextarea({ onChange, onUpdate }: TextareaConfig) {
       }
     }
   };
-}
+};
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Generic Textarea  Component (Main)
  */
-export default function Textarea(props: TextareaProps) {
+export function Textarea(props: TextareaProps) {
   //separate component related props from field attributes
   const {  
     error, 
@@ -67,3 +74,6 @@ export default function Textarea(props: TextareaProps) {
     />
   );
 };
+
+//defaults to textarea
+export default Textarea;

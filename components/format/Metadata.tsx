@@ -1,5 +1,11 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { CSSProperties } from 'react';
+
+//--------------------------------------------------------------------//
+// Types
 
 export type MetadataProps = { 
   style?: CSSProperties,
@@ -7,10 +13,13 @@ export type MetadataProps = {
   value: Record<string, string|number>
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Metadata Format Component (Main)
  */
-export default function Metadata({ className, style, value }: MetadataProps) {
+export function Metadata({ className, style, value }: MetadataProps) {
   return (
     <table>
       <tbody>
@@ -24,3 +33,6 @@ export default function Metadata({ className, style, value }: MetadataProps) {
     </table>
   );
 };
+
+//defaults to metadata
+export default Metadata;

@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ExtendsType } from '../types.js';
 import type { ButtonProps } from './Button.js';
@@ -6,16 +9,17 @@ import React, { useState, useEffect } from 'react';
 //components
 import Button from './Button.js';
 
-/**
- * Fieldset Config
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type FieldsetConfig<ValueType = any> = {
   value?: ValueType[],
   defaultValue?: ValueType[],
   emptyValue?: ValueType,
   onChange?: (values: ValueType[]) => void,
   onUpdate?: (values: ValueType[]) => void
-}
+};
+
 //use this type in your custom fieldset wrapper
 //ex. const Custom: React.FC<FieldsetProps<YOUR ROW TYPE>> = (props) => {}
 export type FieldsetProps<ValueType = any> = ExtendsType<ButtonProps, {
@@ -29,6 +33,7 @@ export type FieldsetProps<ValueType = any> = ExtendsType<ButtonProps, {
   onChange?: (values: ValueType[]) => void,
   onUpdate?: (values: ValueType[]) => void
 }>;
+
 //use this type in your custom fields component
 //ex. const Fields: React.FC<FieldsProps<YOUR ROW TYPE>> = (props) => {}
 export type FieldsProps<ValueType = any> = {
@@ -40,6 +45,9 @@ export type FieldsProps<ValueType = any> = {
   error?: boolean,
   set: (values: (ValueType|undefined)[]) => void
 };
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Fieldset Hook Aggregate
@@ -91,11 +99,14 @@ export function useFieldset<ValueType = any>(
   return { values, handlers };
 };
 
+//--------------------------------------------------------------------//
+// Main
+
 /**
  * Factory to make a dynamic form fieldset
  * A group of fields that can be multiplied or removed dynamically
  */
-export default function make<ValueType = any>(
+export function make<ValueType = any>(
   Fields: React.FC<FieldsProps<ValueType>>
 ) {
   //renders a dynamic form fieldset
@@ -158,3 +169,6 @@ export default function make<ValueType = any>(
     );
   };
 };
+
+//defaults to make
+export default make;

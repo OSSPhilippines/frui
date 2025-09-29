@@ -1,9 +1,12 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import { CSSProperties } from 'react';
 
-/**
- * Separated Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type SeparatedProps = { 
   value: (string|number)[], 
   separator?: string,
@@ -11,10 +14,13 @@ export type SeparatedProps = {
   style?: CSSProperties
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Separated Format Component (Main)
  */
-export default function Separated(props: SeparatedProps) {
+export function Separated(props: SeparatedProps) {
   const { value, className, style, separator = ' ' } = props;
   if (separator === 'line') {
     return (
@@ -29,3 +35,6 @@ export default function Separated(props: SeparatedProps) {
     </span>
   );  
 };
+
+//defaults to separated
+export default Separated;

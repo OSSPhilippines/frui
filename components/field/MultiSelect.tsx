@@ -1,4 +1,10 @@
+//--------------------------------------------------------------------//
+// Imports
+
 import React, { useState, useEffect, useRef } from 'react';
+
+//--------------------------------------------------------------------//
+// Types
 
 export type MultiSelectProps = React.HTMLAttributes<HTMLDivElement> & {
   options: string[];
@@ -8,7 +14,13 @@ export type MultiSelectProps = React.HTMLAttributes<HTMLDivElement> & {
   placeholder?: string;
 };
 
-export default function MultiSelect({
+//--------------------------------------------------------------------//
+// Components
+
+/**
+ * MultiSelect Component
+ */
+export function MultiSelect({
   options = [],
   custom = false,
   searchable = false,
@@ -178,3 +190,6 @@ export default function MultiSelect({
     </div>
   );
 };
+
+//defaults to MultiSelect
+export default MultiSelect;

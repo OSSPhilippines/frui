@@ -1,15 +1,21 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { HTMLLinkProps } from '../types.js';
 
-/**
- * List Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type ListProps = HTMLLinkProps & { value: (string|number)[], ordered?: boolean };
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * List Format Component (Main)
  */
-export default function List(props: ListProps) {
+export function List(props: ListProps) {
   const { value, ordered, className, style = {} } = props;
   const classNames = ['frui-format-list'];
   if (className) {
@@ -28,3 +34,6 @@ export default function List(props: ListProps) {
     </ul>
   );
 };
+
+//defaults to list
+export default List;

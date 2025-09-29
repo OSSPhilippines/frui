@@ -1,13 +1,16 @@
+ //--------------------------------------------------------------------//
+// Imports
+
 //modules
 import type { ChangeEvent, CSSProperties } from 'react';
 import { useState, useEffect } from 'react';
-//src
+//frui
 import type { HTMLInputProps } from '../types.js';
 import type { InputConfig } from './Input.js';
 
-/**
- * Checkbox Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type CheckboxProps = HTMLInputProps & {
   label?: string,
   error?: any,
@@ -21,6 +24,9 @@ export type CheckboxProps = HTMLInputProps & {
   className?: string,
   onUpdate?: (value: string|number|undefined, checked: boolean) => void
 };
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Checkbox Hook Aggregate
@@ -49,12 +55,15 @@ export function useCheckbox(config: InputConfig) {
       }
     }
   };
-}
+};
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Styled Checkbox Component (Main)
  */
-export default function Checkbox(props: CheckboxProps) {
+export function Checkbox(props: CheckboxProps) {
   //separate component related props from field attributes
   const {   
     defaultChecked,
@@ -126,4 +135,7 @@ export default function Checkbox(props: CheckboxProps) {
       </span>
     </label>
   );
-}
+};
+
+//defaults to checkbox
+export default Checkbox;

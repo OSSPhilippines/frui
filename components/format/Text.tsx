@@ -1,10 +1,15 @@
-//types
+//--------------------------------------------------------------------//
+// Types
+
 export type TextProps = { value: string, format?: 'uppercase'|'lowercase'|'capitalize'|'none' };
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Text Format Component (Main)
  */
-export default function Text({ value, format }: TextProps) {
+export function Text({ value, format }: TextProps) {
   const styles: React.CSSProperties = {};
   if (format === 'uppercase') {
     styles.textTransform = 'uppercase';
@@ -15,3 +20,6 @@ export default function Text({ value, format }: TextProps) {
   }
   return (<span style={styles}>{value}</span>);
 };
+
+//defaults to text
+export default Text;

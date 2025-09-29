@@ -1,5 +1,11 @@
+//--------------------------------------------------------------------//
+// Imports
+
 import type { ChangeEvent, MouseEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
+
+//--------------------------------------------------------------------//
+// Types
 
 export type WYSIWYGConfig = {
   value?: string,
@@ -44,7 +50,10 @@ export type WYSIWYGProps = {
   onChange?: (value: string) => void,
   onUpdate?: (state: { value: string; action: string }) => void,
   [key: string]: any
-}
+};
+
+//--------------------------------------------------------------------//
+// Hooks
 
 export function useWYSIWYG(config: WYSIWYGConfig) {
   const { 
@@ -360,7 +369,10 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
   return { refs, blocks, handlers, isCodeView, value: currentValue };
 };
 
-export default function WYSIWYG(props: WYSIWYGProps) {
+//--------------------------------------------------------------------//
+// Components
+
+export function WYSIWYG(props: WYSIWYGProps) {
   const {
     history,
     font,
@@ -1088,3 +1100,6 @@ export default function WYSIWYG(props: WYSIWYGProps) {
     </div>
   );
 };
+
+//defaults to wysiwyg
+export default WYSIWYG;

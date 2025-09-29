@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //modules
 import type { 
   ChangeEvent, 
@@ -6,13 +9,13 @@ import type {
   CSSProperties 
 } from 'react';
 import { useState } from 'react';
-//src
+//frui
 import type { InputProps } from './Input.js';
 import Input from './Input.js';
 
-/**
- * Autocomplete Config
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type AutocompleteConfig = {
   options?: string[],
   defaultValue?: string|number|readonly string[],
@@ -23,9 +26,6 @@ export type AutocompleteConfig = {
   onUpdate?: (value: string) => void
 };
 
-/**
- * Autocomplete Dropdown Props
- */
 export type AutocompleteDropdownProps = { 
   options?: string[],
   show: boolean,
@@ -35,9 +35,6 @@ export type AutocompleteDropdownProps = {
   match: (option: string) => void
 };
 
-/**
- * Autocomplete Props
- */
 export type AutocompleteProps = InputProps & {
   options?: string[],
   styles?: Record<string, CSSProperties|false|undefined>|false,
@@ -46,6 +43,9 @@ export type AutocompleteProps = InputProps & {
   onQuery?: (query: string, set: Function) => void,
   onDropdown?: (show: boolean) => void
 };
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Autocomplete Hook Aggregate
@@ -115,6 +115,9 @@ export function useAutocomplete(config: AutocompleteConfig) {
   return { value, options, showing, handlers };
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Autocomplete Dropdown
  */
@@ -152,7 +155,7 @@ export function AutocompleteDropdown(props: AutocompleteDropdownProps) {
 /**
  * Autocomplete  Component (Main)
  */
-export default function Autocomplete(props: AutocompleteProps) {
+export function Autocomplete(props: AutocompleteProps) {
   const { 
     options: defaultOptions,
     className,
@@ -197,3 +200,6 @@ export default function Autocomplete(props: AutocompleteProps) {
     </div>
   );
 };
+
+//defaults to autocomplete
+export default Autocomplete;

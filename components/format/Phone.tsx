@@ -1,18 +1,30 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { LinkProps } from './Link.js';
 //components
 import Link from './Link.js';
+
+//--------------------------------------------------------------------//
+// Types
 
 /**
  * Phone Props
  */
 export type PhoneProps = LinkProps;
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Phone Format Component (Main)
  */
-export default function Phone({ value, ...attributes }: PhoneProps) {
+export function Phone({ value, ...attributes }: PhoneProps) {
   return (
     <Link {...attributes} value={`tel:${value}`} label={value} />
   );
 };
+
+//defaults to phone
+export default Phone;

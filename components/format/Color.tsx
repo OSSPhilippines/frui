@@ -1,9 +1,12 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { CSSProperties } from 'react';
 
-/**
- * Color Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type ColorProps = { 
   value: string, 
   box?: boolean, 
@@ -15,11 +18,13 @@ export type ColorProps = {
   style?: CSSProperties
 };
 
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Color Format Component (Main)
  */
-export default function Color(props: ColorProps) {
+export function Color(props: ColorProps) {
   const { 
     value, 
     box = true, 
@@ -72,3 +77,6 @@ export default function Color(props: ColorProps) {
     </span>
   );
 };
+
+//defaults to color
+export default Color;

@@ -1,22 +1,28 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { CSSProperties } from 'react';
 import type { BadgeProps } from '../element/Badge.js';
 //components
 import Badge from '../element/Badge.js';
 
-/**
- * Taglist Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type TaglistProps = BadgeProps & { 
   className?: string,
   style?: CSSProperties,
   value: (string|number)[] 
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Taglist Format Component (Main)
  */
-export default function Taglist(props: TaglistProps) {
+export function Taglist(props: TaglistProps) {
   const { className, style, value, ...attributes } = props;
   return (
     <span className="frui-format-taglist">
@@ -26,3 +32,6 @@ export default function Taglist(props: TaglistProps) {
     </span>
   );
 };
+
+//defaults to taglist
+export default Taglist;

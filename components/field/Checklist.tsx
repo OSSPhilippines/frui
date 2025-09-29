@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //modules
 import type { ChangeEvent, CSSProperties, ReactNode } from 'react';
 import { 
@@ -7,9 +10,12 @@ import {
   isValidElement, 
   cloneElement 
 } from 'react';
-//src
+//frui
 import type { HTMLInputProps } from '../types.js';
 import type { InputConfig } from './Input.js';
+
+//--------------------------------------------------------------------//
+// Types
 
 export type ChecklistProps = {
   children: ReactNode;
@@ -42,6 +48,9 @@ export type ChecklistItemProps = Omit<
   color?: string;
 };
 
+//--------------------------------------------------------------------//
+// Hooks
+
 export function useChecklistItem(
   config: InputConfig & {
     value: string | number;
@@ -71,7 +80,10 @@ export function useChecklistItem(
       },
     },
   };
-}
+};
+
+//--------------------------------------------------------------------//
+// Components
 
 export function ChecklistItem({
   label,
@@ -129,9 +141,9 @@ export function ChecklistItem({
       </span>
     </label>
   );
-}
+};
 
-export default function Checklist({
+export function Checklist({
   children,
   name,
   defaultValue = [],
@@ -215,4 +227,7 @@ export default function Checklist({
       <input type="hidden" name={name} value={JSON.stringify(selected)} />
     </div>
   );
-}
+};
+
+//defaults to checklist
+export default Checklist;

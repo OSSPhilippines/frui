@@ -1,6 +1,6 @@
-/**
- * Overflow Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type OverflowProps = { 
   value: string, 
   length?: string|number, 
@@ -8,10 +8,13 @@ export type OverflowProps = {
   hellip?: boolean, 
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Overflow Format Component (Main)
  */
-export default function Overflow(props: OverflowProps) {
+export function Overflow(props: OverflowProps) {
   const { value, length, words, hellip } = props;
   const count = typeof length === 'string' ? Number(length) || undefined : length;
   if (words) {
@@ -39,3 +42,6 @@ export default function Overflow(props: OverflowProps) {
 
   return (<>{value}</>);
 };
+
+//defaults to overflow
+export default Overflow;

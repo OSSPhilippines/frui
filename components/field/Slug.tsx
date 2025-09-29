@@ -1,12 +1,15 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ChangeEvent } from 'react';
 import type { InputProps, InputConfig } from './Input.js';
 //components
 import Input from './Input.js';
 
-/**
- * Slug Config
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type SlugConfig = InputConfig & {
   dash?: boolean,
   line?: boolean,
@@ -15,14 +18,14 @@ export type SlugConfig = InputConfig & {
   defaultValue?: string|number|readonly string[]|undefined
 };
 
-/**
- * Slug Props
- */
 export type SlugProps = InputProps & {
   dash?: boolean,
   line?: boolean,
   camel?: boolean
 };
+
+//--------------------------------------------------------------------//
+// Helpers
 
 /**
  * Converts a string to a slug
@@ -63,7 +66,10 @@ export function camelfy(str: string) {
         .replace('-', '')
         .replace('_', '');
     });
-}
+};
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Slug Hook Aggregate
@@ -88,7 +94,13 @@ export function useSlug(config: SlugConfig) {
   return { value, defaultValue, change };
 };
 
-export default function Slug(props: SlugProps) {
+//--------------------------------------------------------------------//
+// Components
+
+/**
+ * Styled Slug Component (Main)
+ */
+export function Slug(props: SlugProps) {
   const { 
     dash,
     line,
@@ -117,3 +129,6 @@ export default function Slug(props: SlugProps) {
     />
   );
 };
+
+//defaults to slug
+export default Slug;

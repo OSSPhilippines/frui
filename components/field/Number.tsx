@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ChangeEvent } from 'react';
 import type { InputProps } from './Input.js';
@@ -6,9 +9,9 @@ import { useState, useEffect } from 'react';
 //components
 import Input from './Input.js';
 
-/**
- * Number Options
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type NumberOptions = {
   min?: number,
   max?: number,
@@ -18,9 +21,6 @@ export type NumberOptions = {
   absolute?: boolean
 };
 
-/**
- * Number Props
- */
 export type NumberProps = InputProps & {
   separator?: string,
   decimal?: string,
@@ -30,21 +30,24 @@ export type NumberProps = InputProps & {
   onUpdate?: Function
 };
 
+//--------------------------------------------------------------------//
+// Helpers
+
 /**
  * Toggles the negative sign
  */
-function toggleNegative(value: string, absolute: boolean) {
+export function toggleNegative(value: string, absolute: boolean) {
   const isNegative = (value.match(/\-/g) || []).length % 2;
   const negative = !absolute && isNegative ? '-' : '';
   value = value.replaceAll('-', '');
   value = value.replace(new RegExp('^0+', 'g'), '');
   return negative + value;
-}
+};
 
 /**
  * Fixes the decimal length
  */
-function fixDecimal(
+export function fixDecimal(
   value: string, 
   decimal: string, 
   decimals: number, 
@@ -75,12 +78,12 @@ function fixDecimal(
   }
 
   return value;
-}
+};
 
 /**
  * Returns true if the value is between the min and max
  */
-function between(value: string, min?: number, max?: number) {
+export function between(value: string, min?: number, max?: number) {
   if (min && !isNaN(min) && parseFloat(value) < min) {
     value = String(min);
   }
@@ -88,12 +91,12 @@ function between(value: string, min?: number, max?: number) {
     value = String(max);
   }
   return value;
-}
+};
 
 /**
  * Adds decimal numbers to the value
  */
-function padDecimals(value: string, decimal: string, decimals: number) {
+export function padDecimals(value: string, decimal: string, decimals: number) {
   if (!decimals || !value.length) {
     return value;
   }
@@ -122,12 +125,12 @@ function padDecimals(value: string, decimal: string, decimals: number) {
   }
 
   return value;
-}
+};
 
 /**
  * Adds commas and decimals to the value
  */
-function prettify(value: string, separator: string, decimal: string) {
+export function prettify(value: string, separator: string, decimal: string) {
   const placeCommas = new RegExp(
     `\\B(?<!\\${separator}\\d*)(?=(\\d{3})+(?!\\d))`, 'g'
   );
@@ -144,12 +147,12 @@ function prettify(value: string, separator: string, decimal: string) {
   }
 
   return value
-}
+};
 
 /**
  * Returns the actual and pretty number format
  */
-function getFormats(value: string, options: NumberOptions, cursor = 0) {
+export function getFormats(value: string, options: NumberOptions, cursor = 0) {
   //expand options
   const {
     min,     
@@ -175,15 +178,18 @@ function getFormats(value: string, options: NumberOptions, cursor = 0) {
     value: padDecimals(formatted, dec, decimals),
     display: prettify(formatted, separator, decimal)
   };
-}
+};
 
 /**
  * Returns the suggested formats based on the input
  */
-function getFormatsFromInput(input: HTMLInputElement, options: NumberOptions) {
+export function getFormatsFromInput(input: HTMLInputElement, options: NumberOptions) {
   const cursor = input.selectionStart? input.selectionStart - 1: 0;
   return getFormats(input.value, options, cursor);
-}
+};
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Number Hook Aggregate
@@ -273,12 +279,15 @@ export function useNumber(config: NumberProps) {
   }, [ value ]);
 
   return { displayValue, handlers };
-}
+};
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Number  Component (Main)
  */
-export default function NumberField(props: NumberProps) {
+export function NumberField(props: NumberProps) {
   //expand props
   const { 
     name,
@@ -320,3 +329,6 @@ export default function NumberField(props: NumberProps) {
     />
   );
 };
+
+//defaults to number
+export default NumberField;

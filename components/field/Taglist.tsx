@@ -1,12 +1,15 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ChangeEvent, KeyboardEvent, CSSProperties } from 'react';
 import type { ExtendsType, HTMLInputProps } from '../types.js';
 //hooks
 import { useState, useEffect } from 'react';
 
-/**
- * Taglist Config
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type TaglistConfig = {
   value?: string[],
   defaultValue?: string[],
@@ -14,9 +17,6 @@ export type TaglistConfig = {
   onUpdate?: Function
 };
 
-/**
- * Taglist Props
- */
 export type TaglistProps = ExtendsType<HTMLInputProps, {
   name?: string,
   error?: any,
@@ -30,6 +30,9 @@ export type TaglistProps = ExtendsType<HTMLInputProps, {
   className?: string, 
   style?: CSSProperties
 }>;
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Taglist Hook Aggregate
@@ -94,10 +97,13 @@ export function useTaglist(config: TaglistConfig) {
   };
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Generic Taglist  Component (Main)
  */
-export default function Taglist(props: TaglistProps) {
+export function Taglist(props: TaglistProps) {
   //separate component related props from field attributes
   const { 
     name,
@@ -182,4 +188,7 @@ export default function Taglist(props: TaglistProps) {
       />
     </div>
   );
-}
+};
+
+//defaults to taglist
+export default Taglist;

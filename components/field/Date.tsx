@@ -1,28 +1,28 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ExtendsType } from '../types.js';
 import type { InputProps } from './Input.js';
 //components
 import Input from './Input.js';
 
-/**
- * Date Input
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type DateInput = string|number|Date;
 
-/**
- * Date Config
- */
 export type DateConfig = {
   defaultValue?: DateInput, 
   onUpdate?: (value: string) => void
 };
 
-/**
- * Date Props
- */
 export type DateProps = ExtendsType<InputProps, {
   defaultValue?: DateInput
 }>;
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Date Hook Aggregate
@@ -38,10 +38,13 @@ export function useDate({ onUpdate }: DateConfig) {
   };
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Date  Component
  */
-export default function DateField(props: DateProps) {
+export function DateField(props: DateProps) {
   const { defaultValue, className, onUpdate, ...attributes } = props;
   const update = useDate({ onUpdate });
   const classNames = [ 'frui-field-date' ];
@@ -61,3 +64,6 @@ export default function DateField(props: DateProps) {
     />
   );
 };
+
+//defaults to date
+export default DateField;

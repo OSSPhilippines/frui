@@ -1,16 +1,25 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { HTMLImageProps } from '../types.js';
 
-/**
- * Image Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type ImageProps = HTMLImageProps & { value: string };
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Image Format Component (Main)
  */
-export default function Image({ value, ...attributes }: ImageProps) {
+export function Image({ value, ...attributes }: ImageProps) {
   return (
     <img {...attributes} src={value} />
   );
 };
+
+//defaults to image
+export default Image;

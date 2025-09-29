@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ExtendsType } from '../types.js';
 import type { SelectProps, SelectOption } from './Select.js';
@@ -6,9 +9,9 @@ import Select from './Select.js';
 //data
 import countries from '../data/countries.js';
 
-/**
- * Country Data
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type CountryData = {
   type: string,
   iso2: string,
@@ -23,28 +26,22 @@ export type CountryData = {
   num: [ string, string ]
 };
 
-/**
- * Country Option
- */
 export type CountryOption = SelectOption<string>;
 
-/**
- * Country Config
- */
 export type CountryConfig = {
   value?: string,
   defaultValue?: string,
   map: (country: CountryData) => CountryOption
 };
 
-/**
- * Country Props
- */
 export type CountryProps = ExtendsType<SelectProps, {
   options?: undefined,
   defaultValue?: string,
   value?: string
 }>;
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Country Hook Aggregate
@@ -69,10 +66,13 @@ export function useCountry(config: CountryConfig) {
   return { selected, selectedDefault, options };
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Styled Country  Component (Main)
  */
-export default function Country(props: CountryProps) {
+export function Country(props: CountryProps) {
   const { 
     value, 
     defaultValue, 
@@ -109,3 +109,6 @@ export default function Country(props: CountryProps) {
     />
   );
 };
+
+//defaults to country
+export default Country;

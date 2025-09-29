@@ -1,7 +1,13 @@
+//--------------------------------------------------------------------//
+// Imports
+
 // types
 import type { CSSProperties } from 'react';
 // hooks
 import { useRef, useState, useEffect, useCallback } from 'react';
+
+//--------------------------------------------------------------------//
+// Types
 
 export type SliderValue = number | [number, number];
 
@@ -26,8 +32,10 @@ export type RangeSliderProps = {
   style?: CSSProperties
 };
 
+//--------------------------------------------------------------------//
+// Hooks
 
-function useRangeSlider(config: RangeSliderProps) {
+export function useRangeSlider(config: RangeSliderProps) {
   const {
     value,
     defaultValue,
@@ -201,9 +209,12 @@ function useRangeSlider(config: RangeSliderProps) {
     name,
     disabled
   };
-}
+};
 
-export default function RangeSlider(props: RangeSliderProps) {
+//--------------------------------------------------------------------//
+// Components
+
+export function RangeSlider(props: RangeSliderProps) {
   const {
     sliderRef,
     classNames,
@@ -301,5 +312,8 @@ export default function RangeSlider(props: RangeSliderProps) {
       )}
     </div>
   );
-}
+};
+
+//defaults to range slider
+export default RangeSlider;
 

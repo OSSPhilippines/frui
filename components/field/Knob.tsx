@@ -1,4 +1,10 @@
+//--------------------------------------------------------------------//
+// Imports
+
 import { useRef, useState, useEffect } from 'react';
+
+//--------------------------------------------------------------------//
+// Types
 
 export type KnobProps = {
   value?: number;
@@ -16,19 +22,28 @@ export type KnobProps = {
   valueColor?: string;
 };
 
-function clamp(val: number, min: number, max: number) {
+//--------------------------------------------------------------------//
+// Helpers
+
+export function clamp(val: number, min: number, max: number) {
   return Math.min(Math.max(val, min), max);
-}
+};
 
-function getAngle(x: number, y: number, cx: number, cy: number) {
+export function getAngle(x: number, y: number, cx: number, cy: number) {
   return Math.atan2(y - cy, x - cx);
-}
+};
 
-function formatValue(template: string, value: number) {
+export function formatValue(template: string, value: number) {
   return template.replace('{}', value.toString());
-}
+};
 
-export default function Knob({
+//--------------------------------------------------------------------//
+// Components
+
+/**
+ * Knob Component
+ */
+export function Knob({
   value,
   defaultValue = 0,
   onChange,
@@ -150,4 +165,7 @@ export default function Knob({
       <input type="hidden" name={name} value={actualValue} />
     </div>
   );
-}
+};
+
+//defaults to knob
+export default Knob;

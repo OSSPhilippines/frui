@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 import type { CSSProperties } from 'react';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import ColorDisplay, { ColorProps } from '../format/Color';
@@ -5,6 +8,9 @@ import ColorDisplay, { ColorProps } from '../format/Color';
 export type RGBA = { r: number; g: number; b: number; a: number; };
 export type HSVA = { h: number; s: number; v: number; a: number; };
 export type Dragging = 'palette' | 'hue' | 'alpha' | null;
+
+//--------------------------------------------------------------------//
+// Types
 
 export type ColorPickerConfig = {
   value?: string,
@@ -23,8 +29,14 @@ export type ColorPickerProps = Omit<ColorProps, 'value'> & {
   pickerClassName?: string
 };
 
+//--------------------------------------------------------------------//
+// Constants
+
 export const defaultHsva: HSVA = { h: 208, s: 61, v: 89, a: 0.75 };
 export const defaultRgbaString = rgbaToString(hsvaToRgba(defaultHsva));
+
+//--------------------------------------------------------------------//
+// Helpers
 
 export function hsvaToRgba(hsva: HSVA): RGBA {
   const s = hsva.s / 100;
@@ -126,6 +138,9 @@ export function parseColorString(colorString: string): RGBA | null {
 
   return null;
 };
+
+//--------------------------------------------------------------------//
+// Hooks
 
 export function useColorPicker(config: ColorPickerConfig) {
   const {
@@ -317,7 +332,10 @@ export function useColorPicker(config: ColorPickerConfig) {
   };
 };
 
-export default function ColorPicker(props: ColorPickerProps) {
+//--------------------------------------------------------------------//
+// Components
+
+export function ColorPicker(props: ColorPickerProps) {
   const {
     value,
     defaultValue = defaultRgbaString,
@@ -554,3 +572,6 @@ export default function ColorPicker(props: ColorPickerProps) {
     </div>
   );
 };
+
+//defaults to color picker
+export default ColorPicker;

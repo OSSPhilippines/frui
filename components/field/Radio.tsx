@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ChangeEvent, MouseEvent, CSSProperties } from 'react';
 import type { HTMLInputProps } from '../types.js';
@@ -5,9 +8,9 @@ import type { InputConfig } from './Input.js';
 //hooks
 import { useState, useEffect } from 'react';
 
-/**
- * Radio Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type RadioProps = HTMLInputProps & {
   label?: string,
   error?: any,
@@ -21,6 +24,9 @@ export type RadioProps = HTMLInputProps & {
   className?: string,
   onUpdate?: (value: string|number|undefined, checked: boolean) => void
 };
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Currency Hook Aggregate
@@ -50,12 +56,15 @@ export function useRadio(config: InputConfig) {
       }
     }
   };
-}
+};
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Styled Radio  Component (Main)
  */
-export default function Radio(props: RadioProps) {
+export function Radio(props: RadioProps) {
   //separate component related props from field attributes
   const {   
     defaultChecked,
@@ -129,4 +138,7 @@ export default function Radio(props: RadioProps) {
       </span>
     </label>
   );
-}
+};
+
+//defaults to radio
+export default Radio;

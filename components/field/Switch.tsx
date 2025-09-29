@@ -1,9 +1,15 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ChangeEvent, MouseEvent, CSSProperties } from 'react';
 import type { InputConfig } from './Input.js';
 import type { HTMLInputProps } from '../types.js';
 //hooks
 import { useState, useEffect } from 'react';
+
+//--------------------------------------------------------------------//
+// Types
 
 /**
  * Switch Props
@@ -25,6 +31,9 @@ export type SwitchProps = HTMLInputProps & {
   className?: string,
   onUpdate?: (value: string|number|undefined, checked: boolean) => void
 };
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Switch Hook Aggregate
@@ -54,11 +63,15 @@ export function useSwitch(config: InputConfig) {
       }
     }
   };
-}
+};
+
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Styled Switch  Component (Main)
  */
-export default function Switch(props: SwitchProps) {
+export function Switch(props: SwitchProps) {
   //separate component related props from field attributes
   const {   
     defaultChecked,
@@ -144,4 +157,7 @@ export default function Switch(props: SwitchProps) {
       </span>
     </label>
   );
-}
+};
+
+//defaults to switch
+export default Switch;

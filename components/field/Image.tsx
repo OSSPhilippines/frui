@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { FileProps } from './File.js';
 //hooks
@@ -5,10 +8,13 @@ import { useFile } from './File.js';
 //components
 import Input from './Input.js';
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Generic Image  Component (Main)
  */
-export default function Image(props: FileProps) {
+export function Image(props: FileProps) {
   //separate component related props from field attributes
   const { 
     uploading: locale = 'Uploading...',
@@ -84,3 +90,6 @@ export default function Image(props: FileProps) {
     </div>
   );
 };
+
+//defaults to image
+export default Image;

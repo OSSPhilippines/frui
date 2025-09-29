@@ -1,12 +1,15 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { InputProps } from './Input.js';
 //components
 import Input from './Input.js';
 import 'inputmask';
 
-/**
- * Mask Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type MaskProps = InputProps & { 
   mask?: string,
   regex?: string,
@@ -19,10 +22,13 @@ export type MaskProps = InputProps & {
   onReady?: Function
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Mask  Component (Main)
  */
-export default function InputMask(props: MaskProps) {
+export function InputMask(props: MaskProps) {
   const { 
     mask,
     regex,
@@ -53,3 +59,6 @@ export default function InputMask(props: MaskProps) {
 
   return <Input passRef={ref} {...attributes} />
 };
+
+//defaults to mask
+export default InputMask;

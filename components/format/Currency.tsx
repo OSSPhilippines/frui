@@ -1,12 +1,15 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { CSSProperties } from 'react';
 //helpers
 import currencies from '../data/currencies.js';
 import countries from '../data/countries.js';
 
-/**
- * Currency Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type CurrencyProps = {
   value: string, 
   flag?: boolean, 
@@ -18,10 +21,13 @@ export type CurrencyProps = {
   style?: CSSProperties
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Currency Format Component (Main)
  */
-export default function Currency(props: CurrencyProps) {
+export function Currency(props: CurrencyProps) {
   const { 
     value, 
     flag = true, 
@@ -93,3 +99,6 @@ export default function Currency(props: CurrencyProps) {
     </span>
   );
 };
+
+//defaults to currency
+export default Currency;

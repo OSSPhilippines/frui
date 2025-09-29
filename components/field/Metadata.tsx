@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ExtendsType } from '../types.js';
 import type { FieldsProps, FieldsetProps } from '../form/Fieldset.js';
@@ -10,14 +13,11 @@ import Date from './Date.js';
 import Datetime from './Datetime.js';
 import Time from './Time.js';
 
-/**
- * Metadata Type
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type MetadataType = [ string, string|number|Date ];
 
-/**
- * Metadata Config
- */
 export type MetadataConfig = {
   type?: string,
   values?: (MetadataType|undefined)[],
@@ -25,9 +25,6 @@ export type MetadataConfig = {
   set: (values: (MetadataType|undefined)[]) => void
 };
 
-/**
- * Metadata Props
- */
 export type MetadataProps = ExtendsType<FieldsetProps<MetadataType>, {
   type?: string,
   min?: number|string,
@@ -35,6 +32,9 @@ export type MetadataProps = ExtendsType<FieldsetProps<MetadataType>, {
   step?: number|string,
   placeholder?: string|string[]
 }>;
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Metadata Hook Aggregate
@@ -70,6 +70,9 @@ export function useMetadata(config: MetadataConfig) {
   
   return { handlers, input: { isDate, isText, isNumber } };
 }
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Key/Value Component 
@@ -188,7 +191,7 @@ const Fieldset = make<MetadataType>(MetadataFields);
 /**
  * Metadata set Component (Main)
  */
-export default function Metadata(props: MetadataProps) {
+export function Metadata(props: MetadataProps) {
   const { type, min, max, step, placeholder, ...attributes } = props;
   const placeholders = Array.isArray(placeholder) 
     ? placeholder
@@ -197,4 +200,7 @@ export default function Metadata(props: MetadataProps) {
   return (
     <Fieldset {...attributes} config={config} emptyValue={['', '']} />
   );
-}
+};
+
+//defaults to metadata
+export default Metadata;

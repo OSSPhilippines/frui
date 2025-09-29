@@ -1,6 +1,6 @@
-/**
- * Number Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type NumberProps = { 
   value: string|number,
   separator?: string,
@@ -9,8 +9,11 @@ export type NumberProps = {
   absolute?: boolean 
 };
 
+//--------------------------------------------------------------------//
+// Helpers
+
 //function to format a number given the separator, decimal, and number of decimals to show
-const formatNumber = (
+export const formatNumber = (
   value: number, 
   separator: string, 
   decimal: string, 
@@ -35,10 +38,13 @@ const formatNumber = (
   return (value < 0 ? '-' : '') + integerString + decimalString;
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Number Format Component (Main)
  */
-export default function NumberFormat(props: NumberProps) {
+export function NumberFormat(props: NumberProps) {
   const {
     value,
     separator = '',
@@ -55,3 +61,6 @@ export default function NumberFormat(props: NumberProps) {
   );
   return (<>{number}</>);
 };
+
+//defaults to number
+export default NumberFormat;

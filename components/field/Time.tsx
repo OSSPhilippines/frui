@@ -1,28 +1,28 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ExtendsType } from '../types.js';
 import type { InputProps } from './Input.js';
 //components
 import Input from './Input.js';
 
-/**
- * Time Input
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type TimeInput = string|number|Date;
 
-/**
- * Time Config
- */
 export type TimeConfig = {
   defaultValue?: TimeInput, 
   onUpdate?: (value: string) => void
 };
 
-/**
- * Time Props
- */
 export type TimeProps = ExtendsType<InputProps, {
   defaultValue?: TimeInput
 }>;
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Time Hook Aggregate
@@ -39,10 +39,13 @@ export function useTime({ defaultValue }: TimeConfig) {
   return value;
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Time  Component
  */
-export default function Time(props: TimeProps) {
+export function Time(props: TimeProps) {
   const { defaultValue, className, ...attributes } = props;
   const value = useTime({ defaultValue });
   const classNames = [ 'frui-field-time' ];
@@ -57,4 +60,7 @@ export default function Time(props: TimeProps) {
       {...attributes}
     />
   );
-}
+};
+
+//defaults to time
+export default Time;

@@ -1,11 +1,14 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { CSSProperties } from 'react';
 //helpers
 import countries from '../data/countries.js';
 
-/**
- * Country Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type CountryProps = { 
   value: string, 
   flag?: boolean, 
@@ -17,10 +20,13 @@ export type CountryProps = {
   style?: CSSProperties
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Country Format Component (Main)
  */
-export default function Country(props: CountryProps) {
+export function Country(props: CountryProps) {
   const { 
     value, 
     flag = true, 
@@ -84,3 +90,6 @@ export default function Country(props: CountryProps) {
     </span>
   );
 };
+
+//defaults to country
+export default Country;

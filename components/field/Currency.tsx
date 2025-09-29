@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ExtendsType } from '../types.js';
 import type { SelectProps, SelectOption } from './Select.js';
@@ -7,9 +10,9 @@ import Select from './Select.js';
 import currencies from '../data/currencies.js';
 import countries from '../data/countries.js';
 
-/**
- * Currency Data
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type CurrencyData = {
   flag: string,
   type: string,
@@ -19,28 +22,22 @@ export type CurrencyData = {
   symbol: string
 }
 
-/**
- * Currency Option
- */
 export type CurrencyOption = SelectOption<string>;
 
-/**
- * Currency Config
- */
 export type CurrencyConfig = {
   value?: string,
   defaultValue?: string,
   map: (country: CurrencyData) => CurrencyOption
 };
 
-/**
- * Currency Props
- */
 export type CurrencyProps = ExtendsType<SelectProps, {
   options?: undefined,
   value?: string,
   defaultValue?: string
 }>;
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Currency Hook Aggregate
@@ -75,10 +72,13 @@ export function useCurrency(config: CurrencyConfig) {
   return { selected, selectedDefault, options };
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Styled Currency  Component (Main)
  */
-export default function Currency(props: CurrencyProps) {
+export function Currency(props: CurrencyProps) {
   const { 
     value, 
     defaultValue, 
@@ -115,3 +115,6 @@ export default function Currency(props: CurrencyProps) {
     />
   );
 };
+
+//defaults to currency
+export default Currency;

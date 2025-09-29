@@ -1,7 +1,10 @@
-/**
- * Yesno Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type YesnoProps = { value: any, yes?: string, no?: string };
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Yesno Format Component (Main)

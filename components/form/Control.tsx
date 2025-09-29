@@ -1,9 +1,12 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ReactNode, CSSProperties } from 'react';
 
-/**
- * Control Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type ControlProps = {
   label?: string,
   error?: string,
@@ -12,10 +15,13 @@ export type ControlProps = {
   children?: ReactNode
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Form Control Component (Main)
  */
-export default function Control(props: ControlProps) {
+export function Control(props: ControlProps) {
   //separate component related props from field attributes
   const {   
     label, 
@@ -42,3 +48,6 @@ export default function Control(props: ControlProps) {
     </div>
   );
 };
+
+//defaults to control
+export default Control;

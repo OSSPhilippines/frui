@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { FilelistProps } from './Filelist.js';
 //hooks
@@ -5,10 +8,13 @@ import { useFilelist } from './Filelist.js';
 //components
 import Input from './Input.js';
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Generic File  Component (Main)
  */
-export default function Imagelist(props: FilelistProps) {
+export function Imagelist(props: FilelistProps) {
   //separate component related props from field attributes
   const { 
     uploading = 'Uploading...',
@@ -76,4 +82,7 @@ export default function Imagelist(props: FilelistProps) {
       )}
     </div>
   );
-}
+};
+
+//defaults to imagelist
+export default Imagelist;

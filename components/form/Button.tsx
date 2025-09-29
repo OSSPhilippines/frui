@@ -1,10 +1,13 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { CSSProperties } from 'react';
 import type { HTMLButtonProps } from '../types.js';
 
-/**
- * Button Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type ButtonProps = HTMLButtonProps & {
   href?: string,
   target?: string,
@@ -34,10 +37,13 @@ export type ButtonProps = HTMLButtonProps & {
   style?: CSSProperties|false
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Generic Button Component (Main)
  */
-export default function Button(props: ButtonProps) {
+export function Button(props: ButtonProps) {
   // Separate component related props from field attributes
   const { 
     href,
@@ -176,3 +182,6 @@ export default function Button(props: ButtonProps) {
     </button>
   );
 };
+
+//defaults to button
+export default Button;

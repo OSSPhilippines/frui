@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ReactNode, KeyboardEvent, CSSProperties } from 'react';
 //hooks
@@ -5,18 +8,15 @@ import { useState, useEffect } from 'react';
 //components
 import Input from './Input.js';
 
-/**
- * Select Option
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type SelectOption<T = any> = {
   label: ReactNode,
   value: T,
   keyword?: string|Function
 };
 
-/**
- * Select Config
- */
 export type SelectConfig<T = any> = {
   value?: T,
   defaultValue?: T,
@@ -30,9 +30,6 @@ export type SelectConfig<T = any> = {
   ) => void
 };
 
-/**
- * Select Dropdown Props
- */
 export type SelectDropdownProps<T = any> = { 
   options: SelectOption<T>[]
   show: boolean,
@@ -43,9 +40,6 @@ export type SelectDropdownProps<T = any> = {
   match: (option: SelectOption<T>) => void
 };
 
-/**
- * Select Props
- */
 export type SelectProps<T = any> = {
   name?: string,
   value?: T,
@@ -64,6 +58,9 @@ export type SelectProps<T = any> = {
     update: (options: SelectOption<T>[]) => void
   ) => void
 };
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Select Hook Aggregate
@@ -158,6 +155,9 @@ export function useSelect<T = any>(config: SelectConfig<T>) {
   
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Select Dropdown
  */
@@ -201,7 +201,7 @@ export function SelectDropdown(props: SelectDropdownProps) {
 /**
  * Styled Select Component (Main)
  */
-export default function Select<T = any>(props: SelectProps) {
+export function Select<T = any>(props: SelectProps) {
   const { 
     name,
     searchable,
@@ -277,3 +277,6 @@ export default function Select<T = any>(props: SelectProps) {
     </div>
   );
 };
+
+//defaults to select
+export default Select;

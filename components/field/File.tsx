@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ChangeEvent, CSSProperties } from 'react';
 import type { InputProps, InputConfig } from './Input.js';
@@ -7,17 +10,14 @@ import { useInput } from './Input.js';
 //components
 import Input from './Input.js';
 
-/**
- * File Config
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type FileConfig = InputConfig & {
   defaultValue?: string,
   onUpload?: (file: File, update: (url: string) => void) => void
 };
 
-/**
- * File Props
- */
 export type FileProps = InputProps & {
   defaultValue?: string,
   uploading?: string,
@@ -26,6 +26,9 @@ export type FileProps = InputProps & {
   onUpdate?: (value: string) => void,
   onUpload?: (file: File, update: (url: string) => void) => void
 };
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * File Hook Aggregate
@@ -64,10 +67,13 @@ export function useFile(config: FileConfig) {
   return { uploading, url, handlers };   
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Generic File  Component (Main)
  */
-export default function File(props: FileProps) {
+export function File(props: FileProps) {
   //separate component related props from field attributes
   const { 
     uploading: locale = 'Uploading...',
@@ -136,4 +142,7 @@ export default function File(props: FileProps) {
       )}
     </div>
   );
-}
+};
+
+//defaults to file
+export default File;

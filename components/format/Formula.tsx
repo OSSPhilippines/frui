@@ -1,16 +1,19 @@
-/**
- * Formula Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type FormulaProps = { 
   value: string, 
   formula: string,
   data?: Record<string, any> 
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Formula Format Component (Main)
  */
-export default function Formula(props: FormulaProps) {
+export function Formula(props: FormulaProps) {
   const { value, data = {}, formula } = props;
   let calculations = formula.replace(/\{this\}/, String(Number(value) || 0));
   //replace templates from the dataset
@@ -28,3 +31,6 @@ export default function Formula(props: FormulaProps) {
   } catch (e) {}
   return (<>{solution}</>);
 };
+
+//defaults to formula
+export default Formula;

@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { FieldsProps, FieldsetProps } from '../form/Fieldset.js';
 //components
@@ -5,14 +8,11 @@ import Input from './Input.js';
 import Button from '../form/Button.js';
 import make from '../form/Fieldset.js';
 
-/**
- * Textlist Type
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type TextlistType = string;
 
-/**
- * Textlist Config
- */
 export type TextlistConfig = {
   type?: string,
   values?: (TextlistType|undefined)[],
@@ -20,12 +20,12 @@ export type TextlistConfig = {
   set: (values: (TextlistType|undefined)[]) => void
 };
 
-/**
- * Textlist Props
- */
 export type TextlistProps = FieldsetProps<TextlistType> & {
   placeholder?: string
 };
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Textlist Hook Aggregate
@@ -47,7 +47,10 @@ export function useTextlists(config: TextlistConfig) {
   };
   
   return { handlers };
-}
+};
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Text Item Component 
@@ -101,10 +104,13 @@ const Fieldset = make<TextlistType>(TextlistFields);
 /**
  * Textlist set Component (Main)
  */
-export default function Textlist(props: TextlistProps) {
+export function Textlist(props: TextlistProps) {
   const { placeholder, ...attributes } = props;
   const config = { placeholder };
   return (
     <Fieldset {...attributes} config={config} emptyValue="" />
   );
 };
+
+//defaults to textlist
+export default Textlist;

@@ -1,6 +1,11 @@
+//--------------------------------------------------------------------//
+// Imports
+
 import type { JSX } from 'react';
 
-//types
+//--------------------------------------------------------------------//
+// Types
+
 export type RatingProps = { 
   value: string|number,
   max?: number,
@@ -8,10 +13,13 @@ export type RatingProps = {
   round?: 'round'|'ceil'|'floor'
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Rating Format Component (Main)
  */
-export default function Rating(props: RatingProps) {
+export function Rating(props: RatingProps) {
   const {
     value,
     max,
@@ -32,3 +40,6 @@ export default function Rating(props: RatingProps) {
   }
   return (<>{stars}</>);
 };
+
+//defaults to rating
+export default Rating;

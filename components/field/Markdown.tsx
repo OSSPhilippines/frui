@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { TextareaProps } from './Textarea.js';
 //hooks
@@ -9,17 +12,17 @@ import Button from '../form/Button.js';
 //using react-dom/server to render markdown... on the client side
 import { renderToStaticMarkup } from 'react-dom/server';
 
-/**
- * Markdown Config
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type MarkdownConfig = {
   onUpdate?: Function
 };
 
-/**
- * Markdown Props
- */
 export type MarkdownProps = TextareaProps;
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Markdown Hook Aggregate
@@ -36,12 +39,15 @@ export function useMarkdown({ onUpdate }: MarkdownConfig) {
       }
     }
   };
-}
+};
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Form Markdown Component (Main)
  */
-export default function Markdown(props: MarkdownProps) {
+export function Markdown(props: MarkdownProps) {
   const {
     onUpdate,
     defaultValue,
@@ -96,3 +102,6 @@ export default function Markdown(props: MarkdownProps) {
     </div>
   );
 };
+
+//defaults to markdown
+export default Markdown;

@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ChangeEvent, CSSProperties } from 'react';
 import type { InputProps, InputConfig } from './Input.js';
@@ -7,17 +10,14 @@ import { useInput } from './Input.js';
 //components
 import Input from './Input.js';
 
-/**
- * Filelist Config
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type FilelistConfig = InputConfig & {
   defaultValue?: string[],
   onUpload?: (files: File[], update: (urls: string[]) => void) => void
 };
 
-/**
- * Filelist Props
- */
 export type FilelistProps = InputProps & {
   uploading?: string,
   defaultValue?: string[],
@@ -27,6 +27,9 @@ export type FilelistProps = InputProps & {
   onUpdate?: (value: string[]) => void,
   onUpload?: (files: File[], update: (urls: string[]) => void) => void
 };
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Filelist Hook Aggregate
@@ -76,10 +79,13 @@ export function useFilelist(config: FilelistConfig) {
   return { queued, uploaded, handlers };  
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Generic File  Component (Main)
  */
-export default function Filelist(props: FilelistProps) {
+export function Filelist(props: FilelistProps) {
   //separate component related props from field attributes
   const { 
     uploading = 'Uploading...',
@@ -145,4 +151,7 @@ export default function Filelist(props: FilelistProps) {
       )}
     </div>
   );
-}
+};
+
+//defaults to filelist
+export default Filelist;

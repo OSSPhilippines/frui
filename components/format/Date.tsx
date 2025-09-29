@@ -1,14 +1,20 @@
-//helpers
+//--------------------------------------------------------------------//
+// Imports
+
+//modules
 import moment from 'moment';
 
-/**
- * Date Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type DateProps = { 
   value: string|number|Date, 
   locale?: string,
   format?: string 
 };
+
+//--------------------------------------------------------------------//
+// Configuration
 
 //moment configuration
 moment.locale('short', { 
@@ -33,10 +39,13 @@ moment.locale('short', {
   }
 });
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Date Format Component (Main)
  */
-export default function DateFormat(props: DateProps) {
+export function DateFormat(props: DateProps) {
   const { 
     value, 
     locale = 'en',
@@ -52,3 +61,6 @@ export default function DateFormat(props: DateProps) {
     <>{moment(date).locale(locale).format(format)}</>
   );
 };
+
+//defaults to date
+export default DateFormat;

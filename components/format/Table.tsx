@@ -1,11 +1,14 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { CSSProperties } from 'react';
 //components
 import { Table, Thead, Tcol, Trow } from '../element/Table.js';
 
-/**
- * Table Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type TableProps = { 
   style?: CSSProperties,
   className?: string,
@@ -13,10 +16,13 @@ export type TableProps = {
   stripes?: [ string, string, string ]
 };
 
+//--------------------------------------------------------------------//
+// Components
+
 /**
  * Table Format Component (Main)
  */
-export default function TableFormat(props: TableProps) {
+export function TableFormat(props: TableProps) {
   const { style = {}, className, value, stripes } = props;
   if (!value || !value.length) return null;
   const styles = {
@@ -45,3 +51,6 @@ export default function TableFormat(props: TableProps) {
     </Table>
   );
 };
+
+//defaults to table
+export default TableFormat;

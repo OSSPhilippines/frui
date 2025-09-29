@@ -1,10 +1,13 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { ChangeEvent, LegacyRef, CSSProperties } from 'react';
 import type { ExtendsType, HTMLInputProps } from '../types.js';
 
-/**
- * Input Config
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type InputConfig = {
   checked?: boolean,
   defaultChecked?: boolean,
@@ -12,15 +15,15 @@ export type InputConfig = {
   onUpdate?: Function
 };
 
-/**
- * Input Props
- */
 export type InputProps = ExtendsType<HTMLInputProps, {
   style?: CSSProperties,
   error?: any,
   onUpdate?: (value: string) => void,
   passRef?: LegacyRef<HTMLInputElement>
 }>;
+
+//--------------------------------------------------------------------//
+// Hooks
 
 /**
  * Input Hook Aggregate
@@ -34,12 +37,15 @@ export function useInput({ onChange, onUpdate }: InputConfig) {
       }
     }
   };
-}
+};
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Generic Input  Component (Main)
  */
-export default function Input(props: InputProps) {
+export function Input(props: InputProps) {
   //separate component related props from field attributes
   const {   
     error, 
@@ -68,3 +74,6 @@ export default function Input(props: InputProps) {
     />
   );
 };
+
+//defaults to input
+export default Input;

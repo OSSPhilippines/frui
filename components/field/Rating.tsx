@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------//
+// Imports
+
 import type { 
   SVGProps,
   ChangeEvent, 
@@ -7,6 +10,9 @@ import type {
 } from 'react';
 
 import React, { useState, useCallback, useId } from 'react';
+
+//--------------------------------------------------------------------//
+// Types
 
 export type RatingConfig = {
   name?: string,
@@ -40,7 +46,13 @@ export type RatingProps = {
   style?: CSSProperties
 };
 
+//--------------------------------------------------------------------//
+// Helpers
+
 export const defaultGetLabelText = (value: number): string => `${value} Star${value !== 1 ? 's' : ''}`;
+
+//--------------------------------------------------------------------//
+// Hooks
 
 export function useRating(config: RatingConfig) {
   const {
@@ -95,7 +107,10 @@ export function useRating(config: RatingConfig) {
     handlers,
     isControlled
   };
-}
+};
+
+//--------------------------------------------------------------------//
+// Components
 
 export function Star({ style, ...props }: SVGProps<SVGSVGElement>) {
   return (
@@ -113,7 +128,10 @@ export function Star({ style, ...props }: SVGProps<SVGSVGElement>) {
   );
 };
 
-export default function Rating(props: RatingProps) {
+//--------------------------------------------------------------------//
+// Components
+
+export function Rating(props: RatingProps) {
   const {
     name: providedName,
     value: controlledValue,
@@ -222,4 +240,7 @@ export default function Rating(props: RatingProps) {
       })}
     </span>
   );
-}
+};
+
+//defaults to rating
+export default Rating;

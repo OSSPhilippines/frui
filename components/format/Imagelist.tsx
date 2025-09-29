@@ -1,10 +1,16 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //types
 import type { HTMLImageProps } from '../types.js';
 
-/**
- * Imagelist Props
- */
+//--------------------------------------------------------------------//
+// Types
+
 export type ImagelistProps = HTMLImageProps & { value: string[] };
+
+//--------------------------------------------------------------------//
+// Components
 
 /**
  * Imagelist Format Component (Main)

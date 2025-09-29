@@ -600,7 +600,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following props are accepted by <C value="WYSIWYG" />.
+            The <C value="<WYSIWYG>" /> field can be passed the 
+            following props.
           </Translate>
         </p>
         <Props props={props} />

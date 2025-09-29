@@ -160,14 +160,19 @@ export function Body() {
             use any input attributes as props.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Input name="name" placeholder="Enter name.." value="John Doe" />
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <Input 
+              name="name" 
+              placeholder="Enter name.." 
+              value="John Doe" 
+            />
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -180,14 +185,18 @@ export function Body() {
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Input onUpdate={value => alert(value)} />
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
+        <Preview 
+          title="On Update Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <Input 
+              onUpdate={value => alert(value)} 
+              placeholder="Type something..." 
+            />
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Change')}
@@ -257,14 +266,15 @@ export function Body() {
             the input field red.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview 
+          title="Input With Error" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <Input error value="Not a hotdog." />
-          </div>
-          <Code language="typescript">
-            {examples[2]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[2]}</Preview.Code>
+        </Preview>
       </div>
       
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
@@ -273,8 +283,8 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            Input accepts all props of a standard HTML Input 
-            element. See <a 
+            The <C value="<Input>" /> field accepts all props of 
+            a standard HTML Input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"
               target="_blank"

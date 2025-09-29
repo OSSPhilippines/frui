@@ -297,8 +297,8 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            Dates accepts all props of a standard HTML Input 
-            element. See <a 
+            The <C value="<Checkbox>" /> field accepts all props of 
+            a standard HTML Input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"
               target="_blank"

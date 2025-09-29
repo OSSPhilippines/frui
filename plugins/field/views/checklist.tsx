@@ -543,8 +543,8 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            Checklist accepts all props of a standard HTML input 
-            element. See <a 
+            The <C value="<Checklist>" /> field accepts all props 
+            of a standard HTML input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Checkbox"
               target="_blank"

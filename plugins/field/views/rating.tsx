@@ -474,8 +474,9 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            The Rating component wraps visually hidden radio inputs for accessibility and form integration.
-            It accepts the following specific props:
+            The <C value="<Rating>" /> field wraps visually hidden 
+            radio inputs for accessibility and form integration.
+            It accepts the following specific props.
           </Translate>
         </p>
         <Props props={propsData} />

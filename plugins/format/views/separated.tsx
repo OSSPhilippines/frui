@@ -149,7 +149,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Separated>" /> component can be passed the 
+            The <C value="<Separated>" /> format can be passed the 
             following props.
           </Translate>
         </p>

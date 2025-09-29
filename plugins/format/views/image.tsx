@@ -153,7 +153,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Image>" /> component can be passed the 
+            The <C value="<Image>" /> format can be passed the 
             following props.
           </Translate>
         </p>

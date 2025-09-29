@@ -327,9 +327,10 @@ export function Body() {
         {_('API Reference')}
       </h2>
       <div>
-        <p className="py-4">
+         <p className="py-2">
           <Translate>
-            The following props are accepted by <C value="CodeEditor" />.
+            The <C value="<CodeEditor>" /> field can be passed the 
+            following props.
           </Translate>
         </p>
         <Props props={props} />

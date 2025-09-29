@@ -274,8 +274,8 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            Textarea accepts all props of a standard HTML Textarea 
-            element. See <a 
+            The <C value="<Textarea>" /> field accepts all props of a 
+            standard HTML Textarea element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea"
               target="_blank"

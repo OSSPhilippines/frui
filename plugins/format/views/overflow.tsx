@@ -151,7 +151,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Overflow>" /> component can be passed the 
+            The <C value="<Overflow>" /> format can be passed the 
             following props.
           </Translate>
         </p>

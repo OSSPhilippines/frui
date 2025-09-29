@@ -429,8 +429,8 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            Radio accepts all props of a standard HTML input 
-            element. See <a 
+            The <C value="<Radio>" /> field accepts all props of a 
+            standard HTML input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Radio"
               target="_blank"

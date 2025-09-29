@@ -150,7 +150,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Formula>" /> component can be passed the 
+            The <C value="<Formula>" /> format can be passed the 
             following props.
           </Translate>
         </p>

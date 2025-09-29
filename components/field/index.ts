@@ -32,12 +32,12 @@ export type {
   DateInput,
   DateConfig,
   DateProps
-} from './Date.js';
+} from './DatePicker.js';
 export type {
   DatetimeInput,
   DatetimeConfig,
   DatetimeProps
-} from './Datetime.js';
+} from './DatetimePicker.js';
 export type { FileConfig, FileProps } from './File.js';
 export type { FilelistConfig, FilelistProps } from './Filelist.js';
 export type { InputConfig, InputProps } from './Input.js';
@@ -79,7 +79,7 @@ export type {
   TimeInput,
   TimeConfig,
   TimeProps
-} from './Time.js';
+} from './TimePicker.js';
 export type {
   WYSIWYGConfig,
   WYSIWYGProps
@@ -101,8 +101,8 @@ export {
 } from './ColorPicker.js';
 export { useCountry } from './Country.js';
 export { useCurrency } from './Currency.js';
-export { useDate } from './Date.js';
-export { useDatetime } from './Datetime.js';
+export { useDate } from './DatePicker.js';
+export { useDatetime } from './DatetimePicker.js';
 export { useFile } from './File.js';
 export { useFilelist } from './Filelist.js';
 export { useInput } from './Input.js';
@@ -121,7 +121,7 @@ export { useSwitch } from './Switch.js';
 export { useTaglist } from './Taglist.js';
 export { useTextarea } from './Textarea.js';
 export { useTextlists } from './Textlist.js';
-export { useTime } from './Time.js';
+export { useTime } from './TimePicker.js';
 export { useWYSIWYG } from './WYSIWYG.js';
 
 import Autocomplete from './Autocomplete.js';
@@ -131,8 +131,8 @@ import CodeEditor from './CodeEditor.js';
 import ColorPicker from './ColorPicker.js';
 import Country from './Country.js';
 import Currency from './Currency.js';
-import Date from './Date.js';
-import Datetime from './Datetime.js';
+import Date from './DatePicker.js';
+import Datetime from './DatetimePicker.js';
 import File from './File.js';
 import Filelist from './Filelist.js';
 import Image from './Image.js';
@@ -156,7 +156,7 @@ import Switch from './Switch.js';
 import Taglist from './Taglist.js';
 import Textarea from './Textarea.js';
 import Textlist from './Textlist.js';
-import Time from './Time.js';
+import Time from './TimePicker.js';
 import WYSIWYG from './WYSIWYG.js';
 
 export {

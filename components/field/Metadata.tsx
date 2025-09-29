@@ -9,9 +9,9 @@ import Button from '../form/Button.js';
 import make from '../form/Fieldset.js';
 import Input from './Input.js';
 import Number from './Number.js';
-import Date from './Date.js';
-import Datetime from './Datetime.js';
-import Time from './Time.js';
+import Date from './DatePicker.js';
+import Datetime from './DatetimePicker.js';
+import Time from './TimePicker.js';
 
 //--------------------------------------------------------------------//
 // Types

@@ -7,7 +7,7 @@ import { useLanguage, Translate } from 'r22n';
 //frui
 import Bread from 'components/element/Bread.js';
 import Table from 'components/element/Table.js';
-import Time from 'components/field/Time.js';
+import Time from 'components/field/TimePicker.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

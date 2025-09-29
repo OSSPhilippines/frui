@@ -8,7 +8,7 @@ import { useLanguage, Translate } from 'r22n';
 import Bread from 'components/element/Bread.js';
 import Table from 'components/element/Table.js';
 import Alert from 'components/element/Alert.js';
-import DateField from 'components/field/Date.js';
+import DateField from 'components/field/DatePicker.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

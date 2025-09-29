@@ -5,7 +5,7 @@
 import type { ExtendsType } from '../types.js';
 import type { InputProps } from './Input.js';
 //hooks
-import { useDate } from './Date.js';
+import { useDate } from './DatePicker.js';
 //components
 import Input from './Input.js';
 

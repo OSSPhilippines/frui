@@ -133,6 +133,9 @@ const MainMenu: React.FC<{
         <Link href="/field/password" className={`${pathname.indexOf('/field/password') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Password')}</span>
         </Link>
+        <Link href="/field/phone-input" className={`${pathname.indexOf('/field/phone-input') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
+          <span className="inline-block pl-2">{_('Phone Input')}</span>
+        </Link>
         <Link href="/field/radio" className={`${pathname.indexOf('/field/radio') === 0 ? 'text-white' : ''} block pl-7 pr-3 py-2 cursor-pointer`}>
           <span className="inline-block pl-2">{_('Radio')}</span>
         </Link>

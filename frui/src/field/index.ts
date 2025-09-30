@@ -50,6 +50,7 @@ export type {
 export type { MultiSelectProps } from './MultiSelect.js';
 export type { NumberOptions, NumberProps } from './Number.js';
 export type { PasswordProps } from './Password.js';
+export type { DialCode, PhoneInputProps } from './PhoneInput.js';
 export type { RadioProps } from './Radio.js';
 export type { RatingConfig, RatingProps } from './Rating.js';
 //export type {} from './Radiolist.js';
@@ -108,6 +109,7 @@ export { useMarkdown } from './Markdown.js';
 export { useMetadata, MetadataFields } from './Metadata.js';
 export { useNumber } from './Number.js';
 export { usePassword } from './Password.js';
+export { usePhoneInput, PhoneDropdown } from './PhoneInput.js';
 export { useRadio } from './Radio.js';
 export { useRating, Star } from './Rating.js';
 //export {} from './Radiolist.js';
@@ -143,6 +145,7 @@ import Metadata from './Metadata.js';
 import MultiSelect from './MultiSelect.js';
 import Number from './Number.js';
 import Password from './Password.js';
+import PhoneInput from './PhoneInput.js';
 import Radio from './Radio.js';
 //import Radiolist from './Radiolist.js';
 import Rating from './Radio.js';
@@ -177,6 +180,7 @@ export {
   MultiSelect,
   Number,
   Password,
+  PhoneInput,
   Radio,
   Rating,
   Select,

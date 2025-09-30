@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap");
+
+.frui-phone-input-container {
+  align-items: center;
+  border: 1px solid var(--black);
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.frui-phone-input-container-input {
+  border: none;
+  border-left: 1px solid var(--black);
+  flex: 1;
+  font-size: 14px;
+  outline: none;
+  padding: 8px;
+}
+
+.frui-phone-input-dialcode {
+  color: inherit;
+  font-size: small;
+  opacity: 0.7;
+}
+
+.frui-phone-input-dropdown {
+  background-color: var(--white);
+  border: 1px solid var(--black);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  left: 0;
+  margin-top: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 1000;
+}
+
+.frui-phone-input-dropdown-container {
+  position: relative;
+  width: 100%;
+}
+
+.frui-phone-input-dropdown-item {
+  align-items: center;
+  color: var(--black);
+  display: flex;
+  font-size: small;
+  gap: 8px;
+  padding: 8px;
+  text-align: left;
+}
+
+.frui-phone-input-dropdown-item:hover {
+  background-color: var(--info);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.frui-phone-input-error .frui-phone-input-container {
+  border: 1px solid var(--error);
+  box-shadow: 0 0 0 1px var(--error);
+}
+
+.frui-phone-input-error .frui-phone-input-container-input {
+  color: var(--black);
+}
+
+.frui-phone-input-error .frui-phone-input-select-btn {
+  color: var(--black);
+}
+
+.frui-phone-input-flag {
+  font-family: "Noto Color Emoji", "sans-serif";
+  font-size: 14px;
+}
+
+.frui-phone-input-search {
+  font-size: 16px;
+  margin: 4px;
+  padding: 8px 8px;
+  width: calc(100% - 16px);
+}
+
+.frui-phone-input-select-btn {
+  align-items: center;
+  background: var(--white);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  gap: 6px;
+  min-width: 90px;
+  padding: 8px 12px;
+}
+
+.frui-phone-input-select-btn:focus {
+  outline: 2px solid var(--black);
+}
+
+.frui-phone-input-wrapper {
+  position: relative;
+  width: 100%;
+}

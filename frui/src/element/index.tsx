@@ -1,11 +1,11 @@
-export type { AlertProps } from './Alert';
-export type { BadgeProps } from './Badge';
-export type { LoaderProps } from './Loader';
+export type { AlertProps } from './Alert.js';
+export type { BadgeProps } from './Badge.js';
+export type { LoaderProps } from './Loader.js';
 export type {
   ModalContextProps,
   ModalProviderProps, 
   ModalProps
-} from './Modal';
+} from './Modal.js';
 export type { 
   TableColProps,
   TableFootProps,
@@ -13,24 +13,24 @@ export type {
   TableProps,
   TableRowProps,
   TableRuleProps
-} from './Table';
-export type { TooltipProps, TooltipDirection } from './Tooltip';
+} from './Table.js';
+export type { TooltipProps, TooltipDirection } from './Tooltip.js';
 
-export { ModalContext, ModalProvider, useModal } from './Modal';
+export { ModalContext, ModalProvider, useModal } from './Modal.js';
 export {
   Thead,
   Tfoot,
   Tcol,
   Trow,
   Tgroup
-} from './Table';
+} from './Table.js';
 
-import Alert from './Alert';
-import Badge from './Badge';
-import Loader from './Loader';
-import Modal from './Modal';
-import Table from './Table';
-import Tooltip from './Tooltip';
+import Alert from './Alert.js';
+import Badge from './Badge.js';
+import Loader from './Loader.js';
+import Modal from './Modal.js';
+import Table from './Table.js';
+import Tooltip from './Tooltip.js';
 
 export {
   Alert,

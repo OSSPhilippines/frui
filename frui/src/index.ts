@@ -3,14 +3,14 @@ import * as Field from './field/index.js';
 import * as Form from './form/index.js';
 import * as Format from './format/index.js';
 
-export type { AlertProps } from './element/Alert';
-export type { BadgeProps } from './element/Badge';
-export type { LoaderProps } from './element/Loader';
+export type { AlertProps } from './element/Alert.js';
+export type { BadgeProps } from './element/Badge.js';
+export type { LoaderProps } from './element/Loader.js';
 export type {
   ModalContextProps,
   ModalProviderProps, 
   ModalProps
-} from './element/Modal';
+} from './element/Modal.js';
 export type { 
   TableColProps,
   TableFootProps,
@@ -18,35 +18,35 @@ export type {
   TableProps,
   TableRowProps,
   TableRuleProps
-} from './element/Table';
-export type { TooltipProps, TooltipDirection } from './element/Tooltip';
-export type { ButtonProps } from './form/Button';
-export type { ControlProps } from './form/Control';
+} from './element/Table.js';
+export type { TooltipProps, TooltipDirection } from './element/Tooltip.js';
+export type { ButtonProps } from './form/Button.js';
+export type { ControlProps } from './form/Control.js';
 export type { 
   FieldsProps, 
   FieldsetConfig, 
   FieldsetProps
-} from './form/Fieldset';
+} from './form/Fieldset.js';
 
-export { ModalContext, ModalProvider, useModal } from './element/Modal';
+export { ModalContext, ModalProvider, useModal } from './element/Modal.js';
 export {
   Thead,
   Tfoot,
   Tcol,
   Trow,
   Tgroup
-} from './element/Table';
-export { useFieldset } from './form/Fieldset';
+} from './element/Table.js';
+export { useFieldset } from './form/Fieldset.js';
 
-import Alert from './element/Alert';
-import Badge from './element/Badge';
-import Loader from './element/Loader';
-import Modal from './element/Modal';
-import Table from './element/Table';
-import Tooltip from './element/Tooltip';
-import Button from './form/Button';
-import Control from './form/Control';
-import Fieldset from './form/Fieldset';
+import Alert from './element/Alert.js';
+import Badge from './element/Badge.js';
+import Loader from './element/Loader.js';
+import Modal from './element/Modal.js';
+import Table from './element/Table.js';
+import Tooltip from './element/Tooltip.js';
+import Button from './form/Button.js';
+import Control from './form/Control.js';
+import Fieldset from './form/Fieldset.js';
 
 export {
   Element,

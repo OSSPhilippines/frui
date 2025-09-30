@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import ColorDisplay, { ColorProps } from '../format/Color';
+import ColorDisplay, { ColorProps } from '../format/Color.js';
 
 export type RGBA = { r: number; g: number; b: number; a: number; };
 export type HSVA = { h: number; s: number; v: number; a: number; };

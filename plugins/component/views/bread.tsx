@@ -25,51 +25,54 @@ import {
 const props = [
   //bread props
   [
-    [ 'activeClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to active crumb' ],
-    [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'crumbClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to each crumb' ],
-    [ 'style', 'CSS Object', 'No', 'Standard CSS input' ]
+    [ 'className', 'string | Function', 'No', 'Standard HTML class names' ],
+    [ 'crumb', 'string | CSSProperties | Function', 'No', 'Slot: class/style to apply to each crumb element' ],
+    [ 'defaultValue', 'Crumb[]', 'No', 'Uncontrolled serializable bread trail array' ],
+    [ 'onClick', 'Function', 'No', 'Click handler for each crumb' ],
+    [ 'pop', 'boolean', 'No', 'Whether to remove last n crumbs from trail on click' ],
+    [ 'style', 'CSSProperties | Function', 'No', 'Standard CSS input' ],
+    [ 'value', 'Crumb[]', 'No', 'Controlled serializable bread trail array' ]
   ],
   //crumb props
   [
-    [ 'activeClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to active crumb' ],
-    [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'href', 'string', 'No', 'Href link for the crumb' ],
+    [ 'className', 'string | Function', 'No', 'Standard HTML class names' ],
+    [ 'href', 'string', 'No', 'Link for the crumb' ],
     [ 'icon', 'string', 'No', 'Icon class name for the crumb (only font awesome)' ],
-    [ 'style', 'CSS Object', 'No', 'Standard CSS input' ]
+    [ 'onClick', 'Function', 'No', 'Click handler for each crumb' ],
+    [ 'style', 'CSSProperties | Function', 'No', 'Standard CSS input' ]
   ],
   //slicer props
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'style', 'CSS Object', 'No', 'Standard CSS input' ],
+    [ 'style', 'CSSProperties', 'No', 'Standard CSS input' ],
     [ 'value', 'string', 'No', 'String value for the slicer (default is /)' ]
   ]
 ];
 
 const examples = [
 //0
-`<Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+`<Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
   <Bread.Slicer />
   <Bread.Crumb>Crumb 1</Bread.Crumb>
   <Bread.Crumb>Crumb 2</Bread.Crumb>
   <Bread.Crumb>Crumb 3</Bread.Crumb>
 </Bread>`,
 //1
-`<Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+`<Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
   <Bread.Slicer />
   <Bread.Crumb icon="home">Crumb 1</Bread.Crumb>
   <Bread.Crumb icon="folder">Crumb 2</Bread.Crumb>
   <Bread.Crumb icon="file">Crumb 3</Bread.Crumb>
 </Bread>`,
 //2
-`<Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+`<Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
   <Bread.Slicer value="›" />
   <Bread.Crumb>Crumb 1</Bread.Crumb>
   <Bread.Crumb>Crumb 2</Bread.Crumb>
   <Bread.Crumb>Crumb 3</Bread.Crumb>
 </Bread>`,
 //3
-`<Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+`<Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
   <Bread.Crumb>Crumb 1</Bread.Crumb>
   <Bread.Slicer value="+" />
   <Bread.Crumb>Crumb 2</Bread.Crumb>
@@ -77,7 +80,7 @@ const examples = [
   <Bread.Crumb>Crumb 3</Bread.Crumb>
 </Bread>`,
 //4
-`<Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+`<Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
   <Bread.Slicer />
   <Bread.Crumb>Crumb 1</Bread.Crumb>
   <Bread.Crumb>Crumb 2</Bread.Crumb>
@@ -86,9 +89,9 @@ const examples = [
 //5
 `<Bread>
   <Bread.Slicer />
-  <Bread.Crumb className="font-normal" activeClassStyle="font-bold">Crumb 1</Bread.Crumb>
-  <Bread.Crumb className="font-normal" activeClassStyle="font-bold">Crumb 2</Bread.Crumb>
-  <Bread.Crumb className="font-normal" activeClassStyle="font-bold">Crumb 3</Bread.Crumb>
+  <Bread.Crumb className={({ active }) => active ? 'font-bold' : 'font-normal'}>Crumb 1</Bread.Crumb>
+  <Bread.Crumb className={({ active }) => active ? 'font-bold' : 'font-normal'}>Crumb 2</Bread.Crumb>
+  <Bread.Crumb className={({ active }) => active ? 'font-bold' : 'font-normal'}>Crumb 3</Bread.Crumb>
 </Bread>`,
 //6
 `<Bread.Slicer>
@@ -104,7 +107,7 @@ const examples = [
  */
 export function Crumbs() {
   return (
-    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
       <Bread.Slicer />
       <Bread.Crumb icon="icons" href="/component">
         Components
@@ -167,7 +170,7 @@ export function Examples() {
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
-          <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+          <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
             <Bread.Slicer />
             <Bread.Crumb>Crumb 1</Bread.Crumb>
             <Bread.Crumb>Crumb 2</Bread.Crumb>
@@ -182,7 +185,7 @@ export function Examples() {
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
-          <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+          <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
             <Bread.Slicer />
             <Bread.Crumb icon="home">Crumb 1</Bread.Crumb>
             <Bread.Crumb icon="folder">Crumb 2</Bread.Crumb>
@@ -197,7 +200,7 @@ export function Examples() {
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
-          <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+          <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
             <Bread.Slicer value="›" />
             <Bread.Crumb>Crumb 1</Bread.Crumb>
             <Bread.Crumb>Crumb 2</Bread.Crumb>
@@ -212,7 +215,7 @@ export function Examples() {
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
-          <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+          <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
             <Bread.Crumb>Crumb 1</Bread.Crumb>
             <Bread.Slicer value="+" />
             <Bread.Crumb>Crumb 2</Bread.Crumb>
@@ -271,8 +274,7 @@ export function Body() {
         <p className="py-2">
           <Translate>
             You can manage the styles of the crumbs by passing class names to
-            the <C value="crumbClassStyle" />, <C value="activeClassStyle" />, 
-            and <C value="contentClassStyle" /> props in 
+            the <C value="crumb" /> slot in 
             the <C value="<Bread>" /> component.
           </Translate>
         </p>
@@ -304,7 +306,7 @@ export function Body() {
           className="border border-2 theme-bc-3 mt-4"
         >
           <Preview.Example center padding>
-            <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+            <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
               <Bread.Slicer />
               <Bread.Crumb>Crumb 1</Bread.Crumb>
               <Bread.Crumb>Crumb 2</Bread.Crumb>
@@ -319,7 +321,7 @@ export function Body() {
           className="border border-2 theme-bc-3 mt-4"
         >
           <Preview.Example center padding>
-            <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+            <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
               <Bread.Slicer value="+"/>
               <Bread.Crumb>Crumb 1</Bread.Crumb>
               <Bread.Crumb>Crumb 2</Bread.Crumb>
@@ -334,7 +336,7 @@ export function Body() {
           className="border border-2 theme-bc-3 mt-4"
         >
           <Preview.Example center padding>
-            <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+            <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
               <Bread.Slicer>
                 <i className="fas fa-fw fa-chevron-right text-sm relative px-t--2"></i>
               </Bread.Slicer>

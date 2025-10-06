@@ -15,7 +15,6 @@ import { languages } from '@codemirror/language-data';
 //frui
 import Input from './Input.js';
 import type { InputProps } from './Input.js';
-import { ExtendsType } from '../types.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -26,17 +25,15 @@ export type CodeEditorConfig = {
   onUpdate?: Function;
 };
 
-export type CodeEditorProps = ExtendsType<
-  InputProps,
-  {
-    defaultValue?: string;
-    extensions?: Extension[];
-    language?: string;
-    numbers?: boolean; //might not be needed (there's nothing special about it; could just add to extensions if necessary)
-    setup?: 'minimal' | 'basic' | 'custom';
-    value?: string;
-  }
->;
+export type CodeEditorProps = InputProps & {
+  defaultValue?: string;
+  extensions?: Extension[];
+  language?: string;
+  //might not be needed (there's nothing special about it; could just add to extensions if necessary)
+  numbers?: boolean; 
+  setup?: 'minimal' | 'basic' | 'custom';
+  value?: string;
+};
 
 //--------------------------------------------------------------------//
 // Helpers

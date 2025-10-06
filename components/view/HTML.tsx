@@ -1,7 +1,7 @@
 //--------------------------------------------------------------------//
 // Types
 
-export type HTMLProps = { value: string };
+export type ClassStyleProps = { value: string };
 
 //--------------------------------------------------------------------//
 // Components
@@ -9,7 +9,7 @@ export type HTMLProps = { value: string };
 /**
  * HTML Format Component (Main)
  */
-export function HTML({ value }: HTMLProps) {
+export function HTML({ value }: ClassStyleProps) {
   return (
     <div dangerouslySetInnerHTML={{ __html: value }} />
   );

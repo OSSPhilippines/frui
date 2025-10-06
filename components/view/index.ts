@@ -4,7 +4,7 @@ export type { CurrencyProps } from './Currency.js';
 export type { DateProps } from './Date.js'; 
 export type { EmailProps } from './Email.js';
 export type { FormulaProps } from './Formula.js';
-export type { HTMLProps } from './HTML.js';
+export type { ClassStyleProps } from './HTML.js';
 export type { ImageProps } from './Image.js';
 export type { ImagelistProps } from './Imagelist.js';
 export type { JSONProps } from './JSON.js';

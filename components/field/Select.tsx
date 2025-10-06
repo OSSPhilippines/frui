@@ -1,11 +1,11 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//types
+//modules
 import type { ReactNode, KeyboardEvent, CSSProperties } from 'react';
-//hooks
 import { useState, useEffect } from 'react';
-//components
+//frui
+import type { ClassStyleProps, ChildrenProps } from '../types.js';
 import Input from './Input.js';
 
 //--------------------------------------------------------------------//

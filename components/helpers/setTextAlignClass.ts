@@ -1,4 +1,4 @@
-//src
+//frui
 import type { AlignProps } from '../types';
 
 /**

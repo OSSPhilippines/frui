@@ -38,7 +38,7 @@ export type {
   RadiusProps,
   SizeProps,
   FillProps,
-  HTMLProps,
+  ClassStyleProps,
   ChildrenProps
 } from './types.js'
 
@@ -62,14 +62,14 @@ import Button from './form/Button';
 import Control from './form/Control';
 import Fieldset from './form/Fieldset';
 
-import setColorClass from './helpers/color/all.js';
-import setBackgroundColorClass from './helpers/color/background.js';
-import setBorderColorClass from './helpers/color/border.js';
-import setTextColorClass from './helpers/color/text.js';
-import setTextAlignClass from './helpers/align.js';
-import setDisplayClass from './helpers/display.js';
-import setRadiusClass from './helpers/radius.js';
-import setTextSizeClass from './helpers/size.js';
+import setColorClass from './helpers/color/setColorClass.js';
+import setBackgroundColorClass from './helpers/color/setBackgroundColorClass.js';
+import setBorderColorClass from './helpers/color/setBorderColorClass.js';
+import setTextColorClass from './helpers/color/setTextColorClass.js';
+import setTextAlignClass from './helpers/setTextAlignClass.js';
+import setDisplayClass from './helpers/setDisplayClass.js';
+import setRadiusClass from './helpers/setRadiusClass.js';
+import setTextSizeClass from './helpers/setTextSizeClass.js';
 
 export {
   Element,

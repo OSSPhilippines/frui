@@ -2,26 +2,34 @@
 // Imports
 
 //modules
-import type { JSX } from 'react';
+import type { CSSProperties, JSX } from 'react';
 
 //frui
-import type { HTMLProps } from '../types.js';
+import type { 
+  CallableClassStyleProps,
+  HTMLElementProps 
+} from '../types.js';
 
 //--------------------------------------------------------------------//
 // Types
 
-export type PagerProps = HTMLProps & {
-  activeClass?: string,
-  total?: number,
-  skip?: number, 
-  take?: number, 
-  radius?: number,
-  onClick?: (page: number) => void,
-  prev?: boolean | JSX.Element,
-  next?: boolean | JSX.Element,
-  start?: boolean | JSX.Element,
-  end?: boolean | JSX.Element
+export type PagerState = {
+  active: boolean
 };
+
+export type PagerProps = CallableClassStyleProps<PagerState> 
+  & Omit<HTMLElementProps<HTMLDivElement>, 'className' | 'style'> 
+  & {
+    total?: number,
+    skip?: number, 
+    take?: number, 
+    radius?: number,
+    onUpdate?: (page: number) => void,
+    prev?: boolean | JSX.Element,
+    next?: boolean | JSX.Element,
+    start?: boolean | JSX.Element,
+    end?: boolean | JSX.Element
+  };
 
 //--------------------------------------------------------------------//
 // Helpers
@@ -54,14 +62,12 @@ export function Pager(props: PagerProps) {
     skip = 0, 
     take = 50, 
     radius = 0, 
-    onClick = () => {},
+    onUpdate,
     start,
     end,
     next,
     prev,
-    activeClass: activeClassName,
-    className,
-    style
+    ...attributes
   } = props;
   //calculate current page
   const currentPage = Math.floor(skip / take) + 1;
@@ -83,7 +89,20 @@ export function Pager(props: PagerProps) {
   }
   const showStart = showPages[0] !== 1;
   const showEnd = showPages[showPages.length - 1] !== lastPage;
-  const refresh = (page: number) => onClick(Math.max(page - 1, 0) * take);
+  const refresh = (page: number) => onUpdate 
+    && onUpdate(Math.max(page - 1, 0) * take);
+  //get style handlers
+  const classNameHandler: Function = typeof props.className === 'function' 
+    ? props.className 
+    : () => props.className || '';
+  const styleHandler: Function = typeof props.style === 'function' 
+    ? props.style 
+    : () => props.style || {};
+  //get all possible style states
+  const className = classNameHandler({ active: false }) as string;
+  const style = styleHandler({ active: false }) as CSSProperties;
+  const activeClassName = classNameHandler({ active: true }) as string;
+  const activeStyle = styleHandler({ active: true }) as CSSProperties;
   //set default classes
   const classes = [];
   //if custom class, add it
@@ -123,8 +142,9 @@ export function Pager(props: PagerProps) {
     <>
       {showStart && start && (
         <div 
+          {...attributes}
           className={startClass} 
-          style={style} 
+          style={style}
           onClick={() => refresh(1)}
         >
           {typeof start !== 'boolean' ? start : '«'}
@@ -132,8 +152,9 @@ export function Pager(props: PagerProps) {
       )}
       {!currentIsFirst && prev && (
         <div 
-          className={prevClass} 
-          style={style} 
+          {...attributes}
+          className={prevClass}
+          style={style}
           onClick={() => refresh(currentPage - 1)}
         >
           {typeof prev !== 'boolean' ? prev : '‹'}
@@ -142,8 +163,9 @@ export function Pager(props: PagerProps) {
       {showPages.map((page, i) => (
         <div
           key={i}
+          {...attributes}
           className={page === currentPage ? activeClass : pageClass}
-          style={style}
+          style={page === currentPage ? activeStyle : style}
           onClick={() => refresh(page)}
         >
           {page}
@@ -151,7 +173,8 @@ export function Pager(props: PagerProps) {
       ))}
       {!currentIsLast && next && (
         <div 
-          className={nextClass} 
+          {...attributes}
+          className={nextClass}
           style={style}
           onClick={() => refresh(currentPage + 1)}
         >
@@ -160,6 +183,7 @@ export function Pager(props: PagerProps) {
       )}
       {showEnd && end && (
         <div 
+          {...attributes}
           className={endClass}
           style={style}
           onClick={() => refresh(lastPage)}

@@ -29,13 +29,7 @@ const props = [
   //dialog
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'defaultOpen', 'boolean', 'No', 'Whether the dialog is open by default' ],
-    [ 'onClose', 'Function', 'No', 'Function triggered when the dialog is closed' ],
-    [ 'onOpen', 'Function', 'No', 'Function triggered when the dialog is opened' ],
-    [ 'open', 'boolean', 'No', 'Whether the dialog is open or not (controlled)' ],
-    [ 'overlayClassName', 'string', 'No', 'Overlay class names' ],
-    [ 'overlayClose', 'boolean', 'No', 'Whether to close the dialog when clicking outside' ],
-    [ 'overlayStyle', 'CSSProperties', 'No', 'Overlay styles' ],
+    [ 'overlay', 'false | object', 'No', 'Props for the overlay element. Set to false to disable overlay.' ],
     [ 'style', 'CSSProperties', 'No', 'Standard HTML styles' ]
   ],
   //dialog provider
@@ -206,7 +200,7 @@ return (
  */
 export function Crumbs() {
   return (
-    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
       <Bread.Slicer />
       <Bread.Crumb icon="icons" href="/component">
         Components
@@ -312,7 +306,7 @@ export function Examples() {
           <Dialog 
             open={overlayed} 
             onClose={() => overlay(false)}
-            overlayClose
+            overlay={{ close: true }}
             className="theme-bg-0 theme-bc-1 px-w-320 rounded-lg overflow-hidden shadow-lg"
           >
             <header className="flex items-center p-3 theme-bg-2">

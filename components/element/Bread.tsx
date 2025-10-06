@@ -13,20 +13,33 @@ import {
 
 //frui
 import type { 
-  ClassStyleProp, 
-  HTMLProps, 
-  ChildrenProps 
+  CallableClassStyleProps,
+  CallableSlotStyleProp,
+  CallableChildrenProps,
+  ClassStyleProps,
+  HTMLElementProps
 } from '../types.js';
-import applyClassStyle from '../helpers/style.js';
+import getClassStyles from '../helpers/getClassStyles.js';
+import getSlotStyles from '../helpers/getSlotStyles.js';
 
 //--------------------------------------------------------------------//
 // Types
 
+export type BreadStates = { active: boolean };
+
+//serializable primitive
+export type Crumb = ClassStyleProps & {
+  //href link for the crumb
+  href?: string,
+  //icon class name for the crumb (only font awesome)
+  icon?: string,
+  //label for the crumb
+  label: string
+};
+
 export type BreadContextProps = {
-  //class/style to apply to active crumb
-  activeClassStyle?: ClassStyleProp,
-  //class/style to apply to each crumb
-  crumbClassStyle?: ClassStyleProp,
+  //slot: class/style to apply to each crumb element
+  crumb?: CallableSlotStyleProp<BreadStates>,
   //remove last n crumbs from trail
   pop: (count?: number) => void,
   //add crumb to trail
@@ -35,24 +48,33 @@ export type BreadContextProps = {
   trail: string[]
 };
 
-export type BreadSlicerProps = HTMLProps & ChildrenProps & {
+export type BreadSlicerProps = HTMLElementProps<HTMLSpanElement> & {
   value?: string
 };
 
-export type BreadCrumbProps = HTMLProps & ChildrenProps & {
-  //class/style to apply to active crumb
-  activeClassStyle?: ClassStyleProp,
-  //href link for the crumb
-  href?: string,
-  //icon class name for the crumb (only font awesome)
-  icon?: string
-};
+export type BreadCrumbProps = CallableClassStyleProps<BreadStates> 
+  & CallableChildrenProps<BreadStates> 
+  & Omit<HTMLElementProps<HTMLAnchorElement>, 'className' | 'style' | 'children'>
+  & {
+    //href link for the crumb
+    href?: string,
+    //icon class name for the crumb (only font awesome)
+    icon?: string,
+    //click handler for each crumb
+    onClick?: () => void
+  };
 
-export type BreadProps = HTMLProps & ChildrenProps & {
-  //class/style to apply to active crumb
-  activeClassStyle?: ClassStyleProp,
-  //class/style to apply to each crumb
-  crumbClassStyle?: ClassStyleProp
+export type BreadProps = HTMLElementProps<HTMLDivElement> & {
+  //slot: class/style to apply to each crumb element
+  crumb?: CallableSlotStyleProp<BreadStates>,
+  //uncontrolled serializable bread trail array
+  defaultValue?: Crumb[],
+  //click handler for each crumb
+  onClick?: () => void,
+  //whether to remove last n crumbs from trail on click
+  pop?: boolean,
+  //controlled serializable bread trail array
+  value?: Crumb[]
 };
 
 //--------------------------------------------------------------------//
@@ -67,7 +89,7 @@ export const DEFAULT_SLICER = '/';
  * Build the breadcrumb trail from the children.
  * Adds the separator between crumbs.
  */
-export function buildCrumbs(children: ReactNode) {
+export function buildBreadTrail(children: ReactNode) {
   const nodes = !Array.isArray(children) 
     ? [ children ].filter(Boolean)
     : children;
@@ -123,7 +145,7 @@ export const BreadContext = createContext<BreadContextProps>({
  */
 export function BreadSlicer(props: BreadSlicerProps) {
   //props
-  const { value, className, style, children } = props;
+  const { value, className, style, children, ...attributes } = props;
   //hooks
   const id = useId();
   const context = useContext(BreadContext);
@@ -144,7 +166,7 @@ export function BreadSlicer(props: BreadSlicerProps) {
   //render
   if (!shouldShow) return null;
   return (
-    <span className={classes.join(' ')} style={style}>
+    <span {...attributes} className={classes.join(' ')} style={style}>
       {separator}
     </span>
   );
@@ -156,8 +178,6 @@ export function BreadSlicer(props: BreadSlicerProps) {
 export function BreadCrumb(props: BreadCrumbProps) {
   //props
   const { 
-    //class/style to apply to active crumb
-    activeClassStyle, //?: ClassStyleProp
     //children nodes
     children, //?: ReactNode
     //tabs class name
@@ -167,50 +187,35 @@ export function BreadCrumb(props: BreadCrumbProps) {
     //icon class name for the crumb (only font awesome)
     icon, //?: string
     //tabs style
-    style //?: CSSProperties
+    style, //?: CSSProperties
+    ...attributes
   } = props;
   //hooks
   const id = useId();
-  const context = useContext(BreadContext);
-  const { trail } = context;
+  const context = useBreadContext();
   //variables
-  const isActive = id === trail[trail.length - 1];
+  const { trail, crumb } = context;
+  const active = id === trail[trail.length - 1];
   const shouldShow = id && trail.includes(id);
-  // configure classes and styles
-  const classes = [ 'frui-bread-crumb' ];
-  const styles = { ...style };
-  // if active crumb
-  if (isActive) {
-    //add active class
-    classes.push('frui-bread-crumb-active');
-    //if BreadCrumb has an active prop
-    if (activeClassStyle) {
-      //use the active prop from BreadCrumb
-      applyClassStyle(classes, styles, activeClassStyle);
-    //if the context has an active prop
-    } else if (context.activeClassStyle) {
-      //use the active prop from context
-      applyClassStyle(classes, styles, context.activeClassStyle);
-    //there are no active props
-    //if BreadCrumb has a className prop
-    } else if (className) {
-      //use the className prop from BreadCrumb
-      classes.push(className);
-    //if the context has a crumbs prop
-    } else if (context.crumbClassStyle) {
-      //use the crumbs prop from context
-      applyClassStyle(classes, styles, context.crumbClassStyle);
-    }
-  //not active crumb
-  //if BreadCrumb has a className prop
-  } else if (className) {
-    //use the className prop from BreadCrumb
-    classes.push(className);
-  //if the context has a crumbs prop
-  } else if (context.crumbClassStyle) {
-    //use the crumbs prop from context
-    applyClassStyle(classes, styles, context.crumbClassStyle);
-  }
+  // get slot styles
+  const slot = crumb ? getSlotStyles(crumb, { active }) : {};
+  //get final classes and styles
+  const { classes, styles } = getClassStyles({
+    //default classes to apply
+    classes: [ 
+      'frui-bread-crumb', 
+      ...(active ? ['frui-bread-crumb-active'] : []) 
+    ],
+    //style props
+    props: {
+      //prefer direct props over slot props
+      className: className || slot.className,
+      //prefer direct props over slot props
+      style: style || slot.style
+    },
+    //state to pass to callable props
+    state: { active }
+  });
   //effects
   useEffect(() => {
     //add crumb to trail
@@ -222,9 +227,10 @@ export function BreadCrumb(props: BreadCrumbProps) {
   if (!shouldShow) return null;
   if (href) return (
     <a
+      {...attributes}
       href={href}
       className={classes.join(' ')}
-      style={style}
+      style={styles}
       onClick={() => {
         const index = trail.indexOf(id);
         if (index >= 0) {
@@ -232,18 +238,19 @@ export function BreadCrumb(props: BreadCrumbProps) {
           context.pop(trail.length - index - 1);
         }
       }}
-      data-active={isActive ? 'true' : 'false'}
+      data-active={active ? 'true' : 'false'}
     >
       {!!icon && (
         <i className={`frui-bread-crumb-icon fas fa-fw fa-${icon}`}></i>
       )}
-      {children}
+      {typeof children === 'function' ? children({ active }) : children}
     </a>
   );
   return (
     <span
+      {...attributes}
       className={classes.join(' ')}
-      style={style}
+      style={styles}
       onClick={() => {
         const index = trail.indexOf(id);
         if (index >= 0) {
@@ -251,12 +258,12 @@ export function BreadCrumb(props: BreadCrumbProps) {
           context.pop(trail.length - index - 1);
         }
       }}
-      data-active={isActive ? 'true' : 'false'}
+      data-active={active ? 'true' : 'false'}
     >
       {!!icon && (
         <i className={`frui-bread-crumb-icon fas fa-fw fa-${icon}`}></i>
       )}
-      {children}
+      {typeof children === 'function' ? children({ active }) : children}
     </span>
   );
 };
@@ -267,27 +274,30 @@ export function BreadCrumb(props: BreadCrumbProps) {
 export function Bread(props: BreadProps) {
   //props
   const { 
-    //class/style to apply to active crumb
-    activeClassStyle, //?: ClassStyleProp
     //children nodes
     children, //?: ReactNode
     //tabs class name
     className, //?: string
-    //class/style to apply to each crumb
-    crumbClassStyle, //?: ClassStyleProp
+    //slot: class/style to apply to each crumb element
+    crumb, //?: CallableSlotStyleProp<BreadStates>,
+    //uncontrolled serializable bread trail array
+    defaultValue, //?: Crumb[],
     //tabs style
-    style //?: CSSProperties,
+    style, //?: CSSProperties,
+    //controlled serializable bread trail array
+    value, //?: Crumb[]
+    ...attributes
   } = props;
   //hooks
   const [ trail, setTrail ] = useState<string[]>([]);
+  const [ crumbs, setCrumbs ] = useState<Crumb[]>(defaultValue || []);
   //variables
   // configure classes
   const classes = [ 'frui-bread' ];
   if (className) classes.push(className);
   // configure context provider
   const provider = { 
-    activeClassStyle,
-    crumbClassStyle,
+    crumb,
     //remove last n crumbs from trail
     pop: (count = 1) => {
       setTrail(trail => {
@@ -305,11 +315,34 @@ export function Bread(props: BreadProps) {
     //crumb trail (ids[])
     trail
   };
+  //effects
+  // if there's a controlled value
+  useEffect(() => {
+    if (Array.isArray(value)) {
+      setCrumbs(value);
+    }
+  }, [ value ]);
   //render
   return (
     <BreadContext.Provider value={provider}>
-      <div className={classes.join(' ')} style={style}>
-        {buildCrumbs(children)}
+      <div {...attributes} className={classes.join(' ')} style={style}>
+        {!!children 
+          ? buildBreadTrail(children)
+          : crumbs.map((crumb, index) => {
+            const { className, href, icon, label, style } = crumb;
+            return (
+              <BreadCrumb 
+                key={`crumb-${index}`} 
+                className={className} 
+                href={href} 
+                icon={icon} 
+                style={style}
+              >
+                {label}
+              </BreadCrumb>
+            );
+          })
+        }
       </div>
     </BreadContext.Provider>
   );

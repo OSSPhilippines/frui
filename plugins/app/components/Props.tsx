@@ -2,38 +2,25 @@
 import type { JSX } from 'react';
 import { useLanguage } from 'r22n';
 //frui
-import { 
-  Table, 
-  Thead, 
-  Trow, 
-  Tcol, 
-  useStripe 
-} from 'components/element/Table.js';
+import Table from 'components/element/Table.js';
 
-export default function Props({ props }: { props: (string|JSX.Element)[][] }) {
+export type PropsProps = { props: (string|JSX.Element)[][] };
+
+export default function Props({ props }: PropsProps) {
   const { _ } = useLanguage();
-  const stripe = useStripe('theme-bg-2', 'theme-bg-1');
   return (
-    <Table>
-      <Thead className="text-left theme-bg-3">{_('Name')}</Thead>
-      <Thead className="text-left theme-bg-3">{_('Type')}</Thead>
-      <Thead className="text-center theme-bg-3">{_('Required')}</Thead>
-      <Thead className="text-left theme-bg-3">{_('Notes')}</Thead>
+    <Table column={[ 'theme-bg-2', 'theme-bg-1' ]}>
+      <Table.Head className="text-left theme-bg-3">{_('Name')}</Table.Head>
+      <Table.Head className="text-left theme-bg-3">{_('Type')}</Table.Head>
+      <Table.Head className="text-center theme-bg-3">{_('Required')}</Table.Head>
+      <Table.Head className="text-left theme-bg-3">{_('Notes')}</Table.Head>
       {props.map((prop, i) => (
-        <Trow key={i}>
-          <Tcol className={`${stripe(i)}`}>
-            {prop[0]}
-          </Tcol>
-          <Tcol className={`${stripe(i)}`}>
-            {prop[1]}
-          </Tcol>
-          <Tcol className={`${stripe(i)} text-center`}>
-            {prop[2]}
-          </Tcol>
-          <Tcol className={`${stripe(i)}`}>
-            {prop[3]}
-          </Tcol>
-        </Trow>
+        <Table.Row key={i} index={i}>
+          <Table.Col>{prop[0]}</Table.Col>
+          <Table.Col>{prop[1]}</Table.Col>
+          <Table.Col addClassName="text-center">{prop[2]}</Table.Col>
+          <Table.Col>{prop[3]}</Table.Col>
+        </Table.Row>
       
       ))}
     </Table>

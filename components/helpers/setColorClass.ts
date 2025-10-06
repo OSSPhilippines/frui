@@ -1,5 +1,5 @@
-//src
-import type { ColorProps, ColorPropType } from '../../types.js';
+//frui
+import type { ColorProps, ColorPropType } from '../types.js';
 
 /**
  * Set color style

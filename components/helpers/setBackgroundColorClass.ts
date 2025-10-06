@@ -1,6 +1,6 @@
-//src
-import type { BackgroundColorProps } from '../../types.js';
-import setColorClass from './all.js';
+//frui
+import type { BackgroundColorProps } from '../types.js';
+import setColorClass from './setColorClass.js';
 
 /**
  * Set background color style

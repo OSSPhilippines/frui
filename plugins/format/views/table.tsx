@@ -48,7 +48,7 @@ const examples = [
  */
 export function Crumbs() {
   return (
-    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
       <Bread.Slicer />
       <Bread.Crumb icon="text-height" href="/format">
         Formats

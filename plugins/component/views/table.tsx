@@ -29,14 +29,14 @@ const props = [
   //table
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'columnClassStyle', 'string | string[] | React.CSSProperties | React.CSSProperties[]', 'No', 'List of class names or styles to use for each column, or a single class name to use for all columns' ],
+    [ 'column', 'string | string[] | React.CSSProperties | React.CSSProperties[]', 'No', 'List of class names or styles to use for each column, or a single class name to use for all columns' ],
     [ 'footClassStyle', 'string | React.CSSProperties', 'No', 'Class name or styles to use for all foot cells' ],
-    [ 'headClassStyle', 'string | React.CSSProperties', 'No', 'Class name or styles to use for all head cells' ],
+    [ 'head', 'string | React.CSSProperties', 'No', 'Class name or styles to use for all head cells' ],
     [ 'style', 'CSS Object', 'No', 'Standard CSS input' ]
   ],
   //table head
   [
-    [ 'addClassStyle', 'string | React.CSSProperties', 'No', 'Additional class names to add to the head cell' ],
+    [ 'addClassName', 'string | React.CSSProperties', 'No', 'Additional class names to add to the head cell' ],
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
     [ 'colSpan', 'number', 'No', 'How many columns this cell will cover' ],
     [ 'noWrap', 'boolean', 'No', 'Keeps all text in one line' ],
@@ -54,7 +54,7 @@ const props = [
   //table row
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'columnStyleClass', 'string | React.CSSProperties', 'No', 'Class name to use for all columns in this row, overrides the columnClassStyle prop from Table' ],
+    [ 'columnStyleClass', 'string | React.CSSProperties', 'No', 'Class name to use for all columns in this row, overrides the column prop from Table' ],
     [ 'colSpan', 'number', 'No', 'How many columns this cell will cover' ],
     [ 'noWrap', 'boolean', 'No', 'Keeps all text in one line' ],
     [ 'rowSpan', 'number', 'No', 'How many rows this cell will cover' ],
@@ -62,7 +62,7 @@ const props = [
   ],
   //table col
   [
-    [ 'addClassStyle', 'string | React.CSSProperties', 'No', 'Additional class names or styles to add to the column cell' ],
+    [ 'addClassName', 'string | React.CSSProperties', 'No', 'Additional class names or styles to add to the column cell' ],
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
     [ 'colSpan', 'number', 'No', 'How many columns this cell will cover' ],
     [ 'noWrap', 'boolean', 'No', 'Keeps all text in one line' ],
@@ -80,7 +80,7 @@ const props = [
   ],
   //table foot
   [
-    [ 'addClassStyle', 'string | React.CSSProperties', 'No', 'Additional class names or styles to add to the foot cell' ],
+    [ 'addClassName', 'string | React.CSSProperties', 'No', 'Additional class names or styles to add to the foot cell' ],
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
     [ 'colSpan', 'number', 'No', 'How many columns this cell will cover' ],
     [ 'noWrap', 'boolean', 'No', 'Keeps all text in one line' ],
@@ -134,100 +134,100 @@ const examples = [
 //1
 `<Table 
   className="w-full"
-  columnClassStyle={[ 'theme-bg-2', 'theme-bg-1' ]}
-  headClassStyle="theme-bg-3"
+  column={[ 'theme-bg-2', 'theme-bg-1' ]}
+  head="theme-bg-3"
 >
-  <Table.Head addClassStyle="text-left">ID</Table.Head>
-  <Table.Head addClassStyle="text-left">Name</Table.Head>
-  <Table.Head addClassStyle="text-center">Active</Table.Head>
-  <Table.Head addClassStyle="text-right">Created</Table.Head>
-  <Table.Head addClassStyle="text-right">Updated</Table.Head>
+  <Table.Head addClassName="text-left">ID</Table.Head>
+  <Table.Head addClassName="text-left">Name</Table.Head>
+  <Table.Head addClassName="text-center">Active</Table.Head>
+  <Table.Head addClassName="text-right">Created</Table.Head>
+  <Table.Head addClassName="text-right">Updated</Table.Head>
   <Table.Row stripe={0}>
     <Table.Col>1</Table.Col>
     <Table.Col>John Doe</Table.Col>
-    <Table.Col addClassStyle="text-center">Yes</Table.Col>
-    <Table.Col addClassStyle="text-right">2025-01-02</Table.Col>
-    <Table.Col addClassStyle="text-right">2025-03-04</Table.Col>
+    <Table.Col addClassName="text-center">Yes</Table.Col>
+    <Table.Col addClassName="text-right">2025-01-02</Table.Col>
+    <Table.Col addClassName="text-right">2025-03-04</Table.Col>
   </Table.Row>
   <Table.Row stripe={1}>
     <Table.Col>2</Table.Col>
     <Table.Col>Jane Doe</Table.Col>
-    <Table.Col addClassStyle="text-center">No</Table.Col>
-    <Table.Col addClassStyle="text-right">2025-04-05</Table.Col>
-    <Table.Col addClassStyle="text-right">2025-05-06</Table.Col>
+    <Table.Col addClassName="text-center">No</Table.Col>
+    <Table.Col addClassName="text-right">2025-04-05</Table.Col>
+    <Table.Col addClassName="text-right">2025-05-06</Table.Col>
   </Table.Row>
   <Table.Row stripe={2}>
     <Table.Col>3</Table.Col>
     <Table.Col>Jack Doe</Table.Col>
-    <Table.Col addClassStyle="text-center">Yes</Table.Col>
-    <Table.Col addClassStyle="text-right">2025-07-08</Table.Col>
-    <Table.Col addClassStyle="text-right">2025-09-01</Table.Col>
+    <Table.Col addClassName="text-center">Yes</Table.Col>
+    <Table.Col addClassName="text-right">2025-07-08</Table.Col>
+    <Table.Col addClassName="text-right">2025-09-01</Table.Col>
   </Table.Row>
 </Table>`,
 //2
-`<Table headClassStyle="theme-bg-3 border-t-0!" className="w-full">
-  <Table.Head addClassStyle="text-left" wrap1>ID</Table.Head>
-  <Table.Head addClassStyle="text-left" wrap2>Name</Table.Head>
-  <Table.Head addClassStyle="text-center">Active</Table.Head>
-  <Table.Head addClassStyle="text-right">Created</Table.Head>
-  <Table.Head addClassStyle="text-right">Updated</Table.Head>
-  <Table.Row columnClassStyle="theme-bg-2">
+`<Table head="theme-bg-3 border-t-0!" className="w-full">
+  <Table.Head addClassName="text-left" wrap1>ID</Table.Head>
+  <Table.Head addClassName="text-left" wrap2>Name</Table.Head>
+  <Table.Head addClassName="text-center">Active</Table.Head>
+  <Table.Head addClassName="text-right">Created</Table.Head>
+  <Table.Head addClassName="text-right">Updated</Table.Head>
+  <Table.Row column="theme-bg-2">
     <Table.Col>1</Table.Col>
     <Table.Col>John Doe</Table.Col>
-    <Table.Col addClassStyle="text-center">Yes</Table.Col>
-    <Table.Col addClassStyle="text-right" noWrap>January 02, 2025</Table.Col>
-    <Table.Col addClassStyle="text-right" noWrap>March 04, 2025</Table.Col>
+    <Table.Col addClassName="text-center">Yes</Table.Col>
+    <Table.Col addClassName="text-right" noWrap>January 02, 2025</Table.Col>
+    <Table.Col addClassName="text-right" noWrap>March 04, 2025</Table.Col>
   </Table.Row>
-  <Table.Row columnClassStyle="theme-bg-1">
+  <Table.Row column="theme-bg-1">
     <Table.Col>2</Table.Col>
     <Table.Col>Jane Doe</Table.Col>
-    <Table.Col addClassStyle="text-center">No</Table.Col>
-    <Table.Col addClassStyle="text-right" noWrap>April 05, 2025</Table.Col>
-    <Table.Col addClassStyle="text-right" noWrap>May 06, 2025</Table.Col>
+    <Table.Col addClassName="text-center">No</Table.Col>
+    <Table.Col addClassName="text-right" noWrap>April 05, 2025</Table.Col>
+    <Table.Col addClassName="text-right" noWrap>May 06, 2025</Table.Col>
   </Table.Row>
-  <Table.Row columnClassStyle="theme-bg-2">
+  <Table.Row column="theme-bg-2">
     <Table.Col>3</Table.Col>
     <Table.Col>Jack Doe</Table.Col>
-    <Table.Col addClassStyle="text-center">Yes</Table.Col>
-    <Table.Col addClassStyle="text-right" noWrap>July 08, 2025</Table.Col>
-    <Table.Col addClassStyle="text-right" noWrap>September 01, 2025</Table.Col>
+    <Table.Col addClassName="text-center">Yes</Table.Col>
+    <Table.Col addClassName="text-right" noWrap>July 08, 2025</Table.Col>
+    <Table.Col addClassName="text-right" noWrap>September 01, 2025</Table.Col>
   </Table.Row>
 </Table>`,
 //3
-`<Table className="w-full" headClassStyle="theme-bg-3 border-t-0!">
-    <Table.Head addClassStyle="text-left" stickyLeft stickyTop>ID</Table.Head>
-    <Table.Head addClassStyle="text-left" noWrap stickyTop>First Name</Table.Head>
-    <Table.Head addClassStyle="text-left" noWrap stickyTop>Last Name</Table.Head>
-    <Table.Head addClassStyle="text-center" stickyTop>Active</Table.Head>
-    <Table.Head addClassStyle="text-center" stickyTop>Role</Table.Head>
-    <Table.Head addClassStyle="text-center" stickyTop>Rating</Table.Head>
-    <Table.Head addClassStyle="text-right" stickyTop>Created</Table.Head>
-    <Table.Head addClassStyle="text-right" stickyTop>Updated</Table.Head>
-    <Table.Head addClassStyle="text-center" stickyRight stickyTop>Actions</Table.Head>
-    <Table.Row columnClassStyle="theme-bg-1">
+`<Table className="w-full" head="theme-bg-3 border-t-0!">
+    <Table.Head addClassName="text-left" stickyLeft stickyTop>ID</Table.Head>
+    <Table.Head addClassName="text-left" noWrap stickyTop>First Name</Table.Head>
+    <Table.Head addClassName="text-left" noWrap stickyTop>Last Name</Table.Head>
+    <Table.Head addClassName="text-center" stickyTop>Active</Table.Head>
+    <Table.Head addClassName="text-center" stickyTop>Role</Table.Head>
+    <Table.Head addClassName="text-center" stickyTop>Rating</Table.Head>
+    <Table.Head addClassName="text-right" stickyTop>Created</Table.Head>
+    <Table.Head addClassName="text-right" stickyTop>Updated</Table.Head>
+    <Table.Head addClassName="text-center" stickyRight stickyTop>Actions</Table.Head>
+    <Table.Row column="theme-bg-1">
       <Table.Col stickyLeft>1</Table.Col>
       <Table.Col noWrap>John</Table.Col>
       <Table.Col noWrap>Doe</Table.Col>
-      <Table.Col addClassStyle="text-center">Yes</Table.Col>
-      <Table.Col addClassStyle="text-center">Admin</Table.Col>
-      <Table.Col addClassStyle="text-center">⭐⭐⭐⭐⭐</Table.Col>
-      <Table.Col addClassStyle="text-right" noWrap>January 02, 2025</Table.Col>
-      <Table.Col addClassStyle="text-right" noWrap>March 04, 2025</Table.Col>
-      <Table.Col addClassStyle="text-center" noWrap stickyRight>
+      <Table.Col addClassName="text-center">Yes</Table.Col>
+      <Table.Col addClassName="text-center">Admin</Table.Col>
+      <Table.Col addClassName="text-center">⭐⭐⭐⭐⭐</Table.Col>
+      <Table.Col addClassName="text-right" noWrap>January 02, 2025</Table.Col>
+      <Table.Col addClassName="text-right" noWrap>March 04, 2025</Table.Col>
+      <Table.Col addClassName="text-center" noWrap stickyRight>
         <i className="fas fa-edit mr-2 theme-info"></i>
         <i className="fas fa-trash-alt theme-error"></i>
       </Table.Col>
     </Table.Row>
-    <Table.Row columnClassStyle="theme-bg-1">
+    <Table.Row column="theme-bg-1">
       <Table.Col stickyLeft>2</Table.Col>
       <Table.Col noWrap>Jane</Table.Col>
       <Table.Col noWrap>Doe</Table.Col>
-      <Table.Col addClassStyle="text-center">No</Table.Col>
-      <Table.Col addClassStyle="text-center">User</Table.Col>
-      <Table.Col addClassStyle="text-center">⭐⭐⭐⭐</Table.Col>
-      <Table.Col addClassStyle="text-right" noWrap>April 05, 2025</Table.Col>
-      <Table.Col addClassStyle="text-right" noWrap>May 06, 2025</Table.Col>
-      <Table.Col addClassStyle="text-center" noWrap stickyRight>
+      <Table.Col addClassName="text-center">No</Table.Col>
+      <Table.Col addClassName="text-center">User</Table.Col>
+      <Table.Col addClassName="text-center">⭐⭐⭐⭐</Table.Col>
+      <Table.Col addClassName="text-right" noWrap>April 05, 2025</Table.Col>
+      <Table.Col addClassName="text-right" noWrap>May 06, 2025</Table.Col>
+      <Table.Col addClassName="text-center" noWrap stickyRight>
         <i className="fas fa-edit mr-2 theme-info"></i>
         <i className="fas fa-trash-alt theme-error"></i>
       </Table.Col>
@@ -243,7 +243,7 @@ const examples = [
  */
 export function Crumbs() {
   return (
-    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
       <Bread.Slicer />
       <Bread.Crumb icon="icons" href="/component">
         Components
@@ -342,34 +342,34 @@ export function Examples() {
         <Preview.Example>
           <Table 
             className="w-full"
-            columnClassStyle={[ 'theme-bg-2', 'theme-bg-1' ]}
-            headClassStyle="theme-bg-3"
+            column={[ 'theme-bg-2', 'theme-bg-1' ]}
+            head="theme-bg-3"
           >
-            <Table.Head addClassStyle="text-left">ID</Table.Head>
-            <Table.Head addClassStyle="text-left">Name</Table.Head>
-            <Table.Head addClassStyle="text-center">Active</Table.Head>
-            <Table.Head addClassStyle="text-right">Created</Table.Head>
-            <Table.Head addClassStyle="text-right">Updated</Table.Head>
-            <Table.Row stripe={0}>
+            <Table.Head addClassName="text-left">ID</Table.Head>
+            <Table.Head addClassName="text-left">Name</Table.Head>
+            <Table.Head addClassName="text-center">Active</Table.Head>
+            <Table.Head addClassName="text-right">Created</Table.Head>
+            <Table.Head addClassName="text-right">Updated</Table.Head>
+            <Table.Row index={0}>
               <Table.Col>1</Table.Col>
               <Table.Col>John Doe</Table.Col>
-              <Table.Col addClassStyle="text-center">Yes</Table.Col>
-              <Table.Col addClassStyle="text-right">2025-01-02</Table.Col>
-              <Table.Col addClassStyle="text-right">2025-03-04</Table.Col>
+              <Table.Col addClassName="text-center">Yes</Table.Col>
+              <Table.Col addClassName="text-right">2025-01-02</Table.Col>
+              <Table.Col addClassName="text-right">2025-03-04</Table.Col>
             </Table.Row>
-            <Table.Row stripe={1}>
+            <Table.Row index={1}>
               <Table.Col>2</Table.Col>
               <Table.Col>Jane Doe</Table.Col>
-              <Table.Col addClassStyle="text-center">No</Table.Col>
-              <Table.Col addClassStyle="text-right">2025-04-05</Table.Col>
-              <Table.Col addClassStyle="text-right">2025-05-06</Table.Col>
+              <Table.Col addClassName="text-center">No</Table.Col>
+              <Table.Col addClassName="text-right">2025-04-05</Table.Col>
+              <Table.Col addClassName="text-right">2025-05-06</Table.Col>
             </Table.Row>
-            <Table.Row stripe={2}>
+            <Table.Row index={2}>
               <Table.Col>3</Table.Col>
               <Table.Col>Jack Doe</Table.Col>
-              <Table.Col addClassStyle="text-center">Yes</Table.Col>
-              <Table.Col addClassStyle="text-right">2025-07-08</Table.Col>
-              <Table.Col addClassStyle="text-right">2025-09-01</Table.Col>
+              <Table.Col addClassName="text-center">Yes</Table.Col>
+              <Table.Col addClassName="text-right">2025-07-08</Table.Col>
+              <Table.Col addClassName="text-right">2025-09-01</Table.Col>
             </Table.Row>
           </Table>
         </Preview.Example>
@@ -382,32 +382,32 @@ export function Examples() {
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example>
-          <Table headClassStyle="theme-bg-3 border-t-0!" className="w-full">
-            <Table.Head addClassStyle="text-left" wrap1>ID</Table.Head>
-            <Table.Head addClassStyle="text-left" wrap2>Name</Table.Head>
-            <Table.Head addClassStyle="text-center">Active</Table.Head>
-            <Table.Head addClassStyle="text-right">Created</Table.Head>
-            <Table.Head addClassStyle="text-right">Updated</Table.Head>
-            <Table.Row columnClassStyle="theme-bg-2">
+          <Table head="theme-bg-3 border-t-0!" className="w-full">
+            <Table.Head addClassName="text-left" wrap1>ID</Table.Head>
+            <Table.Head addClassName="text-left" wrap2>Name</Table.Head>
+            <Table.Head addClassName="text-center">Active</Table.Head>
+            <Table.Head addClassName="text-right">Created</Table.Head>
+            <Table.Head addClassName="text-right">Updated</Table.Head>
+            <Table.Row column="theme-bg-2">
               <Table.Col>1</Table.Col>
               <Table.Col>John Doe</Table.Col>
-              <Table.Col addClassStyle="text-center">Yes</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>January 02, 2025</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>March 04, 2025</Table.Col>
+              <Table.Col addClassName="text-center">Yes</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>January 02, 2025</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>March 04, 2025</Table.Col>
             </Table.Row>
-            <Table.Row columnClassStyle="theme-bg-1">
+            <Table.Row column="theme-bg-1">
               <Table.Col>2</Table.Col>
               <Table.Col>Jane Doe</Table.Col>
-              <Table.Col addClassStyle="text-center">No</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>April 05, 2025</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>May 06, 2025</Table.Col>
+              <Table.Col addClassName="text-center">No</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>April 05, 2025</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>May 06, 2025</Table.Col>
             </Table.Row>
-            <Table.Row columnClassStyle="theme-bg-2">
+            <Table.Row column="theme-bg-2">
               <Table.Col>3</Table.Col>
               <Table.Col>Jack Doe</Table.Col>
-              <Table.Col addClassStyle="text-center">Yes</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>July 08, 2025</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>September 01, 2025</Table.Col>
+              <Table.Col addClassName="text-center">Yes</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>July 08, 2025</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>September 01, 2025</Table.Col>
             </Table.Row>
           </Table>
         </Preview.Example>
@@ -420,96 +420,96 @@ export function Examples() {
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example>
-          <Table className="w-full" headClassStyle="theme-bg-3 border-t-0!">
-            <Table.Head addClassStyle="text-left" stickyLeft stickyTop>ID</Table.Head>
-            <Table.Head addClassStyle="text-left" noWrap stickyTop>First Name</Table.Head>
-            <Table.Head addClassStyle="text-left" noWrap stickyTop>Last Name</Table.Head>
-            <Table.Head addClassStyle="text-center" stickyTop>Active</Table.Head>
-            <Table.Head addClassStyle="text-center" stickyTop>Role</Table.Head>
-            <Table.Head addClassStyle="text-center" stickyTop>Rating</Table.Head>
-            <Table.Head addClassStyle="text-right" stickyTop>Created</Table.Head>
-            <Table.Head addClassStyle="text-right" stickyTop>Updated</Table.Head>
-            <Table.Head addClassStyle="text-center" stickyRight stickyTop>Actions</Table.Head>
-            <Table.Row columnClassStyle="theme-bg-1">
+          <Table className="w-full" head="theme-bg-3 border-t-0!">
+            <Table.Head addClassName="text-left" stickyLeft stickyTop>ID</Table.Head>
+            <Table.Head addClassName="text-left" noWrap stickyTop>First Name</Table.Head>
+            <Table.Head addClassName="text-left" noWrap stickyTop>Last Name</Table.Head>
+            <Table.Head addClassName="text-center" stickyTop>Active</Table.Head>
+            <Table.Head addClassName="text-center" stickyTop>Role</Table.Head>
+            <Table.Head addClassName="text-center" stickyTop>Rating</Table.Head>
+            <Table.Head addClassName="text-right" stickyTop>Created</Table.Head>
+            <Table.Head addClassName="text-right" stickyTop>Updated</Table.Head>
+            <Table.Head addClassName="text-center" stickyRight stickyTop>Actions</Table.Head>
+            <Table.Row column="theme-bg-1">
               <Table.Col stickyLeft>1</Table.Col>
               <Table.Col noWrap>John</Table.Col>
               <Table.Col noWrap>Doe</Table.Col>
-              <Table.Col addClassStyle="text-center">Yes</Table.Col>
-              <Table.Col addClassStyle="text-center">Admin</Table.Col>
-              <Table.Col addClassStyle="text-center">⭐⭐⭐⭐⭐</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>January 02, 2025</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>March 04, 2025</Table.Col>
-              <Table.Col addClassStyle="text-center" noWrap stickyRight>
+              <Table.Col addClassName="text-center">Yes</Table.Col>
+              <Table.Col addClassName="text-center">Admin</Table.Col>
+              <Table.Col addClassName="text-center">⭐⭐⭐⭐⭐</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>January 02, 2025</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>March 04, 2025</Table.Col>
+              <Table.Col addClassName="text-center" noWrap stickyRight>
                 <i className="fas fa-edit mr-2 theme-info"></i>
                 <i className="fas fa-trash-alt theme-error"></i>
               </Table.Col>
             </Table.Row>
-            <Table.Row columnClassStyle="theme-bg-1">
+            <Table.Row column="theme-bg-1">
               <Table.Col stickyLeft>2</Table.Col>
               <Table.Col noWrap>Jane</Table.Col>
               <Table.Col noWrap>Doe</Table.Col>
-              <Table.Col addClassStyle="text-center">No</Table.Col>
-              <Table.Col addClassStyle="text-center">User</Table.Col>
-              <Table.Col addClassStyle="text-center">⭐⭐⭐⭐</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>April 05, 2025</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>May 06, 2025</Table.Col>
-              <Table.Col addClassStyle="text-center" noWrap stickyRight>
+              <Table.Col addClassName="text-center">No</Table.Col>
+              <Table.Col addClassName="text-center">User</Table.Col>
+              <Table.Col addClassName="text-center">⭐⭐⭐⭐</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>April 05, 2025</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>May 06, 2025</Table.Col>
+              <Table.Col addClassName="text-center" noWrap stickyRight>
                 <i className="fas fa-edit mr-2 theme-info"></i>
                 <i className="fas fa-trash-alt theme-error"></i>
               </Table.Col>
             </Table.Row>
-            <Table.Row columnClassStyle="theme-bg-1">
+            <Table.Row column="theme-bg-1">
               <Table.Col stickyLeft>3</Table.Col>
               <Table.Col noWrap>Jack</Table.Col>
               <Table.Col noWrap>Doe</Table.Col>
-              <Table.Col addClassStyle="text-center">Yes</Table.Col>
-              <Table.Col addClassStyle="text-center">Admin</Table.Col>
-              <Table.Col addClassStyle="text-center">⭐⭐</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>July 08, 2025</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>September 01, 2025</Table.Col>
-              <Table.Col addClassStyle="text-center" noWrap stickyRight>
+              <Table.Col addClassName="text-center">Yes</Table.Col>
+              <Table.Col addClassName="text-center">Admin</Table.Col>
+              <Table.Col addClassName="text-center">⭐⭐</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>July 08, 2025</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>September 01, 2025</Table.Col>
+              <Table.Col addClassName="text-center" noWrap stickyRight>
                 <i className="fas fa-edit mr-2 theme-info"></i>
                 <i className="fas fa-trash-alt theme-error"></i>
               </Table.Col>
             </Table.Row>
-            <Table.Row columnClassStyle="theme-bg-1">
+            <Table.Row column="theme-bg-1">
               <Table.Col stickyLeft>4</Table.Col>
               <Table.Col noWrap>John</Table.Col>
               <Table.Col noWrap>Doe</Table.Col>
-              <Table.Col addClassStyle="text-center">Yes</Table.Col>
-              <Table.Col addClassStyle="text-center">Guest</Table.Col>
-              <Table.Col addClassStyle="text-center">⭐</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>January 02, 2025</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>March 04, 2025</Table.Col>
-              <Table.Col addClassStyle="text-center" noWrap stickyRight>
+              <Table.Col addClassName="text-center">Yes</Table.Col>
+              <Table.Col addClassName="text-center">Guest</Table.Col>
+              <Table.Col addClassName="text-center">⭐</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>January 02, 2025</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>March 04, 2025</Table.Col>
+              <Table.Col addClassName="text-center" noWrap stickyRight>
                 <i className="fas fa-edit mr-2 theme-info"></i>
                 <i className="fas fa-trash-alt theme-error"></i>
               </Table.Col>
             </Table.Row>
-            <Table.Row columnClassStyle="theme-bg-1">
+            <Table.Row column="theme-bg-1">
               <Table.Col stickyLeft>5</Table.Col>
               <Table.Col noWrap>Jane</Table.Col>
               <Table.Col noWrap>Doe</Table.Col>
-              <Table.Col addClassStyle="text-center">No</Table.Col>
-              <Table.Col addClassStyle="text-center">Manager</Table.Col>
-              <Table.Col addClassStyle="text-center">⭐⭐⭐</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>April 05, 2025</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>May 06, 2025</Table.Col>
-              <Table.Col addClassStyle="text-center" noWrap stickyRight>
+              <Table.Col addClassName="text-center">No</Table.Col>
+              <Table.Col addClassName="text-center">Manager</Table.Col>
+              <Table.Col addClassName="text-center">⭐⭐⭐</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>April 05, 2025</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>May 06, 2025</Table.Col>
+              <Table.Col addClassName="text-center" noWrap stickyRight>
                 <i className="fas fa-edit mr-2 theme-info"></i>
                 <i className="fas fa-trash-alt theme-error"></i>
               </Table.Col>
             </Table.Row>
-            <Table.Row columnClassStyle="theme-bg-1">
+            <Table.Row column="theme-bg-1">
               <Table.Col stickyLeft>6</Table.Col>
               <Table.Col noWrap>Jack</Table.Col>
               <Table.Col noWrap>Doe</Table.Col>
-              <Table.Col addClassStyle="text-center">Yes</Table.Col>
-              <Table.Col addClassStyle="text-center">User</Table.Col>
-              <Table.Col addClassStyle="text-center">⭐⭐⭐⭐⭐</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>July 08, 2025</Table.Col>
-              <Table.Col addClassStyle="text-right" noWrap>September 01, 2025</Table.Col>
-              <Table.Col addClassStyle="text-center" noWrap stickyRight>
+              <Table.Col addClassName="text-center">Yes</Table.Col>
+              <Table.Col addClassName="text-center">User</Table.Col>
+              <Table.Col addClassName="text-center">⭐⭐⭐⭐⭐</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>July 08, 2025</Table.Col>
+              <Table.Col addClassName="text-right" noWrap>September 01, 2025</Table.Col>
+              <Table.Col addClassName="text-center" noWrap stickyRight>
                 <i className="fas fa-edit mr-2 theme-info"></i>
                 <i className="fas fa-trash-alt theme-error"></i>
               </Table.Col>

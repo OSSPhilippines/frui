@@ -7,12 +7,12 @@ import type { Highlighter } from 'shiki';
 import type { Theme, Themes } from 'react-shiki';
 import ShikiHighlighter from 'react-shiki';
 //frui
-import type { HTMLProps } from '../types.js';
+import type { ClassStyleProps } from '../types.js';
 
 //--------------------------------------------------------------------//
 // Types
 
-export type CodeProps = HTMLProps & {
+export type CodeProps = ClassStyleProps & {
   addDefaultStyles?: boolean,
   highlighter?: Highlighter,
   langClassName?: string,

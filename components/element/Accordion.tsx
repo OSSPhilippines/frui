@@ -10,53 +10,53 @@ import {
 } from 'react'; 
 
 //frui
-import type { 
-  ClassStyleProp, 
-  HTMLProps, 
-  ChildrenProps 
+import type {  
+  CallableClassStyleProps,
+  CallableSlotStyleProp,
+  CallableChildrenProps,
+  SlotStyleProp,
+  HTMLElementProps
 } from '../types.js';
-import applyClassStyle from '../helpers/style.js';
+import getClassStyles from '../helpers/getClassStyles.js';
+import getSlotStyles from '../helpers/getSlotStyles.js';
 
 //--------------------------------------------------------------------//
 // Types
 
+export type AccordionStates = { active: boolean };
+
 export type AccordionContextProps = {
-  //class/style to apply to active label
-  activeClassStyle?: ClassStyleProp,
-  //class/style to apply to each content
-  contentClassStyle?: ClassStyleProp,
+  //slot: class/style to apply to each content element
+  content?: SlotStyleProp,
   //accordion item value
   itemValue?: string,
+  //slot: class/style to apply to each label element
+  label?: CallableSlotStyleProp<AccordionStates>,
   //change value handler
   onChange: (value: string) => void,
-  //class/style to apply to each label
-  labelClassStyle?: ClassStyleProp,
   //active accordion value
   value?: string
 };
 
-export type AccordionLabelProps = HTMLProps & ChildrenProps & {
-  //class/style to apply if active
-  activeClassStyle?: ClassStyleProp
-};
+export type AccordionLabelProps = CallableClassStyleProps<AccordionStates> 
+  & CallableChildrenProps<AccordionStates>
+  & Omit<HTMLElementProps<HTMLDivElement>, 'className' | 'style' | 'children'>;
 
-export type AccordionContentProps = HTMLProps & ChildrenProps;
+export type AccordionContentProps = HTMLElementProps<HTMLDivElement>;
 
-export type AccordionBellowProps = HTMLProps & ChildrenProps & {
-  value?: string
-};
+export type AccordionBellowProps = CallableClassStyleProps<AccordionStates> 
+  & Omit<HTMLElementProps<HTMLDivElement>, 'className' | 'style'>
+  & { value?: string };
 
-export type AccordionProps = HTMLProps & ChildrenProps & {
-  //class/style to apply to active label
-  activeClassStyle?: ClassStyleProp,
-  //class/style to apply to each content
-  contentClassStyle?: ClassStyleProp,
+export type AccordionProps = HTMLElementProps<HTMLDivElement> & {
+  //slot: class/style to apply to each content element
+  content?: SlotStyleProp,
   //default active accordion value
   defaultValue?: string,
+  //slot: class/style to apply to each label element
+  label?: CallableSlotStyleProp<AccordionStates>,
   //change value handler
   onChange?: (value: string) => void,
-  //class/style to apply to each label
-  labelClassStyle?: ClassStyleProp,
   //controlled value
   value?: string
 };
@@ -86,7 +86,7 @@ export const AccordionContext = createContext<AccordionContextProps>({
  */
 export function AccordionActive(props: AccordionContentProps) {
   //props
-  const { className, style, children } = props;
+  const { className, style, children, ...attributes } = props;
   //hooks
   const { value, itemValue } = useAccordionContext();
   //variables
@@ -97,7 +97,7 @@ export function AccordionActive(props: AccordionContentProps) {
   }
   //render
   return itemValue && value === itemValue ? (
-    <div className={classes.join(' ')} style={style}>
+    <div {...attributes} className={classes.join(' ')} style={style}>
       {children}
     </div>
   ) : null;
@@ -108,7 +108,7 @@ export function AccordionActive(props: AccordionContentProps) {
  */
 export function AccordionInactive(props: AccordionContentProps) {
   //props
-  const { className, style, children } = props;
+  const { className, style, children, ...attributes } = props;
   //hooks
   const { value, itemValue } = useAccordionContext();
   //variables
@@ -119,7 +119,7 @@ export function AccordionInactive(props: AccordionContentProps) {
   }
   //render
   return !itemValue || value !== itemValue ? (
-    <div className={classes.join(' ')} style={style}>
+    <div {...attributes} className={classes.join(' ')} style={style}>
       {children}
     </div>
   ) : null;
@@ -130,66 +130,51 @@ export function AccordionInactive(props: AccordionContentProps) {
  */
 export function AccordionLabel(props: AccordionLabelProps) {
   //props
-  const {
-    //class/style to apply if active
-    activeClassStyle, //?: ClassStyleProp
+  const { 
     //children nodes
     children, //?: ReactNode
-    //tabs class name
+    //label class name
     className, //?: string
-    //tabs style
-    style //?: CSSProperties
+    //label style
+    style, //?: CSSProperties
+    ...attributes
   } = props;
   //hooks
   const context = useAccordionContext();
-  const { value, itemValue, labelClassStyle, onChange } = context;
   //variables
-  const isActive = itemValue && value === itemValue;
-  // configure classes and styles
-  const classes = [ 'frui-accordion-label' ];
-  const styles = { ...style };
-  // if active tab
-  if (isActive) {
-    //add active class
-    classes.push('frui-tabs-label-active');
-    //if AccordionLabel has an active prop
-    if (activeClassStyle) {
-      //use the active prop from AccordionLabel
-      applyClassStyle(classes, styles, activeClassStyle);
-    //if the context has an active prop
-    } else if (context.activeClassStyle) {
-      //use the active prop from context
-      applyClassStyle(classes, styles, context.activeClassStyle);
-    //there are no active props
-    //if AccordionLabel has a className prop
-    } else if (className) {
-      //use the className prop from AccordionLabel
-      classes.push(className);
-    } else if (labelClassStyle) {
-      //use the labels prop from context
-      applyClassStyle(classes, styles, labelClassStyle);
-    }
-  //not active tab
-  //if AccordionLabel has a className prop
-  } else if (className) {
-    //use the className prop from AccordionLabel
-    classes.push(className);
-  //if the context has a labels prop
-  } else if (labelClassStyle) {
-    //use the labels prop from context
-    applyClassStyle(classes, styles, labelClassStyle);
-  }
+  // extract context
+  const { value, itemValue, label, onChange } = context;
+  // determine active state
+  const active = Boolean(itemValue && value === itemValue);
+  // get slot styles
+  const slot = label ? getSlotStyles(label, { active }) : {};
+  //get final classes and styles
+  const { classes, styles } = getClassStyles({
+    //default classes to apply
+    classes: [ 
+      'frui-accordion-label', 
+      ...(active ? ['frui-accordion-label-active'] : []) 
+    ],
+    //style props
+    props: {
+      //prefer direct props over slot props
+      className: className || slot.className,
+      //prefer direct props over slot props
+      style: style || slot.style
+    },
+    //state to pass to callable props
+    state: { active }
+  });
   //render
   return (
     <div
+      {...attributes}
       className={classes.join(' ')}
-      style={style}
-      onClick={
-        () => itemValue && onChange(itemValue)
-      }
-      data-active={isActive ? 'true' : 'false'}
+      style={styles}
+      onClick={() => itemValue && onChange(itemValue)}
+      data-active={active ? 'true' : 'false'}
     >
-      {children}
+      {typeof children === 'function' ? children({ active }) : children}
     </div>
   );
 };
@@ -199,21 +184,41 @@ export function AccordionLabel(props: AccordionLabelProps) {
  */
 export function AccordionContent(props: AccordionContentProps) {
   //props
-  const { className, style, children } = props;
+  const { 
+    //children nodes
+    children, //?: ReactNode
+    //content class name
+    className, //?: string
+    //content style
+    style, //?: CSSProperties
+    ...attributes
+  } = props;
   //hooks
-  const { value, contentClassStyle, itemValue } = useAccordionContext();
+  const context = useAccordionContext();
   //variables
-  // configure classes and styles
-  const classes = [ 'frui-accordion-content' ];
-  const styles = { ...style };
-  if (className) {
-    classes.push(className);
-  } else if (contentClassStyle) {
-    applyClassStyle(classes, styles, contentClassStyle);
-  }
+  // extract context
+  const { value, itemValue, content } = context;
+  // determine active state
+  const active = itemValue && value === itemValue;
+  // get slot styles
+  const slot = content ? getSlotStyles(content, { active }) : {};
+  //get final classes and styles
+  const { classes, styles } = getClassStyles({
+    //default classes to apply
+    classes: [ 'frui-accordion-content' ],
+    //style props
+    props: {
+      //prefer direct props over slot props
+      className: className || slot.className,
+      //prefer direct props over slot props
+      style: style || slot.style
+    },
+    //state to pass to callable props
+    state: { active }
+  });
   //render
   return itemValue && value === itemValue ? (
-    <div className={classes.join(' ')} style={styles}>
+    <div {...attributes} className={classes.join(' ')} style={styles}>
       {children}
     </div>
   ) : null;
@@ -224,19 +229,38 @@ export function AccordionContent(props: AccordionContentProps) {
  */
 export function AccordionBellow(props: AccordionBellowProps) {
   //props
-  const { value, className, style, children } = props;
+  const { 
+    value, 
+    className, 
+    style, 
+    children,
+    ...attributes
+  } = props;
   //hooks
   const context = useAccordionContext();
   //variables
-  // configure classes
-  const classes = [ 'frui-accordion-bellow' ];
-  if (className) classes.push(className);
+  // determine active state
+  const active = Boolean(value && context.value === value);
+  //get final classes and styles
+  const { classes, styles } = getClassStyles({
+    //default classes to apply
+    classes: [ 'frui-accordion-bellow' ],
+    //style props
+    props: {
+      //prefer direct props over slot props
+      className: className,
+      //prefer direct props over slot props
+      style: style
+    },
+    //state to pass to callable props
+    state: { active }
+  });
   // configure context provider
   const provider = { ...context, itemValue: value };
   //render
   return (
     <AccordionContext.Provider value={provider}>
-      <div className={classes.join(' ')} style={style}>
+      <div {...attributes} className={classes.join(' ')} style={styles}>
         {children}
       </div>
     </AccordionContext.Provider>
@@ -249,24 +273,23 @@ export function AccordionBellow(props: AccordionBellowProps) {
 export function Accordion(props: AccordionProps) {
   //props
   const { 
-    //class/style to apply to active label
-    activeClassStyle, //?: ClassStyleProp
     //children nodes
     children, //?: ReactNode
     //accordion class name
     className, //?: string
+    //slot: class/style to apply to each content element
+    content, //?: SlotStyleProp,
+    //slot: class/style to apply to each label element
+    label, //?: CallableSlotStyleProp<AccordionStates>,
     //change value handler
     onChange, //: (value: string) => void
-    //class/style to apply to each content
-    contentClassStyle, //?: ClassStyleProp
     //default active accordion value
     defaultValue, //?: string
     //accordion style
     style, //?: CSSProperties
-    //class/style to apply to each labels
-    labelClassStyle, //?: ClassStyleProp
     //controlled value
-    value //?: string
+    value, //?: string
+    ...attributes
   } = props;
   //hooks
   const [ activeValue, change ] = useState<string|undefined>(defaultValue);
@@ -276,13 +299,12 @@ export function Accordion(props: AccordionProps) {
   if (className) classes.push(className);
   // configure context provider
   const provider = { 
-    activeClassStyle, 
+    content,
+    label,
     onChange: (value: string) => {
       change(value);
       onChange && onChange(value);
     },
-    contentClassStyle, 
-    labelClassStyle,
     value: activeValue
   };
   //effects
@@ -296,7 +318,7 @@ export function Accordion(props: AccordionProps) {
   //render
   return (
     <AccordionContext.Provider value={provider}>
-      <div className={classes.join(' ')} style={style}>
+      <div {...attributes} className={classes.join(' ')} style={style}>
         {children}
       </div>
     </AccordionContext.Provider>

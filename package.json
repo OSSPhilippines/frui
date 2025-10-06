@@ -83,6 +83,7 @@
   ],
   "plugins": [
     "./plugins/app/plugin",
+    "./plugins/tool/plugin",
     "./plugins/component/plugin",
     "./plugins/field/plugin",
     "./plugins/format/plugin"

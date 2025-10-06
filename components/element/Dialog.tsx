@@ -2,7 +2,7 @@
 // Imports
 
 //modules
-import type { JSX, CSSProperties } from 'react';
+import type { JSX } from 'react';
 import { 
   createContext, 
   useContext, 
@@ -12,7 +12,11 @@ import {
 import { createPortal } from 'react-dom';
 
 //frui
-import type { HTMLProps, ChildrenProps } from '../types.js';
+import type { 
+  ClassStyleProps, 
+  ChildrenProps, 
+  HTMLElementProps
+} from '../types.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -31,15 +35,17 @@ export type DialogContextProps = {
   openDialog: () => void
 };
 
-export type DialogProviderProps = HTMLProps & ChildrenProps & {
+export type DialogProviderProps = ClassStyleProps & ChildrenProps & {
   //id of the dialog container
   id?: string
 };
 
-export type DialogCloseProps = HTMLProps & ChildrenProps & {
+export type DialogCloseProps = ClassStyleProps & ChildrenProps & {
   //triggers when dialog is closed
   onClose?: () => void
 };
+
+export type DialogOverlayProps = HTMLElementProps<HTMLDivElement>;
 
 export type DialogConfig = {
   //uncontrolled open state
@@ -52,14 +58,15 @@ export type DialogConfig = {
   open?: boolean
 };
 
-export type DialogProps = HTMLProps & ChildrenProps & DialogConfig & {
-  //overlay class name
-  overlayClassName?: string,
-  //whether to close the dialog when clicking outside
-  overlayClose?: boolean,
-  //overlay styles
-  overlayStyle?: CSSProperties
-};
+export type DialogProps = DialogConfig 
+  & HTMLElementProps<HTMLDivElement> 
+  //slot: props for overlay element
+  & { 
+    overlay?: false | HTMLElementProps<HTMLDivElement> & {
+      //whether to close the dialog when clicking outside
+      close: boolean
+    } 
+  };
 
 //--------------------------------------------------------------------//
 // Hooks
@@ -226,6 +233,29 @@ export function DialogClose(props: DialogCloseProps) {
 };
 
 /**
+ * Dialog overlay component
+ */
+export function DialogOverlay(props: DialogOverlayProps) {
+  //props
+  const { 
+    //contents of the dialog
+    children, //?: ReactNode
+    //dialog class name
+    className, //?: string=
+    ...attributes
+  } = props;
+  //variables
+  // configure classes
+  const classes = [ 'frui-dialog-overlay' ];
+  if (className) classes.push(className);
+  return (
+    <div {...attributes} className={classes.join(' ')}>
+      {children}
+    </div>
+  );
+};
+
+/**
  * Dialog Component
  */
 export function Dialog(props: DialogProps) {
@@ -235,14 +265,11 @@ export function Dialog(props: DialogProps) {
     children, //?: ReactNode
     //dialog class name
     className, //?: string
-    //overlay class name
-    overlayClassName, //?: string
-    //whether to close the dialog when clicking outside
-    overlayClose, //?: boolean
-    //overlay styles
-    overlayStyle, //?: CSSProperties
+    //slot: class/style to apply to overlay element
+    overlay, //?: false | HTMLElementProps<HTMLDivElement> & ...
     //dialog styles
-    style //?: React.CSSProperties
+    style, //?: React.CSSProperties
+    ...attributes
   } = props;
   //hooks
   const { dialogOpened, handlers } = useDialog(props);
@@ -251,11 +278,9 @@ export function Dialog(props: DialogProps) {
   // configure classes
   const classes = [ 'frui-dialog' ];
   if (className) classes.push(className);
-  const overlayClasses = [ 'frui-dialog-overlay' ];
-  if (overlayClassName) overlayClasses.push(overlayClassName);
-  //
+  // handlers
   const onOverlayClick = () => {
-    overlayClose && closeDialog();
+    overlay && overlay.close && closeDialog();
   };
   const ignoreOverlayClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -267,19 +292,16 @@ export function Dialog(props: DialogProps) {
   return (
     <DialogContext.Provider value={provider}>
       {portal(
-        <div 
-          className={overlayClasses.join(' ')} 
-          onClick={onOverlayClick}
-          style={overlayStyle}
-        >
+        <DialogOverlay {...overlay} onClick={onOverlayClick}>
           <div 
+            {...attributes}
             className={classes.join(' ')} 
             onClick={ignoreOverlayClick}
             style={style}
           >
             {children}
           </div>
-        </div>
+        </DialogOverlay>
       )}
     </DialogContext.Provider>
   );
@@ -288,6 +310,7 @@ export function Dialog(props: DialogProps) {
 export default Object.assign(Dialog, {
   Context: DialogContext,
   Provider: DialogProvider,
+  Overlay: DialogOverlay,
   Close: DialogClose,
   useContext: useDialogContext,
   useDialog

@@ -2,88 +2,165 @@
 // Imports
 
 //modules
-import type { JSX, ReactNode } from 'react';
+import type { JSX, ReactNode, CSSProperties } from 'react';
 import { createContext, useContext } from 'react';
 
 //frui
-import type { 
-  ClassStyleProp, 
-  HTMLProps, 
-  ChildrenProps 
+import type {  
+  ClassStyleProps,
+  ChildrenProps,
+  HTMLTableProps,
+  HTMLTableHeadProps,
+  HTMLTableRowProps,
+  HTMLTableCellProps
 } from '../types.js';
-import applyClassStyle from '../helpers/style.js';
+import getSlotStyles from '../helpers/getSlotStyles.js';
 
 //--------------------------------------------------------------------//
 // Types
 
+//serializable column primitive
+export type Column = ClassStyleProps & {
+  //the amount of columns to span
+  colSpan?: number,
+  //disable wrapping of content
+  noWrap?: boolean,
+  //the amount of rows to span
+  rowSpan?: number,
+  //sticky position to bottom of the table
+  stickyBottom?: boolean,
+  //sticky position to left of the table
+  stickyLeft?: boolean,
+  //sticky position to right of the table
+  stickyRight?: boolean,
+  //sticky position to top of the table
+  stickyTop?: boolean,
+  //sets min width to 100px (uses an invisible rule)
+  wrap1?: boolean,
+  //sets min width to 200px (uses an invisible rule)
+  wrap2?: boolean,
+  //sets min width to 300px (uses an invisible rule)
+  wrap3?: boolean,
+  //sets min width to 400px (uses an invisible rule)
+  wrap4?: boolean,
+  //sets min width to 500px (uses an invisible rule)
+  wrap5?: boolean
+};
+
+//serializable foot primitive
+export type Foot = ClassStyleProps & {
+  //the amount of columns to span
+  colSpan?: number,
+  //disable wrapping of content
+  noWrap?: boolean,
+  //the amount of rows to span
+  rowSpan?: number,
+  //sticky position to bottom of the table
+  stickyBottom?: boolean,
+  //sticky position to left of the table
+  stickyLeft?: boolean,
+  //sticky position to right of the table
+  stickyRight?: boolean,
+  //sets min width to 100px (uses an invisible rule)
+  wrap1?: boolean,
+  //sets min width to 200px (uses an invisible rule)
+  wrap2?: boolean,
+  //sets min width to 300px (uses an invisible rule)
+  wrap3?: boolean,
+  //sets min width to 400px (uses an invisible rule)
+  wrap4?: boolean,
+  //sets min width to 500px (uses an invisible rule)
+  wrap5?: boolean
+};
+
+//serializable head primitive
+export type Head = ClassStyleProps & {
+  //the amount of columns to span
+  colSpan?: number,
+  //disable wrapping of content
+  noWrap?: boolean,
+  //the amount of rows to span
+  rowSpan?: number,
+  //sticky position to left of the table
+  stickyLeft?: boolean,
+  //sticky position to right of the table
+  stickyRight?: boolean,
+  //sticky position to top of the table
+  stickyTop?: boolean,
+  //sets min width to 100px (uses an invisible rule)
+  wrap1?: boolean,
+  //sets min width to 200px (uses an invisible rule)
+  wrap2?: boolean,
+  //sets min width to 300px (uses an invisible rule)
+  wrap3?: boolean,
+  //sets min width to 400px (uses an invisible rule)
+  wrap4?: boolean,
+  //sets min width to 500px (uses an invisible rule)
+  wrap5?: boolean
+};
+
+//derrivative of SlotStyleProp except also accepts Column
+export type ColumnSlot = string | CSSProperties | Column;
+//derrivative of SlotStyleProp except also accepts Foot
+export type FootSlot = string | CSSProperties | Foot;
+//derrivative of SlotStyleProp except also accepts Column
+export type HeadSlot = string | CSSProperties | Head;
+
+//a utility type for adding class/style props
+export type AddClassStyle = {
+  //additional classname to apply (aside from the context)
+  addClassName?: string,
+  //additional style to apply (aside from the context)
+  addStyle?: CSSProperties
+};
+
 export type TableContextProps = {
-  columnClassStyle?: ClassStyleProp | ClassStyleProp[],
-  footClassStyle?: ClassStyleProp,
-  headClassStyle?: ClassStyleProp,
+  //slot: class/style to apply to each column element
+  //takes an array for striping
+  column?: ColumnSlot | ColumnSlot[],
+  //slot: class/style to apply to each foot element
+  foot?: FootSlot,
+  //slot: class/style to apply to each head element
+  head?: HeadSlot,
+  //current stripe index
   index: number
 };
 
 export type TableRuleProps = { width: string };
+export type TableColProps = Column 
+  & AddClassStyle 
+  & ChildrenProps 
+  & HTMLTableCellProps;
+export type TableFootProps = Foot 
+  & AddClassStyle 
+  & ChildrenProps 
+  & HTMLTableHeadProps;
+export type TableHeadProps = Head 
+  & AddClassStyle 
+  & ChildrenProps 
+  & HTMLTableHeadProps;
+export type TableRowProps = ClassStyleProps 
+  & ChildrenProps 
+  & HTMLTableRowProps 
+  & {
+    //slot: class/style to apply to each column element
+    column?: ColumnSlot,
+    //current stripe index
+    index?: number
+  };
 
-export type TableColProps = HTMLProps & ChildrenProps & {
-  addClassStyle?: ClassStyleProp,
-  colSpan?: number,
-  noWrap?: boolean,
-  rowSpan?: number,
-  stickyBottom?: boolean,
-  stickyLeft?: boolean,
-  stickyRight?: boolean,
-  stickyTop?: boolean,
-  wrap1?: boolean,
-  wrap2?: boolean,
-  wrap3?: boolean,
-  wrap4?: boolean,
-  wrap5?: boolean
-};
-
-export type TableFootProps = HTMLProps & ChildrenProps & {
-  addClassStyle?: ClassStyleProp,
-  colSpan?: number,
-  noWrap?: boolean,
-  rowSpan?: number,
-  stickyBottom?: boolean,
-  stickyLeft?: boolean,
-  stickyRight?: boolean,
-  wrap1?: boolean,
-  wrap2?: boolean,
-  wrap3?: boolean,
-  wrap4?: boolean,
-  wrap5?: boolean
-};
-
-export type TableHeadProps = HTMLProps & ChildrenProps & {
-  addClassStyle?: ClassStyleProp,
-  colSpan?: number,
-  noWrap?: boolean,
-  rowSpan?: number,
-  stickyLeft?: boolean,
-  stickyRight?: boolean,
-  stickyTop?: boolean,
-  wrap1?: boolean,
-  wrap2?: boolean,
-  wrap3?: boolean,
-  wrap4?: boolean,
-  wrap5?: boolean
-};
-
-export type TableRowProps = HTMLProps & ChildrenProps & {
-  columnClassStyle?: ClassStyleProp,
-  colSpan?: number,
-  noWrap?: boolean,
-  rowSpan?: number,
-  stripe?: number
-};
-
-export type TableProps = HTMLProps & ChildrenProps & {
-  columnClassStyle?: ClassStyleProp | ClassStyleProp[],
-  footClassStyle?: ClassStyleProp,
-  headClassStyle?: ClassStyleProp
-};
+export type TableProps = ClassStyleProps 
+  & ChildrenProps 
+  & HTMLTableProps 
+  & {
+    //slot: class/style to apply to each column element
+    //takes an array for striping
+    column?: ColumnSlot | ColumnSlot[],
+    //slot: class/style to apply to each foot element
+    foot?: FootSlot,
+    //slot: class/style to apply to each head element
+    head?: HeadSlot,
+  };
 
 //--------------------------------------------------------------------//
 // Helpers
@@ -165,14 +242,30 @@ export function getBody(children: ReactNode) {
   return body;
 };
 
+/**
+ * Returns actual slot value based on the index
+ */
+export function getColumnSlot(
+  slot?: ColumnSlot | ColumnSlot[], 
+  index = 0
+) {
+  if (!slot) {
+    return {};
+  }
+  if (!Array.isArray(slot)) {
+    return slot;
+  }
+  return slot[index % slot.length];
+};
+
 //--------------------------------------------------------------------//
 // Hooks
 
 /**
  * Table stripe hook. This returns a function that can be used to get 
- * a color from the list of colors passed in a round-robin fashion.
+ * a column prop from the list of props passed in a round-robin fashion.
  */
-export function useStripe(...stripes: ClassStyleProp[]) {
+export function useStripe(...stripes: Column[]) {
   //hooks
   let active = 0;
   //handler
@@ -220,30 +313,47 @@ export const TableContext = createContext<TableContextProps>({
 /**
  * Table column component
  */
-export function TableCol(props: TableColProps) {
-  //props
+export function TableColumn(props: TableColProps) {
+  //hooks
+  const { column, index } = useTableContext();
+  //variables
+  // get the slot for this column (if any)
+  const slot = getColumnSlot(column, index);
+  // now get the props
   const {
-    addClassStyle,
+    //additional classname to apply (aside from the context)
+    addClassName, //?: string,
+    //additional style to apply (aside from the context)
+    addStyle, //?: CSSProperties
     children,
     className,
-    colSpan,
-    noWrap,
-    rowSpan,
-    stickyBottom,
-    stickyLeft,
-    stickyRight,
-    stickyTop,
+    //the amount of columns to span
+    colSpan, //?: number
+    //disable wrapping of content
+    noWrap, //?: boolean
+    //the amount of rows to span
+    rowSpan, //?: number
+    //sticky position to bottom of the table
+    stickyBottom, //?: boolean
+    //sticky position to left of the table
+    stickyLeft, //?: boolean
+    //sticky position to top of the table
+    stickyTop, //?: boolean
+    //sticky position to right of the table
+    stickyRight, //?: boolean
+    //sets min width to 100px (uses an invisible rule)
+    wrap1, //?: boolean
+    //sets min width to 200px (uses an invisible rule)
+    wrap2, //?: boolean
+    //sets min width to 300px (uses an invisible rule)
+    wrap3, //?: boolean
+    //sets min width to 400px (uses an invisible rule)
+    wrap4, //?: boolean
+    //sets min width to 500px (uses an invisible rule)
+    wrap5, //?: boolean
     style,
-    wrap1,
-    wrap2,
-    wrap3,
-    wrap4,
-    wrap5,
     ...attributes
-  } = props;
-  //hooks
-  const context = useTableContext();
-  //variables
+  } = Object.assign({}, slot, props) as TableColProps;
   // configure classes and styles
   const classes = [ 'frui-table-col' ];
   const styles = { ...style };
@@ -281,23 +391,15 @@ export function TableCol(props: TableColProps) {
   if (className) {
     //add className prop
     classes.push(className);
-  // else if context has col style prop
-  } else if (context.columnClassStyle) {
-    if (!Array.isArray(context.columnClassStyle)) {
-      //add col style prop from context
-      applyClassStyle(classes, styles, context.columnClassStyle);
-    // else col style is an array
-    } else {
-      //add col style prop from context based on index
-      applyClassStyle(classes, styles, context.columnClassStyle[
-        context.index % context.columnClassStyle.length
-      ]);
-    }
   }
-  //if there are additional classes
-  if (addClassStyle) {
+  // if there are additional classes
+  if (addClassName) {
     //add additional classes
-    applyClassStyle(classes, styles, addClassStyle);
+    classes.push(addClassName);
+  }
+  if (addStyle) {
+    //add additional style
+    Object.assign(styles, addStyle);
   }
   // configure attributes
   const extras: Record<string, number> = {};
@@ -361,25 +463,39 @@ export function TableCol(props: TableColProps) {
 export function TableFoot(props: TableFootProps) {
   //props
   const {
-    addClassStyle,
+    //additional classname to apply (aside from the context)
+    addClassName, //?: string,
+    //additional style to apply (aside from the context)
+    addStyle, //?: CSSProperties
     children,
     className,
-    colSpan,
-    noWrap,
-    rowSpan,
-    stickyBottom,
-    stickyLeft,
-    stickyRight,
+    //the amount of columns to span
+    colSpan, //?: number
+    //disable wrapping of content
+    noWrap, //?: boolean
+    //the amount of rows to span
+    rowSpan, //?: number
+    //sticky position to bottom of the table
+    stickyBottom, //?: boolean
+    //sticky position to left of the table
+    stickyLeft, //?: boolean
+    //sticky position to right of the table
+    stickyRight, //?: boolean
+    //sets min width to 100px (uses an invisible rule)
+    wrap1, //?: boolean
+    //sets min width to 200px (uses an invisible rule)
+    wrap2, //?: boolean
+    //sets min width to 300px (uses an invisible rule)
+    wrap3, //?: boolean
+    //sets min width to 400px (uses an invisible rule)
+    wrap4, //?: boolean
+    //sets min width to 500px (uses an invisible rule)
+    wrap5, //?: boolean
     style,
-    wrap1,
-    wrap2,
-    wrap3,
-    wrap4,
-    wrap5,
     ...attributes
   } = props;
   //hooks
-  const context = useTableContext();
+  const { foot } = useTableContext();
   //variables
   // configure classes and styles
   const classes = [ 'frui-table-foot' ];
@@ -431,14 +547,28 @@ export function TableFoot(props: TableFootProps) {
     //add className prop
     classes.push(className);
   // else if context has foot style prop
-  } else if (context.footClassStyle) {
-    //add foot style prop from context
-    applyClassStyle(classes, styles, context.footClassStyle);
+  } else if (foot) {
+    //get slot styles
+    const slot = getSlotStyles(foot, {});
+    //if slot has className
+    if (slot.className) {
+      //add slot className
+      classes.push(slot.className);
+    }
+    //if slot has style
+    if (slot.style) {
+      //add slot style
+      Object.assign(styles, slot.style);
+    }
   }
-  //if there are additional classes
-  if (addClassStyle) {
+  // if there are additional classes
+  if (addClassName) {
     //add additional classes
-    applyClassStyle(classes, styles, addClassStyle);
+    classes.push(addClassName);
+  }
+  if (addStyle) {
+    //add additional style
+    Object.assign(styles, addStyle);
   }
   // configure attributes
   const extras: Record<string, number> = {};
@@ -484,7 +614,7 @@ export function TableFoot(props: TableFootProps) {
   //render
   return (
     <th 
-      {...attributes} 
+      {...attributes}
       className={classes.join(' ')} 
       style={styles}
       {...extras}
@@ -496,93 +626,44 @@ export function TableFoot(props: TableFootProps) {
 };
 
 /**
- * Table Group Component
- * This can be used to group rows together in an iterator instead 
- * of `<></>` which is not detected by `getBody()`.
- */
-export function TableGroup(props: TableRowProps) {
-  return props.children;
-};
-
-/**
- * Table Row Component
- */
-export function TableRow(props: TableRowProps) {
-  //props
-  const {
-    children,
-    className,
-    columnClassStyle,
-    colSpan,
-    noWrap,
-    rowSpan,
-    stripe = 0,
-    ...attributes
-  } = props;
-  //hooks
-  const context = useTableContext();
-  //variables
-  // configure classes
-  const classes = [ 'frui-table-row' ];
-  // if no wrap
-  if (noWrap) {
-    //add no wrap class
-    classes.push('frui-table-nowrap');
-  }
-  // if className prop
-  if (className) {
-    //add className prop
-    classes.push(className);
-  }
-  // configure attributes
-  const extras: Record<string, number> = {};
-  if (rowSpan) {
-    extras.rowSpan = rowSpan || 0;
-  }
-  if (colSpan) {
-    extras.colSpan = colSpan || 0;
-  }
-  // configure context provider
-  const provider = {
-    ...context,
-    index: stripe,
-    columnClassStyle: columnClassStyle || context.columnClassStyle
-  };
-  //render
-  return (
-    <TableContext.Provider value={provider}>
-      <tr {...attributes} className={classes.join(' ')} {...extras}>
-        {children}
-      </tr>
-    </TableContext.Provider>
-  );
-};
-
-/**
  * Table Header Component
  */
 export function TableHead(props: TableHeadProps) {
   //props
   const {
-    addClassStyle,
+    //additional classname to apply (aside from the context)
+    addClassName, //?: string
+    //additional style to apply (aside from the context)
+    addStyle, //?: CSSProperties
     children,
     className,
-    colSpan,
-    noWrap,
-    rowSpan,
-    stickyTop,
-    stickyLeft,
-    stickyRight,
+    //the amount of columns to span
+    colSpan, //?: number
+    //disable wrapping of content
+    noWrap, //?: boolean
+    //the amount of rows to span
+    rowSpan, //?: number
+    //sticky position to left of the table
+    stickyLeft, //?: boolean
+    //sticky position to right of the table
+    stickyRight, //?: boolean
+    //sticky position to top of the table
+    stickyTop, //?: boolean
+    //sets min width to 100px (uses an invisible rule)
+    wrap1, //?: boolean
+    //sets min width to 200px (uses an invisible rule)
+    wrap2, //?: boolean
+    //sets min width to 300px (uses an invisible rule)
+    wrap3, //?: boolean
+    //sets min width to 400px (uses an invisible rule)
+    wrap4, //?: boolean
+    //sets min width to 500px (uses an invisible rule)
+    wrap5, //?: boolean
     style,
-    wrap1,
-    wrap2,
-    wrap3,
-    wrap4,
-    wrap5,
     ...attributes
   } = props;
   //hooks
-  const context = useTableContext();
+  const { head } = useTableContext();
   //variables
   // configure classes and styles
   const classes = [ 'frui-table-head' ];
@@ -634,14 +715,28 @@ export function TableHead(props: TableHeadProps) {
     //add className prop
     classes.push(className);
   // else if context has head style prop
-  } else if (context.headClassStyle) {
-    //add head style prop from context
-    applyClassStyle(classes, styles, context.headClassStyle);
+  } else if (head) {
+    //get slot styles
+    const slot = getSlotStyles(head, {});
+    //if slot has className
+    if (slot.className) {
+      //add slot className
+      classes.push(slot.className);
+    }
+    //if slot has style
+    if (slot.style) {
+      //add slot style
+      Object.assign(styles, slot.style);
+    }
   }
-  //if there are additional classes
-  if (addClassStyle) {
+  // if there are additional classes
+  if (addClassName) {
     //add additional classes
-    applyClassStyle(classes, styles, addClassStyle);
+    classes.push(addClassName);
+  }
+  if (addStyle) {
+    //add additional style
+    Object.assign(styles, addStyle);
   }
   // configure attributes
   const extras: Record<string, number> = {};
@@ -687,7 +782,7 @@ export function TableHead(props: TableHeadProps) {
   //render
   return (
     <th 
-      {...attributes} 
+      {...attributes}
       className={classes.join(' ')} 
       style={styles}
       {...extras}
@@ -695,6 +790,43 @@ export function TableHead(props: TableHeadProps) {
       {children}
       {rule}
     </th>
+  );
+};
+
+/**
+ * Table Group Component
+ * This can be used to group rows together in an iterator instead 
+ * of `<></>` which is not detected by `getBody()`.
+ */
+export function TableGroup(props: TableRowProps) {
+  return props.children;
+};
+
+/**
+ * Table Row Component
+ */
+export function TableRow(props: TableRowProps) {
+  //props
+  const { children, className, column, index, style } = props;
+  //hooks
+  const context = useTableContext();
+  //variables
+  // configure classes
+  const classes = [ 'frui-table-row' ];
+  // if className prop
+  if (className) {
+    //add className prop
+    classes.push(className);
+  }
+  // configure context provider
+  const provider = { ...context, index: index || context.index, column };
+  //render
+  return (
+    <TableContext.Provider value={provider}>
+      <tr className={classes.join(' ')} style={style}>
+        {children}
+      </tr>
+    </TableContext.Provider>
   );
 };
 
@@ -715,9 +847,13 @@ export function Table(props: TableProps) {
   //props
   const {
     className,
-    columnClassStyle,
-    footClassStyle,
-    headClassStyle,
+    //slot: class/style to apply to each column element
+    //takes an array for striping
+    column, //?: ColumnSlot | ColumnSlot[]
+    //slot: class/style to apply to each foot element
+    foot, //?: FootSlot
+    //slot: class/style to apply to each head element
+    head, //?: HeadSlot
     style
   } = props;
   //variables
@@ -732,23 +868,23 @@ export function Table(props: TableProps) {
   }
   // configure context provider
   const provider = { 
-    columnClassStyle,
-    footClassStyle,
-    headClassStyle,
+    column,
+    foot,
+    head,
     index: 0
   };
   // collect head, body and foot components
-  const head = getHead(children);
-  const body = getBody(children);
-  const foot = getFoot(children);
+  const headChildren = getHead(children);
+  const bodyChildren = getBody(children);
+  const footChildren = getFoot(children);
   //render
   return (
     <TableContext.Provider value={provider}>
       <div className={classes.join(' ')} style={style}>
         <table className="frui-table">
-          {head && <thead><tr>{head}</tr></thead>}
-          {body && <tbody>{body}</tbody>}
-          {foot && <tfoot><tr>{foot}</tr></tfoot>}
+          {headChildren && <thead><tr>{headChildren}</tr></thead>}
+          {bodyChildren && <tbody>{bodyChildren}</tbody>}
+          {footChildren && <tfoot><tr>{footChildren}</tr></tfoot>}
         </table>
       </div>
     </TableContext.Provider>
@@ -761,7 +897,7 @@ export function Table(props: TableProps) {
 export {
   TableHead as Thead,
   TableFoot as Tfoot,
-  TableCol as Tcol,
+  TableColumn as Tcol,
   TableRow as Trow,
   TableGroup as Tgroup,
   TableRule as Trule
@@ -773,7 +909,7 @@ export default Object.assign(
   {
     Head: TableHead,
     Foot: TableFoot,
-    Col: TableCol,
+    Col: TableColumn,
     Row: TableRow,
     Group: TableGroup,
     Rule: TableRule,

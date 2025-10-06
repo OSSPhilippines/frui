@@ -6,11 +6,10 @@ import type {
   ColorProps, 
   FillProps, 
   RadiusProps,
-  HTMLProps,
-  ChildrenProps
+  HTMLElementProps
 } from '../types.js';
-import setColorClass from '../helpers/color/all.js';
-import setRadiusClass from '../helpers/radius.js';
+import setColorClass from '../helpers/setColorClass.js';
+import setRadiusClass from '../helpers/setRadiusClass.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -21,8 +20,7 @@ import setRadiusClass from '../helpers/radius.js';
 export type BadgeProps = ColorProps 
   & FillProps 
   & RadiusProps 
-  & HTMLProps 
-  & ChildrenProps;
+  & HTMLElementProps<HTMLSpanElement>;
 
 //--------------------------------------------------------------------//
 // Components
@@ -38,7 +36,8 @@ export function Badge(props: BadgeProps) {
     outline, 
     style,
     className,
-    children 
+    children,
+    ...attributes
   } = props;
   //set default styles and classes
   const styles = { ...style };
@@ -76,7 +75,7 @@ export function Badge(props: BadgeProps) {
   }
 
   return (
-    <span className={classes.join(' ')} style={styles}>
+    <span {...attributes} className={classes.join(' ')} style={styles}>
       {children}
     </span>
   );

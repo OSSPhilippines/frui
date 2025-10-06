@@ -6,11 +6,10 @@ import type {
   ColorProps, 
   FillProps, 
   RadiusProps,
-  HTMLProps,
-  ChildrenProps
+  HTMLElementProps
 } from '../types.js';
-import setColorClass from '../helpers/color/all.js';
-import setRadiusClass from '../helpers/radius.js';
+import setColorClass from '../helpers/setColorClass.js';
+import setRadiusClass from '../helpers/setRadiusClass.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -18,8 +17,7 @@ import setRadiusClass from '../helpers/radius.js';
 export type AlertProps = ColorProps 
   & FillProps 
   & RadiusProps 
-  & HTMLProps 
-  & ChildrenProps;
+  & HTMLElementProps<HTMLDivElement>;
 
 //--------------------------------------------------------------------//
 // Components
@@ -35,7 +33,8 @@ export function Alert(props: AlertProps) {
     outline, 
     style,
     className,
-    children 
+    children,
+    ...attributes
   } = props;
   //set default styles and classes
   const styles = { ...style };
@@ -73,7 +72,7 @@ export function Alert(props: AlertProps) {
   }
 
   return (
-    <div className={classes.join(' ')} style={styles}>
+    <div {...attributes} className={classes.join(' ')} style={styles}>
       {children}
     </div>
   );

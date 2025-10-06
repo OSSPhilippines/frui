@@ -10,69 +10,69 @@ import {
 } from 'react'; 
 
 //frui
-import type { 
-  ClassStyleProp, 
-  HTMLProps, 
-  ChildrenProps 
+import type {  
+  CallableClassStyleProps,
+  CallableSlotStyleProp,
+  CallableChildrenProps,
+  SlotStyleProp,
+  HTMLElementProps
 } from '../types.js';
-import applyClassStyle from '../helpers/style.js';
+import getClassStyles from '../helpers/getClassStyles.js';
+import getSlotStyles from '../helpers/getSlotStyles.js';
 
 //--------------------------------------------------------------------//
 // Types
 
+export type TabsStates = { active: boolean };
+
 export type TabsContextProps = {
-  //class/style to apply to active tab
-  activeClassStyle?: ClassStyleProp,
-  //class/style to apply to each content
-  contentClassStyle?: ClassStyleProp,
+  //slot: class/style to apply to each content element
+  content?: SlotStyleProp,
   //change value handler
   onChange: (value: string) => void,
-  //class/style to apply to each tab
-  tabClassStyle?: ClassStyleProp,
+  //slot: class/style to apply to each tab element
+  tab?: CallableSlotStyleProp<TabsStates>,
   //tab item value
   tabValue?: string,
   //active tab value
   value?: string
 };
 
-export type TabsHeadProps = HTMLProps & ChildrenProps & {
-  //class/style to apply to active tab
-  activeClassStyle?: ClassStyleProp,
-  //class/style to apply to each tab
-  tabClassStyle?: ClassStyleProp
+export type TabsHeadProps = HTMLElementProps & {
+  //slot: class/style to apply to each tab
+  tab?: CallableSlotStyleProp<TabsStates>
 };
 
-export type TabsLabelProps = HTMLProps & ChildrenProps & {
-  //class/style to apply if active
-  activeClassStyle?: ClassStyleProp,
+export type TabsLabelProps = CallableClassStyleProps<TabsStates>
+  & CallableChildrenProps<TabsStates>
+  & Omit<HTMLElementProps<HTMLDivElement>, 'className' | 'style' | 'children'>
+  & {
+    //unique name for the tab
+    value?: string
+  };
+
+export type TabsBodyProps = HTMLElementProps & {
+  //slot: class/style to apply to each content
+  content?: SlotStyleProp
+};
+
+export type TabsContentProps = HTMLElementProps<HTMLDivElement> & {
   //unique name for the tab
   value?: string
 };
 
-export type TabsBodyProps = HTMLProps & ChildrenProps & {
-  //class/style to apply to each content
-  contentClassStyle?: ClassStyleProp
-};
+export type TabsActiveProps = HTMLElementProps<HTMLDivElement>;
+export type TabsInactiveProps = HTMLElementProps<HTMLDivElement>;
 
-export type TabsContentProps = HTMLProps & ChildrenProps & {
-  //unique name for the tab
-  value?: string
-};
-
-export type TabsActiveProps = HTMLProps & ChildrenProps;
-export type TabsInactiveProps = HTMLProps & ChildrenProps;
-
-export type TabsProps = HTMLProps & ChildrenProps & {
-  //class/style to apply to active tab
-  activeClassStyle?: ClassStyleProp,
-  //change value handler
-  onChange?: (value: string) => void,
-  //class/style to apply to each content
-  contentClassStyle?: ClassStyleProp,
+export type TabsProps = HTMLElementProps<HTMLDivElement> & {
+  //slot: class/style to apply to each content
+  content?: SlotStyleProp,
   //default active tab value
   defaultValue?: string,
-  //class/style to apply to each tab
-  tabClassStyle?: ClassStyleProp,
+  //change value handler
+  onChange?: (value: string) => void,
+  //slot: class/style to apply to each tab
+  tab?: CallableSlotStyleProp<TabsStates>,
   //controlled value
   value?: string
 };
@@ -102,7 +102,7 @@ export const TabsContext = createContext<TabsContextProps>({
  */
 export function TabsActive(props: TabsActiveProps) {
   //props
-  const { className, style, children } = props;
+  const { className, style, children, ...attributes } = props;
   //hooks
   const { value, tabValue } = useTabsContext();
   //variables
@@ -113,7 +113,7 @@ export function TabsActive(props: TabsActiveProps) {
   }
   //render
   return tabValue && value === tabValue ? (
-    <div className={classes.join(' ')} style={style}>
+    <div {...attributes} className={classes.join(' ')} style={style}>
       {children}
     </div>
   ) : null;
@@ -124,7 +124,7 @@ export function TabsActive(props: TabsActiveProps) {
  */
 export function TabsInactive(props: TabsInactiveProps) {
   //props
-  const { className, style, children } = props;
+  const { className, style, children, ...attributes } = props;
   //hooks
   const { value, tabValue } = useTabsContext();
   //variables
@@ -135,7 +135,7 @@ export function TabsInactive(props: TabsInactiveProps) {
   }
   //render
   return !tabValue || value !== tabValue ? (
-    <div className={classes.join(' ')} style={style}>
+    <div {...attributes} className={classes.join(' ')} style={style}>
       {children}
     </div>
   ) : null;
@@ -147,16 +147,15 @@ export function TabsInactive(props: TabsInactiveProps) {
 export function TabsHead(props: TabsHeadProps) {
   //props
   const { 
-    //class/style to apply to active tab
-    activeClassStyle, //?: ClassStyleProp
     //children nodes
     children, //?: ReactNode
     //tabs class name
     className, //?: string
     //tabs style
     style, //?: CSSProperties
-    //class/style to apply to each tab
-    tabClassStyle //?: ClassStyleProp
+    //slot: class/style to apply to each tab
+    tab, //?: CallableSlotStyleProp<TabsStates>
+    ...attributes
   } = props;
   //hooks
   const context = useTabsContext();
@@ -167,13 +166,12 @@ export function TabsHead(props: TabsHeadProps) {
   // configure context provider
   const provider = { 
     ...context, 
-    active: activeClassStyle || context.activeClassStyle, 
-    tab: tabClassStyle || context.tabClassStyle
+    tab: tab || context.tab
   };
   //render
   return (
     <TabsContext.Provider value={provider}>
-      <header className={classes.join(' ')} style={style}>
+      <header {...attributes} className={classes.join(' ')} style={style}>
         {children}
       </header>
     </TabsContext.Provider>
@@ -186,8 +184,6 @@ export function TabsHead(props: TabsHeadProps) {
 export function TabsLabel(props: TabsLabelProps) {
   //props
   const {
-    //class/style to apply if active
-    activeClassStyle, //?: ClassStyleProp
     //children nodes
     children, //?: ReactNode
     //tabs class name
@@ -195,58 +191,46 @@ export function TabsLabel(props: TabsLabelProps) {
     //tabs style
     style, //?: CSSProperties
     //unique name for the tab
-    value //?: string
+    value, //?: string
+    ...attributes
   } = props;
   //hooks
   const context = useTabsContext();
   //variables
-  const isActive = value && context.value === value;
-  // configure classes and styles
-  const classes = [ 'frui-tabs-label' ];
-  const styles = { ...style };
-  // if active tab
-  if (isActive) {
-    //add active class
-    classes.push('frui-tabs-label-active');
-    //if TabsLabel has an active prop
-    if (activeClassStyle) {
-      //use the active prop from TabsLabel
-      applyClassStyle(classes, styles, activeClassStyle);
-    //if the context has an active prop
-    } else if (context.activeClassStyle) {
-      //use the active prop from context
-      applyClassStyle(classes, styles, context.activeClassStyle);
-    //there are no active props
-    //if TabsLabel has a className prop
-    } else if (className) {
-      //use the className prop from TabsLabel
-      classes.push(className);
-    } else if (context.tabClassStyle) {
-      //use the tabs prop from context
-      applyClassStyle(classes, styles, context.tabClassStyle);
-    }
-  //not active tab
-  //if TabsLabel has a className prop
-  } else if (className) {
-    //use the className prop from TabsLabel
-    classes.push(className);
-  //if the context has a tabs prop
-  } else if (context.tabClassStyle) {
-    //use the tabs prop from context
-    applyClassStyle(classes, styles, context.tabClassStyle);
-  }
+  // determine active state
+  const active = Boolean(value && context.value === value);
+  // get slot styles
+  const slot = context.tab ? getSlotStyles(context.tab, { active }) : {};
+  //get final classes and styles
+  const { classes, styles } = getClassStyles({
+    //default classes to apply
+    classes: [ 
+      'frui-tabs-label', 
+      ...(active ? ['frui-tabs-label-active'] : []) 
+    ],
+    //style props
+    props: {
+      //prefer direct props over slot props
+      className: className || slot.className,
+      //prefer direct props over slot props
+      style: style || slot.style
+    },
+    //state to pass to callable props
+    state: { active }
+  });
   // configure context provider
   const provider = { ...context, tabValue: value };
   //render
   return (
     <TabsContext.Provider value={provider}>
       <div
+        {...attributes}
         className={classes.join(' ')}
-        style={style}
+        style={styles}
         onClick={() => value && context.onChange(value)}
-        data-active={isActive ? 'true' : 'false'}
+        data-active={active ? 'true' : 'false'}
       >
-        {children}
+        {typeof children === 'function' ? children({ active }) : children}
       </div>
     </TabsContext.Provider>
   );
@@ -262,10 +246,11 @@ export function TabsBody(props: TabsBodyProps) {
     children, //?: ReactNode
     //tabs class name
     className, //?: string
-    //class/style to apply to each content
-    contentClassStyle, //?: ClassStyleProp
+    //slot: class/style to apply to each content
+    content, //?: SlotStyleProp
     //tabs style
     style, //?: CSSProperties
+    ...attributes
   } = props;
   //hooks
   const context = useTabsContext();
@@ -276,12 +261,12 @@ export function TabsBody(props: TabsBodyProps) {
   // configure context provider
   const provider = { 
     ...context, 
-    contentClassStyle: contentClassStyle || context.contentClassStyle
+    content: content || context.content
   };
   //render
   return (
     <TabsContext.Provider value={provider}>
-      <main className={classes.join(' ')} style={style}>
+      <main {...attributes} className={classes.join(' ')} style={style}>
         {children}
       </main>
     </TabsContext.Provider>
@@ -306,21 +291,25 @@ export function TabsContent(props: TabsContentProps) {
   //hooks
   const context = useTabsContext();
   //variables
-  // configure classes and styles
-  const classes = [ 'frui-tabs-content' ];
-  const styles = { ...style };
-  //if TabsContent has a className prop
-  if (className) {
-    //use the className prop from TabsContent
-    classes.push(className);
-  //if the context has a tabs prop
-  } else if (context.contentClassStyle) {
-    //use the tabs prop from context
-    applyClassStyle(classes, styles, context.contentClassStyle);
-  }
+  // get slot styles
+  const slot = context.content ? getSlotStyles(context.content, {}) : {};
+  //get final classes and styles
+  const { classes, styles } = getClassStyles({
+    //default classes to apply
+    classes: [ 'frui-tabs-content' ],
+    //style props
+    props: {
+      //prefer direct props over slot props
+      className: className || slot.className,
+      //prefer direct props over slot props
+      style: style || slot.style
+    },
+    //state to pass to callable props
+    state: {}
+  });
   //render
   return value && context.value === value ? (
-    <div className={classes.join(' ')} style={style}>
+    <div className={classes.join(' ')} style={styles}>
       {children}
     </div>
   ) : null;
@@ -332,24 +321,23 @@ export function TabsContent(props: TabsContentProps) {
 export function Tabs(props: TabsProps) {
   //props
   const { 
-    //class/style to apply to active tab
-    activeClassStyle, //?: ClassStyleProp
     //children nodes
     children, //?: ReactNode
     //tabs class name
     className, //?: string
     //change value handler
     onChange, //: (value: string) => void
-    //class/style to apply to each content
-    contentClassStyle, //?: ClassStyleProp
+    //slot: class/style to apply to each content
+    content, //?: SlotStyleProp
     //default active tab value
     defaultValue, //?: string
     //tabs style
     style, //?: CSSProperties
-    //class/style to apply to each tab
-    tabClassStyle, //?: ClassStyleProp
+    //slot: class/style to apply to each tab
+    tab, //?: CallableSlotStyleProp<TabsStates>,
     //controlled value
-    value //?: string
+    value, //?: string
+    ...attributes
   } = props;
   //hooks
   const [ activeValue, change ] = useState<string|undefined>(defaultValue);
@@ -359,13 +347,12 @@ export function Tabs(props: TabsProps) {
   if (className) classes.push(className);
   // configure context provider
   const provider = { 
-    activeClassStyle, 
     onChange: (value: string) => {
       change(value);
       onChange && onChange(value);
     },
-    contentClassStyle, 
-    tabClassStyle,
+    content, 
+    tab,
     value: activeValue
   };
   //effects
@@ -379,7 +366,7 @@ export function Tabs(props: TabsProps) {
   //render
   return (
     <TabsContext.Provider value={provider}>
-      <div className={classes.join(' ')} style={style}>
+      <div {...attributes} className={classes.join(' ')} style={style}>
         {children}
       </div>
     </TabsContext.Provider>

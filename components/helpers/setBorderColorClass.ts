@@ -1,6 +1,6 @@
-//src
-import type { BorderColorProps } from '../../types.js';
-import setColorClass from './all.js';
+//frui
+import type { BorderColorProps } from '../types.js';
+import setColorClass from './setColorClass.js';
 
 /**
  * Set border color style

@@ -27,50 +27,48 @@ import { useState } from 'react';
 const props = [
   //accordion
   [
-    [ 'activeClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to active label' ],
-    [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'contentClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to each content' ],
-    [ 'defaultValue', 'string', 'No', 'Default active accordion value' ],
-    [ 'onChange', '(value: string) => void', 'No', 'Change value handler' ],
-    [ 'labelClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply to each label' ],
-    [ 'style', 'React.CSSProperties', 'No', 'Standard HTML styles' ],
-    [ 'value', 'string', 'No', 'Controlled value' ],
+    [ 'className', 'string | Function', 'No', 'Standard HTML class names' ],
+    [ 'content', 'string | CSSProperties', 'No', 'Class/style to apply to each content element' ],
+    [ 'defaultValue', 'string', 'No', 'Default active accordion item value' ],
+    [ 'label', 'string | CSSProperties | Function', 'No', 'Class/style to apply to each label element' ],
+    [ 'onChange', 'Function', 'No', 'Change value handler' ],
+    [ 'style', 'CSSProperties | Function', 'No', 'Standard HTML styles' ],
+    [ 'value', 'string', 'No', 'Controlled active accordion item value' ],
   ],
-  //accordion item
+  //accordion item/bellow
   [
-    [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'style', 'React.CSSProperties', 'No', 'Standard HTML styles' ],
+    [ 'className', 'string | Function', 'No', 'Standard HTML class names' ],
+    [ 'style', 'CSSProperties | Function', 'No', 'Standard HTML styles' ],
     [ 'value', 'string', 'Yes', 'Unique name for the accordion item' ]
   ],
   //accordion label
   [
-    [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'activeClassStyle', 'string | React.CSSProperties', 'No', 'Class/style to apply if active' ],
-    [ 'style', 'React.CSSProperties', 'No', 'Standard HTML styles' ]
+    [ 'className', 'string | Function', 'No', 'Standard HTML class names' ],
+    [ 'style', 'CSSProperties | Function', 'No', 'Standard HTML styles' ]
   ],
   //accordion content
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'style', 'React.CSSProperties', 'No', 'Standard HTML styles' ]
+    [ 'style', 'CSSProperties', 'No', 'Standard HTML styles' ]
   ],
   //accordion active
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'style', 'React.CSSProperties', 'No', 'Standard HTML styles' ],
+    [ 'style', 'CSSProperties', 'No', 'Standard HTML styles' ]
   ],
   //accordion inactive
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'style', 'React.CSSProperties', 'No', 'Standard HTML styles' ],
+    [ 'style', 'CSSProperties', 'No', 'Standard HTML styles' ]
   ]
 ];
 
 const examples = [
 //0
 `<Accordion 
-  labelClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-  contentClassStyle="px-3 py-4 border theme-bc-2"
+  content="px-3 py-4 border theme-bc-2"
   defaultValue="item1"
+  label="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
 >
   <Accordion.Item value="item1">
     <Accordion.Label>Item 1</Accordion.Label>
@@ -87,10 +85,12 @@ const examples = [
 </Accordion>`,
 //1
 `<Accordion 
-  activeClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-  labelClassStyle="px-3 py-2 border theme-bc-3 theme-bg-1"
-  contentClassStyle="px-3 py-4 border theme-bc-2"
+  content="px-3 py-4 border theme-bc-2"
   defaultValue="item1"
+  label={({ active }) => active 
+    ? 'px-3 py-2 border theme-bc-3 font-bold theme-bg-2' 
+    : 'px-3 py-2 border theme-bc-3 theme-bg-1'
+  }
 >
   <Accordion.Item value="item1">
     <Accordion.Label>Item 1</Accordion.Label>
@@ -107,8 +107,8 @@ const examples = [
 </Accordion>`,
 //2
 `<Accordion 
-  labelClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-  contentClassStyle="px-3 py-4 border theme-bc-2"
+  label="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
+  content="px-3 py-4 border theme-bc-2"
   defaultValue="item1"
 >
   <Accordion.Item value="item1">
@@ -126,8 +126,8 @@ const examples = [
 </Accordion>`,
 //3
 `<Accordion 
-  labelClassStyle="flex items-center px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-  contentClassStyle="px-3 py-4 border theme-bc-2"
+  label="flex items-center px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
+  content="px-3 py-4 border theme-bc-2"
   defaultValue="item1"
 >
   <Accordion.Item value="item1">
@@ -202,8 +202,8 @@ const prev = () => setItem(item => (item - 1 + items.length) % items.length);
 
 return (
   <Accordion 
-    labelClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-    contentClassStyle="px-3 py-4 border theme-bc-2"
+    label="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
+    content="px-3 py-4 border theme-bc-2"
     value={items[item]}
   >
     <Accordion.Item value="item1">
@@ -302,7 +302,7 @@ return (
  */
 export function Crumbs() {
   return (
-    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
       <Bread.Slicer />
       <Bread.Crumb icon="icons" href="/component">
         Components
@@ -373,9 +373,9 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <Accordion 
-            labelClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-            contentClassStyle="px-3 py-4 border theme-bc-2"
+            content="px-3 py-4 border theme-bc-2"
             defaultValue="item1"
+            label="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
           >
             <Accordion.Item value="item1">
               <Accordion.Label>Item 1</Accordion.Label>
@@ -401,10 +401,12 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <Accordion 
-            activeClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-            labelClassStyle="px-3 py-2 border theme-bc-3 theme-bg-1"
-            contentClassStyle="px-3 py-4 border theme-bc-2"
+            content="px-3 py-4 border theme-bc-2"
             defaultValue="item1"
+            label={({ active }) => active 
+              ? 'px-3 py-2 border theme-bc-3 font-bold theme-bg-2' 
+              : 'px-3 py-2 border theme-bc-3 theme-bg-1'
+            }
           >
             <Accordion.Item value="item1">
               <Accordion.Label>Item 1</Accordion.Label>
@@ -430,9 +432,9 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <Accordion 
-            labelClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-            contentClassStyle="px-3 py-4 border theme-bc-2"
+            content="px-3 py-4 border theme-bc-2"
             defaultValue="item1"
+            label="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
           >
             <Accordion.Item value="item1">
               <Accordion.Content>Content for Item 1</Accordion.Content>
@@ -458,9 +460,9 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <Accordion 
-            labelClassStyle="flex items-center px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-            contentClassStyle="px-3 py-4 border theme-bc-2"
+            content="px-3 py-4 border theme-bc-2"
             defaultValue="item1"
+            label="flex items-center px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
           >
             <Accordion.Item value="item1">
               <Accordion.Label>
@@ -556,8 +558,8 @@ export function Body() {
         <p className="py-2">
           <Translate>
             You can manage the styles of the labels by passing class names to
-            the <C value="labelClassStyle" />, <C value="activeClassStyle" />, 
-            and <C value="contentClassStyle" /> props in 
+            the <C value="label" /> slot, 
+            and <C value="content" /> slot in 
             the <C value="<Accordion>" /> component.
           </Translate>
         </p>
@@ -590,8 +592,8 @@ export function Body() {
         >
           <Preview.Example center padding>
             <Accordion 
-              labelClassStyle="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-              contentClassStyle="px-3 py-4 border theme-bc-2"
+              content="px-3 py-4 border theme-bc-2"
+              label="px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
               value={items[item]}
             >
               <Accordion.Item value="item1">
@@ -651,9 +653,9 @@ export function Body() {
         >
           <Preview.Example center padding>
             <Accordion 
-              labelClassStyle="flex items-center px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
-              contentClassStyle="px-3 py-4 border theme-bc-2"
+              content="px-3 py-4 border theme-bc-2"
               defaultValue="item1"
+              label="flex items-center px-3 py-2 border theme-bc-3 font-bold theme-bg-2"
             >
               <Accordion.Item value="item1">
                 <Accordion.Label>

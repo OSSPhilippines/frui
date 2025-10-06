@@ -1,4 +1,4 @@
-//src
+//frui
 import type { RadiusProps } from '../types';
 
 /**

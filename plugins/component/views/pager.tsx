@@ -25,16 +25,15 @@ import {
 // Constants
 
 const props = [
-  [ 'activeClass', 'string', 'No', 'Class name to apply to the active page button' ],
-  [ 'className', 'string', 'No', 'Standard HTML class names' ],
+  [ 'className', 'string | Function', 'No', 'Standard HTML class names' ],
   [ 'end', 'false | JSX.Element', 'No', 'Custom end button. If false, the end button will not be shown' ],
   [ 'next', 'false | JSX.Element', 'No', 'Custom next button. If false, the next button will not be shown' ],
-  [ 'onClick', 'Function', 'No', 'Function that is called when a page is clicked. The function receives the new skip value as its only argument' ],
+  [ 'onUpdate', 'Function', 'No', 'Function that is called when a page is clicked. The function receives the new skip value as its only argument' ],
   [ 'prev', 'false | JSX.Element', 'No', 'Custom previous button. If false, the previous button will not be shown' ],
   [ 'radius', 'number', 'No', 'Number of pages to show around the current page (default: 2)' ],
   [ 'skip', 'number', 'No', 'Number of items to skip' ],
   [ 'start', 'false | JSX.Element', 'No', 'Custom start button. If false, the start button will not be shown' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS input' ],
+  [ 'style', 'CSSProperties | Function', 'No', 'Standard CSS input' ],
   [ 'take', 'number', 'No', 'Number of items to take' ],
   [ 'total', 'number', 'No', 'Total number of items' ]
 ];
@@ -60,16 +59,20 @@ const examples = [
 />`,
 //4
 `<Pager 
-  className="w-8 h-8 text-blue-600" 
-  activeClass="w-8 h-8 font-normal!" 
+  className={({ active }) => active 
+    ? 'w-8 h-8 font-normal!' 
+    : 'w-8 h-8 text-blue-600'
+  } 
   total={300} 
   skip={100} 
   take={50} 
 />`,
 //5
 `<Pager 
-  className="w-8 h-8 text-blue-600" 
-  activeClass="w-8 h-8 font-normal!"
+  className={({ active }) => active 
+    ? 'w-8 h-8 font-normal!' 
+    : 'w-8 h-8 text-blue-600'
+  } 
   total={10000} 
   skip={skip} 
   onClick={skip => setSkip(skip)}  
@@ -90,7 +93,7 @@ const examples = [
  */
 export function Crumbs() {
   return (
-    <Bread crumbClassStyle="font-normal" activeClassStyle="font-bold">
+    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
       <Bread.Slicer />
       <Bread.Crumb icon="icons" href="/component">
         Components
@@ -300,8 +303,10 @@ export function Body() {
         >
           <Preview.Example center padding>
             <Pager 
-              className="w-8 h-8 text-blue-600" 
-              activeClass="w-8 h-8 font-normal!" 
+              className={({ active }) => active 
+                ? 'w-8 h-8 font-normal!' 
+                : 'w-8 h-8 text-blue-600'
+              } 
               total={300} 
               skip={100} 
               take={50} 
@@ -328,11 +333,13 @@ export function Body() {
         >
           <Preview.Example center padding>
             <Pager 
-              className="w-8 h-8 text-blue-600" 
-              activeClass="w-8 h-8 font-normal!"
+              className={({ active }) => active 
+                ? 'w-8 h-8 font-normal!' 
+                : 'w-8 h-8 text-blue-600'
+              } 
               total={10000} 
               skip={skip} 
-              onClick={skip => setSkip(skip)}  
+              onUpdate={skip => setSkip(skip)}  
               take={50} 
               radius={3}
               prev

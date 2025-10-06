@@ -8,11 +8,10 @@ import { useState, useRef, useEffect } from 'react';
 import type { 
   ColorProps, 
   RadiusProps, 
-  HTMLProps, 
-  ChildrenProps 
+  HTMLElementProps
 } from '../types';
-import setColorClass from '../helpers/color/all.js';
-import setRadiusClass from '../helpers/radius.js';
+import setColorClass from '../helpers/setColorClass.js';
+import setRadiusClass from '../helpers/setRadiusClass.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -28,12 +27,15 @@ export type TooltipConfig = {
   hover?: boolean
 };
 
+export type TooltipContainerProps = HTMLElementProps<HTMLDivElement>;
+
 export type TooltipProps = ColorProps 
   & RadiusProps 
-  & HTMLProps 
-  & ChildrenProps 
+  & HTMLElementProps<HTMLSpanElement>
   & TooltipConfig
   & {
+    //slot: props for container element
+    container?: TooltipContainerProps,
     opacity?: string | number
   };
 
@@ -198,6 +200,29 @@ export function useTooltip(config: TooltipConfig) {
 // Components
 
 /**
+ * Tooltip container component
+ */
+export function TooltipContainer(props: TooltipContainerProps) {
+  //props
+  const { 
+    //contents of the tooltip
+    children, //?: ReactNode
+    //tooltip class name
+    className, //?: string
+    ...attributes
+  } = props;
+  //variables
+  // configure classes
+  const classes = [ 'frui-tooltip-container' ];
+  if (className) classes.push(className);
+  return (
+    <div {...attributes} className={classes.join(' ')}>
+      {children}
+    </div>
+  );
+};
+
+/**
  * Tooltip component (main)
  */
 export function Tooltip(props: TooltipProps) {
@@ -205,11 +230,13 @@ export function Tooltip(props: TooltipProps) {
     text,
     children,
     color,
+    container,
     style,
     className,
     opacity,
     arrow,
-    hover
+    hover,
+    ...attributes
   } = props;
 
   const {
@@ -244,15 +271,16 @@ export function Tooltip(props: TooltipProps) {
   }
 
   return (
-    <div
+    <TooltipContainer
+      {...container}
       ref={containerRef}
-      className="frui-tooltip-container"
       onMouseEnter={() => hover && visible(true)}
       onMouseLeave={() => hover && visible(false)}
     >
       {children}
       {isVisible && (
         <div 
+          {...attributes}
           ref={tooltipRef} 
           className={classes.join(' ')} 
           style={styles}
@@ -260,9 +288,11 @@ export function Tooltip(props: TooltipProps) {
           {text}
         </div>
       )}
-    </div>
+    </TooltipContainer>
   );
 };
 
 //defaults to tooltip
-export default Tooltip;
+export default Object.assign(Tooltip, {
+  Container: TooltipContainer
+});

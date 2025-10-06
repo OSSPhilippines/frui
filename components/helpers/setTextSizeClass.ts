@@ -1,4 +1,4 @@
-//src
+//frui
 import type { SizeProps } from '../types';
 
 /**

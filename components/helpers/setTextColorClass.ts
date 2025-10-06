@@ -1,6 +1,6 @@
-//src
-import type { TextColorProps } from '../../types.js';
-import setColorClass from './all.js';
+//frui
+import type { TextColorProps } from '../types.js';
+import setColorClass from './setColorClass.js';
 
 /**
  * Set text color style

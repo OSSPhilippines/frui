@@ -1,43 +1,76 @@
-import type { JSX, ReactNode, ReactElement, CSSProperties } from 'react';
+import type {
+  Component, 
+  ReactNode, 
+  CSSProperties,
+  DetailedHTMLProps,
+  ImgHTMLAttributes,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+  ButtonHTMLAttributes,
+  TableHTMLAttributes,
+  ThHTMLAttributes,
+  TdHTMLAttributes,
+  HTMLAttributes
+} from 'react';
 
-//General types
-export type ExtendsType<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
+//Native HTML types
 
-export type AnyReactChildren = ReactNode|ReactElement|JSX.Element
-  |ReactNode[]|ReactElement[]|JSX.Element[]|string;
+export type HTMLElementProps<T = HTMLElement> = DetailedHTMLProps<
+  HTMLAttributes<T>,
+  T
+>;
 
-//HTML types
-export type HTMLPreProps = React.DetailedHTMLProps<
-  React.ImgHTMLAttributes<HTMLPreElement>, 
+export type HTMLPreProps = DetailedHTMLProps<
+  ImgHTMLAttributes<HTMLPreElement>, 
   HTMLPreElement
 >;
 
-export type HTMLLinkProps = React.DetailedHTMLProps<
-  React.ImgHTMLAttributes<HTMLAnchorElement>, 
+export type HTMLLinkProps = DetailedHTMLProps<
+  ImgHTMLAttributes<HTMLAnchorElement>, 
   HTMLAnchorElement
 >;
 
-export type HTMLImageProps = React.DetailedHTMLProps<
-  React.ImgHTMLAttributes<HTMLImageElement>, 
+export type HTMLImageProps = DetailedHTMLProps<
+  ImgHTMLAttributes<HTMLImageElement>, 
   HTMLImageElement
 >;
 
-export type HTMLInputProps = React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>, 
+export type HTMLInputProps = DetailedHTMLProps<
+  InputHTMLAttributes<HTMLInputElement>, 
   HTMLInputElement
 >;
 
-export type HTMLTextareaProps = React.DetailedHTMLProps<
-  React.TextareaHTMLAttributes<HTMLTextAreaElement>, 
+export type HTMLTableProps = DetailedHTMLProps<
+  TableHTMLAttributes<HTMLTableElement>, 
+  HTMLTableElement
+>;
+
+export type HTMLTableHeadProps = DetailedHTMLProps<
+  ThHTMLAttributes<HTMLTableCellElement>, 
+  HTMLTableCellElement
+>;
+
+export type HTMLTableRowProps = DetailedHTMLProps<
+  TableHTMLAttributes<HTMLTableRowElement>, 
+  HTMLTableRowElement
+>;
+
+export type HTMLTableCellProps = DetailedHTMLProps<
+  TdHTMLAttributes<HTMLTableCellElement>, 
+  HTMLTableCellElement
+>;
+
+export type HTMLTextareaProps = DetailedHTMLProps<
+  TextareaHTMLAttributes<HTMLTextAreaElement>, 
   HTMLTextAreaElement
 >;
 
-export type HTMLButtonProps = React.DetailedHTMLProps<
-  React.ButtonHTMLAttributes<HTMLButtonElement>, 
+export type HTMLButtonProps = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>, 
   HTMLButtonElement
 >;
 
-//Common props
+//color props
 
 export type ColorPropType = 'tx' | 'bg' | 'bd'; 
 
@@ -97,6 +130,8 @@ export type BorderColorProps = {
   bdcolor?: string,
 };
 
+//attribute props
+
 export type SizeProps = {
   xs?: boolean,
   sm?: boolean,
@@ -138,13 +173,45 @@ export type AlignProps = {
   justify?: boolean
 };
 
-export type HTMLProps = {
-  style?: CSSProperties,
-  className?: string
+export type ReactType = {
+  type: Function | Component,
+  props: Record<string, unknown>
 };
 
-export type ClassStyleProp = string | CSSProperties | [ string, CSSProperties ];
+//class name style props
+
+export type CallableClassName<S> = (props: S) => string;
+
+export type CallableStyle<S> = (props: S) => CSSProperties;
+
+export type CallableSlotStyle<S> = (props: S) => string | CSSProperties | ClassStyleProps;
+
+export type CallableClassNameProp<S> = string | CallableClassName<S>;
+
+export type CallableStyleProp<S> = CSSProperties | CallableStyle<S>;
+
+export type SlotStyleProp = string
+  | CSSProperties 
+  | ClassStyleProps;
+
+export type CallableSlotStyleProp<S> = SlotStyleProp | CallableSlotStyle<S>;
+
+export type ClassStyleProps = {
+  className?: string,
+  style?: CSSProperties
+};
+
+export type CallableClassStyleProps<S> = {
+  className?: CallableClassNameProp<S>,
+  style?: CallableStyleProp<S>
+};
+
+//children props
 
 export type ChildrenProps = {
   children?: ReactNode
+};
+
+export type CallableChildrenProps<S> = {
+  children?: ReactNode | ((state: S) => ReactNode)
 };

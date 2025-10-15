@@ -2,197 +2,723 @@
 // Imports
 
 //modules
-import type { ReactNode, KeyboardEvent, CSSProperties } from 'react';
-import { useState, useEffect } from 'react';
+import type { ReactNode, Ref } from 'react';
+import { 
+  createContext, 
+  useContext, 
+  useState, 
+  useEffect, 
+  useRef 
+} from 'react';
 //frui
-import type { ClassStyleProps, ChildrenProps } from '../types.js';
-import Input from './Input.js';
+import type { 
+  CallableClassStyleProps,
+  CallableSlotStyleProp,
+  CallableChildrenProps,
+  ClassStyleProps, 
+  ChildrenProps,
+  SlotStyleProp
+} from '../types.js';
+import getClassStyles from '../helpers/getClassStyles.js';
+import getSlotStyles from '../helpers/getSlotStyles.js';
 
 //--------------------------------------------------------------------//
 // Types
 
-export type SelectOption<T = any> = {
-  label: ReactNode,
-  value: T,
-  keyword?: string|Function
+export type Option = {
+  label: string,
+  keyword?: string,
+  value: string
 };
 
-export type SelectConfig<T = any> = {
-  value?: T,
-  defaultValue?: T,
-  defaultOptions?: SelectOption<T>[],
+export type SelectStates = {
+  //the current selected option/s
+  active: boolean
+};
+
+export type SelectContextProps = {
+  //current search keyword
+  keyword?: string,
+  //whether the dropdown is open
+  opened: boolean,
+  //slot: style to apply to the select control
+  option?: CallableSlotStyleProp<SelectStates>,
+  //options count
+  options: number,
+  //clear handler
+  clear: () => void,
+  //toggle handler for dropdown
+  open: (show: boolean) => void,
+  //select handler
+  select: (option: string) => void,
+  //the current selected option/s
+  selected: string[]
+};
+
+export type SelectConfig = {
+  //position of the dropdown
+  bottom?: boolean,
+  //uncontrolled serializable select value
+  defaultValue?: string|string[],
+  //position of the dropdown
+  left?: boolean,
+  //whether to accept multiple selections
+  multiple?: boolean,
+  //drop down handler
   onDropdown?: (show: boolean) => void,
-  onSelected?: (value: SelectOption<T>) => void,
-  onUpdate?: (value: T) => void,
-  onQuery?: (
-    query: string, 
-    update: (options: SelectOption<T>[]) => void
-  ) => void
+  //update handler
+  onUpdate?: (value: string|string[]) => void,
+  //position of the dropdown
+  top?: boolean,
+  //position of the dropdown
+  right?: boolean,
+  //controlled select value
+  value?: string|string[]
 };
 
-export type SelectDropdownProps<T = any> = { 
-  options: SelectOption<T>[]
-  show: boolean,
+export type SelectOptionProps = CallableClassStyleProps<SelectStates> 
+  & CallableChildrenProps<SelectStates> 
+  & {
+    keyword?: string,
+    value: string
+  };
+
+export type SelectPlaceholderProps = ClassStyleProps & ChildrenProps;
+
+export type SelectDisplayProps = ClassStyleProps & ChildrenProps & {
+  //position of the dropdown
+  bottom?: boolean,
+  //position of the dropdown
+  left?: boolean,
+  //position of the dropdown
+  right?: boolean,
+  //dropdown handler
+  onOpen?: (opened: boolean) => void,
+  //position of the dropdown
+  top?: boolean
+};
+
+export type SelectDropdownHeadProps = ClassStyleProps & ChildrenProps;
+export type SelectDropdownFootProps = ClassStyleProps & ChildrenProps;
+
+export type SelectDropdownProps = ClassStyleProps & ChildrenProps & {
+  position?: [ number, number ],
+  ref: Ref<HTMLDivElement>
+};
+
+export type SelectProps = ClassStyleProps & ChildrenProps & SelectConfig & {
+  //slot: style to apply to the select display
+  display?: SlotStyleProp,
+  //slot: style to apply to the select drop down
+  dropdown?: SlotStyleProp,
+  //whether the select is in an error state
   error?: boolean,
-  searchable?: boolean,
-  select: (value: SelectOption<T>) => void,
-  search: (e: KeyboardEvent) => void,
-  match: (option: SelectOption<T>) => void
-};
-
-export type SelectProps<T = any> = {
+  //name used by forms
   name?: string,
-  value?: T,
-  defaultValue?: T,
-  options: SelectOption<T>[]|Record<string, T>,
-  searchable?: boolean,
-  placeholder?: string,
-  error?: boolean,
-  style?: CSSProperties,
-  className?: string,
+  //dropdown handler
   onDropdown?: (show: boolean) => void,
-  onSelected?: (value: SelectOption<T>) => void,
-  onUpdate?: (value: T) => void,
-  onQuery?: (
-    query: string, 
-    update: (options: SelectOption<T>[]) => void
-  ) => void
+  //update handler
+  onUpdate?: (value: string|string[]) => void,
+  //slot: style to apply to the select control
+  option?: CallableSlotStyleProp<SelectStates>,
+  //serialized list of options as array or object
+  options?: Option[]|Record<string, string>,
+  //placeholder text when no option is selected
+  placeholder?: string
+};
+
+//--------------------------------------------------------------------//
+// Helpers
+
+/**
+ * Build options from either children or data
+ */
+export function buildOptions(
+  children?: ReactNode,
+  data?: Option[] | Record<string, string>,
+  selected: string[] = [],
+  multiple?: boolean
+) {
+  if (children) {
+    const options = getOptions(children, selected, multiple);
+    if (options.options.length > 0 || options.selected.length > 0) {
+      return options;
+    }
+  } 
+  if (data) {
+    return makeOptions(data, selected, multiple);
+  }
+  return { options: [], selected: [] };
+};
+
+/**
+ * Calculate dropdown position based on select and dropdown 
+ * sizes and direction
+ */
+export function getDropdownPosition(
+  container: HTMLDivElement, 
+  tooltip: HTMLDivElement,
+  direction: { top: boolean, bottom: boolean, left: boolean, right: boolean }
+) {
+  const { top, bottom, left, right } = direction;
+  const containerRect = container.getBoundingClientRect();
+  const tooltipRect = tooltip.getBoundingClientRect();
+  const position = { x: 0, y: 0 };
+
+  switch (true) {
+    case left:
+      position.y = 0;
+      //x = container left - tooltip width - arrow size
+      //(to the left of the container)
+      position.x = -(tooltipRect.width);
+      break;
+    case right:
+      position.y = 0;
+      //x = container width + arrow size
+      //(to the right of the container)
+      position.x = containerRect.width;
+      break;
+    case top:
+      //y = container top - tooltip height - arrow size
+      //(above the container)
+      position.y = -(tooltipRect.height);
+      //x = container width / 2 - tooltip width / 2
+      //(to center it)
+      position.x = (containerRect.width / 2) - (tooltipRect.width / 2);
+      break;
+    case bottom:
+    default:
+      //y = container bottom + arrow size
+      //(below the container)
+      position.y = containerRect.height;
+      //x = container width / 2 - tooltip width / 2
+      //(to center it)
+      position.x = (containerRect.width / 2) - (tooltipRect.width / 2);
+      break;
+  }
+  return position;
+};
+
+/**
+ * Get footer from children or use default
+ */
+export function getFooter(
+  children?: ReactNode
+): ReactNode {
+  if (!children) return null;
+  const nodes = !Array.isArray(children) 
+    ? [ children ].filter(Boolean)
+    : children;
+  for (const child of nodes) {
+    //skip null/undefined child
+    if (!child) continue;
+    //if child is a SelectDropdownFoot
+    if (child.type === SelectDropdownFoot || child.props?.selectDropdownFoot) {
+      return child;
+    }
+  }
+  return null;
+};
+
+/**
+ * Get header from children or use default
+ */
+export function getHeader(
+  children?: ReactNode
+): ReactNode {
+  if (!children) return null;
+  const nodes = !Array.isArray(children) 
+    ? [ children ].filter(Boolean)
+    : children;
+  for (const child of nodes) {
+    //skip null/undefined child
+    if (!child) continue;
+    //if child is a SelectDropdownHead
+    if (child.type === SelectDropdownHead || child.props?.selectDropdownHead) {
+      return child;
+    }
+  }
+  return null;
+};
+
+/**
+ * Extracts nodes from children, data, and selected values
+ */
+export function getNodes(
+  children?: ReactNode,
+  data?: Option[] | Record<string, string>,
+  selected: string[] = [],
+  multiple?: boolean
+) {
+  const nodes = buildOptions(children, data, selected, multiple);
+  const placeholder = getPlaceholder(children);
+  const header = getHeader(children);
+  const footer = getFooter(children);
+  return { ...nodes, placeholder, header, footer };
+};
+
+/**
+ * Get options from children nodes
+ */
+export function getOptions<T = unknown>(
+  children: ReactNode, 
+  values: T[], 
+  multiple?: boolean
+) {
+  const nodes = !Array.isArray(children) 
+    ? [ children ].filter(Boolean)
+    : children;
+  const options: ReactNode[] = [];
+  const selected: ReactNode[] = [];
+  const others: ReactNode[] = [];
+  for (const child of nodes) {
+    //skip null/undefined child
+    if (!child) {
+      others.push(child);
+      continue;
+    }
+    //if child is a SelectOption
+    if (child.type === SelectOption || child.props?.selectOption) {
+      //if multiple selections allowed
+      if (multiple) {
+        //check if option is selected
+        if (values.includes(child.props.value)) {
+          //add to selected
+          selected.push(child);
+        } else {
+          //add to options
+          options.push(child);
+        }
+      //single selection
+      } else if (values.includes(child.props.value)) {
+        //only add first match
+        if (selected.length === 0) {
+          //add to selected
+          selected.push(child);
+        }
+        //dont add to options
+      } else {
+        //add to options
+        options.push(child);
+      }
+      continue;
+    }
+    others.push(child);
+  }
+  return { options, selected };
+};
+
+/**
+ * Get placeholder from children or use default
+ */
+export function getPlaceholder(
+  children?: ReactNode, 
+  defaultValue = 'Choose Option...'
+): ReactNode {
+  if (!children) return defaultValue;
+  const nodes = !Array.isArray(children) 
+    ? [ children ].filter(Boolean)
+    : children;
+  for (const child of nodes) {
+    //skip null/undefined child
+    if (!child) continue;
+    //if child is a SelectPlaceholder
+    if (child.type === SelectPlaceholder || child.props?.selectPlaceholder) {
+      return child;
+    }
+  }
+  return (
+    <SelectPlaceholder>{defaultValue}</SelectPlaceholder>
+  );
+};
+
+/**
+ * Make options from data (array or object)
+ */
+export function makeOptions(
+  data: Option[] | Record<string, string>,
+  selected: string[], 
+  multiple?: boolean
+) {
+  if (!Array.isArray(data)) {
+    if (typeof data === 'object') {
+      data = Object.entries(data).map(([ key, val ]) => ({
+        label: key,
+        value: val
+      }));
+    } else {
+      data = [];
+    }
+  }
+  const style = { padding: '2px 8px' };
+  const options: ReactNode[] = [];
+  for (let i = 0; i < data.length; i++) {
+    const { label, value, keyword } = data[i];
+    options.push(
+      <SelectOption key={i} value={value} style={style} keyword={keyword}>
+        {label}
+      </SelectOption>
+    );
+  }
+  return getOptions(options, selected, multiple);
 };
 
 //--------------------------------------------------------------------//
 // Hooks
 
 /**
+ * Select context hook
+ */
+export function useSelectContext() {
+  return useContext(SelectContext);
+};
+
+/**
  * Select Hook Aggregate
  */
-export function useSelect<T = any>(config: SelectConfig<T>) {
+export function useSelect(config: SelectConfig) {
+  //props
   const { 
-    value,
-    defaultValue,
-    defaultOptions = [],
-    onDropdown,
-    onSelected,
-    onUpdate,
-    onQuery
+    //position of the dropdown
+    bottom, //?: boolean
+    //uncontrolled serializable select value
+    defaultValue, //?: string|string[]
+    //position of the dropdown
+    left, //?: boolean
+    //whether to accept multiple selections
+    multiple, //?: boolean
+    //drop down handler
+    onDropdown, //?: (show: boolean) => void
+    //update handler
+    onUpdate, //?: (value: string|string[]) => void
+    //position of the dropdown
+    top, //?: boolean
+    //position of the dropdown
+    right, //?: boolean
+    //controlled select value
+    value //?: string|string[]
   } = config;
-  //get the current value
-  const currentValue = typeof defaultValue !== 'undefined'
+  //if no default value
+  const noValue = typeof defaultValue === 'undefined' 
+    || defaultValue === null ;
+  const defaultValues = noValue
+    //use empty array
+    ? [] 
+    //if default value is array
+    : Array.isArray(defaultValue) 
+    //just use it
+    // (we can tell type based if multiple is true)
     ? defaultValue
-    : typeof value !== 'undefined'
-    ? value
-    : undefined;
-  //get the default selected option based on the current value
-  const defaultSelected = defaultOptions.find(
-    option => option.value === currentValue
-  );
+    //else wrap in array 
+    : [ defaultValue ];
   //hooks
-  const [ options, setOptions ] = useState(defaultOptions);
-  //search query string
-  const [ query, setQuery ] = useState('');
-  //selected option
-  const [ selected, setSelected ] = useState(defaultSelected);
-  //whether to show dropdown
-  const [ showing, show ] = useState(false);
+  // whether the dropdown is open
+  const [ opened, open ] = useState(false);
+  // the current selected option/s
+  const [ selected, setSelected ] = useState(defaultValues);
+  // position of the tooltip
+  const [ position, setPosition ] = useState<[ number, number ]>([0, 0]);
+  //variables
+  const refs = {
+    container: useRef<HTMLDivElement>(null),
+    dropdown: useRef<HTMLDivElement>(null)
+  };
   //handlers
   const handlers = {
-    toggle() {
-      show(!showing);
-      onDropdown && onDropdown(!showing);
-    },
-    //updates query string
-    search(e: KeyboardEvent) {
-      setTimeout(() => {
-        const input = e.target as HTMLInputElement;
-        setQuery(input.value);
-        onQuery && onQuery(input.value, setOptions);
-      });
-    },
-    //(internally) matches options with query string
-    match(option: SelectOption<T>) {
-      const keyword = (query || '').toLowerCase();
-      if (typeof option.keyword === 'string') {
-        return option.keyword
-          .toLowerCase()
-          .indexOf(keyword) >= 0;
-      } else if (typeof option.keyword === 'function') {
-        return option.keyword(keyword);
-      } else if (typeof option.value !== 'undefined' 
-        && option.value !== null
-      ) {
-        return option.value
-          .toString()
-          .toLowerCase()
-          .indexOf(keyword) >= 0;
-      } else if (typeof option.label === 'string') {
-        return option.label
-          .toLowerCase()
-          .indexOf(keyword) >= 0;
+    clear: () => setSelected([]),
+    open,
+    select: (option: string) => {
+      //if multiple selections allowed
+      if (multiple) {
+        //if option is already selected, remove it
+        if (selected.includes(option)) {
+          const values = selected.filter(s => s !== option);
+          setSelected(values);
+          onUpdate && onUpdate(values);
+        //else add it
+        } else {
+          const values = [ ...selected, option ];
+          setSelected(values);
+          onUpdate && onUpdate(values);
+        }
+      //single selection
+      } else {
+        setSelected([ option ]);
+        onUpdate && onUpdate(option);
+        //close the dropdown
+        open(false);
       }
-
-      return true;
-    },
-    //selects an option from the dropdown
-    select(option: SelectOption<T>) {
-      show(false);
-      setSelected(option);
-      onDropdown && onDropdown(false);
-      onSelected && onSelected(option);
-      onUpdate && onUpdate(option.value);
     }
   };
-
-  //for controlled states we should update 
-  //the values when the value prop changes
+  //effects
+  // when controlled value changes
   useEffect(() => {
-    if (!value) return;
-    const selected = options.find(
-      option => option.value === value
-    );
-    setSelected(selected);
+    if (value === undefined) return;
+    if (!multiple && typeof value === 'string') {
+      //update selected value
+      handlers.select(value);
+    } else if (multiple && Array.isArray(value)) {
+      //update selected values
+      setSelected(value);
+    }
+    //trigger update handler
+    value && onUpdate && onUpdate(value);
   }, [ value ]);
+  // when dropdown opens/closes
+  useEffect(() => {
+    //trigger dropdown handler
+    opened && onDropdown && onDropdown(true);
+    !opened && onDropdown && onDropdown(false);
+  }, [ opened ]);
+  // when dropdown opens, calculate position
+  useEffect(() => {
+    //if not visible, or if container or tooltip ref is not set, skip
+    if (!opened || !refs.container.current || !refs.dropdown.current) {
+      return;
+    }
 
-  return { selected, options, showing, handlers };
+    const position = getDropdownPosition(
+      refs.container.current, 
+      refs.dropdown.current, 
+      { top: !!top, bottom: !!bottom, left: !!left, right: !!right }
+    );
+
+    setPosition([ position.x, position.y ]);
+  }, [ 
+    opened,
+    selected,
+    refs.container,
+    refs.dropdown,
+    top, 
+    bottom, 
+    left, 
+    right
+  ]);
   
+  return {
+    refs,
+    opened,
+    selected,
+    position,
+    handlers
+  };
 };
 
 //--------------------------------------------------------------------//
 // Components
 
 /**
- * Select Dropdown
+ * Select context
+ */
+export const SelectContext = createContext<SelectContextProps>({
+  //clear handler
+  clear: () => {},
+  //toggle handler
+  open: () => {},
+  //whether the dropdown is open
+  opened: false,
+  //options count
+  options: 0,
+  //select an option
+  select: () => {},
+  //the current selected option/s
+  selected: []
+});
+
+/**
+ * Styled Select Option Component
+ * This is used for serialized options.
+ */
+export function SelectOption(props: SelectOptionProps) {
+  //props
+  const { value, className, style, children } = props;
+  //hooks
+  const { select, selected, option } = useContext(SelectContext);
+  //variables
+  const active = selected.includes(value);
+  // get slot styles
+  const slot = option ? getSlotStyles(option, { active }) : {};
+  //get final classes and styles
+  const { classes, styles } = getClassStyles({
+    //default classes to apply
+    classes: [ 
+      'frui-field-select-option', 
+      ...(active ? [ 'frui-field-select-option-active' ] : []) 
+    ],
+    //style props
+    props: {
+      //prefer direct props over slot props
+      className: className || slot.className,
+      //prefer direct props over slot props
+      style: style || slot.style
+    },
+    //state to pass to callable props
+    state: { active }
+  });
+  //handlers
+  const onClick = () => select(value);
+  //render
+  return (
+    <div className={classes.join(' ')} style={styles} onClick={onClick}>
+      {typeof children === 'function' ? children({ active }) : children}
+    </div>
+  );
+};
+
+/**
+ * Styled Select Placeholder Component
+ */
+export function SelectPlaceholder(props: SelectPlaceholderProps) {
+  //props
+  const { children, className, style } = props;
+  //hooks
+  const { open, opened } = useContext(SelectContext);
+  //variables
+  // determine classes
+  const classes = [ 'frui-field-select-placeholder' ];
+  className && classes.push(className);
+  // determine styles
+  const styles = { ...style };
+  //handlers
+  const toggle = () => open(!opened);
+  //render
+  return (
+    <div className={classes.join(' ')} style={styles} onClick={toggle}>
+      {children}
+    </div>
+  );
+};
+
+/**
+ * Styled Select Display Component
+ */
+export function SelectDisplay(props: SelectDisplayProps) {
+  //props
+  const { 
+    bottom,
+    children, 
+    className, 
+    left,
+    right,
+    style,
+    top
+  } = props;
+  //hooks
+  const { 
+    open, 
+    opened, 
+    clear, 
+    selected,
+    options
+  } = useContext(SelectContext);
+  //variables
+  // determine classes
+  const classes = [ 'frui-field-select-display' ];
+  className && classes.push(className);
+  // determine styles
+  const styles = { ...style };
+  // determine direction symbol
+  const direction = top ? '▲' 
+    : bottom ? '▼' 
+    : left ? '◀' 
+    : right ? '▶' 
+    : '▼';
+  //handlers
+  const toggle = () => open(!opened);
+  //render
+  return (
+    <div className={classes.join(' ')} style={styles}>
+      <div className="frui-field-select-selected">
+        {children}
+      </div>
+      <div className="frui-field-select-controls">
+        {selected.length > 0 && (
+          <span 
+            className="frui-field-select-clear"
+            onClick={clear}
+          >&times;</span>
+        )}
+        {options > 0 && (
+          <span 
+            className="frui-field-select-toggle"
+            onClick={toggle}
+          >
+            {direction}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+};
+
+/**
+ * Styled Select Dropdown Foot Component
+ */
+export function SelectDropdownFoot(props: SelectDropdownFootProps) {
+  //props
+  const { children, className, style } = props;
+  //variables
+  // determine classes
+  const classes = [ 'frui-field-select-dropdown-foot' ];
+  className && classes.push(className);
+  // determine styles
+  const styles = { ...style };
+  //render
+  return (
+    <footer className={classes.join(' ')} style={styles}>
+      {children}
+    </footer>
+  );
+};
+
+/**
+ * Styled Select Dropdown Header Component
+ */
+export function SelectDropdownHead(props: SelectDropdownHeadProps) {
+  //props
+  const { children, className, style } = props;
+  //variables
+  // determine classes
+  const classes = [ 'frui-field-select-dropdown-head' ];
+  className && classes.push(className);
+  // determine styles
+  const styles = { ...style };
+  //render
+  return (
+    <header className={classes.join(' ')} style={styles}>
+      {children}
+    </header>
+  );
+};
+
+/**
+ * Styled Select Dropdown Component
  */
 export function SelectDropdown(props: SelectDropdownProps) {
-  const {
-    options, 
-    show, 
-    searchable,
-    select, 
-    search, 
-    match 
+  //props
+  const { 
+    children, 
+    className, 
+    position = [ 0, 0 ],
+    ref, 
+    style 
   } = props;
-
-  const style = !show ? { display: 'none' }: undefined;
-
+  //hooks
+  const { opened } = useContext(SelectContext);
+  //variables
+  // determine classes
+  const classes = [ 'frui-field-select-dropdown' ];
+  className && classes.push(className);
+  // determine styles
+  const styles = { ...style };
+  styles.left = position[0];
+  styles.top = position[1];
+  //render
+  if (!opened) return null;
   return (
-    <div className="frui-field-select-dropdown" style={style}>
-      {searchable && (
-        <div className="frui-field-select-search">
-          <Input className="frui-field-select-search-control" onKeyUp={search} />
-          <span className="frui-field-select-search-icon">
-            &#x1F50E;
-          </span>
-        </div>
-      )}
+    <div ref={ref} className={classes.join(' ')} style={styles}>
       <div className="frui-field-select-options">
-        {options.filter(match).map((option, i) => (
-          <div 
-            key={i} 
-            onClick={_ => select(option)} 
-            className="frui-field-select-option"
-          >
-            {option.label}
-          </div>
-        ))}
+        {children}
       </div>
     </div>
   );
@@ -201,82 +727,170 @@ export function SelectDropdown(props: SelectDropdownProps) {
 /**
  * Styled Select Component (Main)
  */
-export function Select<T = any>(props: SelectProps) {
+export function Select(props: SelectProps) {
+  //props
   const { 
-    name,
-    searchable,
-    value,
-    defaultValue,
-    options: defaultOptions,
-    placeholder = 'Choose an Option',
-    error, 
+    //position of the dropdown
+    bottom, //?: boolean
+    //children (options)
+    children,
+    //custom class name
     className,
+    //uncontrolled serializable select value
+    defaultValue, //?: T
+    //slot: style to apply to the select display
+    display, //: SlotStyleProp
+    //slot: style to apply to the select drop down
+    dropdown, //: SlotStyleProp
+    //whether the select is in an error state
+    error, //?: boolean
+    //position of the dropdown
+    left, //?: boolean
+    //whether to accept multiple selections
+    multiple, //?: boolean
+    //name used by forms
+    name, //?: string
+    //dropdown handler
+    onDropdown, //?: (show: boolean) => void
+    //update handler
+    onUpdate, //?: (value: string) => void
+    //slot: style to apply to the select control
+    option, //: CallableSlotStyleProp<SelectStates>
+    //serialized list of options as array or object
+    options, //: SelectOption[]|Record<string, string>
+    //placeholder text when no option is selected
+    placeholder, //?: string
+    //position of the dropdown
+    right, //?: boolean
+    //custom inline styles
     style,
-    onQuery,
-    onDropdown,
-    onSelected,
-    onUpdate
+    //position of the dropdown
+    top, //?: boolean
+    //controlled select value
+    value //?: T
   } = props;
-
-  //we need to change from {k:v} to [{value: k, label: v}]
-  const entries = (
-    typeof defaultOptions === 'object' && !Array.isArray(defaultOptions)
-  ) ? Object.keys(defaultOptions).map(value => ({ 
-    value, label: (defaultOptions as Record<string, string>)[value] 
-  })): defaultOptions;
-
-  const { selected, options, showing, handlers } = useSelect<T>({
-    value,
+  //hooks
+  const {
+    //handlers
+    handlers,
+    //whether the dropdown is open
+    opened,
+    //position of the dropdown
+    position,
+    //container and dropdown references
+    refs,
+    //the current selected option/s
+    selected
+  } = useSelect({
+    bottom,
     defaultValue,
-    defaultOptions: entries,
-    onQuery,
+    left,
+    multiple,
     onDropdown,
-    onSelected,
-    onUpdate
+    onUpdate,
+    right,
+    top,
+    value
   });
-
-  const classNames = [ 'frui-field-select' ];
-  if (className) {
-    classNames.push(className);
-  }
-
-  const placeholderClass = [ 'frui-field-select-placeholder' ];
+  //variables
+  // determine classes
+  const classes = [ 'frui-field-select' ];
+  className && classes.push(className);
   if (error) {
-    placeholderClass.push('frui-tx-error', 'frui-bd-error');
+    classes.push('frui-field-select-error');
   }
-
-  const inputValue = typeof selected?.value === 'string' 
-    ? selected.value 
-    : typeof selected?.value === 'number'
-    ? String(selected.value)
-    : typeof selected?.value === 'boolean'
-    ? String(selected.value)
-    : selected?.value && typeof selected.value === 'object'
-    ? JSON.stringify(selected.value)
-    : '';
-
+  if (top) {
+    classes.push('frui-field-select-top');
+  } else if (left) {
+    classes.push('frui-field-select-left');
+  } else if (right) {
+    classes.push('frui-field-select-right');
+  } else {
+    classes.push('frui-field-select-bottom');
+  }
+  // determine styles
+  const styles = { ...style };
+  // get slot styles
+  const displayStyles = display ? getSlotStyles(display, {}) : {};
+  const dropdownStyles = dropdown ? getSlotStyles(dropdown, {}) : {};
+  // determine provider
+  const nodes = getNodes(
+    children,
+    options,
+    selected,
+    multiple
+  );
+  const provider = { 
+    opened,
+    option,
+    options: nodes.options.length,
+    clear: handlers.clear,
+    open: handlers.open,
+    select: handlers.select,
+    selected
+  } as SelectContextProps;
+  //render
+  const label = getPlaceholder(children, placeholder);
   return (
-    <div className={classNames.join(' ')} style={style}>
-      <div className="frui-field-select-control" onClick={handlers.toggle}>
-        {selected?.label || (
-          <span className={placeholderClass.join(' ')}>
-            {placeholder}
-          </span>
+    <SelectContext.Provider value={provider}>
+      <div 
+        ref={refs.container} 
+        className={classes.join(' ')} 
+        style={styles}
+      >
+        {/* Selected options & dropdown toggler */}
+        <SelectDisplay 
+          className={displayStyles.className} 
+          style={displayStyles.style}
+          onOpen={handlers.open}
+          bottom={bottom}
+          left={left}
+          right={right}
+          top={top}
+        >
+          {nodes.selected.length > 0  ? nodes.selected : label}
+        </SelectDisplay>
+        {/* Other options, search input */}
+        {nodes.options.length > 0 && (
+          <SelectDropdown 
+            ref={refs.dropdown}
+            className={dropdownStyles.className} 
+            style={dropdownStyles.style} 
+            position={position}
+          >
+            {nodes.header}
+            {nodes.options}
+            {nodes.footer}
+          </SelectDropdown>
+        )}
+        {/* Hidden values (for form submission) */}
+        {selected.map((selected, i) => typeof selected !== 'undefined' 
+          && selected !== null ? (
+            <input 
+              key={i} 
+              name={name} 
+              type="hidden" 
+              value={selected.toString()} 
+            />
+          ) : null
         )}
       </div>
-      <SelectDropdown 
-        options={options} 
-        show={showing} 
-        error={error}
-        searchable={searchable} 
-        select={handlers.select} 
-        search={handlers.search} 
-        match={handlers.match} 
-      />
-      <input name={name} type="hidden" value={inputValue} />
-    </div>
+    </SelectContext.Provider>
   );
 };
 
 //defaults to select
-export default Select;
+export default Object.assign(Select, {
+  Context: SelectContext,
+  Display: SelectDisplay,
+  Dropdown: SelectDropdown,
+  Option: SelectOption,
+  Head: SelectDropdownHead,
+  Foot: SelectDropdownFoot,
+  Placeholder: SelectPlaceholder,
+  getOptions,
+  makeOptions,
+  buildOptions,
+  useSelect,
+  useSelectContext
+});

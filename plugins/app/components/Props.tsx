@@ -21,7 +21,6 @@ export default function Props({ props }: PropsProps) {
           <Table.Col addClassName="text-center">{prop[2]}</Table.Col>
           <Table.Col>{prop[3]}</Table.Col>
         </Table.Row>
-      
       ))}
     </Table>
   );

@@ -249,13 +249,14 @@ export function getColumnSlot(
   slot?: ColumnSlot | ColumnSlot[], 
   index = 0
 ) {
-  if (!slot) {
-    return {};
+  if (Array.isArray(slot)) {
+    return getColumnSlot(slot[index % slot.length]);
+  } else if (typeof slot === 'string') {
+    return { className: slot };
+  } else if (typeof slot === 'object') {
+    return { style: slot };
   }
-  if (!Array.isArray(slot)) {
-    return slot;
-  }
-  return slot[index % slot.length];
+  return {};
 };
 
 //--------------------------------------------------------------------//
@@ -819,7 +820,11 @@ export function TableRow(props: TableRowProps) {
     classes.push(className);
   }
   // configure context provider
-  const provider = { ...context, index: index || context.index, column };
+  const provider = { 
+    ...context, 
+    index: typeof index === 'number' ? index : context.index, 
+    column: column || context.column
+  };
   //render
   return (
     <TableContext.Provider value={provider}>

@@ -13,7 +13,7 @@ import { useLanguage } from 'r22n';
 import ShikiHighlighter from 'react-shiki';
 
 //frui
-import type { HTMLProps, ChildrenProps } from 'components/types.js';
+import type { ClassStyleProps, ChildrenProps } from 'components/types.js';
 import { notify } from 'components/element/Notifier.js';
 
 //--------------------------------------------------------------------//
@@ -33,7 +33,7 @@ export type PreviewExampleProps = ChildrenProps & {
 
 export type PreviewCodeProps = ChildrenProps & {};
 
-export type PreviewProps = HTMLProps & ChildrenProps & {
+export type PreviewProps = ClassStyleProps & ChildrenProps & {
   height?: number,
   title: string
 };

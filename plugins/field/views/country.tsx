@@ -7,7 +7,7 @@ import { useLanguage, Translate } from 'r22n';
 //frui
 import Bread from 'components/element/Bread.js';
 import Table from 'components/element/Table.js';
-import Country from 'components/field/Country.js';
+import CountrySelect from 'components/field/CountrySelect.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -26,56 +26,32 @@ import {
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
-  [ 'defaultValue', 'string', 'No', 'Alias to value' ],
-  [ 'error', 'string|boolean', 'No', 'Any error message' ],
-  [ 'name', 'string', 'No', 'Used for react server components.' ],
-  [ 'onDropdown', 'Function', 'No', 'Event handler when dropdown opens/closes' ],
-  [ 'onSelected', 'Function', 'No', 'Event handler when an option has been selected' ],
-  [ 'onUpdate', 'Function', 'No', 'Update event handler' ],
-  [ 'options', 'string[]', 'No', 'List of select options.' ],
-  [ 'placeholder', 'string', 'No', 'Display text when no value set' ],
-  [ 'searchable', 'boolean', 'No', 'Add a search field' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
-  [ 'value', 'string', 'No', 'Selected value from the options' ]
+  [ 'display', 'SlotStyleProp', 'No', 'Style to apply to the select display' ],
+  [ 'dropdown', 'SlotStyleProp', 'No', 'Style to apply to the select drop down' ],
+  [ 'error', 'boolean', 'No', 'Whether the select is in an error state' ],
+  [ 'name', 'string', 'No', 'Name used by forms' ],
+  [ 'onDropdown', '(show: boolean) => void', 'No', 'Dropdown handler' ],
+  [ 'onUpdate', '(country: CountryData | CountryData[]) => void', 'No', 'Update handler for country data' ],
+  [ 'option', 'CallableSlotStyleProp<SelectStates>', 'No', 'Style to apply to the select option' ],
+  [ 'placeholder', 'string', 'No', 'Placeholder text when no option is selected' ],
+  [ 'searchable', 'boolean | string', 'No', 'Whether the country select is searchable' ],
+  [ 'style', 'CSSProperties', 'No', 'Standard HTML styles' ]
 ];
 
 const examples = [
 //0
-`<Country className="w-full z-30 text-black" placeholder="Select Country" searchable />`,
+`<CountrySelect />`,
 //1
-`<Country 
-  className="w-full z-20 text-black" 
+`<CountrySelect searchable />`,
+//2
+`<CountrySelect searchable multiple />`,
+//3
+`<CountrySelect 
   onDropdown={open => console.log('dropdown', open)}
-  onSelected={option => console.log('selected', option)}
   onUpdate={value => alert(JSON.stringify(value))}
 />`,
-//2
-`{
-  label: 'United States',
-  value: {
-    countryCode: 'US',
-    countryName: 'United States',
-    currencyType: 'fiat',
-    currencyCode: 'USD',
-    currencyName: 'US Dollar',
-    currencyPlural: 'US Dollars',
-    currencySymbol: '$',
-    language: 'en'
-  }
-}`,
-//3
-`{
-  countryCode: 'US',
-  countryName: 'United States',
-  currencyType: 'fiat',
-  currencyCode: 'USD',
-  currencyName: 'US Dollar',
-  currencyPlural: 'US Dollars',
-  currencySymbol: '$',
-  language: 'en'
-}`,
 //4
-`<Country className="w-full z-10 text-black" error value="US" />`
+`<CountrySelect error value="US" />`
 ];
 
 //--------------------------------------------------------------------//
@@ -116,11 +92,23 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Country')}
+          {_('Country Select')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#examples">{_('Examples')}</a>
+            <a href="#basics">{_('Basics')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#searchable">{_('Searchable')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#multiple">{_('Multiple')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
@@ -131,27 +119,6 @@ export function Menu() {
         </ul>
       </div>
     </aside>
-  );
-};
-
-/**
- * Examples component
- */
-export function Examples() {
-  return (
-    <div className="flex items-start rmd-block flex-wrap gap-4">
-      {/* Info Example */}
-      <Preview 
-        height={100}
-        title="Info Example" 
-        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          TODO
-        </Preview.Example>
-        <Preview.Code>{''}</Preview.Code>
-      </Preview>
-    </div>
   );
 };
 
@@ -168,7 +135,7 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Country')}
+        {_('Country Select')}
       </h1>
       <div>
         <p className="py-2">
@@ -177,53 +144,97 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Country from 'frui/field/Country';`}
+          {`import CountrySelect from 'frui/field/CountrySelect';`}
         </Code>
       </div>
 
       <h2 id="basic" className="uppercase font-bold text-lg mt-8">
         {_('Basics')}
       </h2>
-      <div>
+      <div className="relative z-[100]">
         <p className="py-4">
           <Translate>
-            The following is a basic example of an 
-            <C l value="Country" /> field.
+            The following is a basic example of 
+            a <C l value="CountrySelect" /> field.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Country className="w-full z-30 text-black" placeholder="Select Country" searchable value="US" />
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3 relative z-[100]"
+        >
+          <Preview.Example center padding>
+            <CountrySelect />
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
+      </div>
+
+      <h2 id="searchable" className="uppercase font-bold text-lg mt-8">
+        {_('Searchable')}
+      </h2>
+      <div className="relative z-[99]">
+        <p className="py-4">
+          <Translate>
+            You can add a search field to the dropdown by passing
+            the <C value="searchable" /> prop to the 
+            <C l value="CountrySelect" /> component.
+          </Translate>
+        </p>
+        <Preview 
+          title="Search Example" 
+          className="border border-2 theme-bc-3 relative z-[100]"
+        >
+          <Preview.Example center padding>
+            <CountrySelect searchable />
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
+      </div>
+
+      <h2 id="multiple" className="uppercase font-bold text-lg mt-8">
+        {_('Multiple')}
+      </h2>
+      <div className="relative z-[98]">
+        <p className="py-4">
+          <Translate>
+            You can enable multiple selection by passing the
+            <C value="multiple" /> prop to the
+            <C l value="CountrySelect" /> component.
+          </Translate>
+        </p>
+        <Preview
+          title="Multiple Example"
+          className="border border-2 theme-bc-3 relative z-[100]"
+        >
+          <Preview.Example center padding>
+            <CountrySelect searchable multiple />
+          </Preview.Example>
+          <Preview.Code>{examples[2]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
         {_('Events')}
       </h2>
-      <div>
+      <div className="relative z-[97]">
         <p className="py-4">
           <Translate>
             The following example makes use of all the possible 
             events for <C value="Country" />.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="relative flex items-center justify-center p-3 theme-bg-1">
-            <Country 
-              className="w-full z-20 text-black" 
+        <Preview
+          title="Event Listeners"
+          className="border border-2 theme-bc-3 relative z-[100]"
+        >
+          <Preview.Example center padding>
+            <CountrySelect 
               onDropdown={open => console.log('dropdown', open)}
-              onSelected={option => console.log('selected', option)}
               onUpdate={value => alert(JSON.stringify(value))}
             />
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[3]}</Preview.Code>
+        </Preview>
         <h3 className="font-semibold text-md mt-8">
           {_('On Dropdown')}
         </h3>
@@ -247,33 +258,6 @@ export function Body() {
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
               <C value="true" />
-            </Table.Col>
-          </Table.Row>
-        </Table>
-
-        <h3 className="font-semibold text-md mt-8">
-          {_('On Selected')}
-        </h3>
-        <p className="py-4">
-          <Translate>
-            The <C value="onSelected" /> event is triggered when an
-            option has been selected. The following arguments are
-            passed to the event handler:
-          </Translate>
-        </p>
-        <Table>
-          <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
-          <Table.Row>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('option')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('SelectOption')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              <Code language="json" copy={false}>{examples[2]}</Code>
             </Table.Col>
           </Table.Row>
         </Table>
@@ -309,21 +293,24 @@ export function Body() {
       <h2 id="errors" className="uppercase font-bold text-lg mt-8">
         {_('Errors')}
       </h2>
-      <div>
+      <div className="relative z-[96]">
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
             the Country field red.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Country className="w-full z-10 text-black" error value="US" />
-          </div>
-          <Code language="typescript">
-            {examples[4]}
-          </Code>
-        </div>
+        <Preview
+          title="Error Example"
+          className="border border-2 theme-bc-3 relative z-[100]"
+        >
+          <Preview.Example center padding>
+            <CountrySelect error value="US" />
+          </Preview.Example>
+          <Preview.Code>
+            {`<CountrySelect error value="US" />`}
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -333,7 +320,7 @@ export function Body() {
         <Translate>
           You can add your own custom class to selects
           or use any of the respective 
-          <C l value="frui-field-select" />, 
+          <C l value="frui-field-country-select" />, 
           <C l value="frui-field-select-control" />, 
           <C l value="frui-field-select-placeholder" />, 
           <C l value="frui-field-select-dropdown" />,  
@@ -352,7 +339,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Country>" /> field can be passed the 
+            The <C value="<CountrySelect>" /> field can be passed the 
             following props.
           </Translate>
         </p>

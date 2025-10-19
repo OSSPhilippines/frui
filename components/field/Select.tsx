@@ -25,11 +25,7 @@ import getSlotStyles from '../helpers/getSlotStyles.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type Option = {
-  label: string,
-  keyword?: string,
-  value: string
-};
+export type SelectData = { label?: string, value: string };
 
 export type SelectStates = {
   //the current selected option/s
@@ -37,8 +33,8 @@ export type SelectStates = {
 };
 
 export type SelectContextProps = {
-  //current search keyword
-  keyword?: string,
+  //whether to accept multiple selections
+  multiple?: boolean,
   //whether the dropdown is open
   opened: boolean,
   //slot: style to apply to the select control
@@ -78,10 +74,7 @@ export type SelectConfig = {
 
 export type SelectOptionProps = CallableClassStyleProps<SelectStates> 
   & CallableChildrenProps<SelectStates> 
-  & {
-    keyword?: string,
-    value: string
-  };
+  & { value: string };
 
 export type SelectPlaceholderProps = ClassStyleProps & ChildrenProps;
 
@@ -122,7 +115,7 @@ export type SelectProps = ClassStyleProps & ChildrenProps & SelectConfig & {
   //slot: style to apply to the select control
   option?: CallableSlotStyleProp<SelectStates>,
   //serialized list of options as array or object
-  options?: Option[]|Record<string, string>,
+  options?: SelectData[]|Record<string, string>,
   //placeholder text when no option is selected
   placeholder?: string
 };
@@ -135,7 +128,7 @@ export type SelectProps = ClassStyleProps & ChildrenProps & SelectConfig & {
  */
 export function buildOptions(
   children?: ReactNode,
-  data?: Option[] | Record<string, string>,
+  data?: SelectData[] | Record<string, string>,
   selected: string[] = [],
   multiple?: boolean
 ) {
@@ -168,32 +161,25 @@ export function getDropdownPosition(
   switch (true) {
     case left:
       position.y = 0;
-      //x = container left - tooltip width - arrow size
       //(to the left of the container)
       position.x = -(tooltipRect.width);
       break;
     case right:
       position.y = 0;
-      //x = container width + arrow size
       //(to the right of the container)
       position.x = containerRect.width;
       break;
     case top:
-      //y = container top - tooltip height - arrow size
       //(above the container)
       position.y = -(tooltipRect.height);
-      //x = container width / 2 - tooltip width / 2
-      //(to center it)
-      position.x = (containerRect.width / 2) - (tooltipRect.width / 2);
+      position.x = 0;
       break;
     case bottom:
     default:
       //y = container bottom + arrow size
       //(below the container)
       position.y = containerRect.height;
-      //x = container width / 2 - tooltip width / 2
-      //(to center it)
-      position.x = (containerRect.width / 2) - (tooltipRect.width / 2);
+      position.x = 0;
       break;
   }
   return position;
@@ -246,7 +232,7 @@ export function getHeader(
  */
 export function getNodes(
   children?: ReactNode,
-  data?: Option[] | Record<string, string>,
+  data?: SelectData[] | Record<string, string>,
   selected: string[] = [],
   multiple?: boolean
 ) {
@@ -277,6 +263,14 @@ export function getOptions<T = unknown>(
       others.push(child);
       continue;
     }
+    //an array can be from options.map(...)
+    if (Array.isArray(child)) {
+      const nested = getOptions(child, values, multiple);
+      options.push(...nested.options);
+      selected.push(...nested.selected);
+      others.push(...nested.others);
+      continue;
+    }
     //if child is a SelectOption
     if (child.type === SelectOption || child.props?.selectOption) {
       //if multiple selections allowed
@@ -305,7 +299,7 @@ export function getOptions<T = unknown>(
     }
     others.push(child);
   }
-  return { options, selected };
+  return { options, selected, others };
 };
 
 /**
@@ -336,7 +330,7 @@ export function getPlaceholder(
  * Make options from data (array or object)
  */
 export function makeOptions(
-  data: Option[] | Record<string, string>,
+  data: SelectData[] | Record<string, string>,
   selected: string[], 
   multiple?: boolean
 ) {
@@ -353,10 +347,10 @@ export function makeOptions(
   const style = { padding: '2px 8px' };
   const options: ReactNode[] = [];
   for (let i = 0; i < data.length; i++) {
-    const { label, value, keyword } = data[i];
+    const { label, value } = data[i];
     options.push(
-      <SelectOption key={i} value={value} style={style} keyword={keyword}>
-        {label}
+      <SelectOption key={i} value={value} style={style}>
+        {label || value}
       </SelectOption>
     );
   }
@@ -560,7 +554,7 @@ export function SelectOption(props: SelectOptionProps) {
   //render
   return (
     <div className={classes.join(' ')} style={styles} onClick={onClick}>
-      {typeof children === 'function' ? children({ active }) : children}
+      {typeof children === 'function' ? children({ active }) : (children || value)}
     </div>
   );
 };
@@ -704,7 +698,7 @@ export function SelectDropdown(props: SelectDropdownProps) {
     style 
   } = props;
   //hooks
-  const { opened } = useContext(SelectContext);
+  const { multiple, opened } = useContext(SelectContext);
   //variables
   // determine classes
   const classes = [ 'frui-field-select-dropdown' ];
@@ -713,13 +707,21 @@ export function SelectDropdown(props: SelectDropdownProps) {
   const styles = { ...style };
   styles.left = position[0];
   styles.top = position[1];
+  //get nodes
+  const nodes = {
+    options: getOptions(children, [], multiple).options,
+    header: getHeader(children),
+    footer: getFooter(children)
+  };
   //render
   if (!opened) return null;
   return (
     <div ref={ref} className={classes.join(' ')} style={styles}>
+      {nodes.header}
       <div className="frui-field-select-options">
-        {children}
+        {nodes.options}
       </div>
+      {nodes.footer}
     </div>
   );
 };
@@ -821,6 +823,7 @@ export function Select(props: SelectProps) {
     multiple
   );
   const provider = { 
+    multiple,
     opened,
     option,
     options: nodes.options.length,
@@ -888,6 +891,11 @@ export default Object.assign(Select, {
   Head: SelectDropdownHead,
   Foot: SelectDropdownFoot,
   Placeholder: SelectPlaceholder,
+  getDropdownPosition,
+  getFooter,
+  getHeader,
+  getNodes,
+  getPlaceholder,
   getOptions,
   makeOptions,
   buildOptions,

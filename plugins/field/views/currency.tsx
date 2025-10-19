@@ -7,7 +7,7 @@ import { useLanguage, Translate } from 'r22n';
 //frui
 import Bread from 'components/element/Bread.js';
 import Table from 'components/element/Table.js';
-import Currency from 'components/field/Currency.js';
+import CurrencySelect from 'components/field/CurrencySelect.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -26,56 +26,32 @@ import {
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
-  [ 'defaultValue', 'string', 'No', 'Alias to value' ],
-  [ 'error', 'string|boolean', 'No', 'Any error message' ],
-  [ 'name', 'string', 'No', 'Used for react server components.' ],
-  [ 'onDropdown', 'Function', 'No', 'Event handler when dropdown opens/closes' ],
-  [ 'onSelected', 'Function', 'No', 'Event handler when an option has been selected' ],
-  [ 'onUpdate', 'Function', 'No', 'Update event handler' ],
-  [ 'options', 'string[]', 'No', 'List of select options.' ],
-  [ 'placeholder', 'string', 'No', 'Display text when no value set' ],
-  [ 'searchable', 'boolean', 'No', 'Add a search field' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
-  [ 'value', 'string', 'No', 'Selected value from the options' ]
+  [ 'display', 'SlotStyleProp', 'No', 'Style to apply to the select display' ],
+  [ 'dropdown', 'SlotStyleProp', 'No', 'Style to apply to the select drop down' ],
+  [ 'error', 'boolean', 'No', 'Whether the select is in an error state' ],
+  [ 'name', 'string', 'No', 'Name used by forms' ],
+  [ 'onDropdown', '(show: boolean) => void', 'No', 'Dropdown handler' ],
+  [ 'onUpdate', '(currency: CurrencyData | CurrencyData[]) => void', 'No', 'Update handler for currency data' ],
+  [ 'option', 'CallableSlotStyleProp<SelectStates>', 'No', 'Style to apply to the select option' ],
+  [ 'placeholder', 'string', 'No', 'Placeholder text when no option is selected' ],
+  [ 'searchable', 'boolean | string', 'No', 'Whether the currency select is searchable' ],
+  [ 'style', 'CSSProperties', 'No', 'Standard HTML styles' ]
 ];
 
 const examples = [
 //0
-`<Currency className="w-full z-30 text-black" placeholder="Select Currency" searchable />`,
+`<CurrencySelect />`,
 //1
-`<Currency 
-  className="w-full z-20 text-black" 
+`<CurrencySelect searchable />`,
+//2
+`<CurrencySelect searchable multiple />`,
+//3
+`<CurrencySelect 
   onDropdown={open => console.log('dropdown', open)}
-  onSelected={option => console.log('selected', option)}
   onUpdate={value => alert(JSON.stringify(value))}
 />`,
-//2
-`{
-  label: 'USD',
-  value: {
-    countryCode: 'US',
-    countryName: 'United States',
-    currencyType: 'fiat',
-    currencyCode: 'USD',
-    currencyName: 'US Dollar',
-    currencyPlural: 'US Dollars',
-    currencySymbol: '$',
-    language: 'en'
-  }
-}`,
-//3
-`{
-  countryCode: 'US',
-  countryName: 'United States',
-  currencyType: 'fiat',
-  currencyCode: 'USD',
-  currencyName: 'US Dollar',
-  currencyPlural: 'US Dollars',
-  currencySymbol: '$',
-  language: 'en'
-}`,
 //4
-`<Currency className="w-full z-10 text-black" error value="US" />`
+`<CurrencySelect error value="USD" />`
 ];
 
 //--------------------------------------------------------------------//
@@ -116,11 +92,23 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Currency')}
+          {_('Currency Select')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#examples">{_('Examples')}</a>
+            <a href="#basics">{_('Basics')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#searchable">{_('Searchable')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#multiple">{_('Multiple')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
@@ -131,27 +119,6 @@ export function Menu() {
         </ul>
       </div>
     </aside>
-  );
-};
-
-/**
- * Examples component
- */
-export function Examples() {
-  return (
-    <div className="flex items-start rmd-block flex-wrap gap-4">
-      {/* Info Example */}
-      <Preview 
-        height={100}
-        title="Info Example" 
-        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          TODO
-        </Preview.Example>
-        <Preview.Code>{''}</Preview.Code>
-      </Preview>
-    </div>
   );
 };
 
@@ -168,7 +135,7 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Currency')}
+        {_('Currency Select')}
       </h1>
       <div>
         <p className="py-2">
@@ -177,59 +144,100 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Currency from 'frui/field/Currency';`}
+          {`import CurrencySelect from 'frui/field/CurrencySelect';`}
         </Code>
       </div>
 
       <h2 id="basic" className="uppercase font-bold text-lg mt-8">
         {_('Basics')}
       </h2>
-      <div>
+      <div className="relative z-[100]">
         <p className="py-4">
           <Translate>
-            The following is a basic example of an 
-            <C l value="Currency" /> field.
+            The following is a basic example of 
+            a <C l value="CurrencySelect" /> field.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Currency className="w-full z-30 text-black" placeholder="Select Currency" searchable value="US" />
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3 relative z-[100]"
+        >
+          <Preview.Example center padding>
+            <CurrencySelect />
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
+      </div>
+
+      <h2 id="searchable" className="uppercase font-bold text-lg mt-8">
+        {_('Searchable')}
+      </h2>
+      <div className="relative z-[99]">
+        <p className="py-4">
+          <Translate>
+            You can add a search field to the dropdown by passing
+            the <C value="searchable" /> prop to the 
+            <C l value="CurrencySelect" /> component.
+          </Translate>
+        </p>
+        <Preview 
+          title="Search Example" 
+          className="border border-2 theme-bc-3 relative z-[100]"
+        >
+          <Preview.Example center padding>
+            <CurrencySelect searchable />
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
+      </div>
+
+      <h2 id="multiple" className="uppercase font-bold text-lg mt-8">
+        {_('Multiple')}
+      </h2>
+      <div className="relative z-[98]">
+        <p className="py-4">
+          <Translate>
+            You can enable multiple selection by passing the
+            <C value="multiple" /> prop to the
+            <C l value="CurrencySelect" /> component.
+          </Translate>
+        </p>
+        <Preview
+          title="Multiple Example"
+          className="border border-2 theme-bc-3 relative z-[100]"
+        >
+          <Preview.Example center padding>
+            <CurrencySelect searchable multiple />
+          </Preview.Example>
+          <Preview.Code>{examples[2]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
         {_('Events')}
       </h2>
-      <div>
+      <div className="relative z-[97]">
         <p className="py-4">
           <Translate>
             The following example makes use of all the possible 
             events for <C value="Currency" />.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="relative flex items-center justify-center p-3 theme-bg-1">
-            <Currency 
-              className="w-full z-20 text-black" 
+        <Preview
+          title="Event Listeners"
+          className="border border-2 theme-bc-3 relative z-[100]"
+        >
+          <Preview.Example center padding>
+            <CurrencySelect 
               onDropdown={open => console.log('dropdown', open)}
-              onSelected={option => console.log('selected', option)}
               onUpdate={value => alert(JSON.stringify(value))}
             />
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
-      </div>
-      
-      <h3 className="font-semibold text-md mt-8">
-        {_('On Dropdown')}
-      </h3>
-      <div>
+          </Preview.Example>
+          <Preview.Code>{examples[3]}</Preview.Code>
+        </Preview>
+        <h3 className="font-semibold text-md mt-8">
+          {_('On Dropdown')}
+        </h3>
         <p className="py-4">
           <Translate>
             The <C value="onDropdown" /> event is triggered when the 
@@ -250,33 +258,6 @@ export function Body() {
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
               <C value="true" />
-            </Table.Col>
-          </Table.Row>
-        </Table>
-
-        <h3 className="font-semibold text-md mt-8">
-          {_('On Selected')}
-        </h3>
-        <p className="py-4">
-          <Translate>
-            The <C value="onSelected" /> event is triggered when an
-            option has been selected. The following arguments are
-            passed to the event handler:
-          </Translate>
-        </p>
-        <Table>
-          <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
-          <Table.Row>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('option')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('SelectOption')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              <Code language="json" copy={false}>{examples[2]}</Code>
             </Table.Col>
           </Table.Row>
         </Table>
@@ -309,6 +290,29 @@ export function Body() {
         </Table>
       </div>
 
+      <h2 id="errors" className="uppercase font-bold text-lg mt-8">
+        {_('Errors')}
+      </h2>
+      <div className="relative z-[96]">
+        <p className="py-4">
+          <Translate>
+            You can pass the <C value="error" /> prop to highlight 
+            the Currency field red.
+          </Translate>
+        </p>
+        <Preview
+          title="Error Example"
+          className="border border-2 theme-bc-3 relative z-[100]"
+        >
+          <Preview.Example center padding>
+            <CurrencySelect name="error" error value="USD" />
+          </Preview.Example>
+          <Preview.Code>
+            {`<CurrencySelect error value="USD" />`}
+          </Preview.Code>
+        </Preview>
+      </div>
+
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
         {_('Global Styles')}
       </h2>
@@ -316,7 +320,7 @@ export function Body() {
         <Translate>
           You can add your own custom class to selects
           or use any of the respective 
-          <C l value="frui-field-select" />, 
+          <C l value="frui-field-currency-select" />, 
           <C l value="frui-field-select-control" />, 
           <C l value="frui-field-select-placeholder" />, 
           <C l value="frui-field-select-dropdown" />,  
@@ -328,34 +332,14 @@ export function Body() {
           <C l value="frui-field-select-label" /> CSS classes. 
         </Translate>
       </p>
-
-      <h2 id="errors" className="uppercase font-bold text-lg mt-8">
-        {_('Errors')}
-      </h2>
-      <div>
-        <p className="py-4">
-          <Translate>
-            You can pass the <C value="error" /> prop to highlight 
-            the Currency field red.
-          </Translate>
-        </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Currency className="w-full z-10 text-black" error value="US" />
-          </div>
-          <Code language="typescript">
-            {examples[4]}
-          </Code>
-        </div>
-      </div>
-
+                  
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Currency>" /> field can be passed the 
+            The <C value="<CurrencySelect>" /> field can be passed the 
             following props.
           </Translate>
         </p>
@@ -363,13 +347,13 @@ export function Body() {
       </div>
 
       <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
-        <a className="theme-2" href="/field/country">
+        <a className="theme-2 hover:text-link" href="/field/color-picker">
           <i className="fas fa-arrow-left mr-2"></i>
-          {_('Country')}
+          {_('Color Picker')}
         </a>
         <div className="flex-grow"></div>
-        <a className="theme-2" href="/field/date">
-          {_('Date')}
+        <a className="theme-2 hover:text-link" href="/field/currency">
+          {_('Currency')}
           <i className="fas fa-arrow-right ml-2"></i>
         </a>
       </div>
@@ -387,8 +371,8 @@ export function Head(props: PageProps) {
       uri="/field/currency"
       title="Currency Field"
       description={
-        'Currency is a field component that provides a list of '
-        + 'world currencies for users to select from.'
+        'Currency fields in FRUI, allow users select from a list of '
+        + 'countries around the world.'
       }
       styles={styles}
     />

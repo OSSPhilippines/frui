@@ -27,23 +27,58 @@ import {
 // Constants
 
 const props = [
-  [ 'bottom', 'boolean', 'No', 'Display the dropdown below the field' ],
-  [ 'className', 'string', 'No', 'Standard HTML class names' ],
-  [ 'defaultValue', 'string', 'No', 'Alias to value' ],
-  [ 'error', 'string|boolean', 'No', 'Any error message' ],
-  [ 'left', 'boolean', 'No', 'Display the dropdown to the left' ],
-  [ 'multiple', 'boolean', 'No', 'Allow multiple selections' ],
-  [ 'name', 'string', 'No', 'Used for react server components.' ],
-  [ 'onDropdown', 'Function', 'No', 'Event handler when dropdown opens/closes' ],
-  [ 'onUpdate', 'Function', 'No', 'Update event handler' ],
-  [ 'option', 'string | Function', 'No', 'Class name or function that returns a class name for each option' ],
-  [ 'options', 'Option[]', 'No', 'List of select options.' ],
-  [ 'placeholder', 'string', 'No', 'Display text when no value set' ],
-  [ 'right', 'boolean', 'No', 'Display the dropdown to the right' ],
-  [ 'searchable', 'boolean', 'No', 'Add a search field' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
-  [ 'top', 'boolean', 'No', 'Display the dropdown above the field' ],
-  [ 'value', 'string', 'No', 'Selected value from the options' ]
+  //select props
+  [
+    [ 'className', 'string', 'No', 'Standard HTML class names' ],
+    [ 'display', 'string|CSS Object|ClassStyleProps', 'No', 'Slot style to apply to the select display' ],
+    [ 'dropdown', 'string|CSS Object|ClassStyleProps', 'No', 'Slot style to apply to the select dropdown' ],
+    [ 'error', 'string|boolean', 'No', 'Any error message' ],
+    [ 'multiple', 'boolean', 'No', 'Allow multiple selections' ],
+    [ 'name', 'string', 'No', 'Used for react server components.' ],
+    [ 'onDropdown', 'Function', 'No', 'Event handler when dropdown opens/closes' ],
+    [ 'onUpdate', 'Function', 'No', 'Update event handler' ],
+    [ 'option', 'string|Function', 'No', 'Slot style to apply to the select options' ],
+    [ 'options', 'string[]', 'No', 'List of select options.' ],
+    [ 'placeholder', 'string', 'No', 'Display text when no value set' ]
+  ],
+  //select display props
+  [
+    [ 'bottom', 'boolean', 'No', 'Display the dropdown below the field' ],
+    [ 'className', 'string', 'No', 'Standard HTML class names' ],
+    [ 'left', 'boolean', 'No', 'Display the dropdown to the left' ],
+    [ 'onOpen', 'Function', 'No', 'Dropdown open/close event handler' ],
+    [ 'right', 'boolean', 'No', 'Display the dropdown to the right' ],
+    [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
+    [ 'top', 'boolean', 'No', 'Display the dropdown above the field' ]
+  ],
+  //select placeholder props
+  [
+    [ 'className', 'string', 'No', 'Standard HTML class names' ],
+    [ 'style', 'CSS Object', 'No', 'Standard CSS object' ]
+  ],
+  //select dropdown props
+  [
+    [ 'className', 'string', 'No', 'Standard HTML class names' ],
+    [ 'position', '[number, number]', 'No', 'X/Y position of the dropdown' ],
+    [ 'ref', 'Ref<HTMLDivElement>', 'No', 'Reference to the dropdown element' ],
+    [ 'style', 'CSS Object', 'No', 'Standard CSS object' ]
+  ],
+  //select dropdown head props
+  [
+    [ 'className', 'string', 'No', 'Standard HTML class names' ],
+    [ 'style', 'CSS Object', 'No', 'Standard CSS object' ]
+  ],
+  //select dropdown foot props
+  [
+    [ 'className', 'string', 'No', 'Standard HTML class names' ],
+    [ 'style', 'CSS Object', 'No', 'Standard CSS object' ]
+  ],
+  //select option props
+  [
+    [ 'className', 'string', 'No', 'Standard HTML class names' ],
+    [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
+    [ 'value', 'string', 'Yes', 'Value of the option' ]
+  ]
 ];
 
 const examples = [
@@ -327,8 +362,8 @@ export function Body() {
         >
           <Preview.Example center padding>
             <Select options={[
-              { label: 'Foo', value: 'foo', keyword: 'foo' },
-              { label: 'Bar', value: 'bar', keyword: 'bar' }
+              { label: 'Foo', value: 'foo' },
+              { label: 'Bar', value: 'bar' }
             ]} />
           </Preview.Example>
           <Preview.Code>{examples[1]}</Preview.Code>
@@ -538,7 +573,7 @@ export function Body() {
         >
           <Preview.Example center padding>
             <Select name="select-search" option="px-p-2-8-2-8" options={options}>
-              <Select.Head className="px-px-8">
+              <Select.Head className="px-px-8 px-pt-8">
                 <form 
                   className="flex items-center border theme-bc-3"
                   onSubmit={filter}
@@ -699,13 +734,68 @@ export function Body() {
         {_('API Reference')}
       </h2>
       <div>
-        <p className="py-4">
+        <p className="py-2">
           <Translate>
-            The <C value="<Select>" /> field can be passed the 
+            The following section describes the props for each select 
+            component.
+          </Translate>
+        </p>
+        <h3 className="font-semibold mt-4">{_('Root')}</h3>
+        <p className="py-2">
+          <Translate>
+            The <C value="<Select>" /> component can be passed the 
             following props.
           </Translate>
         </p>
-        <Props props={props} />
+        <Props props={props[0]} />
+        <h3 className="font-semibold mt-4">{_('Item')}</h3>
+        <p className="py-2">
+          <Translate>
+            The <C value="<Select.Display>" /> component can be passed the 
+            following props.
+          </Translate>
+        </p>
+        <Props props={props[1]} />
+        <h3 className="font-semibold mt-4">{_('Placeholder')}</h3>
+        <p className="py-2">
+          <Translate>
+            The <C value="<Select.Placeholder>" /> component can be passed the 
+            following props.
+          </Translate>
+        </p>
+        <Props props={props[2]} />
+        <h3 className="font-semibold mt-4">{_('Dropdown')}</h3>
+        <p className="py-2">
+          <Translate>
+            The <C value="<Select.Dropdown>" /> component can be passed the 
+            following props.
+          </Translate>
+        </p>
+        <Props props={props[3]} />
+        <h3 className="font-semibold mt-4">{_('Dropdown Head')}</h3>
+        <p className="py-2">
+          <Translate>
+            The <C value="<Select.Head>" /> component can be passed the 
+            following props.
+          </Translate>
+        </p>
+        <Props props={props[4]} />
+        <h3 className="font-semibold mt-4">{_('Dropdown Foot')}</h3>
+        <p className="py-2">
+          <Translate>
+            The <C value="<Select.Foot>" /> component can be passed the 
+            following props.
+          </Translate>
+        </p>
+        <Props props={props[5]} />
+        <h3 className="font-semibold mt-4">{_('Option')}</h3>
+        <p className="py-2">
+          <Translate>
+            The <C value="<Select.Option>" /> component can be passed the 
+            following props.
+          </Translate>
+        </p>
+        <Props props={props[6]} />
       </div>
 
       <div className="flex items-center border-t theme-bg-2 mt-8 p-4">

@@ -1,13 +1,17 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//types
-import type { ExtendsType } from '../types.js';
-import type { SelectProps, SelectOption } from './Select.js';
-//components
-import Select from './Select.js';
-//data
+//modules
+import type { KeyboardEvent } from 'react';
+import { useState } from 'react';
+//frui
+import type { SelectProps } from './Select.js';
 import countries from '../data/countries.js';
+import { 
+  Select, 
+  SelectDropdownHead,
+  SelectOption
+} from './Select.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -26,89 +30,89 @@ export type CountryData = {
   num: [ string, string ]
 };
 
-export type CountryOption = SelectOption<string>;
-
-export type CountryConfig = {
-  value?: string,
-  defaultValue?: string,
-  map: (country: CountryData) => CountryOption
-};
-
-export type CountryProps = ExtendsType<SelectProps, {
-  options?: undefined,
-  defaultValue?: string,
-  value?: string
-}>;
-
-//--------------------------------------------------------------------//
-// Hooks
-
-/**
- * Country Hook Aggregate
- */
-export function useCountry(config: CountryConfig) {
-  const { value, defaultValue, map } = config;
-  //generate options
-  const options = (countries as CountryData[]).map(map);
-
-  const selected = typeof value === 'string' 
-    ? options.filter(
-        option => option.value === value
-      )[0] as CountryOption
-    : undefined;
-  
-  const selectedDefault = typeof defaultValue === 'string' 
-    ? options.filter(
-        option => option.value === defaultValue
-      )[0] as CountryOption
-    : undefined;
-
-  return { selected, selectedDefault, options };
+export type CountrySelectProps = Omit<SelectProps, 'onUpdate'> & {
+  searchable?: boolean | string,
+  onUpdate?: (country: CountryData | CountryData[]) => void
 };
 
 //--------------------------------------------------------------------//
 // Components
 
-/**
- * Styled Country  Component (Main)
- */
-export function Country(props: CountryProps) {
-  const { 
-    value, 
-    defaultValue, 
-    placeholder = 'Choose a Country', 
-    ...attributes 
-  } = props;
-  const { selected, selectedDefault, options } = useCountry({
-    value, 
-    defaultValue,
-    map: country => ({
-      label: (
-        <>
-          <span className="text-lg">{country.flag}</span>
-          <span className="frui-field-select-label">
-            {country.name}
-          </span>  
-        </>
-      ),
-      value: country.iso3,
-      keyword: (keyword: string) => country.iso3.toLowerCase().indexOf(keyword) >= 0
-        || country.name.toLowerCase().indexOf(keyword) >= 0
-        || country.iso3.toLowerCase().indexOf(keyword) >= 0
-    })
-  });
-
+export function CountrySelect(props: CountrySelectProps) {
+  //props
+  const { className, onUpdate, placeholder, searchable } = props;
+  //hooks
+  const [ keyword, setKeyword ] = useState('');
+  const [ options, setOptions ] = useState(countries);
+  //variables
+  const classes = [ 'frui-field-country-select' ];
+  className && classes.push(className);
+  const searchPlaceholder = typeof searchable === 'string' 
+    ? searchable 
+    : 'Search...';
+  //handlers
+  const handlers = {
+    filter: (e: KeyboardEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      setTimeout(() => {
+        const input = e.target as HTMLInputElement;
+        const keyword = input.value.toLowerCase().trim();
+        const filtered = countries.filter(
+          country => country.name.toLowerCase().includes(keyword)
+            || country.iso2.toLowerCase().includes(keyword)
+            || country.iso3.toLowerCase().includes(keyword)
+            || country.cur.toLowerCase().includes(keyword)
+            || country.lang.toLowerCase().includes(keyword)
+            || country.tel.includes(keyword)
+        );
+        setOptions(filtered);
+      });
+      return false;
+    },
+    update: onUpdate ? (value: string | string[]) => {
+      if (Array.isArray(value)) {
+        const selected = countries.filter(
+          country => value.includes(country.iso2)
+        ) as CountryData[];
+        onUpdate && onUpdate(selected);
+      } else {
+        const selected = countries.find(
+          country => country.iso2 === value
+        ) as CountryData | undefined;
+        selected && onUpdate && onUpdate(selected);
+      }
+    }: undefined
+  };
+  //render
   return (
-    <Select<CountryData>
-      {...attributes} 
-      placeholder={placeholder} 
-      value={selected} 
-      defaultValue={selectedDefault}
-      options={options} 
-      searchable={true} 
-    />
+    <Select
+      {...props}
+      className={classes.join(' ')}
+      onUpdate={handlers.update}
+      placeholder={placeholder || 'Select a country'}
+    >
+      {!!searchable && (
+        <SelectDropdownHead>
+          <div>
+            <input 
+              type="text" 
+              onKeyUp={handlers.filter} 
+              placeholder={searchPlaceholder} 
+              value={keyword}
+              onChange={e => setKeyword(e.target.value)}
+            />
+            <span>🔍</span>
+          </div>
+        </SelectDropdownHead>
+      )}
+      {options.map(option => (
+        <SelectOption key={option.iso2} value={option.iso2}>
+          {option.flag} {option.name}
+        </SelectOption>
+      ))}
+    </Select>
   );
 };
 
 //defaults to country
-export default Country;
+export default CountrySelect;

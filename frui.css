@@ -20,6 +20,8 @@
 
 @import url('./styles/fields/autocomplete.css');
 @import url('./styles/fields/colorpicker.css');
+@import url('./styles/fields/country.css');
+@import url('./styles/fields/currency.css');
 @import url('./styles/fields/date.css');
 @import url('./styles/fields/datetime.css');
 @import url('./styles/fields/file.css');

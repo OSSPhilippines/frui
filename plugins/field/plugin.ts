@@ -5,7 +5,6 @@ export default function plugin(server: HttpServer) {
     ctx.get('/field', '@/plugins/field/views/index');
     ctx.get('/field/autocomplete', '@/plugins/field/views/autocomplete');
     ctx.get('/field/checkbox', '@/plugins/field/views/checkbox');
-    ctx.get('/field/checklist', '@/plugins/field/views/checklist');
     ctx.get('/field/color', '@/plugins/field/views/color');
     ctx.get('/field/country', '@/plugins/field/views/country');
     ctx.get('/field/currency', '@/plugins/field/views/currency');

@@ -2,10 +2,11 @@
 // Imports
 
 //modules
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import type { Extension } from '@codemirror/state';
+import { useEffect, useRef, useState } from 'react';
 import { minimalSetup, basicSetup } from 'codemirror';
 import { EditorView, lineNumbers } from '@codemirror/view';
-import { EditorState, Extension } from '@codemirror/state';
+import { EditorState } from '@codemirror/state';
 import {
   LanguageSupport,
   LanguageDescription,
@@ -13,26 +14,30 @@ import {
 import { languages } from '@codemirror/language-data';
 
 //frui
-import Input from './Input.js';
-import type { InputProps } from './Input.js';
+import type { HTMLTextareaProps } from '../types.js';
 
 //--------------------------------------------------------------------//
 // Types
 
 export type CodeEditorConfig = {
-  language: string;
-  onChange?: Function;
-  onUpdate?: Function;
+  defaultValue?: string,
+  language: string,
+  onUpdate?: (value?: string) => void,
+  options: Extension,
+  value?: string
 };
 
-export type CodeEditorProps = InputProps & {
-  defaultValue?: string;
-  extensions?: Extension[];
-  language?: string;
-  //might not be needed (there's nothing special about it; could just add to extensions if necessary)
-  numbers?: boolean; 
-  setup?: 'minimal' | 'basic' | 'custom';
-  value?: string;
+export type CodeEditorProps = HTMLTextareaProps & {
+  defaultValue?: string,
+  extensions?: Extension[],
+  language?: string,
+  //might not be needed 
+  // there's nothing special about it
+  // could just add to extensions if necessary
+  numbers?: boolean, 
+  onUpdate?: (value?: string) => void,
+  setup?: 'minimal' | 'basic' | 'custom',
+  value?: string
 };
 
 //--------------------------------------------------------------------//
@@ -100,31 +105,86 @@ export async function getLanguageExtension(
 //--------------------------------------------------------------------//
 // Hooks
 
-export function useCodeEditor({
-  language,
-  onUpdate,
-  onChange,
-}: CodeEditorConfig) {
-  const [languageExtension, setLanguageExtension] = useState<
-    LanguageSupport | undefined
-  >(undefined);
-
+export function useCodeEditor(config: CodeEditorConfig) {
+  //config
+  const { 
+    defaultValue,
+    language, 
+    onUpdate, 
+    options,
+    value
+  } = config;
+  //hooks
+  const [ 
+    currentValue, 
+    setCurrentValue 
+  ] = useState(defaultValue);
+  const [ 
+    languageExtension, 
+    setLanguageExtension 
+  ] = useState<LanguageSupport>();
+  //variables
+  const refs = {
+    field: useRef<HTMLTextAreaElement | null>(null),
+    editor: useRef<HTMLDivElement | null>(null),
+    view: useRef<EditorView | null>(null),
+  };
+  const handlers = {
+    create(parent?: HTMLDivElement) {
+      if (!parent) return null;
+      const state = EditorState.create({
+        doc: currentValue || '',
+        extensions: [
+          options,
+          languageExtension ?? [],
+          EditorView.updateListener.of((viewUpdate) => {
+            if (viewUpdate.docChanged && refs.view.current) {
+              handlers.update(viewUpdate.state.doc.toString());
+            }
+          }),
+        ]
+      });
+      return new EditorView({ state, parent });
+    },
+    update(value?: string) {
+      setCurrentValue(value);
+      onUpdate && onUpdate(value);
+    }
+  };
+  //effects
+  // whenever value changes, update currentValue
   useEffect(() => {
-    getLanguageExtension(language).then((extension) => {
+    if (value !== undefined) {
+      setCurrentValue(value);
+    }
+  }, [ value ]);
+  // whenever language changes, load the corresponding extension
+  useEffect(() => {
+    getLanguageExtension(language).then(extension => {
       setLanguageExtension(extension);
     });
-  }, [language]);
+  }, [ language ]);
+  // whenever languageExtension changes, re-initialize the editor
+  useEffect(() => {
+    if (refs.editor.current) {
+      const view = handlers.create(refs.editor.current);
+      if (view) {
+        refs.view.current = view;
+      }
+    }
 
+    return () => {
+      if (refs.view.current) {
+        refs.view.current.destroy();
+      }
+    };
+  }, [ languageExtension ]);
+  
   return {
+    currentValue,
     languageExtension,
-    handlers: {
-      update: (value: string) => {
-        onUpdate && onUpdate(value);
-      },
-      change: (event: ChangeEvent<HTMLInputElement>) => {
-        onChange && onChange(event);
-      },
-    },
+    refs,
+    handlers
   };
 };
 
@@ -136,92 +196,40 @@ export function useCodeEditor({
  * Code Editor Component
  */
 export function CodeEditor(props: CodeEditorProps) {
+  //props
   const {
+    className,
     defaultValue,
     extensions = [],
     language = '',
     numbers = false,
     onUpdate,
-    onChange,
     setup = 'minimal',
+    style,
     value,
     ...attributes
   } = props;
-
-  const [currentValue, setCurrentValue] = useState<string>(value!);
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const editorRef = useRef<HTMLDivElement | null>(null);
-  const viewRef = useRef<EditorView | null>(null);
-
-  const { languageExtension, handlers } = useCodeEditor({
+  //hooks
+  const { currentValue, refs } = useCodeEditor({
+    defaultValue,
     language,
-    onChange,
     onUpdate,
+    options: getEditorOptions(setup, numbers, extensions),
+    value
   });
-  const options = getEditorOptions(setup, numbers, extensions);
-
-  useEffect(() => {
-    if (editorRef.current) {
-      const state = EditorState.create({
-        doc: value ?? defaultValue ?? '',
-        extensions: [
-          options,
-          languageExtension ?? [],
-          EditorView.updateListener.of((viewUpdate) => {
-            // if (onUpdate.docChanged && viewRef.current) {
-            //   const newValue = viewRef.current.state.doc.toString();
-            //   if (value) {
-            //     setCurrentValue(newValue);
-            //     handlers.update(newValue);
-            //     handlers.change(newValue);
-            //   } else {
-            //     //default to uncontrolled
-            //     inputRef.current!.value = newValue;
-            //   }
-            // }
-            if (viewUpdate.docChanged && viewRef.current) {
-              const newValue = viewUpdate.state.doc.toString();
-              handlers.change({
-                target: {
-                  ...inputRef.current,
-                  value: newValue,
-                },
-              } as ChangeEvent<HTMLInputElement>);
-              handlers.update(newValue);
-
-              if (value) {
-                setCurrentValue(newValue);
-              } else {
-                inputRef.current!.value = newValue; //default to uncontrolled
-              }
-            }
-          }),
-        ],
-      });
-
-      viewRef.current = new EditorView({
-        state,
-        parent: editorRef.current,
-      });
-    }
-
-    return () => {
-      if (viewRef.current) {
-        viewRef.current.destroy();
-      }
-    };
-  }, [languageExtension]);
-
+  //variables
+  const classes = [ 'frui-field-code-editor' ];
+  className && classes.push(className);
+  //render
   return (
-    <div className={`frui-field-code-editor ${props.className || ''}`}>
-      <Input
-        {...attributes}
-        passRef={inputRef}
-        type='hidden'
-        value={currentValue}
-        defaultValue={defaultValue}
+    <div className={classes.join(' ')} style={style}>
+      <div className="frui-field-code-editor-container" ref={refs.editor}></div>
+      <textarea 
+        {...attributes} 
+        className="frui-field-code-editor-field" 
+        ref={refs.field} 
+        value={currentValue} 
       />
-      <div className='code-editor-container' ref={editorRef}></div>
     </div>
   );
 };

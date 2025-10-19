@@ -121,14 +121,9 @@ export const menu: SectionItem[] = [
         href: '/field/checkbox'
       },
       {
-        label: 'Checklist',
-        search: '/field/checklist',
-        href: '/field/checklist'
-      },
-      {
         label: 'Code Editor',
-        search: '/field/code',
-        href: '/field/code'
+        search: '/field/editor',
+        href: '/field/editor'
       },
       {
         label: 'Color Picker',

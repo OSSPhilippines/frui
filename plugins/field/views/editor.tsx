@@ -34,7 +34,6 @@ const props = [
   [ 'language', 'string', 'No', 'Language to use' ],
   [ 'name', 'string', 'No', 'Used for React Server Components.' ],
   [ 'numbers', 'boolean', 'No', 'Toggle line numbers (defaults to false; ineffective when using basic setup).' ],
-  [ 'onChange', 'Function', 'No', 'Event handler when value has changed' ],
   [ 'onUpdate', 'Function', 'No', 'Event handler when value updates' ],
   [ 'setup', 'string', 'No', "CodeMirror setup options ('minimal' | 'basic' | 'custom')" ],
   [ 'value', 'string', 'No', 'Default value (controlled)' ]
@@ -43,25 +42,43 @@ const props = [
 const examples = [
 //0
 `<CodeEditor
-  value='console.log("Hello world!");'
-  name={'code-editor'}
-  setup={'basic'}
-  language='javascript'
-  className='w-[50%] min-h-40 bg-white'
+  value="console.log('Hello world!');"
+  name="code-editor"
+  setup="basic"
+  language="javascript"
+  className="bg-white max-h-[200px] overflow-auto"
 />`,
 //1
+`<Select
+  className="w-[50%] z-40 text-black"
+  options={languages.map((lang) => ({
+    value: lang.name,
+    label: lang.name,
+  }))}
+  onUpdate={(value) => setSelectedLanguage(value as string)}
+  value={selectedLanguage}
+/>
+
+<CodeEditor
+  setup="basic"
+  language={selectedLanguage}
+  className="bg-white max-h-[200px] overflow-auto"
+  onUpdate={(value) => value && setCode(value)}
+  value={code}
+/>`,
+//2
 `import { cpp } from '@codemirror/lang-cpp';
 
 function CPPCodeEditor () {
   return <CodeEditor extensions={[ cpp() ]} setup='basic'/>
 }`,
-//2
+//3
 `<CodeEditor
-  className='w-[50%] min-h-40 bg-white'
-  onUpdate={(value) => alert(value)}
-  value='<div>Hello World</div>'
-  setup={'basic'}
-  language='html'
+  className="bg-white max-h-[200px] overflow-auto"
+  onUpdate={value => alert(value)}
+  value="<div>Hello World</div>"
+  setup="basic"
+  language="html"
 />`
 ];
 
@@ -122,27 +139,6 @@ export function Menu() {
 };
 
 /**
- * Examples component
- */
-export function Examples() {
-  return (
-    <div className="flex items-start rmd-block flex-wrap gap-4">
-      {/* Info Example */}
-      <Preview 
-        height={100}
-        title="Info Example" 
-        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          TODO
-        </Preview.Example>
-        <Preview.Code>{''}</Preview.Code>
-      </Preview>
-    </div>
-  );
-};
-
-/**
  * Documentation body component
  */
 export function Body() {
@@ -176,27 +172,26 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            A <C l value="CodeEditor" /> is not a standard input field but a
-            specialized component for editing code that wraps around the
-            CodeMirror component. A hidden <C l value="Input" /> component is used to store the value.
+            A <C l value="CodeEditor" /> is not a standard input field 
+            but a specialized component for editing code that wraps 
+            around the CodeMirror component. 
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <div className="w-full">
-              <CodeEditor
-                value='console.log("Hello world!");'
-                name={'code-editor'}
-                setup={'basic'}
-                language='javascript'
-                className='w-[50%] min-h-40 bg-white'
-              />
-            </div>
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+        <Preview 
+          title="Basic Example" 
+          className="border border-2"
+        >
+          <Preview.Example center padding>
+            <CodeEditor
+              value="console.log('Hello world!');"
+              name="code-editor"
+              setup="basic"
+              language="javascript"
+              className="bg-white max-h-[200px] overflow-auto"
+            />
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="languages" className="uppercase font-bold text-lg mt-8">
@@ -208,34 +203,32 @@ export function Body() {
             <C l value="CodeEditor" /> supports a variety of languages out of the box.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <div className="w-full">
-              <Select
-                className="w-[50%] z-40 text-black"
-                options={languages.map((lang) => ({
-                  value: lang.name,
-                  label: lang.name,
-                }))}
-                onSelected={(value) => {
-                  setSelectedLanguage(value.value);
-                }}
-                value={selectedLanguage}
-              />
+        <Preview 
+          title="Change Languages" 
+          className="border border-2"
+        >
+          <Preview.Example center padding>
+            <Select
+              className="relative z-[10000]"
+              dropdown="max-h-[100px] overflow-auto"
+              options={languages.map((lang) => ({
+                value: lang.name,
+                label: lang.name,
+              }))}
+              onUpdate={(value) => setSelectedLanguage(value as string)}
+              value={selectedLanguage}
+            />
 
-              <CodeEditor
-                setup={'basic'}
-                language={selectedLanguage}
-                className="w-[50%] min-h-40 bg-white"
-                onUpdate={(value) => setCode(value)}
-                value={code}
-              />
-            </div>
-          </div>
-          <Code language="typescript">
-            {`<CodeEditor setup={'basic'} language="${selectedLanguage}" className='w-[50%] min-h-40 bg-white'/>`}
-          </Code>
-        </div>
+            <CodeEditor
+              setup="basic"
+              language={selectedLanguage}
+              className="bg-white max-h-[200px] overflow-auto"
+              onUpdate={(value) => value && setCode(value)}
+              value={code}
+            />
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
       </div>
 
       <h3 className="font-semibold text-md mt-8">
@@ -244,11 +237,12 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Language support extensions can also be passed into the editor via the <C l value="extensions" /> prop.
+            Language support extensions can also be passed into the 
+            editor via the <C l value="extensions" /> prop.
           </Translate>
         </p>
         <Code language="typescript">
-          {examples[1]}
+          {examples[2]}
         </Code>
       </div>
 
@@ -261,52 +255,29 @@ export function Body() {
             <C value="onUpdate" /> is like <C value="onChange" r /> except the value is passed instead of the change event.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <div className="w-full">
-              <CodeEditor
-                className="w-[50%] min-h-40 bg-white"
-                onUpdate={(value) => alert(value)}
-                value="<div>Hello World</div>"
-                setup={'basic'}
-                language="html"
-              />
-            </div>
-          </div>
-          <Code language="typescript">
-            {examples[2]}
-          </Code>
-        </div>
+        <Preview 
+          title="Basic Example" 
+          className="border border-2"
+        >
+          <Preview.Example center padding>
+            <CodeEditor
+              className="bg-white max-h-[200px] overflow-auto"
+              onUpdate={value => alert(value)}
+              value="<div>Hello World</div>"
+              setup="basic"
+              language="html"
+            />
+          </Preview.Example>
+          <Preview.Code>{examples[3]}</Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
-          {_('On Change')}
+          {_('On Update')}
         </h3>
         <p className="py-4">
           <Translate>
-            The <C value="onChange" /> event is triggered when the value has changed.
-          </Translate>
-        </p>
-        <Table>
-          <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
-          <Table.Row>
-            <Table.Col className="theme-bg-1 text-left">{_('event')}</Table.Col>
-            <Table.Col className="theme-bg-1 text-left">{_('Event Object')}</Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              see: <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" target="_blank">Change Event</a>
-            </Table.Col>
-          </Table.Row>
-        </Table>
-      </div>
-
-      <h3 className="font-semibold text-md mt-8">
-        {_('On Update')}
-      </h3>
-      <div>
-        <p className="py-4">
-          <Translate>
-            The <C value="onUpdate" /> event is triggered when the value has been updated.
+            The <C value="onUpdate" /> event is triggered when the 
+            value has been updated.
           </Translate>
         </p>
         <Table>

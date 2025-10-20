@@ -1,10 +1,7 @@
 //modules
 import { useLanguage } from 'r22n';
 //frui
-import Mask from 'components/field/Mask.js';
-import Country from 'components/field/Country.js';
 import Switch from 'components/field/Switch.js';
-import Control from 'components/form/Control.js';
 import Button from 'components/form/Button.js';
 import Alert from 'components/element/Alert.js';
 import { 
@@ -39,12 +36,6 @@ export function Body() {
               <i className="fas fa-info-circle mr-2"></i>
               {_('You are good to go!')}
             </Alert>
-            <Control label="Enter ID" className="mt-2">
-              <Mask mask="999.999.999-99" className="!theme-bc-1" />
-            </Control>
-            <Control label="Choose a Country" className="mt-2 relative z-50">
-              <Country className="!theme-bc-1 text-black" />
-            </Control>
             <div className="my-2">
               <Switch ridge checkex rounded label={_('Get Started')} />
             </div>

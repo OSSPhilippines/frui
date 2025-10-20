@@ -56,19 +56,19 @@ export type WYSIWYGProps = {
 // Hooks
 
 export function useWYSIWYG(config: WYSIWYGConfig) {
-  const { 
+  const {
     value = '',
     onChange,
     onUpdate
   } = config;
-  
-  const [ isCodeView, setIsCodeView ] = useState(false);
-  const [ currentValue, setCurrentValue ] = useState(value);
+
+  const [isCodeView, setIsCodeView] = useState(false);
+  const [currentValue, setCurrentValue] = useState(value);
 
   useEffect(() => {
-    if (refs.editor.current 
+    if (refs.editor.current
       && typeof value === 'string'
-      && value !== refs.editor.current.innerHTML 
+      && value !== refs.editor.current.innerHTML
       && !isCodeView
     ) {
       refs.editor.current.innerHTML = value;
@@ -77,8 +77,9 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
         refs.hidden.current.value = value;
       }
     }
-  }, [ value, isCodeView ]);
+  }, [value, isCodeView]);
 
+  //using refs so that they are not recreated on every render
   const refs = {
     editor: useRef<HTMLDivElement>(null),
     textarea: useRef<HTMLTextAreaElement>(null),
@@ -87,36 +88,55 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
     gallery: useRef<HTMLInputElement>(null)
   };
 
+  //this will be the container for the WYSIWYG editor
   const blocks = {
+    //list ordered
     listOrdered: () => handlers.execCommand('insertOrderedList'),
+    //list unordered
     listUnordered: () => handlers.execCommand('insertUnorderedList'),
+    //undo
     undo: () => handlers.execCommand('undo'),
+    //redo
     redo: () => handlers.execCommand('redo'),
+    //font
     font(e: ChangeEvent<HTMLSelectElement>) {
       handlers.execCommand('fontName', e.target.value);
       e.target.value = '';
     },
+    //size
     size(e: ChangeEvent<HTMLSelectElement>) {
       handlers.execCommand('fontSize', e.target.value);
       e.target.value = '';
     },
+    //format
     format(e: ChangeEvent<HTMLSelectElement>) {
       handlers.execCommand('formatBlock', e.target.value);
     },
+    //paragraph
     paragraph: () => handlers.execCommand('formatBlock', 'p'),
+    //blockquote
     blockquote: () => handlers.execCommand('formatBlock', 'blockquote'),
+    //bold
     bold: () => handlers.execCommand('bold'),
+    //italic
     italic: () => handlers.execCommand('italic'),
+    //underline
     underline: () => handlers.execCommand('underline'),
+    //color
     color(e: ChangeEvent<HTMLInputElement>) {
       handlers.execCommand('foreColor', e.target.value);
     },
+    //highlight
     highlight(e: ChangeEvent<HTMLInputElement>) {
       handlers.execCommand('hiliteColor', e.target.value);
     },
+    //strikethrough
     strikethrough: () => handlers.execCommand('strikeThrough'),
+    //subscript
     subscript: () => handlers.execCommand('subscript'),
+    //superscript
     superscript: () => handlers.execCommand('superscript'),
+    //text style
     textStyle(e: ChangeEvent<HTMLSelectElement>) {
       const style = e.target.value;
       if (!refs.editor.current || isCodeView) return;
@@ -146,6 +166,7 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
       handlers.input();
       e.target.value = '';
     },
+    //remove format
     removeFormat: () => {
       if (!refs.editor.current || isCodeView) return;
       const selection = window.getSelection();
@@ -170,23 +191,31 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
         selection.addRange(range);
       }
       handlers.input();
-      onUpdate && onUpdate({ 
-        value: refs.editor.current.innerHTML || '', 
-        action: 'removeFormat' 
+      onUpdate && onUpdate({
+        value: refs.editor.current.innerHTML || '',
+        action: 'removeFormat'
       });
     },
+    //indent
     indent: () => handlers.execCommand('indent'),
+    //outdent
     outdent: () => handlers.execCommand('outdent'),
+    //align left
     alignLeft: () => handlers.execCommand('justifyLeft'),
+    //align center
     alignCenter: () => handlers.execCommand('justifyCenter'),
+    //align right
     alignRight: () => handlers.execCommand('justifyRight'),
+    //horizontal rule
     rule: () => handlers.execCommand('insertHorizontalRule'),
+    //line height
     lineHeight(e: ChangeEvent<HTMLSelectElement>) {
       if (refs.editor.current && !isCodeView) {
         refs.editor.current.style.lineHeight = e.target.value;
         handlers.input();
       }
     },
+    //table
     table() {
       if (isCodeView) return;
       const rows = prompt('Enter number of rows', '2');
@@ -198,11 +227,13 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
         handlers.execCommand('insertHTML', tableHTML);
       }
     },
+    //link
     link() {
       if (isCodeView) return;
       const url = prompt('Enter URL', 'https://');
       if (url && /^https?:\/\//.test(url)) handlers.execCommand('createLink', url);
     },
+    //image upload
     image: () => refs.file.current?.click(),
     imageUpload(e: ChangeEvent<HTMLInputElement>) {
       if (isCodeView) return;
@@ -213,6 +244,7 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
         reader.readAsDataURL(file);
       }
     },
+    //image gallery
     imageGallery: () => refs.gallery.current?.click(),
     galleryUpload(e: ChangeEvent<HTMLInputElement>) {
       if (isCodeView) return;
@@ -227,13 +259,25 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
         });
       }
     },
+    //video upload
     video() {
       if (isCodeView) return;
       const url = prompt('Enter video URL (e.g., YouTube embed)', '');
       if (url && /^https?:\/\//.test(url)) {
-        handlers.execCommand('insertHTML', `<iframe src="${url}" width="560" height="315" frameborder="0" allowfullscreen></iframe>`);
+        handlers.execCommand(
+          'insertHTML',
+          `<iframe 
+            src="${url}" 
+            width="560" 
+            height="315" 
+            frameborder="0" 
+            allowfullscreen
+          >
+          </iframe>`
+        );
       }
     },
+    //audio upload
     audio() {
       if (isCodeView) return;
       const url = prompt('Enter audio URL', '');
@@ -241,6 +285,7 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
         handlers.execCommand('insertHTML', `<audio controls src="${url}"></audio>`);
       }
     },
+    //math
     math() {
       if (isCodeView) return;
       const expr = prompt('Enter math expression (e.g., x^2)', '');
@@ -248,6 +293,7 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
         handlers.execCommand('insertHTML', `<span class="frui-wysiwyg-math">[Math: ${expr}]</span>`);
       }
     },
+    //fullscreen
     fullscreen: () => {
       if (refs.editor.current) {
         if (!document.fullscreenElement) {
@@ -257,11 +303,13 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
         }
       }
     },
+    //show blocks
     showBlocks() {
       if (refs.editor.current && !isCodeView) {
         refs.editor.current.classList.toggle('frui-wysiwyg-show-block');
       }
     },
+    //code view toggle
     codeViewToggle() {
       if (refs.editor.current && refs.textarea.current && refs.hidden.current) {
         if (!isCodeView) {
@@ -281,6 +329,7 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
         onUpdate && onUpdate({ value: !isCodeView ? refs.textarea.current.value : refs.editor.current.innerHTML, action: 'codeViewToggle' });
       }
     },
+    //preview
     preview() {
       if (refs.editor.current) {
         const win = window.open('', '_blank');
@@ -288,7 +337,9 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
         win?.document.close();
       }
     },
+    //print
     print: () => window.print(),
+    //save
     save() {
       if (refs.editor.current) {
         const blob = new Blob([refs.editor.current.innerHTML], { type: 'text/html' });
@@ -300,11 +351,13 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
         URL.revokeObjectURL(url);
       }
     },
+    //template
     template(e: ChangeEvent<HTMLSelectElement>) {
       const templateHTML = e.target.value;
       if (templateHTML && !isCodeView) handlers.execCommand('insertHTML', templateHTML);
       e.target.value = '';
     },
+    //text direction
     dirToggle() {
       if (refs.editor.current && !isCodeView) {
         const currentDir = refs.editor.current.getAttribute('dir') || 'ltr';
@@ -312,12 +365,14 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
         handlers.input();
       }
     },
+    //set left to right
     dirLTR() {
       if (refs.editor.current && !isCodeView) {
         refs.editor.current.setAttribute('dir', 'ltr');
         handlers.input();
       }
     },
+    //set right to left
     dirRTL() {
       if (refs.editor.current && !isCodeView) {
         refs.editor.current.setAttribute('dir', 'rtl');
@@ -326,6 +381,7 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
     }
   };
 
+  //event handlers
   const handlers = {
     change(e: ChangeEvent<HTMLTextAreaElement>) {
       if (isCodeView && refs.hidden.current) {
@@ -333,7 +389,7 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
         setCurrentValue(e.target.value);
         onChange?.(e.target.value);
         onUpdate?.({ value: e.target.value, action: 'input' });
-      }  
+      }
     },
     input() {
       if (refs.editor.current && refs.hidden.current) {
@@ -373,6 +429,7 @@ export function useWYSIWYG(config: WYSIWYGConfig) {
 // Components
 
 export function WYSIWYG(props: WYSIWYGProps) {
+  //destructure props and separate out attributes to pass to hidden input
   const {
     history,
     font,
@@ -411,10 +468,11 @@ export function WYSIWYG(props: WYSIWYGProps) {
     ...attributes
   } = props;
 
-  const { 
-    refs, 
-    blocks, 
-    handlers, 
+  //use the hook
+  const {
+    refs,
+    blocks,
+    handlers,
     value,
     isCodeView
   } = useWYSIWYG({
@@ -425,29 +483,36 @@ export function WYSIWYG(props: WYSIWYGProps) {
 
   return (
     <div className={`frui-wysiwyg ${dir === 'rtl' ? 'frui-wysiwyg-rtl' : ''}`}>
+      {/* Toolbar */}
       <div className="frui-wysiwyg-toolbar">
+        {/* History Buttons */}
         {history && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.undo} 
-              title="Undo" 
-              aria-label="Undo" 
+            {/* Undo Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.undo}
+              title="Undo"
+              aria-label="Undo"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-undo"></i>
             </button>
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.redo} 
-              title="Redo" 
-              aria-label="Redo" 
+            {/* Redo Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.redo}
+              title="Redo"
+              aria-label="Redo"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-redo"></i>
             </button>
           </div>
         )}
+        {/* Font Selector */}
         {font && (
           <div className="frui-wysiwyg-btn-module">
             <select
@@ -488,6 +553,7 @@ export function WYSIWYG(props: WYSIWYGProps) {
             </select>
           </div>
         )}
+        {/* Size Selector */}
         {size && (
           <div className="frui-wysiwyg-btn-module">
             <select
@@ -518,6 +584,7 @@ export function WYSIWYG(props: WYSIWYGProps) {
             </select>
           </div>
         )}
+        {/* Format Selector */}
         {format && (
           <div className="frui-wysiwyg-btn-module">
             <select
@@ -540,63 +607,75 @@ export function WYSIWYG(props: WYSIWYGProps) {
             </select>
           </div>
         )}
+        {/* Paragraph Button */}
         {paragraph && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.paragraph} 
-              title="Paragraph" 
-              aria-label="Paragraph" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.paragraph}
+              title="Paragraph"
+              aria-label="Paragraph"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-paragraph"></i>
             </button>
           </div>
         )}
+        {/* Blockquote Button */}
         {blockquote && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.blockquote} 
-              title="Blockquote" 
-              aria-label="Blockquote" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.blockquote}
+              title="Blockquote"
+              aria-label="Blockquote"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-quote-right"></i>
             </button>
           </div>
         )}
+        {/* Inline Style Buttons */}
         {style && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.bold} 
-              title="Bold" 
-              aria-label="Bold" 
+            {/* Bold Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.bold}
+              title="Bold"
+              aria-label="Bold"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-bold"></i>
             </button>
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.italic} 
-              title="Italic" 
-              aria-label="Italic" 
+            {/* Italic Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.italic}
+              title="Italic"
+              aria-label="Italic"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-italic"></i>
             </button>
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.underline} 
-              title="Underline" 
-              aria-label="Underline" 
+            {/* Underline Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.underline}
+              title="Underline"
+              aria-label="Underline"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-underline"></i>
             </button>
           </div>
         )}
+        {/* Color Picker */}
         {color && (
           <div className="frui-wysiwyg-btn-module">
             <input
@@ -609,6 +688,7 @@ export function WYSIWYG(props: WYSIWYGProps) {
             />
           </div>
         )}
+        {/* Highlight Color Picker */}
         {highlight && (
           <div className="frui-wysiwyg-btn-module">
             <input
@@ -621,37 +701,45 @@ export function WYSIWYG(props: WYSIWYGProps) {
             />
           </div>
         )}
+        {/* Text Style Buttons */}
         {text && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.strikethrough} 
-              title="Strikethrough" 
-              aria-label="Strikethrough" 
+            {/* Strikethrough Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.strikethrough}
+              title="Strikethrough"
+              aria-label="Strikethrough"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-strikethrough"></i>
             </button>
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.subscript} 
-              title="Subscript" 
-              aria-label="Subscript" 
+            {/* Subscript Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.subscript}
+              title="Subscript"
+              aria-label="Subscript"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-subscript"></i>
             </button>
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.superscript} 
-              title="Superscript" 
-              aria-label="Superscript" 
+            {/* Superscript Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.superscript}
+              title="Superscript"
+              aria-label="Superscript"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-superscript"></i>
             </button>
           </div>
         )}
+        {/* Text Style Selector */}
         {textStyle && (
           <div className="frui-wysiwyg-btn-module">
             <select
@@ -663,50 +751,52 @@ export function WYSIWYG(props: WYSIWYGProps) {
               disabled={isCodeView}
             >
               <option value="" disabled>T Style</option>
-              <option 
-                value="code" 
-                style={{ backgroundColor: '#F9F9F9', 
-                border: '1px solid #E1E1E1', padding: '0 4px' }}
+              <option
+                value="code"
+                style={{
+                  backgroundColor: '#F9F9F9',
+                  border: '1px solid #E1E1E1', padding: '0 4px'
+                }}
               >
                 Code
               </option>
-              <option 
-                value="translucent" 
+              <option
+                value="translucent"
                 style={{ opacity: 0.6 }}
               >
                 Translucent
               </option>
-              <option 
-                value="shadow" 
+              <option
+                value="shadow"
                 style={{ textShadow: '2px 2px 2px #B1B1B1' }}
               >
                 Shadow
               </option>
-              <option 
-                value="spaced" 
-                style={{ 
-                  letterSpacing: '2px', 
-                  wordSpacing: '4px' 
+              <option
+                value="spaced"
+                style={{
+                  letterSpacing: '2px',
+                  wordSpacing: '4px'
                 }}
               >
-                  Spaced
+                Spaced
               </option>
-              <option 
-                value="bordered" 
-                style={{ 
-                  border: '2px solid #000000', 
-                  padding: '2px 6px' 
+              <option
+                value="bordered"
+                style={{
+                  border: '2px solid #000000',
+                  padding: '2px 6px'
                 }}
               >
                 Bordered
               </option>
-              <option 
-                value="neon" 
-                style={{ 
-                  textShadow: '0 0 5px #FFFFFF, 0 0 10px #FFFFFF, 0 0 20px #FF00DE', 
-                  color: '#FFFFFF', 
-                  backgroundColor: '#000000', 
-                  padding: '2px 6px' 
+              <option
+                value="neon"
+                style={{
+                  textShadow: '0 0 5px #FFFFFF, 0 0 10px #FFFFFF, 0 0 20px #FF00DE',
+                  color: '#FFFFFF',
+                  backgroundColor: '#000000',
+                  padding: '2px 6px'
                 }}
               >
                 NEON
@@ -714,107 +804,129 @@ export function WYSIWYG(props: WYSIWYGProps) {
             </select>
           </div>
         )}
+        {/* Remove Format Button */}
         {remove && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.removeFormat} 
-              title="Remove Format" 
-              aria-label="Remove Format" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.removeFormat}
+              title="Remove Format"
+              aria-label="Remove Format"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-eraser"></i>
             </button>
           </div>
         )}
+        {/* Indent */}
         {indent && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.indent} 
-              title="Indent" 
-              aria-label="Indent" 
+            {/* Indent Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.indent}
+              title="Indent"
+              aria-label="Indent"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-indent"></i>
             </button>
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.outdent} 
-              title="Outdent" 
-              aria-label="Outdent" 
+            {/* Outdent Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.outdent}
+              title="Outdent"
+              aria-label="Outdent"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-outdent"></i>
             </button>
           </div>
         )}
+        {/* Text Alignment */}
         {align && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.alignLeft} 
-              title="Align Left" 
-              aria-label="Align Left" 
+            {/* Align Left Buttons */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.alignLeft}
+              title="Align Left"
+              aria-label="Align Left"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-align-left"></i>
             </button>
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.alignCenter} 
-              title="Align Center" 
-              aria-label="Align Center" 
+            {/* Align Center Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.alignCenter}
+              title="Align Center"
+              aria-label="Align Center"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-align-center"></i>
             </button>
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.alignRight} 
-              title="Align Right" 
-              aria-label="Align Right" 
+            {/* Align Right Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.alignRight}
+              title="Align Right"
+              aria-label="Align Right"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-align-right"></i>
             </button>
           </div>
         )}
+        {/* Horizontal Rule Button */}
         {rule && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.rule} 
-              title="Horizontal Rule" 
-              aria-label="Horizontal Rule" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.rule}
+              title="Horizontal Rule"
+              aria-label="Horizontal Rule"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-minus"></i>
             </button>
           </div>
         )}
+        {/* List Button */}
         {list && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.listOrdered} 
-              title="Ordered List" 
-              aria-label="Ordered List" 
+            {/* Ordered List Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.listOrdered}
+              title="Ordered List"
+              aria-label="Ordered List"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-list-ol"></i>
             </button>
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.listUnordered} 
-              title="Unordered List" 
-              aria-label="Unordered List" 
+            {/* Unordered List Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.listUnordered}
+              title="Unordered List"
+              aria-label="Unordered List"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-list-ul"></i>
             </button>
           </div>
         )}
+        {/* Line Height */}
         {lineheight && (
           <div className="frui-wysiwyg-btn-module">
             <select
@@ -832,38 +944,44 @@ export function WYSIWYG(props: WYSIWYGProps) {
             </select>
           </div>
         )}
+        {/* Table Button */}
         {table && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.table} 
-              title="Table" 
-              aria-label="Insert Table" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.table}
+              title="Table"
+              aria-label="Insert Table"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-table"></i>
             </button>
           </div>
         )}
+        {/* Link Button */}
         {link && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.link} 
-              title="Link" 
-              aria-label="Insert Link" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.link}
+              title="Link"
+              aria-label="Insert Link"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-link"></i>
             </button>
           </div>
         )}
+        {/* Image Button */}
         {image && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.image} 
-              title="Image" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.image}
+              title="Image"
               aria-label="Insert Image" disabled={isCodeView}>
               <i className="fas fa-fw fa-image"></i>
             </button>
@@ -877,13 +995,15 @@ export function WYSIWYG(props: WYSIWYGProps) {
             />
           </div>
         )}
+        {/* Image Gallery Button */}
         {imageGallery && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.imageGallery} 
-              title="Image Gallery" 
-              aria-label="Insert from Gallery" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.imageGallery}
+              title="Image Gallery"
+              aria-label="Insert from Gallery"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-images"></i>
@@ -899,78 +1019,90 @@ export function WYSIWYG(props: WYSIWYGProps) {
             />
           </div>
         )}
+        {/* Video Button */}
         {video && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.video} 
-              title="Video" 
-              aria-label="Insert Video" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.video}
+              title="Video"
+              aria-label="Insert Video"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-video"></i>
             </button>
           </div>
         )}
+        {/* Audio Button */}
         {audio && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.audio} 
-              title="Audio" 
-              aria-label="Insert Audio" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.audio}
+              title="Audio"
+              aria-label="Insert Audio"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-volume-up"></i>
             </button>
           </div>
         )}
+        {/* Math Button */}
         {math && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.math} 
-              title="Math" 
-              aria-label="Insert Math" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.math}
+              title="Math"
+              aria-label="Insert Math"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-square-root-alt"></i>
             </button>
           </div>
         )}
+        {/* Fullscreen Button */}
         {fullscreen && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.fullscreen} 
-              title="Fullscreen" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.fullscreen}
+              title="Fullscreen"
               aria-label="Toggle Fullscreen"
             >
               <i className="fas fa-fw fa-expand"></i>
             </button>
           </div>
         )}
+        {/* Show Blocks Button */}
         {showblocks && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.showBlocks} 
-              title="Show Blocks" 
-              aria-label="Toggle Block Visibility" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.showBlocks}
+              title="Show Blocks"
+              aria-label="Toggle Block Visibility"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-border-all"></i>
             </button>
           </div>
         )}
+        {/* Code Button */}
         {code && (
           <div className="frui-wysiwyg-btn-module">
             <button
+              type="button"
               className="frui-wysiwyg-btn"
               onClick={blocks.codeViewToggle}
               title={isCodeView ? 'WYSIWYG View' : 'Code View'}
-              aria-label={isCodeView 
-                ? 'Switch to WYSIWYG View' 
+              aria-label={isCodeView
+                ? 'Switch to WYSIWYG View'
                 : 'Switch to Code View'
               }
             >
@@ -978,42 +1110,49 @@ export function WYSIWYG(props: WYSIWYGProps) {
             </button>
           </div>
         )}
+        {/* Preview Button */}
         {preview && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.preview} 
-              title="Preview" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.preview}
+              title="Preview"
               aria-label="Preview Content"
             >
               <i className="fas fa-fw fa-eye"></i>
             </button>
           </div>
         )}
+        {/* Print Button */}
         {print && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.print} 
-              title="Print" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.print}
+              title="Print"
               aria-label="Print"
             >
               <i className="fas fa-fw fa-print"></i>
             </button>
           </div>
         )}
+        {/* Save Button */}
         {save && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.save} 
-              title="Save" 
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.save}
+              title="Save"
               aria-label="Save as HTML"
             >
               <i className="fas fa-fw fa-save"></i>
             </button>
           </div>
         )}
+        {/* Template Selector */}
         {template && (
           <div className="frui-wysiwyg-btn-module">
             <select
@@ -1034,31 +1173,38 @@ export function WYSIWYG(props: WYSIWYGProps) {
             </select>
           </div>
         )}
+        {/* Direction */}
         {dir && (
           <div className="frui-wysiwyg-btn-module">
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.dirToggle} 
-              title="Toggle Direction" 
-              aria-label="Toggle Text Direction" 
+            {/* Direction Buttons */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.dirToggle}
+              title="Toggle Direction"
+              aria-label="Toggle Text Direction"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-exchange-alt"></i>
             </button>
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.dirLTR} 
-              title="Left to Right" 
-              aria-label="Left to Right" 
+            {/* Left to Right Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.dirLTR}
+              title="Left to Right"
+              aria-label="Left to Right"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-long-arrow-alt-left"></i>
             </button>
-            <button 
-              className="frui-wysiwyg-btn" 
-              onClick={blocks.dirRTL} 
-              title="Right to Left" 
-              aria-label="Right to Left" 
+            {/* Right to Left Button */}
+            <button
+              type="button"
+              className="frui-wysiwyg-btn"
+              onClick={blocks.dirRTL}
+              title="Right to Left"
+              aria-label="Right to Left"
               disabled={isCodeView}
             >
               <i className="fas fa-fw fa-long-arrow-alt-right"></i>
@@ -1066,12 +1212,15 @@ export function WYSIWYG(props: WYSIWYGProps) {
           </div>
         )}
       </div>
+      {/* This will be the hidden input for the editor's content so it 
+      can be submitted with the form */}
       <input
         type="hidden"
         ref={refs.hidden}
         value={value}
         {...attributes}
       />
+      {/* This will be the editable div for the WYSIWYG content */}
       <div
         ref={refs.editor}
         className="frui-wysiwyg-editable"
@@ -1081,6 +1230,7 @@ export function WYSIWYG(props: WYSIWYGProps) {
         dir={dir}
         aria-label="Rich Text Editor"
       />
+      {/* This will be the textarea for the output view */}
       <textarea
         ref={refs.textarea}
         style={{

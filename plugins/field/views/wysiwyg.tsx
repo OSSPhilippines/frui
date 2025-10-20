@@ -1,9 +1,10 @@
 //--------------------------------------------------------------------//
-// Imports
+//imports
 
 //modules
 import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
+import clsx from 'clsx';
 
 //frui
 import Bread from 'components/element/Bread.js';
@@ -11,31 +12,72 @@ import WYSIWYG from 'components/field/WYSIWYG.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Props, 
-  Code, 
+import {
+  LayoutPanel,
+  LayoutProvider,
+  ThemeHead,
+  Props,
+  Code,
   C,
   Preview
 } from 'plugins/app/index.js';
 
+//styles
 //--------------------------------------------------------------------//
-// Constants
+
+const asideStyles = clsx(
+  'absolute',
+  'border-l',
+  'bottom-0',
+  'hidden',
+  'lg:block',
+  'right-0',
+  'text-sm',
+  'theme-bc-1',
+  'top-0',
+  'w-56',
+  'z-1'
+);
+
+const asideTitleStyles = clsx(
+  'border-b',
+  'font-semibold',
+  'p-3',
+  'text-sm',
+  'theme-bc-1',
+  'theme-bg-1',
+  'uppercase'
+);
+
+const contentStyles = clsx(
+  'absolute',
+  'bottom-0',
+  'h-full',
+  'left-0',
+  'lg:right-56',
+  'overflow-auto',
+  'pb-5',
+  'px-3',
+  'pt-3',
+  'right-0',
+  'top-0'
+);
+
+//--------------------------------------------------------------------//
+//constants
 
 const props = [
-  [ 'className', 'string', 'No', 'Standard HTML class names' ],
-  [ 'value', 'string', 'No', 'Initial content in HTML format' ],
-  [ 'history', 'boolean', 'No', 'Enable undo/redo buttons' ],
-  [ 'font', 'boolean', 'No', 'Enable font family selection' ],
-  [ 'size', 'boolean', 'No', 'Enable font size selection' ],
-  [ 'format', 'boolean', 'No', 'Enable block format options (e.g., headings)' ],
-  [ 'paragraph', 'boolean', 'No', 'Enable paragraph formatting button' ],
-  [ 'blockquote', 'boolean', 'No', 'Enable blockquote formatting button' ],
-  [ 'style', 'boolean', 'No', 'Enable bold, italic, underline buttons' ],
-  [ 'color', 'boolean', 'No', 'Enable text color picker' ],
-  [ 'highlight', 'boolean', 'No', 'Enable background highlight picker' ],
+  ['className', 'string', 'No', 'Standard HTML class names'],
+  ['value', 'string', 'No', 'Initial content in HTML format'],
+  ['history', 'boolean', 'No', 'Enable undo/redo buttons'],
+  ['font', 'boolean', 'No', 'Enable font family selection'],
+  ['size', 'boolean', 'No', 'Enable font size selection'],
+  ['format', 'boolean', 'No', 'Enable block format options (e.g., headings)'],
+  ['paragraph', 'boolean', 'No', 'Enable paragraph formatting button'],
+  ['blockquote', 'boolean', 'No', 'Enable blockquote formatting button'],
+  ['style', 'boolean', 'No', 'Enable bold, italic, underline buttons'],
+  ['color', 'boolean', 'No', 'Enable text color picker'],
+  ['highlight', 'boolean', 'No', 'Enable background highlight picker'],
   [
     'text',
     'boolean',
@@ -48,36 +90,36 @@ const props = [
     'No',
     'Enable custom text styles (e.g., Code, Shadow) with single-style application',
   ],
-  [ 'remove', 'boolean', 'No', 'Enable remove format button (preserves inherited styles)' ],
-  [ 'indent', 'boolean', 'No', 'Enable indent/outdent buttons' ],
+  ['remove', 'boolean', 'No', 'Enable remove format button (preserves inherited styles)'],
+  ['indent', 'boolean', 'No', 'Enable indent/outdent buttons'],
   [
     'align',
     'boolean',
     'No',
     'Enable left, center, right alignment buttons',
   ],
-  [ 'rule', 'boolean', 'No', 'Enable horizontal rule button' ],
-  [ 'list', 'boolean', 'No', 'Enable ordered/unordered list buttons' ],
-  [ 'lineheight', 'boolean', 'No', 'Enable line height selection' ],
-  [ 'table', 'boolean', 'No', 'Enable table insertion' ],
-  [ 'link', 'boolean', 'No', 'Enable link insertion' ],
-  [ 'image', 'boolean', 'No', 'Enable image upload' ],
+  ['rule', 'boolean', 'No', 'Enable horizontal rule button'],
+  ['list', 'boolean', 'No', 'Enable ordered/unordered list buttons'],
+  ['lineheight', 'boolean', 'No', 'Enable line height selection'],
+  ['table', 'boolean', 'No', 'Enable table insertion'],
+  ['link', 'boolean', 'No', 'Enable link insertion'],
+  ['image', 'boolean', 'No', 'Enable image upload'],
   [
     'imageGallery',
     'boolean',
     'No',
     'Enable multiple image upload (gallery simulation)',
   ],
-  [ 'video', 'boolean', 'No', 'Enable video embedding' ],
-  [ 'audio', 'boolean', 'No', 'Enable audio embedding' ],
-  [ 'math', 'boolean', 'No', 'Enable math expression insertion' ],
-  [ 'fullscreen', 'boolean', 'No', 'Enable fullscreen toggle' ],
-  [ 'showblocks', 'boolean', 'No', 'Enable block visibility toggle' ],
-  [ 'code', 'boolean', 'No', 'Enable code view toggle' ],
-  [ 'preview', 'boolean', 'No', 'Enable content preview in new window' ],
-  [ 'print', 'boolean', 'No', 'Enable print button' ],
-  [ 'save', 'boolean', 'No', 'Enable save as HTML button' ],
-  [ 'template', 'boolean', 'No', 'Enable predefined template insertion' ],
+  ['video', 'boolean', 'No', 'Enable video embedding'],
+  ['audio', 'boolean', 'No', 'Enable audio embedding'],
+  ['math', 'boolean', 'No', 'Enable math expression insertion'],
+  ['fullscreen', 'boolean', 'No', 'Enable fullscreen toggle'],
+  ['showblocks', 'boolean', 'No', 'Enable block visibility toggle'],
+  ['code', 'boolean', 'No', 'Enable code view toggle'],
+  ['preview', 'boolean', 'No', 'Enable content preview in new window'],
+  ['print', 'boolean', 'No', 'Enable print button'],
+  ['save', 'boolean', 'No', 'Enable save as HTML button'],
+  ['template', 'boolean', 'No', 'Enable predefined template insertion'],
   [
     'dir',
     `'ltr' | 'rtl'`,
@@ -96,20 +138,20 @@ const props = [
     'No',
     'Handler for updates ({ value: string, action: string })',
   ],
-  [ 'name', 'string', 'No', 'Used for form integration' ],
-  [ 'error', 'string', 'No', 'Display error message and highlight field' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object for custom styling' ]
+  ['name', 'string', 'No', 'Used for form integration'],
+  ['error', 'string', 'No', 'Display error message and highlight field'],
+  ['style', 'CSS Object', 'No', 'Standard CSS object for custom styling']
 ];
 
 const examples = [
-//0
-`<WYSIWYG 
+  //0
+  `<WYSIWYG 
   className="w-full" 
   name="editorContent"
   value="<p>Hello, <b>World</b>!</p>"
 />`,
-//1
-`<WYSIWYG 
+  //1
+  `<WYSIWYG 
   className="w-full" 
   name="editorContent"
   history 
@@ -127,8 +169,8 @@ const examples = [
   list 
   value="<p>Formatted <i>text</i> here.</p>"
 />`,
-//2
-`<WYSIWYG 
+  //2
+  `<WYSIWYG 
   className="w-full" 
   name="editorContent"
   history 
@@ -165,8 +207,8 @@ const examples = [
   dir="ltr"
   value="<p>Full-featured <b>editor</b>.</p>"
 />`,
-//3
-`<WYSIWYG 
+  //3
+  `<WYSIWYG 
   className="w-full" 
   name="editorContent"
   history 
@@ -175,8 +217,8 @@ const examples = [
   dir="rtl"
   value="<p>مرحباً <b>بالعالم</b>!</p>"
 />`,
-//4
-`<WYSIWYG 
+  //4
+  `<WYSIWYG 
   className="w-full" 
   name="editorContent"
   history 
@@ -184,8 +226,8 @@ const examples = [
   onChange={value => console.log('change', value)}
   onUpdate={({ value, action }) => console.log('update', value, action)}
 />`,
-//5
-`<WYSIWYG 
+  //5
+  `<WYSIWYG 
   className="w-full" 
   name="editorContent"
   table 
@@ -193,8 +235,8 @@ const examples = [
   align 
   value="<table border='1'><tr><td><b>Cell 1</b></td><td>Cell 2</td></tr></table>"
 />`,
-//6
-`<WYSIWYG 
+  //6
+  `<WYSIWYG 
   className="w-full" 
   name="editorContent"
   image 
@@ -202,8 +244,8 @@ const examples = [
   link 
   value="<p>Check this <a href='https://example.com'>link</a> and image below:</p>"
 />`,
-//7
-`<WYSIWYG 
+  //7
+  `<WYSIWYG 
   className="w-full" 
   name="editorContent"
   template 
@@ -213,7 +255,6 @@ const examples = [
 ];
 
 //--------------------------------------------------------------------//
-// Components
 
 /**
  * Crumbs component
@@ -238,14 +279,8 @@ export function Menu() {
   const { _ } = useLanguage();
   //render
   return (
-    <aside className={
-      'hidden lg:block absolute top-0 bottom-0 right-0 z-1 w-56 '
-      + 'border-l theme-bc-1 text-sm'
-    }>
-      <h4 className={
-        'p-3 border-b theme-bc-1 theme-bg-1 text-sm uppercase '
-        + 'font-semibold'
-      }>
+    <aside className={asideStyles}>
+      <h4 className={asideTitleStyles}>
         {_('Contents')}
       </h4>
       <div className="p-3">
@@ -254,7 +289,16 @@ export function Menu() {
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#examples">{_('Examples')}</a>
+            <a href="#basics">{_('Basics')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#features">{_('Features')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#form-submission">{_('Form Submission')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#full">{_('Full Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
@@ -275,9 +319,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview 
+      <Preview
         height={100}
-        title="Info Example" 
+        title="Info Example"
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -293,22 +337,31 @@ export function Examples() {
  * Documentation body component
  */
 export function Body() {
-  // hooks
+  //hooks
   const { _ } = useLanguage();
-  const [ editorValue, setEditorValue ] = useState(
+  const [editorValue, setEditorValue] = useState(
     '<p>Type here to see events...</p>'
   );
+
   const [lastEvent, setLastEvent] = useState<{
     type: string,
     value: string,
     action?: string
   } | null>(null);
-  // render
+
+  //for form submission example where capture the value
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const content = formData.get('editorContent') as string;
+
+    //display in alert
+    alert('Form submitted!\n\nContent:\n' + content);
+  }
+  //render
   return (
-    <div className={
-      'absolute top-0 bottom-0 left-0 right-0 lg:right-56 px-3 pt-3 '
-      + 'pb-5 h-full overflow-auto'
-    }>
+    <div className={contentStyles}>
       <h1
         id="top"
         className="flex items-center uppercase font-bold text-xl"
@@ -326,7 +379,7 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
+      <h2 id="basics" className="uppercase font-bold text-lg mt-8">
         {_('Basics')}
       </h2>
       <div>
@@ -382,6 +435,64 @@ export function Body() {
           </div>
           <Code language="typescript">{examples[1]}</Code>
         </div>
+      </div>
+
+      {/* Form Submission */}
+      <h2 id="form-submission" className="uppercase font-bold text-lg mt-8">
+        {_('Form Submission')}
+      </h2>
+      <p>
+        <Translate>
+          To include the WYSIWYG content in a form submission, set the{" "}
+          <C value="name" /> prop. The content will be included as HTML in 
+          the form data under that name.
+        </Translate>
+      </p>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <WYSIWYG
+            className="w-full"
+            name="editorContent"
+            history
+            font
+            size
+            format
+            paragraph
+            blockquote
+            style
+            color
+            highlight
+            text
+            textStyle
+            remove
+            indent
+            align
+            rule
+            list
+            lineheight
+            table
+            link
+            image
+            imageGallery
+            video
+            audio
+            math
+            fullscreen
+            showblocks
+            code
+            preview
+            print
+            save
+            template
+            dir="ltr"
+          />
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600"
+          >
+            Submit
+          </button>
+        </form>
       </div>
 
       <h2 id="full" className="uppercase font-bold text-lg mt-8">
@@ -538,7 +649,8 @@ export function Body() {
           <Translate>
             Add images, videos, and links using <C value="image" />,{" "}
             <C value="video" />, and <C value="link" /> props for rich
-            content. Links can be clicked with Ctrl (Windows) or Cmd (Mac) to open in a new tab.
+            content. Links can be clicked with Ctrl (Windows) or Cmd (Mac) 
+            to open in a new tab.
           </Translate>
         </p>
         <div className="curved overflow-hidden">
@@ -590,7 +702,8 @@ export function Body() {
           <C value="frui-wysiwyg-btn" />, and{" "}
           <C value="frui-wysiwyg-editable" /> classes. Additional classes
           like <C value="__frui-wysiwyg-t-*" /> (e.g.,{" "}
-          <C value="__frui-wysiwyg-t-code" />) apply custom text styles, with only one style applied at a time to prevent nesting.
+          <C value="__frui-wysiwyg-t-code" />) apply custom text styles,
+          with only one style applied at a time to prevent nesting.
         </Translate>
       </p>
 
@@ -600,7 +713,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The <C value="<WYSIWYG>" /> field can be passed the 
+            The <C value="<WYSIWYG>" /> field can be passed the
             following props.
           </Translate>
         </p>

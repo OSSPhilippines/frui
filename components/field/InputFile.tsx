@@ -2,7 +2,7 @@
 // Imports
 
 //types
-import type { ChangeEvent, CSSProperties } from 'react';
+import type { ChangeEvent } from 'react';
 import type { InputProps, InputConfig } from './Input.js';
 //hooks
 import { useState, useEffect } from 'react';
@@ -20,11 +20,9 @@ export type FileConfig = InputConfig & {
 
 export type FileProps = InputProps & {
   defaultValue?: string,
-  uploading?: string,
-  style?: CSSProperties,
-  className?: string,
   onUpdate?: (value: string) => void,
-  onUpload?: (file: File, update: (url: string) => void) => void
+  onUpload?: (file: File, update: (url: string) => void) => void,
+  uploading?: string
 };
 
 //--------------------------------------------------------------------//
@@ -145,4 +143,4 @@ export function File(props: FileProps) {
 };
 
 //defaults to file
-export default File;
+export default Object.assign(File, { useFile });

@@ -2,9 +2,9 @@
 // Imports
 
 //types
-import type { FileProps } from './File.js';
+import type { FileProps } from './InputFile.js';
 //hooks
-import { useFile } from './File.js';
+import { useFile } from './InputFile.js';
 //components
 import Input from './Input.js';
 

@@ -7,7 +7,7 @@ import { useLanguage, Translate } from 'r22n';
 //frui
 import Bread from 'components/element/Bread.js';
 import Table from 'components/element/Table.js';
-import File from 'components/field/File.js';
+import InputFile from 'components/field/InputFile.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -32,7 +32,6 @@ const props = [
   [ 'onChange', 'Function', 'No', 'Event handler when value has changed' ],
   [ 'onUpdate', 'Function', 'No', 'Update event handler' ],
   [ 'onUpload', 'Function', 'Yes', 'Called when file is loaded' ],
-  [ 'passRef', 'LegacyRef', 'No', 'Passes ref to html input' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
   [ 'uploading', 'string', 'No', 'Phrased used when uploading files' ],
   [ 'value', 'string', 'No', 'Default value' ]
@@ -40,9 +39,9 @@ const props = [
 
 const examples = [
 //0
-`<File className="bg-white w-full" value="https://images.wsj.net/im-580612/8SR" />`,
+`<InputFile className="bg-white w-full" value="https://images.wsj.net/im-580612/8SR" />`,
 //1
-`<File 
+`<InputFile 
   className="bg-white w-full" 
   onUpload={(file, next) => {
     //just a mock call
@@ -55,7 +54,7 @@ const examples = [
 //2
 `next('//cdn.ex.com/img.jpg')`,
 //3
-`<File error={string|true} className="bg-white w-full" />`
+`<InputFile error={string|true} className="bg-white w-full" />`
 ];
 
 //--------------------------------------------------------------------//
@@ -96,11 +95,17 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('File')}
+          {_('Input File')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#examples">{_('Examples')}</a>
+            <a href="#basic">{_('Basics')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
@@ -111,27 +116,6 @@ export function Menu() {
         </ul>
       </div>
     </aside>
-  );
-};
-
-/**
- * Examples component
- */
-export function Examples() {
-  return (
-    <div className="flex items-start rmd-block flex-wrap gap-4">
-      {/* Info Example */}
-      <Preview 
-        height={100}
-        title="Info Example" 
-        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          TODO
-        </Preview.Example>
-        <Preview.Code>{''}</Preview.Code>
-      </Preview>
-    </div>
   );
 };
 
@@ -148,7 +132,7 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('File')}
+        {_('Input File')}
       </h1>
       <div>
         <p className="py-2">
@@ -157,21 +141,22 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import File from 'frui/field/File';`}
+          {`import InputFile from 'frui/field/InputFile';`}
         </Code>
       </div>
 
       <h2 id="basic" className="uppercase font-bold text-lg mt-8">
         {_('Basics')}
       </h2>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <File className="bg-white w-full" value="https://images.wsj.net/im-580612/8SR"  />
-        </div>
-        <Code language="typescript">
-          {examples[0]}
-        </Code>
-      </div>
+      <Preview 
+        title="Info Example" 
+        className="border border-2 theme-bc-3"
+      >
+        <Preview.Example center padding>
+          <InputFile className="bg-white w-full" value="https://images.wsj.net/im-580612/8SR"  />
+        </Preview.Example>
+        <Preview.Code>{examples[0]}</Preview.Code>
+      </Preview>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
         {_('Events')}
@@ -189,19 +174,20 @@ export function Body() {
             from upload to form processing.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <File className="bg-white w-full" onUpload={(_file, next) => {
+        <Preview 
+          title="Event Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputFile className="bg-white w-full" onUpload={(_file, next) => {
               //just a mock call
               setTimeout(() => {
                 next('https://images.wsj.net/im-580612/8SR')
               }, 5000)
             }} onUpdate={value => alert(value)} />
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Change')}
@@ -316,14 +302,15 @@ export function Body() {
             red.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <File error className="bg-white w-full" />
-          </div>
-          <Code language="typescript">
-            {examples[3]}
-          </Code>
-        </div>
+        <Preview 
+          title="Error Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputFile error className="bg-white w-full" />
+          </Preview.Example>
+          <Preview.Code>{examples[3]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">

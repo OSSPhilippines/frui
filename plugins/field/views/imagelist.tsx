@@ -31,7 +31,6 @@ const props = [
   [ 'name', 'string', 'No', 'Used for react server components.' ],
   [ 'onUpdate', 'Function', 'No', 'Update event handler' ],
   [ 'onUpload', 'Function', 'Yes', 'Called when file is loaded' ],
-  [ 'passRef', 'LegacyRef', 'No', 'Passes ref to html input' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
   [ 'uploading', 'string', 'No', 'Phrased used when uploading files' ],
   [ 'value', 'string[]', 'No', 'Default value' ]
@@ -103,7 +102,13 @@ export function Menu() {
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#examples">{_('Examples')}</a>
+            <a href="#basic">{_('Basics')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
@@ -114,27 +119,6 @@ export function Menu() {
         </ul>
       </div>
     </aside>
-  );
-};
-
-/**
- * Examples component
- */
-export function Examples() {
-  return (
-    <div className="flex items-start rmd-block flex-wrap gap-4">
-      {/* Info Example */}
-      <Preview 
-        height={100}
-        title="Info Example" 
-        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          TODO
-        </Preview.Example>
-        <Preview.Code>{''}</Preview.Code>
-      </Preview>
-    </div>
   );
 };
 
@@ -151,7 +135,7 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Imagelist')}
+        {_('Image List')}
       </h1>
       <div>
         <p className="py-2">
@@ -167,14 +151,15 @@ export function Body() {
       <h2 id="basic" className="uppercase font-bold text-lg mt-8">
         {_('Basics')}
       </h2>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
+      <Preview 
+        title="Basic Example" 
+        className="border border-2 theme-bc-3"
+      >
+        <Preview.Example center padding>
           <Imagelist className="bg-white w-full" value={['https://images.wsj.net/im-580612/8SR']}  />
-        </div>
-        <Code language="typescript">
-          {examples[0]}
-        </Code>
-      </div>
+        </Preview.Example>
+        <Preview.Code>{examples[0]}</Preview.Code>
+      </Preview>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
         {_('Events')}
@@ -192,27 +177,28 @@ export function Body() {
             from upload to form processing.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Imagelist
-            className="w-full bg-white"
-            defaultValue={[
-              'https://images.wsj.net/im-580612/8SR', 
-              'https://images.wsj.net/im-580612/8SR'
-            ]}
-            onUpload={(files, next) => {
-              //just a mock call
-              setTimeout(() => {
-                next(files.map((_file, _i) => 'https://images.wsj.net/im-580612/8SR'))
-              }, 1000)
-            }}
-            onUpdate={console.log}
-          />
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
+        <Preview 
+          title="Event Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <Imagelist
+              className="w-full bg-white"
+              defaultValue={[
+                'https://images.wsj.net/im-580612/8SR', 
+                'https://images.wsj.net/im-580612/8SR'
+              ]}
+              onUpload={(files, next) => {
+                //just a mock call
+                setTimeout(() => {
+                  next(files.map((_file, _i) => 'https://images.wsj.net/im-580612/8SR'))
+                }, 1000)
+              }}
+              onUpdate={console.log}
+            />
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Upload')}
@@ -297,14 +283,15 @@ export function Body() {
             red.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview 
+          title="Error Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <Imagelist error className="bg-white w-full" />
-          </div>
-          <Code language="typescript">
-            {examples[3]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[3]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -327,7 +314,7 @@ export function Body() {
         {_('API Reference')}
       </h2>
       <div>
-        <p>
+        <p className="py-4">
           <Translate>
             The <C value="<Imagelist>" /> field accepts all props 
             of a standard HTML Input element. See <a 

@@ -204,6 +204,39 @@ return (
 `<Select error value="foo" option="px-p-2-8-2-8">
   <Select.Option value="foo">Foo</Select.Option>
   <Select.Option value="bar">Bar</Select.Option>
+</Select>`,
+//12
+`<Select option="px-p-2-8-2-8">
+  <Select.Option value="US">🇺🇸 United States</Select.Option>
+  <Select.Option value="PH">🇵🇭 Philippines</Select.Option>
+</Select>`,
+//13
+`<Select option="px-p-2-8-2-8">
+  <Select.Option value="product-1">
+    <div className="flex items-start mb-3">
+      <img width="70" src="https://m.media-amazon.com/images/I/81swjZCbdiL._AC_SL100_.jpg" />
+      <div className="ml-3">
+        <h3 className="font-semibold">
+          KODAK PIXPRO FZ55-BK 16MP Digital Camera with 5X 
+          Optical Zoom & 1080P Full HD Video
+        </h3>
+        <div className="mt-2">$299.99</div>
+      </div>
+    </div>
+  </Select.Option>
+  <Select.Option value="product-2">
+    <div className="flex items-start">
+      <img width="70" src="https://m.media-amazon.com/images/I/714hINuPoBL._AC_SL100_.jpg" />
+      <div className="ml-3">
+        <h3 className="font-semibold">
+          Canon EOS Rebel T7 DSLR Camera with 18-55mm Lens | 
+          Built-in Wi-Fi | 24.1 MP CMOS Sensor | DIGIC 4+ 
+          Image Processor HD Videos
+        </h3>
+        <div className="mt-2">$999.99</div>
+      </div>
+    </div>
+  </Select.Option>
 </Select>`
 ];
 
@@ -288,6 +321,78 @@ export function Menu() {
 };
 
 /**
+ * Examples component
+ */
+export function Examples() {
+  return (
+    <div className="flex items-start rmd-block flex-wrap gap-4">
+      {/* Basic Example */}
+      <Preview 
+        title="Basic Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <Select>
+            <Select.Option className="px-p-2-8-2-8" value="foo">Foo</Select.Option>
+            <Select.Option className="px-p-2-8-2-8" value="bar">Bar</Select.Option>
+          </Select>
+        </Preview.Example>
+        <Preview.Code>{examples[0]}</Preview.Code>
+      </Preview>
+      {/* Country Example */}
+      <Preview 
+        title="Country Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <Select option="px-p-2-8-2-8">
+            <Select.Option value="US">🇺🇸 United States</Select.Option>
+            <Select.Option value="PH">🇵🇭 Philippines</Select.Option>
+          </Select>
+        </Preview.Example>
+        <Preview.Code>{examples[12]}</Preview.Code>
+      </Preview>
+      {/* Products Example */}
+      <Preview 
+        title="Products Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <Select option="px-p-2-8-2-8">
+            <Select.Option value="product-1">
+              <div className="flex items-start mb-3">
+                <img width="70" src="https://m.media-amazon.com/images/I/81swjZCbdiL._AC_SL100_.jpg" />
+                <div className="ml-3">
+                  <h3 className="font-semibold">
+                    KODAK PIXPRO FZ55-BK 16MP Digital Camera with 5X 
+                    Optical Zoom & 1080P Full HD Video
+                  </h3>
+                  <div className="mt-2">$299.99</div>
+                </div>
+              </div>
+            </Select.Option>
+            <Select.Option value="product-2">
+              <div className="flex items-start">
+                <img width="70" src="https://m.media-amazon.com/images/I/714hINuPoBL._AC_SL100_.jpg" />
+                <div className="ml-3">
+                  <h3 className="font-semibold">
+                    Canon EOS Rebel T7 DSLR Camera with 18-55mm Lens | 
+                    Built-in Wi-Fi | 24.1 MP CMOS Sensor | DIGIC 4+ 
+                    Image Processor HD Videos
+                  </h3>
+                  <div className="mt-2">$999.99</div>
+                </div>
+              </div>
+            </Select.Option>
+          </Select>
+        </Preview.Example>
+        <Preview.Code>{examples[13]}</Preview.Code>
+      </Preview>
+    </div>
+  );
+};
+
+/**
  * Documentation body component
  */
 export function Body() {
@@ -328,6 +433,13 @@ export function Body() {
         </Code>
       </div>
 
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
+      </h2>
+      <div className="relative z-[101]">
+        <Examples />
+      </div>
+
       <h2 id="basic" className="uppercase font-bold text-lg mt-8">
         {_('Basics')}
       </h2>
@@ -338,6 +450,7 @@ export function Body() {
             <C l value="Select" /> field.
           </Translate>
         </p>
+
         <Preview 
           title="Basic Example" 
           className="border border-2 theme-bc-3 relative z-[100]"

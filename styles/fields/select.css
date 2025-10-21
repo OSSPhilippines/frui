@@ -88,6 +88,6 @@
   cursor: pointer;
 }
 
-.frui-field-select-selected .frui-field-select-option {
+.frui-field-select-option-active {
   display: inline-block;
 }

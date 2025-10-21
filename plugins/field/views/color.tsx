@@ -7,7 +7,7 @@ import { useLanguage, Translate } from 'r22n';
 
 //frui
 import Bread from 'components/element/Bread.js';
-import ColorPicker from 'components/field/ColorPicker.js';
+import ColorPicker from 'components/field/InputColor.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

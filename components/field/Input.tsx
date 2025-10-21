@@ -2,8 +2,8 @@
 // Imports
 
 //types
-import type { ChangeEvent, LegacyRef, CSSProperties } from 'react';
-import type { ExtendsType, HTMLInputProps } from '../types.js';
+import type { ChangeEvent } from 'react';
+import type { HTMLInputProps } from '../types.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -15,12 +15,10 @@ export type InputConfig = {
   onUpdate?: Function
 };
 
-export type InputProps = ExtendsType<HTMLInputProps, {
-  style?: CSSProperties,
+export type InputProps = HTMLInputProps & {
   error?: any,
-  onUpdate?: (value: string) => void,
-  passRef?: LegacyRef<HTMLInputElement>
-}>;
+  onUpdate?: (value: string) => void
+};
 
 //--------------------------------------------------------------------//
 // Hooks
@@ -29,14 +27,16 @@ export type InputProps = ExtendsType<HTMLInputProps, {
  * Input Hook Aggregate
  */
 export function useInput({ onChange, onUpdate }: InputConfig) {
-  return {
-    handlers: {
-      change: (e: ChangeEvent<HTMLInputElement>) => {
-        onChange && onChange(e);
-        onUpdate && onUpdate(e.target.value);
-      }
+  const handlers = {
+    change: (e: ChangeEvent<HTMLInputElement>) => {
+      onChange && onChange(e);
+      handlers.update(e.target.value);
+    },
+    update: (value: string) => {
+      onUpdate && onUpdate(value);
     }
   };
+  return { handlers };
 };
 
 //--------------------------------------------------------------------//
@@ -52,7 +52,7 @@ export function Input(props: InputProps) {
     className,
     onChange,
     onUpdate,
-    passRef,
+    ref,
     ...attributes 
   } = props;
   //hooks
@@ -69,7 +69,6 @@ export function Input(props: InputProps) {
     <input 
       {...attributes} 
       className={classNames.join(' ')}
-      ref={passRef} 
       onChange={handlers.change} 
     />
   );

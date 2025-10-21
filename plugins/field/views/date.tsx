@@ -8,7 +8,7 @@ import { useLanguage, Translate } from 'r22n';
 import Bread from 'components/element/Bread.js';
 import Table from 'components/element/Table.js';
 import Alert from 'components/element/Alert.js';
-import DateField from 'components/field/DatePicker.js';
+import InputDate from 'components/field/InputDate.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -32,20 +32,19 @@ const props = [
   [ 'name', 'string', 'No', 'Used for react server components.' ],
   [ 'onChange', 'Function', 'No', 'Event handler when value has changed' ],
   [ 'onUpdate', 'Function', 'No', 'Update event handler' ],
-  [ 'passRef', 'LegacyRef', 'No', 'Passes ref to html input' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
   [ 'value', 'string|number|Date', 'No', 'Default value (Controlled)' ]
 ];
 
 const examples = [
 //0
-`<DateField defaultValue={'2024-02-03 12:00:00'} />
-<DateField defaultValue={new Date()} />
-<DateField defaultValue={(new Date()).getTime()} />`,
+`<InputDate defaultValue="2024-02-03 12:00:00" />
+<InputDate defaultValue={new Date()} />
+<InputDate defaultValue={(new Date()).getTime()} />`,
 //1
-`<Date onUpdate={value => alert(value)} />`,
+`<InputDate onUpdate={value => alert(value)} />`,
 //2
-`<Date error={string|true} value="Invalid Date." />`
+`<InputDate error={string|true} value="Invalid Date." />`
 ];
 
 //--------------------------------------------------------------------//
@@ -86,11 +85,17 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Date')}
+          {_('Input Date')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#examples">{_('Examples')}</a>
+            <a href="#basic">{_('Basics')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
@@ -101,27 +106,6 @@ export function Menu() {
         </ul>
       </div>
     </aside>
-  );
-};
-
-/**
- * Examples component
- */
-export function Examples() {
-  return (
-    <div className="flex items-start rmd-block flex-wrap gap-4">
-      {/* Info Example */}
-      <Preview 
-        height={100}
-        title="Info Example" 
-        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          TODO
-        </Preview.Example>
-        <Preview.Code>{''}</Preview.Code>
-      </Preview>
-    </div>
   );
 };
 
@@ -138,7 +122,7 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Date')}
+        {_('Input Date')}
       </h1>
       <div>
         <p className="py-2">
@@ -147,7 +131,7 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Date from 'frui/field/Date';`}
+          {`import InputDate from 'frui/field/InputDate';`}
         </Code>
       </div>
 
@@ -166,16 +150,15 @@ export function Body() {
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <div className="w-full">
-              <DateField defaultValue={'2024-02-03 12:00:00'} />
-            </div>
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputDate defaultValue="2024-02-03 12:00:00" />
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
         <Alert info className="my-4">
           <i className="fas fa-info-circle mr-2"></i>
           When using the native <C value="Date" /> object, change 
@@ -194,14 +177,15 @@ export function Body() {
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <DateField onUpdate={value => alert(value)} />
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
+        <Preview 
+          title="Events Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputDate onUpdate={value => alert(value)} />
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Change')}
@@ -271,14 +255,15 @@ export function Body() {
             the input field red.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <DateField error value="Invalid Date." />
-          </div>
-          <Code language="typescript">
-            {examples[2]}
-          </Code>
-        </div>
+        <Preview 
+          title="Error Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputDate error defaultValue="Invalid Date." />
+          </Preview.Example>
+          <Preview.Code>{examples[2]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -295,9 +280,9 @@ export function Body() {
         {_('API Reference')}
       </h2>
       <div>
-        <p>
+        <p className="py-2">
           <Translate>
-            The <C value="<Checkbox>" /> field accepts all props of 
+            The <C value="<InputDate>" /> field accepts all props of 
             a standard HTML Input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"

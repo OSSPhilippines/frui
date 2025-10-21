@@ -236,6 +236,19 @@ export function Tooltip(props: TooltipProps) {
     opacity,
     arrow,
     hover,
+    info: _info,
+    warning: _warning,
+    success: _success,
+    error: _error,
+    muted: _muted,
+    black: _black,
+    white: _white,
+    primary: _primary,
+    secondary: _secondary,
+    tertiary: _tertiary,
+    curved: _curved,
+    rounded: _rounded,
+    pill: _pill,
     ...attributes
   } = props;
 

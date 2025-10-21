@@ -31,7 +31,6 @@ const props = [
   [ 'name', 'string', 'No', 'Used for react server components.' ],
   [ 'onChange', 'Function', 'No', 'Event handler when value has changed' ],
   [ 'onUpdate', 'Function', 'No', 'Update event handler' ],
-  [ 'passRef', 'LegacyRef', 'No', 'Passes ref to html input' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
   [ 'value', 'string', 'No', 'Default value (Controlled)' ]
 ];

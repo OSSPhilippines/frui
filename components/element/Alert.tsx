@@ -34,15 +34,26 @@ export function Alert(props: AlertProps) {
     style,
     className,
     children,
+    info: _info,
+    warning: _warning,
+    success: _success,
+    error: _error,
+    muted: _muted,
+    black: _black,
+    white: _white,
+    primary: _primary,
+    secondary: _secondary,
+    tertiary: _tertiary,
+    curved: _curved,
+    rounded: _rounded,
+    pill: _pill,
     ...attributes
   } = props;
   //set default styles and classes
   const styles = { ...style };
   const classes = [ 'frui-alert' ];
   //if custom class, add it
-  if (className) {
-    classes.push(className);
-  }
+  className && classes.push(className);
   //determine layout
   const layout = outline 
     ? 'outline' 

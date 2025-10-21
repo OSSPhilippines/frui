@@ -1,25 +1,54 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//types
-import type { ExtendsType } from '../types.js';
+//modules
+import { useEffect, useState } from 'react';
+//frui
 import type { InputProps } from './Input.js';
-//components
 import Input from './Input.js';
 
 //--------------------------------------------------------------------//
 // Types
 
-export type DateInput = string|number|Date;
+export type DateInput = string | number | Date;
 
 export type DateConfig = {
   defaultValue?: DateInput, 
-  onUpdate?: (value: string) => void
+  onUpdate?: (value?: Date) => void,
+  value?: DateInput
 };
 
-export type DateProps = ExtendsType<InputProps, {
-  defaultValue?: DateInput
-}>;
+export type DateProps = Omit<InputProps, 'defaultValue' | 'value' | 'onUpdate'> & {
+  defaultValue?: DateInput,
+  onUpdate?: (value?: Date) => void,
+  value?: DateInput
+};
+
+//--------------------------------------------------------------------//
+// Helpers
+
+/**
+ * Convert various date input formats into a Date object
+ */
+export function toDate(input?: DateInput) {
+  if (!input) {
+    return undefined;
+  } else if (input instanceof Date) {
+    return input;
+  }
+  try {
+    return new Date(input);
+  } catch(e) {}
+  return undefined;
+};
+
+export function toDateString(date?: Date) {
+  if (!date || isNaN(date.getTime())) return undefined;
+  const YYYY = date.getFullYear();
+  const MM = String(date.getMonth() + 1).padStart(2, '0');
+  const DD = String(date.getDate()).padStart(2, '0');
+  return `${YYYY}-${MM}-${DD}`;
+};
 
 //--------------------------------------------------------------------//
 // Hooks
@@ -27,15 +56,32 @@ export type DateProps = ExtendsType<InputProps, {
 /**
  * Date Hook Aggregate
  */
-export function useDate({ onUpdate }: DateConfig) {
-  return (value: string) => {
-    if (onUpdate && value) {
-      try {
-        const utc = new Date(value).toUTCString();
-        onUpdate(new Date(utc).toISOString());
-      } catch(e) {} 
+export function useDate(config: DateConfig) {
+  //props
+  const { defaultValue, onUpdate, value } = config;
+  const defaultDate = toDate(defaultValue);
+  //hooks
+  const [ date, setDate ] = useState(defaultDate);
+  //handlers
+  const handlers = {
+    set: setDate,
+    toString: () => date
+      ? toDateString(date)
+      : undefined,
+    update: (value?: string) => {
+      const date = toDate(value);
+      setDate(date);
+      onUpdate && onUpdate(date);
     }
   };
+  //effects
+  // whenever value changes from outside, update internal state
+  useEffect(() => {
+    //dont allow undefined to override existing value
+    if (value === undefined) return;
+    handlers.set(toDate(value));
+  }, [ value ]);
+  return { date, handlers };
 };
 
 //--------------------------------------------------------------------//
@@ -44,26 +90,35 @@ export function useDate({ onUpdate }: DateConfig) {
 /**
  * Date  Component
  */
-export function DateField(props: DateProps) {
-  const { defaultValue, className, onUpdate, ...attributes } = props;
-  const update = useDate({ onUpdate });
+export function InputDate(props: DateProps) {
+  //props
+  const { 
+    className, 
+    defaultValue, 
+    onUpdate, 
+    value, 
+    ...attributes 
+  } = props;
+  //hooks
+  const { handlers } = useDate({ defaultValue, onUpdate, value });
+  //variables
   const classNames = [ 'frui-field-date' ];
-  if (className) {
-    classNames.push(className);
-  }
+  className && classNames.push(className);
+  //render
   return (
     <Input 
       {...attributes}
       type="date"
-      defaultValue={defaultValue 
-        ? new Date(defaultValue).toISOString().split('T')[0]
-        : undefined
-      }
       className={classNames.join(' ')}
-      onUpdate={update}
+      onUpdate={handlers.update}
+      value={handlers.toString() || ''}
     />
   );
 };
 
 //defaults to date
-export default DateField;
+export default Object.assign(InputDate, {
+  toDate,
+  toDateString,
+  useDate
+});

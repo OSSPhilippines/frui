@@ -1,8 +1,8 @@
-.frui-field-markdown-nav {
+.frui-field-markdown-editor-nav {
   font-size: 18px;
   text-align: right;
 }
-.frui-field-markdown-preview {
+.frui-field-markdown-editor-preview {
   background-color: var(--white);
   border-color: var(--black);
   border-style: solid;

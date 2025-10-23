@@ -72,9 +72,9 @@ export function TextlistFields(props: FieldsProps<TextlistType>) {
   const value = values ? values[index]: undefined;
 
   return (
-    <div className="frui-field-textlist-row">
+    <div className="frui-field-text-list-row">
       <Input
-        className="frui-field-textlist-input"
+        className="frui-field-text-list-input"
         placeholder={placeholder}
         defaultValue={values ? values[index]: undefined}
         onUpdate={handlers.update}
@@ -85,7 +85,7 @@ export function TextlistFields(props: FieldsProps<TextlistType>) {
         outline
         error
         onClick={handlers.remove}
-        className="frui-field-textlist-remove"
+        className="frui-field-text-list-remove"
       >
         &times;
       </Button>

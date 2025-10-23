@@ -43,7 +43,7 @@ export type { FilelistConfig, FilelistProps } from './Filelist.js';
 export type { InputConfig, InputProps } from './Input.js';
 export type { KnobProps } from './Knob.js';
 //export type {} from './JSON.js';
-export type { MarkdownConfig, MarkdownProps } from './Markdown.js';
+export type { MarkdownConfig, MarkdownProps } from './MarkdownEditor.js';
 export type { MaskProps } from './Mask.js';
 export type {
   MetadataType,
@@ -83,7 +83,7 @@ export type {
 export type {
   WYSIWYGConfig,
   WYSIWYGProps
-} from './WYSIWYG.js';
+} from './WysiwygEditor.js';
 
 export { 
   useAutocomplete, 
@@ -107,7 +107,7 @@ export { useFile } from './File.js';
 export { useFilelist } from './Filelist.js';
 export { useInput } from './Input.js';
 //export {} from './JSON.js';
-export { useMarkdown } from './Markdown.js';
+export { useMarkdown } from './MarkdownEditor.js';
 export { useMetadata, MetadataFields } from './Metadata.js';
 export { useNumber } from './Number.js';
 export { usePassword } from './Password.js';
@@ -122,7 +122,7 @@ export { useTaglist } from './Taglist.js';
 export { useTextarea } from './Textarea.js';
 export { useTextlists } from './Textlist.js';
 export { useTime } from './TimePicker.js';
-export { useWYSIWYG } from './WYSIWYG.js';
+export { useWYSIWYG } from './WysiwygEditor.js';
 
 import Autocomplete from './Autocomplete.js';
 import Checkbox from './Checkbox.js';
@@ -140,7 +140,7 @@ import Imagelist from './Imagelist.js';
 import Input from './Input.js';
 import Knob from './Knob.js';
 //import Json from './JSON.js';
-import Markdown from './Markdown.js';
+import Markdown from './MarkdownEditor.js';
 import Mask from './Mask.js';
 import Metadata from './Metadata.js';
 import MultiSelect from './MultiSelect.js';
@@ -157,7 +157,7 @@ import Taglist from './Taglist.js';
 import Textarea from './Textarea.js';
 import Textlist from './Textlist.js';
 import Time from './TimePicker.js';
-import WYSIWYG from './WYSIWYG.js';
+import WYSIWYG from './WysiwygEditor.js';
 
 export {
   Autocomplete,

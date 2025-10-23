@@ -1,4 +1,4 @@
-.frui-field-image-control {
+.frui-field-input-file-control {
   border-color: var(--black);
   border-style: solid;
   border-width: 1px;
@@ -10,35 +10,32 @@
   width: 100%;
 }
 
-.frui-field-image-file {
+.frui-field-input-file-reset {
+  color: var(--error);
+  cursor: pointer;
+  font-size: 20px;
+  margin-top: -2px;
+}
+
+.frui-field-input-file-file {
   align-items: center;
   border-color: gray;
   border-style: solid;
+  border-top-width: 0;
   border-width: 1px;
+  box-sizing: border-box;
   color: var(--black);
   display: flex;
   padding-bottom: 6px;
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 6px;
+  width: 100%;
 }
 
-.frui-field-image-link {
-  display: block;
+.frui-field-input-file-link {
   flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.frui-field-image-image {
-  height: 20px;
-  margin-right: 8px;
-}
-
-.frui-field-image-reset {
-  color: var(--error);
-  cursor: pointer;
-  font-size: 20px;
-  margin-top: -2px;
 }

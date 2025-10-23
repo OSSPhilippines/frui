@@ -111,7 +111,7 @@ export function InputDatetime(props: DatetimeProps) {
   //hooks
   const { handlers } = useDatetime({ defaultValue, onUpdate, value });
   //variables
-  const classes = [ 'frui-field-datetime' ];
+  const classes = [ 'frui-field-input-datetime' ];
   className && classes.push(className);
   //render
   return (

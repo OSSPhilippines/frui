@@ -138,7 +138,7 @@ export function Taglist(props: TaglistProps) {
       : undefined,
   });
 
-  const classNames = [ 'frui-field-taglist' ];
+  const classNames = [ 'frui-field-tag-list' ];
   if (error) {
     classNames.push('frui-tx-error');
   }
@@ -146,7 +146,7 @@ export function Taglist(props: TaglistProps) {
     classNames.push(className);
   }
 
-  const tagClasses = [ 'frui-field-taglist-tag' ];
+  const tagClasses = [ 'frui-field-tag-list-tag' ];
   const tagStyle: CSSProperties = {};
   if (color) {
     tagStyle.backgroundColor = color;
@@ -171,7 +171,7 @@ export function Taglist(props: TaglistProps) {
         <div key={i} className={tagClasses.join(' ')} style={tagStyle}>
           {tag}
           <button 
-            className="frui-field-taglist-remove"
+            className="frui-field-tag-list-remove"
             onClick={() => handlers.remove(i)}
           >
             &times;
@@ -180,7 +180,7 @@ export function Taglist(props: TaglistProps) {
         </div>
       ))}
       <input
-        className="frui-field-taglist-input"
+        className="frui-field-tag-list-input"
         value={input}
         onKeyDown={handlers.edit}
         onKeyUp={handlers.save}

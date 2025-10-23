@@ -57,18 +57,18 @@ export function Input(props: InputProps) {
   } = props;
   //hooks
   const { handlers } = useInput({ onChange, onUpdate });
-  const classNames = [ 'frui-field-input' ];
+  const classes = [ 'frui-field-input' ];
   if (error) {
-    classNames.push('frui-tx-error', 'frui-bd-error');
+    classes.push('frui-tx-error', 'frui-bd-error');
   }
   if (className) {
-    classNames.push(className);
+    classes.push(className);
   }
   //render
   return (
     <input 
       {...attributes} 
-      className={classNames.join(' ')}
+      className={classes.join(' ')}
       onChange={handlers.change} 
     />
   );

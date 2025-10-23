@@ -112,7 +112,7 @@ export function Knob({
   }, [dragging]);
 
   return (
-    <div className="frui-field-knob" style={{ width: size, height: size / 2 }}>
+    <div className="frui-field-knob-slider" style={{ width: size, height: size / 2 }}>
       <svg
         ref={knobRef}
         width={size}
@@ -123,7 +123,7 @@ export function Knob({
           setDragging(true);
           handleInteraction(e.clientX, e.clientY);
         }}
-        className="frui-field-knob-svg"
+        className="frui-field-knob-slider-svg"
       >
         <circle
           cx={radius}
@@ -157,7 +157,7 @@ export function Knob({
           dominantBaseline="middle"
           fontSize={size * 0.2}
           fill={textColor}
-          className="frui-field-knob-label"
+          className="frui-field-knob-slider-label"
         >
           {formatValue(valueTemplate, actualValue)}
         </text>

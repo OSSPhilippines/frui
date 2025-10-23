@@ -1,4 +1,4 @@
-.frui-field-taglist {
+.frui-field-tag-list {
   background-color: var(--white);
   border-color: var(--black);
   border-style: solid;
@@ -12,7 +12,7 @@
   width: 100%;
 }
 
-.frui-field-taglist-tag {
+.frui-field-tag-list-tag {
   align-items: center;
   border-radius: 5px;
   color: var(--white);
@@ -25,7 +25,7 @@
   white-space: nowrap;
 }
 
-.frui-field-taglist-remove {
+.frui-field-tag-list-remove {
   background-color: unset;
   border: none;
   color: var(--white);
@@ -37,7 +37,7 @@
   padding-top: 2px;
 }
 
-.frui-field-taglist-input {
+.frui-field-tag-list-input {
   border: none;
   outline: none;
   padding-bottom: 8px;

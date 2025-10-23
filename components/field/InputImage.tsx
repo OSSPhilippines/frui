@@ -52,26 +52,26 @@ export function Image(props: FileProps) {
           type="file" 
           accept="image/*"
           error={error}
-          className="frui-field-image-control"
+          className="frui-field-input-image-control"
           onChange={handlers.change} 
         />
       )}
       {!url && uploading && (
-        <div className="frui-field-image-file">
-          <span className="frui-field-image-link">
+        <div className="frui-field-input-image-file">
+          <span className="frui-field-input-image-link">
             {locale}
           </span>
         </div>
       )}
       {url && (
-        <div className="frui-field-image-file">
+        <div className="frui-field-input-image-file">
           <img 
             src={url} 
             alt="preview" 
-            className="frui-field-image-image" 
+            className="frui-field-input-image-image" 
           />
           <a 
-            className="frui-field-image-link"
+            className="frui-field-input-image-link"
             href={url} 
             target="_blank" 
             rel="noreferrer"
@@ -79,7 +79,7 @@ export function Image(props: FileProps) {
             {url}
           </a>
           <div 
-            className="frui-field-image-reset"
+            className="frui-field-input-image-reset"
             onClick={() => handlers.reset()}
           >
             &times;

@@ -96,7 +96,7 @@ export function File(props: FileProps) {
     onUpdate, 
     onUpload 
   });
-  const classNames = [ 'frui-field-file' ];
+  const classNames = [ 'frui-field-input-file' ];
   if (className) {
     classNames.push(className);
   }
@@ -108,21 +108,21 @@ export function File(props: FileProps) {
           {...attributes} 
           type="file" 
           error={error}
-          className="frui-field-file-control"
+          className="frui-field-input-file-control"
           onChange={handlers.change} 
         />
       )}
       {!url && uploading && (
-        <div className="frui-field-file-file">
-          <span className="frui-field-file-link">
+        <div className="frui-field-input-file-file">
+          <span className="frui-field-input-file-link">
             {locale}
           </span>
         </div>
       )}
       {url && (
-        <div className="frui-field-file-file">
+        <div className="frui-field-input-file-file">
           <a 
-            className="frui-field-file-link"
+            className="frui-field-input-file-link"
             href={url} 
             target="_blank" 
             rel="noreferrer"
@@ -130,7 +130,7 @@ export function File(props: FileProps) {
             {url}
           </a>
           <div 
-            className="frui-field-file-reset"
+            className="frui-field-input-file-reset"
             onClick={() => handlers.reset()}
           >
             &times;

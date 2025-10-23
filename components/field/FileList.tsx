@@ -108,7 +108,7 @@ export function Filelist(props: FilelistProps) {
     onUpload 
   });
   
-  const classNames = [ 'frui-field-filelist' ];
+  const classNames = [ 'frui-field-file-list' ];
   if (className) {
     classNames.push(className);
   }
@@ -120,13 +120,13 @@ export function Filelist(props: FilelistProps) {
         multiple
         type="file" 
         error={error}
-        className="frui-field-filelist-control"
+        className="frui-field-file-list-control"
         onChange={handlers.change} 
       />
       {uploaded.length > 0 && uploaded.map((url, i) => (
-        <div key={i} className="frui-field-filelist-file">
+        <div key={i} className="frui-field-file-list-file">
           <a 
-            className="frui-field-filelist-link"
+            className="frui-field-file-list-link"
             href={url} 
             target="_blank" 
             rel="noreferrer"
@@ -134,7 +134,7 @@ export function Filelist(props: FilelistProps) {
             {url}
           </a>
           <div 
-            className="frui-field-filelist-remove"
+            className="frui-field-file-list-remove"
             onClick={() => handlers.remove(i)}
           >
             &times;
@@ -143,8 +143,8 @@ export function Filelist(props: FilelistProps) {
         </div>
       ))}
       {queued > 0 && (
-        <div className="frui-field-filelist-file">
-          <span className="frui-field-filelist-link">
+        <div className="frui-field-file-list-file">
+          <span className="frui-field-file-list-link">
             {uploading}
           </span>
         </div>

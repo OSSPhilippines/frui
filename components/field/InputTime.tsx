@@ -127,7 +127,7 @@ export function InputTime(props: TimeProps) {
     ...attributes 
   } = props;
   const { handlers } = useTime({ defaultValue, onUpdate, value });
-  const classes = [ 'frui-field-time' ];
+  const classes = [ 'frui-field-input-time' ];
   className && classes.push(className);
   return (
     <>

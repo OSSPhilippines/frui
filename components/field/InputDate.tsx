@@ -102,7 +102,7 @@ export function InputDate(props: DateProps) {
   //hooks
   const { handlers } = useDate({ defaultValue, onUpdate, value });
   //variables
-  const classNames = [ 'frui-field-date' ];
+  const classNames = [ 'frui-field-input-date' ];
   className && classNames.push(className);
   //render
   return (

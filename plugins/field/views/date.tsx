@@ -272,7 +272,7 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can add your own custom class to date or use 
-          the <C value="frui-field-time" /> CSS class.
+          the <C value="frui-field-date" /> CSS class.
         </Translate>
       </p>
 

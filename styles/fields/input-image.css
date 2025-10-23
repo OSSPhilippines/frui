@@ -1,4 +1,4 @@
-.frui-field-file-control {
+.frui-field-input-image-control {
   border-color: var(--black);
   border-style: solid;
   border-width: 1px;
@@ -10,32 +10,35 @@
   width: 100%;
 }
 
-.frui-field-file-reset {
-  color: var(--error);
-  cursor: pointer;
-  font-size: 20px;
-  margin-top: -2px;
-}
-
-.frui-field-file-file {
+.frui-field-input-image-file {
   align-items: center;
   border-color: gray;
   border-style: solid;
-  border-top-width: 0;
   border-width: 1px;
-  box-sizing: border-box;
   color: var(--black);
   display: flex;
   padding-bottom: 6px;
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 6px;
-  width: 100%;
 }
 
-.frui-field-file-link {
+.frui-field-input-image-link {
+  display: block;
   flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.frui-field-input-image-image {
+  height: 20px;
+  margin-right: 8px;
+}
+
+.frui-field-input-image-reset {
+  color: var(--error);
+  cursor: pointer;
+  font-size: 20px;
+  margin-top: -2px;
 }

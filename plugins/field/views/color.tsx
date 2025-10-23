@@ -1,13 +1,13 @@
 //--------------------------------------------------------------------//
 // Imports
 
-import { useState } from 'react';
 //modules
 import { useLanguage, Translate } from 'r22n';
 
 //frui
 import Bread from 'components/element/Bread.js';
-import ColorPicker from 'components/field/InputColor.js';
+import Table from 'components/element/Table.js';
+import InputColor from 'components/field/InputColor.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -25,68 +25,16 @@ import {
 // Constatnts
 
 const props = [
-  [ 'value', 'string', 'No', 'Current color (hex, rgba). If undefined, component is uncontrolled.' ],
-  [ 'defaultValue', 'string', 'No', 'Initial color if `value` is undefined (uncontrolled).' ],
-  [ 'onChange', 'function', 'No', 'Callback `(color: string) => void` returning rgba string.' ],
-  [ 'showAlpha', 'boolean', 'No (true)', 'Show alpha slider and input.' ],
-  [ 'showInputs', 'boolean', 'No (true)', 'Show RGBA input fields.' ],
-  [ 'swatches', 'string[]', 'No', 'Array of hex/rgba colors for swatches.' ],
-  [ 'pickerStyle', 'CSS Object', 'No', 'Custom CSS for the picker popover element.' ],
-  [ 'pickerClassName', 'string', 'No', 'Custom class name for the picker popover element.' ],
-  [ 'className', 'string', 'No', 'Class names for the main wrapper div.' ],
-  [ 'style', 'CSS Object', 'No', 'Inline styles for the main wrapper div.' ],
-  [ 'box', 'boolean', 'No (true)', 'Show color preview box in display.' ],
-  [ 'text', 'boolean', 'No (true)', 'Show color text value in display.' ],
-  [ 'lg', 'boolean', 'No', 'Use large size for display.' ],
-  [ 'md', 'boolean', 'No', 'Use medium size for display.' ],
-  [ 'sm', 'boolean', 'No', 'Use small size for display.' ]
-];
-
-const examples = [
-//0-------------------------------------------------------------------//
-`<ColorPicker
-  value={color}
-  onChange={newRgbaColor => setColor(newRgbaColor)}
-/>`,
-//1-------------------------------------------------------------------//
-`<ColorPicker
-  defaultValue="rgba(245, 166, 35, 1)"
-  onChange={newColor => console.log(newColor)}
-/>`,
-//2-------------------------------------------------------------------//
-`<ColorPicker value={color} onChange={setColor} showAlpha={false} />
-
-<ColorPicker value={color} onChange={setColor} showInputs={false} />
-
-<ColorPicker
-  value={color}
-  onChange={setColor}
-  swatches={['#FF6B6B', '#4ECDC4', 'rgba(69, 183, 209, 0.7)', '#F7B801', '#5F4B8B']}
-/>
-
-const defaultSwatches = ['#D0021B'];
-<ColorPicker value={color} onChange={setColor} swatches={defaultSwatches} />
-`,
-//3-------------------------------------------------------------------//
-`<ColorPicker value={color} onChange={setColor} lg text={false} />
-
-<ColorPicker value={color} onChange={setColor} sm box={false} />
-
-<ColorPicker value={color} onChange={setColor} pickerClassName="custom-popover" />
-
-<ColorPicker
-  value={color}
-  onChange={setColor}
-  pickerStyle={{ background: '#f0f0f0', width: '280px' }}
-/>`,
-//4-------------------------------------------------------------------//
-];
-
-const defaultSwatches = [
-  '#D0021B', '#F5A623', '#F8E71C', '#8B572A', '#7ED321',
-  '#417505', '#BD10E0', '#9013FE', '#4A90E2', '#50E3C2',
-  '#B8E986', '#000000', '#4A4A4A', '#9B9B9B', '#FFFFFF',
-  'rgba(0, 0, 255, 0.5)'
+  [ 'className', 'string', 'No', 'Standard HTML class names' ],
+  [ 'defaultValue', 'string|number|Date', 'No', 'Default value (Uncontrolled)' ],
+  [ 'error', 'string|boolean', 'No', 'Any error message' ],
+  [ 'input', 'string|CSS Object', 'No', 'Input slot styles' ],
+  [ 'name', 'string', 'No', 'Used for react server components.' ],
+  [ 'onChange', 'Function', 'No', 'Event handler when value has changed' ],
+  [ 'onUpdate', 'Function', 'No', 'Update event handler' ],
+  [ 'picker', 'string|CSS Object', 'No', 'Picker slot styles' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
+  [ 'value', 'string|number|Date', 'No', 'Default value (Controlled)' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -151,16 +99,41 @@ export function Menu() {
 export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
-      {/* Info Example */}
+      {/* Hex Example */}
       <Preview 
-        height={100}
-        title="Info Example" 
+        title="Hex Example" 
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
-          TODO
+          <InputColor defaultValue="#006699" />
         </Preview.Example>
-        <Preview.Code>{''}</Preview.Code>
+        <Preview.Code>
+          {'<InputColor defaultValue="#006699" />'}
+        </Preview.Code>
+      </Preview>
+      {/* Name Example */}
+      <Preview 
+        title="Color Name Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <InputColor defaultValue="salmon" />
+        </Preview.Example>
+        <Preview.Code>
+          {'<InputColor defaultValue="salmon" />'}
+        </Preview.Code>
+      </Preview>
+      {/* RGBA Example */}
+      <Preview 
+        title="RGBA Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <InputColor defaultValue="rgba(245, 166, 35, 1)" />
+        </Preview.Example>
+        <Preview.Code>
+          {'<InputColor defaultValue="rgba(245, 166, 35, 1)" />'}
+        </Preview.Code>
       </Preview>
     </div>
   );
@@ -172,8 +145,6 @@ export function Examples() {
 export function Body() {
   //hooks
   const { _ } = useLanguage();
-  const [ pickerColor, setPickerColor ] = useState('rgba(74, 144, 226, 1)');
-  const [ pickerColor2, setPickerColor2 ] = useState('rgba(255, 107, 107, 0.8)');
   //render
   return (
     <div className={
@@ -194,6 +165,178 @@ export function Body() {
         </Code>
       </div>
 
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
+      </h2>
+      <div>
+        <p className="py-2">
+          <Translate>
+            The following are some basic usages of color inputs.
+          </Translate>
+        </p>
+        <Examples />
+      </div>
+
+      <h2 id="managing" className="uppercase font-bold text-lg mt-8">
+        {_('Managing Styles')}
+      </h2>
+      <div>
+        <p className="py-2">
+          <Translate>
+            You can manage the styles of the input color slots by passing 
+            class names, or styles object to
+            the <C value="input" /> slot, 
+            and <C value="control" /> slot in 
+            the <C value="<InputColor>" /> component.
+          </Translate>
+        </p>
+        <Preview 
+          title="Slot Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <div className="flex justify-center">
+              <InputColor className="inline-block" picker="p-2" input="theme-bg-muted theme-white!" />
+            </div>
+          </Preview.Example>
+          <Preview.Code>
+            {'<InputColor className="inline-block" picker="p-2" input="theme-bg-muted theme-white!" />'}
+          </Preview.Code>
+        </Preview>
+      </div>
+
+      <h2 id="events" className="uppercase font-bold text-lg mt-8">
+        {_('Events')}
+      </h2>
+      <div>
+        <p className="py-4">
+          <Translate>
+            <C value="onUpdate" /> is like <C value="onChange" r /> 
+            except the value is passed instead of the change event.
+          </Translate>
+        </p>
+        <Preview 
+          title="Events Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputColor onUpdate={value => alert(value)} />
+          </Preview.Example>
+          <Preview.Code>
+            {'<InputColor onUpdate={value => alert(value)} />'}
+          </Preview.Code>
+        </Preview>
+
+        <h3 className="font-semibold text-md mt-8">
+          {_('On Change')}
+        </h3>
+        <p className="py-4">
+          <Translate>
+            The <C value="onChange" /> event is triggered when the
+            value has changed. The following arguments are passed
+            to the event handler:
+          </Translate>
+        </p>
+        <Table>
+          <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
+          <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
+          <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
+          <Table.Row>
+            <Table.Col className="theme-bg-1 text-left">
+              {_('event')}
+            </Table.Col>
+            <Table.Col className="theme-bg-1 text-left">
+              {_('Event Object')}
+            </Table.Col>
+            <Table.Col className="theme-bg-1 text-left">
+              see: <a 
+                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
+                target="_blank"
+              >Change Event</a>
+            </Table.Col>
+          </Table.Row>
+        </Table>
+
+        <h3 className="font-semibold text-md mt-8">
+          {_('On Update')}
+        </h3>
+        <p className="py-4">
+          <Translate>
+            The <C value="onUpdate" /> event is triggered when the
+            value has been updated. The following arguments are
+            passed to the event handler:
+          </Translate>
+        </p>
+        <Table>
+          <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
+          <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
+          <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
+          <Table.Row>
+            <Table.Col className="theme-bg-1 text-left">
+              {_('value')}
+            </Table.Col>
+            <Table.Col className="theme-bg-1 text-left">
+              {_('string')}
+            </Table.Col>
+            <Table.Col className="theme-bg-1 text-left">
+              <C value="2024-12-01T00:00:00.000Z" quote />
+            </Table.Col>
+          </Table.Row>
+        </Table>
+      </div>
+
+      <h2 id="errors" className="uppercase font-bold text-lg mt-8">
+        {_('Errors')}
+      </h2>
+      <div>
+        <p className="py-4">
+          <Translate>
+            You can pass the <C value="error" /> prop to highlight 
+            the input field red.
+          </Translate>
+        </p>
+        <Preview 
+          title="Error Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputColor error defaultValue="Invalid Color." />
+          </Preview.Example>
+          <Preview.Code>{examples[2]}</Preview.Code>
+        </Preview>
+      </div>
+
+      <h2 id="styles" className="uppercase font-bold text-lg mt-8">
+        {_('Global Styles')}
+      </h2>
+      <p className="py-4">
+        <Translate>
+          You can add your own custom class to date or use 
+          the <C value="frui-field-input-color" /> CSS class.
+        </Translate>
+      </p>
+
+      <h2 id="api" className="uppercase font-bold text-lg mt-8">
+        {_('API Reference')}
+      </h2>
+      <div>
+        <p className="py-2">
+          <Translate>
+            The <C value="<InputColor>" /> field accepts all props of 
+            a standard HTML Input element. See <a 
+              className="theme-2 underline"
+              href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"
+              target="_blank"
+            >Moz</a> for standard input attributes.
+          </Translate>
+        </p>
+        <Props props={props} />
+      </div>
+      
+
+
+
+
       <h2 id="basic" className="uppercase font-bold text-lg mt-8 mb-2">
         {_('Basic Usage (Controlled)')}
       </h2>
@@ -207,13 +350,12 @@ export function Body() {
         </p>
         <div className="curved">
           <div className="flex items-center justify-center p-3 theme-bg-1">
-            <ColorPicker
-              value={pickerColor}
-              onChange={setPickerColor}
-            />
-            <span className='ml-4 text-sm'>
-              Selected: <C value={pickerColor} />
-            </span>
+            {/* 
+              <ColorPicker
+                value={pickerColor}
+                onChange={setPickerColor}
+              />
+            */}
           </div>
           <Code language="typescript">{examples[0]}</Code>
         </div>
@@ -234,10 +376,12 @@ export function Body() {
         </p>
         <div className="curved">
             <div className="flex items-center justify-center p-3 theme-bg-1">
-            <ColorPicker
-              defaultValue="rgba(245, 166, 35, 1)"
-              onChange={(c) => console.log('Uncontrolled changed:', c)}
-            />
+            {/*
+              <ColorPicker
+                defaultValue="rgba(245, 166, 35, 1)"
+                onChange={(c) => console.log('Uncontrolled changed:', c)}
+              />
+            */}
             <span className='ml-4 text-sm'>
               Default: <C value="rgba(245, 166, 35, 1)"/>
             </span>
@@ -260,41 +404,49 @@ export function Body() {
           <div className="flex flex-wrap items-center justify-center p-3 theme-bg-1 gap-4">
             <div>
               <div className="text-xs text-center mb-1">No Alpha</div>
-              <ColorPicker
-                value={pickerColor2}
-                onChange={setPickerColor2}
-                showAlpha={false}
-              />
+              {/*
+                <ColorPicker
+                  value={pickerColor2}
+                  onChange={setPickerColor2}
+                  showAlpha={false}
+                />
+              */}
             </div>
             <div>
               <div className="text-xs text-center mb-1">No Inputs</div>
-              <ColorPicker
-                value={pickerColor2}
-                onChange={setPickerColor2}
-                showInputs={false}
-              />
+              {/*
+                <ColorPicker
+                  value={pickerColor2}
+                  onChange={setPickerColor2}
+                  showInputs={false}
+                />
+              */}
             </div>
             <div>
               <div className="text-xs text-center mb-1">Custom Swatches</div>
-                <ColorPicker
-                value={pickerColor2}
-                onChange={setPickerColor2}
-                swatches={[
-                  '#FF6B6B', 
-                  '#4ECDC4', 
-                  'rgba(69, 183, 209, 0.7)', 
-                  '#F7B801', 
-                  '#5F4B8B'
-                ]}
-              />
+                {/*
+                  <ColorPicker
+                    value={pickerColor2}
+                    onChange={setPickerColor2}
+                    swatches={[
+                      '#FF6B6B', 
+                      '#4ECDC4', 
+                      'rgba(69, 183, 209, 0.7)', 
+                      '#F7B801', 
+                      '#5F4B8B'
+                    ]}
+                  />
+                */}
             </div>
             <div>
               <div className="text-xs text-center mb-1">Default Swatches</div>
-                <ColorPicker
-                value={pickerColor}
-                onChange={setPickerColor}
-                swatches={defaultSwatches}
-              />
+                {/*
+                  <ColorPicker
+                    value={pickerColor}
+                    onChange={setPickerColor}
+                    swatches={defaultSwatches}
+                  />
+                */}
             </div>
           </div>
           <Code language="typescript">{examples[2]}</Code>
@@ -318,27 +470,31 @@ export function Body() {
           <div className="flex flex-wrap items-center justify-center p-3 theme-bg-1 gap-4">
             <div>
               <div className="text-xs text-center mb-1">Large / No Text</div>
-              <ColorPicker value={pickerColor} onChange={setPickerColor} lg text={false} />
+              {/* <ColorPicker value={pickerColor} onChange={setPickerColor} lg text={false} /> */}
             </div>
             <div>
-                <div className="text-xs text-center mb-1">Small / No Box</div>
-              <ColorPicker value={pickerColor} onChange={setPickerColor} sm box={false} />
+              <div className="text-xs text-center mb-1">Small / No Box</div>
+              {/* <ColorPicker value={pickerColor} onChange={setPickerColor} sm box={false} /> */}
             </div>
             <div>
               <div className="text-xs text-center mb-1">Custom Popover Class</div>
-              <ColorPicker
-                value={pickerColor}
-                onChange={setPickerColor}
-                pickerClassName="custom-popover-border"
-              />
+              {/*
+                <ColorPicker
+                  value={pickerColor}
+                  onChange={setPickerColor}
+                  pickerClassName="custom-popover-border"
+                />
+              */}
             </div>
             <div>
               <div className="text-xs text-center mb-1">Custom Popover Style</div>
-              <ColorPicker
-                value={pickerColor}
-                onChange={setPickerColor}
-                pickerStyle={{ background: '#f0f0f0', width: '280px' }}
-              />
+              {/*
+                <ColorPicker
+                  value={pickerColor}
+                  onChange={setPickerColor}
+                  pickerStyle={{ background: '#f0f0f0', width: '280px' }}
+                />
+              */}
             </div>
           </div>
           <Code language="typescript">{examples[3]}</Code>

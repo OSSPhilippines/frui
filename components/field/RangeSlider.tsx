@@ -80,12 +80,12 @@ export function useRangeSlider(config: RangeSliderProps) {
   const startPercent = Math.max(0, Math.min(100, ((startValue - min) / (max - min)) * 100));
   // For single sliders, end position matches start; for range sliders, calculate independently
   const endPercent = range ? Math.max(0, Math.min(100, ((endValue - min) / (max - min)) * 100)) : startPercent;
-  const classNames = ['frui-field-slider'];
+  const classNames = ['frui-field-range-slider'];
 
   // Apply layout-specific styling based on orientation
-  if (vertical) { classNames.push('frui-field-slider-vertical') }
+  if (vertical) { classNames.push('frui-field-range-slider-vertical') }
   // Indicate disabled state for accessibility and styling
-  if (disabled) { classNames.push('frui-field-slider-disabled') }
+  if (disabled) { classNames.push('frui-field-range-slider-disabled') }
   // Allow custom styling from parent components
   if (className) { classNames.push(className) }
 
@@ -243,22 +243,22 @@ export function RangeSlider(props: RangeSliderProps) {
     <div className={classNames.join(' ')} style={style}>
       <div
         ref={sliderRef}
-        className="frui-field-slider-rail"
+        className="frui-field-range-slider-rail"
         style={{ backgroundColor: railColor }}
       >
         {/* Visual indicator of selected range/value */}
-        <div className="frui-field-slider-track" style={trackStyle} />
+        <div className="frui-field-range-slider-track" style={trackStyle} />
 
         {/* Primary handle for single sliders, start handle for range sliders */}
         <div
-          className="frui-field-slider-handle"
+          className="frui-field-range-slider-handle"
           style={startHandleStyle}
           onMouseDown={(e) => handleMouseDown('start', e)}
           onMouseEnter={() => tooltip && setShowTooltip('start')}
           onMouseLeave={() => !dragging && setShowTooltip(null)}
         >
           {tooltip && showTooltip === 'start' && (
-            <div className="frui-field-slider-tooltip">
+            <div className="frui-field-range-slider-tooltip">
               {tooltipFormatter(startValue)}
             </div>
           )}
@@ -267,14 +267,14 @@ export function RangeSlider(props: RangeSliderProps) {
         {/* Second handle only needed for range selection */}
         {range && (
           <div
-            className="frui-field-slider-handle"
+            className="frui-field-range-slider-handle"
             style={endHandleStyle}
             onMouseDown={(e) => handleMouseDown('end', e)}
             onMouseEnter={() => tooltip && setShowTooltip('end')}
             onMouseLeave={() => !dragging && setShowTooltip(null)}
           >
             {tooltip && showTooltip === 'end' && (
-              <div className="frui-field-slider-tooltip">
+              <div className="frui-field-range-slider-tooltip">
                 {tooltipFormatter(endValue)}
               </div>
             )}
@@ -287,11 +287,11 @@ export function RangeSlider(props: RangeSliderProps) {
           return (
             <div
               key={markValue}
-              className="frui-field-slider-mark"
+              className="frui-field-range-slider-mark"
               style={vertical ? { bottom: `${markPercent}%` } : { left: `${markPercent}%` }}
             >
-              <div className="frui-field-slider-mark-dot" />
-              <div className="frui-field-slider-mark-label">{markLabel}</div>
+              <div className="frui-field-range-slider-mark-dot" />
+              <div className="frui-field-range-slider-mark-label">{markLabel}</div>
             </div>
           );
         })}

@@ -1,13 +1,13 @@
-.frui-field-knob {
+.frui-field-knob-slider {
     position: relative;
     display: inline-block;
   }
   
-  .frui-field-knob-svg {
+  .frui-field-knob-slider-svg {
     cursor: pointer;
   }
   
-  .frui-field-knob-label {
+  .frui-field-knob-slider-label {
     position: absolute;
     top: 0;
     left: 0;

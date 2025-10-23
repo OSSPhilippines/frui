@@ -7,7 +7,7 @@ import { useLanguage, Translate } from 'r22n';
 //frui
 import Bread from 'components/element/Bread.js';
 import Table from 'components/element/Table.js';
-import Markdown from 'components/field/Markdown.js';
+import Markdown from 'components/field/MarkdownEditor.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

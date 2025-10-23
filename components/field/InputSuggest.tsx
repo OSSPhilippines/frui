@@ -136,13 +136,13 @@ export function AutocompleteDropdown(props: AutocompleteDropdownProps) {
   }
 
   return (
-    <div className="frui-field-autocomplete-dropdown" style={style}>
-      <div className="frui-field-autocomplete-options">
+    <div className="frui-field-input-suggest-dropdown" style={style}>
+      <div className="frui-field-input-suggest-options">
         {options && options.filter(match).map((option, i) => (
           <div 
             key={i} 
             onClick={_ => select(option)} 
-            className="frui-field-autocomplete-option"
+            className="frui-field-input-suggest-option"
           >
             {option}
           </div>
@@ -177,7 +177,7 @@ export function Autocomplete(props: AutocompleteProps) {
     onUpdate
   });
   //variables
-  const classNames = [ 'frui-field-autocomplete' ];
+  const classNames = [ 'frui-field-input-suggest' ];
   if (className) {
     classNames.push(className);
   }

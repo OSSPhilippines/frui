@@ -39,12 +39,12 @@ export function Password(props: PasswordProps) {
   //hooks
   const { showing, toggle } = usePassword();
 
-  const classNames = [ 'frui-field-password' ];
+  const classNames = [ 'frui-field-input-password' ];
   if (className) {
     classNames.push(className);
   }
 
-  const toggleClass = [ 'frui-field-password-toggle' ];
+  const toggleClass = [ 'frui-field-input-password-toggle' ];
   if (error) {
     toggleClass.push('frui-tx-error', 'frui-bd-error');
   }
@@ -55,7 +55,7 @@ export function Password(props: PasswordProps) {
         {...attributes} 
         error={error} 
         type={showing ? 'text': 'password'} 
-        className="frui-field-password-control"
+        className="frui-field-input-password-control"
       />
       <span className={toggleClass.join(' ')} onClick={toggle}>
         {showing ? '✷': 'A' }

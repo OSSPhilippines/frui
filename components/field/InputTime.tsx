@@ -5,6 +5,7 @@
 import { useEffect, useState } from 'react';
 
 //frui
+import type { ExtendsType } from '../types.js';
 import type { InputProps } from './Input.js';
 import Input from './Input.js';
 
@@ -14,16 +15,15 @@ import Input from './Input.js';
 export type TimeInput = string | number | Date;
 
 export type TimeConfig = {
+  //uncontrolled default value
   defaultValue?: TimeInput, 
+  //handler when value updates
   onUpdate?: (value?: Date) => void,
+  //controlled value
   value?: TimeInput
 };
 
-export type TimeProps = InputProps & {
-  defaultValue?: TimeInput, 
-  onUpdate?: (value?: Date) => void,
-  value?: TimeInput
-};
+export type TimeProps = ExtendsType<InputProps, TimeConfig>;
 
 //--------------------------------------------------------------------//
 // Constants

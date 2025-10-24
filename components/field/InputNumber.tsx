@@ -1,34 +1,58 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//types
-import type { ChangeEvent } from 'react';
+//modules
+import type { ChangeEvent, RefObject } from 'react';
+import { useState, useEffect, useRef } from 'react';
+//frui
+import type { ExtendsType } from '../types.js';
 import type { InputProps } from './Input.js';
-//hooks
-import { useState, useEffect } from 'react';
-//components
 import Input from './Input.js';
 
 //--------------------------------------------------------------------//
 // Types
 
 export type NumberOptions = {
-  min?: number,
-  max?: number,
-  separator?: string,
-  decimal?: string,
-  decimals?: number,
+  //absolute value (no negatives)
   absolute?: boolean
+  //decimal symbol
+  decimal?: string,
+  //number of decimal places
+  decimals?: number,
+  //maximum value
+  max?: number,
+  //minimum value
+  min?: number,
+  //thousands separator
+  separator?: string
 };
 
-export type NumberProps = InputProps & {
-  separator?: string,
-  decimal?: string,
+export type InputNumberConfig = {
+  //absolute value (no negatives)
   absolute?: boolean,
-  width?: string,
-  controls?: Function,
-  onUpdate?: Function
+  //decimal symbol
+  decimal?: string,
+  //uncontrolled value
+  defaultValue?: string | number,
+  //maximum value
+  max?: string | number,
+  //minimum value
+  min?: string | number,
+  //handler when value changes
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
+  //handler when value updates
+  onUpdate?: (value: number) => void,
+  //reference to the input element
+  ref?: RefObject<HTMLInputElement>,
+  //thousands separator
+  separator?: string,
+  //incremental step (when using arrow keys)
+  step?: string | number,
+  //controlled value
+  value?: string | number
 };
+
+export type InputNumberProps = ExtendsType<InputProps, InputNumberConfig>;
 
 //--------------------------------------------------------------------//
 // Helpers
@@ -152,7 +176,7 @@ export function prettify(value: string, separator: string, decimal: string) {
 /**
  * Returns the actual and pretty number format
  */
-export function getFormats(value: string, options: NumberOptions, cursor = 0) {
+export function getFormats(value: string|number, options: NumberOptions, cursor = 0) {
   //expand options
   const {
     min,     
@@ -162,7 +186,7 @@ export function getFormats(value: string, options: NumberOptions, cursor = 0) {
     decimals = 0, 
     absolute = false
   } = options;
-
+  value = String(value || '');
   const dec = decimal || '.';
   //1. Remove any non number related
   const notNumberRelated = new RegExp(`[^0-9\-\\${dec}]`, 'g');
@@ -180,37 +204,41 @@ export function getFormats(value: string, options: NumberOptions, cursor = 0) {
   };
 };
 
-/**
- * Returns the suggested formats based on the input
- */
-export function getFormatsFromInput(input: HTMLInputElement, options: NumberOptions) {
-  const cursor = input.selectionStart? input.selectionStart - 1: 0;
-  return getFormats(input.value, options, cursor);
-};
-
 //--------------------------------------------------------------------//
 // Hooks
 
 /**
  * Number Hook Aggregate
  */
-export function useNumber(config: NumberProps) {
-  //expand props
+export function useInputNumber(config: InputNumberConfig) {
+  //props
   const {
-    value,
-    defaultValue,
-    min,
-    max,      
-    separator = ',', 
-    decimal = '.', 
-    step, 
-    absolute = false,
-    controls,
-    onUpdate,
-    onChange
+    //absolute value (no negatives)
+    absolute = false, //?: boolean
+    //decimal symbol
+    decimal = '.', //?: string
+    //uncontrolled value
+    defaultValue, //?: string | number
+    //maximum value
+    max, //?: number
+    //minimum value
+    min, //?: number
+    //handler when value changes
+    onChange, //?: (e: ChangeEvent<HTMLInputElement>) => void
+    //handler when value updates
+    onUpdate, //?: (value: number) => void
+    //reference to the input element
+    ref: passRef, //?: RefObject<HTMLInputElement>,
+    //thousands separator
+    separator = ',', //?: string
+    //incremental step (when using arrow keys)
+    step, //?: number
+    //controlled value
+    value //?: string | number
   } = config;
-
-  const decimals = step? String(step).split('.')[1]?.length || -1: -1;
+  //auto determine the amount of decimals from the step value
+  const decimals = step ? (String(step).split('.')[1]?.length || -1) : -1;
+  //configure the options (to determine the hidden and display values)
   const options = { 
     min: Number(min) || undefined, 
     max: Number(max) || undefined, 
@@ -219,43 +247,43 @@ export function useNumber(config: NumberProps) {
     decimals, 
     absolute 
   };
-  const initial = getFormats(String(defaultValue || ''), options);
+  //now get the initial hidden and display values
+  const initial = getFormats(defaultValue || '', options);
   //hooks
   const [ hiddenValue, setHiddenValue ] = useState(initial.value);
   const [ displayValue, setDisplayValue ] = useState(initial.display);
   const [ cursor, setCursor ] = useState(0);
-  const [ input, setInput ] = useState<HTMLInputElement>();
+  const internalRef = useRef<HTMLInputElement>(null)
+  //variables
+  const ref = passRef || internalRef;
   //handers
   const handlers = {
-    update: (value: string|number) => {
-      getFormats(String(value), options)
-    },
-    passRef: (element: HTMLInputElement) => {
-      if (element && !input) {
-        controls && controls({ update: handlers.update, value: hiddenValue });
-        setInput(element);
+    update: (value: string|number, cursor?: number, pointer?: number) => {
+      const format = getFormats(String(value), options, cursor);
+      if (Number(hiddenValue) !== Number(format.value)) {
+        setHiddenValue(format.value);
+        onUpdate && onUpdate(Number(format.value));
       }
-    },
-    format: (e: ChangeEvent<HTMLInputElement>) => {
-      const { value, display } = getFormatsFromInput(e.target, options);
-      if (Number(hiddenValue) !== Number(value)) {
-        onChange && onChange(e);
-        onUpdate && onUpdate(String(Number(value)));
-        setHiddenValue(value);
-      }
-      
-      const pointer = e.target.selectionStart || 0;
-      if (displayValue !== display) {
-        if (display.length > displayValue.length) {
-          setCursor(pointer + (display.length - displayValue.length) - 1);
-        } else if (display.length < displayValue.length) {
-          setCursor(pointer - (displayValue.length - display.length) + 1);
-        } else {
-          setCursor(pointer);
+
+      if (displayValue !== format.display) {
+        if (typeof pointer === 'number') {
+          if (format.display.length > displayValue.length) {
+            setCursor(pointer + (format.display.length - displayValue.length) - 1);
+          } else if (format.display.length < displayValue.length) {
+            setCursor(pointer - (displayValue.length - format.display.length) + 1);
+          } else {
+            setCursor(pointer);
+          }
         }
         
-        setDisplayValue(display);
+        setDisplayValue(format.display);
       }
+    },
+    change: (e: ChangeEvent<HTMLInputElement>) => {
+      onChange && onChange(e);
+      const cursor = e.target.selectionStart ? e.target.selectionStart - 1: 0;
+      const pointer = e.target.selectionStart || 0;
+      handlers.update(e.target.value, cursor, pointer);
     },
     defocus: () => {
       setDisplayValue(padDecimals(displayValue, decimal, decimals));
@@ -263,22 +291,22 @@ export function useNumber(config: NumberProps) {
   };
   
   //effects
+  // whenever the cursor value changes, update the actual cursor in the input
   useEffect(() => {
-    if (input && cursor >= 0) {
-      input.selectionStart = cursor;
-      input.selectionEnd = cursor;
+    if (ref.current && cursor >= 0) {
+      ref.current.selectionStart = cursor;
+      ref.current.selectionEnd = cursor;
     } 
   }, [ cursor ]);
-  //for controlled states we should update 
-  //the values when the value prop changes
+  // whenever value changes from outside, update internal state
   useEffect(() => {
     if (value === undefined) return;
-    const newValue = getFormats(String(value || ''), options);
-    setHiddenValue(newValue.value);
-    setDisplayValue(newValue.display);
+    const format = getFormats(String(value || ''), options);
+    setHiddenValue(format.value);
+    setDisplayValue(format.display);
   }, [ value ]);
 
-  return { displayValue, handlers };
+  return { ref, displayValue, hiddenValue, handlers };
 };
 
 //--------------------------------------------------------------------//
@@ -287,48 +315,80 @@ export function useNumber(config: NumberProps) {
 /**
  * Number  Component (Main)
  */
-export function NumberField(props: NumberProps) {
-  //expand props
+export function InputNumber(props: InputNumberProps) {
+  //props
   const { 
+    //absolute value (no negatives)
+    absolute = false, //?: boolean
+    //decimal symbol
+    decimal = '.', //?: string
+    //uncontrolled value
+    defaultValue, //?: string | number
+    //maximum value
+    max, //?: number
+    //minimum value
+    min, //?: number
+    //input name (for form submission)
     name,
-    value,
-    defaultValue,
-    min,
-    max,      
-    separator = ',', 
-    decimal = '.', 
-    step, 
-    absolute = false,
-    controls,
-    onUpdate,
-    onChange,
+    //handler when value changes
+    onChange, //?: (e: ChangeEvent<HTMLInputElement>) => void
+    //handler when value updates
+    onUpdate, //?: (value: number) => void
+    //reference to the input element
+    ref: passRef, //?: RefObject<HTMLInputElement>,
+    //thousands separator
+    separator = ',', //?: string
+    //incremental step (when using arrow keys)
+    step, //?: number
+    //controlled value
+    value, //?: string | number
     ...attributes 
   } = props;
-
-  const { displayValue, handlers } = useNumber({
-    value,
-    defaultValue,
-    min,
-    max,      
-    separator, 
-    decimal, 
-    step, 
+  //hooks
+  const { 
+    ref, 
+    displayValue, 
+    hiddenValue, 
+    handlers 
+  } = useInputNumber({ 
     absolute,
-    controls,
+    decimal,
+    defaultValue,
+    max,
+    min,
+    onChange,
     onUpdate,
-    onChange
+    ref: passRef,
+    separator,
+    step,
+    value
   });
-
+  //render
   return (
-    <Input 
-      passRef={handlers.passRef} 
-      {...attributes}
-      onChange={handlers.format} 
-      onBlur={handlers.defocus} 
-      value={displayValue}  
-    />
+    <>
+      <Input 
+        {...attributes}
+        ref={ref} 
+        onChange={handlers.change} 
+        onBlur={handlers.defocus} 
+        value={displayValue}  
+      />
+      <input 
+        type="hidden" 
+        name={name} 
+        value={hiddenValue} 
+      />
+    </>
   );
 };
 
 //defaults to number
-export default NumberField;
+export default Object.assign(InputNumber, {
+  useInputNumber,
+  getFormats,
+  toggleNegative,
+  fixDecimal,
+  between,
+  padDecimals,
+  prettify
+});

@@ -13,6 +13,9 @@ import type {
   HTMLAttributes
 } from 'react';
 
+//General types
+export type ExtendsType<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
+
 //Native HTML types
 
 export type HTMLElementProps<T = HTMLElement> = DetailedHTMLProps<

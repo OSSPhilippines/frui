@@ -5,7 +5,7 @@
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 //frui
-import type { SlotStyleProp } from '../types.js';
+import type { ExtendsType, SlotStyleProp } from '../types.js';
 import type { InputProps } from './Input.js';
 import colors from '../data/colors.js';
 import getSlotStyles from '../helpers/getSlotStyles.js';
@@ -23,18 +23,27 @@ export type RgbaColor = {
 };
 
 export type ColorConfig = {
+  //uncontrolled default value
   defaultValue?: string,
+  //handler when value changes
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
+  //handler when value updates
   onUpdate?: (color: string) => void,
+  //controlled value
   value?: string
 };
 
 export type ColorPickerProps = {
+  //handler when value updates
   onUpdate?: (color: string) => void,
+  //controlled value
   value?: string
 };
 
-export type ColorProps = Omit<InputProps, 'type'> & ColorConfig & {
+export type ColorProps = ExtendsType<InputProps, ColorConfig> & {
+  //slot: color input styles
   input?: SlotStyleProp,
+  //slot: color picker styles
   picker?: SlotStyleProp
 };
 
@@ -133,14 +142,24 @@ export function toHex(color?: string) {
 /**
  * Hook to manage color state and updates.
  */
-export function useColor(config: ColorConfig) {
+export function useInputColor(config: ColorConfig) {
   //config
-  const { defaultValue, onUpdate, value } = config;
+  const {
+    //uncontrolled default value
+    defaultValue, //?: string
+    //handler when value changes
+    onChange, //?: (e: ChangeEvent<HTMLInputElement>) => void
+    //handler when value updates
+    onUpdate, //?: (color: string) => void
+    //controlled value
+    value //?: string
+  } = config;
   //hooks
   const [ color, setColor ] = useState(defaultValue);
   //handlers
   const handlers = {
     change: (event: ChangeEvent<HTMLInputElement>) => {
+      onChange && onChange(event);
       handlers.update(event.target.value);
     },
     update: (color: string) => {
@@ -178,7 +197,7 @@ export function ColorInput(props: ColorProps) {
     ...attributes 
   } = props;
   //hooks
-  const { color, handlers } = useColor({
+  const { color, handlers } = useInputColor({
     defaultValue,
     onUpdate,
     value
@@ -246,5 +265,5 @@ export function ColorInput(props: ColorProps) {
 export default Object.assign(ColorInput, {
   toHex,
   toRGBA,
-  useColor
+  useInputColor
 });

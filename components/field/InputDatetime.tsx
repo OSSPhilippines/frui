@@ -5,6 +5,7 @@
 import { useEffect, useState } from 'react';
 
 //frui
+import type { ExtendsType } from '../types.js';
 import type { InputProps } from './Input.js';
 import Input from './Input.js';
 import { toDate } from './InputDate.js';
@@ -15,16 +16,15 @@ import { toDate } from './InputDate.js';
 export type DatetimeInput = string | number | Date;
 
 export type DatetimeConfig = {
-  defaultValue?: DatetimeInput, 
+  //uncontrolled default value
+  defaultValue?: DatetimeInput,
+  //handler when value updates 
   onUpdate?: (value?: Date) => void,
+  //controlled value
   value?: DatetimeInput
 };
 
-export type DatetimeProps = Omit<InputProps, 'defaultValue' | 'value' | 'onUpdate'> & {
-  defaultValue?: DatetimeInput,
-  onUpdate?: (value?: Date) => void,
-  value?: DatetimeInput
-};
+export type DatetimeProps = ExtendsType<InputProps, DatetimeConfig>;
 
 //--------------------------------------------------------------------//
 // Helpers
@@ -61,7 +61,7 @@ export function toDatetimeInputString(date?: Date) {
 /**
  * Datetime Hook Aggregate
  */
-export function useDatetime(config: DatetimeConfig) {
+export function useInputDatetime(config: DatetimeConfig) {
   //props
   const { defaultValue, onUpdate, value } = config;
   const defaultDate = toDate(defaultValue);
@@ -109,7 +109,7 @@ export function InputDatetime(props: DatetimeProps) {
     ...attributes 
   } = props;
   //hooks
-  const { handlers } = useDatetime({ defaultValue, onUpdate, value });
+  const { handlers } = useInputDatetime({ defaultValue, onUpdate, value });
   //variables
   const classes = [ 'frui-field-input-datetime' ];
   className && classes.push(className);
@@ -137,5 +137,5 @@ export default Object.assign(InputDatetime, {
   toDate,
   toDateString,
   toDatetimeInputString,
-  useDatetime
+  useInputDatetime
 });

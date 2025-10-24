@@ -4,6 +4,7 @@
 //modules
 import { useEffect, useState } from 'react';
 //frui
+import type { ExtendsType } from '../types.js';
 import type { InputProps } from './Input.js';
 import Input from './Input.js';
 
@@ -13,16 +14,15 @@ import Input from './Input.js';
 export type DateInput = string | number | Date;
 
 export type DateConfig = {
+  //uncontrolled default value
   defaultValue?: DateInput, 
+  //handler when value updates
   onUpdate?: (value?: Date) => void,
+  //controlled value
   value?: DateInput
 };
 
-export type DateProps = Omit<InputProps, 'defaultValue' | 'value' | 'onUpdate'> & {
-  defaultValue?: DateInput,
-  onUpdate?: (value?: Date) => void,
-  value?: DateInput
-};
+export type DateProps = ExtendsType<InputProps, DateConfig>;
 
 //--------------------------------------------------------------------//
 // Helpers
@@ -56,7 +56,7 @@ export function toDateString(date?: Date) {
 /**
  * Date Hook Aggregate
  */
-export function useDate(config: DateConfig) {
+export function useInputDate(config: DateConfig) {
   //props
   const { defaultValue, onUpdate, value } = config;
   const defaultDate = toDate(defaultValue);
@@ -100,7 +100,7 @@ export function InputDate(props: DateProps) {
     ...attributes 
   } = props;
   //hooks
-  const { handlers } = useDate({ defaultValue, onUpdate, value });
+  const { handlers } = useInputDate({ defaultValue, onUpdate, value });
   //variables
   const classNames = [ 'frui-field-input-date' ];
   className && classNames.push(className);
@@ -120,5 +120,5 @@ export function InputDate(props: DateProps) {
 export default Object.assign(InputDate, {
   toDate,
   toDateString,
-  useDate
+  useInputDate
 });

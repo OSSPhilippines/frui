@@ -1,29 +1,26 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//types
+//modules
 import type { ChangeEvent } from 'react';
-import type { InputProps, InputConfig } from './Input.js';
-//hooks
 import { useState, useEffect } from 'react';
-import { useInput } from './Input.js';
-//components
-import Input from './Input.js';
+//frui
+import type { ExtendsType } from '../types.js';
+import type { InputProps, InputConfig } from './Input.js';
+import Input, { useInput } from './Input.js';
 
 //--------------------------------------------------------------------//
 // Types
 
-export type FileConfig = InputConfig & {
+export type FileConfig = ExtendsType<InputConfig, {
   defaultValue?: string,
   onUpload?: (file: File, update: (url: string) => void) => void
-};
+}>;
 
-export type FileProps = InputProps & {
-  defaultValue?: string,
+export type FileProps = ExtendsType<InputProps, FileConfig & {
   onUpdate?: (value: string) => void,
-  onUpload?: (file: File, update: (url: string) => void) => void,
   uploading?: string
-};
+}>;
 
 //--------------------------------------------------------------------//
 // Hooks
@@ -31,7 +28,7 @@ export type FileProps = InputProps & {
 /**
  * File Hook Aggregate
  */
-export function useFile(config: FileConfig) {
+export function useInputFile(config: FileConfig) {
   const {
     defaultValue,
     onChange, 
@@ -87,7 +84,7 @@ export function File(props: FileProps) {
     ...attributes 
   } = props;
   //hooks
-  const { uploading, url, handlers } = useFile({ 
+  const { uploading, url, handlers } = useInputFile({ 
     //files are not controllable because it relies on the file object
     //not the value attribute. Therefore, defaultValue is used instead
     //and value and defaultValue are used interchangeably.
@@ -143,4 +140,4 @@ export function File(props: FileProps) {
 };
 
 //defaults to file
-export default Object.assign(File, { useFile });
+export default Object.assign(File, { useInputFile });

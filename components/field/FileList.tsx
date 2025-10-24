@@ -1,24 +1,23 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//types
+//modules
 import type { ChangeEvent, CSSProperties } from 'react';
-import type { InputProps, InputConfig } from './Input.js';
-//hooks
 import { useState, useEffect } from 'react';
-import { useInput } from './Input.js';
-//components
-import Input from './Input.js';
+//frui
+import type { ExtendsType } from '../types.js';
+import type { InputProps, InputConfig } from './Input.js';
+import Input, { useInput } from './Input.js';
 
 //--------------------------------------------------------------------//
 // Types
 
-export type FilelistConfig = InputConfig & {
+export type FilelistConfig = ExtendsType<InputConfig, {
   defaultValue?: string[],
   onUpload?: (files: File[], update: (urls: string[]) => void) => void
-};
+}>;
 
-export type FilelistProps = InputProps & {
+export type FilelistProps = ExtendsType<InputProps, {
   uploading?: string,
   defaultValue?: string[],
   value?: string[],
@@ -26,7 +25,7 @@ export type FilelistProps = InputProps & {
   className?: string,
   onUpdate?: (value: string[]) => void,
   onUpload?: (files: File[], update: (urls: string[]) => void) => void
-};
+}>;
 
 //--------------------------------------------------------------------//
 // Hooks
@@ -34,7 +33,7 @@ export type FilelistProps = InputProps & {
 /**
  * Filelist Hook Aggregate
  */
-export function useFilelist(config: FilelistConfig) {
+export function useFileList(config: FilelistConfig) {
   const {
     defaultValue,
     onChange, 
@@ -85,7 +84,7 @@ export function useFilelist(config: FilelistConfig) {
 /**
  * Generic File  Component (Main)
  */
-export function Filelist(props: FilelistProps) {
+export function FileList(props: FilelistProps) {
   //separate component related props from field attributes
   const { 
     uploading = 'Uploading...',
@@ -101,7 +100,7 @@ export function Filelist(props: FilelistProps) {
     ...attributes 
   } = props;
   //hooks
-  const { queued, uploaded, handlers } = useFilelist({ 
+  const { queued, uploaded, handlers } = useFileList({ 
     defaultValue: value || defaultValue,
     onChange, 
     onUpdate, 
@@ -154,4 +153,4 @@ export function Filelist(props: FilelistProps) {
 };
 
 //defaults to filelist
-export default Object.assign(Filelist, { useFilelist });
+export default Object.assign(FileList, { useFileList });

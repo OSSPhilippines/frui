@@ -5,6 +5,7 @@
 import type { KeyboardEvent } from 'react';
 import { useState } from 'react';
 //frui
+import type { ExtendsType } from '../types.js';
 import type { SelectProps } from './Select.js';
 import currencies from '../data/currencies.js';
 import countries from '../data/countries.js';
@@ -26,10 +27,10 @@ export type CurrencyData = {
   symbol: string
 }
 
-export type CurrencySelectProps = Omit<SelectProps, 'onUpdate'> & {
+export type CurrencySelectProps = ExtendsType<SelectProps, {
   searchable?: boolean | string,
   onUpdate?: (currency: CurrencyData | CurrencyData[]) => void
-};
+}>;
 
 //--------------------------------------------------------------------//
 // Constants

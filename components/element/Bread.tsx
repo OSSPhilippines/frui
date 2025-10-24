@@ -13,6 +13,7 @@ import {
 
 //frui
 import type { 
+  ExtendsType,
   CallableClassStyleProps,
   CallableSlotStyleProp,
   CallableChildrenProps,
@@ -52,17 +53,19 @@ export type BreadSlicerProps = HTMLElementProps<HTMLSpanElement> & {
   value?: string
 };
 
-export type BreadCrumbProps = CallableClassStyleProps<BreadStates> 
-  & CallableChildrenProps<BreadStates> 
-  & Omit<HTMLElementProps<HTMLAnchorElement>, 'className' | 'style' | 'children'>
-  & {
-    //href link for the crumb
-    href?: string,
-    //icon class name for the crumb (only font awesome)
-    icon?: string,
-    //click handler for each crumb
-    onClick?: () => void
-  };
+export type BreadCrumbProps = ExtendsType<
+  HTMLElementProps<HTMLAnchorElement>,
+  CallableClassStyleProps<BreadStates> 
+    & CallableChildrenProps<BreadStates>
+    & {
+      //href link for the crumb
+      href?: string,
+      //icon class name for the crumb (only font awesome)
+      icon?: string,
+      //click handler for each crumb
+      onClick?: () => void
+    }
+>;
 
 export type BreadProps = HTMLElementProps<HTMLDivElement> & {
   //slot: class/style to apply to each crumb element

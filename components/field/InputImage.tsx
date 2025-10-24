@@ -4,7 +4,7 @@
 //types
 import type { FileProps } from './InputFile.js';
 //hooks
-import { useFile } from './InputFile.js';
+import { useInputFile } from './InputFile.js';
 //components
 import Input from './Input.js';
 
@@ -30,7 +30,7 @@ export function Image(props: FileProps) {
     ...attributes 
   } = props;
   //hooks
-  const { uploading, url, handlers } = useFile({ 
+  const { uploading, url, handlers } = useInputFile({ 
     //files are not controllable because it relies on the file object
     //not the value attribute. Therefore, defaultValue is used instead
     //and value and defaultValue are used interchangeably.

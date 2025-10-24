@@ -6,6 +6,7 @@ import type { CSSProperties, JSX } from 'react';
 
 //frui
 import type { 
+  ExtendsType,
   CallableClassStyleProps,
   HTMLElementProps 
 } from '../types.js';
@@ -17,19 +18,21 @@ export type PagerState = {
   active: boolean
 };
 
-export type PagerProps = CallableClassStyleProps<PagerState> 
-  & Omit<HTMLElementProps<HTMLDivElement>, 'className' | 'style'> 
-  & {
-    total?: number,
-    skip?: number, 
-    take?: number, 
-    radius?: number,
-    onUpdate?: (page: number) => void,
-    prev?: boolean | JSX.Element,
-    next?: boolean | JSX.Element,
-    start?: boolean | JSX.Element,
-    end?: boolean | JSX.Element
-  };
+export type PagerProps = ExtendsType<
+  HTMLElementProps<HTMLDivElement>,
+  CallableClassStyleProps<PagerState> 
+    &  {
+      total?: number,
+      skip?: number, 
+      take?: number, 
+      radius?: number,
+      onUpdate?: (page: number) => void,
+      prev?: boolean | JSX.Element,
+      next?: boolean | JSX.Element,
+      start?: boolean | JSX.Element,
+      end?: boolean | JSX.Element
+    }
+>;
 
 //--------------------------------------------------------------------//
 // Helpers

@@ -5,6 +5,7 @@
 import type { KeyboardEvent } from 'react';
 import { useState } from 'react';
 //frui
+import type { ExtendsType } from '../types.js';
 import type { SelectProps } from './Select.js';
 import countries from '../data/countries.js';
 import { 
@@ -30,10 +31,10 @@ export type CountryData = {
   num: [ string, string ]
 };
 
-export type CountrySelectProps = Omit<SelectProps, 'onUpdate'> & {
+export type CountrySelectProps = ExtendsType<SelectProps, {
   searchable?: boolean | string,
   onUpdate?: (country: CountryData | CountryData[]) => void
-};
+}>;
 
 //--------------------------------------------------------------------//
 // Components

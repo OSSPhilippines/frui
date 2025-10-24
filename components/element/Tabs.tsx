@@ -11,6 +11,7 @@ import {
 
 //frui
 import type {  
+  ExtendsType,
   CallableClassStyleProps,
   CallableSlotStyleProp,
   CallableChildrenProps,
@@ -43,13 +44,13 @@ export type TabsHeadProps = HTMLElementProps & {
   tab?: CallableSlotStyleProp<TabsStates>
 };
 
-export type TabsLabelProps = CallableClassStyleProps<TabsStates>
-  & CallableChildrenProps<TabsStates>
-  & Omit<HTMLElementProps<HTMLDivElement>, 'className' | 'style' | 'children'>
-  & {
+export type TabsLabelProps = ExtendsType<
+  HTMLElementProps<HTMLDivElement>,
+  CallableClassStyleProps<TabsStates>
+    & CallableChildrenProps<TabsStates>
     //unique name for the tab
-    value?: string
-  };
+    & { value?: string }
+>;
 
 export type TabsBodyProps = HTMLElementProps & {
   //slot: class/style to apply to each content

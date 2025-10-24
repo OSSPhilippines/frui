@@ -1,9 +1,10 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//types
+//modules
 import type { ChangeEvent } from 'react';
-import type { HTMLInputProps } from '../types.js';
+//frui
+import type { ExtendsType, HTMLInputProps } from '../types.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -15,10 +16,10 @@ export type InputConfig = {
   onUpdate?: Function
 };
 
-export type InputProps = HTMLInputProps & {
+export type InputProps = ExtendsType<HTMLInputProps, {
   error?: any,
   onUpdate?: (value: string) => void
-};
+}>;
 
 //--------------------------------------------------------------------//
 // Hooks
@@ -52,7 +53,6 @@ export function Input(props: InputProps) {
     className,
     onChange,
     onUpdate,
-    ref,
     ...attributes 
   } = props;
   //hooks
@@ -64,6 +64,7 @@ export function Input(props: InputProps) {
   if (className) {
     classes.push(className);
   }
+
   //render
   return (
     <input 

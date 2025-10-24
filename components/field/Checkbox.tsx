@@ -5,13 +5,13 @@
 import type { ChangeEvent, CSSProperties } from 'react';
 import { useState, useEffect } from 'react';
 //frui
-import type { HTMLInputProps } from '../types.js';
+import type { ExtendsType, HTMLInputProps } from '../types.js';
 import type { InputConfig } from './Input.js';
 
 //--------------------------------------------------------------------//
 // Types
 
-export type CheckboxProps = HTMLInputProps & {
+export type CheckboxProps = ExtendsType<HTMLInputProps, {
   label?: string,
   error?: any,
   check?: boolean,
@@ -23,7 +23,7 @@ export type CheckboxProps = HTMLInputProps & {
   style?: CSSProperties,
   className?: string,
   onUpdate?: (value: string|number|undefined, checked: boolean) => void
-};
+}>;
 
 //--------------------------------------------------------------------//
 // Hooks

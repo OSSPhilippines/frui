@@ -7,7 +7,7 @@ import { useLanguage, Translate } from 'r22n';
 //frui
 import Bread from 'components/element/Bread.js';
 import Table from 'components/element/Table.js';
-import Mask from 'components/field/Mask.js';
+import InputMask from 'components/field/InputMask.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -35,17 +35,6 @@ const props = [
   [ 'passRef', 'LegacyRef', 'No', 'Passes ref to html input' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
   [ 'value', 'string|number', 'No', 'Default value (Controlled)' ]
-];
-
-const examples = [
-//0
-`<Mask mask="999-999-9999" placeholder="999-999-9999" />`,
-//1
-`<Mask mask="(99) 9999[9]-9999" placeholder="(99) 9999[9]-9999" />`,
-//2
-`<Mask mask="999-999-9999" onUpdate={value => alert(value)} />`,
-//3
-`<Mask error mask="999-999-9999" placeholder="999-999-9999" />`
 ];
 
 //--------------------------------------------------------------------//
@@ -90,10 +79,13 @@ export function Menu() {
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#examples">{_('Examples')}</a>
+            <a href="#basic">{_('Basics')}</a>
           </li>
           <li className="ml-2 pb-1">
-            <a href="#styles">{_('Global Styles')}</a>
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#api">{_('API Reference')}</a>
@@ -165,14 +157,17 @@ export function Body() {
             additional <C value="mask" /> prop.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Mask mask="999-999-9999" placeholder="999-999-9999" />
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputMask mask="999-999-9999" placeholder="999-999-9999" />
+          </Preview.Example>
+          <Preview.Code>
+            {'<InputMask mask="999-999-9999" placeholder="999-999-9999" />'}
+          </Preview.Code>
+        </Preview>
         <p className="py-4">
           <Translate>
             Masks uses a combination of the following masking 
@@ -191,14 +186,17 @@ export function Body() {
             optional. This is done by using <C value="[ ]" />.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Mask mask="(99) 9999[9]-9999" placeholder="(99) 9999[9]-9999" />
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
+        <Preview 
+          title="Optional Pattern" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputMask mask="(99) 9999[9]-9999" placeholder="(99) 9999[9]-9999" />
+          </Preview.Example>
+          <Preview.Code>
+            {'<InputMask mask="(99) 9999[9]-9999" placeholder="(99) 9999[9]-9999" />'}
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -211,14 +209,17 @@ export function Body() {
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Mask mask="999-999-9999" onUpdate={value => alert(value)} />
-          </div>
-          <Code language="typescript">
-            {examples[2]}
-          </Code>
-        </div>
+        <Preview 
+          title="Event Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputMask mask="999-999-9999" onUpdate={value => alert(value)} />
+          </Preview.Example>
+          <Preview.Code>
+            {'<InputMask mask="999-999-9999" onUpdate={value => alert(value)} />'}
+          </Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Change')}
@@ -288,23 +289,26 @@ export function Body() {
             the input field red.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Mask error mask="999-999-9999" placeholder="999-999-9999" />
-          </div>
-          <Code language="typescript">
-            {examples[3]}
-          </Code>
-        </div>
+        <Preview 
+          title="Error Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputMask error mask="999-999-9999" placeholder="999-999-9999" />
+          </Preview.Example>
+          <Preview.Code>
+            {'<InputMask error mask="999-999-9999" placeholder="999-999-9999" />'}
+          </Preview.Code>
+        </Preview>
       </div>
       
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
-        <p>
+        <p className="py-2">
           <Translate>
-            The <C value="<Mask>" /> field accepts all props of a 
+            The <C value="<InputMask>" /> field accepts all props of a 
             standard HTML Input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"

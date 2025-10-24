@@ -11,6 +11,7 @@ import {
 
 //frui
 import type {  
+  ExtendsType,
   CallableClassStyleProps,
   CallableSlotStyleProp,
   CallableChildrenProps,
@@ -38,15 +39,19 @@ export type AccordionContextProps = {
   value?: string
 };
 
-export type AccordionLabelProps = CallableClassStyleProps<AccordionStates> 
-  & CallableChildrenProps<AccordionStates>
-  & Omit<HTMLElementProps<HTMLDivElement>, 'className' | 'style' | 'children'>;
+export type AccordionLabelProps = ExtendsType<
+  HTMLElementProps<HTMLDivElement>, 
+  CallableClassStyleProps<AccordionStates> 
+    & CallableChildrenProps<AccordionStates>
+>;
 
 export type AccordionContentProps = HTMLElementProps<HTMLDivElement>;
 
-export type AccordionBellowProps = CallableClassStyleProps<AccordionStates> 
-  & Omit<HTMLElementProps<HTMLDivElement>, 'className' | 'style'>
-  & { value?: string };
+export type AccordionBellowProps = ExtendsType<
+  HTMLElementProps<HTMLDivElement>,
+  CallableClassStyleProps<AccordionStates> 
+    & { value?: string }
+>;
 
 export type AccordionProps = HTMLElementProps<HTMLDivElement> & {
   //slot: class/style to apply to each content element

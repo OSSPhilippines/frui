@@ -7,7 +7,7 @@ import { useLanguage, Translate } from 'r22n';
 //frui
 import Bread from 'components/element/Bread.js';
 import Table from 'components/element/Table.js';
-import Number from 'components/field/Number.js';
+import InputNumber from 'components/field/InputNumber.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -31,7 +31,6 @@ const props = [
   [ 'name', 'string', 'No', 'Used for react server components.' ],
   [ 'onChange', 'Function', 'No', 'Event handler when value has changed' ],
   [ 'onUpdate', 'Function', 'No', 'Update event handler' ],
-  [ 'passRef', 'LegacyRef', 'No', 'Passes ref to html input' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
   [ 'value', 'string', 'No', 'Default value (Controlled)' ]
 ];
@@ -178,7 +177,7 @@ export function Body() {
         <div className="curved overflow-hidden">
           <div className="flex items-center justify-center p-3 theme-bg-1">
             <div className="w-full">
-              <Number min="0" max="10000" step="0.01" defaultValue="12345.67" />
+              <InputNumber min="0" max="10000" step="0.01" defaultValue="12345.67" />
             </div>
           </div>
           <Code language="typescript">
@@ -199,7 +198,7 @@ export function Body() {
         </p>
         <div className="curved overflow-hidden">
           <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Number min="0" max="10000" step="0.01" defaultValue="1234.56" onUpdate={value => alert(value)} />
+            <InputNumber min="0" max="10000" step="0.01" defaultValue="1234.56" onUpdate={value => alert(value)} />
           </div>
           <Code language="typescript">
             {examples[1]}
@@ -276,7 +275,7 @@ export function Body() {
         </p>
         <div className="curved overflow-hidden">
           <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Number error min="0" max="10000" step="0.01" value="1234.56" />
+            <InputNumber error min="0" max="10000" step="0.01" value="1234.56" />
           </div>
           <Code language="typescript">
             {examples[2]}

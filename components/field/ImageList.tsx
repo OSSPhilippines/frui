@@ -1,11 +1,9 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//types
+//frui
 import type { FilelistProps } from './Filelist.js';
-//hooks
-import { useFilelist } from './Filelist.js';
-//components
+import { useFileList } from './Filelist.js';
 import Input from './Input.js';
 
 //--------------------------------------------------------------------//
@@ -14,7 +12,7 @@ import Input from './Input.js';
 /**
  * Generic File  Component (Main)
  */
-export function Imagelist(props: FilelistProps) {
+export function ImageList(props: FilelistProps) {
   //separate component related props from field attributes
   const { 
     uploading = 'Uploading...',
@@ -30,7 +28,7 @@ export function Imagelist(props: FilelistProps) {
     ...attributes 
   } = props;
   //hooks
-  const { queued, uploaded, handlers } = useFilelist({ 
+  const { queued, uploaded, handlers } = useFileList({ 
     defaultValue: defaultValue || value,
     onChange, 
     onUpdate, 
@@ -85,4 +83,4 @@ export function Imagelist(props: FilelistProps) {
 };
 
 //defaults to imagelist
-export default Imagelist;
+export default ImageList;

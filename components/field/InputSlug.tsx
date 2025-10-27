@@ -1,28 +1,37 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//types
-import type { ChangeEvent } from 'react';
+//modules
+import type { ChangeEvent, FocusEvent } from 'react';
+import { useEffect, useState } from 'react';
+//frui
+import type { ExtendsType } from '../types.js'
 import type { InputProps, InputConfig } from './Input.js';
-//components
 import Input from './Input.js';
 
 //--------------------------------------------------------------------//
 // Types
 
-export type SlugConfig = InputConfig & {
-  dash?: boolean,
-  line?: boolean,
+export type SlugConfig = ExtendsType<InputConfig, {
+  //whether to convert to camel case
   camel?: boolean,
-  value: string|number|readonly string[]|undefined,
-  defaultValue?: string|number|readonly string[]|undefined
-};
+  //whether to use dashes instead of underscores (default)
+  dash?: boolean,
+  //uncontrolled default value
+  defaultValue?: string|number|readonly string[]|undefined,
+  //whether to use underscores instead of dashes
+  line?: boolean,
+  //on blur event handler
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void,
+  //controlled value
+  value: string|number|readonly string[]|undefined
+}>;
 
-export type SlugProps = InputProps & {
+export type SlugProps = ExtendsType<InputProps, {
   dash?: boolean,
   line?: boolean,
   camel?: boolean
-};
+}>;
 
 //--------------------------------------------------------------------//
 // Helpers
@@ -30,8 +39,13 @@ export type SlugProps = InputProps & {
 /**
  * Converts a string to a slug
  */
-export function slugify(str: string, noDash = false, noLine = false) {
-  return str.trim()
+export function slugify(
+    value: string, 
+    noDash = false, 
+    noLine = false,
+    allowDashWrapping = false
+  ) {
+  value = value.trim()
     //replace special characters with dashes (or underscores)
     .replace(/[^a-zA-Z0-9\-_]/g, noLine ? '-': '_')
     //replace dashes with underscores (or dashes if allowed)
@@ -41,19 +55,23 @@ export function slugify(str: string, noDash = false, noLine = false) {
     //replace multiple dashes with a single dash
     .replace(/-{2,}/g, '-')
     //replace multiple underscores with a single underscore
-    .replace(/_{2,}/g, '_')
+    .replace(/_{2,}/g, '_');
+
+  if (!allowDashWrapping) {
     //trim dashes and underscores from the beginning and end of the string
-    .replace(/^-+|-+$/g, '')
-    .replace(/^_+|_+$/g, '')
-    //convert to lowercase
-    .toLowerCase();
+    value = value
+      .replace(/^-+|-+$/g, '')
+      .replace(/^_+|_+$/g, '')
+  }
+  //convert to lowercase
+  return value.toLowerCase();
 };
 
 /**
  * Converts a string to camel case
  */
-export function camelfy(str: string) {
-  return str.trim()
+export function camelfy(value: string) {
+  return value.trim()
     //replace special characters with underscores
     .replace(/[^a-zA-Z0-9]/g, '_')
     //replace multiple underscores with a single underscore
@@ -75,23 +93,55 @@ export function camelfy(str: string) {
  * Slug Hook Aggregate
  */
 export function useSlug(config: SlugConfig) {
-  const value = config.value
-    ? (config.camel 
-      ? camelfy(String(config.value))
-      : slugify(String(config.value), !config.dash, !config.line)
-    ) : undefined;
-  const defaultValue = config.defaultValue
-    ? (config.camel 
-      ? camelfy(String(config.defaultValue))
-      : slugify(String(config.defaultValue), !config.dash, !config.line)
-    ) : undefined;
-  const change = (e: ChangeEvent<HTMLInputElement>) => {
-    e.target.value = config.camel 
-      ? camelfy(e.target.value)
-      : slugify(e.target.value, !config.dash, !config.line);
-    config.onChange && config.onChange(e);
+  //config
+  const {
+    //whether to convert to camel case
+    camel, //?: boolean
+    //whether to use dashes instead of underscores (default)
+    dash, //?: boolean
+    //uncontrolled default value
+    defaultValue, //?: string|number|readonly string[]|undefined
+    //whether to use underscores instead of dashes
+    line, //?: boolean
+    //on blur event handler
+    onBlur, //?: (e: ChangeEvent<HTMLInputElement>) => void
+    //on change event handler
+    onChange, //?: (e: ChangeEvent<HTMLInputElement>) => void
+    //controlled value
+    value //: string|number|readonly string[]|undefined
+  } = config;
+  //hooks
+  const [ slug, setSlug ] = useState<string>(camel 
+    ? camelfy(String(defaultValue))
+    : slugify(String(defaultValue), !dash, !line)
+  );
+  //handlers
+  const handlers = {
+    blur(e: FocusEvent<HTMLInputElement>) {
+      setSlug(camel 
+        ? camelfy(String(e.target.value))
+        : slugify(String(e.target.value), !dash, !line)
+      );
+      onBlur && onBlur(e);
+    },
+    change(e: ChangeEvent<HTMLInputElement>) {
+      setSlug(camel 
+        ? camelfy(String(e.target.value))
+        : slugify(String(e.target.value), !dash, !line, true)
+      );
+      onChange && onChange(e);
+    } 
   };
-  return { value, defaultValue, change };
+  //effects
+  useEffect(() => {
+    if (value !== undefined) {
+      const slug = camel 
+        ? camelfy(String(value))
+        : slugify(String(value), !dash, !line);
+      setSlug(slug);
+    }
+  }, [ value, camel, dash, line ]);
+  return { slug, handlers };
 };
 
 //--------------------------------------------------------------------//
@@ -102,30 +152,39 @@ export function useSlug(config: SlugConfig) {
  */
 export function Slug(props: SlugProps) {
   const { 
-    dash,
-    line,
-    camel,
-    value: rawValue, 
-    defaultValue: rawDefaultValue, 
-    onChange,
+    //whether to convert to camel case
+    camel, //?: boolean
+    //whether to use dashes instead of underscores (default)
+    dash, //?: boolean
+    //uncontrolled default value
+    defaultValue, //?: string|number|readonly string[]|undefined
+    //whether to use underscores instead of dashes
+    line, //?: boolean
+    //on blur event handler
+    onBlur, //?: (e: ChangeEvent<HTMLInputElement>) => void
+    //on change event handler
+    onChange, //?: (e: ChangeEvent<HTMLInputElement>) => void
+    //controlled value
+    value, //: string|number|readonly string[]|undefined
     ...attributes 
   } = props;
 
-  const { value, defaultValue, change } = useSlug({
+  const { slug, handlers } = useSlug({
     dash,
     line,
     camel,
-    value: rawValue, 
-    defaultValue: rawDefaultValue,
+    value, 
+    defaultValue,
+    onBlur,
     onChange
   });
 
   return (
     <Input 
       {...attributes} 
-      value={value} 
-      defaultValue={defaultValue} 
-      onChange={change}
+      value={slug} 
+      onBlur={handlers.blur}
+      onChange={handlers.change}
     />
   );
 };

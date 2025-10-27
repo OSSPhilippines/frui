@@ -7,7 +7,7 @@ import { useLanguage, Translate } from 'r22n';
 //frui
 import Bread from 'components/element/Bread.js';
 import Table from 'components/element/Table.js';
-import Slug from 'components/field/Slug.js';
+import InputSlug from 'components/field/InputSlug.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -30,15 +30,6 @@ const props = [
   [ 'passRef', 'LegacyRef', 'No', 'Standard ref input' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS input' ],
   [ 'className', 'string', 'No', 'Standard class name input' ]
-];
-
-const examples = [
-//0
-`<Slug value="I am a Title" />`,
-//1
-`<Slug defaultValue="I am a Title" onUpdate={value => alert(value)} />`,
-//2
-`<Input error={string|true} defaultValue="I am not a Title" />`
 ];
 
 //--------------------------------------------------------------------//
@@ -98,27 +89,6 @@ export function Menu() {
 };
 
 /**
- * Examples component
- */
-export function Examples() {
-  return (
-    <div className="flex items-start rmd-block flex-wrap gap-4">
-      {/* Info Example */}
-      <Preview 
-        height={100}
-        title="Info Example" 
-        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          TODO
-        </Preview.Example>
-        <Preview.Code>{''}</Preview.Code>
-      </Preview>
-    </div>
-  );
-};
-
-/**
  * Documentation body component
  */
 export function Body() {
@@ -131,7 +101,7 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Slugs')}
+        {_('Slug')}
       </h1>
       <div>
         <p className="py-2">
@@ -140,7 +110,7 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Slug from 'frui/field/Slug';`}
+          {`import InputSlug from 'frui/field/InputSlug';`}
         </Code>
       </div>
 
@@ -154,14 +124,17 @@ export function Body() {
             The value for numbers removes commas.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Slug defaultValue="I am a Title" />
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputSlug defaultValue="I am a Title" />
+          </Preview.Example>
+          <Preview.Code>
+            {'<InputSlug defaultValue="I am a Title" />'}
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -174,14 +147,17 @@ export function Body() {
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Slug defaultValue="I am a Title" onUpdate={value => alert(value)} />
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
+        <Preview 
+          title="Event Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputSlug defaultValue="I am a Title" onUpdate={value => alert(value)} />
+          </Preview.Example>
+          <Preview.Code>
+            {'<InputSlug defaultValue="I am a Title" onUpdate={value => alert(value)} />'}
+          </Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Change')}
@@ -251,14 +227,17 @@ export function Body() {
             the input field red.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Slug defaultValue="I am not a Title" error />
-          </div>
-          <Code language="typescript">
-            {examples[2]}
-          </Code>
-        </div>
+        <Preview 
+          title="Error Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputSlug defaultValue="I am not a Title" error />
+          </Preview.Example>
+          <Preview.Code>
+            {'<InputSlug defaultValue="I am not a Title" error />'}
+          </Preview.Code>
+        </Preview>
       </div>
       
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
@@ -267,7 +246,7 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            The <C value="<Slug>" /> field accepts all props of a 
+            The <C value="<InputSlug>" /> field accepts all props of a 
             standard HTML Input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"
@@ -301,9 +280,9 @@ export function Head(props: PageProps) {
   return (
     <ThemeHead
       uri="/field/slug"
-      title="Slug Field"
+      title="InputSlug Field"
       description={
-        'Slug is a field component that wraps the standard '
+        'InputSlug is a field component that wraps the standard '
         + 'HTML input element for slug values.'
       }
       styles={styles}

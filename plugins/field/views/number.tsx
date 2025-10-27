@@ -35,15 +35,6 @@ const props = [
   [ 'value', 'string', 'No', 'Default value (Controlled)' ]
 ];
 
-const examples = [
-//0
-`<Number min="0" max="10000" step="0.01" defaultValue="12345.67" />`,
-//1
-`<Number min="0" max="10000" step="0.01" defaultValue="1234.56" onUpdate={value => alert(value)} />`,
-//2
-`<Input error={string|true} min="0" max="10000" step="0.01" value="1234.56" />`
-];
-
 //--------------------------------------------------------------------//
 // Components
 
@@ -89,6 +80,12 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -106,16 +103,65 @@ export function Menu() {
 export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
-      {/* Info Example */}
+      {/* Default Example */}
       <Preview 
-        height={100}
-        title="Info Example" 
+        title="Default Example" 
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
-          TODO
+          <InputNumber defaultValue="12345.67" />
         </Preview.Example>
-        <Preview.Code>{''}</Preview.Code>
+        <Preview.Code>
+          {'<InputNumber defaultValue="12345.67" />'}
+        </Preview.Code>
+      </Preview>
+      {/* Price Example */}
+      <Preview 
+        title="Price Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <InputNumber defaultValue="12345.67" step="0.01" />
+        </Preview.Example>
+        <Preview.Code>
+          {'<InputNumber defaultValue="12345.67" step="0.01" />'}
+        </Preview.Code>
+      </Preview>
+      {/* l10n Example */}
+      <Preview 
+        title="l10n Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <InputNumber defaultValue="12345.67" decimal="," separator="." />
+        </Preview.Example>
+        <Preview.Code>
+          {'<InputNumber defaultValue="12345.67" decimal="," separator="." />'}
+        </Preview.Code>
+      </Preview>
+      {/* Absolute Example */}
+      <Preview 
+        title="Absolute Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <InputNumber defaultValue="-12345.67" absolute />
+        </Preview.Example>
+        <Preview.Code>
+          {'<InputNumber defaultValue="-12345.67" absolute />'}
+        </Preview.Code>
+      </Preview>
+      {/* Min/Max/Step Example */}
+      <Preview 
+        title="Min/Max/Step Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <InputNumber defaultValue="10" min="0" max="100" step="5" />
+        </Preview.Example>
+        <Preview.Code>
+          {'<InputNumber defaultValue="10" min="0" max="100" step="5" />'}
+        </Preview.Code>
       </Preview>
     </div>
   );
@@ -143,47 +189,23 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Number from 'frui/field/Number';`}
+          {`import InputNumber from 'frui/field/InputNumber';`}
         </Code>
       </div>
-      
-      <h2 id="api" className="uppercase font-bold text-lg mt-8">
-        {_('API Reference')}
-      </h2>
-      <div>
-        <p>
-          <Translate>
-            Numbers accepts all props of a standard HTML Input 
-            element. See <a 
-              className="theme-2 underline"
-              href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"
-              target="_blank"
-            >Moz</a> for standard input attributes.
-          </Translate>
-        </p>
-        <Props props={props} />
-      </div>
 
-      <h2 id="types" className="uppercase font-bold text-lg mt-8">
-        {_('Basic')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
           <Translate>
-            Number fields display commas and can limit decimal length.
-            The value for numbers removes commas.
+            Number wraps the HTML standard <code 
+              className="text-sm theme-2"
+            >{'`<input />`'}</code> element. Therefore, you can 
+            use any input attributes as props.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <div className="w-full">
-              <InputNumber min="0" max="10000" step="0.01" defaultValue="12345.67" />
-            </div>
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+        <Examples />
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -196,15 +218,17 @@ export function Body() {
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview 
+          title="Events Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <InputNumber min="0" max="10000" step="0.01" defaultValue="1234.56" onUpdate={value => alert(value)} />
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
-
+          </Preview.Example>
+          <Preview.Code>
+            {'<InputNumber min="0" max="10000" step="0.01" defaultValue="1234.56" onUpdate={value => alert(value)} />'}
+          </Preview.Code>
+        </Preview>
         <h3 className="font-semibold text-md mt-8">
           {_('On Change')}
         </h3>
@@ -273,23 +297,26 @@ export function Body() {
             the input field red.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview 
+          title="Errors Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <InputNumber error min="0" max="10000" step="0.01" value="1234.56" />
-          </div>
-          <Code language="typescript">
-            {examples[2]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>
+            {'<InputNumber error min="0" max="10000" step="0.01" value="1234.56" />'}
+          </Preview.Code>
+        </Preview>
       </div>
       
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
-        <p>
+        <p className="py-4">
           <Translate>
-            The <C value="<Number>" /> field accepts all props of a 
+            The <C value="<InputNumber>" /> field accepts all props of a 
             standard HTML Input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"

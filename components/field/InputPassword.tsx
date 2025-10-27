@@ -1,19 +1,23 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//types
-import type { InputProps } from './Input.js';
-//hooks
+//modules
 import { useState } from 'react';
-//components
+//frui
+import type { ExtendsType, SlotStyleProp } from '../types.js';
+import type { InputProps } from './Input.js';
+import getSlotStyles from '../helpers/getSlotStyles.js';
+import getClassStyles from '../helpers/getClassStyles.js';
 import Input from './Input.js';
 
 //--------------------------------------------------------------------//
 // Types
 
-export type PasswordProps = InputProps & {
+export type PasswordProps = ExtendsType<InputProps, {
+  input?: SlotStyleProp,
+  toggle?: SlotStyleProp,
   error?: boolean
-};
+}>;
 
 //--------------------------------------------------------------------//
 // Hooks
@@ -35,29 +39,68 @@ export function usePassword() {
  */
 export function Password(props: PasswordProps) {
   //remove type
-  const { error, className, ...attributes } = props;
+  const { 
+    error, 
+    className, 
+    input, 
+    style,
+    toggle: toggler,
+    ...attributes 
+  } = props;
   //hooks
   const { showing, toggle } = usePassword();
 
-  const classNames = [ 'frui-field-input-password' ];
-  if (className) {
-    classNames.push(className);
-  }
-
-  const toggleClass = [ 'frui-field-input-password-toggle' ];
-  if (error) {
-    toggleClass.push('frui-tx-error', 'frui-bd-error');
-  }
+  //configure classes
+  const classes = [ 'frui-field-input-password' ];
+  className && classes.push(className);
+  //get slot styles
+  const slots = {
+    input: input ? getSlotStyles(input, {}): {},
+    toggle: toggler ? getSlotStyles(toggler, {}): {}
+  };
+  const styles = {
+    input: getClassStyles({
+      //default classes to apply
+      classes: [ 'frui-field-input-password-control' ],
+      //style props
+      props: {
+        //prefer direct props over slot props
+        className: slots.input.className,
+        //prefer direct props over slot props
+        style: slots.input.style
+      },
+      //state to pass to callable props
+      state: {}
+    }),
+    toggle: getClassStyles({
+      //default classes to apply
+      classes: [ 'frui-field-input-password-toggle' ],
+      //style props
+      props: {
+        //prefer direct props over slot props
+        className: slots.toggle.className,
+        //prefer direct props over slot props
+        style: slots.toggle.style
+      },
+      //state to pass to callable props
+      state: {}
+    })
+  };
 
   return (
-    <div className={classNames.join(' ')}>
+    <div className={classes.join(' ')} style={style}>
       <Input 
         {...attributes} 
         error={error} 
         type={showing ? 'text': 'password'} 
-        className="frui-field-input-password-control"
+        className={styles.input.classes.join(' ')}
+        style={styles.input.styles}
       />
-      <span className={toggleClass.join(' ')} onClick={toggle}>
+      <span 
+        className={styles.toggle.classes.join(' ')} 
+        onClick={toggle}
+        style={styles.toggle.styles}
+      >
         {showing ? '✷': 'A' }
       </span>
     </div>

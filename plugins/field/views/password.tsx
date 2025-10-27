@@ -7,7 +7,7 @@ import { useLanguage, Translate } from 'r22n';
 //frui
 import Bread from 'components/element/Bread.js';
 import Table from 'components/element/Table.js';
-import Password from 'components/field/Password.js';
+import InputPassword from 'components/field/InputPassword.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -31,18 +31,8 @@ const props = [
   [ 'name', 'string', 'No', 'Used for react server components.' ],
   [ 'onChange', 'Function', 'No', 'Event handler when value has changed' ],
   [ 'onUpdate', 'Function', 'No', 'Update event handler' ],
-  [ 'passRef', 'LegacyRef', 'No', 'Passes ref to html input' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
   [ 'value', 'string', 'No', 'Default value (Controlled)' ]
-];
-
-const examples = [
-//0
-`<Password className="w-full" placeholder="Enter Password..." />`,
-//1
-`<Password placeholder="Enter password.." onUpdate={value => alert(value)} />`,
-//2
-`<Password error={string|true} value="Not a password" />`
 ];
 
 //--------------------------------------------------------------------//
@@ -87,7 +77,13 @@ export function Menu() {
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#examples">{_('Examples')}</a>
+            <a href="#basic">{_('Basic Example')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
@@ -98,27 +94,6 @@ export function Menu() {
         </ul>
       </div>
     </aside>
-  );
-};
-
-/**
- * Examples component
- */
-export function Examples() {
-  return (
-    <div className="flex items-start rmd-block flex-wrap gap-4">
-      {/* Info Example */}
-      <Preview 
-        height={100}
-        title="Info Example" 
-        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          TODO
-        </Preview.Example>
-        <Preview.Code>{''}</Preview.Code>
-      </Preview>
-    </div>
   );
 };
 
@@ -135,7 +110,7 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Passwords')}
+        {_('Password')}
       </h1>
       <div>
         <p className="py-2">
@@ -144,7 +119,7 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Password from 'frui/field/Password';`}
+          {`import InputPassword from 'frui/field/InputPassword';`}
         </Code>
       </div>
 
@@ -158,14 +133,17 @@ export function Body() {
             The value for numbers removes commas.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Password className="w-full" placeholder="Enter Password..." />
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputPassword className="w-full" placeholder="Enter InputPassword..." />
+          </Preview.Example>
+          <Preview.Code>
+            {'<InputPassword className="w-full" placeholder="Enter InputPassword..." />'}
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -178,14 +156,17 @@ export function Body() {
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Password className="w-full" placeholder="Enter password.." onUpdate={value => alert(value)} />
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
+        <Preview 
+          title="Event Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputPassword className="w-full" placeholder="Enter password.." onUpdate={value => alert(value)} />
+          </Preview.Example>
+          <Preview.Code>
+            {'<InputPassword className="w-full" placeholder="Enter password.." onUpdate={value => alert(value)} />'}
+          </Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Change')}
@@ -255,15 +236,30 @@ export function Body() {
             the input field red.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Password className="w-full" error value="Not a password" />
-          </div>
-          <Code language="typescript">
-            {examples[2]}
-          </Code>
-        </div>
+        <Preview 
+          title="Error Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <InputPassword className="w-full" error value="Not a password" />
+          </Preview.Example>
+          <Preview.Code>
+            {'<InputPassword className="w-full" error value="Not a password" />'}
+          </Preview.Code>
+        </Preview>
       </div>
+
+      <h2 id="styles" className="uppercase font-bold text-lg mt-8">
+        {_('Global Styles')}
+      </h2>
+      <p className="py-4">
+        <Translate>
+          You can add use 
+          the <C l value="frui-field-password" />, <C l value="frui-field-password-control" />, 
+          and <C l value="frui-field-password-toggle" /> CSS classes to 
+          globally theme password fields.
+        </Translate>
+      </p>
       
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
@@ -271,7 +267,7 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            The <C value="<Password>" /> field accepts all props of a 
+            The <C value="<InputPassword>" /> field accepts all props of a 
             standard HTML Input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"
@@ -305,9 +301,9 @@ export function Head(props: PageProps) {
   return (
     <ThemeHead
       uri="/field/password"
-      title="Password Field"
+      title="InputPassword Field"
       description={
-        'Password is a field component that wraps the standard '
+        'InputPassword is a field component that wraps the standard '
         + 'HTML input element for password values.'
       }
       styles={styles}

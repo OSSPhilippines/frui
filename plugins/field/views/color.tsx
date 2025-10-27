@@ -82,6 +82,15 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#managing">{_('Managing Styles')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">

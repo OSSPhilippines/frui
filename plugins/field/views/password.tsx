@@ -254,10 +254,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add use 
+          You can use 
           the <C l value="frui-field-password" />, <C l value="frui-field-password-control" />, 
-          and <C l value="frui-field-password-toggle" /> CSS classes to 
-          globally theme password fields.
+          and <C l value="frui-field-password-toggle" /> CSS classes to globally theme the password field.
         </Translate>
       </p>
       

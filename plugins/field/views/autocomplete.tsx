@@ -389,17 +389,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to 
-          <C l value="Autocomplete" /> components
-          or use any combination of <C 
-            value="frui-field-autocomplete" 
-          />, <C 
-            value="frui-field-autocomplete-dropdown" 
-          />, <C 
-            value="frui-field-autocomplete-options" 
-          />, and <C 
-            value="frui-field-autocomplete-option" 
-          /> CSS classes.
+          You can use
+          the <C l value="Autocomplete" />, <C value="frui-field-autocomplete"/>, <C value="frui-field-autocomplete-dropdown"/>, <C value="frui-field-autocomplete-options"/>, 
+          and <C value="frui-field-autocomplete-option" /> CSS classes to globally theme autocomplete.
         </Translate>
       </p>
       

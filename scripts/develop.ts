@@ -6,6 +6,7 @@ import unocss from 'unocss/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 //stackpress
 import { server as http } from '@stackpress/ingest/http';
+import { pathToFileURL } from 'node:url';
 
 type Config = typeof config;
 
@@ -26,7 +27,7 @@ const config = {
     cssFiles: [ 
       'virtual:uno.css',
       //'react-toastify/dist/ReactToastify.css',
-      path.join(cwd, 'frui.css')
+      pathToFileURL(path.join(cwd, 'frui.css')).href
     ],
     //vite plugins
     plugins: [ unocss(), tsconfigPaths() ]

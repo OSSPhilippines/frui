@@ -123,13 +123,19 @@ export function Menu() {
           {_('Code Editor')}
         </a>
         <ul className="list-disc pl-2">
-          <li className="ml-2 pb-1">
-            <a href="#examples">{_('Examples')}</a>
+          <li>
+            <a href="#basic">{_('Basics')}</a>
           </li>
-          <li className="ml-2 pb-1">
-            <a href="#styles">{_('Global Styles')}</a>
+          <li>
+            <a href="#languages">{_('Languages')}</a>
           </li>
-          <li className="ml-2 pb-1">
+          <li>
+            <a href="#unsupported-languages">{_('Unsupported Languages')}</a>
+          </li>
+          <li>
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li>
             <a href="#api">{_('API Reference')}</a>
           </li>
         </ul>
@@ -178,7 +184,7 @@ export function Body() {
           </Translate>
         </p>
         <Preview 
-          title="Basic Example" 
+          title="Basic Usage" 
           className="border border-2"
         >
           <Preview.Example center padding>
@@ -231,7 +237,7 @@ export function Body() {
         </Preview>
       </div>
 
-      <h3 className="font-semibold text-md mt-8">
+      <h3 className="font-semibold text-md mt-8" id="unsupported-languages">
         {_('Unsupported Languages')}
       </h3>
       <div>
@@ -256,7 +262,7 @@ export function Body() {
           </Translate>
         </p>
         <Preview 
-          title="Basic Example" 
+          title="Event Example"
           className="border border-2"
         >
           <Preview.Example center padding>

@@ -294,8 +294,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can apply rounded, colors and shapes to the 
-            <C l value="Switch" /> component.
+            You can use
+            the <C l value="Switch" /> component and the <C l value="frui-field-switch" /> CSS class to globally theme the switch field.
           </Translate>
         </p>
 

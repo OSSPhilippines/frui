@@ -318,14 +318,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to images
-          or use any of the respective 
-          <C l value="frui-field-image" />, 
-          <C l value="frui-field-image-control" />, 
-          <C l value="frui-field-image-reset" />, 
-          <C l value="frui-field-image-file" />,  
-          <C l value="frui-field-image-link" />, and 
-          <C l value="frui-field-image-image" /> CSS classes. 
+          You can use
+          the <C l value="frui-field-image" />, <C l value="frui-field-image-control" />, <C l value="frui-field-image-reset" />, <C l value="frui-field-image-file" />,  <C l value="frui-field-image-link" />,
+          and <C l value="frui-field-image-image" />  CSS classes to globally theme the image field.
         </Translate>
       </p>
       

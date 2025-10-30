@@ -271,8 +271,8 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to date or use 
-          the <C value="frui-field-date" /> CSS class.
+          You can use 
+          the <C value="frui-field-date" /> CSS class to globally theme the date field.
         </Translate>
       </p>
 

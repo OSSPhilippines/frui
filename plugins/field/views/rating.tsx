@@ -459,12 +459,12 @@ export function Body() {
       </h2>
       <p className="py-4 mt-4">
         <Translate>
-          You can add custom CSS classes via 
+          You can use
           the <C value="className" /> prop or inline styles via 
-          the <C value="style" /> prop to the 
+          the <C value="style" /> prop on the 
           root <C l value=".frui-rating-root" /> element. 
-          Component-specific classes like <C l value=".frui-rating-icon" />, <C l value=".frui-rating-icon-filled" />, <C l value=".frui-rating-icon-empty" />, <C l value=".frui-rating-icon-hover" />, <C l value=".frui-rating-icon-active" />, 
-          and size/state classes are available for more targeted styling.
+          Component-specific CSS classes such as <C l value=".frui-rating-icon" />, <C l value=".frui-rating-icon-filled" />, <C l value=".frui-rating-icon-empty" />, <C l value=".frui-rating-icon-hover" />, <C l value=".frui-rating-icon-active" />, 
+          along with size and state classes, are available for more targeted styling.
         </Translate>
       </p>
 

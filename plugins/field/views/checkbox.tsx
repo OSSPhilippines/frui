@@ -90,6 +90,12 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -367,16 +373,6 @@ export function Body() {
         </div>
       </div>
 
-      <h2 id="styles" className="uppercase font-bold text-lg mt-8">
-        {_('Global Styles')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          You can apply rounded, colors and shapes to the 
-          <C l value="Checkbox" /> component.
-        </Translate>
-      </p>
-
       <h3 className="font-semibold text-md mt-8">
         {_('Rounded')}
       </h3>
@@ -464,12 +460,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can also add your own custom class to 
-          <C l value="Checkbox" /> components
-          or use any combination of 
-          <C l value="frui-field-option" />, 
-          <C l value="frui-field-option-control" />, and
-          <C l value="frui-field-option-label" /> CSS classes.
+          You can use
+          the <C l value="Checkbox" /> components or use any combination of <C l value="frui-field-option" />, <C l value="frui-field-option-control" />,
+          and<C l value="frui-field-option-label" /> CSS classes to globally theme checkbox.
         </Translate>
       </p>
       

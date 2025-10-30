@@ -396,8 +396,8 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to knob
-          or use the <C l value="frui-field-knob" /> CSS class. 
+          You can use
+          the <C l value="frui-field-knob" /> CSS class to globally theme the knob field.
         </Translate>
       </p>
             

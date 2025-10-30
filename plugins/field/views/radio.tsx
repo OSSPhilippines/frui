@@ -325,8 +325,8 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can apply rounded, colors and shapes to the 
-          <C l value="Radio" /> component.
+          You can use
+          the <C l value="Radio" /> CSS class to globally theme the radio field.
         </Translate>
       </p>
 

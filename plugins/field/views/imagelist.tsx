@@ -299,14 +299,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to imagelist
-          or use any of the respective 
-          <C l value="frui-field-imagelist" />, 
-          <C l value="frui-field-imagelist-control" />, 
-          <C l value="frui-field-imagelist-file" />, 
-          <C l value="frui-field-imagelist-link" />,  
-          <C l value="frui-field-imagelist-image" />, and 
-          <C l value="frui-field-imagelist-remove" /> CSS classes. 
+          You can use
+          the <C l value="frui-field-imagelist" />, <C l value="frui-field-imagelist-control" />, <C l value="frui-field-imagelist-file" />, <C l value="frui-field-imagelist-link" />,  <C l value="frui-field-imagelist-image" />,
+          and <C l value="frui-field-imagelist-remove" /> CSS classes to globally theme the image list field.
         </Translate>
       </p>
       

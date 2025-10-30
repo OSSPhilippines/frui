@@ -251,12 +251,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to selects
-          or use any of the respective 
-          <C l value="frui-field-taglist" />, 
-          <C l value="frui-field-taglist-tag" />, 
-          <C l value="frui-field-taglist-remove" />, and
-          <C l value="frui-field-taglist-input" /> CSS classes. 
+          You can use
+          the <C l value="frui-field-taglist" />, <C l value="frui-field-taglist-tag" />, <C l value="frui-field-taglist-remove" />,
+          and <C l value="frui-field-taglist-input" /> CSS classes to globally theme the tag list field.
         </Translate>
       </p>
       

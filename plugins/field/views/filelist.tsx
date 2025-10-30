@@ -300,13 +300,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to filelist
-          or use any of the respective 
-          <C l value="frui-field-filelist" />, 
-          <C l value="frui-field-filelist-control" />, 
-          <C l value="frui-field-filelist-file" />, 
-          <C l value="frui-field-filelist-link" />, and 
-          <C l value="frui-field-filelist-remove" /> CSS classes. 
+          You can use
+          the <C l value="frui-field-filelist" />, <C l value="frui-field-filelist-control" />, <C l value="frui-field-filelist-file" />, <C l value="frui-field-filelist-link" />,
+          and <C l value="frui-field-filelist-remove" />  CSS classes to globally theme the file list field.
         </Translate>
       </p>
       

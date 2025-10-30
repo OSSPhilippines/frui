@@ -264,8 +264,8 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to datetime or use 
-          the <C value="frui-field-datetime" /> CSS class.
+          You can use 
+          the <C value="frui-field-datetime" /> CSS class to globally theme the datetime field.
         </Translate>
       </p>
 

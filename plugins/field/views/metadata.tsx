@@ -300,13 +300,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to selects
-          or use any of the respective 
-          <C l value="frui-field-metadata-row" />, 
-          <C l value="frui-field-metadata-remove" />, 
-          <C l value="frui-field-metadata-name" />, 
-          <C l value="frui-field-metadata-value" />, and
-          <C l value="frui-fieldset-add" /> CSS classes. 
+          You can use
+          the <C l value="frui-field-metadata-row" />, <C l value="frui-field-metadata-remove" />, <C l value="frui-field-metadata-name" />, <C l value="frui-field-metadata-value" />,
+          and <C l value="frui-fieldset-add" /> CSS classes to globally theme the metadata field.
         </Translate>
       </p>
       

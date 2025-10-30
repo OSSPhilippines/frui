@@ -254,12 +254,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to selects
-          or use any of the respective 
-          <C l value="frui-field-textlist-row" />, 
-          <C l value="frui-field-textlist-remove" />, 
-          <C l value="frui-field-textlist-value" />, and
-          <C l value="frui-fieldset-add" /> CSS classes. 
+          You can use
+          the <C l value="frui-field-textlist-row" />, <C l value="frui-field-textlist-remove" />, <C l value="frui-field-textlist-value" />,
+          and <C l value="frui-fieldset-add" /> CSS classes to globally theme the text list field.
         </Translate>
       </p>
       

@@ -318,13 +318,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to files
-          or use any of the respective 
-          <C l value="frui-field-file" />, 
-          <C l value="frui-field-file-control" />, 
-          <C l value="frui-field-file-reset" />, 
-          <C l value="frui-field-file-file" />, and 
-          <C l value="frui-field-file-link" /> CSS classes. 
+          You can use
+          the <C l value="frui-field-file" />, <C l value="frui-field-file-control" />, <C l value="frui-field-file-reset" />, <C l value="frui-field-file-file" />,
+          and <C l value="frui-field-file-link" /> CSS classes to globally theme the file field.
         </Translate>
       </p>
       

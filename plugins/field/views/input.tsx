@@ -11,12 +11,12 @@ import Input from 'components/field/Input.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Props, 
-  Code, 
+import {
+  LayoutPanel,
+  LayoutProvider,
+  ThemeHead,
+  Props,
+  Code,
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -36,12 +36,12 @@ const props = [
 ];
 
 const examples = [
-//0
-`<Input name="name" placeholder="Enter name.." value="John Doe" />`,
-//1
-`<Input onUpdate={value => alert(value)} />`,
-//2
-`<Input error={string|true} value="Not a hotdog." />`
+  //0
+  `<Input name="name" placeholder="Enter name.." value="John Doe" />`,
+  //1
+  `<Input onUpdate={value => alert(value)} />`,
+  //2
+  `<Input error={string|true} value="Not a hotdog." />`
 ];
 
 //--------------------------------------------------------------------//
@@ -89,7 +89,10 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
-            <a href="#styles">{_('Global Styles')}</a>
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#api">{_('API Reference')}</a>
@@ -126,27 +129,27 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
           <Translate>
-            Input wraps the HTML standard <code 
+            Input wraps the HTML standard <code
               className="text-sm theme-2"
-            >{'`<input />`'}</code> element. Therefore, you can 
+            >{'`<input />`'}</code> element. Therefore, you can
             use any input attributes as props.
           </Translate>
         </p>
-        <Preview 
-          title="Basic Example" 
+        <Preview
+          title="Basic Example"
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <Input 
-              name="name" 
-              placeholder="Enter name.." 
-              value="John Doe" 
+            <Input
+              name="name"
+              placeholder="Enter name.."
+              value="John Doe"
             />
           </Preview.Example>
           <Preview.Code>{examples[0]}</Preview.Code>
@@ -159,18 +162,18 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            <C value="onUpdate" /> is like <C value="onChange" r /> 
+            <C value="onUpdate" /> is like <C value="onChange" r />
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <Preview 
-          title="On Update Example" 
+        <Preview
+          title="With Events"
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <Input 
-              onUpdate={value => alert(value)} 
-              placeholder="Type something..." 
+            <Input
+              onUpdate={value => alert(value)}
+              placeholder="Type something..."
             />
           </Preview.Example>
           <Preview.Code>{examples[1]}</Preview.Code>
@@ -198,8 +201,8 @@ export function Body() {
               {_('Event Object')}
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
-              see: <a 
-                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
+              see: <a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event"
                 target="_blank"
               >Change Event</a>
             </Table.Col>
@@ -240,12 +243,12 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight 
+            You can pass the <C value="error" /> prop to highlight
             the input field red.
           </Translate>
         </p>
-        <Preview 
-          title="Input With Error" 
+        <Preview
+          title="Error Example"
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
@@ -254,15 +257,15 @@ export function Body() {
           <Preview.Code>{examples[2]}</Preview.Code>
         </Preview>
       </div>
-      
+
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Input>" /> field accepts all props of 
-            a standard HTML Input element. See <a 
+            The <C value="<Input>" /> field accepts all props of
+            a standard HTML Input element. See <a
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"
               target="_blank"

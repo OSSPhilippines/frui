@@ -127,6 +127,12 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#languages">{_('Languages')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -166,8 +172,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Example')}
       </h2>
       <div>
         <p className="py-4">
@@ -256,7 +262,7 @@ export function Body() {
           </Translate>
         </p>
         <Preview 
-          title="Basic Example" 
+          title="With Events" 
           className="border border-2"
         >
           <Preview.Example center padding>

@@ -12,12 +12,12 @@ import Rating from 'components/field/Rating.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Props, 
-  Code, 
+import {
+  LayoutPanel,
+  LayoutProvider,
+  ThemeHead,
+  Props,
+  Code,
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -44,8 +44,8 @@ const propsData: [string, string, string, string][] = [
 ];
 
 const examples = [
-//0
-`function ControlledRatingExample() {
+  //0
+  `function ControlledRatingExample() {
   const [controlledValue, setControlledValue] = useState<number | null>(2);
 
   return (
@@ -59,12 +59,12 @@ const examples = [
     />
   );
 }`,
-//1
-`<Rating defaultValue={3} size="small" />
+  //1
+  `<Rating defaultValue={3} size="small" />
 <Rating defaultValue={3} size="medium" />
 <Rating defaultValue={3} size="large" />`,
-//2
-`// Define custom icons (examples)
+  //2
+  `// Define custom icons (examples)
 const HeartIcon = (props) => (/* SVG code */);
 const CircleIcon = (props) => (/* SVG code */);
 
@@ -82,17 +82,17 @@ const CircleIcon = (props) => (/* SVG code */);
   emptyIcon={<CircleIcon style={{ opacity: 0.3 }} />}
   max={6}
 />`,
-//3
-`{/* Default: Icons 1, 2, 3 are filled */}
+  //3
+  `{/* Default: Icons 1, 2, 3 are filled */}
 <Rating defaultValue={3} />
 
 {/* highlightSelectedOnly: Only icon 3 is filled */}
 <Rating defaultValue={3} highlightSelectedOnly />`,
-//4
-`<Rating value={4} readOnly />
+  //4
+  `<Rating value={4} readOnly />
 <Rating value={2} disabled />`,
-//5
-`<Rating
+  //5
+  `<Rating
   name="event-rating"
   defaultValue={1}
   onChange={(event, value) => alert(\`onChange: Value \${value} selected!\`)}
@@ -158,6 +158,24 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#controlled">{_('Controlled')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#sizes">{_('Sizes')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#icons">{_('Custom Icons')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#highlight">{_('Highlighting')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#read-only">{_('Read Only & Disabled')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -176,9 +194,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview 
+      <Preview
         height={100}
-        title="Info Example" 
+        title="Info Example"
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -219,8 +237,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
@@ -229,14 +247,17 @@ export function Body() {
             It renders 5 stars.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Basic Rating Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <Rating name="basic-rating" defaultValue={3} />
-          </div>
-          <Code language="typescript">
+          </Preview.Example>
+          <Preview.Code>
             {`<Rating name="basic-rating" defaultValue={3} />`}
-          </Code>
-        </div>
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="controlled" className="uppercase font-bold text-lg mt-8">
@@ -245,25 +266,32 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            For a controlled component, use the <C value="value" />, 
-            and <C value="onChange" r /> props, typically with React 
+            For a controlled component, use the <C value="value" />,
+            and <C value="onChange" r /> props, typically with React
             state.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex flex-col items-center justify-center p-3 theme-bg-1 space-y-2">
-            <Rating
-              name="controlled-rating"
-              value={controlledValue}
-              onChange={(_, newValue) => {
-                setControlledValue(newValue);
-                console.log('Controlled Change:', newValue);
-              }}
-            />
-            <span>{_('Current Value:')} {controlledValue ?? 'null'}</span>
-          </div>
-          <Code language="typescript">{examples[0]}</Code>
-        </div>
+        <Preview
+          title="Controlled Rating Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <div className="flex flex-col items-center space-y-2">
+              <Rating
+                name="controlled-rating"
+                value={controlledValue}
+                onChange={(_, newValue) => {
+                  setControlledValue(newValue);
+                  console.log('Controlled Change:', newValue);
+                }}
+              />
+              <span>{_('Current Value:')} {controlledValue ?? 'null'}</span>
+            </div>
+          </Preview.Example>
+          <Preview.Code>
+            {examples[0]}
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="sizes" className="uppercase font-bold text-lg mt-8">
@@ -272,20 +300,27 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Use the <C value="size" /> prop to adjust the icon size. 
-            The sizes correspond to CSS 
-            classes <C l value=".frui-rating-sizeSmall" />, <C l value=".frui-rating-sizeMedium" />, 
+            Use the <C value="size" /> prop to adjust the icon size.
+            The sizes correspond to CSS
+            classes <C l value=".frui-rating-sizeSmall" />, <C l value=".frui-rating-sizeMedium" />,
             and <C l value=".frui-rating-sizeLarge" />.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex flex-col space-y-2 items-start justify-center p-3 theme-bg-1">
-            <div><C value="small" />: <Rating defaultValue={3} size="small" /></div>
-            <div><C value="medium" /> (default): <Rating defaultValue={3} size="medium" /></div>
-            <div><C value="large" />: <Rating defaultValue={3} size="large" /></div>
-          </div>
-          <Code language="typescript">{examples[1]}</Code>
-        </div>
+        <Preview
+          title="Rating Sizes"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
+            <div className="flex flex-col space-y-2">
+              <div><C value="small" />: <Rating defaultValue={3} size="small" /></div>
+              <div><C value="medium" /> (default): <Rating defaultValue={3} size="medium" /></div>
+              <div><C value="large" />: <Rating defaultValue={3} size="large" /></div>
+            </div>
+          </Preview.Example>
+          <Preview.Code>
+            {examples[1]}
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="icons" className="uppercase font-bold text-lg mt-8">
@@ -294,32 +329,37 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Provide custom React nodes to the <C value="icon" /> (filled) 
-            and <C value="emptyIcon" /> props. If <C value="emptyIcon" /> is 
-            not provided, a faded version of the <C value="icon" /> is 
-            used. Styles target <C l value=".frui-rating-icon-filled" />, 
+            Provide custom React nodes to the <C value="icon" /> (filled)
+            and <C value="emptyIcon" /> props. If <C value="emptyIcon" /> is
+            not provided, a faded version of the <C value="icon" /> is
+            used. Styles target <C l value=".frui-rating-icon-filled" />,
             and <C l value=".frui-rating-icon-empty" />.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex flex-col space-y-2 items-start justify-center p-3 theme-bg-1">
-            <Rating 
-              defaultValue={3.5} 
-              icon={<HeartIcon />} 
-              emptyIcon={<HeartIcon 
-              style={{ opacity: 0.3 }} />} 
-              max={5} 
-            />
-            <Rating 
-              defaultValue={4} 
-              icon={<CircleIcon />} 
-              emptyIcon={<CircleIcon 
-              style={{ opacity: 0.3 }} />} 
-              max={6} 
-            />
-          </div>
-          <Code language="typescript">{examples[2]}</Code>
-        </div>
+        <Preview
+          title="Custom Icons Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
+            <div className="flex flex-col space-y-4 items-start">
+              <Rating
+                defaultValue={3.5}
+                icon={<HeartIcon />}
+                emptyIcon={<HeartIcon style={{ opacity: 0.3 }} />}
+                max={5}
+              />
+              <Rating
+                defaultValue={4}
+                icon={<CircleIcon />}
+                emptyIcon={<CircleIcon style={{ opacity: 0.3 }} />}
+                max={6}
+              />
+            </div>
+          </Preview.Example>
+          <Preview.Code>
+            {examples[2]}
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="highlight" className="uppercase font-bold text-lg mt-8">
@@ -328,18 +368,25 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            By default, all icons up to the selected/hovered 
-            value are filled. Use <C value="highlightSelectedOnly" /> to 
+            By default, all icons up to the selected/hovered
+            value are filled. Use <C value="highlightSelectedOnly" /> to
             only fill the single selected/hovered icon.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex flex-col space-y-2 items-start justify-center p-3 theme-bg-1">
-            <div>Default: <Rating defaultValue={3} /></div>
-            <div>Highlight Selected Only: <Rating defaultValue={3} highlightSelectedOnly /></div>
-          </div>
-          <Code language="typescript">{examples[3]}</Code>
-        </div>
+        <Preview
+          title="Highlighting Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
+            <div className="flex flex-col space-y-4 items-start">
+              <div>Default: <Rating defaultValue={3} /></div>
+              <div>Highlight Selected Only: <Rating defaultValue={3} highlightSelectedOnly /></div>
+            </div>
+          </Preview.Example>
+          <Preview.Code>
+            {examples[3]}
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="read-only" className="uppercase font-bold text-lg mt-8">
@@ -348,19 +395,26 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Use <C value="readOnly" /> to display a rating that 
+            Use <C value="readOnly" /> to display a rating that
             cannot be changed by the user (<C l value=".frui-rating-readOnly" /> class).
-            Use <C value="disabled" /> to prevent interaction 
+            Use <C value="disabled" /> to prevent interaction
             and apply disabled styling (<C l value=".frui-rating-disabled" /> class).
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex flex-col space-y-2 items-start justify-center p-3 theme-bg-1">
-            <div>Read Only: <Rating value={4} readOnly /></div>
-            <div>Disabled: <Rating value={2} disabled /></div>
-          </div>
-          <Code language="typescript">{examples[4]}</Code>
-        </div>
+        <Preview
+          title="Read Only & Disabled States"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
+            <div className="flex flex-col space-y-4 items-start">
+              <div>Read Only: <Rating value={4} readOnly /></div>
+              <div>Disabled: <Rating value={2} disabled /></div>
+            </div>
+          </Preview.Example>
+          <Preview.Code>
+            {examples[4]}
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -369,89 +423,26 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The <C value="onChange" /> callback fires when a 
-            rating is selected. The <C value="onChangeActive" r /> callback 
-            fires when the mouse enters or leaves an icon, 
-            providing the hovered value (or null). Hover styles 
-            are mainly handled via CSS (<C l value=".frui-rating-icon-hover" />).
+            Use <C value="readOnly" /> to display a rating that
+            cannot be changed by the user (<C l value=".frui-rating-readOnly" /> class).
+            Use <C value="disabled" /> to prevent interaction
+            and apply disabled styling (<C l value=".frui-rating-disabled" /> class).
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex flex-col items-start justify-center p-3 theme-bg-1 space-y-2">
-            <Rating
-              name="event-rating"
-              defaultValue={1}
-              onChange={(_, v) => alert(`onChange: Value ${v} selected!`)}
-              onChangeActive={(_, v) => setHoverActiveValue(v)}
-            />
-            <span>{_('Hovered Value (via onChangeActive):')} {hoverActiveValue ?? 'null'}</span>
-          </div>
-          <Code language="typescript">{examples[5]}</Code>
-        </div>
-
-        <h3 className="font-semibold text-md mt-8">
-          {_('onChange')}
-        </h3>
-        <p className="py-4">
-          <Translate>
-            The <C value="onChange" /> event is triggered when the
-            value has changed. The following arguments are passed
-            to the event handler:
-          </Translate>
-        </p>
-        <Table>
-          <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Description')}</Table.Head>
-          <Table.Row>
-            <Table.Col className="theme-bg-1 text-left">
-              <C value="event" />
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              <C value="ChangeEvent<HTMLInputElement>" />
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('The change event on the underlying radio input.')}
-            </Table.Col>
-          </Table.Row>
-            <Table.Row>
-              <Table.Col className="theme-bg-1 text-left">
-                <C value="value" />
-              </Table.Col>
-              <Table.Col className="theme-bg-1 text-left">
-                <C value="number | null" />
-              </Table.Col>
-              <Table.Col className="theme-bg-1 text-left">
-                {_('The newly selected rating value.')}
-              </Table.Col>
-          </Table.Row>
-        </Table>
-
-        <h3 className="font-semibold text-md mt-8">
-          {_('onChangeActive')}
-        </h3>
-        <p className="py-4">
-          <Translate>
-              The <C value="onChangeActive" /> event is triggered 
-              when the mouse pointer enters or leaves an icon. The 
-              following arguments are passed to the event handler:
-          </Translate>
-        </p>
-        <Table>
-            <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
-            <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
-            <Table.Head className="theme-bg-3 text-left">{_('Description')}</Table.Head>
-              <Table.Row>
-                <Table.Col className="theme-bg-1 text-left"><C value="event" /></Table.Col>
-                <Table.Col className="theme-bg-1 text-left"><C value="MouseEvent" /></Table.Col>
-                <Table.Col className="theme-bg-1 text-left">{_('The native mouse event.')}</Table.Col>
-            </Table.Row>
-            <Table.Row>
-                <Table.Col className="theme-bg-1 text-left"><C value="value" /></Table.Col>
-                <Table.Col className="theme-bg-1 text-left"><C value="number | null" /></Table.Col>
-                <Table.Col className="theme-bg-1 text-left">{_('The value of the icon being hovered, or null if the mouse leaves the component.')}</Table.Col>
-            </Table.Row>
-        </Table>
+        <Preview
+          title="Read Only & Disabled States"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
+            <div className="flex flex-col space-y-4 items-start">
+              <div>Read Only: <Rating value={4} readOnly /></div>
+              <div>Disabled: <Rating value={2} disabled /></div>
+            </div>
+          </Preview.Example>
+          <Preview.Code>
+            {examples[4]}
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -459,11 +450,11 @@ export function Body() {
       </h2>
       <p className="py-4 mt-4">
         <Translate>
-          You can add custom CSS classes via 
-          the <C value="className" /> prop or inline styles via 
-          the <C value="style" /> prop to the 
-          root <C l value=".frui-rating-root" /> element. 
-          Component-specific classes like <C l value=".frui-rating-icon" />, <C l value=".frui-rating-icon-filled" />, <C l value=".frui-rating-icon-empty" />, <C l value=".frui-rating-icon-hover" />, <C l value=".frui-rating-icon-active" />, 
+          You can use
+          the <C value="className" /> prop or inline styles via
+          the <C value="style" /> prop to the
+          root <C l value=".frui-rating-root" /> element.
+          Component-specific classes like <C l value=".frui-rating-icon" />, <C l value=".frui-rating-icon-filled" />, <C l value=".frui-rating-icon-empty" />, <C l value=".frui-rating-icon-hover" />, <C l value=".frui-rating-icon-active" />,
           and size/state classes are available for more targeted styling.
         </Translate>
       </p>
@@ -474,7 +465,7 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            The <C value="<Rating>" /> field wraps visually hidden 
+            The <C value="<Rating>" /> field wraps visually hidden
             radio inputs for accessibility and form integration.
             It accepts the following specific props.
           </Translate>

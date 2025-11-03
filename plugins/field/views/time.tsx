@@ -11,12 +11,12 @@ import InputTime from 'components/field/InputTime.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Props, 
-  Code, 
+import {
+  LayoutPanel,
+  LayoutProvider,
+  ThemeHead,
+  Props,
+  Code,
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -36,14 +36,14 @@ const props = [
 ];
 
 const examples = [
-//0
-`<InputTime defaultValue={new Date().toISOString()} />
+  //0
+  `<InputTime defaultValue={new Date().toISOString()} />
 <InputTime defaultValue={new Date()} />
 <InputTime defaultValue={(new Date()).getTime()} />`,
-//1
-`<InputTime onUpdate={value => alert(value)} />`,
-//2
-`<InputTime error={string|true} value="Invalid Date." />`
+  //1
+  `<InputTime onUpdate={value => alert(value)} />`,
+  //2
+  `<InputTime error={string|true} value="Invalid Date." />`
 ];
 
 //--------------------------------------------------------------------//
@@ -84,11 +84,11 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Input Time')}
+          {_('Time')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#basic">{_('Basics')}</a>
+            <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#events">{_('Events')}</a>
@@ -134,23 +134,23 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
           <Translate>
-            Time fields use the default <C 
+            Time fields use the default <C
               quote={true}
               value={`<input type="time" />`}
-            /> element, but normalizes 
-            values to ISO strings using <C value="toISOString()" />. 
-            <C l value="onUpdate" /> is like <C value="onChange" r /> 
+            /> element, but normalizes
+            values to ISO strings using <C value="toISOString()" />.
+            <C l value="onUpdate" /> is like <C value="onChange" r />
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <Preview 
-          title="Basic Example" 
+        <Preview
+          title="Basic Example"
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
@@ -166,12 +166,12 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            <C value="onUpdate" /> is like <C value="onChange" r /> 
+            <C value="onUpdate" /> is like <C value="onChange" r />
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <Preview 
-          title="Events Example" 
+        <Preview
+          title="With Events"
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
@@ -202,8 +202,8 @@ export function Body() {
               {_('Event Object')}
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
-              see: <a 
-                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
+              see: <a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event"
                 target="_blank"
               >Change Event</a>
             </Table.Col>
@@ -244,12 +244,12 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight 
+            You can pass the <C value="error" /> prop to highlight
             the input field red.
           </Translate>
         </p>
-        <Preview 
-          title="Error Example" 
+        <Preview
+          title="Error Example"
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
@@ -264,8 +264,8 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to time components or 
-          use the <C value="frui-field-date" /> CSS class.
+          You can use
+          the <C value="frui-field-date" /> CSS class to globally theme the time field.
         </Translate>
       </p>
 
@@ -275,8 +275,8 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<InputTime>" /> field accepts all props of a 
-            standard HTML Input element. See <a 
+            The <C value="<InputTime>" /> field accepts all props of a
+            standard HTML Input element. See <a
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"
               target="_blank"

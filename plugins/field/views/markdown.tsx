@@ -11,12 +11,12 @@ import Markdown from 'components/field/MarkdownEditor.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Props, 
-  Code, 
+import {
+  LayoutPanel,
+  LayoutProvider,
+  ThemeHead,
+  Props,
+  Code,
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -38,12 +38,12 @@ const props = [
 ];
 
 const examples = [
-//0
-`<Markdown name="name" placeholder="Enter name.." defaultValue="# Hello World" />`,
-//1
-`<Markdown onUpdate={value => alert(value)} value="# Hello World" />`,
-//2
-`<Markdown error onUpdate={value => alert(value)} value="# Not a hotdog." />`
+  //0
+  `<Markdown name="name" placeholder="Enter name.." defaultValue="# Hello World" />`,
+  //1
+  `<Markdown onUpdate={value => alert(value)} value="# Hello World" />`,
+  //2
+  `<Markdown error onUpdate={value => alert(value)} value="# Not a hotdog." />`
 ];
 
 //--------------------------------------------------------------------//
@@ -91,7 +91,10 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
-            <a href="#styles">{_('Global Styles')}</a>
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#api">{_('API Reference')}</a>
@@ -109,9 +112,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview 
+      <Preview
         height={100}
-        title="Info Example" 
+        title="Info Example"
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -149,28 +152,35 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
           <Translate>
-            Markdown wraps the HTML standard <code 
+            Markdown wraps the HTML standard <code
               className="text-sm theme-2"
-            >{'`<textarea />`'}</code> element. Therefore, you can 
+            >{'`<textarea />`'}</code> element. Therefore, you can
             use any textarea attributes as props.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Basic Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
-              <Markdown name="name" placeholder="Enter name.." defaultValue="# Hello World" />
+              <Markdown
+                name="name"
+                placeholder="Enter markdown here..."
+                defaultValue="# Hello World"
+              />
             </div>
-          </div>
-          <Code language="typescript">
+          </Preview.Example>
+          <Preview.Code>
             {examples[0]}
-          </Code>
-        </div>
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -179,21 +189,26 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            <C value="onUpdate" /> is like <C value="onChange" r /> 
+            <C value="onUpdate" /> is like <C value="onChange" r />
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="With Events"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
-              <Markdown onUpdate={value => alert(value)} value="# Hello World" />
+              <Markdown
+                onUpdate={value => alert(value)}
+                value="# Hello World"
+              />
             </div>
-          </div>
-          <Code language="typescript">
+          </Preview.Example>
+          <Preview.Code>
             {examples[1]}
-          </Code>
-        </div>
-        
+          </Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Change')}
@@ -217,8 +232,8 @@ export function Body() {
               {_('Event Object')}
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
-              see: <a 
-                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
+              see: <a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event"
                 target="_blank"
               >Change Event</a>
             </Table.Col>
@@ -259,30 +274,37 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight 
+            You can pass the <C value="error" /> prop to highlight
             the markdown field red.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Error State Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
-              <Markdown error onUpdate={value => alert(value)} value="# Not a hotdog." />
+              <Markdown
+                error
+                onUpdate={value => alert(value)}
+                value="# Not a hotdog."
+              />
             </div>
-          </div>
-          <Code language="typescript">
+          </Preview.Example>
+          <Preview.Code>
             {examples[2]}
-          </Code>
-        </div>
+          </Preview.Code>
+        </Preview>
       </div>
-      
+
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p>
           <Translate>
-            The <C value="<Markdown>" /> field accepts all props of a standard HTML Textarea 
-            element. See <a 
+            The <C value="<Markdown>" /> field accepts all props of a standard HTML Textarea
+            element. See <a
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea"
               target="_blank"

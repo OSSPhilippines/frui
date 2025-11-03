@@ -96,7 +96,7 @@ export function Menu() {
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#basics">{_('Basics')}</a>
+            <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#searchable">{_('Searchable')}</a>
@@ -148,8 +148,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div className="relative z-[100]">
         <p className="py-4">
@@ -224,7 +224,7 @@ export function Body() {
           </Translate>
         </p>
         <Preview
-          title="Event Listeners"
+          title="With Events"
           className="border border-2 theme-bc-3 relative z-[100]"
         >
           <Preview.Example center padding>
@@ -318,18 +318,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to selects
-          or use any of the respective 
-          <C l value="frui-field-currency-select" />, 
-          <C l value="frui-field-select-control" />, 
-          <C l value="frui-field-select-placeholder" />, 
-          <C l value="frui-field-select-dropdown" />,  
-          <C l value="frui-field-select-search" />,  
-          <C l value="frui-field-select-search-control" />,  
-          <C l value="frui-field-select-search-icon" />,  
-          <C l value="frui-field-select-options" />,  
-          <C l value="frui-field-select-option" />, and 
-          <C l value="frui-field-select-label" /> CSS classes. 
+          You can use
+          the <C l value="frui-field-currency-select" />, <C l value="frui-field-select-control" />, <C l value="frui-field-select-placeholder" />, <C l value="frui-field-select-dropdown" />, <C l value="frui-field-select-search" />, <C l value="frui-field-select-search-control" />, <C l value="frui-field-select-search-icon" />, <C l value="frui-field-select-options" />, <C l value="frui-field-select-option" />,
+          and <C l value="frui-field-select-label" /> CSS classes to globally theme the currency field.
         </Translate>
       </p>
                   

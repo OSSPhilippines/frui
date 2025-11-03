@@ -11,12 +11,12 @@ import Metadata from 'components/field/Metadata.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Props, 
-  Code, 
+import {
+  LayoutPanel,
+  LayoutProvider,
+  ThemeHead,
+  Props,
+  Code,
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -41,20 +41,20 @@ const props = [
 ];
 
 const examples = [
-//0
-`<Metadata 
+  //0
+  `<Metadata 
   add="Add Reference" 
   placeholder={['Enter Key', 'Enter Value']} 
   value={Object.entries({ foo: 'Foo', bar: 'Bar' })} 
 />`,
-//1
-`<Metadata type="date" add="Add Date" />`,
-//2
-`<Metadata type="number" min="0" max="100000" step="0.01" add="Add Number" />`,
-//3
-`<Metadata add="Add Reference" onUpdate={value => alert(JSON.stringify(value))} />`,
-//4
-`<Metadata error value={Object.entries({ foo: 'Foo', bar: 'Bar' })} />`
+  //1
+  `<Metadata type="date" add="Add Date" />`,
+  //2
+  `<Metadata type="number" min="0" max="100000" step="0.01" add="Add Number" />`,
+  //3
+  `<Metadata add="Add Reference" onUpdate={value => alert(JSON.stringify(value))} />`,
+  //4
+  `<Metadata error value={Object.entries({ foo: 'Foo', bar: 'Bar' })} />`
 ];
 
 //--------------------------------------------------------------------//
@@ -102,6 +102,12 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -120,9 +126,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview 
+      <Preview
         height={100}
-        title="Info Example" 
+        title="Info Example"
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -160,51 +166,57 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
           <Translate>
-            The following is a basic example of a 
+            The following is a basic example of a
             <C l value="Metadata" /> field.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Basic Metadata Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
-              <Metadata 
-                add="Add Reference" 
-                placeholder={['Enter Key', 'Enter Value']} 
-                value={Object.entries({ foo: 'Foo', bar: 'Bar' })} 
+              <Metadata
+                add="Add Reference"
+                placeholder={['Enter Key', 'Enter Value']}
+                value={Object.entries({ foo: 'Foo', bar: 'Bar' })}
               />
             </div>
-          </div>
-          <Code language="typescript">
+          </Preview.Example>
+          <Preview.Code>
             {examples[0]}
-          </Code>
-        </div>
+          </Preview.Code>
+        </Preview>
         <p className="py-4">
           <Translate>
             You can set different value types using the
-            <C l value="type" /> prop. Its value can be one of 
+            <C l value="type" /> prop. Its value can be one of
             <C l value='type="text"' quote />,
             <C l value='type="number"' quote />,
             <C l value='type="date"' quote />,
             <C l value='type="time"' quote />, or
-            <C l value='type="datetime"' quote />. 
+            <C l value='type="datetime"' quote />.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Date Type Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
               <Metadata type="date" add="Add Date" />
             </div>
-          </div>
-          <Code language="typescript">
+          </Preview.Example>
+          <Preview.Code>
             {examples[1]}
-          </Code>
-        </div>
+          </Preview.Code>
+        </Preview>
         <p className="py-4">
           <Translate>
             For <C value='type="number"' quote />, you can also
@@ -212,16 +224,25 @@ export function Body() {
             <C l value="step" /> props.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Number Type with Constraints"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
-              <Metadata type="number" min="0" max="100000" step="0.01" add="Add Number" />
+              <Metadata
+                type="number"
+                min="0"
+                max="100000"
+                step="0.01"
+                add="Add Number"
+              />
             </div>
-          </div>
-          <Code language="typescript">
+          </Preview.Example>
+          <Preview.Code>
             {examples[2]}
-          </Code>
-        </div>
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -230,20 +251,26 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following example makes use of all the possible 
+            The following example makes use of all the possible
             events for <C value="Metadata" />.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="relative flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Metadata Events"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
-              <Metadata add="Add Reference" onUpdate={value => alert(JSON.stringify(value))} />
+              <Metadata
+                add="Add Reference"
+                onUpdate={value => alert(JSON.stringify(value))}
+              />
             </div>
-          </div>
-          <Code language="typescript">
+          </Preview.Example>
+          <Preview.Code>
             {examples[3]}
-          </Code>
-        </div>
+          </Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Update')}
@@ -279,20 +306,26 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight 
+            You can pass the <C value="error" /> prop to highlight
             the Metadata field red.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Error State Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
-              <Metadata error value={Object.entries({ foo: 'Foo', bar: 'Bar' })} />
+              <Metadata
+                error
+                value={Object.entries({ foo: 'Foo', bar: 'Bar' })}
+              />
             </div>
-          </div>
-          <Code language="typescript">
+          </Preview.Example>
+          <Preview.Code>
             {examples[4]}
-          </Code>
-        </div>
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -300,23 +333,19 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to selects
-          or use any of the respective 
-          <C l value="frui-field-metadata-row" />, 
-          <C l value="frui-field-metadata-remove" />, 
-          <C l value="frui-field-metadata-name" />, 
-          <C l value="frui-field-metadata-value" />, and
-          <C l value="frui-fieldset-add" /> CSS classes. 
+          You can use
+          the <C l value="frui-field-metadata-row" />, <C l value="frui-field-metadata-remove" />, <C l value="frui-field-metadata-name" />, <C l value="frui-field-metadata-value" />,
+          and <C l value="frui-fieldset-add" /> CSS classes to globally theme the metadata field.
         </Translate>
       </p>
-      
+
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-4">
           <Translate>
-            The <C value="<Metadata>" /> field can be passed the 
+            The <C value="<Metadata>" /> field can be passed the
             following props.
           </Translate>
         </p>

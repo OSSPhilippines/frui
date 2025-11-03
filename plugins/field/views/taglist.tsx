@@ -11,12 +11,12 @@ import Taglist from 'components/field/Taglist.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Props, 
-  Code, 
+import {
+  LayoutPanel,
+  LayoutProvider,
+  ThemeHead,
+  Props,
+  Code,
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -42,12 +42,12 @@ const props = [
 ];
 
 const examples = [
-//0
-`<Taglist placeholder="Enter Value" value={['foo', 'bar']} />`,
-//1
-`<Taglist onUpdate={console.log} />`,
-//2
-`<Taglist error value={['foo', 'bar']} />`
+  //0
+  `<Taglist placeholder="Enter Value" value={['foo', 'bar']} />`,
+  //1
+  `<Taglist onUpdate={console.log} />`,
+  //2
+  `<Taglist error value={['foo', 'bar']} />`
 ];
 
 //--------------------------------------------------------------------//
@@ -95,6 +95,12 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -113,9 +119,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview 
+      <Preview
         height={100}
-        title="Info Example" 
+        title="Info Example"
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -153,26 +159,29 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
           <Translate>
-            The following is a basic example of a 
+            The following is a basic example of a
             <C l value="Taglist" /> field.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Basic Taglist Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
               <Taglist placeholder="Enter Value" value={['foo', 'bar']} />
             </div>
-          </div>
-          <Code language="typescript">
+          </Preview.Example>
+          <Preview.Code>
             {examples[0]}
-          </Code>
-        </div>
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -181,20 +190,23 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following example makes use of all the possible 
+            The following example makes use of all the possible
             events for <C value="Taglist" />.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="relative flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="With Events"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
               <Taglist onUpdate={console.log} />
             </div>
-          </div>
-          <Code language="typescript">
+          </Preview.Example>
+          <Preview.Code>
             {examples[1]}
-          </Code>
-        </div>
+          </Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Update')}
@@ -230,20 +242,23 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight 
+            You can pass the <C value="error" /> prop to highlight
             the Taglist field red.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Error State Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
               <Taglist error value={['foo', 'bar']} />
             </div>
-          </div>
-          <Code language="typescript">
+          </Preview.Example>
+          <Preview.Code>
             {examples[2]}
-          </Code>
-        </div>
+          </Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -251,22 +266,19 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to selects
-          or use any of the respective 
-          <C l value="frui-field-taglist" />, 
-          <C l value="frui-field-taglist-tag" />, 
-          <C l value="frui-field-taglist-remove" />, and
-          <C l value="frui-field-taglist-input" /> CSS classes. 
+          You can use
+          the <C l value="frui-field-taglist" />, <C l value="frui-field-taglist-tag" />, <C l value="frui-field-taglist-remove" />,
+          and <C l value="frui-field-taglist-input" /> CSS classes to globally theme the taglist field.
         </Translate>
       </p>
-      
+
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-4">
           <Translate>
-            The <C value="<Taglist>" /> field can be passed the 
+            The <C value="<Taglist>" /> field can be passed the
             following props.
           </Translate>
         </p>

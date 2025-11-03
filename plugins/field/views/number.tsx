@@ -219,7 +219,7 @@ export function Body() {
           </Translate>
         </p>
         <Preview 
-          title="Events Example" 
+          title="With Events" 
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>

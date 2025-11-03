@@ -11,12 +11,12 @@ import Autocomplete from 'components/field/Autocomplete.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Props, 
-  Code, 
+import {
+  LayoutPanel,
+  LayoutProvider,
+  ThemeHead,
+  Props,
+  Code,
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -39,14 +39,14 @@ const props = [
 ];
 
 const examples = [
-//0
-`<Autocomplete 
+  //0
+  `<Autocomplete 
   className="w-full" 
   options={[ 'foo', 'bar' ]} 
   placeholder="Enter foo or bar"
 />`,
-//1
-`<Autocomplete 
+  //1
+  `<Autocomplete 
   className="w-full" 
   options={['foo', 'bar']}
   onQuery={(query, set) => setTimeout(
@@ -58,8 +58,8 @@ const examples = [
   onUpdate={value => console.log('update', value)}
   placeholder="Enter 'b'"
 />`,
-//2
-`<Autocomplete 
+  //2
+  `<Autocomplete 
   error
   className="w-full" 
   options={[ 'foo', 'bar' ]} 
@@ -112,6 +112,12 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -130,9 +136,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview 
+      <Preview
         height={100}
-        title="Info Example" 
+        title="Info Example"
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -170,23 +176,23 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
           <Translate>
-            The following is a basic example of an 
+            The following is a basic example of an
             <C l value="Autocomplete" /> field.
           </Translate>
         </p>
-        <Preview 
-          title="Basic Example" 
+        <Preview
+          title="Basic Example"
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <Autocomplete 
-              className="w-full" 
+            <Autocomplete
+              className="w-full"
               options={[ 'foo', 'bar' ]} 
               placeholder="Enter foo or bar"
             />
@@ -201,20 +207,20 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following example makes use of all the possible 
+            The following example makes use of all the possible
             events for <C value="Autocomplete" />.
           </Translate>
         </p>
-        <Preview 
-          title="With Events" 
+        <Preview
+          title="With Events"
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <Autocomplete 
-              className="w-full" 
+            <Autocomplete
+              className="w-full"
               options={['foo', 'bar']}
               onQuery={(_query, set) => setTimeout(
-                () => set(['boo', 'bar', 'baz']), 
+                () => set(['boo', 'bar', 'baz']),
                 1000
               )}
               onDropdown={open => console.log('dropdown', open)}
@@ -249,8 +255,8 @@ export function Body() {
                 {_('Event Object')}
               </Table.Col>
               <Table.Col className="theme-bg-1 text-left">
-                see: <a 
-                  href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
+                see: <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event"
                   target="_blank"
                 >Change Event</a>
               </Table.Col>
@@ -264,7 +270,7 @@ export function Body() {
         <div>
           <p className="py-4">
             <Translate>
-              The <C value="onDropdown" /> event is triggered when the 
+              The <C value="onDropdown" /> event is triggered when the
               dropdown opens or closes. The following arguments are
               passed to the event handler:
             </Translate>
@@ -363,18 +369,18 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight 
+            You can pass the <C value="error" /> prop to highlight
             the Autocomplete field red.
           </Translate>
         </p>
-        <Preview 
-          title="With Events" 
+        <Preview
+          title="Error Example"
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <Autocomplete 
+            <Autocomplete
               error
-              className="w-full" 
+              className="w-full"
               options={[ 'foo', 'bar' ]} 
               placeholder="Enter foo or bar"
               value="Not a hotdog."
@@ -389,27 +395,19 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to 
-          <C l value="Autocomplete" /> components
-          or use any combination of <C 
-            value="frui-field-autocomplete" 
-          />, <C 
-            value="frui-field-autocomplete-dropdown" 
-          />, <C 
-            value="frui-field-autocomplete-options" 
-          />, and <C 
-            value="frui-field-autocomplete-option" 
-          /> CSS classes.
+          You can use
+          the <C value="Autocomplete" />, <C value="frui-field-autocomplete" />, <C value="frui-field-autocomplete-dropdown" />, <C value="frui-field-autocomplete-options" />,
+          and <C value="frui-field-autocomplete-option" /> CSS classes to globally theme autocomplete.
         </Translate>
       </p>
-      
+
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Autocomplete>" /> field can be passed the 
+            The <C value="<Autocomplete>" /> field can be passed the
             following props.
           </Translate>
         </p>

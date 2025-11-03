@@ -267,8 +267,8 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C l value="frui-field-taglist" />, <C l value="frui-field-taglist-tag" />, <C l value="frui-field-taglist-remove" />,
-          and <C l value="frui-field-taglist-input" /> CSS classes to globally theme the taglist field.
+          the <C value="frui-field-taglist" />, <C value="frui-field-taglist-tag" />, <C value="frui-field-taglist-remove" />,
+          and <C value="frui-field-taglist-input" /> CSS classes to globally theme the taglist field.
         </Translate>
       </p>
 

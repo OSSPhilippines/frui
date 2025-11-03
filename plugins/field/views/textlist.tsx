@@ -270,8 +270,8 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C l value="frui-field-textlist-row" />, <C l value="frui-field-textlist-remove" />, <C l value="frui-field-textlist-value" />,
-          and <C l value="frui-fieldset-add" /> CSS classes to globally theme the textlist field.
+          the <C value="frui-field-textlist-row" />, <C value="frui-field-textlist-remove" />, <C value="frui-field-textlist-value" />,
+          and <C value="frui-fieldset-add" /> CSS classes to globally theme the textlist field.
         </Translate>
       </p>
 

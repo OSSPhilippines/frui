@@ -475,8 +475,8 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C l value="Checkbox" />, <C l value="frui-field-option" />, <C l value="frui-field-option-control" />,
-          and <C l value="frui-field-option-label" /> CSS classes to globally theme checkboxes.
+          the <C value="Checkbox" />, <C value="frui-field-option" />, <C value="frui-field-option-control" />,
+          and <C value="frui-field-option-label" /> CSS classes to globally theme checkboxes.
         </Translate>
       </p>
 

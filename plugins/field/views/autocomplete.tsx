@@ -39,8 +39,8 @@ const props = [
 ];
 
 const examples = [
-  //0
-  `<Autocomplete 
+//0
+`<Autocomplete 
   className="w-full" 
   options={[ 'foo', 'bar' ]} 
   placeholder="Enter foo or bar"
@@ -58,8 +58,8 @@ const examples = [
   onUpdate={value => console.log('update', value)}
   placeholder="Enter 'b'"
 />`,
-  //2
-  `<Autocomplete 
+//2
+`<Autocomplete 
   error
   className="w-full" 
   options={[ 'foo', 'bar' ]} 

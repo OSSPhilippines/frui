@@ -528,7 +528,7 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C l value="frui-field-knob" /> CSS class to globally theme the knob field.
+          the <C value="frui-field-knob" /> CSS class to globally theme the knob field.
         </Translate>
       </p>
 

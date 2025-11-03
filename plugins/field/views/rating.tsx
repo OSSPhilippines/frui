@@ -453,8 +453,8 @@ export function Body() {
           You can use
           the <C value="className" /> prop or inline styles via
           the <C value="style" /> prop to the
-          root <C l value=".frui-rating-root" /> element.
-          Component-specific classes like <C l value=".frui-rating-icon" />, <C l value=".frui-rating-icon-filled" />, <C l value=".frui-rating-icon-empty" />, <C l value=".frui-rating-icon-hover" />, <C l value=".frui-rating-icon-active" />,
+          root <C value=".frui-rating-root" /> element.
+          Component-specific classesike <C value=".frui-rating-icon" />, <C value=".frui-rating-icon-filled" />, <C value=".frui-rating-icon-empty" />, <C value=".frui-rating-icon-hover" />, <C value=".frui-rating-icon-active" />,
           and size/state classes are available for more targeted styling.
         </Translate>
       </p>

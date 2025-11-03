@@ -334,8 +334,8 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C l value="frui-field-metadata-row" />, <C l value="frui-field-metadata-remove" />, <C l value="frui-field-metadata-name" />, <C l value="frui-field-metadata-value" />,
-          and <C l value="frui-fieldset-add" /> CSS classes to globally theme the metadata field.
+          the <C value="frui-field-metadata-row" />, <C value="frui-field-metadata-remove" />, <C value="frui-field-metadata-name" />, <C value="frui-field-metadata-value" />,
+          and <C value="frui-fieldset-add" /> CSS classes to globally theme the metadata field.
         </Translate>
       </p>
 

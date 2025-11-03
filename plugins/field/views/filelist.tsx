@@ -301,8 +301,8 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C l value="frui-field-filelist" />, <C l value="frui-field-filelist-control" />, <C l value="frui-field-filelist-file" />, <C l value="frui-field-filelist-link" />,
-          and <C l value="frui-field-filelist-remove" /> CSS classes to globally theme the file list field.
+          the <C value="frui-field-filelist" />, <C value="frui-field-filelist-control" />, <C value="frui-field-filelist-file" />, <C value="frui-field-filelist-link" />,
+          and <C value="frui-field-filelist-remove" /> CSS classes to globally theme the file list field.
         </Translate>
       </p>
       

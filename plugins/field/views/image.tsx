@@ -319,8 +319,8 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C l value="frui-field-image" />, <C l value="frui-field-image-control" />, <C l value="frui-field-image-reset" />, <C l value="frui-field-image-file" />,  <C l value="frui-field-image-link" />,
-          and <C l value="frui-field-image-image" /> CSS classes to globally theme the image field.
+          the <C value="frui-field-image" />, <C value="frui-field-image-control" />, <C value="frui-field-image-reset" />, <C value="frui-field-image-file" />,  <C value="frui-field-image-link" />,
+          and <C value="frui-field-image-image" /> CSS classes to globally theme the image field.
         </Translate>
       </p>
       

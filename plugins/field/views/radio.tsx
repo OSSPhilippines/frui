@@ -47,10 +47,10 @@ const props = [
 ];
 
 const examples = [
-  //0
-  `<Radio rounded name="name" label="Yes" value="yes" defaultChecked />`,
-  //1
-  `function Home() {
+//0
+`<Radio rounded name="name" label="Yes" value="yes" defaultChecked />`,
+//1
+`function Home() {
   const [ value, setValue ] = useState('yes');
   return (
     <span>
@@ -72,14 +72,14 @@ const examples = [
     </span>
   )
 }`,
-  //2
-  `<Radio error rounded label="Yes" defaultChecked />`,
-  //3
-  `<Radio rounded defaultChecked />`,
-  //4
-  `<Radio blue label="Blue" defaultChecked />`,
-  //5
-  `<Radio square label="Blue" defaultChecked />`
+//2
+`<Radio error rounded label="Yes" defaultChecked />`,
+//3
+`<Radio rounded defaultChecked />`,
+//4
+`<Radio blue label="Blue" defaultChecked />`,
+//5
+`<Radio square label="Blue" defaultChecked />`
 ];
 
 //--------------------------------------------------------------------//
@@ -351,7 +351,7 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C l value="Radio" /> CSS class to globally theme the radio field.
+          the <C value="Radio" /> CSS class to globally theme the radio field.
         </Translate>
       </p>
 

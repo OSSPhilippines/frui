@@ -133,9 +133,6 @@ export function Menu() {
             <a href="#events">{_('Events')}</a>
           </li>
           <li className="ml-2 pb-1">
-            <a href="#styles">{_('Global Styles')}</a>
-          </li>
-          <li className="ml-2 pb-1">
             <a href="#api">{_('API Reference')}</a>
           </li>
         </ul>

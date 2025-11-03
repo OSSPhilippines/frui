@@ -300,8 +300,8 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C l value="frui-field-imagelist" />, <C l value="frui-field-imagelist-control" />, <C l value="frui-field-imagelist-file" />, <C l value="frui-field-imagelist-link" />,  <C l value="frui-field-imagelist-image" />,
-          and <C l value="frui-field-imagelist-remove" /> CSS classes to globally theme the image list field.
+          the <C value="frui-field-imagelist" />, <C value="frui-field-imagelist-control" />, <C value="frui-field-imagelist-file" />, <C value="frui-field-imagelist-link" />,  <C value="frui-field-imagelist-image" />,
+          and <C value="frui-field-imagelist-remove" /> CSS classes to globally theme the image list field.
         </Translate>
       </p>
       

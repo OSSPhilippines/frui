@@ -320,8 +320,8 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C l value="frui-field-country-select" />, <C l value="frui-field-select-control" />, <C l value="frui-field-select-placeholder" />, <C l value="frui-field-select-dropdown" />,  <C l value="frui-field-select-search" />,  <C l value="frui-field-select-search-control" />,  <C l value="frui-field-select-search-icon" />,  <C l value="frui-field-select-options" />,  <C l value="frui-field-select-option" />,
-          and <C l value="frui-field-select-label" /> CSS classes to globally theme the country field.
+          the <C value="frui-field-country-select" />, <C value="frui-field-select-control" />, <C value="frui-field-select-placeholder" />, <C value="frui-field-select-dropdown" />,  <C value="frui-field-select-search" />,  <C value="frui-field-select-search-control" />,  <C value="frui-field-select-search-icon" />,  <C value="frui-field-select-options" />,  <C value="frui-field-select-option" />,
+          and <C value="frui-field-select-label" /> CSS classes to globally theme the country field.
         </Translate>
       </p>
                   

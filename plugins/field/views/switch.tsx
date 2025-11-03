@@ -310,7 +310,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can use
-            the <C l value="Switch" /> CSS class to globally theme the switch field.
+            the <C value="Switch" /> CSS class to globally theme the switch field.
           </Translate>
         </p>
 

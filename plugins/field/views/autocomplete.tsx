@@ -207,7 +207,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following example makes use of all the possible
+            The following example makes use of all the possible 
             events for <C value="Autocomplete" />.
           </Translate>
         </p>

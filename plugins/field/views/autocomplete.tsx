@@ -45,8 +45,8 @@ const examples = [
   options={[ 'foo', 'bar' ]} 
   placeholder="Enter foo or bar"
 />`,
-  //1
-  `<Autocomplete 
+//1
+`<Autocomplete 
   className="w-full" 
   options={['foo', 'bar']}
   onQuery={(query, set) => setTimeout(
@@ -136,9 +136,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview
+      <Preview 
         height={100}
-        title="Info Example"
+        title="Info Example" 
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -182,17 +182,17 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following is a basic example of an
+            The following is a basic example of an 
             <C l value="Autocomplete" /> field.
           </Translate>
         </p>
-        <Preview
-          title="Basic Example"
+        <Preview 
+          title="Basic Example" 
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <Autocomplete
-              className="w-full"
+            <Autocomplete 
+              className="w-full" 
               options={[ 'foo', 'bar' ]} 
               placeholder="Enter foo or bar"
             />

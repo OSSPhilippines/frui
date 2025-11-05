@@ -11,12 +11,12 @@ import Autocomplete from 'components/field/Autocomplete.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import {
-  LayoutPanel,
-  LayoutProvider,
-  ThemeHead,
-  Props,
-  Code,
+import { 
+  LayoutPanel, 
+  LayoutProvider, 
+  ThemeHead, 
+  Props, 
+  Code, 
   C,
   Preview
 } from 'plugins/app/index.js';

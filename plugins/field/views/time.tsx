@@ -12,11 +12,11 @@ import InputTime from 'components/field/InputTime.js';
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
 import {
-  LayoutPanel,
-  LayoutProvider,
-  ThemeHead,
-  Props,
-  Code,
+  LayoutPanel, 
+  LayoutProvider, 
+  ThemeHead, 
+  Props, 
+  Code, 
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -36,14 +36,14 @@ const props = [
 ];
 
 const examples = [
-  //0
-  `<InputTime defaultValue={new Date().toISOString()} />
+//0
+`<InputTime defaultValue={new Date().toISOString()} />
 <InputTime defaultValue={new Date()} />
 <InputTime defaultValue={(new Date()).getTime()} />`,
-  //1
-  `<InputTime onUpdate={value => alert(value)} />`,
-  //2
-  `<InputTime error={string|true} value="Invalid Date." />`
+//1
+`<InputTime onUpdate={value => alert(value)} />`,
+//2
+`<InputTime error={string|true} value="Invalid Date." />`
 ];
 
 //--------------------------------------------------------------------//
@@ -140,17 +140,17 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Time fields use the default <C
+            Time fields use the default <C 
               quote={true}
               value={`<input type="time" />`}
-            /> element, but normalizes
-            values to ISO strings using <C value="toISOString()" />.
-            <C l value="onUpdate" /> is like <C value="onChange" r />
+            /> element, but normalizes 
+            values to ISO strings using <C value="toISOString()" />. 
+            <C l value="onUpdate" /> is like <C value="onChange" r /> 
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <Preview
-          title="Basic Example"
+        <Preview 
+          title="Basic Example" 
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
@@ -166,11 +166,11 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            <C value="onUpdate" /> is like <C value="onChange" r />
+            <C value="onUpdate" /> is like <C value="onChange" r /> 
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <Preview
+        <Preview 
           title="With Events"
           className="border border-2 theme-bc-3"
         >
@@ -202,7 +202,7 @@ export function Body() {
               {_('Event Object')}
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
-              see: <a
+              see: <a 
                 href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event"
                 target="_blank"
               >Change Event</a>
@@ -244,12 +244,12 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight
+            You can pass the <C value="error" /> prop to highlight 
             the input field red.
           </Translate>
         </p>
-        <Preview
-          title="Error Example"
+        <Preview 
+          title="Error Example" 
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
@@ -275,8 +275,8 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<InputTime>" /> field accepts all props of a
-            standard HTML Input element. See <a
+            The <C value="<InputTime>" /> field accepts all props of a 
+            standard HTML Input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"
               target="_blank"

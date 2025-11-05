@@ -12,11 +12,11 @@ import Markdown from 'components/field/MarkdownEditor.js';
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
 import {
-  LayoutPanel,
-  LayoutProvider,
-  ThemeHead,
-  Props,
-  Code,
+  LayoutPanel, 
+  LayoutProvider, 
+  ThemeHead, 
+  Props, 
+  Code, 
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -38,12 +38,12 @@ const props = [
 ];
 
 const examples = [
-  //0
-  `<Markdown name="name" placeholder="Enter name.." defaultValue="# Hello World" />`,
-  //1
-  `<Markdown onUpdate={value => alert(value)} value="# Hello World" />`,
-  //2
-  `<Markdown error onUpdate={value => alert(value)} value="# Not a hotdog." />`
+//0
+`<Markdown name="name" placeholder="Enter name.." defaultValue="# Hello World" />`,
+//1
+`<Markdown onUpdate={value => alert(value)} value="# Hello World" />`,
+//2
+`<Markdown error onUpdate={value => alert(value)} value="# Not a hotdog." />`
 ];
 
 //--------------------------------------------------------------------//
@@ -112,9 +112,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview
+      <Preview 
         height={100}
-        title="Info Example"
+        title="Info Example" 
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>

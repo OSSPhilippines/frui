@@ -322,7 +322,7 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can use
+          You can use 
           the <C value="frui-field-input-color" /> CSS class to globally theme the color field.
         </Translate>
       </p>

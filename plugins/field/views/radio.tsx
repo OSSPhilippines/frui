@@ -198,9 +198,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Radio wraps the HTML standard <code
+            Radio wraps the HTML standard <code 
               className="text-sm theme-2"
-            >{'`<input />`'}</code> element. Therefore, you can
+            >{'`<input />`'}</code> element. Therefore, you can 
             use any input attributes as props.
           </Translate>
         </p>
@@ -217,9 +217,7 @@ export function Body() {
               defaultChecked
             />
           </Preview.Example>
-          <Preview.Code>
-            {examples[0]}
-          </Preview.Code>
+          <Preview.Code>{examples[0]}</Preview.Code>
         </Preview>
       </div>
 
@@ -229,7 +227,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            <C value="onUpdate" /> is like <C value="onChange" r />
+            <C value="onUpdate" /> is like <C value="onChange" r /> 
             except the value is passed instead of the change event.
           </Translate>
         </p>
@@ -256,9 +254,7 @@ export function Body() {
               />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[1]}
-          </Preview.Code>
+          <Preview.Code>{examples[1]}</Preview.Code>
         </Preview>
 
         <h3 className="font-semibold text-md mt-8">
@@ -284,7 +280,7 @@ export function Body() {
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
               see: <a
-                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event"
+                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
                 target="_blank"
               >Change Event</a>
             </Table.Col>
@@ -325,7 +321,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight
+            You can pass the <C value="error" /> prop to highlight 
             the Radio field red.
           </Translate>
         </p>
@@ -339,9 +335,7 @@ export function Body() {
               <Radio error rounded label="No" className="ml-4" />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[2]}
-          </Preview.Code>
+          <Preview.Code>{examples[2]}</Preview.Code>
         </Preview>
       </div>
 
@@ -381,7 +375,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Use <C value="blue" /> or <C value="orange" /> prop to
+            Use <C value="blue" /> or <C value="orange" /> prop to 
             change the color of radios.
           </Translate>
         </p>
@@ -402,8 +396,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Use <C value="circle" />, <C value="checked" /> or
-            <C l value="checked" /> prop to change the color of
+            Use <C value="circle" />, <C value="checked" /> or 
+            <C l value="checked" /> prop to change the color of 
             radios.
           </Translate>
         </p>
@@ -438,12 +432,9 @@ export function Body() {
 
         <p className="py-4">
           <Translate>
-            You can also add your own custom class to
-            <C l value="Radio" /> components
-            or use any combination of
-            <C l value="frui-field-option" />,
-            <C l value="frui-field-option-control" />, and
-            <C l value="frui-field-option-label" /> CSS classes.
+            You can use
+            the <C l value="frui-field-option" />, <C l value="frui-field-option-control" />,
+            and <C l value="frui-field-option-label" /> CSS classes to globally theme the radio field.
           </Translate>
         </p>
       </div>
@@ -454,8 +445,8 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            The <C value="<Radio>" /> field accepts all props of a
-            standard HTML input element. See <a
+            The <C value="<Radio>" /> field accepts all props of a 
+            standard HTML input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Radio"
               target="_blank"

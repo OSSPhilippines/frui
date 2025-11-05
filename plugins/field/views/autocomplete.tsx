@@ -407,7 +407,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Autocomplete>" /> field can be passed the
+            The <C value="<Autocomplete>" /> field can be passed the 
             following props.
           </Translate>
         </p>

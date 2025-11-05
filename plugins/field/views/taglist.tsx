@@ -12,11 +12,11 @@ import Taglist from 'components/field/Taglist.js';
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
 import {
-  LayoutPanel,
-  LayoutProvider,
-  ThemeHead,
-  Props,
-  Code,
+  LayoutPanel, 
+  LayoutProvider, 
+  ThemeHead, 
+  Props, 
+  Code, 
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -42,12 +42,12 @@ const props = [
 ];
 
 const examples = [
-  //0
-  `<Taglist placeholder="Enter Value" value={['foo', 'bar']} />`,
-  //1
-  `<Taglist onUpdate={console.log} />`,
-  //2
-  `<Taglist error value={['foo', 'bar']} />`
+//0
+`<Taglist placeholder="Enter Value" value={['foo', 'bar']} />`,
+//1
+`<Taglist onUpdate={console.log} />`,
+//2
+`<Taglist error value={['foo', 'bar']} />`
 ];
 
 //--------------------------------------------------------------------//
@@ -119,9 +119,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview
+      <Preview 
         height={100}
-        title="Info Example"
+        title="Info Example" 
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -165,7 +165,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following is a basic example of a
+            The following is a basic example of a 
             <C l value="Taglist" /> field.
           </Translate>
         </p>
@@ -190,7 +190,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following example makes use of all the possible
+            The following example makes use of all the possible 
             events for <C value="Taglist" />.
           </Translate>
         </p>
@@ -203,9 +203,7 @@ export function Body() {
               <Taglist onUpdate={console.log} />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[1]}
-          </Preview.Code>
+          <Preview.Code>{examples[1]}</Preview.Code>
         </Preview>
 
         <h3 className="font-semibold text-md mt-8">
@@ -242,7 +240,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight
+            You can pass the <C value="error" /> prop to highlight 
             the Taglist field red.
           </Translate>
         </p>
@@ -255,9 +253,7 @@ export function Body() {
               <Taglist error value={['foo', 'bar']} />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[2]}
-          </Preview.Code>
+          <Preview.Code>{examples[2]}</Preview.Code>
         </Preview>
       </div>
 
@@ -278,7 +274,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The <C value="<Taglist>" /> field can be passed the
+            The <C value="<Taglist>" /> field can be passed the 
             following props.
           </Translate>
         </p>

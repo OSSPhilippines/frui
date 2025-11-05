@@ -12,11 +12,11 @@ import Table from 'components/element/Table.js';
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
 import {
-  LayoutPanel,
-  LayoutProvider,
-  ThemeHead,
-  Props,
-  Code,
+  LayoutPanel, 
+  LayoutProvider, 
+  ThemeHead, 
+  Props, 
+  Code, 
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -44,6 +44,20 @@ const props = [
   [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
   [ 'value', 'string', 'No', 'Default value (Controlled)' ]
 ];
+
+const examples = [
+//0
+`<Checkbox 
+blue 
+label="Blue" 
+defaultChecked />
+\n
+<Checkbox 
+orange 
+label="Orange" 
+defaultChecked 
+/>`,
+]
 
 //--------------------------------------------------------------------//
 // Components
@@ -114,8 +128,8 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Basic Example */}
-      <Preview
-        title="Basic Example"
+      <Preview 
+        title="Basic Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -128,8 +142,8 @@ export function Examples() {
         </Preview.Code>
       </Preview>
       {/* Rounded Example */}
-      <Preview
-        title="Rounded Example"
+      <Preview 
+        title="Rounded Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -142,8 +156,8 @@ export function Examples() {
         </Preview.Code>
       </Preview>
       {/* Orange Example */}
-      <Preview
-        title="Orange Example"
+      <Preview 
+        title="Orange Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -156,8 +170,8 @@ export function Examples() {
         </Preview.Code>
       </Preview>
       {/* Circle Shape Example */}
-      <Preview
-        title="Circle Shape Example"
+      <Preview 
+        title="Circle Shape Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -170,8 +184,8 @@ export function Examples() {
         </Preview.Code>
       </Preview>
       {/* Square Shape Example */}
-      <Preview
-        title="Square Shape Example"
+      <Preview 
+        title="Square Shape Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -184,8 +198,8 @@ export function Examples() {
         </Preview.Code>
       </Preview>
       {/* Looks Like Radio */}
-      <Preview
-        title="Looks Like Radio"
+      <Preview 
+        title="Looks Like Radio" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -198,8 +212,8 @@ export function Examples() {
         </Preview.Code>
       </Preview>
       {/* Orange Square Example */}
-      <Preview
-        title="Orange Square Example"
+      <Preview 
+        title="Orange Square Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -212,8 +226,8 @@ export function Examples() {
         </Preview.Code>
       </Preview>
       {/* Round Square Example */}
-      <Preview
-        title="Round Square Example"
+      <Preview 
+        title="Round Square Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -261,9 +275,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Checkbox wraps the HTML standard <code
+            Checkbox wraps the HTML standard <code 
               className="text-sm theme-2"
-            >{'`<input />`'}</code> element. Therefore, you can
+            >{'`<input />`'}</code> element. Therefore, you can 
             use any input attributes as props.
           </Translate>
         </p>
@@ -276,7 +290,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            <C value="onUpdate" /> is like <C value="onChange" r />
+            <C value="onUpdate" /> is like <C value="onChange" r /> 
             except the value is passed instead of the change event.
           </Translate>
         </p>
@@ -315,7 +329,7 @@ export function Body() {
               </Table.Col>
               <Table.Col className="theme-bg-1 text-left">
                 see: <a
-                  href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event"
+                  href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
                   target="_blank"
                 >Change Event</a>
               </Table.Col>
@@ -359,7 +373,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight
+            You can pass the <C value="error" /> prop to highlight 
             the Checkbox field red.
           </Translate>
         </p>
@@ -403,7 +417,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Use <C value="blue" /> or <C value="orange" /> prop to
+            Use <C value="blue" /> or <C value="orange" /> prop to 
             change the color of checkboxes.
           </Translate>
         </p>
@@ -427,8 +441,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Use <C value="circle" />, <C value="square" /> or
-            <C value="check" /> prop to change the shape of
+            Use <C value="circle" />, <C value="square" /> or 
+            <C value="check" /> prop to change the shape of 
             checkboxes.
           </Translate>
         </p>
@@ -464,7 +478,7 @@ export function Body() {
             </div>
           </Preview.Example>
           <Preview.Code>
-            {'<Checkbox circle rounded blue label="Circle" defaultChecked />\n<Checkbox square orange label="Square" defaultChecked />\n<Checkbox check rounded label="Check" defaultChecked />'}
+            {examples[0]}
           </Preview.Code>
         </Preview>
       </div>
@@ -475,7 +489,7 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C value="Checkbox" />, <C value="frui-field-option" />, <C value="frui-field-option-control" />,
+          the <C value="frui-field-option" />, <C value="frui-field-option-control" />,
           and <C value="frui-field-option-label" /> CSS classes to globally theme checkboxes.
         </Translate>
       </p>
@@ -486,8 +500,8 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            The <C value="<Checkbox>" /> field accepts all props of
-            a standard HTML input element. See <a
+            The <C value="<Checkbox>" /> field accepts all props of 
+            a standard HTML input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Checkbox"
               target="_blank"

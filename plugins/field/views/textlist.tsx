@@ -12,11 +12,11 @@ import Textlist from 'components/field/Textlist.js';
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
 import {
-  LayoutPanel,
-  LayoutProvider,
-  ThemeHead,
-  Props,
-  Code,
+  LayoutPanel, 
+  LayoutProvider, 
+  ThemeHead, 
+  Props, 
+  Code, 
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -37,16 +37,16 @@ const props = [
 ];
 
 const examples = [
-  //0
-  `<Textlist 
-  add="Add Value" 
-  placeholder="Enter Value"
-  value={['foo', 'bar']} 
+//0
+`<Textlist 
+add="Add Value" 
+placeholder="Enter Value"
+value={['foo', 'bar']} 
 />`,
-  //1
-  `<Textlist add="Add Value" onUpdate={value => alert(JSON.stringify(value))} />`,
-  //2
-  `<Textlist error value={['foo', 'bar']} />`
+//1
+`<Textlist add="Add Value" onUpdate={value => alert(JSON.stringify(value))} />`,
+//2
+`<Textlist error value={['foo', 'bar']} />`
 ];
 
 //--------------------------------------------------------------------//
@@ -118,9 +118,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview
+      <Preview 
         height={100}
-        title="Info Example"
+        title="Info Example" 
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -164,7 +164,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following is a basic example of a
+            The following is a basic example of a 
             <C l value="Textlist" /> field.
           </Translate>
         </p>
@@ -174,16 +174,14 @@ export function Body() {
         >
           <Preview.Example padding>
             <div className="w-full">
-              <Textlist
-                add="Add Value"
+              <Textlist 
+                add="Add Value" 
                 placeholder="Enter Value"
-                value={['foo', 'bar']}
+                value={['foo', 'bar']} 
               />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[0]}
-          </Preview.Code>
+          <Preview.Code>{examples[0]}</Preview.Code>
         </Preview>
       </div>
 
@@ -193,7 +191,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following example makes use of all the possible
+            The following example makes use of all the possible 
             events for <C value="Textlist" />.
           </Translate>
         </p>
@@ -245,7 +243,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight
+            You can pass the <C value="error" /> prop to highlight 
             the Textlist field red.
           </Translate>
         </p>
@@ -258,9 +256,7 @@ export function Body() {
               <Textlist error value={['foo', 'bar']} />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[2]}
-          </Preview.Code>
+          <Preview.Code>{examples[2]}</Preview.Code>
         </Preview>
       </div>
 
@@ -281,7 +277,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The <C value="<Textlist>" /> field can be passed the
+            The <C value="<Textlist>" /> field can be passed the 
             following props.
           </Translate>
         </p>

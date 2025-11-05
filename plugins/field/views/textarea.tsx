@@ -12,11 +12,11 @@ import Textarea from 'components/field/Textarea.js';
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
 import {
-  LayoutPanel,
-  LayoutProvider,
-  ThemeHead,
-  Props,
-  Code,
+  LayoutPanel, 
+  LayoutProvider, 
+  ThemeHead, 
+  Props, 
+  Code, 
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -38,12 +38,12 @@ const props = [
 ];
 
 const examples = [
-  //0
-  `<Textarea name="name" placeholder="Enter name..">Hello World</Textarea>`,
-  //1
-  `<Textarea onUpdate={value => alert(value)}>Hello World</Textarea>`,
-  //2
-  `<Textarea error onUpdate={value => alert(value)}>Not a hotdog.</Textarea>`
+//0
+`<Textarea name="name" placeholder="Enter name..">Hello World</Textarea>`,
+//1
+`<Textarea onUpdate={value => alert(value)}>Hello World</Textarea>`,
+//2
+`<Textarea error onUpdate={value => alert(value)}>Not a hotdog.</Textarea>`
 ];
 
 //--------------------------------------------------------------------//
@@ -112,9 +112,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview
+      <Preview 
         height={100}
-        title="Info Example"
+        title="Info Example" 
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -158,9 +158,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Textarea wraps the HTML standard <code
+            Textarea wraps the HTML standard <code 
               className="text-sm theme-2"
-            >{'`<textarea />`'}</code> element. Therefore, you can
+            >{'`<textarea />`'}</code> element. Therefore, you can 
             use any textarea attributes as props.
           </Translate>
         </p>
@@ -171,9 +171,7 @@ export function Body() {
           <Preview.Example center padding>
             <Textarea name="name" placeholder="Enter name..">Hello World</Textarea>
           </Preview.Example>
-          <Preview.Code>
-            {examples[0]}
-          </Preview.Code>
+          <Preview.Code>{examples[0]}</Preview.Code>
         </Preview>
       </div>
 
@@ -183,7 +181,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            <C value="onUpdate" /> is like <C value="onChange" r />
+            <C value="onUpdate" /> is like <C value="onChange" r /> 
             except the value is passed instead of the change event.
           </Translate>
         </p>
@@ -222,7 +220,7 @@ export function Body() {
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
               see: <a
-                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event"
+                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
                 target="_blank"
               >Change Event</a>
             </Table.Col>
@@ -263,7 +261,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight
+            You can pass the <C value="error" /> prop to highlight 
             the textarea field red.
           </Translate>
         </p>
@@ -274,9 +272,7 @@ export function Body() {
           <Preview.Example center padding>
             <Textarea error onUpdate={value => alert(value)}>Not a hotdog.</Textarea>
           </Preview.Example>
-          <Preview.Code>
-            {examples[2]}
-          </Preview.Code>
+          <Preview.Code>{examples[2]}</Preview.Code>
         </Preview>
       </div>
 
@@ -286,8 +282,8 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            The <C value="<Textarea>" /> field accepts all props of a
-            standard HTML Textarea element. See <a
+            The <C value="<Textarea>" /> field accepts all props of a 
+            standard HTML Textarea element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea"
               target="_blank"

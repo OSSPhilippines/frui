@@ -13,10 +13,10 @@ import Switch from 'components/field/Switch.js';
 import type { PageProps } from 'plugins/app/types.js';
 import {
   LayoutPanel,
-  LayoutProvider,
-  ThemeHead,
-  Props,
-  Code,
+  LayoutProvider, 
+  ThemeHead, 
+  Props, 
+  Code, 
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -50,20 +50,20 @@ const props = [
 ];
 
 const examples = [
-  //0
-  `<Switch name="name" value="yes" defaultChecked />`,
-  //1
-  `<Switch onUpdate={(value, checked) => alert(\`\${value} - \${checked}\`)} />`,
-  //2
-  `<Switch error label="Active?" defaultChecked />`,
-  //3
-  `<Switch ridge defaultChecked />`,
-  //4
-  `<Switch rounded defaultChecked />`,
-  //5
-  `<Switch blue label="Blue" defaultChecked />`,
-  //6
-  `<Switch onoff defaultChecked />`
+//0
+`<Switch name="name" value="yes" defaultChecked />`,
+//1
+`<Switch onUpdate={(value, checked) => alert(\`\${value} - \${checked}\`)} />`,
+//2
+`<Switch error label="Active?" defaultChecked />`,
+//3
+`<Switch ridge defaultChecked />`,
+//4
+`<Switch rounded defaultChecked />`,
+//5
+`<Switch blue label="Blue" defaultChecked />`,
+//6
+`<Switch onoff defaultChecked />`
 ];
 
 //--------------------------------------------------------------------//
@@ -135,9 +135,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview
+      <Preview 
         height={100}
-        title="Info Example"
+        title="Info Example" 
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -181,9 +181,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Switch wraps the HTML standard <code
+            Switch wraps the HTML standard <code 
               className="text-sm theme-2"
-            >{'`<input />`'}</code> element. Therefore, you can
+            >{'`<input />`'}</code> element. Therefore, you can 
             use any input attributes as props.
           </Translate>
         </p>
@@ -194,9 +194,7 @@ export function Body() {
           <Preview.Example center padding>
             <Switch name="name" value="yes" defaultChecked />
           </Preview.Example>
-          <Preview.Code>
-            {examples[0]}
-          </Preview.Code>
+          <Preview.Code>{examples[0]}</Preview.Code>
         </Preview>
       </div>
 
@@ -206,7 +204,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            <C value="onUpdate" /> is like <C value="onChange" r />
+            <C value="onUpdate" /> is like <C value="onChange" r /> 
             except the value is passed instead of the change event.
           </Translate>
         </p>
@@ -217,9 +215,7 @@ export function Body() {
           <Preview.Example center padding>
             <Switch onUpdate={(value, checked) => alert(`${value} - ${checked}`)} />
           </Preview.Example>
-          <Preview.Code>
-            {examples[1]}
-          </Preview.Code>
+          <Preview.Code>{examples[1]}</Preview.Code>
         </Preview>
 
         <h3 className="font-semibold text-md mt-8">
@@ -245,7 +241,7 @@ export function Body() {
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
               see: <a
-                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event"
+                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
                 target="_blank"
               >Change Event</a>
             </Table.Col>
@@ -286,7 +282,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight
+            You can pass the <C value="error" /> prop to highlight 
             the Switch field red.
           </Translate>
         </p>
@@ -297,9 +293,7 @@ export function Body() {
           <Preview.Example center padding>
             <Switch error label="Active?" defaultChecked />
           </Preview.Example>
-          <Preview.Code>
-            {examples[2]}
-          </Preview.Code>
+          <Preview.Code>{examples[2]}</Preview.Code>
         </Preview>
       </div>
 
@@ -319,7 +313,7 @@ export function Body() {
         </h3>
         <p className="py-4">
           <Translate>
-            Use <C value="ridge" /> prop to add ridges to the
+            Use <C value="ridge" /> prop to add ridges to the 
             knobs.
           </Translate>
         </p>
@@ -355,8 +349,8 @@ export function Body() {
         </h3>
         <p className="py-4">
           <Translate>
-            Use <C value="blue" />, <C value="orange" /> or
-            <C l value="green" /> prop to change the color of
+            Use <C value="blue" />, <C value="orange" /> or 
+            <C l value="green" /> prop to change the color of 
             switches.
           </Translate>
         </p>
@@ -376,8 +370,8 @@ export function Body() {
         </h3>
         <p className="py-4">
           <Translate>
-            Use <C value="onoff" />, <C value="yesno" />,
-            <C l value="checkex" /> or <C value="sunmoon" /> prop
+            Use <C value="onoff" />, <C value="yesno" />, 
+            <C l value="checkex" /> or <C value="sunmoon" /> prop 
             to change the color of switches.
           </Translate>
         </p>
@@ -411,12 +405,9 @@ export function Body() {
         </div>
         <p className="py-4">
           <Translate>
-            You can also add your own custom class to
-            <C l value="Switch" /> components
-            or use any combination of
-            <C l value="frui-field-option" />,
-            <C l value="frui-field-option-control" />, and
-            <C l value="frui-field-option-label" /> CSS classes.
+            You can use
+            the <C l value="frui-field-option" />, <C l value="frui-field-option-control" />,
+            and <C l value="frui-field-option-label" />  CSS classes to globally theme the switch field.
           </Translate>
         </p>
       </div>
@@ -427,8 +418,8 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            The <C value="<Switch>" /> field accepts all props of a
-            standard HTML input element. See <a
+            The <C value="<Switch>" /> field accepts all props of a 
+            standard HTML input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Switch"
               target="_blank"

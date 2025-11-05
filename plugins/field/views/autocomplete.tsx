@@ -211,16 +211,16 @@ export function Body() {
             events for <C value="Autocomplete" />.
           </Translate>
         </p>
-        <Preview
-          title="With Events"
+        <Preview 
+          title="With Events" 
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <Autocomplete
-              className="w-full"
+            <Autocomplete 
+              className="w-full" 
               options={['foo', 'bar']}
               onQuery={(_query, set) => setTimeout(
-                () => set(['boo', 'bar', 'baz']),
+                () => set(['boo', 'bar', 'baz']), 
                 1000
               )}
               onDropdown={open => console.log('dropdown', open)}
@@ -255,7 +255,7 @@ export function Body() {
                 {_('Event Object')}
               </Table.Col>
               <Table.Col className="theme-bg-1 text-left">
-                see: <a
+                see: <a 
                   href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event"
                   target="_blank"
                 >Change Event</a>
@@ -270,7 +270,7 @@ export function Body() {
         <div>
           <p className="py-4">
             <Translate>
-              The <C value="onDropdown" /> event is triggered when the
+              The <C value="onDropdown" /> event is triggered when the 
               dropdown opens or closes. The following arguments are
               passed to the event handler:
             </Translate>
@@ -369,7 +369,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight
+            You can pass the <C value="error" /> prop to highlight 
             the Autocomplete field red.
           </Translate>
         </p>
@@ -378,9 +378,9 @@ export function Body() {
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <Autocomplete
+            <Autocomplete 
               error
-              className="w-full"
+              className="w-full" 
               options={[ 'foo', 'bar' ]} 
               placeholder="Enter foo or bar"
               value="Not a hotdog."

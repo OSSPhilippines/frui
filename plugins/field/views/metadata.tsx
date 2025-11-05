@@ -11,7 +11,7 @@ import Metadata from 'components/field/Metadata.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import {
+import { 
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead, 
@@ -43,9 +43,9 @@ const props = [
 const examples = [
 //0
 `<Metadata 
-add="Add Reference" 
-placeholder={['Enter Key', 'Enter Value']} 
-value={Object.entries({ foo: 'Foo', bar: 'Bar' })} 
+ add="Add Reference" 
+ placeholder={['Enter Key', 'Enter Value']} 
+ value={Object.entries({ foo: 'Foo', bar: 'Bar' })} 
 />`,
 //1
 `<Metadata type="date" add="Add Date" />`,
@@ -328,7 +328,7 @@ export function Body() {
           and <C value="frui-fieldset-add" /> CSS classes to globally theme the metadata field.
         </Translate>
       </p>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>

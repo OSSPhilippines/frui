@@ -11,7 +11,7 @@ import Markdown from 'components/field/MarkdownEditor.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import {
+import { 
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead, 
@@ -158,9 +158,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Markdown wraps the HTML standard <code
+            Markdown wraps the HTML standard <code 
               className="text-sm theme-2"
-            >{'`<textarea />`'}</code> element. Therefore, you can
+            >{'`<textarea />`'}</code> element. Therefore, you can 
             use any textarea attributes as props.
           </Translate>
         </p>
@@ -189,7 +189,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            <C value="onUpdate" /> is like <C value="onChange" r />
+            <C value="onUpdate" /> is like <C value="onChange" r /> 
             except the value is passed instead of the change event.
           </Translate>
         </p>
@@ -232,8 +232,8 @@ export function Body() {
               {_('Event Object')}
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
-              see: <a
-                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event"
+              see: <a 
+                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
                 target="_blank"
               >Change Event</a>
             </Table.Col>
@@ -274,7 +274,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C value="error" /> prop to highlight
+            You can pass the <C value="error" /> prop to highlight 
             the markdown field red.
           </Translate>
         </p>
@@ -291,9 +291,7 @@ export function Body() {
               />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[2]}
-          </Preview.Code>
+          <Preview.Code>{examples[2]}</Preview.Code>
         </Preview>
       </div>
 
@@ -304,7 +302,7 @@ export function Body() {
         <p>
           <Translate>
             The <C value="<Markdown>" /> field accepts all props of a standard HTML Textarea
-            element. See <a
+            element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea"
               target="_blank"

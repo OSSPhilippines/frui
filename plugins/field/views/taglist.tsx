@@ -11,7 +11,7 @@ import Taglist from 'components/field/Taglist.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import {
+import { 
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead, 
@@ -267,10 +267,10 @@ export function Body() {
           and <C value="frui-field-taglist-input" /> CSS classes to globally theme the taglist field.
         </Translate>
       </p>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
-      </h2>
+    </h2>
       <div>
         <p className="py-4">
           <Translate>

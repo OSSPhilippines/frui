@@ -12,12 +12,12 @@ import Radio from 'components/field/Radio.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import {
-  LayoutPanel,
-  LayoutProvider,
-  ThemeHead,
-  Props,
-  Code,
+import { 
+  LayoutPanel, 
+  LayoutProvider, 
+  ThemeHead, 
+  Props, 
+  Code, 
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -151,9 +151,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview
+      <Preview 
         height={100}
-        title="Info Example"
+        title="Info Example" 
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -279,7 +279,7 @@ export function Body() {
               {_('Event Object')}
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
-              see: <a
+              see: <a 
                 href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
                 target="_blank"
               >Change Event</a>
@@ -433,12 +433,12 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can use
-            the <C l value="frui-field-option" />, <C l value="frui-field-option-control" />,
-            and <C l value="frui-field-option-label" /> CSS classes to globally theme the radio field.
+            the <C value="frui-field-option" />, <C value="frui-field-option-control" />,
+            and <C value="frui-field-option-label" /> CSS classes to globally theme the radio field.
           </Translate>
         </p>
       </div>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>

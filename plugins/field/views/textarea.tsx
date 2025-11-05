@@ -11,7 +11,7 @@ import Textarea from 'components/field/Textarea.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import {
+import { 
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead, 
@@ -219,7 +219,7 @@ export function Body() {
               {_('Event Object')}
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
-              see: <a
+              see: <a 
                 href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
                 target="_blank"
               >Change Event</a>
@@ -275,7 +275,7 @@ export function Body() {
           <Preview.Code>{examples[2]}</Preview.Code>
         </Preview>
       </div>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>

@@ -11,8 +11,8 @@ import Switch from 'components/field/Switch.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import {
-  LayoutPanel,
+import { 
+  LayoutPanel, 
   LayoutProvider, 
   ThemeHead, 
   Props, 
@@ -240,7 +240,7 @@ export function Body() {
               {_('Event Object')}
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
-              see: <a
+              see: <a 
                 href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
                 target="_blank"
               >Change Event</a>
@@ -411,7 +411,7 @@ export function Body() {
           </Translate>
         </p>
       </div>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>

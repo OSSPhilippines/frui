@@ -11,7 +11,7 @@ import Table from 'components/element/Table.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import {
+import { 
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead, 
@@ -328,8 +328,8 @@ export function Body() {
                 {_('Event Object')}
               </Table.Col>
               <Table.Col className="theme-bg-1 text-left">
-                see: <a
-                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
+                see: <a 
+                  href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
                   target="_blank"
                 >Change Event</a>
               </Table.Col>
@@ -493,7 +493,7 @@ export function Body() {
           and <C value="frui-field-option-label" /> CSS classes to globally theme checkboxes.
         </Translate>
       </p>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>

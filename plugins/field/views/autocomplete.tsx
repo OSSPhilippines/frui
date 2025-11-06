@@ -373,7 +373,7 @@ export function Body() {
             the Autocomplete field red.
           </Translate>
         </p>
-        <Preview
+        <Preview 
           title="Error Example"
           className="border border-2 theme-bc-3"
         >
@@ -400,7 +400,7 @@ export function Body() {
           and <C value="frui-field-autocomplete-option" /> CSS classes to globally theme autocomplete.
         </Translate>
       </p>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>

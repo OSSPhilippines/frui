@@ -11,7 +11,7 @@ import Input from 'components/field/Input.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import {
+import { 
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead, 

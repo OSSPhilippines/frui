@@ -39,9 +39,9 @@ const props = [
 const examples = [
 //0
 `<Textlist 
- add="Add Value" 
- placeholder="Enter Value"
- value={['foo', 'bar']} 
+  add="Add Value" 
+  placeholder="Enter Value"
+  value={['foo', 'bar']} 
 />`,
 //1
 `<Textlist add="Add Value" onUpdate={value => alert(JSON.stringify(value))} />`,

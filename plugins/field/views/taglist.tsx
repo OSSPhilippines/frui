@@ -270,7 +270,7 @@ export function Body() {
       
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
-    </h2>
+      </h2>
       <div>
         <p className="py-4">
           <Translate>

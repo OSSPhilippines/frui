@@ -294,14 +294,14 @@ export function Body() {
           <Preview.Code>{examples[2]}</Preview.Code>
         </Preview>
       </div>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p>
           <Translate>
-            The <C value="<Markdown>" /> field accepts all props of a standard HTML Textarea
+            The <C value="<Markdown>" /> field accepts all props of a standard HTML Textarea 
             element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea"

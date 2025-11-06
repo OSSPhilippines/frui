@@ -43,9 +43,9 @@ const props = [
 const examples = [
 //0
 `<Metadata 
- add="Add Reference" 
- placeholder={['Enter Key', 'Enter Value']} 
- value={Object.entries({ foo: 'Foo', bar: 'Bar' })} 
+  add="Add Reference" 
+  placeholder={['Enter Key', 'Enter Value']} 
+  value={Object.entries({ foo: 'Foo', bar: 'Bar' })} 
 />`,
 //1
 `<Metadata type="date" add="Add Date" />`,

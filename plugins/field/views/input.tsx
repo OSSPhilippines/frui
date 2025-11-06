@@ -11,7 +11,7 @@ import Input from 'components/field/Input.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
+import {
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead, 
@@ -141,7 +141,7 @@ export function Body() {
             use any input attributes as props.
           </Translate>
         </p>
-        <Preview 
+        <Preview
           title="Basic Example" 
           className="border border-2 theme-bc-3"
         >
@@ -257,7 +257,7 @@ export function Body() {
           <Preview.Code>{examples[2]}</Preview.Code>
         </Preview>
       </div>
-      
+
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>

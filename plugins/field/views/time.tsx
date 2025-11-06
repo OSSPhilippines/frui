@@ -11,7 +11,7 @@ import InputTime from 'components/field/InputTime.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import {
+import { 
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead, 
@@ -203,7 +203,7 @@ export function Body() {
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
               see: <a 
-                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event"
+                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
                 target="_blank"
               >Change Event</a>
             </Table.Col>

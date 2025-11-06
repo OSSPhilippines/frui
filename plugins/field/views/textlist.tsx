@@ -11,7 +11,7 @@ import Textlist from 'components/field/Textlist.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import {
+import { 
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead, 
@@ -39,9 +39,9 @@ const props = [
 const examples = [
 //0
 `<Textlist 
-add="Add Value" 
-placeholder="Enter Value"
-value={['foo', 'bar']} 
+ add="Add Value" 
+ placeholder="Enter Value"
+ value={['foo', 'bar']} 
 />`,
 //1
 `<Textlist add="Add Value" onUpdate={value => alert(JSON.stringify(value))} />`,
@@ -204,9 +204,7 @@ export function Body() {
               <Textlist add="Add Value" onUpdate={value => alert(JSON.stringify(value))} />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[1]}
-          </Preview.Code>
+          <Preview.Code>{examples[1]}</Preview.Code>
         </Preview>
 
         <h3 className="font-semibold text-md mt-8">
@@ -270,7 +268,7 @@ export function Body() {
           and <C value="frui-fieldset-add" /> CSS classes to globally theme the textlist field.
         </Translate>
       </p>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>

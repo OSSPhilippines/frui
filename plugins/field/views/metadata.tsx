@@ -189,7 +189,7 @@ export function Body() {
               />
             </div>
           </Preview.Example>
-          <Preview.Code>{examples[0]}  </Preview.Code>
+          <Preview.Code>{examples[0]}</Preview.Code>
         </Preview>
         <p className="py-4">
           <Translate>

@@ -177,9 +177,7 @@ export function Body() {
               />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[0]}
-          </Preview.Code>
+          <Preview.Code>{examples[0]}</Preview.Code>
         </Preview>
       </div>
 
@@ -205,9 +203,7 @@ export function Body() {
               />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[1]}
-          </Preview.Code>
+          <Preview.Code>{examples[1]}</Preview.Code>
         </Preview>
 
         <h3 className="font-semibold text-md mt-8">

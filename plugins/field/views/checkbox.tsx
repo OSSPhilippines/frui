@@ -45,6 +45,25 @@ const props = [
   [ 'value', 'string', 'No', 'Default value (Controlled)' ]
 ];
 
+const examples = [
+//0
+`<Checkbox 
+  circle 
+  label="Circle" 
+  defaultChecked 
+/>
+<Checkbox 
+  square 
+  label="Square" 
+  defaultChecked 
+/>
+<Checkbox 
+  check 
+  label="Check" 
+  defaultChecked 
+/>`,
+];
+
 //--------------------------------------------------------------------//
 // Components
 
@@ -440,9 +459,7 @@ export function Body() {
               <Checkbox check label="Check" defaultChecked className="ml-4" />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {'<Checkbox circle label="Circle" defaultChecked />\n<Checkbox square label="Square" defaultChecked />\n<Checkbox check label="Check" defaultChecked />'}
-          </Preview.Code>
+          <Preview.Code>{examples[0]}</Preview.Code>
         </Preview>
       </div>
 

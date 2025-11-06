@@ -178,9 +178,7 @@ export function Body() {
               <Taglist placeholder="Enter Value" value={['foo', 'bar']} />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[0]}
-          </Preview.Code>
+          <Preview.Code>{examples[0]}</Preview.Code>
         </Preview>
       </div>
 

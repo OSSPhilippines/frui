@@ -192,9 +192,7 @@ export function Body() {
           <Preview.Example center padding>
             <Textarea onUpdate={value => alert(value)}>Hello World</Textarea>
           </Preview.Example>
-          <Preview.Code>
-            {examples[1]}
-          </Preview.Code>
+          <Preview.Code>{examples[1]}</Preview.Code>
         </Preview>
 
         <h3 className="font-semibold text-md mt-8">

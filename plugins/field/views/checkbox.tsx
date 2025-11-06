@@ -45,20 +45,6 @@ const props = [
   [ 'value', 'string', 'No', 'Default value (Controlled)' ]
 ];
 
-const examples = [
-//0
-`<Checkbox 
-blue 
-label="Blue" 
-defaultChecked />
-\n
-<Checkbox 
-orange 
-label="Orange" 
-defaultChecked 
-/>`,
-]
-
 //--------------------------------------------------------------------//
 // Components
 

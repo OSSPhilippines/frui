@@ -182,11 +182,7 @@ export function Body() {
         >
           <Preview.Example padding>
             <div className="w-full">
-              <Metadata 
-                add="Add Reference" 
-                placeholder={['Enter Key', 'Enter Value']} 
-                value={Object.entries({ foo: 'Foo', bar: 'Bar' })} 
-              />
+              <Metadata type="number" min="0" max="100000" step="0.01" add="Add Number" />
             </div>
           </Preview.Example>
           <Preview.Code>{examples[0]}</Preview.Code>
@@ -255,10 +251,7 @@ export function Body() {
         >
           <Preview.Example padding>
             <div className="w-full">
-              <Metadata
-                add="Add Reference"
-                onUpdate={value => alert(JSON.stringify(value))}
-              />
+              <Metadata add="Add Reference" onUpdate={value => alert(JSON.stringify(value))} />
             </div>
           </Preview.Example>
           <Preview.Code>{examples[3]}</Preview.Code>
@@ -308,10 +301,7 @@ export function Body() {
         >
           <Preview.Example padding>
             <div className="w-full">
-              <Metadata
-                error
-                value={Object.entries({ foo: 'Foo', bar: 'Bar' })}
-              />
+              <Metadata error value={Object.entries({ foo: 'Foo', bar: 'Bar' })} />
             </div>
           </Preview.Example>
           <Preview.Code>{examples[4]}</Preview.Code>

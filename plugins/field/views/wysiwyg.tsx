@@ -693,7 +693,7 @@ export function Body() {
           <Translate>
             Add images, videos, and links using <C value="image" />,{" "}
             <C value="video" />, and <C value="link" /> props for rich
-            content. Links can be clicked with Ctrl (Windows) or Cmd (Mac)
+            content. Links can be clicked with Ctrl (Windows) or Cmd (Mac) 
             to open in a new tab.
           </Translate>
         </p>
@@ -747,12 +747,10 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can customize the component using the <C value="className" /> prop or by targeting
-          the <C value="frui-wysiwyg" />, <C value="frui-wysiwyg-toolbar" />,
-          <C value="frui-wysiwyg-btn" />, and <C value="frui-wysiwyg-editable" /> CSS classes.
-          Additional classes such as <C value="__frui-wysiwyg-t-*" /> (e.g.,
-          <C value="__frui-wysiwyg-t-code" />) apply custom text styles,
-          with only one style applied at a time to prevent nested styling.
+          You can use
+          the <C value="frui-wysiwyg" />, <C value="frui-wysiwyg-toolbar" />, 
+          <C value="frui-wysiwyg-btn" />, 
+          and <C value="frui-wysiwyg-editable" /> CSS classes to globally theme the WYSIWYG field.
         </Translate>
       </p>
 

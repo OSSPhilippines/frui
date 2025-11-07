@@ -134,6 +134,28 @@ const examples = [
   label="Blue" 
   defaultChecked 
 />`,
+//11
+`<Checkbox 
+  circle 
+  rounded 
+  blue 
+  label="Circle" 
+  defaultChecked 
+/>
+<Checkbox 
+  square 
+  orange 
+  label="Square" 
+  defaultChecked 
+  className="ml-4" 
+/>
+<Checkbox 
+  check 
+  rounded 
+  label="Check" 
+  defaultChecked 
+  className="ml-4" 
+/>`,
 ];
 
 //--------------------------------------------------------------------//
@@ -534,7 +556,7 @@ export function Body() {
             </div>
           </Preview.Example>
           <Preview.Code>
-            {examples[0]}
+            {examples[11]}
           </Preview.Code>
         </Preview>
       </div>

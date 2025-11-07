@@ -304,7 +304,12 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can use
-            the <C value="Switch" /> CSS class to globally theme the switch field.
+            the <C value="frui-field-switch" />, <C value="frui-field-switch-rounded" />, 
+            <C value="frui-field-switch-onoff" />, <C value="frui-field-switch-yesno" />, 
+            <C value="frui-field-switch-sunmoon" />, <C value="frui-field-switch-checkex" />, 
+            <C value="frui-field-switch-ridge" />, <C value="frui-field-switch-smooth" />, 
+            <C value="frui-field-switch-blue" />, <C value="frui-field-switch-orange" />, 
+            and <C value="frui-field-switch-green" /> CSS classes to globally theme the switch field.
           </Translate>
         </p>
 

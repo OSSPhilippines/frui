@@ -153,7 +153,6 @@ export function Body() {
       </h2>
       <div className="relative z-[100]">
         <p className="py-4">
-
           <Translate>
             The following is a basic example of 
             a <C l value="CountrySelect" /> field.

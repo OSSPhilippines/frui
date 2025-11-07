@@ -197,10 +197,7 @@ export function Body() {
         >
           <Preview.Example padding>
             <div className="w-full">
-              <Markdown
-                onUpdate={value => alert(value)}
-                value="# Hello World"
-              />
+              <Markdown error onUpdate={value => alert(value)} value="# Not a hotdog." />
             </div>
           </Preview.Example>
           <Preview.Code>{examples[1]}</Preview.Code>

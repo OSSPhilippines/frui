@@ -209,13 +209,7 @@ export function Body() {
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <Radio
-              rounded
-              name="name"
-              label="Yes"
-              value="yes"
-              defaultChecked
-            />
+            <Radio rounded name="name" label="Yes" value="yes" defaultChecked />
           </Preview.Example>
           <Preview.Code>{examples[0]}</Preview.Code>
         </Preview>

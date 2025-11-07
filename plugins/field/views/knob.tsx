@@ -12,12 +12,12 @@ import Knob from 'components/field/Knob.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import {
-  LayoutPanel,
-  LayoutProvider,
-  ThemeHead,
-  Props,
-  Code,
+import { 
+  LayoutPanel, 
+  LayoutProvider, 
+  ThemeHead, 
+  Props, 
+  Code, 
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -42,54 +42,66 @@ const props = [
 ];
 
 const examples = [
-  //0
-  `<Knob defaultValue={35} />`,
-  //1
-  `<Knob 
+//0
+`<Knob defaultValue={35} />`,
+//1
+`<Knob 
   value={min} 
   onChange={setMin} 
   min={10} 
   max={80} 
 />`,
-  //2
-  `<Knob 
+//2
+`<Knob 
   value={stepped} 
   onChange={setStepped} 
   step={10} 
 />`,
-  //3
-  `<Knob 
+//3
+`<Knob 
   value={customSize} 
   onChange={setCustomSize} 
   size={150} 
 />`,
-  //4
-  `<Knob 
+//4
+`<Knob 
   value={thickStroke} 
   onChange={setThickStroke} 
   stroke={15} 
 />`,
-  //5
-  `<Knob 
+//5
+`<Knob 
   value={colorful} 
   onChange={setColorful} 
   valueColor="#e91e63" 
   textColor="#e91e63" 
 />`,
-  //6
-  `<Knob 
+//6
+`<Knob 
   value={tracked} 
   onChange={setTracked} 
   rangeColor="#ccc" 
   valueColor="#4caf50" 
 />`,
-  //7
-  `<Knob 
+//7
+`<Knob 
   value={value} 
   onChange={setValue} 
   valueTemplate="{}%" 
   textColor="#333" 
-/>`
+/>`,
+//8
+`<Knob 
+  value={value} 
+  onChange={(e) => setValue(Number(e.target.value))} 
+/>`,
+//9
+`<Knob 
+  value={min} 
+  onChange={setMin} 
+  min={10} 
+  max={80} 
+/>`,
 ];
 
 //--------------------------------------------------------------------//
@@ -179,9 +191,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview
+      <Preview 
         height={100}
-        title="Info Example"
+        title="Info Example" 
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -244,9 +256,7 @@ export function Body() {
               <Knob defaultValue={35} />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[0]}
-          </Preview.Code>
+          <Preview.Code>{examples[0]}</Preview.Code>
         </Preview>
       </div>
 
@@ -256,7 +266,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The <C value="onChange" /> event is triggered when the value changes.
+            The <C value="onChange" /> event is triggered when the
+            value has changed. The following arguments are passed
+            to the event handler:
           </Translate>
         </p>
         <Preview
@@ -274,12 +286,7 @@ export function Body() {
               </div>
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {`<Knob 
-              value={value} 
-              onChange={(e) => setValue(Number(e.target.value))} 
-            />`}
-          </Preview.Code>
+          <Preview.Code>{examples[8]}</Preview.Code>
         </Preview>
       </div>
 
@@ -309,14 +316,7 @@ export function Body() {
               </div>
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {`<Knob 
-              value={min} 
-              onChange={setMin} 
-              min={10} 
-              max={80} 
-            />`}
-          </Preview.Code>
+          <Preview.Code>{examples[9]}</Preview.Code>
         </Preview>
       </div>
 
@@ -331,7 +331,7 @@ export function Body() {
         </p>
         <div className="curved overflow-hidden">
           <div className="flex items-center justify-center p-6 theme-bg-1">
-            <Knob value={stepped} onChange={setStepped} step={10} />
+          <Knob value={stepped} onChange={setStepped} step={10} />
           </div>
           <Code language="tsx">{examples[2]}</Code>
         </div>
@@ -343,7 +343,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-           To change the size of the knob component,
+            To change the size of the knob component,
             pass a value for <C value="step" r />
           </Translate>
         </p>
@@ -353,23 +353,14 @@ export function Body() {
         >
           <Preview.Example center padding>
             <div className="text-center">
-              <Knob
-                value={stepped}
-                onChange={setStepped}
-                step={10}
+              <Knob value={stepped} onChange={setStepped} step={10}
               />
               <div className="mt-2 text-sm">
                 Current value: {stepped} (steps of 10)
               </div>
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {`<Knob 
-              value={stepped} 
-              onChange={setStepped} 
-              step={10} 
-            />`}
-          </Preview.Code>
+          <Preview.Code>{examples[2]}</Preview.Code>
         </Preview>
       </div>
 
@@ -388,23 +379,14 @@ export function Body() {
         >
           <Preview.Example center padding>
             <div className="text-center">
-              <Knob
-                value={thickStroke}
-                onChange={setThickStroke}
-                stroke={15}
+              <Knob value={thickStroke} onChange={setThickStroke} stroke={15}
               />
               <div className="mt-2 text-sm">
                 Stroke width: 15px
               </div>
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {`<Knob 
-              value={thickStroke} 
-              onChange={setThickStroke} 
-              stroke={15} 
-            />`}
-          </Preview.Code>
+          <Preview.Code>{examples[4]}</Preview.Code>
         </Preview>
       </div>
 
@@ -435,14 +417,7 @@ export function Body() {
               </div>
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {`<Knob 
-              value={colorful} 
-              onChange={setColorful} 
-              valueColor="#e91e63" 
-              textColor="#e91e63" 
-            />`}
-          </Preview.Code>
+          <Preview.Code>{examples[5]}</Preview.Code>
         </Preview>
       </div>
 
@@ -474,14 +449,7 @@ export function Body() {
               </div>
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {`<Knob
-              value={tracked} 
-              onChange={setTracked} 
-              rangeColor="#ccc" 
-              valueColor="#4caf50" 
-            />`}
-          </Preview.Code>
+          <Preview.Code>{examples[6]}</Preview.Code>
         </Preview>
       </div>
 
@@ -511,14 +479,7 @@ export function Body() {
               </div>
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {`<Knob
-              value={value}
-              onChange={setValue}
-              valueTemplate="{}%"
-              textColor="#333"
-            />`}
-          </Preview.Code>
+          <Preview.Code>{examples[7]}</Preview.Code>
         </Preview>
       </div>
 
@@ -538,7 +499,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Knob>" /> field can be passed the
+            The <C value="<Knob>" /> field can be passed the 
             following props.
           </Translate>
         </p>

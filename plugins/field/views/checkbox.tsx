@@ -48,18 +48,90 @@ const props = [
 const examples = [
 //0
 `<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
+  defaultChecked 
+/>`,
+//1
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
+  rounded 
+  defaultChecked 
+/>`,
+//2
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
+  orange 
+  defaultChecked 
+/>`,
+//3
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
   circle 
-  label="Circle" 
   defaultChecked 
-/>
-<Checkbox 
+/>`,
+//4
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
   square 
-  label="Square" 
+  defaultChecked 
+/>`,
+//5
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
+  circle 
+  rounded 
+  defaultChecked 
+/>`,
+//6
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
+  orange 
+  square 
+  defaultChecked 
+/>`,
+//7
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
+  rounded 
+  square 
+  defaultChecked 
+/>`,
+//8
+`<Checkbox 
+  label="Active?" 
+  onUpdate={(value, checked) => alert(\`\${value} - \${checked}\`)} 
+/>`,
+//9
+`<Checkbox 
+  blue 
+  label="Blue" 
   defaultChecked 
 />
 <Checkbox 
-  check 
-  label="Check" 
+  orange 
+  label="Orange" 
+  defaultChecked 
+/>`,
+//10
+`<Checkbox 
+  square 
+  label="Blue" 
   defaultChecked 
 />`,
 ];
@@ -142,9 +214,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[0]}</Preview.Code>
       </Preview>
       {/* Rounded Example */}
       <Preview 
@@ -156,9 +226,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" rounded defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" rounded defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[1]}</Preview.Code>
       </Preview>
       {/* Orange Example */}
       <Preview 
@@ -170,9 +238,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" orange defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" orange defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[2]}</Preview.Code>
       </Preview>
       {/* Circle Shape Example */}
       <Preview 
@@ -184,9 +250,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" circle defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" circle defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[3]}</Preview.Code>
       </Preview>
       {/* Square Shape Example */}
       <Preview 
@@ -198,9 +262,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" square defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" square defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[4]}</Preview.Code>
       </Preview>
       {/* Looks Like Radio */}
       <Preview 
@@ -212,9 +274,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" circle rounded defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" circle rounded defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[5]}</Preview.Code>
       </Preview>
       {/* Orange Square Example */}
       <Preview 
@@ -226,9 +286,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" orange square defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" orange square defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[6]}</Preview.Code>
       </Preview>
       {/* Round Square Example */}
       <Preview 
@@ -240,9 +298,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" rounded square defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" rounded square defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[7]}</Preview.Code>
       </Preview>
     </div>
   );
@@ -306,7 +362,7 @@ export function Body() {
             </div>
           </Preview.Example>
           <Preview.Code>
-            {'<Checkbox label="Active?" onUpdate={(value, checked) => alert(`${value} - ${checked}`)} />'}
+            {examples[8]}
           </Preview.Code>
         </Preview>
 
@@ -433,12 +489,9 @@ export function Body() {
               <Checkbox orange label="Orange" defaultChecked className="ml-4" />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {'<Checkbox blue label="Blue" defaultChecked />\n<Checkbox orange label="Orange" defaultChecked />'}
-          </Preview.Code>
+          <Preview.Code>{examples[9]}</Preview.Code>
         </Preview>
       </div>
-
 
       <h3 className="font-semibold text-md mt-8">
         {_('Shapes')}
@@ -459,7 +512,7 @@ export function Body() {
               <Checkbox check label="Check" defaultChecked className="ml-4" />
             </div>
           </Preview.Example>
-          <Preview.Code>{examples[0]}</Preview.Code>
+          <Preview.Code>{examples[10]}</Preview.Code>
         </Preview>
       </div>
 

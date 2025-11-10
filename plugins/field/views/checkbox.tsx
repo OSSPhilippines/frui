@@ -475,9 +475,7 @@ export function Body() {
               <Checkbox error defaultChecked label="Active?" />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[12]}
-          </Preview.Code>
+          <Preview.Code>{examples[12]}</Preview.Code>
         </Preview>
       </div>
 
@@ -497,9 +495,7 @@ export function Body() {
               <Checkbox rounded defaultChecked />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[13]}
-          </Preview.Code>
+          <Preview.Code>{examples[13]}</Preview.Code>
         </Preview>
       </div>
 

@@ -156,6 +156,17 @@ const examples = [
   defaultChecked 
   className="ml-4" 
 />`,
+//12
+`<Checkbox 
+  error 
+  defaultChecked 
+  label="Active?" 
+/>`,
+//13
+`<Checkbox 
+  rounded 
+  defaultChecked 
+/>`
 ];
 
 //--------------------------------------------------------------------//
@@ -465,7 +476,7 @@ export function Body() {
             </div>
           </Preview.Example>
           <Preview.Code>
-            {'<Checkbox error defaultChecked label="Active?" />'}
+            {examples[12]}
           </Preview.Code>
         </Preview>
       </div>
@@ -487,7 +498,7 @@ export function Body() {
             </div>
           </Preview.Example>
           <Preview.Code>
-            {'<Checkbox rounded defaultChecked />'}
+            {examples[13]}
           </Preview.Code>
         </Preview>
       </div>

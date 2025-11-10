@@ -492,7 +492,7 @@ export function Body() {
           the <C value="frui-field-knob" /> CSS class to globally theme the knob field.
         </Translate>
       </p>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>

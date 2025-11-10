@@ -355,7 +355,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             Use <C value="blue" />, <C value="orange" /> or 
-            <C l value="green" /> prop to change the color of  
+            <C l value="green" /> prop to change the color of 
             switches.
           </Translate>
         </p>

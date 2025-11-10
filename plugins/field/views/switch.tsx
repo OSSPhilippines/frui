@@ -318,7 +318,7 @@ export function Body() {
         </h3>
         <p className="py-4">
           <Translate>
-            Use <C value="ridge" /> prop to add ridges to the
+            Use <C value="ridge" /> prop to add ridges to the 
             knobs.
           </Translate>
         </p>

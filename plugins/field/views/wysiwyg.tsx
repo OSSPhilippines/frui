@@ -748,9 +748,10 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C value="frui-wysiwyg" />, <C value="frui-wysiwyg-toolbar" />, 
-          <C value="frui-wysiwyg-btn" />, 
-          and <C value="frui-wysiwyg-editable" /> CSS classes to globally theme the WYSIWYG field.
+          the <C value="frui-field-wysiwyg-editor" />, <C value="frui-field-wysiwyg-editor-toolbar" />,
+          <C value="frui-field-wysiwyg-editor-btn" />, <C value="frui-field-wysiwyg-editor-btn-module" />,
+          <C value="frui-field-wysiwyg-editor-btn-select" />, and <C value="frui-field-wysiwyg-editor-editable" /> 
+          CSS classes to globally theme the WYSIWYG field.
         </Translate>
       </p>
 

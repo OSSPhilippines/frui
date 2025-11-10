@@ -288,9 +288,7 @@ export function Body() {
               <span>{_('Current Value:')} {controlledValue ?? 'null'}</span>
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[0]}
-          </Preview.Code>
+          <Preview.Code>{examples[0]}</Preview.Code>
         </Preview>
       </div>
 
@@ -317,9 +315,7 @@ export function Body() {
               <div><C value="large" />: <Rating defaultValue={3} size="large" /></div>
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[1]}
-          </Preview.Code>
+          <Preview.Code>{examples[1]}</Preview.Code>
         </Preview>
       </div>
 
@@ -356,9 +352,7 @@ export function Body() {
               />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[2]}
-          </Preview.Code>
+          <Preview.Code>{examples[2]}</Preview.Code>
         </Preview>
       </div>
 
@@ -383,9 +377,7 @@ export function Body() {
               <div>Highlight Selected Only: <Rating defaultValue={3} highlightSelectedOnly /></div>
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[3]}
-          </Preview.Code>
+          <Preview.Code>{examples[3]}</Preview.Code>
         </Preview>
       </div>
 
@@ -411,9 +403,7 @@ export function Body() {
               <div>Disabled: <Rating value={2} disabled /></div>
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[4]}
-          </Preview.Code>
+          <Preview.Code>{examples[4]}</Preview.Code>
         </Preview>
       </div>
 
@@ -439,9 +429,7 @@ export function Body() {
               <div>Disabled: <Rating value={2} disabled /></div>
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[4]}
-          </Preview.Code>
+          <Preview.Code>{examples[4]}</Preview.Code>
         </Preview>
       </div>
 

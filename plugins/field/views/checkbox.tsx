@@ -383,9 +383,7 @@ export function Body() {
               <Checkbox label="Active?" onUpdate={(value, checked) => alert(`${value} - ${checked}`)} />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[8]}
-          </Preview.Code>
+          <Preview.Code>{examples[8]}</Preview.Code>
         </Preview>
 
         <h3 className="font-semibold text-md mt-8">
@@ -555,9 +553,7 @@ export function Body() {
               <Checkbox check rounded label="Check" defaultChecked className="ml-4" />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {examples[11]}
-          </Preview.Code>
+          <Preview.Code>{examples[11]}</Preview.Code>
         </Preview>
       </div>
 

@@ -12,12 +12,12 @@ import Rating from 'components/field/Rating.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import {
-  LayoutPanel,
-  LayoutProvider,
-  ThemeHead,
-  Props,
-  Code,
+import { 
+  LayoutPanel, 
+  LayoutProvider, 
+  ThemeHead, 
+  Props, 
+  Code, 
   C,
   Preview
 } from 'plugins/app/index.js';
@@ -44,8 +44,8 @@ const propsData: [string, string, string, string][] = [
 ];
 
 const examples = [
-  //0
-  `function ControlledRatingExample() {
+//0
+`function ControlledRatingExample() {
   const [controlledValue, setControlledValue] = useState<number | null>(2);
 
   return (
@@ -59,12 +59,12 @@ const examples = [
     />
   );
 }`,
-  //1
-  `<Rating defaultValue={3} size="small" />
+//1
+`<Rating defaultValue={3} size="small" />
 <Rating defaultValue={3} size="medium" />
 <Rating defaultValue={3} size="large" />`,
-  //2
-  `// Define custom icons (examples)
+//2
+`// Define custom icons (examples)
 const HeartIcon = (props) => (/* SVG code */);
 const CircleIcon = (props) => (/* SVG code */);
 
@@ -82,17 +82,17 @@ const CircleIcon = (props) => (/* SVG code */);
   emptyIcon={<CircleIcon style={{ opacity: 0.3 }} />}
   max={6}
 />`,
-  //3
-  `{/* Default: Icons 1, 2, 3 are filled */}
+//3
+`{/* Default: Icons 1, 2, 3 are filled */}
 <Rating defaultValue={3} />
 
 {/* highlightSelectedOnly: Only icon 3 is filled */}
 <Rating defaultValue={3} highlightSelectedOnly />`,
-  //4
-  `<Rating value={4} readOnly />
+//4
+`<Rating value={4} readOnly />
 <Rating value={2} disabled />`,
-  //5
-  `<Rating
+//5
+`<Rating
   name="event-rating"
   defaultValue={1}
   onChange={(event, value) => alert(\`onChange: Value \${value} selected!\`)}
@@ -194,9 +194,9 @@ export function Examples() {
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
-      <Preview
+      <Preview 
         height={100}
-        title="Info Example"
+        title="Info Example" 
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
@@ -266,8 +266,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            For a controlled component, use the <C value="value" />,
-            and <C value="onChange" r /> props, typically with React
+            For a controlled component, use the <C value="value" />, 
+            and <C value="onChange" r /> props, typically with React 
             state.
           </Translate>
         </p>
@@ -300,9 +300,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Use the <C value="size" /> prop to adjust the icon size.
-            The sizes correspond to CSS
-            classes <C l value=".frui-rating-sizeSmall" />, <C l value=".frui-rating-sizeMedium" />,
+            Use the <C value="size" /> prop to adjust the icon size. 
+            The sizes correspond to CSS 
+            classes <C l value=".frui-rating-sizeSmall" />, <C l value=".frui-rating-sizeMedium" />, 
             and <C l value=".frui-rating-sizeLarge" />.
           </Translate>
         </p>
@@ -329,10 +329,10 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Provide custom React nodes to the <C value="icon" /> (filled)
-            and <C value="emptyIcon" /> props. If <C value="emptyIcon" /> is
-            not provided, a faded version of the <C value="icon" /> is
-            used. Styles target <C l value=".frui-rating-icon-filled" />,
+            Provide custom React nodes to the <C value="icon" /> (filled) 
+            and <C value="emptyIcon" /> props. If <C value="emptyIcon" /> is 
+            not provided, a faded version of the <C value="icon" /> is 
+            used. Styles target <C l value=".frui-rating-icon-filled" />, 
             and <C l value=".frui-rating-icon-empty" />.
           </Translate>
         </p>
@@ -368,8 +368,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            By default, all icons up to the selected/hovered
-            value are filled. Use <C value="highlightSelectedOnly" /> to
+            By default, all icons up to the selected/hovered 
+            value are filled. Use <C value="highlightSelectedOnly" /> to 
             only fill the single selected/hovered icon.
           </Translate>
         </p>
@@ -395,9 +395,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Use <C value="readOnly" /> to display a rating that
+            Use <C value="readOnly" /> to display a rating that 
             cannot be changed by the user (<C l value=".frui-rating-readOnly" /> class).
-            Use <C value="disabled" /> to prevent interaction
+            Use <C value="disabled" /> to prevent interaction 
             and apply disabled styling (<C l value=".frui-rating-disabled" /> class).
           </Translate>
         </p>
@@ -465,7 +465,7 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            The <C value="<Rating>" /> field wraps visually hidden
+            The <C value="<Rating>" /> field wraps visually hidden 
             radio inputs for accessibility and form integration.
             It accepts the following specific props.
           </Translate>

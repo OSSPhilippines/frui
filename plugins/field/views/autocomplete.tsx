@@ -112,6 +112,12 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -170,8 +176,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
@@ -368,7 +374,7 @@ export function Body() {
           </Translate>
         </p>
         <Preview 
-          title="With Events" 
+          title="Error Example"
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
@@ -389,17 +395,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to 
-          <C l value="Autocomplete" /> components
-          or use any combination of <C 
-            value="frui-field-autocomplete" 
-          />, <C 
-            value="frui-field-autocomplete-dropdown" 
-          />, <C 
-            value="frui-field-autocomplete-options" 
-          />, and <C 
-            value="frui-field-autocomplete-option" 
-          /> CSS classes.
+          You can use
+          the <C value="Autocomplete" />, <C value="frui-field-autocomplete" />, <C value="frui-field-autocomplete-dropdown" />, <C value="frui-field-autocomplete-options" />,
+          and <C value="frui-field-autocomplete-option" /> CSS classes to globally theme autocomplete.
         </Translate>
       </p>
       

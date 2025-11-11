@@ -84,11 +84,11 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Input Time')}
+          {_('Time')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#basic">{_('Basics')}</a>
+            <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#events">{_('Events')}</a>
@@ -134,8 +134,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
@@ -171,7 +171,7 @@ export function Body() {
           </Translate>
         </p>
         <Preview 
-          title="Events Example" 
+          title="With Events"
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
@@ -264,8 +264,8 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to time components or 
-          use the <C value="frui-field-date" /> CSS class.
+          You can use
+          the <C value="frui-field-date" /> CSS class to globally theme the time field.
         </Translate>
       </p>
 

@@ -77,7 +77,7 @@ export function Menu() {
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#basic">{_('Basic Example')}</a>
+            <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#events">{_('Events')}</a>
@@ -123,8 +123,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="types" className="uppercase font-bold text-lg mt-8">
-        {_('Basic')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
@@ -157,7 +157,7 @@ export function Body() {
           </Translate>
         </p>
         <Preview 
-          title="Event Example" 
+          title="With Events" 
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
@@ -254,10 +254,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add use 
-          the <C l value="frui-field-password" />, <C l value="frui-field-password-control" />, 
-          and <C l value="frui-field-password-toggle" /> CSS classes to 
-          globally theme password fields.
+          You can use 
+          the <C value="frui-field-password" />, <C value="frui-field-password-control" />, 
+          and <C value="frui-field-password-toggle" /> CSS classes to globally theme the password field.
         </Translate>
       </p>
       

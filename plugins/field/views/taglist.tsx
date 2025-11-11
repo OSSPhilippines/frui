@@ -95,6 +95,12 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -153,8 +159,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
@@ -163,16 +169,17 @@ export function Body() {
             <C l value="Taglist" /> field.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Basic Taglist Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
               <Taglist placeholder="Enter Value" value={['foo', 'bar']} />
             </div>
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -185,16 +192,17 @@ export function Body() {
             events for <C value="Taglist" />.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="relative flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="With Events"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
               <Taglist onUpdate={console.log} />
             </div>
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Update')}
@@ -234,16 +242,17 @@ export function Body() {
             the Taglist field red.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Error State Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
               <Taglist error value={['foo', 'bar']} />
             </div>
-          </div>
-          <Code language="typescript">
-            {examples[2]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[2]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -251,12 +260,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to selects
-          or use any of the respective 
-          <C l value="frui-field-taglist" />, 
-          <C l value="frui-field-taglist-tag" />, 
-          <C l value="frui-field-taglist-remove" />, and
-          <C l value="frui-field-taglist-input" /> CSS classes. 
+          You can use
+          the <C value="frui-field-taglist" />, <C value="frui-field-taglist-tag" />, <C value="frui-field-taglist-remove" />,
+          and <C value="frui-field-taglist-input" /> CSS classes to globally theme the taglist field.
         </Translate>
       </p>
       

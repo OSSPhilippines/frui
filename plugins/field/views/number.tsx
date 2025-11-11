@@ -86,9 +86,6 @@ export function Menu() {
             <a href="#errors">{_('Errors')}</a>
           </li>
           <li className="ml-2 pb-1">
-            <a href="#styles">{_('Global Styles')}</a>
-          </li>
-          <li className="ml-2 pb-1">
             <a href="#api">{_('API Reference')}</a>
           </li>
         </ul>
@@ -219,7 +216,7 @@ export function Body() {
           </Translate>
         </p>
         <Preview 
-          title="Events Example" 
+          title="With Events" 
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>

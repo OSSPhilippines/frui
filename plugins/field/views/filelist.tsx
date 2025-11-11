@@ -102,7 +102,7 @@ export function Menu() {
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#basic">{_('Basics')}</a>
+            <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#events">{_('Events')}</a>
@@ -148,8 +148,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <Preview 
         title="Basic Example" 
@@ -300,13 +300,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to filelist
-          or use any of the respective 
-          <C l value="frui-field-filelist" />, 
-          <C l value="frui-field-filelist-control" />, 
-          <C l value="frui-field-filelist-file" />, 
-          <C l value="frui-field-filelist-link" />, and 
-          <C l value="frui-field-filelist-remove" /> CSS classes. 
+          You can use
+          the <C value="frui-field-filelist" />, <C value="frui-field-filelist-control" />, <C value="frui-field-filelist-file" />, <C value="frui-field-filelist-link" />,
+          and <C value="frui-field-filelist-remove" /> CSS classes to globally theme the file list field.
         </Translate>
       </p>
       

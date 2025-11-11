@@ -225,7 +225,7 @@ export function Body() {
           </Translate>
         </p>
         <Preview 
-          title="Events Example" 
+          title="With Events" 
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
@@ -322,8 +322,8 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to date or use 
-          the <C value="frui-field-input-color" /> CSS class.
+          You can use 
+          the <C value="frui-field-input-color" /> CSS class to globally theme the color field.
         </Translate>
       </p>
 

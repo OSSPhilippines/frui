@@ -89,7 +89,10 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
-            <a href="#styles">{_('Global Styles')}</a>
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#api">{_('API Reference')}</a>
@@ -126,8 +129,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
@@ -164,7 +167,7 @@ export function Body() {
           </Translate>
         </p>
         <Preview 
-          title="On Update Example" 
+          title="With Events"
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
@@ -245,7 +248,7 @@ export function Body() {
           </Translate>
         </p>
         <Preview 
-          title="Input With Error" 
+          title="Error Example" 
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>

@@ -45,6 +45,130 @@ const props = [
   [ 'value', 'string', 'No', 'Default value (Controlled)' ]
 ];
 
+const examples = [
+//0
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
+  defaultChecked 
+/>`,
+//1
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
+  rounded 
+  defaultChecked 
+/>`,
+//2
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
+  orange 
+  defaultChecked 
+/>`,
+//3
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
+  circle 
+  defaultChecked 
+/>`,
+//4
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
+  square 
+  defaultChecked 
+/>`,
+//5
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
+  circle 
+  rounded 
+  defaultChecked 
+/>`,
+//6
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
+  orange 
+  square 
+  defaultChecked 
+/>`,
+//7
+`<Checkbox 
+  name="name" 
+  label="Active?" 
+  value="yes" 
+  rounded 
+  square 
+  defaultChecked 
+/>`,
+//8
+`<Checkbox 
+  label="Active?" 
+  onUpdate={(value, checked) => alert(\`\${value} - \${checked}\`)} 
+/>`,
+//9
+`<Checkbox 
+  blue 
+  label="Blue" 
+  defaultChecked 
+/>
+<Checkbox 
+  orange 
+  label="Orange" 
+  defaultChecked 
+/>`,
+//10
+`<Checkbox 
+  square 
+  label="Blue" 
+  defaultChecked 
+/>`,
+//11
+`<Checkbox 
+  circle 
+  rounded 
+  blue 
+  label="Circle" 
+  defaultChecked 
+/>
+<Checkbox 
+  square 
+  orange 
+  label="Square" 
+  defaultChecked 
+  className="ml-4" 
+/>
+<Checkbox 
+  check 
+  rounded 
+  label="Check" 
+  defaultChecked 
+  className="ml-4" 
+/>`,
+//12
+`<Checkbox 
+  error 
+  defaultChecked 
+  label="Active?" 
+/>`,
+//13
+`<Checkbox 
+  rounded 
+  defaultChecked 
+/>`
+];
+
 //--------------------------------------------------------------------//
 // Components
 
@@ -90,6 +214,12 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -117,9 +247,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[0]}</Preview.Code>
       </Preview>
       {/* Rounded Example */}
       <Preview 
@@ -131,9 +259,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" rounded defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" rounded defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[1]}</Preview.Code>
       </Preview>
       {/* Orange Example */}
       <Preview 
@@ -145,9 +271,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" orange defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" orange defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[2]}</Preview.Code>
       </Preview>
       {/* Circle Shape Example */}
       <Preview 
@@ -159,9 +283,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" circle defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" circle defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[3]}</Preview.Code>
       </Preview>
       {/* Square Shape Example */}
       <Preview 
@@ -173,9 +295,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" square defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" square defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[4]}</Preview.Code>
       </Preview>
       {/* Looks Like Radio */}
       <Preview 
@@ -187,9 +307,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" circle rounded defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" circle rounded defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[5]}</Preview.Code>
       </Preview>
       {/* Orange Square Example */}
       <Preview 
@@ -201,9 +319,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" orange square defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" orange square defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[6]}</Preview.Code>
       </Preview>
       {/* Round Square Example */}
       <Preview 
@@ -215,9 +331,7 @@ export function Examples() {
             <Checkbox name="name" label="Active?" value="yes" rounded square defaultChecked />
           </div>
         </Preview.Example>
-        <Preview.Code>
-          {'<Checkbox name="name" label="Active?" value="yes" rounded square defaultChecked />'}
-        </Preview.Code>
+        <Preview.Code>{examples[7]}</Preview.Code>
       </Preview>
     </div>
   );
@@ -280,9 +394,7 @@ export function Body() {
               <Checkbox label="Active?" onUpdate={(value, checked) => alert(`${value} - ${checked}`)} />
             </div>
           </Preview.Example>
-          <Preview.Code>
-            {'<Checkbox label="Active?" onUpdate={(value, checked) => alert(`${value} - ${checked}`)} />'}
-          </Preview.Code>
+          <Preview.Code>{examples[8]}</Preview.Code>
         </Preview>
 
         <h3 className="font-semibold text-md mt-8">
@@ -357,25 +469,15 @@ export function Body() {
             the Checkbox field red.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Checkbox error defaultChecked label="Active?" />
-          </div>
-          <Code language="typescript">
-            {`<Checkbox error defaultChecked label="Active?" />`}
-          </Code>
-        </div>
+        <Preview title="Error Example" className="border border-2 theme-bc-3">
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Checkbox error defaultChecked label="Active?" />
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[12]}</Preview.Code>
+        </Preview>
       </div>
-
-      <h2 id="styles" className="uppercase font-bold text-lg mt-8">
-        {_('Global Styles')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          You can apply rounded, colors and shapes to the 
-          <C l value="Checkbox" /> component.
-        </Translate>
-      </p>
 
       <h3 className="font-semibold text-md mt-8">
         {_('Rounded')}
@@ -387,14 +489,14 @@ export function Body() {
             circular.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Checkbox rounded defaultChecked />
-          </div>
-          <Code language="typescript">
-            {`<Checkbox rounded defaultChecked />`}
-          </Code>
-        </div>
+        <Preview title="Rounded Checkbox" className="border border-2 theme-bc-3">
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Checkbox rounded defaultChecked />
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[13]}</Preview.Code>
+        </Preview>
       </div>
 
       <h3 className="font-semibold text-md mt-8">
@@ -407,15 +509,15 @@ export function Body() {
             change the color of checkboxes.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Checkbox blue label="Blue" defaultChecked />
-            <Checkbox orange label="Orange" defaultChecked className="ml-4" />
-          </div>
-          <Code language="typescript">
-            {`<Checkbox blue label="Blue" defaultChecked />`}
-          </Code>
-        </div>
+        <Preview title="Colors" className="border border-2 theme-bc-3">
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Checkbox blue label="Blue" defaultChecked />
+              <Checkbox orange label="Orange" defaultChecked className="ml-4" />
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[9]}</Preview.Code>
+        </Preview>
       </div>
 
       <h3 className="font-semibold text-md mt-8">
@@ -424,21 +526,21 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Use <C value="circle" />, <C value="checked" /> or 
-            <C l value="checked" /> prop to change the color of 
+            Use <C value="circle" />, <C value="square" /> or 
+            <C value="check" /> prop to change the shape of 
             checkboxes.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Checkbox circle label="Circle" defaultChecked />
-            <Checkbox square label="Square" defaultChecked className="ml-4" />
-            <Checkbox check label="Check" defaultChecked className="ml-4" />
-          </div>
-          <Code language="typescript">
-            {`<Checkbox square label="Blue" defaultChecked />`}
-          </Code>
-        </div>
+        <Preview title="Shapes" className="border border-2 theme-bc-3">
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Checkbox circle label="Circle" defaultChecked />
+              <Checkbox square label="Square" defaultChecked className="ml-4" />
+              <Checkbox check label="Check" defaultChecked className="ml-4" />
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[10]}</Preview.Code>
+        </Preview>
       </div>
 
       <h3 className="font-semibold text-md mt-8">
@@ -450,13 +552,16 @@ export function Body() {
             Try different combinations to get the checkbox you want.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Checkbox circle rounded blue label="Circle" defaultChecked />
-            <Checkbox square orange label="Square" defaultChecked className="ml-4" />
-            <Checkbox check rounded label="Check" defaultChecked className="ml-4" />
-          </div>
-        </div>
+        <Preview title="Combinations" className="border border-2 theme-bc-3">
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Checkbox circle rounded blue label="Circle" defaultChecked />
+              <Checkbox square orange label="Square" defaultChecked className="ml-4" />
+              <Checkbox check rounded label="Check" defaultChecked className="ml-4" />
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[11]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -464,12 +569,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can also add your own custom class to 
-          <C l value="Checkbox" /> components
-          or use any combination of 
-          <C l value="frui-field-option" />, 
-          <C l value="frui-field-option-control" />, and
-          <C l value="frui-field-option-label" /> CSS classes.
+          You can use
+          the <C value="frui-field-option" />, <C value="frui-field-option-control" />,
+          and <C value="frui-field-option-label" /> CSS classes to globally theme checkboxes.
         </Translate>
       </p>
       

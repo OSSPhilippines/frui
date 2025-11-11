@@ -127,6 +127,12 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -186,8 +192,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
@@ -198,14 +204,15 @@ export function Body() {
             use any input attributes as props.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Basic Radio Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <Radio rounded name="name" label="Yes" value="yes" defaultChecked />
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -218,28 +225,31 @@ export function Body() {
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Radio 
-              rounded 
-              label="Yes" 
-              value="yes" 
-              checked={value === 'yes'} 
-              onUpdate={value => setValue(value as string)}
-            />
-            <Radio 
-              rounded 
-              label="No" 
-              value="no" 
-              checked={value === 'no'} 
-              onUpdate={value => setValue(value as string)}
-              className="ml-4"
-            />
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
+        <Preview
+          title="With Events"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <div className="flex items-center justify-center">
+              <Radio
+                rounded
+                label="Yes"
+                value="yes"
+                checked={value === 'yes'}
+                onUpdate={value => setValue(value as string)}
+              />
+              <Radio
+                rounded
+                label="No"
+                value="no"
+                checked={value === 'no'}
+                onUpdate={value => setValue(value as string)}
+                className="ml-4"
+              />
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Change')}
@@ -309,15 +319,18 @@ export function Body() {
             the Radio field red.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Radio error rounded label="Yes" defaultChecked />
-            <Radio error rounded label="No" className="ml-4" />
-          </div>
-          <Code language="typescript">
-            {examples[2]}
-          </Code>
-        </div>
+        <Preview
+          title="Error State Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <div className="flex items-center justify-center">
+              <Radio error rounded label="Yes" defaultChecked />
+              <Radio error rounded label="No" className="ml-4" />
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[2]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -325,8 +338,8 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can apply rounded, colors and shapes to the 
-          <C l value="Radio" /> component.
+          You can use
+          the <C value="Radio" /> CSS class to globally theme the radio field.
         </Translate>
       </p>
 
@@ -413,12 +426,9 @@ export function Body() {
 
         <p className="py-4">
           <Translate>
-            You can also add your own custom class to 
-            <C l value="Radio" /> components
-            or use any combination of 
-            <C l value="frui-field-option" />, 
-            <C l value="frui-field-option-control" />, and
-            <C l value="frui-field-option-label" /> CSS classes.
+            You can use
+            the <C value="frui-field-option" />, <C value="frui-field-option-control" />,
+            and <C value="frui-field-option-label" /> CSS classes to globally theme the radio field.
           </Translate>
         </p>
       </div>

@@ -289,7 +289,7 @@ export function Menu() {
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#basics">{_('Basics')}</a>
+            <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#features">{_('Features')}</a>
@@ -298,7 +298,22 @@ export function Menu() {
             <a href="#form-submission">{_('Form Submission')}</a>
           </li>
           <li className="ml-2 pb-1">
-            <a href="#full">{_('Full Examples')}</a>
+            <a href="#full">{_('Full Example')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#rtl">{_('RTL Support')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#tables">{_('Tables')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#media">{_('Media')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#templates">{_('Templates')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
@@ -379,26 +394,30 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basics" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
           <Translate>
-            A basic example of a <C value="WYSIWYG" /> field with minimal
-            setup.
+            A <C value="WYSIWYG" /> is a rich text editor that allows users to
+            format text, add media, and create rich content with a familiar
+            word-processor-like interface.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Basic Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <WYSIWYG
               className="w-full"
               name="editorContent"
               value="<p>Hello, <b>World</b>!</p>"
             />
-          </div>
-          <Code language="typescript">{examples[0]}</Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="features" className="uppercase font-bold text-lg mt-8">
@@ -412,8 +431,11 @@ export function Body() {
             and more.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Features Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <WYSIWYG
               className="w-full"
               name="editorContent"
@@ -432,68 +454,76 @@ export function Body() {
               list
               value="<p>Formatted <i>text</i> here.</p>"
             />
-          </div>
-          <Code language="typescript">{examples[1]}</Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
       </div>
 
       {/* Form Submission */}
       <h2 id="form-submission" className="uppercase font-bold text-lg mt-8">
         {_('Form Submission')}
       </h2>
-      <p>
-        <Translate>
-          To include the WYSIWYG content in a form submission, set the{" "}
-          <C value="name" /> prop. The content will be included as HTML in 
-          the form data under that name.
-        </Translate>
-      </p>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <WYSIWYG
-            className="w-full"
-            name="editorContent"
-            history
-            font
-            size
-            format
-            paragraph
-            blockquote
-            style
-            color
-            highlight
-            text
-            textStyle
-            remove
-            indent
-            align
-            rule
-            list
-            lineheight
-            table
-            link
-            image
-            imageGallery
-            video
-            audio
-            math
-            fullscreen
-            showblocks
-            code
-            preview
-            print
-            save
-            template
-            dir="ltr"
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600"
-          >
-            Submit
-          </button>
-        </form>
-      </div>
+      <Preview
+        title="Form Submission Example"
+        className="border border-2 theme-bc-3"
+      >
+        <Preview.Example center padding>
+          <div className="w-full">
+            <p className="mb-4">
+              <Translate>
+                To include the WYSIWYG content in a form submission, set the{" "}
+                <C value="name" /> prop. The content will be included as HTML in
+                the form data under that name.
+              </Translate>
+            </p>
+            <form onSubmit={handleSubmit}>
+              <WYSIWYG
+                className="w-full"
+                name="editorContent"
+                history
+                font
+                size
+                format
+                paragraph
+                blockquote
+                style
+                color
+                highlight
+                text
+                textStyle
+                remove
+                indent
+                align
+                rule
+                list
+                lineheight
+                table
+                link
+                image
+                imageGallery
+                video
+                audio
+                math
+                fullscreen
+                showblocks
+                code
+                preview
+                print
+                save
+                template
+                dir="ltr"
+              />
+              <button
+                type="submit"
+                className="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </Preview.Example>
+        <Preview.Code>{examples[2]}</Preview.Code>
+      </Preview>
 
       <h2 id="full" className="uppercase font-bold text-lg mt-8">
         {_('Full Example')}
@@ -505,8 +535,11 @@ export function Body() {
             enabled.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Full Features Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <WYSIWYG
               className="w-full"
               name="editorContent"
@@ -544,9 +577,9 @@ export function Body() {
               dir="ltr"
               value="<p>Full-featured <b>editor</b>.</p>"
             />
-          </div>
-          <Code language="typescript">{examples[2]}</Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[2]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="rtl" className="uppercase font-bold text-lg mt-8">
@@ -559,8 +592,11 @@ export function Body() {
             direction for languages like Arabic or Hebrew.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="RTL Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <WYSIWYG
               className="w-full"
               name="editorContent"
@@ -570,9 +606,9 @@ export function Body() {
               dir="rtl"
               value="<p>مرحباً <b>بالعالم</b>!</p>"
             />
-          </div>
-          <Code language="typescript">{examples[3]}</Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[3]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -586,8 +622,11 @@ export function Body() {
             the events in action.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="With Events"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <WYSIWYG
               className="w-full"
               name="editorContent"
@@ -603,17 +642,19 @@ export function Body() {
               }}
               value={editorValue}
             />
-          </div>
-          <Code language="typescript">{examples[4]}</Code>
-        </div>
-        {lastEvent && (
-          <div className="mt-4">
-            <p className="font-semibold">Last Event:</p>
-            <Code language="json">
-              {JSON.stringify(lastEvent, null, 2)}
-            </Code>
-          </div>
-        )}
+            {lastEvent && (
+              <div className="mt-4">
+                <p className="font-semibold">Last Event:</p>
+                <div className="bg-gray-100 p-2 rounded">
+                  <pre className="text-sm overflow-auto">
+                    {JSON.stringify(lastEvent, null, 2)}
+                  </pre>
+                </div>
+              </div>
+            )}
+          </Preview.Example>
+          <Preview.Code>{examples[4]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="tables" className="uppercase font-bold text-lg mt-8">
@@ -626,8 +667,11 @@ export function Body() {
             edit tabular data directly.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Table Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <WYSIWYG
               className="w-full"
               name="editorContent"
@@ -636,9 +680,9 @@ export function Body() {
               align
               value="<table border='1'><tr><td><b>Cell 1</b></td><td>Cell 2</td></tr></table>"
             />
-          </div>
-          <Code language="typescript">{examples[5]}</Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[5]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="media" className="uppercase font-bold text-lg mt-8">
@@ -653,8 +697,11 @@ export function Body() {
             to open in a new tab.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Media Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <WYSIWYG
               className="w-full"
               name="editorContent"
@@ -663,9 +710,9 @@ export function Body() {
               link
               value="<p>Check this <a href='https://example.com'>link</a> and image below:</p>"
             />
-          </div>
-          <Code language="typescript">{examples[6]}</Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[6]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="templates" className="uppercase font-bold text-lg mt-8">
@@ -678,8 +725,11 @@ export function Body() {
             blocks for quick editing.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Templates Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <WYSIWYG
               className="w-full"
               name="editorContent"
@@ -687,9 +737,9 @@ export function Body() {
               style
               value="<p>Start with a <b>template</b> or type here.</p>"
             />
-          </div>
-          <Code language="typescript">{examples[7]}</Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[7]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -697,13 +747,11 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          Customize with <C value="className" /> or target{" "}
-          <C value="frui-wysiwyg" />, <C value="frui-wysiwyg-toolbar" />,{" "}
-          <C value="frui-wysiwyg-btn" />, and{" "}
-          <C value="frui-wysiwyg-editable" /> classes. Additional classes
-          like <C value="__frui-wysiwyg-t-*" /> (e.g.,{" "}
-          <C value="__frui-wysiwyg-t-code" />) apply custom text styles,
-          with only one style applied at a time to prevent nesting.
+          You can use
+          the <C value="frui-field-wysiwyg-editor" />, <C value="frui-field-wysiwyg-editor-toolbar" />,
+          <C value="frui-field-wysiwyg-editor-btn" />, <C value="frui-field-wysiwyg-editor-btn-module" />,
+          <C value="frui-field-wysiwyg-editor-btn-select" />, and <C value="frui-field-wysiwyg-editor-editable" /> 
+          CSS classes to globally theme the WYSIWYG field.
         </Translate>
       </p>
 

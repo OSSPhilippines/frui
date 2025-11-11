@@ -282,7 +282,10 @@ export function Menu() {
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#basics">{_('Basics')}</a>
+            <a href="#examples">{_('Examples')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#basic">{_('Basics')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#multiple">{_('Multiple Selection')}</a>
@@ -837,9 +840,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add use <C l value="frui-field-select" />, <C l value="frui-field-select-error" />, <C l value="frui-field-select-display" />, <C l value="frui-field-select-selected" />, <C l value="frui-field-select-controls" />, <C l value="frui-field-select-clear" />, <C l value="frui-field-select-toggle" />, <C l value="frui-field-select-dropdown" />, <C l value="frui-field-select-bottom" />, <C l value="frui-field-select-left" />, <C l value="frui-field-select-right" />, <C l value="frui-field-select-top" />, <C l value="frui-field-select-option" />, 
-          and <C l value="frui-field-select-selected" /> CSS classes to 
-            globally theme select fields.
+          You can use 
+          the <C value="frui-field-select" />, <C value="frui-field-select-error" />, <C value="frui-field-select-display" />, <C value="frui-field-select-selected" />, <C value="frui-field-select-controls" />, <C value="frui-field-select-clear" />, <C value="frui-field-select-toggle" />, <C value="frui-field-select-dropdown" />, <C value="frui-field-select-bottom" />, <C value="frui-field-select-left" />, <C value="frui-field-select-right" />, <C value="frui-field-select-top" />, <C value="frui-field-select-option" />, 
+          and <C value="frui-field-select-selected" /> CSS classes to globally theme the select field.
         </Translate>
       </p>
       

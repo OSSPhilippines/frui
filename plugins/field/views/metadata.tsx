@@ -102,6 +102,12 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -160,8 +166,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
@@ -170,20 +176,17 @@ export function Body() {
             <C l value="Metadata" /> field.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Basic Metadata Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
-              <Metadata 
-                add="Add Reference" 
-                placeholder={['Enter Key', 'Enter Value']} 
-                value={Object.entries({ foo: 'Foo', bar: 'Bar' })} 
-              />
+              <Metadata type="number" min="0" max="100000" step="0.01" add="Add Number" />
             </div>
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
         <p className="py-4">
           <Translate>
             You can set different value types using the
@@ -195,16 +198,17 @@ export function Body() {
             <C l value='type="datetime"' quote />. 
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Date Type Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
               <Metadata type="date" add="Add Date" />
             </div>
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
         <p className="py-4">
           <Translate>
             For <C value='type="number"' quote />, you can also
@@ -212,16 +216,23 @@ export function Body() {
             <C l value="step" /> props.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Number Type with Constraints"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
-              <Metadata type="number" min="0" max="100000" step="0.01" add="Add Number" />
+              <Metadata
+                type="number"
+                min="0"
+                max="100000"
+                step="0.01"
+                add="Add Number"
+              />
             </div>
-          </div>
-          <Code language="typescript">
-            {examples[2]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[2]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -234,16 +245,17 @@ export function Body() {
             events for <C value="Metadata" />.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="relative flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Metadata Events"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
               <Metadata add="Add Reference" onUpdate={value => alert(JSON.stringify(value))} />
             </div>
-          </div>
-          <Code language="typescript">
-            {examples[3]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[3]}</Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Update')}
@@ -283,16 +295,17 @@ export function Body() {
             the Metadata field red.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Error State Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
               <Metadata error value={Object.entries({ foo: 'Foo', bar: 'Bar' })} />
             </div>
-          </div>
-          <Code language="typescript">
-            {examples[4]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[4]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -300,13 +313,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to selects
-          or use any of the respective 
-          <C l value="frui-field-metadata-row" />, 
-          <C l value="frui-field-metadata-remove" />, 
-          <C l value="frui-field-metadata-name" />, 
-          <C l value="frui-field-metadata-value" />, and
-          <C l value="frui-fieldset-add" /> CSS classes. 
+          You can use
+          the <C value="frui-field-metadata-row" />, <C value="frui-field-metadata-remove" />, <C value="frui-field-metadata-name" />, <C value="frui-field-metadata-value" />,
+          and <C value="frui-fieldset-add" /> CSS classes to globally theme the metadata field.
         </Translate>
       </p>
       

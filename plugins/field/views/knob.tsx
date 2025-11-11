@@ -89,7 +89,19 @@ const examples = [
   onChange={setValue} 
   valueTemplate="{}%" 
   textColor="#333" 
-/>`
+/>`,
+//8
+`<Knob 
+  value={value} 
+  onChange={(e) => setValue(Number(e.target.value))} 
+/>`,
+//9
+`<Knob 
+  value={min} 
+  onChange={setMin} 
+  min={10} 
+  max={80} 
+/>`,
 ];
 
 //--------------------------------------------------------------------//
@@ -135,6 +147,30 @@ export function Menu() {
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
             <a href="#examples">{_('Examples')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#minmax">{_('Min/Max')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#step">{_('Step')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#size">{_('Size')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#stroke">{_('Stroke')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#color">{_('Color')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#track">{_('Track')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#value">{_('Value')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
@@ -202,8 +238,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basic')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
@@ -211,21 +247,23 @@ export function Body() {
             To use the knob, pass a <C value="value" r /> and an <C value="onChange" r /> callback.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-6 theme-bg-1">
-            <Knob defaultValue={35} />
-          </div>
-          <Code language="tsx">{examples[0]}</Code>
-        </div>
+        <Preview
+          title="Basic Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <div className="flex justify-center">
+              <Knob defaultValue={35} />
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
         {_('Events')}
       </h2>
       <div>
-        <h3 className="font-semibold text-md mt-8">
-            {_('On Change')}
-        </h3>
         <p className="py-4">
           <Translate>
             The <C value="onChange" /> event is triggered when the
@@ -233,26 +271,24 @@ export function Body() {
             to the event handler:
           </Translate>
         </p>
-        <Table>
-          <Table.Head className="theme-bg-3 text-left">{_('Name')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Type')}</Table.Head>
-          <Table.Head className="theme-bg-3 text-left">{_('Sample')}</Table.Head>
-          <Table.Row>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('event')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              {_('Event Object')}
-            </Table.Col>
-            <Table.Col className="theme-bg-1 text-left">
-              see: <a 
-                href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event" 
-                target="_blank"
-              >Change Event</a>
-            </Table.Col>
-          </Table.Row>
-        </Table> 
-      </div>     
+        <Preview
+          title="Event Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Knob
+                value={value}
+                onChange={(e) => setValue(Number(e.target.value))}
+              />
+              <div className="mt-2 text-sm">
+                Current value: {value}
+              </div>
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[8]}</Preview.Code>
+        </Preview>
+      </div>
 
       <h2 id="minmax" className="uppercase font-bold text-lg mt-8">
         {_('Min/Max')}
@@ -263,12 +299,25 @@ export function Body() {
             To use the min/max, pass a value for <C value="min" r /> and an <C value="max" r />.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-6 theme-bg-1">
-          <Knob value={min} onChange={setMin} min={10} max={80} />
-          </div>
-          <Code language="tsx">{examples[1]}</Code>
-        </div>
+        <Preview
+          title="Min/Max Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Knob
+                value={min}
+                onChange={setMin}
+                min={10}
+                max={80}
+              />
+              <div className="mt-2 text-sm">
+                Current value: {min} (10-80)
+              </div>
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[9]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="step" className="uppercase font-bold text-lg mt-8">
@@ -298,12 +347,21 @@ export function Body() {
             pass a value for <C value="step" r />
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-6 theme-bg-1">
-            <Knob value={customSize} onChange={setCustomSize} size={150} />
-          </div>
-          <Code language="tsx">{examples[3]}</Code>
-        </div>
+        <Preview
+          title="Step Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Knob value={stepped} onChange={setStepped} step={10}
+              />
+              <div className="mt-2 text-sm">
+                Current value: {stepped} (steps of 10)
+              </div>
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[2]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="stroke" className="uppercase font-bold text-lg mt-8">
@@ -315,12 +373,21 @@ export function Body() {
             To change thickness of stroke, pass a value for <C value="stroke" r />.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-6 theme-bg-1">
-            <Knob value={thickStroke} onChange={setThickStroke} stroke={15} />
-          </div>
-          <Code language="tsx">{examples[4]}</Code>
-        </div>
+        <Preview
+          title="Stroke Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Knob value={thickStroke} onChange={setThickStroke} stroke={15}
+              />
+              <div className="mt-2 text-sm">
+                Stroke width: 15px
+              </div>
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[4]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="color" className="uppercase font-bold text-lg mt-8">
@@ -333,17 +400,25 @@ export function Body() {
             For the text color, pass a value to <C value="textColor" r />.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-6 theme-bg-1">
+        <Preview
+          title="Color Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
               <Knob
                 value={colorful}
                 onChange={setColorful}
                 valueColor="#e91e63"
                 textColor="#e91e63"
               />
-          </div>
-          <Code language="tsx">{examples[5]}</Code>
-        </div>
+              <div className="mt-2 text-sm" style={{ color: '#e91e63' }}>
+                Custom colors applied
+              </div>
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[5]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="track" className="uppercase font-bold text-lg mt-8">
@@ -356,17 +431,26 @@ export function Body() {
             For the value, pass a value for <C value="valueColor" r />.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-6 theme-bg-1">
-            <Knob
-              value={tracked}
-              onChange={setTracked}
-              rangeColor="#ccc"
-              valueColor="#4caf50"
-            />
-          </div>
-          <Code language="tsx">{examples[6]}</Code>
-        </div>
+        <Preview
+          title="Track Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Knob
+                value={tracked}
+                onChange={setTracked}
+                rangeColor="#ccc"
+                valueColor="#4caf50"
+              />
+              <div className="mt-2 text-sm">
+                <span style={{ color: '#4caf50' }}>Value</span> and
+                <span style={{ color: '#ccc' }}> Track</span> colors
+              </div>
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[6]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="value" className="uppercase font-bold text-lg mt-8">
@@ -378,17 +462,25 @@ export function Body() {
             To change the label, pass a value for <C value="valueTemplate" r />
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-6 theme-bg-1">
-            <Knob
-              value={value}
-              onChange={setValue}
-              valueTemplate="{}%"
-              textColor="#333"
-            />
-          </div>
-          <Code language="tsx">{examples[7]}</Code>
-        </div>
+        <Preview
+          title="Value Template Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Knob
+                value={value}
+                onChange={setValue}
+                valueTemplate="{}%"
+                textColor="#333"
+              />
+              <div className="mt-2 text-sm">
+                Using template: <code>{"{}%"}</code>
+              </div>
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[7]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -396,8 +488,8 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to knob
-          or use the <C l value="frui-field-knob" /> CSS class. 
+          You can use
+          the <C value="frui-field-knob" /> CSS class to globally theme the knob field.
         </Translate>
       </p>
             

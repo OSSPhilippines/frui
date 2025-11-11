@@ -94,6 +94,12 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -152,8 +158,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
@@ -162,8 +168,11 @@ export function Body() {
             <C l value="Textlist" /> field.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Basic Textlist Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
               <Textlist 
                 add="Add Value" 
@@ -171,11 +180,9 @@ export function Body() {
                 value={['foo', 'bar']} 
               />
             </div>
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -188,16 +195,17 @@ export function Body() {
             events for <C value="Textlist" />.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="relative flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="With Events"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
               <Textlist add="Add Value" onUpdate={value => alert(JSON.stringify(value))} />
             </div>
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Update')}
@@ -237,16 +245,17 @@ export function Body() {
             the Textlist field red.
           </Translate>
         </p>
-        <div className="curved">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Error State Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example padding>
             <div className="w-full">
               <Textlist error value={['foo', 'bar']} />
             </div>
-          </div>
-          <Code language="typescript">
-            {examples[2]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[2]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -254,12 +263,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to selects
-          or use any of the respective 
-          <C l value="frui-field-textlist-row" />, 
-          <C l value="frui-field-textlist-remove" />, 
-          <C l value="frui-field-textlist-value" />, and
-          <C l value="frui-fieldset-add" /> CSS classes. 
+          You can use
+          the <C value="frui-field-textlist-row" />, <C value="frui-field-textlist-remove" />, <C value="frui-field-textlist-value" />,
+          and <C value="frui-fieldset-add" /> CSS classes to globally theme the textlist field.
         </Translate>
       </p>
       

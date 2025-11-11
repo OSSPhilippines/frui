@@ -111,6 +111,12 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#events">{_('Events')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#errors">{_('Errors')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -169,8 +175,8 @@ export function Body() {
         </Code>
       </div>
 
-      <h2 id="basic" className="uppercase font-bold text-lg mt-8">
-        {_('Basics')}
+      <h2 id="examples" className="uppercase font-bold text-lg mt-8">
+        {_('Examples')}
       </h2>
       <div>
         <p className="py-4">
@@ -181,14 +187,15 @@ export function Body() {
             use any input attributes as props.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Basic Switch Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <Switch name="name" value="yes" defaultChecked />
-          </div>
-          <Code language="typescript">
-            {examples[0]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -201,14 +208,15 @@ export function Body() {
             except the value is passed instead of the change event.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="With Events"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <Switch onUpdate={(value, checked) => alert(`${value} - ${checked}`)} />
-          </div>
-          <Code language="typescript">
-            {examples[1]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
 
         <h3 className="font-semibold text-md mt-8">
           {_('On Change')}
@@ -278,14 +286,15 @@ export function Body() {
             the Switch field red.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
+        <Preview
+          title="Error State Example"
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
             <Switch error label="Active?" defaultChecked />
-          </div>
-          <Code language="typescript">
-            {examples[2]}
-          </Code>
-        </div>
+          </Preview.Example>
+          <Preview.Code>{examples[2]}</Preview.Code>
+        </Preview>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -294,8 +303,13 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can apply rounded, colors and shapes to the 
-            <C l value="Switch" /> component.
+            You can use
+            the <C value="frui-field-switch" />, <C value="frui-field-switch-rounded" />, 
+            <C value="frui-field-switch-onoff" />, <C value="frui-field-switch-yesno" />, 
+            <C value="frui-field-switch-sunmoon" />, <C value="frui-field-switch-checkex" />, 
+            <C value="frui-field-switch-ridge" />, <C value="frui-field-switch-smooth" />, 
+            <C value="frui-field-switch-blue" />, <C value="frui-field-switch-orange" />, 
+            and <C value="frui-field-switch-green" /> CSS classes to globally theme the switch field.
           </Translate>
         </p>
 
@@ -396,12 +410,9 @@ export function Body() {
         </div>
         <p className="py-4">
           <Translate>
-            You can also add your own custom class to 
-            <C l value="Switch" /> components
-            or use any combination of 
-            <C l value="frui-field-option" />, 
-            <C l value="frui-field-option-control" />, and
-            <C l value="frui-field-option-label" /> CSS classes.
+            You can use
+            the <C l value="frui-field-option" />, <C l value="frui-field-option-control" />,
+            and <C l value="frui-field-option-label" />  CSS classes to globally theme the switch field.
           </Translate>
         </p>
       </div>

@@ -32,13 +32,12 @@
 @import url('./styles/fields/input-suggest.css');
 @import url('./styles/fields/input-time.css');
 @import url('./styles/fields/input.css');
-@import url('./styles/fields/knob-slider.css');
 @import url('./styles/fields/markdown-editor.css');
 @import url('./styles/fields/metadata.css');
 @import url('./styles/fields/option-flag.css');
-@import url('./styles/fields/range-slider.css');
 @import url('./styles/fields/rating.css');
 @import url('./styles/fields/select.css');
+@import url('./styles/fields/slider.css');
 @import url('./styles/fields/switch.css');
 @import url('./styles/fields/tag-list.css');
 @import url('./styles/fields/text-list.css');

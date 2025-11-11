@@ -111,11 +111,6 @@ export const menu: SectionItem[] = [
     href: '/field',
     children: [
       {
-        label: 'Autocomplete',
-        search: '/field/autocomplete',
-        href: '/field/autocomplete'
-      },
-      {
         label: 'Checkbox',
         search: '/field/checkbox',
         href: '/field/checkbox'
@@ -176,11 +171,6 @@ export const menu: SectionItem[] = [
         href: '/field/input'
       },
       {
-        label: 'Knob',
-        search: '/field/knob',
-        href: '/field/knob'
-      },
-      {
         label: 'Markdown',
         search: '/field/markdown',
         href: '/field/markdown'
@@ -221,9 +211,19 @@ export const menu: SectionItem[] = [
         href: '/field/select'
       },
       {
+        label: 'Slider',
+        search: '/field/slider',
+        href: '/field/slider'
+      },
+      {
         label: 'Slug',
         search: '/field/slug',
         href: '/field/slug'
+      },
+      {
+        label: 'Suggest',
+        search: '/field/suggest',
+        href: '/field/suggest'
       },
       {
         label: 'Switch',

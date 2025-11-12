@@ -339,7 +339,8 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C value="Radio" /> CSS class to globally theme the radio field.
+          the <C value="frui-field-radio" />, <C value="frui-field-radio-rounded" />, <C value="frui-field-radio-check" />, <C value="frui-field-radio-square" />, <C value="frui-field-radio-circle" />, <C value="frui-field-radio-blue" />, <C value="frui-field-radio-orange" />, 
+          and <C value="frui-field-radio-default" /> CSS classes to globally theme radio.
         </Translate>
       </p>
 

@@ -396,7 +396,7 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C value="Autocomplete" />, <C value="frui-field-autocomplete" />, <C value="frui-field-autocomplete-dropdown" />, <C value="frui-field-autocomplete-options" />,
+          the <C value="frui-field-autocomplete" />, <C value="frui-field-autocomplete-dropdown" />, <C value="frui-field-autocomplete-options" />,
           and <C value="frui-field-autocomplete-option" /> CSS classes to globally theme autocomplete.
         </Translate>
       </p>

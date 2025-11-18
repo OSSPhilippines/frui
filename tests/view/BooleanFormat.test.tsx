@@ -4,7 +4,7 @@
 import '@testing-library/jest-dom'
 import { render, screen, cleanup } from '@testing-library/react'
 import { describe, expect, it, afterEach } from 'vitest'
-import Yesno from '../../components/view/BooleanFormat' // adjust relative path if needed
+import Yesno from '../../components/view/BooleanFormat' 
 
 // --------------------------------------------------------------------
 // Component Tests

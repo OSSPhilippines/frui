@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
-import Tabs from "../../components/Tabs"; // Adjust path if needed
+import Tabs from "../../components/Tabs"; 
 
 // Helper render function
 const setup = (props: any = {}) => (

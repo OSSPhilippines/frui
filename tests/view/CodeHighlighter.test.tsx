@@ -4,7 +4,7 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
-import { Code }  from '../../components/view/CodeHighlighter' // adjust the import path to your component
+import { Code }  from '../../components/view/CodeHighlighter' 
 
 // --------------------------------------------------------------------
 // Mock react-shiki

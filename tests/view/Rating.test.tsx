@@ -4,7 +4,7 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import { Rating } from '../../components/view/Rating' // adjust path if needed
+import { Rating } from '../../components/view/Rating' 
 
 // --------------------------------------------------------------------
 // Component Tests

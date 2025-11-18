@@ -21,7 +21,7 @@ vi.mock('../../components/form/Input.js', () => ({
 }))
 
 // -------------------------------------------------------------------
-// Component Tests (alphabetized by describe block)
+// Component Tests 
 // -------------------------------------------------------------------
 describe('<DatetimeInput />', () => {
   it('applies custom className if provided', () => {

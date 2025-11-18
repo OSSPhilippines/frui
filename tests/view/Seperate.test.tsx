@@ -4,7 +4,7 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import { Separated } from '../../components/view/Separate' // adjust path if needed
+import { Separated } from '../../components/view/Separate' 
 
 // --------------------------------------------------------------------
 // Component Tests

@@ -30,7 +30,7 @@ vi.mock('../../components/form/Input.js', () => ({
 }))
 
 // --------------------------------------------------------------------
-// Tests - Helpers
+// Component Tests
 // --------------------------------------------------------------------
 describe('slugify', () => {
   it('converts string to slug with default options', () => {
@@ -57,7 +57,7 @@ describe('camelfy', () => {
 })
 
 // --------------------------------------------------------------------
-// Tests - Hook
+// Component Tests
 // --------------------------------------------------------------------
 function renderUseSlug(config: Parameters<typeof useSlug>[0]) {
   let hookValue: ReturnType<typeof useSlug> | undefined
@@ -90,7 +90,7 @@ describe('useSlug', () => {
 })
 
 // --------------------------------------------------------------------
-// Tests - Component
+// Component Tests
 // --------------------------------------------------------------------
 describe('<Slug />', () => {
   it('renders input with initial slugified value', () => {

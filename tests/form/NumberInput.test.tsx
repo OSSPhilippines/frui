@@ -40,7 +40,7 @@ vi.mock('../../components/form/Input.js', () => ({
 }))
 
 // --------------------------------------------------------------------
-// Tests
+// Component Tests
 // --------------------------------------------------------------------
 describe('Helper functions', () => {
   it('applyBounds clamps value between min and max', () => {

@@ -29,7 +29,7 @@ Object.defineProperty(window, 'getSelection', {
 ;(document as any).execCommand = vi.fn(() => true)
 
 // --------------------------------------------------------------------
-// Tests
+// Component Tests
 // --------------------------------------------------------------------
 describe('useTextEditor', () => {
   const setupHook = (config = {}) => {

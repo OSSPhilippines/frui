@@ -1,4 +1,3 @@
-
 // --------------------------------------------------------------------
 // Imports
 // --------------------------------------------------------------------
@@ -35,7 +34,7 @@ vi.mock('../../helpers/tools/TextColorTool.js', () => ({ __esModule: true, defau
 vi.mock('../../helpers/tools/TextSizeTool.js', () => ({ __esModule: true, default: mockTool }))
 
 // --------------------------------------------------------------------
-// Tests
+// Component Tests
 // --------------------------------------------------------------------
 describe('useThemeStyle hook', () => {
   it('returns merged default styles and class array', () => {

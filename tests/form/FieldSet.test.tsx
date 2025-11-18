@@ -56,7 +56,7 @@ const MockFields = ({
 )
 
 // --------------------------------------------------------------------
-// Tests
+// Component Tests
 // --------------------------------------------------------------------
 describe('useFieldset', () => {
   it('initializes with defaultValue', () => {

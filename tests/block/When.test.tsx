@@ -1,4 +1,3 @@
-
 // --------------------------------------------------------------------
 // Imports
 // --------------------------------------------------------------------
@@ -8,7 +7,7 @@ import { render, screen } from '@testing-library/react'
 import When, { Otherwise } from '../../components/block/When'  // Replace with actual path
 
 // --------------------------------------------------------------------
-// Tests
+// Component Tests
 // --------------------------------------------------------------------
 describe('When / Otherwise conditional rendering', () => {
   it('renders children when condition is true', () => {

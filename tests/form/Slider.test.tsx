@@ -69,7 +69,7 @@ vi.mock('../../helpers/getSlotStyles.js', () => ({
 }))
 
 // --------------------------------------------------------------------
-// Tests
+// Component Tests
 // --------------------------------------------------------------------
 describe('Helper functions', () => {
   it('clamp keeps value within bounds and snaps correctly', () => {

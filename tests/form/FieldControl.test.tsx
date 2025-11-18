@@ -7,7 +7,7 @@ import { describe, expect, it } from 'vitest'
 import FieldControl from '../../components/form/FieldControl'
 
 // --------------------------------------------------------------------
-// Tests
+// Component Tests
 // --------------------------------------------------------------------
 describe('<FieldControl />', () => {
   it('renders with default class', () => {

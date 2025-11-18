@@ -36,7 +36,7 @@ vi.mock('../../components/form/Input.js', () => ({
 }))
 
 // --------------------------------------------------------------------
-// Tests
+// Component Tests
 // --------------------------------------------------------------------
 describe('useAutocomplete', () => {
   const options = ['Apple', 'Banana', 'Cherry']

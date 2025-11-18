@@ -41,7 +41,7 @@ vi.mock('../../components/form/Input.js', () => ({
 }))
 
 // --------------------------------------------------------------------
-// Tests
+// Component Tests
 // --------------------------------------------------------------------
 describe('Date helper functions', () => {
   it('toDate converts different input types correctly', () => {

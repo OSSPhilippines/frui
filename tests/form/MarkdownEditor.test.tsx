@@ -70,7 +70,7 @@ function renderHookWithState<T>(hook: () => T): { current: T } {
 }
 
 // --------------------------------------------------------------------
-// Tests
+// Component Tests
 // --------------------------------------------------------------------
 describe('useMarkdownEditor', () => {
   it('returns edit mode by default and switches correctly', () => {

@@ -6,7 +6,7 @@ import type {
   CallableSlotStyleProp
 } from '../types.js';
 
-export default function getSlotStyles<S>(
+export function getSlotStyles<S>(
   props: CallableSlotStyleProp<S>, 
   state: S
 ): ClassStyleProps {
@@ -30,3 +30,5 @@ export default function getSlotStyles<S>(
   //else, return empty object
   return {};
 };
+
+export default getSlotStyles;

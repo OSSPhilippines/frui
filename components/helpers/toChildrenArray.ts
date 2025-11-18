@@ -1,7 +1,7 @@
 //modules
 import type { ReactNode } from 'react';
 
-export default function toChildrenArray(children: ReactNode): ReactNode[] {
+export function toChildrenArray(children: ReactNode): ReactNode[] {
   if (!children) return [];
   if (Array.isArray(children)) return children;
   //check if Iterable and use array from
@@ -12,3 +12,5 @@ export default function toChildrenArray(children: ReactNode): ReactNode[] {
   }
   return [ children ];
 };
+
+export default toChildrenArray;

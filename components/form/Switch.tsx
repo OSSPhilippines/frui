@@ -1,0 +1,163 @@
+//--------------------------------------------------------------------//
+// Imports
+
+//types
+import type { ChangeEvent, MouseEvent, CSSProperties } from 'react';
+import type { InputConfig } from './Input.js';
+import type { HTMLInputProps } from '../types.js';
+//hooks
+import { useState, useEffect } from 'react';
+
+//--------------------------------------------------------------------//
+// Types
+
+/**
+ * Switch Props
+ */
+export type SwitchProps = HTMLInputProps & {
+  label?: string,
+  error?: any,
+  rounded?: boolean,
+  onoff?: boolean,
+  yesno?: boolean,
+  checkex?: boolean,
+  sunmoon?: boolean,
+  ridge?: boolean,
+  blue?: boolean,
+  orange?: boolean,
+  green?: boolean,
+  theme?: string|number,
+  style?: CSSProperties,
+  className?: string,
+  onUpdate?: (value: string|number|undefined, checked: boolean) => void
+};
+
+//--------------------------------------------------------------------//
+// Hooks
+
+/**
+ * Switch Hook Aggregate
+ */
+export function useSwitch(config: InputConfig) {
+  const { onChange, onUpdate, defaultChecked, checked } = config;
+  const [ isChecked, check ] = useState(Boolean(defaultChecked || checked));
+  const [ isHovering, hover ] = useState(false);
+  useEffect(() => {
+    if (typeof checked === 'undefined') return;
+    if (checked !== isChecked) {
+      check(checked);
+    }
+  }, [ checked ]);
+  return {
+    isHovering,
+    isChecked,
+    handlers: {
+      out: (_e: MouseEvent<HTMLInputElement>) => hover(false),
+      over: (_e: MouseEvent<HTMLInputElement>) => hover(true),
+      change: (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.checked !== checked) {
+          check(e.target.checked);
+        }
+        onChange && onChange(e);
+        onUpdate && onUpdate(e.target.value, e.target.checked);
+      }
+    }
+  };
+};
+
+//--------------------------------------------------------------------//
+// Components
+
+/**
+ * Styled Switch  Component (Main)
+ */
+export function Switch(props: SwitchProps) {
+  //separate component related props from field attributes
+  const {   
+    defaultChecked,
+    checked,
+    label, 
+    error, 
+    rounded,
+    onoff,
+    yesno,
+    checkex,
+    sunmoon,
+    ridge,
+    blue,
+    orange,
+    green,
+    style,
+    className,
+    onChange,
+    onUpdate,
+    ...attributes 
+  } = props;
+  //hooks
+  const { handlers } = useSwitch({ 
+    onChange, 
+    onUpdate, 
+    checked,
+    defaultChecked 
+  });
+
+  const classNames = [ 'frui-form-switch' ];
+  if (rounded) {
+    classNames.push('frui-form-switch-rounded');
+  }
+  if (error) {
+    classNames.push('frui-tx-error');
+  }
+
+  if (onoff) {
+    classNames.push('frui-form-switch-onoff');
+  } else if (yesno) {
+    classNames.push('frui-form-switch-yesno');
+  } else if (sunmoon) {
+    classNames.push('frui-form-switch-sunmoon');
+  } else {
+    classNames.push('frui-form-switch-checkex');
+  }
+
+  if (ridge) {
+    classNames.push('frui-form-switch-ridge');
+  } else {
+    classNames.push('frui-form-switch-smooth');
+  }
+
+  if (blue) {
+    classNames.push('frui-form-switch-blue');
+  } else if (orange) {
+    classNames.push('frui-form-switch-orange');
+  } else if (green) {
+    classNames.push('frui-form-switch-green');
+  } else {
+    classNames.push('frui-form-switch-default');
+  }
+
+  if (className) {
+    classNames.push(className);
+  }
+
+  //render
+  return (
+    <label className={classNames.join(' ')} style={style}>
+      <input 
+        {...attributes} 
+        onChange={handlers.change} 
+        onMouseOut={handlers.out}
+        onMouseOver={handlers.over}
+        type="checkbox" 
+        className="frui-form-switch-control"
+        checked={checked}
+        defaultChecked={defaultChecked}
+      />
+      <span className="frui-form-switch-label">
+        {label}
+      </span>
+    </label>
+  );
+};
+
+//defaults to switch
+export default Switch;

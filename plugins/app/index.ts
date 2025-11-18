@@ -1,24 +1,17 @@
 export {
-  useToggle,
+  useLayoutToggle,
   LayoutBlank,
   LayoutHead,
   LayoutHome,
-  LayoutMenu,
+  LayoutLeft,
   LayoutPanel,
   LayoutProvider,
   LayoutToggle
-} from './layout';
-
-import Code, { InlineCode as C } from './components/Code.js';
-import Preview from './components/Preview.js';
-import Props from './components/Props.js';
-import Terminal from './components/Terminal.js';
+} from './Layout.js';
 
 export {
   ThemeHead,
   ThemeContext,
   ThemeProvider,
-  useTheme
-} from './theme';
-
-export { Code, Preview, Props, Terminal, C };
+  useThemeContext
+} from './Theme.js';

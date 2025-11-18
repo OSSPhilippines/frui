@@ -1,18 +1,18 @@
 //modules
 import { useLanguage } from 'r22n';
 //frui
-import Mask from 'components/field/Mask.js';
-import Country from 'components/field/Country.js';
-import Switch from 'components/field/Switch.js';
-import Control from 'components/form/Control.js';
-import Button from 'components/form/Button.js';
-import Alert from 'components/element/Alert.js';
+import Mask from 'components/form/MaskInput.js';
+import Country from 'components/form/CountrySelect.js';
+import Switch from 'components/form/Switch.js';
+import Control from 'components/form/FieldControl.js';
+import Button from 'components/Button.js';
+import Alert from 'components/Alert.js';
 import { 
   Table, 
   Thead, 
   Trow, 
   Tcol 
-} from 'components/element/Table.js';
+} from 'components/Table.js';
 //src
 import type { PageProps } from 'plugins/app/types.js';
 import { LayoutProvider, LayoutHome, ThemeHead } from '../../app';

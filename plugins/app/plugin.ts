@@ -27,7 +27,6 @@ export default function plugin(server: HttpServer<Config>) {
 
   server.on('route', async (_, __, ctx) => {
     ctx.get('/', '@/plugins/app/views/home');
-    ctx.get('/start', '@/plugins/app/views/start');
     ctx.on('request', async (req, res, ctx) => {
       await view.route(req, res, ctx);
       //if there is a body or a code that is not 404, skip

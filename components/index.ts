@@ -1,5 +1,5 @@
 import * as Element from './element/index.js';
-import * as Field from './field/index.js';
+import * as Field from './form/index.js';
 import * as Form from './form/index.js';
 import * as Format from './format/index.js';
 
@@ -20,13 +20,13 @@ export type {
   TableRuleProps
 } from './element/Table';
 export type { TooltipProps, TooltipDirection } from './element/Tooltip';
-export type { ButtonProps } from './form/Button';
-export type { ControlProps } from './form/Control';
+export type { ButtonProps } from './Button.js';
+export type { ControlProps } from './form/FieldControl.js';
 export type { 
   FieldsProps, 
   FieldsetConfig, 
   FieldsetProps
-} from './form/Fieldset';
+} from './form/Fieldset.js';
 export type {
   ColorProps,
   ColorPropType,
@@ -50,7 +50,7 @@ export {
   Trow,
   Tgroup
 } from './element/Table';
-export { useFieldset } from './form/Fieldset';
+export { useFieldset } from './form/Fieldset.js';
 
 import Alert from './element/Alert';
 import Badge from './element/Badge';
@@ -58,9 +58,9 @@ import Loader from './element/Loader';
 import Modal from './element/Modal';
 import Table from './element/Table';
 import Tooltip from './element/Tooltip';
-import Button from './form/Button';
-import Control from './form/Control';
-import Fieldset from './form/Fieldset';
+import Button from './Button.js';
+import Control from './form/FieldControl.js';
+import Fieldset from './form/Fieldset.js';
 
 import setColorClass from './helpers/color/setColorClass.js';
 import setBackgroundColorClass from './helpers/color/setBackgroundColorClass.js';

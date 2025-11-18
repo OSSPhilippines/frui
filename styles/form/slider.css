@@ -1,0 +1,35 @@
+.frui-form-slider {
+  display: flex;
+  align-items: center;
+}
+
+.frui-form-slider-input {
+  text-align: center;
+  width: 50px;
+}
+
+.frui-form-slider-track {
+  background-color: #EEEEEE;
+  flex-grow: 1;
+  height: 8px;
+  position: relative;
+  width: 100%;
+}
+
+.frui-form-slider-connection {
+  background-color: #CCCCCC;
+  height: 8px;
+  position: absolute;
+  top: 0;
+}
+
+.frui-form-slider-handle {
+  background-color: #CCCCCC;
+  border-radius: 10000px;
+  cursor: pointer;
+  height: 16px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+}

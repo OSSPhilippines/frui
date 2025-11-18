@@ -39,22 +39,22 @@
 .frui-inline {
   display: inline;
 }
-.frui-inline-block {
+.frui-iblock, .frui-inline-block {
   display: inline-block;
 }
 .frui-flex {
   display: flex;
 }
-.frui-inline-flex {
+.frui-iflex, .frui-inline-flex {
   display: inline-flex;
 }
 .frui-grid {
   display: grid;
 }
-.frui-inline-grid {
+.frui-igrid, .frui-inline-grid {
   display: inline-grid;
 }
-.frui-hidden {
+.frui-none, .frui-hidden {
   display: none;
 }
 

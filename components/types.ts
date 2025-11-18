@@ -16,6 +16,8 @@ import type {
 //General types
 export type ExtendsType<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
 
+export type Hash = Record<string, any>;
+
 //Native HTML types
 
 export type HTMLElementProps<T = HTMLElement> = DetailedHTMLProps<
@@ -73,37 +75,7 @@ export type HTMLButtonProps = DetailedHTMLProps<
   HTMLButtonElement
 >;
 
-//color props
-
-export type ColorPropType = 'tx' | 'bg' | 'bd'; 
-
-export type ColorProps = {
-  info?: boolean, 
-  warning?: boolean, 
-  success?: boolean, 
-  error?: boolean, 
-  muted?: boolean,
-  black?: boolean, 
-  white?: boolean,
-  primary?: boolean, 
-  secondary?: boolean,
-  tertiary?: boolean, 
-  color?: string
-};
-
-export type TextColorProps = {
-  txinfo?: boolean, 
-  txwarning?: boolean, 
-  txsuccess?: boolean, 
-  txerror?: boolean, 
-  txmuted?: boolean, 
-  txblack?: boolean, 
-  txwhite?: boolean,
-  txprimary?: boolean, 
-  txsecondary?: boolean,
-  txtertiary?: boolean,
-  txcolor?: string,
-};
+//theme props
 
 export type BackgroundColorProps = {
   bginfo?: boolean, 
@@ -133,19 +105,33 @@ export type BorderColorProps = {
   bdcolor?: string,
 };
 
-//attribute props
-
-export type SizeProps = {
-  xs?: boolean,
-  sm?: boolean,
-  md?: boolean,
-  lg?: boolean,
-  xl?: boolean,
-  xl2?: boolean,
-  xl3?: boolean,
-  xl4?: boolean,
-  xl5?: boolean
+export type BorderRadiusProps = {
+  curved?: boolean,
+  rounded?: boolean, 
+  pill?: boolean
 };
+
+export type BorderStyleProps = {
+  solid?: boolean,
+  dashed?: boolean,
+  dotted?: boolean
+};
+
+export type ColorProps = {
+  info?: boolean, 
+  warning?: boolean, 
+  success?: boolean, 
+  error?: boolean, 
+  muted?: boolean,
+  black?: boolean, 
+  white?: boolean,
+  primary?: boolean, 
+  secondary?: boolean,
+  tertiary?: boolean, 
+  color?: string
+};
+
+export type ColorPropType = 'tx' | 'bg' | 'bd'; 
 
 export type DisplayProps = {
   block?: boolean,
@@ -158,23 +144,54 @@ export type DisplayProps = {
   hidden?: boolean
 };
 
-export type RadiusProps = {
-  curved?: boolean,
-  rounded?: boolean, 
-  pill?: boolean
-};
-
 export type FillProps = {
-  solid?: boolean,
+  fill?: boolean,
   outline?: boolean
 };
 
-export type AlignProps = {
+export type TextAlignProps = {
   left?: boolean,
   center?: boolean,
   right?: boolean,
   justify?: boolean
 };
+
+export type TextColorProps = {
+  txinfo?: boolean, 
+  txwarning?: boolean, 
+  txsuccess?: boolean, 
+  txerror?: boolean, 
+  txmuted?: boolean, 
+  txblack?: boolean, 
+  txwhite?: boolean,
+  txprimary?: boolean, 
+  txsecondary?: boolean,
+  txtertiary?: boolean,
+  txcolor?: string,
+};
+
+export type TextSizeProps = {
+  xs?: boolean,
+  sm?: boolean,
+  md?: boolean,
+  lg?: boolean,
+  xl?: boolean,
+  xl2?: boolean,
+  xl3?: boolean,
+  xl4?: boolean,
+  xl5?: boolean
+};
+
+export type ThemeProps = BackgroundColorProps
+  & BorderColorProps
+  & BorderRadiusProps 
+  & BorderStyleProps
+  & ColorProps 
+  & DisplayProps
+  & FillProps 
+  & TextAlignProps
+  & TextSizeProps
+  & TextColorProps;
 
 export type ReactType = {
   type: Function | Component,

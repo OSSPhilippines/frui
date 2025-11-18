@@ -15,7 +15,7 @@ export type GetClassStylesOptions<S> = ClassStyleProps & {
   styles?: CSSProperties
 };
 
-export default function getClassStyles<S>(
+export function getClassStyles<S>(
   options: GetClassStylesOptions<S>
 ) {
   const { props, state, classes = [], styles = {} } = options;
@@ -43,3 +43,5 @@ export default function getClassStyles<S>(
   }
   return { children, classes: classes.filter(Boolean), styles };
 };
+
+export default getClassStyles;

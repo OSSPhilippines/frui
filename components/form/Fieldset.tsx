@@ -3,11 +3,11 @@
 
 //types
 import type { ExtendsType } from '../types.js';
-import type { ButtonProps } from './Button.js';
+import type { ButtonProps } from '../Button.js';
 //hooks
 import React, { useState, useEffect } from 'react';
 //components
-import Button from './Button.js';
+import Button from '../Button.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -161,7 +161,7 @@ export function make<ValueType = any>(
             onClick={handlers.add}
             type="button"
           >
-            <span className="frui-fieldset-add">&#43;</span>
+            <span className="frui-form-fieldset-add">&#43;</span>
             {add || 'Add'}
           </Button>
         )}
@@ -171,4 +171,7 @@ export function make<ValueType = any>(
 };
 
 //defaults to make
-export default make;
+export default Object.assign(make, {
+  useFieldset,
+  use: useFieldset
+});

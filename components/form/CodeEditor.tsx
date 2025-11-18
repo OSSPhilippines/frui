@@ -229,6 +229,7 @@ export function CodeEditor(props: CodeEditorProps) {
         className="frui-form-code-editor-field" 
         ref={refs.field} 
         value={currentValue} 
+        readOnly
       />
     </div>
   );

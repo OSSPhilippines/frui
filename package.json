@@ -83,7 +83,10 @@
   ],
   "plugins": [
     "./plugins/app/plugin",
-    "./plugins/docs/plugin"
+    "./plugins/tool/plugin",
+    "./plugins/component/plugin",
+    "./plugins/field/plugin",
+    "./plugins/format/plugin"
   ],
   "scripts": {
     "build": "yarn build:tsc && yarn build:pkg && yarn build:docs",
@@ -94,18 +97,22 @@
     "build:tsc:cjs": "tsc -p ./tsconfig.cjs.json",
     "build:tsc:esm": "tsc -p ./tsconfig.esm.json",
     "build:docs": "tsx scripts/build.ts",
-    "dev": "tsx scripts/develop.ts"
+    "dev": "tsx scripts/develop.ts",
+    "test": "vitest"
   },
   "devDependencies": {
     "@codemirror/language-data": "6.5.1",
     "@stackpress/ingest": "0.6.2",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.0",
     "@types/inputmask": "5.0.7",
     "@types/node": "24.3.1",
-    "@types/react": "19.1.12",
-    "@types/react-dom": "19.1.9",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "5.0.2",
     "codemirror": "6.0.2",
     "inputmask": "5.0.9",
+    "jsdom": "^27.1.0",
     "markdown-to-jsx": "7.7.13",
     "moment": "2.30.1",
     "r22n": "1.0.10",
@@ -119,10 +126,15 @@
     "universal-cookie": "8.0.1",
     "unocss": "66.5.1",
     "vite": "7.1.5",
-    "vite-tsconfig-paths": "5.1.4"
+    "vite-tsconfig-paths": "5.1.4",
+    "vitest": "^4.0.8"
   },
   "peerDependencies": {
     "react": "19.1.1",
     "react-dom": "19.1.1"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/user-event": "^14.6.1"
   }
 }

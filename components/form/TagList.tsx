@@ -44,19 +44,17 @@ export function useTaglist(config: TaglistConfig) {
   const [ tags, setTags ] = useState<string[]>(defaultValue || []);
   
   useEffect(() => {
-    //prevent inf looping
-    if (Array.isArray(value) 
-      && JSON.stringify(value) === JSON.stringify(tags)
-    ) return;
+    // call onUpdate whenever tags change
     onUpdate && onUpdate(tags);
-  }, [ tags ]);
+  }, [tags, onUpdate]);
 
   //for controlled states we should update 
   //the values when the value prop changes
   useEffect(() => {
-    if (!Array.isArray(value)) return;
-    setTags(value)
-  }, [ value ]);
+    if (Array.isArray(value) && value !== tags) {
+      setTags(value);
+    }
+  }, [value, tags]);
   
   return {
     input,

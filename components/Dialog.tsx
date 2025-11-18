@@ -287,12 +287,15 @@ export function Dialog(props: DialogProps) {
   };
   // configure provider
   const provider = { closeDialog, dialogOpened, openDialog };
+
+  const { close, ...overlayProps } = overlay || {};
+
   //render
   if (!dialogOpened) return null;
   return (
     <DialogContext.Provider value={provider}>
       {portal(
-        <DialogOverlay {...overlay} onClick={onOverlayClick}>
+        <DialogOverlay {...overlayProps} onClick={onOverlayClick}>
           <div 
             {...attributes}
             className={classes.join(' ')} 

@@ -27,7 +27,7 @@ export const formatNumber = (
   //get the decimal part of the number
   const decimalPart = abs - integer;
   //get the number of decimals to show
-  const decimalCount = Math.max(0, decimals || String(decimalPart).split('.')[1].length);
+  const decimalCount = Math.max(0, decimals ?? ((String(decimalPart).split('.')[1] || '').length));
   //get the decimal part of the number as a string
   const decimalString = decimalCount ? decimal + decimalPart.toFixed(decimalCount).slice(2) : '';
   //get the integer part of the number as a string

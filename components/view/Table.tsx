@@ -4,7 +4,7 @@
 //types
 import type { CSSProperties } from 'react';
 //components
-import { Table, Thead, Tcol, Trow } from '../element/Table.js';
+import { Table, Thead, Tcol, Trow } from '../Table.js';
 
 //--------------------------------------------------------------------//
 // Types

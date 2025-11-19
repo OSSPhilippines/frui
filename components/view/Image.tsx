@@ -17,7 +17,7 @@ export type ImageProps = HTMLImageProps & { value: string };
  */
 export function Image({ value, ...attributes }: ImageProps) {
   return (
-    <img {...attributes} src={value} />
+    <img {...attributes} src={value || undefined} />
   );
 };
 

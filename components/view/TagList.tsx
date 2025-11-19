@@ -3,9 +3,9 @@
 
 //types
 import type { CSSProperties } from 'react';
-import type { BadgeProps } from '../element/Badge.js';
+import type { BadgeProps } from '../Badge.js';
 //components
-import Badge from '../element/Badge.js';
+import Badge from '../Badge.js';
 
 //--------------------------------------------------------------------//
 // Types

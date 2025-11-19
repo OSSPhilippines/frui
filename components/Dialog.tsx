@@ -265,8 +265,6 @@ export function Dialog(props: DialogProps) {
     children, //?: ReactNode
     //dialog class name
     className, //?: string
-    //slot: class/style to apply to overlay element
-    overlay, //?: false | HTMLElementProps<HTMLDivElement> & ...
     //dialog styles
     style, //?: React.CSSProperties
     ...attributes
@@ -280,13 +278,17 @@ export function Dialog(props: DialogProps) {
   if (className) classes.push(className);
   // handlers
   const onOverlayClick = () => {
-    overlay && overlay.close && closeDialog();
+    close && closeDialog();
   };
   const ignoreOverlayClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
   // configure provider
   const provider = { closeDialog, dialogOpened, openDialog };
+
+  //extract close from overlay
+  const { close, ...overlay } = props.overlay || {};
+
   //render
   if (!dialogOpened) return null;
   return (

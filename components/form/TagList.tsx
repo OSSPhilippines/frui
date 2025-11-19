@@ -42,7 +42,8 @@ export function useTaglist(config: TaglistConfig) {
   const [ input, setInput ] = useState('');
   const [ isKeyReleased, setIsKeyReleased ] = useState(false);
   const [ tags, setTags ] = useState<string[]>(defaultValue || []);
-  
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     //prevent inf looping
     if (Array.isArray(value) 
@@ -51,11 +52,11 @@ export function useTaglist(config: TaglistConfig) {
     onUpdate && onUpdate(tags);
   }, [ tags ]);
 
-  //for controlled states we should update 
+  //for controlled states we should update
   //the values when the value prop changes
   useEffect(() => {
     if (!Array.isArray(value)) return;
-    setTags(value)
+    setTags(tags => value !== tags ? value : tags);
   }, [ value ]);
   
   return {

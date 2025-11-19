@@ -437,11 +437,8 @@ export function Body() {
       <p className="py-4 mt-4">
         <Translate>
           You can use
-          the <C value="className" /> prop or inline styles via
-          the <C value="style" /> prop to the
-          root <C value=".frui-rating-root" /> element.
-          Component-specific classes like <C value=".frui-rating-icon" />, <C value=".frui-rating-icon-filled" />, <C value=".frui-rating-icon-empty" />, <C value=".frui-rating-icon-hover" />, <C value=".frui-rating-icon-active" />,
-          and size/state classes are available for more targeted styling.
+          the <C value="frui-rating-root" />, <C value="frui-rating-icon" />, <C value="frui-rating-icon-filled" />, <C value="frui-rating-icon-empty" />, <C value="frui-rating-icon-hover" />, <C value="frui-rating-icon-active" />, <C value="frui-rating-icon-label" />, <C value="frui-rating-visually-hidden" />, <C value="frui-rating-small" />, <C value="frui-rating-medium" />, <C value="frui-rating-large" />, <C value="frui-rating-disabled" />, 
+          and <C value="frui-rating-readonly" /> CSS classes to globally theme rating.
         </Translate>
       </p>
 

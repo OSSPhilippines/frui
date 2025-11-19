@@ -26,8 +26,12 @@ export const formatNumber = (
   const integer = Math.floor(abs);
   //get the decimal part of the number
   const decimalPart = abs - integer;
+  // use decimals if defined, otherwise use decimal part length
+  const decimalsToUse = typeof decimals === 'undefined'
+    ? (String(decimalPart).split('.')[1] || '').length
+    : decimals;
   //get the number of decimals to show
-  const decimalCount = Math.max(0, decimals || String(decimalPart).split('.')[1].length);
+  const decimalCount = Math.max(0, decimalsToUse);
   //get the decimal part of the number as a string
   const decimalString = decimalCount ? decimal + decimalPart.toFixed(decimalCount).slice(2) : '';
   //get the integer part of the number as a string

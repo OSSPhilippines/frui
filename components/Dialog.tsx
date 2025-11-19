@@ -278,7 +278,7 @@ export function Dialog(props: DialogProps) {
   if (className) classes.push(className);
   // handlers
   const onOverlayClick = () => {
-    overlay && close && closeDialog();
+    close && closeDialog();
   };
   const ignoreOverlayClick = (e: React.MouseEvent) => {
     e.stopPropagation();

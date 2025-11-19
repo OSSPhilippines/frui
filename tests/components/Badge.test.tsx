@@ -1,142 +1,129 @@
 // --------------------------------------------------------------------
 // Imports
 // --------------------------------------------------------------------
-import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { describe, expect, it, vi } from 'vitest'
+import { render, screen } from '@testing-library/react'
+import { describe, it, expect, vi } from 'vitest'
+import Badge from '../../components/Badge'
 
-import { Alert } from '../../components/Alert'
-
-// -------------------------------------------------------------------
-// Mock utilities
-// -------------------------------------------------------------------
-vi.mock('./helpers/tools/BackgroundColorTool.js', () => ({
-  default: class {
-    static get(props: unknown) {
-      return {
-        getClassStyles: ({ styles }: unknown) => {
-          if (props.color && !props.outline) {
-            styles.backgroundColor = props.color
-          }
-        },
-      }
-    }
-  },
-}))
-
-vi.mock('./helpers/tools/BorderColorTool.js', () => ({
-  default: class {
-    static get(props: unknown) {
-      return {
-        getClassStyles: ({ styles }: unknown) => {
-          if (props.outline && props.color) {
-            styles.borderColor = props.color
-          }
-        },
-      }
-    }
-  },
-}))
-
-vi.mock('./helpers/tools/BorderRadiusTool.js', () => ({
-  default: class {
-    static get() {
-      return {
-        getClassStyles: ({ classes }: unknown) => {
-          classes.push('radius-class')
-        },
-      }
-    }
-  },
-}))
-
-vi.mock('./helpers/tools/FillTool.js', () => ({
-  default: class {
-    static get(props: unknown) {
-      return {
-        getClassStyles: ({ classes }: unknown) => {
-          if (props.outline) {
-            classes.push('frui-solid', 'frui-thin')
-          }
-        },
-      }
-    }
-  },
-}))
-
-vi.mock('./helpers/tools/TextAlignTool.js', () => ({
-  default: class {
-    static get() {
-      return {
-        getClassStyles: () => {},
-      }
-    }
-  },
-}))
-
-vi.mock('./helpers/tools/TextColorTool.js', () => ({
-  default: class {
-    static get(props: unknown) {
-      return {
-        getClassStyles: ({ classes, styles }: unknown) => {
-          if (props.outline && props.color) {
-            styles.color = props.color
-          } else {
-            classes.push('frui-tx-white')
-          }
-        },
-      }
-    }
-  },
-}))
-
-vi.mock('./helpers/removeThemeProps.js', () => ({
+// --------------------------------------------------------------------
+// Mocks
+// --------------------------------------------------------------------
+vi.mock('../../components/helpers/removeThemeProps.js', () => ({
+  __esModule: true,
   default: (props: unknown) => props,
 }))
 
-// -------------------------------------------------------------------
-// Component Tests
-// -------------------------------------------------------------------
-describe('<Alert />', () => {
-  it('adds a custom className when provided', () => {
-    render(<Alert className="custom">message</Alert>)
-    expect(screen.getByText('message')).toHaveClass('frui-alert', 'custom')
+vi.mock('../../components/helpers/tools/BackgroundColorTool.js', () => ({
+  __esModule: true,
+  default: {
+    get: () => ({
+      getClassStyles: ({ styles }: { styles: Record<string, unknown> }) => {
+        styles.backgroundColor = 'red'
+      },
+    }),
+  },
+}))
+
+vi.mock('../../components/helpers/tools/BorderColorTool.js', () => ({
+  __esModule: true,
+  default: {
+    get: () => ({
+      getClassStyles: ({ styles }: { styles: Record<string, unknown> }) => {
+        styles.borderColor = 'blue'
+      },
+    }),
+  },
+}))
+
+vi.mock('../../components/helpers/tools/BorderRadiusTool.js', () => ({
+  __esModule: true,
+  default: {
+    get: () => ({
+      getClassStyles: ({ classes }: { classes: string[] }) => {
+        classes.push('radius')
+      },
+    }),
+  },
+}))
+
+vi.mock('../../components/helpers/tools/FillTool.js', () => ({
+  __esModule: true,
+  default: {
+    get: () => ({
+      getClassStyles: ({
+        classes,
+      }: {
+        classes: string[]
+        styles: Record<string, unknown>
+        key: string
+      }) => {
+        classes.push('fill')
+      },
+    }),
+  },
+}))
+
+vi.mock('../../components/helpers/tools/TextAlignTool.js', () => ({
+  __esModule: true,
+  default: {
+    get: () => ({
+      getClassStyles: (_: { classes: string[]; styles: Record<string, unknown> }) => undefined,
+    }),
+  },
+}))
+
+vi.mock('../../components/helpers/tools/TextColorTool.js', () => ({
+  __esModule: true,
+  default: {
+    get: () => ({
+      getClassStyles: ({ styles }: { styles: Record<string, unknown> }) => {
+        styles.color = 'white'
+      },
+    }),
+  },
+}))
+
+// --------------------------------------------------------------------
+// Tests
+// --------------------------------------------------------------------
+describe('Badge', () => {
+  it('renders children content correctly', () => {
+    render(<Badge>Sample</Badge>)
+    expect(screen.getByText('Sample')).toBeInTheDocument()
   })
 
-  it('applies outline layout with border and text color', () => {
+  it('includes default class and applied generated ones', () => {
+    render(<Badge>Badge</Badge>)
+    const badge = screen.getByText('Badge')
+    expect(badge).toHaveClass('frui-badge')
+    expect(badge).toHaveClass('radius')
+    expect(badge).toHaveClass('fill')
+  })
+
+  it('applies inline styles from tools', () => {
+    render(<Badge>Styled</Badge>)
+    const badge = screen.getByText('Styled')
+    expect(badge.style.backgroundColor).toBe('red')
+    expect(badge.style.borderColor).toBe('blue')
+    expect(badge.style.color).toBe('white')
+  })
+
+  it('merges provided className with generated ones', () => {
     render(
-      <Alert color="blue" outline>
-        outlined
-      </Alert>
+      <Badge className="custom">
+        Combined
+      </Badge>
     )
-    const el = screen.getByText('outlined')
-    expect(el).toHaveClass('frui-alert', 'frui-solid', 'frui-thin')
-    expect(el.style.borderColor).toBe('blue')
-    expect(el.style.color).toBe('blue')
+    const badge = screen.getByText('Combined')
+    expect(badge).toHaveClass('custom')
+    expect(badge).toHaveClass('frui-badge')
   })
 
-  it('applies solid layout by default with background color', () => {
-    render(<Alert color="red">solid</Alert>)
-    const el = screen.getByText('solid')
-    expect(el).toHaveClass('frui-alert', 'frui-tx-white')
-    expect(el.style.backgroundColor).toBe('red')
-  })
-
-  it('merges inline styles with generated ones', () => {
-    render(
-      <Alert color="green" style={{ padding: '10px' }}>
-        styled
-      </Alert>
-    )
-    const el = screen.getByText('styled')
+  it('applies passed style props and preserves them with generated styles', () => {
+    render(<Badge style={{ padding: '10px' }}>StyledBadge</Badge>)
+    const el = screen.getByText('StyledBadge')
     expect(el.style.padding).toBe('10px')
-    expect(el.style.backgroundColor).toBe('green')
-  })
-
-  it('renders with base class', () => {
-    const { container } = render(<Alert>content</Alert>)
-    const alert = container.firstChild as HTMLElement
-    expect(alert).toHaveClass('frui-alert', 'frui-tx-white')
-    expect(alert.textContent).toBe('content')
+    expect(el.style.backgroundColor).toBe('red')
   })
 })

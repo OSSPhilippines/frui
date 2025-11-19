@@ -10,7 +10,7 @@ import { ColorInput, clamp, componentToHex, rgbaToHex, toRGBA, toHex } from '../
 // --------------------------------------------------------------------
 vi.mock('../../../components/helpers/getClassStyles.js', () => ({
   __esModule: true,
-  default: ({ classes }: unknown) => ({ classes, styles: {} })
+  default: ({ classes }: { classes: Record<string, string> }) => ({ classes, styles: {} })
 }))
 vi.mock('../../../components/helpers/getSlotStyles.js', () => ({
   __esModule: true,
@@ -18,7 +18,17 @@ vi.mock('../../../components/helpers/getSlotStyles.js', () => ({
 }))
 vi.mock('../../../components/field/Input.js', () => ({
   __esModule: true,
-  default: ({ onChange, className, value, type }: unknown) => (
+  default: ({
+    onChange,
+    className,
+    value,
+    type
+  }: {
+    onChange?: React.ChangeEventHandler<HTMLInputElement>
+    className?: string
+    value?: string | number
+    type?: string
+  }) => (
     <input
       data-testid="mock-input"
       className={className}

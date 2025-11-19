@@ -4,7 +4,6 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { describe, expect, it, vi } from 'vitest'
-
 import { Alert } from '../../components/Alert'
 
 // -------------------------------------------------------------------
@@ -12,12 +11,14 @@ import { Alert } from '../../components/Alert'
 // -------------------------------------------------------------------
 vi.mock('./helpers/tools/BackgroundColorTool.js', () => ({
   default: class {
-    static get(props: unknown) {
+    static get(props: { color?: string; outline?: boolean }) {
       return {
-        getClassStyles: ({ styles }: unknown) => {
+        getClassStyles: ({
+          styles,
+        }: { styles: Record<string, unknown> }) => {
           if (props.color && !props.outline) {
             styles.backgroundColor = props.color
-          }w
+          }
         },
       }
     }
@@ -26,9 +27,11 @@ vi.mock('./helpers/tools/BackgroundColorTool.js', () => ({
 
 vi.mock('./helpers/tools/BorderColorTool.js', () => ({
   default: class {
-    static get(props: unknown) {
+    static get(props: { color?: string; outline?: boolean }) {
       return {
-        getClassStyles: ({ styles }: unknown) => {
+        getClassStyles: ({
+          styles,
+        }: { styles: Record<string, unknown> }) => {
           if (props.outline && props.color) {
             styles.borderColor = props.color
           }
@@ -42,7 +45,7 @@ vi.mock('./helpers/tools/BorderRadiusTool.js', () => ({
   default: class {
     static get() {
       return {
-        getClassStyles: ({ classes }: unknown) => {
+        getClassStyles: ({ classes }: { classes: string[] }) => {
           classes.push('radius-class')
         },
       }
@@ -52,9 +55,9 @@ vi.mock('./helpers/tools/BorderRadiusTool.js', () => ({
 
 vi.mock('./helpers/tools/FillTool.js', () => ({
   default: class {
-    static get(props: unknown) {
+    static get(props: { outline?: boolean }) {
       return {
-        getClassStyles: ({ classes }: unknown) => {
+        getClassStyles: ({ classes }: { classes: string[] }) => {
           if (props.outline) {
             classes.push('frui-solid', 'frui-thin')
           }
@@ -76,9 +79,12 @@ vi.mock('./helpers/tools/TextAlignTool.js', () => ({
 
 vi.mock('./helpers/tools/TextColorTool.js', () => ({
   default: class {
-    static get(props: unknown) {
+    static get(props: { color?: string; outline?: boolean }) {
       return {
-        getClassStyles: ({ classes, styles }: unknown) => {
+        getClassStyles: ({
+          classes,
+          styles,
+        }: { classes: string[]; styles: Record<string, unknown> }) => {
           if (props.outline && props.color) {
             styles.color = props.color
           } else {
@@ -91,7 +97,7 @@ vi.mock('./helpers/tools/TextColorTool.js', () => ({
 }))
 
 vi.mock('./helpers/removeThemeProps.js', () => ({
-  default: (props: unknown) => props,
+  default: (props: Record<string, unknown>) => props,
 }))
 
 // -------------------------------------------------------------------
@@ -139,4 +145,4 @@ describe('<Alert />', () => {
     expect(alert).toHaveClass('frui-alert', 'frui-tx-white')
     expect(alert.textContent).toBe('content')
   })
-})  
+})

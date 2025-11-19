@@ -33,8 +33,6 @@ describe('<Image />', () => {
   it('renders safely when value is empty', () => {
     render(<Image value="" alt="empty" />)
     const image = screen.getByRole('img')
-
-    // React drops empty string attributes -> ensure element exists and src is omitted
     expect(image).toBeInTheDocument()
     expect(image.getAttribute('src')).toBeNull()
   })

@@ -31,7 +31,7 @@ describe('<Yesno />', () => {
     render(<Yesno value="non-empty string" />)
     expect(screen.getByText('Yes')).toBeInTheDocument()
 
-    cleanup() // clear DOM before next render
+    cleanup()
 
     render(<Yesno value={123} />)
     expect(screen.getByText('Yes')).toBeInTheDocument()

@@ -41,7 +41,6 @@ describe('<Metadata />', () => {
 
     cells.forEach((cell) => {
       expect(cell).toHaveClass('custom')
-      // JSDOM normalizes named colors to rgb()
       expect(cell).toHaveStyle({ color: 'rgb(255, 0, 0)' })
     })
   })

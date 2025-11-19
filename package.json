@@ -81,7 +81,7 @@
     "LICENSE",
     "README.md"
   ],
- "plugins": [
+  "plugins": [
     "./plugins/app/plugin",
     "./plugins/docs/plugin"
   ],

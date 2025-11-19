@@ -4,7 +4,7 @@
 import '@testing-library/jest-dom'
 import { describe, expect, it } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import When, { Otherwise } from '../../components/block/When'  // Replace with actual path
+import When, { Otherwise } from '../../components/block/When'  
 
 // --------------------------------------------------------------------
 // Component Tests

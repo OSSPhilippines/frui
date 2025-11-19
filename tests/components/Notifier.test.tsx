@@ -1,22 +1,24 @@
-import { render, screen, waitFor } from '@testing-library/react'
+// --------------------------------------------------------------------
+// Imports
+// --------------------------------------------------------------------
 import '@testing-library/jest-dom'
-import userEvent from '@testing-library/user-event'
+import { render, screen, waitFor } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
+import { toast } from 'react-toastify'
 import {
   configure,
   cookie,
   defaults,
   dismiss,
   flash,
-  notify,
   Notifier,
   NotifierContext,
   NotifierProvider,
+  notify,
   unload,
   useNotifier,
 } from '../../components/Notifier'
-import { toast } from 'react-toastify'
 
 // -------------------------------------------------------------------
 // Mock external libraries

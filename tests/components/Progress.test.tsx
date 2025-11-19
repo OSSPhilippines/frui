@@ -1,3 +1,6 @@
+// --------------------------------------------------------------------
+// Imports
+// --------------------------------------------------------------------
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { describe, expect, it, vi } from 'vitest'
@@ -5,7 +8,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { Progress, ProgressContainer } from '../../components/Progress'
 
 // -------------------------------------------------------------------
-// Mock tool utilities (match actual imports in component)
+// Mock tool utilities 
 // -------------------------------------------------------------------
 vi.mock('./helpers/tools/BackgroundColorTool.js', () => ({
   default: class {

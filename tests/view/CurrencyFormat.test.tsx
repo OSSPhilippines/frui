@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { Currency } from '../../components/view/CurrencyFormat'
 
 // -------------------------------------------------------------------
-// Mock dependencies (correct relative paths from test file)
+// Mock dependencies 
 // -------------------------------------------------------------------
 vi.mock('../../components/data/currencies.js', () => ({
   __esModule: true,

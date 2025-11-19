@@ -1,3 +1,6 @@
+// --------------------------------------------------------------------
+// Imports
+// --------------------------------------------------------------------
 import { fireEvent, render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
@@ -5,7 +8,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { getTooltipPosition, Tooltip, TooltipContainer } from '../../components/Tooltip'
 
 // -------------------------------------------------------------------
-// Mock tool utilities (match actual imports in component)
+// Mock tool utilities 
 // -------------------------------------------------------------------
 vi.mock('./helpers/tools/BorderRadiusTool.js', () => ({
   default: class {

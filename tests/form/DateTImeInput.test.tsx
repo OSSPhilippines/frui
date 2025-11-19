@@ -1,3 +1,6 @@
+// --------------------------------------------------------------------
+// Imports
+// --------------------------------------------------------------------
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
@@ -5,7 +8,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { DatetimeInput, toDatetimeInputString, toDatetimeString } from '../../components/form/DatetimeInput'
 
 // -------------------------------------------------------------------
-// Mock Input component (match relative import from DatetimeInput)
+// Mock Input component
 // -------------------------------------------------------------------
 vi.mock('../../components/form/Input.js', () => ({
   __esModule: true,

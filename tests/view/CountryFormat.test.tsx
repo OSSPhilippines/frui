@@ -7,7 +7,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { Country } from '../../components/view/CountryFormat'
 
 // --------------------------------------------------------------------
-// Mock countries data (keeps tests isolated)
+// Mock countries data 
 // --------------------------------------------------------------------
 vi.mock('../../../components/data/countries.js', () => ({
   __esModule: true,

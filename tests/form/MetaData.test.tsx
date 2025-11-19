@@ -7,7 +7,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { MetadataFields, useMetadata } from '../../components/form/Metadata'
 
 // --------------------------------------------------------------------
-// Module mocks (must come first because vi.mock is hoisted)
+// Module mocks 
 // --------------------------------------------------------------------
 vi.mock('../../components/Button.js', () => ({
   __esModule: true,

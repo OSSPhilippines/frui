@@ -8,7 +8,7 @@ import { describe, it, expect, vi } from 'vitest'
 import CodeEditor, { getEditorOptions, getLanguageExtension } from '../../components/form/CodeEditor'
 
 // -------------------------------------------------------------------
-// Mocks for codemirror & language-data (avoid real editor init)
+// Mocks for codemirror & language-data 
 // -------------------------------------------------------------------
 vi.mock('@codemirror/state', () => ({
   __esModule: true,
@@ -19,7 +19,7 @@ vi.mock('@codemirror/view', () => ({
   __esModule: true,
   EditorView: class {
     static updateListener = { of: vi.fn(() => ({})) }
-    constructor(_: any) {}
+    constructor(_: unknown) {}
     destroy = vi.fn()
   },
   lineNumbers: vi.fn(() => ({})),

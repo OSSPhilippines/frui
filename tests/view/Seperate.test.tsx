@@ -33,16 +33,14 @@ describe('<Separated />', () => {
 
   it('applies className to the container', () => {
     const { container } = render(<Separated value={['A', 'B']} className="my-class" />)
-    const span = container.querySelector('span') // directly select the span container
+    const span = container.querySelector('span')
     expect(span).toHaveClass('my-class')
   })
 
 it('applies style to the container', () => {
   const style = { color: 'red', fontWeight: 'bold' }
   const { container } = render(<Separated value={['X', 'Y']} style={style} />)
-  const span = container.querySelector('span') // directly select the span container
-
-  // Use regex to match the RGB value
+  const span = container.querySelector('span')
   expect(span).toHaveStyle({ color: 'rgb(255, 0, 0)' })
   expect(span).toHaveStyle({ fontWeight: 'bold' })
 })

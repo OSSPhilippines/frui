@@ -7,7 +7,7 @@ import { describe, it, expect, vi } from "vitest";
 import Tabs from "../../components/Tabs"; 
 
 // Helper render function
-const setup = (props: any = {}) => (
+const setup = (props: unknown = {}) => (
   <Tabs defaultValue="tab1" {...props}>
     <Tabs.Head>
       <Tabs.Label value="tab1">Tab 1</Tabs.Label>

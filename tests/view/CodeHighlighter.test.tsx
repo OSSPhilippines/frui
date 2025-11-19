@@ -11,7 +11,7 @@ import { Code }  from '../../components/view/CodeHighlighter'
 // --------------------------------------------------------------------
 vi.mock('react-shiki', () => ({
   __esModule: true,
-  default: ({ children, showLanguage, theme }: any) => (
+  default: ({ children, showLanguage, theme }: unknown) => (
     <div
       data-testid="shiki"
       data-theme={theme}

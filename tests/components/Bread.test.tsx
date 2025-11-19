@@ -9,7 +9,7 @@ import { describe, expect, it, vi } from 'vitest'
 // Mock React useId for deterministic rendering
 // -------------------------------------------------------------------
 vi.mock('react', async () => {
-  const actual: any = await vi.importActual('react')
+  const actual: unknown = await vi.importActual('react')
   return { ...actual, useId: () => 'id1' }
 })
 
@@ -18,7 +18,7 @@ vi.mock('react', async () => {
 // -------------------------------------------------------------------
 vi.mock('components/helpers/getClassStyles', () => ({
   __esModule: true,
-  default: vi.fn(({ classes }: any) => ({ classes, styles: {} })),
+  default: vi.fn(({ classes }: unknown) => ({ classes, styles: {} })),
 }))
 
 vi.mock('components/helpers/getSlotStyles', () => ({
@@ -122,7 +122,7 @@ describe('<BreadSlicer />', () => {
 
 describe('useBreadContext()', () => {
   it('provides the same context value via hook', () => {
-    let grabbed: any
+    let grabbed: unknown
     const Demo = () => {
       grabbed = useBreadContext()
       return null

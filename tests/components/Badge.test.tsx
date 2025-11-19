@@ -12,9 +12,9 @@ import { Alert } from '../../components/Alert'
 // -------------------------------------------------------------------
 vi.mock('./helpers/tools/BackgroundColorTool.js', () => ({
   default: class {
-    static get(props: any) {
+    static get(props: unknown) {
       return {
-        getClassStyles: ({ styles }: any) => {
+        getClassStyles: ({ styles }: unknown) => {
           if (props.color && !props.outline) {
             styles.backgroundColor = props.color
           }
@@ -26,9 +26,9 @@ vi.mock('./helpers/tools/BackgroundColorTool.js', () => ({
 
 vi.mock('./helpers/tools/BorderColorTool.js', () => ({
   default: class {
-    static get(props: any) {
+    static get(props: unknown) {
       return {
-        getClassStyles: ({ styles }: any) => {
+        getClassStyles: ({ styles }: unknown) => {
           if (props.outline && props.color) {
             styles.borderColor = props.color
           }
@@ -42,7 +42,7 @@ vi.mock('./helpers/tools/BorderRadiusTool.js', () => ({
   default: class {
     static get() {
       return {
-        getClassStyles: ({ classes }: any) => {
+        getClassStyles: ({ classes }: unknown) => {
           classes.push('radius-class')
         },
       }
@@ -52,9 +52,9 @@ vi.mock('./helpers/tools/BorderRadiusTool.js', () => ({
 
 vi.mock('./helpers/tools/FillTool.js', () => ({
   default: class {
-    static get(props: any) {
+    static get(props: unknown) {
       return {
-        getClassStyles: ({ classes }: any) => {
+        getClassStyles: ({ classes }: unknown) => {
           if (props.outline) {
             classes.push('frui-solid', 'frui-thin')
           }
@@ -76,9 +76,9 @@ vi.mock('./helpers/tools/TextAlignTool.js', () => ({
 
 vi.mock('./helpers/tools/TextColorTool.js', () => ({
   default: class {
-    static get(props: any) {
+    static get(props: unknown) {
       return {
-        getClassStyles: ({ classes, styles }: any) => {
+        getClassStyles: ({ classes, styles }: unknown) => {
           if (props.outline && props.color) {
             styles.color = props.color
           } else {
@@ -91,7 +91,7 @@ vi.mock('./helpers/tools/TextColorTool.js', () => ({
 }))
 
 vi.mock('./helpers/removeThemeProps.js', () => ({
-  default: (props: any) => props,
+  default: (props: unknown) => props,
 }))
 
 // -------------------------------------------------------------------

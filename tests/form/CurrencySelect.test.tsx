@@ -41,11 +41,11 @@ vi.mock('../../components/data/countries.js', () => ({
 // --------------------------------------------------------------------
 // Mocks - Select component and exports
 // --------------------------------------------------------------------
-let capturedOnUpdate: any
+let capturedOnUpdate: unknown
 
 vi.mock('../../components/form/Select.js', () => ({
   __esModule: true,
-  Select: (props: any) => {
+  Select: (props: unknown) => {
     capturedOnUpdate = props.onUpdate
     return (
       <div data-testid="select" className={props.className}>
@@ -54,10 +54,10 @@ vi.mock('../../components/form/Select.js', () => ({
       </div>
     )
   },
-  SelectDropdownHead: ({ children }: any) => (
+  SelectDropdownHead: ({ children }: unknown) => (
     <div data-testid="dropdown-head">{children}</div>
   ),
-  SelectOption: ({ children, value }: any) => (
+  SelectOption: ({ children, value }: unknown) => (
     <div data-testid="option" data-value={value}>
       {children}
     </div>

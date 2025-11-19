@@ -15,7 +15,6 @@ describe('<Text />', () => {
     render(<Text value="Hello World" />)
     const el = screen.getByText('Hello World')
     expect(el).toBeInTheDocument()
-    // check that textTransform is undefined
     expect(el.style.textTransform).toBe('')
   })
 

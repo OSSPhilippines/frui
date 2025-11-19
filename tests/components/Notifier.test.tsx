@@ -135,7 +135,7 @@ describe('unload()', () => {
 
 describe('useNotifier()', () => {
   it('provides notifier API', () => {
-    let api: any
+    let api: unknown
     const Demo = () => {
       api = useNotifier()
       return null

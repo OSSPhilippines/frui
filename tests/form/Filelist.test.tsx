@@ -12,7 +12,7 @@ import FileList from '../../components/form/FileList'
 // --------------------------------------------------------------------
 vi.mock('../../components/form/Input.js', () => ({
   __esModule: true,
-  default: ({ onChange, multiple, type, className, ...props }: any) => (
+  default: ({ onChange, multiple, type, className, ...props }: unknown) => (
     <input
       data-testid="mock-input"
       type={type}

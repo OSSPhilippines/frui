@@ -12,7 +12,7 @@ import { DatetimeInput, toDatetimeInputString, toDatetimeString } from '../../co
 // -------------------------------------------------------------------
 vi.mock('../../components/form/Input.js', () => ({
   __esModule: true,
-  default: ({ className, onUpdate, type, value }: any) => (
+  default: ({ className, onUpdate, type, value }: unknown) => (
     <input
       className={className}
       data-testid="mock-input"

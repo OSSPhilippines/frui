@@ -10,7 +10,7 @@ import { ColorInput, clamp, componentToHex, rgbaToHex, toRGBA, toHex } from '../
 // --------------------------------------------------------------------
 vi.mock('../../../components/helpers/getClassStyles.js', () => ({
   __esModule: true,
-  default: ({ classes }: any) => ({ classes, styles: {} })
+  default: ({ classes }: unknown) => ({ classes, styles: {} })
 }))
 vi.mock('../../../components/helpers/getSlotStyles.js', () => ({
   __esModule: true,
@@ -18,7 +18,7 @@ vi.mock('../../../components/helpers/getSlotStyles.js', () => ({
 }))
 vi.mock('../../../components/field/Input.js', () => ({
   __esModule: true,
-  default: ({ onChange, className, value, type }: any) => (
+  default: ({ onChange, className, value, type }: unknown) => (
     <input
       data-testid="mock-input"
       className={className}

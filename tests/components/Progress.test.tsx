@@ -43,7 +43,7 @@ vi.mock('./helpers/tools/ColorTool.js', () => ({
 }))
 
 vi.mock('./helpers/removeThemeProps.js', () => ({
-  default: (props: any) => props,
+  default: (props: unknown) => props,
 }))
 
 // -------------------------------------------------------------------

@@ -9,8 +9,6 @@ import { Markdown } from '../../components/view/Markdown'
 // --------------------------------------------------------------------
 // Mock markdown-to-jsx
 // --------------------------------------------------------------------
-// The real library is mocked to a simple component that renders a wrapper
-// and outputs the received children text directly for verification.
 vi.mock('markdown-to-jsx', () => ({
   __esModule: true,
   default: ({ children }: { children: string }) => (

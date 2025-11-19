@@ -127,7 +127,7 @@ describe('Hooks', () => {
   })
 
   it('useDialogContext merges provider and dialog contexts', () => {
-    let captured: any
+    let captured: unknown
     const Demo = () => {
       captured = useDialogContext()
       return null

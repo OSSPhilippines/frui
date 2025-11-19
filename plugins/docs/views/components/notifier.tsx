@@ -14,7 +14,6 @@ import Notifier from 'components/Notifier.js';
 import type { PageProps } from 'plugins/app/types.js';
 import Docs from '../../layout/Docs.js';
 
-
 //--------------------------------------------------------------------//
 // Constants
 

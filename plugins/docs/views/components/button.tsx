@@ -12,7 +12,6 @@ import Button from 'components/Button.js';
 import type { PageProps } from 'plugins/app/types.js';
 import Docs from '../../layout/Docs.js';
 
-
 //--------------------------------------------------------------------//
 // Constants
 

@@ -14,7 +14,6 @@ import Dialog from 'components/Dialog.js';
 import type { PageProps } from 'plugins/app/types.js';
 import Docs from '../../layout/Docs.js';
 
-
 //--------------------------------------------------------------------//
 // Constants
 

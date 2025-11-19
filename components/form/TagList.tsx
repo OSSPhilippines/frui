@@ -52,7 +52,7 @@ export function useTaglist(config: TaglistConfig) {
     onUpdate && onUpdate(tags);
   }, [ tags ]);
 
-  //for controlled states we should update 
+  //for controlled states we should update
   //the values when the value prop changes
   useEffect(() => {
     if (!Array.isArray(value)) return;

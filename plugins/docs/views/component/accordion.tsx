@@ -15,6 +15,11 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
+const uri = '/component/accordion';
+const title = 'Accordion Component';
+const description = 'Accordions are used to show and hide sections of '
+  + 'related content.';
+
 const props = [
   //accordion
   [
@@ -784,12 +789,9 @@ export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (
     <Docs.Head
-      uri="/component/accordion"
-      title="Accordion Component"
-      description={
-        'Accordions are used to show and hide sections of '
-        + 'related content.'
-      }
+      uri={uri}
+      title={title}
+      description={description}
       styles={styles}
     />
   );
@@ -800,7 +802,7 @@ export function Head(props: PageProps) {
  */
 export function Page() {
   return (
-    <Docs pathname="/component/accordion">
+    <Docs pathname={uri}>
       <Menu />
       <Body />
     </Docs>

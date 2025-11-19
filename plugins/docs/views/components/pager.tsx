@@ -19,7 +19,8 @@ import Docs from '../../layout/Docs.js';
 
 const uri = '/component/pager';
 const title = 'Pager Component';
-const description = 'Pager allows for easy navigation between pages of content.';
+const description = 'Pager allows for easy navigation between pages '
+  + 'of content.';
 
 const props = [
   [ 'className', 'string | Function', 'No', 'Standard HTML class names' ],

@@ -8,7 +8,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { Alert } from '../../components/Alert'
 
 // -------------------------------------------------------------------
-// Mock utilities (simulate tool behaviors based on props)
+// Mock utilities
 // -------------------------------------------------------------------
 vi.mock('./helpers/tools/BackgroundColorTool.js', () => ({
   default: class {

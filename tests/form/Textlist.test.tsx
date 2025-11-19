@@ -81,10 +81,10 @@ describe('<TextlistFields />', () => {
     const removeBtn = screen.getByText('×')
 
     fireEvent.change(input, { target: { value: 'typed text' } })
-    expect(setMock).toHaveBeenCalled() // via handlers.update
+    expect(setMock).toHaveBeenCalled()
 
     fireEvent.click(removeBtn)
-    expect(setMock).toHaveBeenCalled() // via handlers.remove
+    expect(setMock).toHaveBeenCalled()
   })
 
   it('renders hidden input when value is string', () => {
@@ -100,7 +100,6 @@ describe('<TextlistFields />', () => {
       />
     )
 
-    // There are two <input>s with value "abc": one visible, one hidden.
     const allInputs = screen.getAllByDisplayValue('abc')
     const hidden = allInputs.find(el => el.getAttribute('type') === 'hidden') as HTMLInputElement
 
@@ -117,7 +116,6 @@ describe('<Textlist />', () => {
   it('renders Fieldset add button', () => {
     render(<Textlist name="wrapper" placeholder="add..." />)
 
-    // Fieldset initially renders only the "Add" button
     const addButton = screen.getByRole('button', { name: /add/i })
     expect(addButton).toBeInTheDocument()
   })

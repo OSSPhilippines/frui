@@ -71,7 +71,6 @@ describe('<Radio />', () => {
   it('renders with custom style prop', () => {
     const { container } = render(<Radio label="Stylish" style={{ color: 'red' }} />)
     const wrapper = container.querySelector('label')!
-    // Browser-normalized RGB color check
     expect(wrapper).toHaveStyle({ color: 'rgb(255, 0, 0)' })
   })
 

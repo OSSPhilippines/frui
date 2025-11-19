@@ -7,11 +7,13 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 import type { ChangeEvent, KeyboardEvent } from 'react'
 import Taglist, { useTaglist } from '../../components/form/Taglist'
+
 // --------------------------------------------------------------------
 // Helpers
 // --------------------------------------------------------------------
 const getInput = () => screen.getByRole('textbox') as HTMLInputElement
 const getTag = (text: string) => screen.getByText(text)
+
 // --------------------------------------------------------------------
 // Hook Tests
 // --------------------------------------------------------------------
@@ -22,11 +24,9 @@ describe('useTaglist()', () => {
       useTaglist({ defaultValue: ['a'], onUpdate: onUpdateMock })
     )
 
-    // Remove tag
     act(() => result.current.handlers.remove(0))
     expect(result.current.tags).toEqual([])
 
-    // Add tag via Enter
     const changeEvent = { target: { value: 'test' } } as unknown as ChangeEvent<HTMLInputElement>
     act(() => result.current.handlers.change(changeEvent))
     rerender()
@@ -46,6 +46,7 @@ describe('useTaglist()', () => {
     expect(result.current.tags).toEqual(['two'])
   })
 })
+
 // --------------------------------------------------------------------
 // Component Tests
 // --------------------------------------------------------------------

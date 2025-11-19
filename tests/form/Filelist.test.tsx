@@ -53,9 +53,7 @@ describe('<FileList />', () => {
     fireEvent.change(screen.getByTestId('mock-input'), {
       target: { files: [file] },
     })
-    // Wait for "Uploading..." placeholder
     await waitFor(() => expect(screen.getByText('Uploading...')).toBeInTheDocument())
-    // Wait for uploaded file
     await waitFor(() => expect(screen.getByText('fileA.jpg')).toBeInTheDocument())
   })
 
@@ -80,7 +78,6 @@ describe('<FileList />', () => {
   it('resets list when defaultValue prop becomes empty array', async () => {
     const { rerender } = render(<FileList defaultValue={['a.png', 'b.png']} />)
     expect(screen.getAllByRole('link')).toHaveLength(2)
-    // Force a fresh mount to clear hook state
     rerender(<FileList key="reset" defaultValue={[]} />)
     await waitFor(() => {
       expect(screen.queryAllByRole('link')).toHaveLength(0)

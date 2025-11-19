@@ -50,7 +50,6 @@ describe('<MaskInput />', () => {
   it('creates a new Inputmask instance and calls mask()', () => {
     const onReady = vi.fn()
     render(<MaskInput mask="9999" alias="numeric" onReady={onReady} />)
-    // Component runs new Inputmask and calls .mask()
     expect(mockMaskMethod).toHaveBeenCalled()
     expect(onReady).toHaveBeenCalledWith(expect.objectContaining({ mask: expect.any(Function) }))
   })

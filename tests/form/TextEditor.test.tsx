@@ -24,9 +24,12 @@ Object.defineProperty(window, 'getSelection', {
   })),
 })
 
-// Polyfill for execCommand
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-;(document as any).execCommand = vi.fn(() => true)
+// Polyfill for execCommand (type-safe)
+Object.defineProperty(document, 'execCommand', {
+  configurable: true,
+  writable: true,
+  value: vi.fn(() => true) as unknown as Document['execCommand'],
+})
 
 // --------------------------------------------------------------------
 // Component Tests
@@ -53,7 +56,6 @@ describe('useTextEditor', () => {
     const getHook = setupHook({ value: 'text', onUpdate })
     const hook = getHook()
 
-    // simulate DOM refs that execCommand requires
     hook.refs.editor.current = document.createElement('div')
     hook.refs.hidden.current = document.createElement('input')
     hook.refs.editor.current.innerHTML = 'sample content'
@@ -72,7 +74,6 @@ describe('useTextEditor', () => {
     const getHook = setupHook({ onChange, onUpdate })
     const hook = getHook()
 
-    // create mock editor structure for input()
     hook.refs.editor.current = document.createElement('div')
     hook.refs.hidden.current = document.createElement('input')
     hook.refs.editor.current.innerHTML = '<p>Typing example</p>'

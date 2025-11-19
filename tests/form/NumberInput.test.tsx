@@ -61,7 +61,6 @@ describe('useNumberInput Hook', () => {
     let result: ReturnType<typeof useNumberInput> | undefined
     function TestComponent() {
       const hook = useNumberInput(config)
-      // Assign each render’s latest value so test can read after re-render
       result = hook
       return <div data-testid="hook-render" />
     }
@@ -82,7 +81,6 @@ describe('useNumberInput Hook', () => {
     act(() => {
       hook.handlers.update('10')
     })
-    // trigger re-render read
     hook = getHook()
     expect(hook.displayValue).toBe('10')
   })

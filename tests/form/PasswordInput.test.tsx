@@ -25,7 +25,7 @@ vi.mock('../../components/form/Input.js', () => ({
   default: ({
     type,
     className,
-    error, // ⬅️ grab it so it's not spread to the DOM
+    error,
     ...props
   }: React.InputHTMLAttributes<HTMLInputElement> & { error?: boolean }) => (
     <input data-testid="password-input" type={type} className={className} {...props} />
@@ -59,7 +59,6 @@ describe('<PasswordInput />', () => {
     expect(input.type).toBe('password')
     await user.click(toggle)
     expect(input.type).toBe('text')
-    // After toggling again
     await user.click(screen.getByText('✷'))
     expect(input.type).toBe('password')
   })

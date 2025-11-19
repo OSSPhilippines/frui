@@ -106,7 +106,6 @@ describe('<CurrencySelect />', () => {
     const onUpdate = vi.fn()
     render(<CurrencySelect onUpdate={onUpdate} />)
 
-    // Trigger captured Select onUpdate handler
     capturedOnUpdate && capturedOnUpdate('EUR')
 
     expect(onUpdate).toHaveBeenCalledWith(

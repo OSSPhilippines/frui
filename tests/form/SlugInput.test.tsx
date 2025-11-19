@@ -113,14 +113,12 @@ describe('<Slug />', () => {
     const input = screen.getByTestId('mock-input')
     fireEvent.blur(input, { target: { value: 'New Test' } })
     expect(onBlur).toHaveBeenCalled()
-    // Component behavior: the Input's `value` does not directly mutate on blur
     expect(input).toHaveValue('New Test')
   })
 
   it('handles camel case mode correctly', () => {
     render(<Slug defaultValue="Camel Case Value" camel />)
     const input = screen.getByTestId('mock-input')
-    // camelCase transformation capitalizes interior words
     expect(input).toHaveValue('CamelCaseValue')
   })
 

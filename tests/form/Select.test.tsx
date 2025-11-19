@@ -13,9 +13,6 @@ import Select, {
 // Component Tests
 // --------------------------------------------------------------------
 describe('<Select />', () => {
-  // ------------------------------------------------------------------
-  // Rendering and structure
-  // ------------------------------------------------------------------
   it('renders base wrapper and placeholder text', () => {
     render(
       <Select placeholder="Pick one">
@@ -35,9 +32,6 @@ describe('<Select />', () => {
     expect(wrapper?.className).toContain('frui-form-select-error')
   })
 
-  // ------------------------------------------------------------------
-  // Opening / Closing dropdown
-  // ------------------------------------------------------------------
   it('toggles dropdown open on placeholder click', async () => {
     render(
       <Select>
@@ -53,9 +47,6 @@ describe('<Select />', () => {
     expect(dropdown).toBeInTheDocument()
   })
 
-  // ------------------------------------------------------------------
-  // Selection behaviour (single select)
-  // ------------------------------------------------------------------
   it('calls onUpdate when an option is clicked', async () => {
     const handleUpdate = vi.fn()
     render(
@@ -109,7 +100,7 @@ describe('<Select />', () => {
   })
 
   // ------------------------------------------------------------------
-  // 5️⃣ Controlled value updates
+  // Controlled value updates
   // ------------------------------------------------------------------
   it('renders correct selected option when value prop provided', () => {
     const { rerender } = render(

@@ -156,7 +156,6 @@ describe('<CountrySelect />', () => {
     us && fireEvent.click(us)
     fr && fireEvent.click(fr)
 
-    // two separate calls for US and FR
     expect(onUpdate).toHaveBeenCalledTimes(2)
     const allArgs = onUpdate.mock.calls.flat()
     const iso2Values = allArgs.map((arg) => arg.iso2)

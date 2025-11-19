@@ -182,7 +182,6 @@ describe('<Autocomplete />', () => {
       fireEvent.keyDown(input, { key: 'a', target: { value: 'Alpha' } })
     })
 
-    // wait for internal timeout to resolve
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 5))
     })
@@ -191,7 +190,6 @@ describe('<Autocomplete />', () => {
       fireEvent.change(input, { target: { value: 'Beta' } })
     })
 
-    // simulate selection via user click through dropdown API match/select
     const dropdownInstance = (Autocomplete as unknown as { useAutocomplete?: () => void })
     expect(input).toBeInTheDocument()
   })

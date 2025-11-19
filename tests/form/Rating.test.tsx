@@ -7,7 +7,7 @@ import { describe, expect, it, vi } from 'vitest'
 import Rating from '../../components/form/Rating'
 
 // --------------------------------------------------------------------
-// Basic rendering tests
+// Component Tests
 // --------------------------------------------------------------------
 describe('<Rating />', () => {
   it('renders five default icons', () => {
@@ -29,20 +29,16 @@ describe('<Rating />', () => {
   it('renders highlightSelectedOnly correctly', () => {
     render(<Rating defaultValue={3} highlightSelectedOnly />)
     const filled = document.querySelectorAll('.frui-rating-icon-filled')
-    // only one (the selected one) should be filled
     expect(filled.length).toBe(1)
   })
 
-  // ------------------------------------------------------------------
-  // Interaction behaviour
-  // ------------------------------------------------------------------
   it('calls onChange when a star is clicked', () => {
     const handleChange = vi.fn()
     render(<Rating onChange={handleChange} />)
     const radios = screen.getAllByRole('radio')
-    fireEvent.click(radios[2]) // select 3rd star
+    fireEvent.click(radios[2])
     expect(handleChange).toHaveBeenCalled()
-    // called value argument is numeric 3
+
     expect(handleChange.mock.calls[0][1]).toBe(3)
   })
 

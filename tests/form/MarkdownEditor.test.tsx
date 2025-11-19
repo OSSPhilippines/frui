@@ -65,7 +65,6 @@ function renderHookWithState<T>(hook: () => T): { current: T } {
     return null
   }
   render(<TestHook />)
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return { current: currentValue! }
 }
 

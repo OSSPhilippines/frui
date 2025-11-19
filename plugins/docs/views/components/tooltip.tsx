@@ -12,18 +12,16 @@ import Tooltip from 'components/Tooltip.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Code, 
-  C, 
-  Props,
-  Preview
-} from 'plugins/app/index.js';
+import Docs from '../../layout/Docs.js';
 
 //--------------------------------------------------------------------//
 // Constants
+
+const uri = '/component/tooltip';
+const title = 'Tooltip Component';
+const description = 
+  'Tooltips display informative text when users hover '
+  + 'over, focus on, or tap an element.';
 
 const props = [
   ['arrow', 'boolean', 'No', 'Displays an arrow on the tooltip'],
@@ -117,6 +115,8 @@ return (
 
 //--------------------------------------------------------------------//
 // Components
+
+const { C, Code, Props, Preview } = Docs;
 
 /**
  * Crumbs component
@@ -510,13 +510,10 @@ export function Body() {
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (
-    <ThemeHead
-      uri="/component/tooltip"
-      title="Tooltip Component"
-      description={
-        'Tooltips display informative text when users hover '
-        + 'over, focus on, or tap an element.'
-      }
+    <Docs.Head
+      uri={uri}
+      title={title}
+      description={description}
       styles={styles}
     />
   );
@@ -527,19 +524,10 @@ export function Head(props: PageProps) {
  */
 export function Page() {
   return (
-    <LayoutProvider>
-      <LayoutPanel pathname="/component/tooltip">
-        <main className="flex flex-col h-full w-full">
-          <div className="p-3 theme-bg-2">
-            <Crumbs />
-          </div>
-          <section className="flex-grow relative h-full">
-            <Menu />
-            <Body />
-          </section>
-        </main>
-      </LayoutPanel>
-    </LayoutProvider>
+    <Docs pathname={uri}>
+      <Menu />
+      <Body />
+    </Docs>
   );
 };
 

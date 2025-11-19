@@ -11,13 +11,8 @@ import make from 'components/form/Fieldset.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Code, 
-  Props 
-} from 'plugins/app/index.js';
+import Docs from '../../layout/Docs.js';
+
 
 //--------------------------------------------------------------------//
 // Types
@@ -28,6 +23,12 @@ export type ContactsProps = FieldsetProps<ContactType> & {};
 //--------------------------------------------------------------------//
 // Constants
 
+const uri = '/component/fieldset';
+const title = 'Fieldset Component';
+const description = 
+  'Fieldset in FRUI allows grouping of fields with repeatable '
+  + 'sets of inputs.';
+
 const props = [
   [ 'limit', 'number', 'No', 'Maximum number of fieldsets' ],
   [ 'defaultValue', 'array', 'No', 'Default values for the fieldset' ],
@@ -37,6 +38,8 @@ const props = [
 
 //--------------------------------------------------------------------//
 // Components
+
+const { C, Code, Props, Preview } = Docs;
 
 /**
  * Crumbs component
@@ -170,13 +173,10 @@ export function Body() {
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (
-    <ThemeHead
-      uri="/component/fieldset"
-      title="Fieldset Component"
-      description={
-        'Fieldset in FRUI allows grouping of fields with repeatable '
-        + 'sets of inputs.'
-      }
+    <Docs.Head
+      uri={uri}
+      title={title}
+      description={description}
       styles={styles}
     />
   );
@@ -187,19 +187,10 @@ export function Head(props: PageProps) {
  */
 export function Page() {
   return (
-    <LayoutProvider>
-      <LayoutPanel pathname="/component/fieldset">
-        <main className="flex flex-col h-full w-full">
-          <div className="p-3 theme-bg-2">
-            <Crumbs />
-          </div>
-          <section className="flex-grow relative h-full">
-            <Menu />
-            <Body />
-          </section>
-        </main>
-      </LayoutPanel>
-    </LayoutProvider>
+    <Docs pathname={uri}>
+      <Menu />
+      <Body />
+    </Docs>
   );
 };
 

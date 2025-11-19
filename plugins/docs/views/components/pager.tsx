@@ -11,18 +11,15 @@ import Pager from 'components/Pager.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Code, 
-  C, 
-  Props,
-  Preview
-} from 'plugins/app/index.js';
+import Docs from '../../layout/Docs.js';
+
 
 //--------------------------------------------------------------------//
 // Constants
+
+const uri = '/component/pager';
+const title = 'Pager Component';
+const description = 'Pager allows for easy navigation between pages of content.';
 
 const props = [
   [ 'className', 'string | Function', 'No', 'Standard HTML class names' ],
@@ -87,6 +84,8 @@ const examples = [
 
 //--------------------------------------------------------------------//
 // Components
+
+const { C, Code, Props, Preview } = Docs;
 
 /**
  * Crumbs component
@@ -398,10 +397,10 @@ export function Body() {
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (
-    <ThemeHead
-      uri="/component/pager"
-      title="Pager Component"
-      description="Pager allows for easy navigation between pages of content."
+    <Docs.Head
+      uri={uri}
+      title={title}
+      description={description}
       styles={styles}
     />
   );
@@ -412,19 +411,10 @@ export function Head(props: PageProps) {
  */
 export function Page() {
   return (
-    <LayoutProvider>
-      <LayoutPanel pathname="/component/pager">
-        <main className="flex flex-col h-full w-full">
-          <div className="p-3 theme-bg-2">
-            <Crumbs />
-          </div>
-          <section className="flex-grow relative h-full">
-            <Menu />
-            <Body />
-          </section>
-        </main>
-      </LayoutPanel>
-    </LayoutProvider>
+    <Docs pathname={uri}>
+      <Menu />
+      <Body />
+    </Docs>
   );
 };
 

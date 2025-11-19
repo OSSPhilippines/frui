@@ -12,18 +12,17 @@ import Notifier from 'components/Notifier.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Code, 
-  C, 
-  Props,
-  Preview
-} from 'plugins/app/index.js';
+import Docs from '../../layout/Docs.js';
+
 
 //--------------------------------------------------------------------//
 // Constants
+
+const uri = '/component/notifier';
+const title = 'Notifier Component';
+const description = 
+  'Notifiers allow users to display notifications with '
+  + 'internal state management.';
 
 const props = [
   //Notifier props
@@ -126,6 +125,8 @@ cookies.set('flash', JSON.stringify(flash), {/* cookie options */});`,
 
 //--------------------------------------------------------------------//
 // Components
+
+const { C, Code, Props, Preview } = Docs;
 
 /**
  * Crumbs component
@@ -429,13 +430,10 @@ export function Body() {
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (
-    <ThemeHead
-      uri="/component/notifier"
-      title="Notifier Component"
-      description={
-        'Notifiers allow users to display notifications with '
-        + 'internal state management.'
-      }
+    <Docs.Head
+      uri={uri}
+      title={title}
+      description={description}
       styles={styles}
     />
   );
@@ -446,19 +444,10 @@ export function Head(props: PageProps) {
  */
 export function Page() {
   return (
-    <LayoutProvider>
-      <LayoutPanel pathname="/component/notifier">
-        <main className="flex flex-col h-full w-full">
-          <div className="p-3 theme-bg-2">
-            <Crumbs />
-          </div>
-          <section className="flex-grow relative h-full">
-            <Menu />
-            <Body />
-          </section>
-        </main>
-      </LayoutPanel>
-    </LayoutProvider>
+    <Docs pathname={uri}>
+      <Menu />
+      <Body />
+    </Docs>
   );
 };
 

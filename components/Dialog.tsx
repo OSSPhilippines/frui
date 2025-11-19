@@ -271,6 +271,8 @@ export function Dialog(props: DialogProps) {
     style, //?: React.CSSProperties
     ...attributes
   } = props;
+  //extract close from overlay
+  const { close } = props.overlay || {};
   //hooks
   const { dialogOpened, handlers } = useDialog(props);
   //variables
@@ -280,7 +282,7 @@ export function Dialog(props: DialogProps) {
   if (className) classes.push(className);
   // handlers
   const onOverlayClick = () => {
-    overlay && overlay.close && closeDialog();
+    overlay && close && closeDialog();
   };
   const ignoreOverlayClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -288,14 +290,12 @@ export function Dialog(props: DialogProps) {
   // configure provider
   const provider = { closeDialog, dialogOpened, openDialog };
 
-  const { close, ...overlayProps } = overlay || {};
-
   //render
   if (!dialogOpened) return null;
   return (
     <DialogContext.Provider value={provider}>
       {portal(
-        <DialogOverlay {...overlayProps} onClick={onOverlayClick}>
+        <DialogOverlay {...overlay} onClick={onOverlayClick}>
           <div 
             {...attributes}
             className={classes.join(' ')} 

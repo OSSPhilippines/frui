@@ -11,18 +11,15 @@ import Table from 'components/Table.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutFoot, 
-  ThemeHead, 
-  Props, 
-  Code, 
-  C,
-  Preview
-} from 'plugins/app/index.js';
+import Docs from '../../layout/Docs.js';
 
 //--------------------------------------------------------------------//
 // Constants
+
+const uri = '/component/checkbox';
+const title = 'Checkbox Component';
+const description = 'Checkbox is a field component that wraps the standard HTML '
+  +'checkbox input element';
 
 const props = [
   [ 'blue', 'boolean', 'No', 'Show blue checkbox' ],
@@ -171,6 +168,8 @@ const examples = [
 
 //--------------------------------------------------------------------//
 // Components
+
+const { C, Code, Props, Preview } = Docs;
 
 /**
  * Crumbs component
@@ -592,7 +591,7 @@ export function Body() {
         <Props props={props} />
       </div>
 
-      <LayoutFoot />
+      <Docs.Foot />
     </div>
   );
 };
@@ -603,13 +602,10 @@ export function Body() {
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (
-    <ThemeHead
-      uri="/form/checkbox"
-      title="Checkbox Field"
-      description={
-        'Checkbox is a field component that wraps the standard HTML '
-        + 'checkbox input element.'
-      }
+    <Docs.Head
+      uri={uri}
+      title={title}
+      description={description}
       styles={styles}
     />
   );
@@ -620,17 +616,10 @@ export function Head(props: PageProps) {
  */
 export function Page() {
   return (
-    <LayoutPanel pathname="/form/checkbox">
-      <main className="flex flex-col h-full w-full">
-        <div className="p-3 theme-bg-2">
-          <Crumbs />
-        </div>
-        <section className="flex-grow relative h-full">
-          <Menu />
-          <Body />
-        </section>
-      </main>
-    </LayoutPanel>
+    <Docs pathname={uri}>
+      <Menu />
+      <Body />
+    </Docs>
   );
 };
 

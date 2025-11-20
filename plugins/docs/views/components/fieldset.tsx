@@ -13,7 +13,6 @@ import make from 'components/form/Fieldset.js';
 import type { PageProps } from 'plugins/app/types.js';
 import Docs from '../../layout/Docs.js';
 
-
 //--------------------------------------------------------------------//
 // Types
 
@@ -152,17 +151,7 @@ export function Body() {
         <Contacts limit={1} />
       </div>
 
-      <div className="flex items-center border-t theme-bg-2 mt-8 pt-4">
-        <a className="text-t2" href="/component">
-          <i className="fas fa-arrow-left mr-2"></i>
-          {_('Components')}
-        </a>
-        <div className="flex-grow"></div>
-        <a className="text-t2" href="/component/table">
-          {_('Table')}
-          <i className="fas fa-arrow-right ml-2"></i>
-        </a>
-      </div>
+      <Docs.Foot />
     </div>
   );
 };

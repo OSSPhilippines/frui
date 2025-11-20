@@ -12,15 +12,7 @@ import WYSIWYG from 'components/form/WYSIWYG.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import {
-  LayoutPanel,
-  LayoutProvider,
-  ThemeHead,
-  Props,
-  Code,
-  C,
-  Preview
-} from 'plugins/app/index.js';
+import Docs from '../../layout/Docs.js';
 
 //styles
 //--------------------------------------------------------------------//
@@ -65,6 +57,11 @@ const contentStyles = clsx(
 
 //--------------------------------------------------------------------//
 //constants
+
+const uri = '/component/wysiwyg';
+const title = 'WYSIWYG Field';
+const description = 'WYSIWYG is a field component that provides a rich text editor '
+  + 'with various formatting options.';
 
 const props = [
   ['className', 'string', 'No', 'Standard HTML class names'],
@@ -253,6 +250,11 @@ const examples = [
   value="<p>Start with a <b>template</b> or type here.</p>"
 />`
 ];
+
+//--------------------------------------------------------------------//
+// Components
+
+const { C, Code, Props, Preview } = Docs;
 
 //--------------------------------------------------------------------//
 
@@ -768,15 +770,7 @@ export function Body() {
         <Props props={props} />
       </div>
 
-      <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
-        <a className="theme-2" href="/form/time">
-          {_('Time')}
-        </a>
-        <div className="flex-grow"></div>
-        <a className="theme-2" href="/view">
-          {_('Formats')}
-        </a>
-      </div>
+      <Docs.Foot/>
     </div>
   );
 };
@@ -787,13 +781,10 @@ export function Body() {
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (
-    <ThemeHead
-      uri="/form/wysiwyg"
-      title="WYSIWYG Field"
-      description={
-        'WYSIWYG is a field component that provides a rich text editor '
-        + 'with various formatting options.'
-      }
+    <Docs.Head
+      uri={uri}
+      title={title}
+      description={description}
       styles={styles}
     />
   );
@@ -804,19 +795,10 @@ export function Head(props: PageProps) {
  */
 export function Page() {
   return (
-    <LayoutProvider>
-      <LayoutPanel pathname="/form/wysiwyg">
-        <main className="flex flex-col h-full w-full">
-          <div className="p-3 theme-bg-2">
-            <Crumbs />
-          </div>
-          <section className="flex-grow relative h-full">
-            <Menu />
-            <Body />
-          </section>
-        </main>
-      </LayoutPanel>
-    </LayoutProvider>
+    <Docs pathname={uri}>
+      <Menu />
+      <Body />
+    </Docs>
   );
 };
 

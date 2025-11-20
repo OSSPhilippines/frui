@@ -6,9 +6,9 @@ import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 
 //frui
+import Alert from 'components/Alert.js';
 import Bread from 'components/Bread.js';
 import Button from 'components/Button.js';
-import Alert from 'components/Alert.js';
 import Dialog from 'components/Dialog.js';
 
 //plugins

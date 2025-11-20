@@ -31,6 +31,8 @@ export type SelectControlProps = ClassStyleProps & ChildrenProps & {
   left?: boolean,
   //name used by forms
   name?: string,
+  //serialized list of options as array or object
+  options?: SelectData[]|Record<string, string>,
   //placeholder text when no option is selected
   placeholder?: string,
   //position of the dropdown
@@ -144,6 +146,8 @@ export function SelectControl(props: SelectControlProps) {
     left, //?: boolean
     //name used by forms
     name, //?: string
+    //serialized list of options as array or object
+    options, //: SelectOption[]|Record<string, string>
     //placeholder text when no option is selected
     placeholder, //?: string
     //position of the dropdown
@@ -160,7 +164,7 @@ export function SelectControl(props: SelectControlProps) {
     opened, 
     clear, 
     selected,
-    options
+    options: optionsCount
   } = Dropdown.useContext();
   //variables
   // determine classes
@@ -175,8 +179,9 @@ export function SelectControl(props: SelectControlProps) {
     : right ? '▶' 
     : '▼';
   // get selected options
-  const components = Dropdown.getOptions(
+  const components = Dropdown.buildOptions(
     children,
+    options,
     selected,
     multiple
   );
@@ -197,7 +202,7 @@ export function SelectControl(props: SelectControlProps) {
             onClick={clear}
           >&times;</span>
         )}
-        {options > 0 && (
+        {optionsCount > 0 && (
           <span 
             className="frui-form-select-control-actions-toggle"
             onClick={toggle}
@@ -304,6 +309,7 @@ export function Select(props: SelectProps) {
           bottom={bottom}
           left={left}
           name={name}
+          options={options}
           placeholder={placeholder}
           right={right}
           top={top}

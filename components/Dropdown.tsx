@@ -134,7 +134,7 @@ export function buildOptions(
  */
 export function getAbsolutePosition(
   container: HTMLDivElement, 
-  tooltip: HTMLDivElement,
+  dropdown: HTMLDivElement,
   direction: { top: boolean, bottom: boolean, left: boolean, right: boolean }
 ) {
   const { top, bottom, left, right } = direction;
@@ -142,14 +142,14 @@ export function getAbsolutePosition(
   // use `createPortal` later to move the dropdown to the end of the 
   // document body to avoid overflow issues.
   const containerRect = container.getBoundingClientRect();
-  const tooltipRect = tooltip.getBoundingClientRect();
+  const dropdownRect = dropdown.getBoundingClientRect();
   const position = { x: 0, y: 0 };
 
   switch (true) {
     case left:
       position.y = 0;
       //(to the left of the container relative to the page)
-      position.x = containerRect.left - tooltipRect.width;
+      position.x = containerRect.left - dropdownRect.width;
       break;
     case right:
       position.y = 0;
@@ -158,7 +158,7 @@ export function getAbsolutePosition(
       break;
     case top:
       //(above the container relative to the page)
-      position.y = containerRect.top - tooltipRect.height;
+      position.y = containerRect.top - dropdownRect.height;
       position.x = containerRect.left;
       break;
     case bottom:
@@ -309,19 +309,19 @@ export function getOptions<T = unknown>(
  */
 export function getRelativePosition(
   container: HTMLDivElement, 
-  tooltip: HTMLDivElement,
+  dropdown: HTMLDivElement,
   direction: { top: boolean, bottom: boolean, left: boolean, right: boolean }
 ) {
   const { top, bottom, left, right } = direction;
   const containerRect = container.getBoundingClientRect();
-  const tooltipRect = tooltip.getBoundingClientRect();
+  const dropdownRect = dropdown.getBoundingClientRect();
   const position = { x: 0, y: 0 };
 
   switch (true) {
     case left:
       position.y = 0;
       //(to the left of the container)
-      position.x = -(tooltipRect.width);
+      position.x = -(dropdownRect.width);
       break;
     case right:
       position.y = 0;
@@ -330,7 +330,7 @@ export function getRelativePosition(
       break;
     case top:
       //(above the container)
-      position.y = -(tooltipRect.height);
+      position.y = -(dropdownRect.height);
       position.x = 0;
       break;
     case bottom:
@@ -433,6 +433,8 @@ export function useDropdown(config: DropdownConfig) {
   const [ selected, setDropdowned ] = useState(defaultValues);
   // position of the dropdown
   const [ position, setPosition ] = useState<[ number, number ]>([0, 0]);
+  // max width of the dropdown (should be applicable for portalled dropdowns)
+  const [ maxWidth, setMaxWidth ] = useState(0);
   //variables
   const refs = {
     container: useRef<HTMLDivElement>(null),
@@ -493,7 +495,7 @@ export function useDropdown(config: DropdownConfig) {
   }, [ opened ]);
   // when dropdown opens, calculate position
   useEffect(() => {
-    //if not visible, or if container or tooltip ref is not set, skip
+    //if not visible, or if container or dropdown ref is not set, skip
     if (!opened || !refs.container.current || !refs.dropdown.current) {
       return;
     }
@@ -511,6 +513,9 @@ export function useDropdown(config: DropdownConfig) {
       );
     //update the position state
     setPosition([ position.x, position.y ]);
+    //determine max width
+    const rect = refs.container.current.getBoundingClientRect();
+    setMaxWidth(rect.width);
   }, [ 
     opened,
     selected,
@@ -523,8 +528,9 @@ export function useDropdown(config: DropdownConfig) {
   ]);
   
   return {
-    refs,
+    maxWidth,
     opened,
+    refs,
     selected,
     position,
     handlers
@@ -560,7 +566,7 @@ export function DropdownOption(props: DropdownOptionProps) {
   //props
   const { value, className, style, children } = props;
   //hooks
-  const { select, selected, option } = useContext(DropdownContext);
+  const { select, selected, option } = useDropdownContext();
   //variables
   const active = selected.includes(value);
   // get slot styles
@@ -696,6 +702,8 @@ export function Dropdown(props: DropdownProps) {
   const {
     //handlers
     handlers,
+    //max width of the dropdown
+    maxWidth,
     //whether the dropdown is open
     opened,
     //position of the dropdown
@@ -705,6 +713,7 @@ export function Dropdown(props: DropdownProps) {
     //the current selected option/s
     selected
   } = useDropdown({
+    append,
     bottom,
     defaultValue,
     left,
@@ -716,20 +725,26 @@ export function Dropdown(props: DropdownProps) {
     value
   });
   //variables
+  // determine direction
+  const direction = top ? 'top' 
+    : bottom ? 'bottom' 
+    : left ? 'left' 
+    : right ? 'right' 
+    : 'bottom';
   // determine classes
   const classes = [ 'frui-dropdown' ];
+  // - add direction
+  classes.push(`frui-dropdown-${direction}`);
+  // - add portalled class if applicable
+  append && classes.push('frui-dropdown-portalled');
+  // - add custom class name
   className && classes.push(className);
-  if (top) {
-    classes.push('frui-dropdown-top');
-  } else if (left) {
-    classes.push('frui-dropdown-left');
-  } else if (right) {
-    classes.push('frui-dropdown-right');
-  } else {
-    classes.push('frui-dropdown-bottom');
-  }
   // determine styles
   const styles = { 
+    maxWidth: append ? `${maxWidth}px` : undefined,
+    width: append && (['top', 'bottom'].includes(direction)) 
+      ? `${maxWidth}px` 
+      : undefined,
     ...style,
     left: `${position[0]}px`,
     top: `${position[1]}px`
@@ -758,34 +773,32 @@ export function Dropdown(props: DropdownProps) {
     open: handlers.open,
     select: handlers.select,
     selected
-  } as DropdownContextProps;
+  };
   //render
   // if append is provided, use portal
   if (append) {
     return (
       <DropdownContext.Provider value={provider}>
-        {handlers.portal(
-          <div 
-            ref={refs.container} 
-            className={containerStyles.className} 
-            style={containerStyles.style} 
-          >
-            {components.control}
-            {components.options.length > 0 && (
-              <div 
-                ref={refs.dropdown} 
-                className={classes.join(' ')} 
-                style={styles}
-              >
-                {components.header}
-                <div className="frui-dropdown-options">
-                  {components.options}
-                </div>
-                {components.footer}
+        <div 
+          ref={refs.container} 
+          className={containerStyles.className} 
+          style={containerStyles.style} 
+        >
+          {components.control}
+          {opened && components.options.length > 0 && handlers.portal(
+            <div 
+              ref={refs.dropdown} 
+              className={classes.join(' ')} 
+              style={styles}
+            >
+              {components.header}
+              <div className="frui-dropdown-options">
+                {components.options}
               </div>
-            )}
-          </div>
-        )}
+              {components.footer}
+            </div>
+          )}
+        </div>
       </DropdownContext.Provider>
     );
   }
@@ -797,7 +810,7 @@ export function Dropdown(props: DropdownProps) {
         style={containerStyles.style} 
       >
         {components.control}
-        {components.options.length > 0 && (
+        {opened && components.options.length > 0 && (
           <div 
             ref={refs.dropdown} 
             className={classes.join(' ')} 

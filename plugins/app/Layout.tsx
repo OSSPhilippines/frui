@@ -150,18 +150,6 @@ export function LayoutLeft(props: LayoutLeftProps) {
 };
 
 /**
- * Layout dialog provider component
- */
-export function LayoutDialogProvider({ children }: ChildrenProps) {
-  const { theme, mode } = useThemeContext();
-  return (
-    <Dialog.Provider className={`${theme}-${mode}`}>
-      {children}
-    </Dialog.Provider>
-  );
-};
-
-/**
  * Layout provider component. An aggregator for all providers
  */
 export function LayoutProvider(props: LayoutProviderProps) {
@@ -171,9 +159,7 @@ export function LayoutProvider(props: LayoutProviderProps) {
     <ThemeProvider>
       <R22nProvider>
         <Notifier.Provider>
-          <LayoutDialogProvider>
-            {children}
-          </LayoutDialogProvider>
+          {children}
         </Notifier.Provider>
       </R22nProvider>
     </ThemeProvider>

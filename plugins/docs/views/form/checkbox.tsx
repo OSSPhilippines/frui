@@ -19,7 +19,7 @@ import Docs from '../../layout/Docs.js';
 const uri = '/form/checkbox';
 const title = 'Checkbox Component';
 const description = 'Checkbox is a field component that wraps the standard HTML '
-  + 'checkbox input element';
+  + 'checkbox input element.';
 
 const props = [
   [ 'blue', 'boolean', 'No', 'Show blue checkbox' ],

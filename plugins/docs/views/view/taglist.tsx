@@ -157,17 +157,7 @@ export function Body() {
         <Props props={props} />
       </div>
 
-      <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
-        <a className="theme-2" href="/view/table">
-          <i className="fas fa-arrow-left mr-2"></i>
-          {_('Table')}
-        </a>
-        <div className="flex-grow"></div>
-        <a className="theme-2" href="/view/text">
-          {_('Text')}
-          <i className="fas fa-arrow-right ml-2"></i>
-        </a>
-      </div>
+      <Docs.Foot />
     </div>
   );
 };

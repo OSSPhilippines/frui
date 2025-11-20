@@ -170,6 +170,8 @@ export function DocsBody(props: DocsBodyProps) {
           </section>
         </main>
       </section>
+      <div id="dialog-root"></div>
+      <div id="dropdown-root"></div>
     </section>
   );
 };

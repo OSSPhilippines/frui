@@ -121,7 +121,7 @@ export function useDialog(config: DialogConfig) {
     },
     portal(dialog: JSX.Element) {
       if (!append) return null;
-      const container = document.body.querySelector(append);
+      const container = document.querySelector(append);
       if (!container) return null;
       return createPortal(dialog, container);
     }

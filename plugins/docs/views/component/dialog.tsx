@@ -8,6 +8,7 @@ import { useLanguage, Translate } from 'r22n';
 //frui
 import Bread from 'components/Bread.js';
 import Button from 'components/Button.js';
+import Alert from 'components/Alert.js';
 import Dialog from 'components/Dialog.js';
 
 //plugins
@@ -28,12 +29,6 @@ const props = [
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
     [ 'overlay', 'false | object', 'No', 'Props for the overlay element. Set to false to disable overlay.' ],
-    [ 'style', 'CSSProperties', 'No', 'Standard HTML styles' ]
-  ],
-  //dialog provider
-  [
-    [ 'id', 'string', 'No', 'ID of the dialog container' ],
-    [ 'className', 'string', 'No', 'Standard HTML class names' ],
     [ 'style', 'CSSProperties', 'No', 'Standard HTML styles' ]
   ],
   //dialog close
@@ -185,9 +180,29 @@ return (
   </div>
 );`,
 //4
-`<Dialog.Provider id="custom-dialog-root">
-  <App />
-</Dialog.Provider>`
+`<Dialog 
+  open={opened} 
+  append="#dialog-root"
+  onClose={() => open(false)}
+  className="theme-bg-0 theme-bc-1 px-w-320 rounded-lg overflow-hidden shadow-lg"
+>
+  <header className="flex items-center p-3 theme-bg-2">
+    <h3 className="flex-grow font-semibold uppercase">
+      Portaled to Dialog Root
+    </h3>
+    <Dialog.Close className="text-2xl theme-error cursor-pointer">
+      &times;
+    </Dialog.Close>
+  </header>
+  <p className="px-3 py-6">
+    Dialog was appended to <C value="div#dialog-root" />.
+  </p>
+  <footer className="border-t theme-bc-1 p-3 flex justify-end">
+    <Dialog.Close className="inline-block theme-error">
+      <Button error>Close</Button>
+    </Dialog.Close>
+  </footer>
+</Dialog>`
 ];
 
 //--------------------------------------------------------------------//
@@ -237,7 +252,7 @@ export function Menu() {
             <a href="#examples">{_('Examples')}</a>
           </li>
           <li className="ml-2 pb-1">
-            <a href="#provider">{_('Provider')}</a>
+            <a href="#portal">{_('Portaling')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
@@ -436,6 +451,7 @@ export function Examples() {
 export function Body() {
   //hooks
   const { _ } = useLanguage();
+  const [ opened, open ] = useState(false);
   //render
   return (
     <div className={
@@ -468,21 +484,58 @@ export function Body() {
         <Examples />
       </div>
 
-      <h2 id="provider" className="uppercase font-bold text-lg mt-8">
-        {_('Provider')}
+      <h2 id="portal" className="uppercase font-bold text-lg mt-8">
+        {_('Portaling')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            Dialogs won't work without a provider closest to the root 
-            container.  The <C value="<Dialog.Provider>" /> component 
-            allows you to set a container for dialogs to be rendered 
-            into.
+            You can portal dialogs to a specific DOM node by passing a 
+            CSS selector to the <C value="append" /> prop. 
           </Translate>
         </p>
-        <Code language="tsx" className="mt-2">
-          {examples[4]}
-        </Code>
+        <Preview 
+          height={200}
+          title="Portal to Dialog Root Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <div className="text-center">
+              <Button info onClick={() => open(true)}>Open Dialog</Button>
+            </div>
+            <Dialog 
+              open={opened} 
+              append="#dialog-root"
+              onClose={() => open(false)}
+              overlay={{ close: true }}
+              className="theme-bg-0 theme-bc-1 px-w-320 rounded-lg overflow-hidden shadow-lg"
+            >
+              <header className="flex items-center p-3 theme-bg-2">
+                <h3 className="flex-grow font-semibold uppercase">
+                  Portaled to Dialog Root
+                </h3>
+                <Dialog.Close className="text-2xl theme-error cursor-pointer">
+                  &times;
+                </Dialog.Close>
+              </header>
+              <p className="px-3 py-6">
+                Dialog was appended to <C value="div#dialog-root" />.
+              </p>
+              <footer className="border-t theme-bc-1 p-3 flex justify-end">
+                <Dialog.Close className="inline-block theme-error">
+                  <Button error>Close</Button>
+                </Dialog.Close>
+              </footer>
+            </Dialog>
+          </Preview.Example>
+          <Preview.Code>{examples[4]}</Preview.Code>
+        </Preview>
+        <Alert info className="mt-4">
+          <i className="fas fa-info-circle mr-2"></i>
+          <Translate>
+            <strong>TIP:</strong> Make sure the target container element exists in the DOM.
+          </Translate>
+        </Alert>
       </div>
 
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
@@ -519,15 +572,6 @@ export function Body() {
         </p>
         <Props props={props[0]} />
 
-        <h3 className="font-semibold mt-4">{_('Provider')}</h3>
-        <p className="py-2">
-          <Translate>
-            The <C value="<Dialog.Provider>" /> component can be passed the 
-            following props.
-          </Translate>
-        </p>
-        <Props props={props[1]} />
-
         <h3 className="font-semibold mt-4">{_('Close')}</h3>
         <p className="py-2">
           <Translate>
@@ -535,7 +579,7 @@ export function Body() {
             following props.
           </Translate>
         </p>
-        <Props props={props[2]} />
+        <Props props={props[1]} />
       </div>
 
       <Docs.Foot />

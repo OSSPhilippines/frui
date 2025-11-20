@@ -444,7 +444,7 @@ export function useDropdown(config: DropdownConfig) {
     open,
     portal(dropdown: JSX.Element) {
       if (!append) return null;
-      const container = document.body.querySelector(append);
+      const container = document.querySelector(append);
       if (!container) return null;
       return createPortal(dropdown, container);
     },

@@ -8,7 +8,6 @@ import { R22nProvider, useLanguage } from 'r22n';
 //frui
 import type { ChildrenProps } from 'components/types.js';
 import Notifier, { unload } from 'components/Notifier.js';
-import Dialog from 'components/Dialog.js';
 
 //plugins
 import { useThemeContext, ThemeProvider } from './Theme.js';

@@ -58,7 +58,7 @@ export function Button(props: ButtonProps) {
   //variables
   // set default styles and classes
   const styles = { ...style };
-  const classes = [ 'frui-form-button' ];
+  const classes = [ 'frui-button' ];
   // - determine background color
   BackgroundColorTool.get(props).getClassStyles({ classes, styles });
   // - determine border color
@@ -74,7 +74,7 @@ export function Button(props: ButtonProps) {
   // - determine text size
   TextSizeTool.get(props).getClassStyles({ classes, styles });
   //determine button size
-  classes.push(`frui-form-button-${
+  classes.push(`frui-button-${
     xs ? 'xs' 
     : sm ? 'sm' 
     : md ? 'md' 

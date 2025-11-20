@@ -6,9 +6,9 @@ import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Bread from 'components/element/Bread.js';
+import Bread from 'components/Bread.js';
 import Button from 'components/Button.js';
-import { When, Otherwise } from 'components/block/When.js';
+import { When, Otherwise } from 'components/When.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

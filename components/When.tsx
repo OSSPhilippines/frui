@@ -5,8 +5,8 @@
 import type { ReactNode } from 'react';
 
 //frui
-import type { ChildrenProps, ReactType } from '../types.js';
-import toChildrenArray from '../helpers/toChildrenArray.js';
+import type { ChildrenProps, ReactType } from './types.js';
+import toChildrenArray from './helpers/toChildrenArray.js';
 export type WhenProps = { condition: boolean };
 
 //--------------------------------------------------------------------//
@@ -43,6 +43,9 @@ export function Otherwise(props: ChildrenProps) {
   return props.children;
 };
 
+/**
+ * When component; Renders children based on condition
+ */
 export function When(props: WhenProps & ChildrenProps) {
   //extract props
   const { condition, children } = props;
@@ -94,4 +97,4 @@ export function When(props: WhenProps & ChildrenProps) {
   return null;
 };
 
-export default Object.assign(When, { Otherwise });
+export default Object.assign(When, { Otherwise, nextCondition });

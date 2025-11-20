@@ -78,8 +78,7 @@ export default function plugin(server: HttpServer<Config>) {
     ctx.get('/view/taglist', '@/plugins/docs/views/view/taglist');
     ctx.get('/view/text', '@/plugins/docs/views/view/text');
     ctx.get('/view/yesno', '@/plugins/docs/views/view/yesno');
-    
-    ctx.get('/tool', '@/plugins/docs/views/tool/index');
+
     ctx.get('/tool/when', '@/plugins/docs/views/tool/when');
   });
 }

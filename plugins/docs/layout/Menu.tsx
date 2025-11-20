@@ -397,6 +397,19 @@ export const menu: MenuItem[] = [
         href: '/view/yesno'
       },
     ]
+  },
+  {
+    icon: 'cogs',
+    label: 'Tools',
+    search: '/tool',
+    href: '/tool',
+    children: [
+      {
+        label: 'When',
+        search: '/tool/when',
+        href: '/tool/when'
+      }
+    ]
   }
 ];
 

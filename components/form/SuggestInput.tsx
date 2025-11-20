@@ -16,7 +16,7 @@ import Input from './Input.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type AutocompleteConfig = {
+export type SuggestInputConfig = {
   options?: string[],
   defaultValue?: string|number|readonly string[],
   onSelected?: (option: string) => void,
@@ -26,7 +26,7 @@ export type AutocompleteConfig = {
   onUpdate?: (value: string) => void
 };
 
-export type AutocompleteDropdownProps = { 
+export type SuggestInputDropdownProps = { 
   options?: string[],
   show: boolean,
   styles?: Record<string, CSSProperties|false|undefined>|false,
@@ -35,7 +35,7 @@ export type AutocompleteDropdownProps = {
   match: (option: string) => void
 };
 
-export type AutocompleteProps = InputProps & {
+export type SuggestInputProps = InputProps & {
   options?: string[],
   styles?: Record<string, CSSProperties|false|undefined>|false,
   classNames?: Record<string, string|false|undefined>|false,
@@ -48,9 +48,9 @@ export type AutocompleteProps = InputProps & {
 // Hooks
 
 /**
- * Autocomplete Hook Aggregate
+ * SuggestInput Hook Aggregate
  */
-export function useAutocomplete(config: AutocompleteConfig) {
+export function useSuggestInput(config: SuggestInputConfig) {
   const { 
     options: defaultOptions,
     defaultValue,
@@ -119,9 +119,9 @@ export function useAutocomplete(config: AutocompleteConfig) {
 // Components
 
 /**
- * Autocomplete Dropdown
+ * SuggestInput Dropdown
  */
-export function AutocompleteDropdown(props: AutocompleteDropdownProps) {
+export function SuggestInputDropdown(props: SuggestInputDropdownProps) {
   const { 
     options, 
     show, 
@@ -153,9 +153,9 @@ export function AutocompleteDropdown(props: AutocompleteDropdownProps) {
 };
 
 /**
- * Autocomplete  Component (Main)
+ * SuggestInput  Component (Main)
  */
-export function Autocomplete(props: AutocompleteProps) {
+export function SuggestInput(props: SuggestInputProps) {
   const { 
     options: defaultOptions,
     className,
@@ -168,7 +168,7 @@ export function Autocomplete(props: AutocompleteProps) {
     onUpdate,
     ...attributes
   } = props;
-  const { value, options, showing, handlers } = useAutocomplete({
+  const { value, options, showing, handlers } = useSuggestInput({
     defaultValue: defaultValue || _value,
     options: defaultOptions,
     onQuery,
@@ -191,7 +191,7 @@ export function Autocomplete(props: AutocompleteProps) {
         {...attributes}
         value={value}
       />
-      <AutocompleteDropdown 
+      <SuggestInputDropdown 
         options={options} 
         show={showing} 
         select={handlers.select} 
@@ -202,4 +202,4 @@ export function Autocomplete(props: AutocompleteProps) {
 };
 
 //defaults to autocomplete
-export default Autocomplete;
+export default SuggestInput;

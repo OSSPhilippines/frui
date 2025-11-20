@@ -21,11 +21,6 @@ import type {
 //--------------------------------------------------------------------//
 // Types
 
-export type DialogProviderContextProps = {
-  //container id
-  containerId: string
-};
-
 export type DialogContextProps = {
   //function to close dialog
   closeDialog: () => void,
@@ -48,6 +43,9 @@ export type DialogCloseProps = ClassStyleProps & ChildrenProps & {
 export type DialogOverlayProps = HTMLElementProps<HTMLDivElement>;
 
 export type DialogConfig = {
+  //selector used to get the element to which the dialog will be
+  // appended to when activated
+  append?: string,  
   //uncontrolled open state
   defaultOpen?: boolean,
   //triggers when dialog is closed
@@ -60,12 +58,12 @@ export type DialogConfig = {
 
 export type DialogProps = DialogConfig 
   & HTMLElementProps<HTMLDivElement> 
-  //slot: props for overlay element
-  & { 
-    overlay?: false | HTMLElementProps<HTMLDivElement> & {
+  & {
+    //slot: props for overlay element
+    overlay?: boolean | HTMLElementProps<HTMLDivElement> & {
       //whether to close the dialog when clicking outside
       close: boolean
-    } 
+    }
   };
 
 //--------------------------------------------------------------------//
@@ -76,9 +74,7 @@ export type DialogProps = DialogConfig
  * (use this in your react component to control dialogs)
  */
 export function useDialogContext() {
-  const { containerId } = useContext(DialogProviderContext);
-  const context = useContext(DialogContext);
-  return { containerId, ...context };
+  return useContext(DialogContext);
 };
 
 /**
@@ -87,6 +83,9 @@ export function useDialogContext() {
 export function useDialog(config: DialogConfig) {
   //props
   const { 
+    //selector used to get the element to which the dialog will be
+    // appended to when activated
+    append, //?: string  
     //uncontrolled open state
     defaultOpen = false, //?: boolean
     //triggers when dialog is closed
@@ -98,7 +97,6 @@ export function useDialog(config: DialogConfig) {
     open //?: boolean
   } = config;
   //hooks
-  const { containerId } = useContext(DialogProviderContext);
   const [ dialogOpened, openDialog ] = useState(defaultOpen);
   const [ openedBefore, hasOpenedBefore ] = useState(false);
   //handlers
@@ -122,7 +120,8 @@ export function useDialog(config: DialogConfig) {
       onOpen && onOpen();
     },
     portal(dialog: JSX.Element) {
-      const container = document.getElementById(containerId);
+      if (!append) return null;
+      const container = document.body.querySelector(append);
       if (!container) return null;
       return createPortal(dialog, container);
     }
@@ -136,7 +135,6 @@ export function useDialog(config: DialogConfig) {
   }, [ open ]);
 
   return { 
-    containerId, 
     dialogOpened, 
     openedBefore, 
     handlers, 
@@ -149,14 +147,6 @@ export function useDialog(config: DialogConfig) {
 // Components
 
 /**
- * Dialog context
- */
-export const DialogProviderContext = createContext<DialogProviderContextProps>({
-  //container id
-  containerId: ''
-});
-
-/**
  * Dialog portal context
  */
 export const DialogContext = createContext<DialogContextProps>({
@@ -167,41 +157,6 @@ export const DialogContext = createContext<DialogContextProps>({
   //function to open dialog
   openDialog: () => {}
 });
-
-/**
- * Dialog provider component
- * (put this in app.tsx)
- */
-export function DialogProvider(props: DialogProviderProps) {
-  //props
-  const { 
-    //overlay (container) class name
-    className, //?: string
-    //pass the children
-    children, //?: ReactNode
-    //container id
-    id: containerId = 'dialog-root',
-    //overlay (container) styles
-    style //?: React.CSSProperties
-  } = props;
-  //variables
-  // configure classes
-  const classes = [ 'frui-dialog-container' ];
-  if (className) classes.push(className);
-  //render
-  return (
-    <DialogProviderContext.Provider value={{ containerId }}>
-    {children}
-    {!!containerId && (
-      <div 
-        id={containerId} 
-        className={classes.join(' ')} 
-        style={style}
-      ></div>
-    )}
-    </DialogProviderContext.Provider>
-  );
-};
 
 /**
  * Dialog close component
@@ -261,6 +216,9 @@ export function DialogOverlay(props: DialogOverlayProps) {
 export function Dialog(props: DialogProps) {
   //props
   const { 
+    //selector used to get the element to which the dialog will be
+    // appended to when activated
+    append, //?: string  
     //contents of the dialog
     children, //?: ReactNode
     //dialog class name
@@ -272,39 +230,95 @@ export function Dialog(props: DialogProps) {
   //hooks
   const { dialogOpened, handlers } = useDialog(props);
   //variables
-  const { closeDialog, openDialog, portal } = handlers;
   // configure classes
   const classes = [ 'frui-dialog' ];
   if (className) classes.push(className);
   // handlers
   const onOverlayClick = () => {
-    close && closeDialog();
+    close && handlers.closeDialog();
   };
   const ignoreOverlayClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
-  // configure provider
-  const provider = { closeDialog, dialogOpened, openDialog };
-
-  //extract close from overlay
-  const { close, ...overlay } = props.overlay || {};
-
   //render
-  if (!dialogOpened) return null;
+  // if dialog is not opened, return null
+  if (!dialogOpened) {
+    return null;
+  }
+  // configure provider
+  const provider = { 
+    closeDialog: handlers.closeDialog, 
+    dialogOpened, 
+    openDialog: handlers.openDialog 
+  };
+  // if no overlay
+  if (props.overlay === false) {
+    // if append is provided, use portal (without overlay)
+    if (append) {
+      return (
+        <DialogContext.Provider value={provider}>
+          {handlers.portal(
+            <div 
+              {...attributes}
+              className={classes.join(' ')} 
+              style={style}
+            >
+              {children}
+            </div>
+          )}
+        </DialogContext.Provider>
+      );  
+    }
+    // otherwise, render normally (without overlay)
+    return (
+      <DialogContext.Provider value={provider}>
+        <div 
+          {...attributes}
+          className={classes.join(' ')} 
+          style={style}
+        >
+          {children}
+        </div>
+      </DialogContext.Provider>
+    );
+  }
+  //extract close from overlay
+  const { 
+    close, 
+    ...overlay 
+  } = typeof props.overlay === 'object' ? props.overlay: {};
+  // if append is provided, use portal (with overlay)
+  if (append) {
+    return (
+      <DialogContext.Provider value={provider}>
+        {handlers.portal(
+          <DialogOverlay {...overlay} onClick={onOverlayClick}>
+            <div 
+              {...attributes}
+              className={classes.join(' ')} 
+              onClick={ignoreOverlayClick}
+              style={style}
+            >
+              {children}
+            </div>
+          </DialogOverlay>
+        )}
+      </DialogContext.Provider>
+    );  
+  }
+  // otherwise, render normally (with overlay)
   return (
     <DialogContext.Provider value={provider}>
-      {portal(
-        <DialogOverlay {...overlay} onClick={onOverlayClick}>
-          <div 
-            {...attributes}
-            className={classes.join(' ')} 
-            onClick={ignoreOverlayClick}
-            style={style}
-          >
-            {children}
-          </div>
-        </DialogOverlay>
-      )}
+      <DialogOverlay {...overlay} onClick={onOverlayClick}>
+        <div 
+          {...attributes}
+          className={classes.join(' ')} 
+          onClick={ignoreOverlayClick}
+          style={style}
+        >
+          {children}
+        </div>
+      </DialogOverlay>
     </DialogContext.Provider>
   );
 };
@@ -313,7 +327,6 @@ export default Object.assign(Dialog, {
   useDialog,
   useDialogContext,
   Context: DialogContext,
-  Provider: DialogProvider,
   Overlay: DialogOverlay,
   Close: DialogClose,
   useContext: useDialogContext,

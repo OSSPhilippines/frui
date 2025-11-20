@@ -17,7 +17,7 @@ import Docs from '../../layout/Docs.js';
 
 const uri = '/view/rating';
 const title = 'Rating Format';
-const description = 'Rating formats convert values to star ratings';
+const description = 'Rating formats convert values to star ratings.';
 
 const props = [
   [ 'max', 'number', 'No', 'Max stars' ],

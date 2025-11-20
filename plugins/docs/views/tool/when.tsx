@@ -19,8 +19,7 @@ import Docs from '../../layout/Docs.js';
 
 const uri = '/format/email';
 const title = 'Email Format';
-const description = 
-  'Email formats convert values to clickable email displays.'
+const description = 'Email formats convert values to clickable email displays.';
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],

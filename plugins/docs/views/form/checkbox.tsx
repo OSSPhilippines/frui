@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/checkbox';
+const uri = '/form/checkbox';
 const title = 'Checkbox Component';
 const description = 'Checkbox is a field component that wraps the standard HTML '
   + 'checkbox input element';

@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/markdown';
+const uri = '/form/markdown';
 const title = 'Markdown Field';
 const description = 'Markdown is a field component that provides a markdown '
   + 'editing interface with live preview.';

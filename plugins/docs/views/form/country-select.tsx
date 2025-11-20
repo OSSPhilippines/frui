@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/country';
+const uri = '/form/country';
 const title = 'Country Field';
 const description = 'Country fields in FRUI, allow users select from a list of '
   + 'countries around the world.';

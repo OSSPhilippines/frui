@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/taglist';
+const uri = '/form/taglist';
 const title = 'TagList Field';
 const description = 'TagList is a field component that allows users to input '
   + 'a list of tags or values.';

@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/password';
+const uri = '/form/password';
 const title = 'PasswordInput Field';
 const description = 'PasswordInput is a field component that wraps the standard '
   + 'HTML input element for password values.';

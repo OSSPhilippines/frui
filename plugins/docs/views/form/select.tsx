@@ -18,7 +18,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/select';
+const uri = '/form/select';
 const title = 'Select Field';
 const description = 'Select is a field component that wraps the standard '
   + 'HTML select element.';

@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/autocomplete';
+const uri = '/form/autocomplete';
 const title = 'Autocomplete Field';
 const description = 'Autocomplete is a text input field that provides a list of '
   + 'suggestions as the user types.';

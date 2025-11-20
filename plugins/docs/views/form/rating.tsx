@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/rating';
+const uri = '/form/rating';
 const title = 'Rating Component';
 const description = 'Rating components allow users to view and set ratings '
   + 'represented by icons.';

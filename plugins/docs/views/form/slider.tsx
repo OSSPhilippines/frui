@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/slider';
+const uri = '/form/slider';
 const title = 'Slider Component';
 const description = 'Slider is a field component that wraps the standard HTML '
   + 'range input element.';

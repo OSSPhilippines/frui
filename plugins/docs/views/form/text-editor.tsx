@@ -58,7 +58,7 @@ const contentStyles = clsx(
 //--------------------------------------------------------------------//
 //constants
 
-const uri = '/component/wysiwyg';
+const uri = '/form/wysiwyg';
 const title = 'WYSIWYG Field';
 const description = 'WYSIWYG is a field component that provides a rich text editor '
   + 'with various formatting options.';

@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/slug';
+const uri = '/form/slug';
 const title = 'SlugInput Field';
 const description = 'SlugInput is a field component that wraps the standard '
   + 'HTML input element for slug values.';

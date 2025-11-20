@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/accordion';
+const uri = '/form/accordion';
 const title = 'Accordion Component';
 const description = 'Accordions are used to show and hide sections of '
   + 'related content.';

@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/file';
+const uri = '/form/file';
 const title = 'File Field';
 const description = 'File is a field component that wraps the standard HTML '
   + 'file input element.';

@@ -17,7 +17,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/radio';
+const uri = '/form/radio';
 const title = 'Radio Field';
 const description = 'Radio is a field component that wraps the standard '
   + 'HTML input element for radio values.';

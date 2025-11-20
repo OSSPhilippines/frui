@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/switch';
+const uri = '/form/switch';
 const title = 'Switch Field';
 const description = 'Switch is a field component that wraps the standard '
   + 'HTML input element for boolean values.';

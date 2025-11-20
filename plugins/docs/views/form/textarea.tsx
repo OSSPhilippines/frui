@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/textarea';
+const uri = '/form/textarea';
 const title = 'Textarea Field';
 const description = 'Textarea is a field component that wraps the standard '
   + 'HTML textarea element for multi-line text input.';

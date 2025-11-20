@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/currency';
+const uri = '/form/currency';
 const title = 'Currency Field';
 const description = 'Currency fields in FRUI, allow users select from a list of '
   + 'count riesaround the world.';

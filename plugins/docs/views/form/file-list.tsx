@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/filelist';
+const uri = '/form/filelist';
 const title = 'File List Field';
 const description = 'File list is a field component that allows users to '
   + 'upload and manage multiple files.';

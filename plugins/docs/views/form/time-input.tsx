@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/time';
+const uri = '/form/time';
 const title = 'Time Field';
 const description = 'Time is a field component that wraps the standard '
   + 'HTML input element for time values.';

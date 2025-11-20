@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/imagelist';
+const uri = '/form/imagelist';
 const title = 'Image List Field';
 const description = 'Image list is a field component that allows users to '
   + 'upload and manage multiple images.';

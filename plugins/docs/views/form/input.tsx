@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/input';
+const uri = '/form/input';
 const title = 'Input Field';
 const description = 'Input is a field component that wraps the standard '
   + 'HTML input element.';

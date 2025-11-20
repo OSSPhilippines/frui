@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/image';
+const uri = '/form/image';
 const title = 'Image Field';
 const description = 'Image is a field component that allows users to upload '
   + 'and manage images.';

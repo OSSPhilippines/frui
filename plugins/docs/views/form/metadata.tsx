@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/metadata';
+const uri = '/form/metadata';
 const title = 'Metadata Field';
 const description = 'Metadata is a field component that allows users to '
   + 'input a set of key-value pairs.';

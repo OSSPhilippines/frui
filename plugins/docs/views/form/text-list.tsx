@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/textlist';
+const uri = '/form/textlist';
 const title = 'TextList Field';
 const description = 'TextList is a field component that allows users to input '
   + 'a list of tags or values.';

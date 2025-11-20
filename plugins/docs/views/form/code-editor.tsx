@@ -19,7 +19,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/editor';
+const uri = '/form/editor';
 const title = 'Code Editor Field';
 const description = 'Code Editor is a field component that provides a code '
   + 'editing interface with syntax highlighting and other '

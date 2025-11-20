@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constatnts
 
-const uri = '/component/color';
+const uri = '/form/color';
 const title = 'Color Picker Field';
 const description = 'A field componnet allowing users to select colors via a '
   + 'popover palette, sliders, and inputs.';

@@ -14,18 +14,16 @@ import Select from 'components/form/Select.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Props, 
-  Code, 
-  C,
-  Preview
-} from 'plugins/app/index.js';
+import Docs from '../../layout/Docs.js';
 
 //--------------------------------------------------------------------//
 // Constants
+
+const uri = '/form/editor';
+const title = 'Code Editor Field';
+const description = 'Code Editor is a field component that provides a code '
+  + 'editing interface with syntax highlighting and other '
+  + 'features powered by CodeMirror.';
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
@@ -84,6 +82,8 @@ function CPPCodeEditor () {
 
 //--------------------------------------------------------------------//
 // Components
+
+const { C, Code, Props, Preview } = Docs;
 
 /**
  * Crumbs component
@@ -310,17 +310,7 @@ export function Body() {
         <Props props={props} />
       </div>
 
-      <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
-        <a className="theme-2" href="/form/datetime">
-          <i className="fas fa-arrow-left mr-2"></i>
-          {_('Datetime')}
-        </a>
-        <div className="flex-grow"></div>
-        <a className="theme-2" href="/form/file">
-          {_('File')}
-          <i className="fas fa-arrow-right ml-2"></i>
-        </a>
-      </div>
+      <Docs.Foot />
     </div>
   );
 };
@@ -331,14 +321,10 @@ export function Body() {
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (
-    <ThemeHead
-      uri="/form/editor"
-      title="Code Editor Field"
-      description={
-        'Code Editor is a field component that provides a code '
-        + 'editing interface with syntax highlighting and other '
-        + 'features.'
-      }
+    <Docs.Head
+      uri={uri}
+      title={title}
+      description={description}
       styles={styles}
     />
   );
@@ -349,19 +335,10 @@ export function Head(props: PageProps) {
  */
 export function Page() {
   return (
-    <LayoutProvider>
-      <LayoutPanel pathname="/form/editor">
-        <main className="flex flex-col h-full w-full">
-          <div className="p-3 theme-bg-2">
-            <Crumbs />
-          </div>
-          <section className="flex-grow relative h-full">
-            <Menu />
-            <Body />
-          </section>
-        </main>
-      </LayoutPanel>
-    </LayoutProvider>
+    <Docs pathname={uri}>
+      <Menu />
+      <Body />
+    </Docs>
   );
 };
 

@@ -10,18 +10,14 @@ import Yesno from 'components/view/Yesno.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Props, 
-  Code,
-  C,
-  Preview
-} from 'plugins/app/index.js';
+import Docs from '../../layout/Docs.js';
 
 //--------------------------------------------------------------------//
 // Constants
+
+const uri = '/view/yesno';
+const title = 'Yesno Format';
+const description = 'Yesno formats convert values to yes or no.';
 
 const props = [
   [ 'no', 'string', 'No', 'Text for no' ],
@@ -31,6 +27,8 @@ const props = [
 
 //--------------------------------------------------------------------//
 // Components
+
+const { C, Code, Props, Preview } = Docs;
 
 /**
  * Crumbs component
@@ -157,12 +155,7 @@ export function Body() {
         <Props props={props} />
       </div>
 
-      <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
-        <a className="theme-2" href="/view/text">
-          <i className="fas fa-arrow-left mr-2"></i>
-          {_('Text')}
-        </a>
-      </div>
+      <Docs.Foot/>
     </div>
   );
 };
@@ -173,10 +166,10 @@ export function Body() {
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (
-    <ThemeHead
-      uri="/view/yesno"
-      title="Yesno Format"
-      description="Yesno formats convert values to yes or no."
+    <Docs.Head
+      uri={uri}
+      title={title}
+      description={description}
       styles={styles}
     />
   );
@@ -187,19 +180,10 @@ export function Head(props: PageProps) {
  */
 export function Page() {
   return (
-    <LayoutProvider>
-      <LayoutPanel pathname="/view/yesno">
-        <main className="flex flex-col h-full w-full">
-          <div className="p-3 theme-bg-2">
-            <Crumbs />
-          </div>
-          <section className="flex-grow relative h-full">
-            <Menu />
-            <Body />
-          </section>
-        </main>
-      </LayoutPanel>
-    </LayoutProvider>
+    <Docs pathname={uri}>
+      <Menu />
+      <Body />
+    </Docs>
   );
 };
 

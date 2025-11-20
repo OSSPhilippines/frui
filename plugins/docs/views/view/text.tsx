@@ -10,18 +10,14 @@ import Text from 'components/view/Text.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Props, 
-  Code,
-  C,
-  Preview
-} from 'plugins/app/index.js';
+import Docs from '../../layout/Docs.js';
 
 //--------------------------------------------------------------------//
 // Constants
+
+const uri = '/view/text';
+const title = 'Text Format';
+const description = 'Text formats capitalizes, uppercase or lowercases values.';
 
 const props = [
   [ 'format', 'string', 'No', 'uppercase, lowercase, capitalize, or none' ],
@@ -30,6 +26,8 @@ const props = [
 
 //--------------------------------------------------------------------//
 // Components
+
+const { C, Code, Props, Preview } = Docs;
 
 /**
  * Crumbs component
@@ -156,17 +154,7 @@ export function Body() {
         <Props props={props} />
       </div>
 
-      <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
-        <a className="theme-2" href="/view/taglist">
-          <i className="fas fa-arrow-left mr-2"></i>
-          {_('Taglist')}
-        </a>
-        <div className="flex-grow"></div>
-        <a className="theme-2" href="/view/yesno">
-          {_('Yesno')}
-          <i className="fas fa-arrow-right ml-2"></i>
-        </a>
-      </div>
+      <Docs.Foot/>
     </div>
   );
 };
@@ -177,10 +165,10 @@ export function Body() {
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (
-    <ThemeHead
-      uri="/view/text"
-      title="Text Format"
-      description="Text formats capitalizes, uppercase or lowercases values."
+    <Docs.Head
+      uri={uri}
+      title={title}
+      description={description}
       styles={styles}
     />
   );
@@ -191,19 +179,10 @@ export function Head(props: PageProps) {
  */
 export function Page() {
   return (
-    <LayoutProvider>
-      <LayoutPanel pathname="/view/text">
-        <main className="flex flex-col h-full w-full">
-          <div className="p-3 theme-bg-2">
-            <Crumbs />
-          </div>
-          <section className="flex-grow relative h-full">
-            <Menu />
-            <Body />
-          </section>
-        </main>
-      </LayoutPanel>
-    </LayoutProvider>
+    <Docs pathname={uri}>
+      <Menu />
+      <Body />
+    </Docs>
   );
 };
 

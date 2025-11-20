@@ -6,52 +6,39 @@ import { useLanguage, Translate } from 'r22n';
 
 //frui
 import Bread from 'components/Bread.js';
-import Button from 'components/Button.js';
+import Badge from 'components/Badge.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Props, 
-  Code, 
-  C,
-  Preview
-} from 'plugins/app/index.js';
+import Docs from '../../layout/Docs.js';
 
 //--------------------------------------------------------------------//
 // Constants
 
+const uri = '/component/badge';
+const title = 'Badge Component';
+const description = 'Badges are used to display status or information.';
+
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
-  [ 'block', 'boolean', 'No', 'button display block' ],
   [ 'color', 'string', 'No', 'Custom CSS hex or name' ],
   [ 'curved', 'boolean', 'No', 'Slight curved corners' ],
   [ 'error', 'boolean', 'No', 'Red badge' ],
-  [ 'full', 'boolean', 'No', 'button width 100%' ],
   [ 'info', 'boolean', 'No', 'Blue badge' ],
   [ 'muted', 'boolean', 'No', 'Gray badge' ],
   [ 'outline', 'boolean', 'No', 'Border and text with color' ],
   [ 'pill', 'boolean', 'No', 'Max rounded corners' ],
-  [ 'solid', 'boolean', 'No', 'Fills badge with color' ],
-  [ 'success', 'boolean', 'No', 'Green badge' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS input' ],
-  [ 'warning', 'boolean', 'No', 'Orange badge' ],
   [ 'rounded', 'boolean', 'No', 'Rounded corners' ],
-  [ 'xs', 'boolean', 'No', 'Extra small button' ],
-  [ 'sm', 'boolean', 'No', 'Small button' ],
-  [ 'md', 'boolean', 'No', 'Medium button' ],
-  [ 'lg', 'boolean', 'No', 'Large button' ],
-  [ 'xl', 'boolean', 'No', 'Extra large button' ],
-  [ 'xl2', 'boolean', 'No', 'XXL button' ],
-  [ 'xl3', 'boolean', 'No', 'XXXL button' ],
-  [ 'xl4', 'boolean', 'No', 'XXXXL button' ],
-  [ 'xl5', 'boolean', 'No', 'XXXXXL button' ]
+  [ 'solid', 'boolean', 'No', 'Fills badge with color' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS input' ],
+  [ 'success', 'boolean', 'No', 'Green badge' ],
+  [ 'warning', 'boolean', 'No', 'Orange badge' ]
 ];
 
 //--------------------------------------------------------------------//
 // Components
+
+const { C, Code, Props, Preview } = Docs;
 
 /**
  * Crumbs component
@@ -63,7 +50,7 @@ export function Crumbs() {
       <Bread.Crumb icon="icons" href="/component">
         Components
       </Bread.Crumb>
-      <Bread.Crumb>Buttons</Bread.Crumb>
+      <Bread.Crumb>Badges</Bread.Crumb>
     </Bread>
   );
 };
@@ -88,7 +75,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Buttons')}
+          {_('Badges')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -114,377 +101,212 @@ export function Examples() {
     <div className="flex items-start rmd-block flex-wrap gap-4">
       {/* Info Example */}
       <Preview 
-        height={110}
         title="Info Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button info>Submit Info</Button>
+            <Badge info>123</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button info>Submit Info</Button>`}
+          {`<Badge info>123</Badge>`}
         </Preview.Code>
       </Preview>
       {/* Warning Example */}
       <Preview 
-        height={110}
         title="Warning Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button warning>Submit Warning</Button>
+            <Badge warning>234</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button warning>Submit Warning</Button>`}
+          {`<Badge warning>234</Badge>`}
         </Preview.Code>
       </Preview>
       {/* Success Example */}
       <Preview 
-        height={110}
         title="Success Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button success>Submit Success</Button>
+            <Badge success>345</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button success>Submit Success</Button>`}
+          {`<Badge success>345</Badge>`}
         </Preview.Code>
       </Preview>
       {/* Error Example */}
       <Preview 
-        height={110}
         title="Error Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button error>Submit Error</Button>
+            <Badge error>456</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button error>Submit Error</Button>`}
+          {`<Badge error>456</Badge>`}
         </Preview.Code>
       </Preview>
       {/* Muted Example */}
       <Preview 
-        height={110}
         title="Muted Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button muted>Submit Muted</Button>
+            <Badge muted>456</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button muted>Submit Muted</Button>`}
+          {`<Badge muted>456</Badge>`}
         </Preview.Code>
       </Preview>
       {/* Custom Color Example */}
       <Preview 
-        height={110}
         title="Custom Color Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button color="salmon">Submit Custom</Button>
+            <Badge color="salmon">567</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button color="salmon">Submit Custom</Button>`}
+          {`<Badge color="salmon">567</Badge>`}
         </Preview.Code>
       </Preview>
       {/* Info Outline Example */}
       <Preview 
-        height={110}
         title="Info Outline Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding background="#222222">
           <div className="text-center">
-            <Button info outline>Submit Info</Button>
+            <Badge info outline>123</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button info outline>Submit Info</Button>`}
+          {`<Badge info outline>123</Badge>`}
         </Preview.Code>
       </Preview>
       {/* Warning Outline Example */}
       <Preview 
-        height={110}
         title="Warning Outline Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding background="#222222">
           <div className="text-center">
-            <Button warning outline>Submit Warning</Button>
+            <Badge warning outline>234</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button warning outline>Submit Warning</Button>`}
+          {`<Badge warning outline>234</Badge>`}
         </Preview.Code>
       </Preview>
       {/* Success Outline Example */}
       <Preview 
-        height={110}
         title="Success Outline Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding background="#222222">
           <div className="text-center">
-            <Button success outline>Submit Success</Button>
+            <Badge success outline>345</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button success outline>Submit Success</Button>`}
+          {`<Badge success outline>345</Badge>`}
         </Preview.Code>
       </Preview>
       {/* Error Outline Example */}
       <Preview 
-        height={110}
         title="Error Outline Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding background="#222222">
           <div className="text-center">
-            <Button error outline>Submit Error</Button>
+            <Badge error outline>456</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button error outline>Submit Error</Button>`}
+          {`<Badge error outline>456</Badge>`}
         </Preview.Code>
       </Preview>
       {/* Muted Outline Example */}
       <Preview 
-        height={110}
         title="Muted Outline Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding background="#222222">
           <div className="text-center">
-            <Button muted outline>Submit Muted</Button>
+            <Badge muted outline>567</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button muted outline>Submit Muted</Button>`}
+          {`<Badge muted outline>567</Badge>`}
         </Preview.Code>
       </Preview>
       {/* Custom Color Outline Example */}
       <Preview 
-        height={110}
         title="Custom Color Outline Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding background="#222222">
           <div className="text-center">
-            <Button color="salmon" outline>Submit Custom</Button>
+            <Badge color="salmon" outline>678</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button color="salmon" outline>Submit Custom</Button>`}
+          {`<Badge color="salmon" outline>678</Badge>`}
         </Preview.Code>
       </Preview>
       {/* Curved Example */}
       <Preview 
-        height={110}
         title="Curved Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button info curved>Submit Curved</Button>
+            <Badge info curved>123</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button info curved>Submit Curved</Button>`}
+          {`<Badge info curved>123</Badge>`}
         </Preview.Code>
       </Preview>
       {/* Rounded Example */}
       <Preview 
-        height={110}
         title="Rounded Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button info rounded>Submit Rounded</Button>
+            <Badge warning rounded>234</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button info rounded>Submit Rounded</Button>`}
+          {`<Badge warning rounded>234</Badge>`}
         </Preview.Code>
       </Preview>
       {/* Pill Example */}
       <Preview 
-        height={110}
         title="Pill Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
-        <Preview.Example center padding>
+        <Preview.Example center padding background="#222222">
           <div className="text-center">
-            <Button info pill>Submit Pill</Button>
+            <Badge success pill outline>345</Badge>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button info pill>Submit Pill</Button>`}
-        </Preview.Code>
-      </Preview>
-      {/* Stretch Example */}
-      <Preview 
-        height={110}
-        title="Stretch Example" 
-        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          <div className="text-center">
-            <Button info block full pill>Submit Block</Button>
-          </div>
-        </Preview.Example>
-        <Preview.Code>
-          {`<Button info block full pill>Submit Block</Button>`}
-        </Preview.Code>
-      </Preview>
-      {/* XS Example */}
-      <Preview 
-        height={110}
-        title="XS Example" 
-        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          <div className="text-center">
-            <Button info pill xs className="text-xs">Submit XS</Button>
-          </div>
-        </Preview.Example>
-        <Preview.Code>
-          {`<Button info pill xs className="text-xs">Submit XS</Button>`}
-        </Preview.Code>
-      </Preview>
-      {/* SM Example */}
-      <Preview 
-        height={110}
-        title="SM Example" 
-        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          <div className="text-center">
-            <Button info pill sm className="text-sm">Submit SM</Button>
-          </div>
-        </Preview.Example>
-        <Preview.Code>
-          {`<Button info pill sm className="text-sm">Submit SM</Button>`}
-        </Preview.Code>
-      </Preview>
-      {/* MD Example */}
-      <Preview 
-        height={110}
-        title="MD Example" 
-        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          <div className="text-center">
-            <Button info pill md className="text-md">Submit MD</Button>
-          </div>
-        </Preview.Example>
-        <Preview.Code>
-          {`<Button info pill md className="text-md">Submit MD</Button>`}
-        </Preview.Code>
-      </Preview>
-      {/* LG Example */}
-      <Preview 
-        height={110}
-        title="LG Example" 
-        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          <div className="text-center">
-            <Button info pill lg className="text-lg">Submit LG</Button>
-          </div>
-        </Preview.Example>
-        <Preview.Code>
-          {`<Button info pill lg className="text-lg">Submit LG</Button>`}
-        </Preview.Code>
-      </Preview>
-      {/* XL Example */}
-      <Preview 
-        height={110}
-        title="XL Example" 
-        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          <div className="text-center">
-            <Button info pill xl className="text-xl">Submit XL</Button>
-          </div>
-        </Preview.Example>
-        <Preview.Code>
-          {`<Button info pill xl className="text-xl">Submit XL</Button>`}
-        </Preview.Code>
-      </Preview>
-      {/* XL2 Example */}
-      <Preview 
-        height={110}
-        title="XL2 Example" 
-        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          <div className="text-center">
-            <Button info pill xl2 className="text-2xl">Submit XXL</Button>
-          </div>
-        </Preview.Example>
-        <Preview.Code>
-          {`<Button info pill xl2 className="text-2xl">Submit XXL</Button>`}
-        </Preview.Code>
-      </Preview>
-      {/* XL3 Example */}
-      <Preview 
-        height={110}
-        title="XL3 Example" 
-        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          <div className="text-center">
-            <Button info pill xl3 className="text-3xl">Submit XXXL</Button>
-          </div>
-        </Preview.Example>
-        <Preview.Code>
-          {`<Button info pill xl3 className="text-3xl">Submit XXXL</Button>`}
-        </Preview.Code>
-      </Preview>
-      {/* XL4 Example */}
-      <Preview 
-        height={110}
-        title="XL4 Example" 
-        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          <div className="text-center">
-            <Button info pill xl4 className="text-4xl">Submit IVL</Button>
-          </div>
-        </Preview.Example>
-        <Preview.Code>
-          {`<Button info pill xl4 className="text-4xl">Submit IVL</Button>`}
-        </Preview.Code>
-      </Preview>
-      {/* XL5 Example */}
-      <Preview 
-        height={110}
-        title="XL5 Example" 
-        className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
-      >
-        <Preview.Example center padding>
-          <div className="text-center">
-            <Button info pill xl5 className="text-5xl">Submit VL</Button>
-          </div>
-        </Preview.Example>
-        <Preview.Code>
-          {`<Button info pill xl5 className="text-5xl">Submit VL</Button>`}
+          {`<Badge success pill outline>345</Badge>`}
         </Preview.Code>
       </Preview>
     </div>
@@ -504,16 +326,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Buttons')}
+        {_('Badges')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the button component like the following.
+            Import the badge component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Button from 'frui/Button';`}
+          {`import Badge from 'frui/Badge';`}
         </Code>
       </div>
 
@@ -523,7 +345,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following are some basic examples of buttons.
+            The following are some basic examples of badges.
           </Translate>
         </p>
         <Examples />
@@ -534,8 +356,8 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can use the <C value="frui-button" /> CSS class to 
-          globally style buttons.
+          You can use the <C value="frui-badge" /> CSS class to 
+          globally theme badges.
         </Translate>
       </p>
 
@@ -545,24 +367,14 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Button>" /> component can be passed the 
+            The <C value="<Badge>" /> component can be passed the 
             following props.
           </Translate>
         </p>
         <Props props={props} />
       </div>
 
-      <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
-        <a className="text-t2" href="/component/badge">
-          <i className="fas fa-arrow-left mr-2"></i>
-          {_('Buttons')}
-        </a>
-        <div className="flex-grow"></div>
-        <a className="text-t2" href="/component/dialog">
-          {_('Dialogs')}
-          <i className="fas fa-arrow-right ml-2"></i>
-        </a>
-      </div>
+      <Docs.Foot />
     </div>
   );
 };
@@ -573,10 +385,10 @@ export function Body() {
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (
-    <ThemeHead
-      uri="/component/button"
-      title="Button Component"
-      description="Buttons allow users to trigger actions and events."
+    <Docs.Head
+      uri={uri}
+      title={title}
+      description={description}
       styles={styles}
     />
   );
@@ -587,19 +399,10 @@ export function Head(props: PageProps) {
  */
 export function Page() {
   return (
-    <LayoutProvider>
-      <LayoutPanel pathname="/component/button">
-        <main className="flex flex-col h-full w-full">
-          <div className="p-3 theme-bg-2">
-            <Crumbs />
-          </div>
-          <section className="flex-grow relative h-full">
-            <Menu />
-            <Body />
-          </section>
-        </main>
-      </LayoutPanel>
-    </LayoutProvider>
+    <Docs pathname={uri}>
+      <Menu />
+      <Body />
+    </Docs>
   );
 };
 

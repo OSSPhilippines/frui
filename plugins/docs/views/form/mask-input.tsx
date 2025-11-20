@@ -16,10 +16,10 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/accordion';
-const title = 'Accordion Component';
-const description = 'Accordions are used to show and hide sections of '
-  + 'related content.';
+const uri = '/form/mask';
+const title = 'Mask Field';
+const description = 'Mask is a field component that provides an input mask '
+  + 'to format user input according to a specified pattern.';
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],

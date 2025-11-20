@@ -15,7 +15,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/color';
+const uri = '/view/color';
 const title = 'Color Format';
 const description = 'Color formats convert values to color displays.';
 

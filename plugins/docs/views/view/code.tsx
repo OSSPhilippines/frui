@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/code';
+const uri = '/view/code';
 const title = 'Code Format';
 const description = 'Code blocks with syntax highlighting and copy functionality.';
 

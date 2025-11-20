@@ -15,7 +15,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/country';
+const uri = '/view/country';
 const title = 'Country Format';
 const description = 'Country formats convert values to country displays.';
 

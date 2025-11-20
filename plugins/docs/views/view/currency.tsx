@@ -15,7 +15,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/currency';
+const uri = '/view/currency';
 const title = 'Currency Format';
 const description = 'Currency formats convert values to currency displays.';
 

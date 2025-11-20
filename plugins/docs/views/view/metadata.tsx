@@ -19,8 +19,6 @@ const uri = '/view/metadata';
 const title = 'Metadata Format';
 const description = 'Metadata formats convert values to key value tables.';
 
-
-
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names applied to all cells' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all cells' ],

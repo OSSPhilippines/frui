@@ -256,8 +256,6 @@ const examples = [
 
 const { C, Code, Props, Preview } = Docs;
 
-//--------------------------------------------------------------------//
-
 /**
  * Crumbs component
  */

@@ -37,7 +37,6 @@ const props = [
 
 const { C, Code, Props, Preview } = Docs;
 
-
 /**
  * Crumbs component
  */
@@ -355,5 +354,6 @@ export function Page() {
     </Docs>
   );
 };
+
 //defaults to page
 export default Page;

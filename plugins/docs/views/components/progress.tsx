@@ -6,7 +6,7 @@ import { useLanguage, Translate } from 'r22n';
 
 //frui
 import Bread from 'components/Bread.js';
-import Badge from 'components/Badge.js';
+import Progress from 'components/Progress.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -15,24 +15,32 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/component/badge';
-const title = 'Badge Component';
-const description = 'Badges are used to display status or information.';
+const uri = '/component/progress';
+const title = 'Progress Bar Component';
+const description = 
+  'Progress bar visually represents the completion status '
+  + 'of a task.';
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
   [ 'color', 'string', 'No', 'Custom CSS hex or name' ],
+  [ 'bgcolor', 'string', 'No', 'Custom CSS hex or name for background' ],
+  [ 'bgerror', 'boolean', 'No', 'Red background' ],
+  [ 'bginfo', 'boolean', 'No', 'Blue background' ],
+  [ 'bgmuted', 'boolean', 'No', 'Gray background' ],
+  [ 'bgsuccess', 'boolean', 'No', 'Green background' ],
+  [ 'bgwarning', 'boolean', 'No', 'Orange background' ],
   [ 'curved', 'boolean', 'No', 'Slight curved corners' ],
-  [ 'error', 'boolean', 'No', 'Red badge' ],
-  [ 'info', 'boolean', 'No', 'Blue badge' ],
-  [ 'muted', 'boolean', 'No', 'Gray badge' ],
-  [ 'outline', 'boolean', 'No', 'Border and text with color' ],
+  [ 'error', 'boolean', 'No', 'Red color bar' ],
+  [ 'height', 'number | string', 'No', 'Height of the progress bar, in px or string (e.g. 2em, 20px)' ],
+  [ 'info', 'boolean', 'No', 'Blue color bar' ],
+  [ 'muted', 'boolean', 'No', 'Gray color bar' ],
   [ 'pill', 'boolean', 'No', 'Max rounded corners' ],
   [ 'rounded', 'boolean', 'No', 'Rounded corners' ],
-  [ 'solid', 'boolean', 'No', 'Fills badge with color' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS input' ],
-  [ 'success', 'boolean', 'No', 'Green badge' ],
-  [ 'warning', 'boolean', 'No', 'Orange badge' ]
+  [ 'success', 'boolean', 'No', 'Green color bar' ],
+  [ 'warning', 'boolean', 'No', 'Orange color bar' ],
+  [ 'width', 'number', 'No', 'Width of the progress bar in percentage (0-100)' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -50,7 +58,7 @@ export function Crumbs() {
       <Bread.Crumb icon="icons" href="/component">
         Components
       </Bread.Crumb>
-      <Bread.Crumb>Badges</Bread.Crumb>
+      <Bread.Crumb>Progress Bar</Bread.Crumb>
     </Bread>
   );
 };
@@ -75,7 +83,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Badges')}
+          {_('Progress Bar')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -106,11 +114,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Badge info>123</Badge>
+            <Progress width={10} info className="theme-white">10%</Progress>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge info>123</Badge>`}
+          {`<Progress width={10} info className="theme-white">10%</Progress>`}
         </Preview.Code>
       </Preview>
       {/* Warning Example */}
@@ -120,11 +128,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Badge warning>234</Badge>
+            <Progress width={15} warning className="theme-white">15%</Progress>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge warning>234</Badge>`}
+          {`<Progress width={15} warning className="theme-white">15%</Progress>`}
         </Preview.Code>
       </Preview>
       {/* Success Example */}
@@ -134,11 +142,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Badge success>345</Badge>
+            <Progress width={20} success className="theme-white">20%</Progress>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge success>345</Badge>`}
+          {`<Progress width={20} success className="theme-white">20%</Progress>`}
         </Preview.Code>
       </Preview>
       {/* Error Example */}
@@ -148,25 +156,25 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Badge error>456</Badge>
+            <Progress width={25} error className="theme-white">25%</Progress>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge error>456</Badge>`}
+          {`<Progress width={25} error className="theme-white">25%</Progress>`}
         </Preview.Code>
       </Preview>
       {/* Muted Example */}
-      <Preview 
+      <Preview
         title="Muted Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Badge muted>456</Badge>
+            <Progress width={30} muted className="theme-white">30%</Progress>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge muted>456</Badge>`}
+          {`<Progress width={30} muted className="theme-white">30%</Progress>`}
         </Preview.Code>
       </Preview>
       {/* Custom Color Example */}
@@ -176,95 +184,95 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Badge color="salmon">567</Badge>
+            <Progress width={35} color="salmon" className="theme-white">35%</Progress>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge color="salmon">567</Badge>`}
+          {`<Progress width={35} color="salmon" className="theme-white">35%</Progress>`}
         </Preview.Code>
       </Preview>
-      {/* Info Outline Example */}
+      {/* Info Background Example */}
       <Preview 
-        title="Info Outline Example" 
+        title="Info Background Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
-        <Preview.Example center padding background="#222222">
+        <Preview.Example center padding>
           <div className="text-center">
-            <Badge info outline>123</Badge>
+            <Progress width={40} muted bginfo className="theme-white">40%</Progress>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge info outline>123</Badge>`}
+          {`<Progress width={40} muted bginfo className="theme-white">40%</Progress>`}
         </Preview.Code>
       </Preview>
-      {/* Warning Outline Example */}
-      <Preview 
-        title="Warning Outline Example" 
+      {/* Warning Background Example */}
+      <Preview
+        title="Warning Background Example"
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
-        <Preview.Example center padding background="#222222">
+        <Preview.Example center padding>
           <div className="text-center">
-            <Badge warning outline>234</Badge>
+            <Progress width={45} muted bgwarning className="theme-white">45%</Progress>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge warning outline>234</Badge>`}
+          {`<Progress width={45} muted bgwarning className="theme-white">45%</Progress>`}
         </Preview.Code>
       </Preview>
-      {/* Success Outline Example */}
+      {/* Success Background Example */}
       <Preview 
-        title="Success Outline Example" 
+        title="Success Background Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
-        <Preview.Example center padding background="#222222">
+        <Preview.Example center padding>
           <div className="text-center">
-            <Badge success outline>345</Badge>
+            <Progress width={50} muted bgsuccess className="theme-white">50%</Progress>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge success outline>345</Badge>`}
+          {`<Progress width={50} muted bgsuccess className="theme-white">50%</Progress>`}
         </Preview.Code>
       </Preview>
-      {/* Error Outline Example */}
+      {/* Error Background Example */}
       <Preview 
-        title="Error Outline Example" 
+        title="Error Background Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
-        <Preview.Example center padding background="#222222">
+        <Preview.Example center padding>
           <div className="text-center">
-            <Badge error outline>456</Badge>
+            <Progress width={55} muted bgerror className="theme-white">55%</Progress>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge error outline>456</Badge>`}
+          {`<Progress width={55} muted bgerror className="theme-white">55%</Progress>`}
         </Preview.Code>
       </Preview>
-      {/* Muted Outline Example */}
+      {/* Muted Background Example */}
       <Preview 
-        title="Muted Outline Example" 
+        title="Muted Background Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
-        <Preview.Example center padding background="#222222">
+        <Preview.Example center padding>
           <div className="text-center">
-            <Badge muted outline>567</Badge>
+            <Progress width={60} muted bgmuted className="theme-white">60%</Progress>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge muted outline>567</Badge>`}
+          {`<Progress width={60} muted bgmuted className="theme-white">60%</Progress>`}
         </Preview.Code>
       </Preview>
-      {/* Custom Color Outline Example */}
+      {/* Custom Background Example */}
       <Preview 
-        title="Custom Color Outline Example" 
+        title="Custom Background Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
-        <Preview.Example center padding background="#222222">
+        <Preview.Example center padding>
           <div className="text-center">
-            <Badge color="salmon" outline>678</Badge>
+            <Progress width={65} muted bgcolor="salmon" className="theme-white">65%</Progress>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge color="salmon" outline>678</Badge>`}
+          {`<Progress width={65} muted bgcolor="salmon" className="theme-white">65%</Progress>`}
         </Preview.Code>
       </Preview>
       {/* Curved Example */}
@@ -274,11 +282,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Badge info curved>123</Badge>
+            <Progress width={70} height={20} warning bgmuted curved />
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge info curved>123</Badge>`}
+          {`<Progress width={70} height={20} warning bgmuted curved></Progress>`}
         </Preview.Code>
       </Preview>
       {/* Rounded Example */}
@@ -288,11 +296,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Badge warning rounded>234</Badge>
+            <Progress width={75} height={20} success bgmuted rounded />
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge warning rounded>234</Badge>`}
+          {`<Progress width={75} height={20} success bgmuted rounded></Progress>`}
         </Preview.Code>
       </Preview>
       {/* Pill Example */}
@@ -300,13 +308,13 @@ export function Examples() {
         title="Pill Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
-        <Preview.Example center padding background="#222222">
+        <Preview.Example center padding>
           <div className="text-center">
-            <Badge success pill outline>345</Badge>
+            <Progress width={80} height={20} info bgmuted pill />
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Badge success pill outline>345</Badge>`}
+          {`<Progress width={80} height={20} info bgmuted pill></Progress>`}
         </Preview.Code>
       </Preview>
     </div>
@@ -326,16 +334,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Badges')}
+        {_('Progress Bar')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the badge component like the following.
+            Import the progress bar component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Badge from 'frui/Badge';`}
+          {`import Progress from 'frui/Progress';`}
         </Code>
       </div>
 
@@ -354,10 +362,12 @@ export function Body() {
       <h2 id="styles" className="uppercase font-bold text-lg mt-8">
         {_('Global Styles')}
       </h2>
-      <p className="py-4">
+      <p className="py-2">
         <Translate>
-          You can use the <C value="frui-badge" /> CSS class to 
-          globally theme badges.
+          You can use 
+          the <C value="frui-progress" />, 
+          and <C value="frui-progress-container" /> CSS classes to 
+          globally theme progress bars.
         </Translate>
       </p>
 
@@ -367,24 +377,14 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Badge>" /> component can be passed the 
+            The <C value="Progress" /> component can be passed the 
             following props.
           </Translate>
         </p>
         <Props props={props} />
       </div>
 
-      <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
-        <a className="text-t2" href="/component/alert">
-          <i className="fas fa-arrow-left mr-2"></i>
-          {_('Alerts')}
-        </a>
-        <div className="flex-grow"></div>
-        <a className="text-t2" href="/component/bread">
-          {_('Bread Crumbs')}
-          <i className="fas fa-arrow-right ml-2"></i>
-        </a>
-      </div>
+      <Docs.Foot />
     </div>
   );
 };

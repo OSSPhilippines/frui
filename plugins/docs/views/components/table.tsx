@@ -10,18 +10,14 @@ import Table from 'components/Table.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Code, 
-  C,
-  Props,
-  Preview
-} from 'plugins/app/index.js';
+import Docs from '../../layout/Docs.js';
 
 //--------------------------------------------------------------------//
 // Constants
+
+const uri = '/component/table';
+const title = 'Table Component';
+const description = 'Tables in FRUI used to display tabular information.';
 
 export type TableRuleProps = { width: string };
 
@@ -237,6 +233,8 @@ const examples = [
 
 //--------------------------------------------------------------------//
 // Components
+
+const { C, Code, Props, Preview } = Docs;
 
 /**
  * Crumbs component
@@ -648,17 +646,7 @@ export function Body() {
           <Props props={props[5]} />
       </div>
 
-      <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
-        <a className="text-t2" href="/component/progress">
-          <i className="fas fa-arrow-left mr-2"></i>
-          {_('Progress')}
-        </a>
-        <div className="flex-grow"></div>
-        <a className="text-t2" href="/component/tabs">
-          {_('Tabs')}
-          <i className="fas fa-arrow-right ml-2"></i>
-        </a>
-      </div>
+      <Docs.Foot />
     </div>
   );
 };
@@ -669,10 +657,10 @@ export function Body() {
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (
-    <ThemeHead
-      uri="/component/table"
-      title="Table Component"
-      description="Tables in FRUI used to display tabular information."
+    <Docs.Head
+      uri={uri}
+      title={title}
+      description={description}
       styles={styles}
     />
   );
@@ -683,19 +671,10 @@ export function Head(props: PageProps) {
  */
 export function Page() {
   return (
-    <LayoutProvider>
-      <LayoutPanel pathname="/component/table">
-        <main className="flex flex-col h-full w-full">
-          <div className="p-3 theme-bg-2">
-            <Crumbs />
-          </div>
-          <section className="flex-grow relative h-full">
-            <Menu />
-            <Body />
-          </section>
-        </main>
-      </LayoutPanel>
-    </LayoutProvider>
+    <Docs pathname={uri}>
+      <Menu />
+      <Body />
+    </Docs>
   );
 };
 

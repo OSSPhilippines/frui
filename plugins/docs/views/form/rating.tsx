@@ -11,18 +11,15 @@ import Rating from 'components/form/Rating.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
-import { 
-  LayoutPanel, 
-  LayoutProvider, 
-  ThemeHead, 
-  Props, 
-  Code, 
-  C,
-  Preview
-} from 'plugins/app/index.js';
+import Docs from '../../layout/Docs.js';
 
 //--------------------------------------------------------------------//
 // Constants
+
+const uri = '/form/rating';
+const title = 'Rating Component';
+const description = 'Rating components allow users to view and set ratings '
+  + 'represented by icons.';
 
 const propsData: [string, string, string, string][] = [
   [ 'name', 'string', 'No', 'Name attribute for the radio inputs (form submission). Auto-generated if not provided.' ],
@@ -101,6 +98,8 @@ const CircleIcon = (props) => (/* SVG code */);
 
 //--------------------------------------------------------------------//
 // Components
+
+const { C, Code, Props, Preview } = Docs;
 
 // Example Custom Icons
 const HeartIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -456,17 +455,7 @@ export function Body() {
         <Props props={propsData} />
       </div>
 
-      <div className="flex items-center border-t theme-bg-2 mt-8 p-4">
-        <a className="theme-2" href="/form/radio">
-          <i className="fas fa-arrow-left mr-2"></i>
-          {_('Radio')}
-        </a>
-        <div className="flex-grow"></div>
-        <a className="theme-2" href="/form/select">
-          {_('Select')}
-          <i className="fas fa-arrow-right ml-2"></i>
-        </a>
-      </div>
+      <Docs.Foot />
     </div>
   );
 };
@@ -477,13 +466,10 @@ export function Body() {
 export function Head(props: PageProps) {
   const { styles = [] } = props;
   return (
-    <ThemeHead
-      uri="/form/rating"
-      title="Rating Component"
-      description={
-        'Rating components allow users to view and set ratings '
-        + 'represented by icons.'
-      }
+    <Docs.Head
+      uri={uri}
+      title={title}
+      description={description}
       styles={styles}
     />
   );
@@ -494,19 +480,10 @@ export function Head(props: PageProps) {
  */
 export function Page() {
   return (
-    <LayoutProvider>
-      <LayoutPanel pathname="/form/rating">
-        <main className="flex flex-col h-full w-full">
-          <div className="p-3 theme-bg-2">
-            <Crumbs />
-          </div>
-          <section className="flex-grow relative h-full">
-            <Menu />
-            <Body />
-          </section>
-        </main>
-      </LayoutPanel>
-    </LayoutProvider>
+    <Docs pathname={uri}>
+      <Menu />
+      <Body />
+    </Docs>
   );
 };
 

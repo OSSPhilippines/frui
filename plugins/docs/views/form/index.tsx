@@ -6,7 +6,6 @@ import {
   LayoutProvider, 
   ThemeHead
 } from 'plugins/app/index.js';
-import Bread from 'components/Bread.js';
 
 import {
   Autocomplete,

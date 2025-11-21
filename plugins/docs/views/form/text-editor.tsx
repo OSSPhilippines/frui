@@ -7,7 +7,6 @@ import { useLanguage, Translate } from 'r22n';
 import clsx from 'clsx';
 
 //frui
-import Bread from 'components/Bread.js';
 import WYSIWYG from 'components/form/WYSIWYG.js';
 
 //plugins
@@ -255,21 +254,6 @@ const examples = [
 // Components
 
 const { C, Code, Props, Preview } = Docs;
-
-/**
- * Crumbs component
- */
-export function Crumbs() {
-  return (
-    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
-      <Bread.Slicer />
-      <Bread.Crumb icon="rectangle-list" href="/form">
-        Fields
-      </Bread.Crumb>
-      <Bread.Crumb>WYSIWYG</Bread.Crumb>
-    </Bread>
-  );
-};
 
 /**
  * Aside right menu component

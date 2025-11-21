@@ -5,7 +5,6 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Bread from 'components/Bread.js';
 import Table from 'components/Table.js';
 import SlugInput from 'components/form/SlugInput.js';
 
@@ -33,21 +32,6 @@ const props = [
 // Components
 
 const { C, Code, Props, Preview } = Docs;
-
-/**
- * Crumbs component
- */
-export function Crumbs() {
-  return (
-    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
-      <Bread.Slicer />
-      <Bread.Crumb icon="rectangle-list" href="/form">
-        Fields
-      </Bread.Crumb>
-      <Bread.Crumb>Slug</Bread.Crumb>
-    </Bread>
-  );
-};
 
 /**
  * Aside right menu component

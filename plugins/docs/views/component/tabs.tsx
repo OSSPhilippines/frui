@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Bread from 'components/Bread.js';
 import Tabs from 'components/Tabs.js';
 
 //plugins
@@ -279,21 +278,6 @@ return (
 // Components
 
 const { C, Code, Props, Preview } = Docs;
-
-/**
- * Crumbs component
- */
-export function Crumbs() {
-  return (
-    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
-      <Bread.Slicer />
-      <Bread.Crumb icon="icons" href="/component">
-        Components
-      </Bread.Crumb>
-      <Bread.Crumb>Tabs</Bread.Crumb>
-    </Bread>
-  );
-};
 
 /**
  * Aside right menu component

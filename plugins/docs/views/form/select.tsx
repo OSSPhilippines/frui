@@ -744,7 +744,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            You can portal dialogs to a specific DOM node by passing a 
+            You can portal the dropdown to a specific DOM node by passing a 
             CSS selector to the <C value="append" /> prop. 
           </Translate>
         </p>

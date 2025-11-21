@@ -147,12 +147,14 @@ export function getAbsolutePosition(
 
   switch (true) {
     case left:
-      position.y = 0;
+      //(to the top of the container relative to the page)
+      position.y = containerRect.top;
       //(to the left of the container relative to the page)
       position.x = containerRect.left - dropdownRect.width;
       break;
     case right:
-      position.y = 0;
+      //(to the top of the container relative to the page)
+      position.y = containerRect.top;
       //(to the right of the container relative to the page)
       position.x = containerRect.left + containerRect.width;
       break;
@@ -415,7 +417,7 @@ export function useDropdown(config: DropdownConfig) {
   } = config;
   //if no default value
   const noValue = typeof defaultValue === 'undefined' 
-    || defaultValue === null ;
+    || defaultValue === null;
   const defaultValues = noValue
     //use empty array
     ? [] 
@@ -431,21 +433,26 @@ export function useDropdown(config: DropdownConfig) {
   const [ opened, open ] = useState(false);
   // the current selected option/s
   const [ selected, setDropdowned ] = useState(defaultValues);
-  // position of the dropdown
+  // position of the dropdown (applicable for both relative and absolute dropdowns)
   const [ position, setPosition ] = useState<[ number, number ]>([0, 0]);
-  // max width of the dropdown (should be applicable for portalled dropdowns)
-  const [ maxWidth, setMaxWidth ] = useState(0);
+  // max width of the dropdown (should be applicable for absolute dropdowns)
+  const [ width, setWidth ] = useState(0);
   //variables
   const refs = {
     container: useRef<HTMLDivElement>(null),
     dropdown: useRef<HTMLDivElement>(null)
   };
+  const absolute = Boolean(append);
   //handlers
   const handlers = {
     clear: () => setDropdowned([]),
     open,
     portal(dropdown: JSX.Element) {
-      if (!append) return null;
+      //if no append selector
+      if (!append) {
+        //return the dropdown as is
+        return dropdown;
+      }
       const container = document.querySelector(append);
       if (!container) return null;
       return createPortal(dropdown, container);
@@ -500,7 +507,7 @@ export function useDropdown(config: DropdownConfig) {
       return;
     }
     //determine position based on where we are appending to
-    const position = !!append 
+    const position = absolute
       ? getAbsolutePosition(
         refs.container.current, 
         refs.dropdown.current, 
@@ -515,7 +522,7 @@ export function useDropdown(config: DropdownConfig) {
     setPosition([ position.x, position.y ]);
     //determine max width
     const rect = refs.container.current.getBoundingClientRect();
-    setMaxWidth(rect.width);
+    setWidth(rect.width);
   }, [ 
     opened,
     selected,
@@ -526,9 +533,54 @@ export function useDropdown(config: DropdownConfig) {
     left, 
     right
   ]);
+  // consider resize and scroll for portalled dropdowns
+  useEffect(() => {
+    if (!absolute) return;
+    const reshape = () => {
+      if (!refs.container.current || !refs.dropdown.current) {
+        return;
+      }
+      //determine position based on where we are appending to
+      const position = absolute
+        ? getAbsolutePosition(
+          refs.container.current, 
+          refs.dropdown.current, 
+          { top: !!top, bottom: !!bottom, left: !!left, right: !!right }
+        )
+        : getRelativePosition(
+          refs.container.current, 
+          refs.dropdown.current, 
+          { top: !!top, bottom: !!bottom, left: !!left, right: !!right }
+        );
+      //update the position state
+      setPosition([ position.x, position.y ]);
+      //determine max width
+      const rect = refs.container.current.getBoundingClientRect();
+      setWidth(rect.width);
+    };
+    window.addEventListener('resize', reshape);
+    //start from the container ref and traverse up to find scrollable parents
+    let parent = refs.container.current as HTMLElement | null;
+    do {
+      parent = parent?.parentElement || null;
+      if (!parent) break;
+      parent.addEventListener('scroll', reshape);
+    } while (refs.container.current?.parentElement);
+    //cleanup
+    return () => {
+      window.removeEventListener('resize', reshape);
+      let parent = refs.container.current as HTMLElement | null;
+      do {
+        parent = parent?.parentElement || null;
+        if (!parent) break;
+        parent.removeEventListener('scroll', reshape);
+      } while (refs.container.current?.parentElement);
+    };
+  }, []);
   
   return {
-    maxWidth,
+    absolute,
+    width,
     opened,
     refs,
     selected,
@@ -700,10 +752,12 @@ export function Dropdown(props: DropdownProps) {
   } = props;
   //hooks
   const {
+    //whether the dropdown has been portalled to a different location
+    absolute,
     //handlers
     handlers,
     //max width of the dropdown
-    maxWidth,
+    width,
     //whether the dropdown is open
     opened,
     //position of the dropdown
@@ -735,16 +789,15 @@ export function Dropdown(props: DropdownProps) {
   const classes = [ 'frui-dropdown' ];
   // - add direction
   classes.push(`frui-dropdown-${direction}`);
-  // - add portalled class if applicable
-  append && classes.push('frui-dropdown-portalled');
+  // - add absolute class if applicable
+  absolute && classes.push('frui-dropdown-absolute');
   // - add custom class name
   className && classes.push(className);
   // determine styles
   const styles = { 
-    maxWidth: append ? `${maxWidth}px` : undefined,
-    width: append && (['top', 'bottom'].includes(direction)) 
-      ? `${maxWidth}px` 
-      : undefined,
+    //only if the dropdown is portalled, set widths
+    width: absolute ? `${width}px` : undefined,
+    //still, let styles prop override
     ...style,
     left: `${position[0]}px`,
     top: `${position[1]}px`
@@ -775,33 +828,6 @@ export function Dropdown(props: DropdownProps) {
     selected
   };
   //render
-  // if append is provided, use portal
-  if (append) {
-    return (
-      <DropdownContext.Provider value={provider}>
-        <div 
-          ref={refs.container} 
-          className={containerStyles.className} 
-          style={containerStyles.style} 
-        >
-          {components.control}
-          {opened && components.options.length > 0 && handlers.portal(
-            <div 
-              ref={refs.dropdown} 
-              className={classes.join(' ')} 
-              style={styles}
-            >
-              {components.header}
-              <div className="frui-dropdown-options">
-                {components.options}
-              </div>
-              {components.footer}
-            </div>
-          )}
-        </div>
-      </DropdownContext.Provider>
-    );
-  }
   return (
     <DropdownContext.Provider value={provider}>
       <div 
@@ -810,7 +836,7 @@ export function Dropdown(props: DropdownProps) {
         style={containerStyles.style} 
       >
         {components.control}
-        {opened && components.options.length > 0 && (
+        {opened && components.options.length > 0 && handlers.portal(
           <div 
             ref={refs.dropdown} 
             className={classes.join(' ')} 

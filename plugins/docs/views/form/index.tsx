@@ -41,11 +41,6 @@ import {
   //WYSIWYG
 } from 'components/form/index.js';
 
-const crumbs: Crumb[] = [
-  { icon: 'icons', label: 'Components', href: '/component' },
-  { label: 'Crumbs' }
-];
-
 export function Body() {
   //hooks
   const { _ } = useLanguage();
@@ -53,9 +48,6 @@ export function Body() {
   return (
     <LayoutPanel pathname="/form">
       <main className="flex flex-col h-full w-full">
-        <div className="p-3 theme-bg-2">
-          <Crumbs crumbs={crumbs} />
-        </div>
         <section className="flex-grow relative h-full">
           <h1 className="px-3 flex items-center uppercase font-bold text-xl">
             {_('Fields')}

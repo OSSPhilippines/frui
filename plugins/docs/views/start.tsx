@@ -2,8 +2,7 @@
 import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 //frui
-import type { Crumb } from 'components/element/Crumbs';
-import Crumbs from 'components/element/Crumbs';
+
 //app
 import type { PageProps } from 'plugins/app/types.js';
 import Code from 'plugins/docs/components/Code';
@@ -15,16 +14,11 @@ export function Body() {
   const { _ } = useLanguage();
   const [ install, setInstall ] = useState('npm');
   //variables
-  const crumbs: Crumb[] = [
-    { icon: 'compass', label: 'Getting Started' }
-  ];
+
   //render
   return (
     <LayoutPanel pathname="/start">
       <main className="flex flex-col h-full w-full">
-        <div className="p-3 theme-bg-2">
-          <Crumbs crumbs={crumbs} />
-        </div>
         <div className="flex-grow px-3 pt-3 pb-5 overflow-auto">
           <h1 className="flex items-center uppercase font-bold text-xl">
             {_('Getting Started')}

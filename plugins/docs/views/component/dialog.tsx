@@ -7,7 +7,6 @@ import { useLanguage, Translate } from 'r22n';
 
 //frui
 import Alert from 'components/Alert.js';
-import Bread from 'components/Bread.js';
 import Button from 'components/Button.js';
 import Dialog from 'components/Dialog.js';
 

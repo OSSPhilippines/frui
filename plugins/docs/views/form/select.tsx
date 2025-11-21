@@ -8,7 +8,6 @@ import { useLanguage, Translate } from 'r22n';
 
 //frui
 import Alert from 'components/Alert.js';
-import Bread from 'components/Bread.js';
 import Table from 'components/Table.js';
 import Select from 'components/form/Select.js';
 

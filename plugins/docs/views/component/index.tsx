@@ -21,10 +21,6 @@ import {
 } from 'components/element';
 import Button from 'components/Button.js';
 
-const crumbs: Crumb[] = [
-  { icon: 'icons', label: 'Components' }
-];
-
 export function Body() {
   //hooks
   const { _ } = useLanguage();
@@ -32,9 +28,6 @@ export function Body() {
   return (
     <LayoutPanel pathname="/component">
       <main className="flex flex-col h-full w-full">
-        <div className="p-3 theme-bg-2">
-          <Crumbs crumbs={crumbs} />
-        </div>
         <section className="flex-grow relative h-full">
           <h1 className="flex items-center uppercase font-bold text-xl">
             {_('Components')}

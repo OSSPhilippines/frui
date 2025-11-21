@@ -7,7 +7,6 @@ import { useLanguage, Translate } from 'r22n';
 import { languages } from '@codemirror/language-data';
 
 //frui
-import Bread from 'components/Bread.js';
 import Table from 'components/Table.js';
 import CodeEditor from 'components/form/CodeEditor.js';
 import Select from 'components/form/Select.js';
@@ -84,21 +83,6 @@ function CPPCodeEditor () {
 // Components
 
 const { C, Code, Props, Preview } = Docs;
-
-/**
- * Crumbs component
- */
-export function Crumbs() {
-  return (
-    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
-      <Bread.Slicer />
-      <Bread.Crumb icon="rectangle-list" href="/form">
-        Fields
-      </Bread.Crumb>
-      <Bread.Crumb>Code Editor</Bread.Crumb>
-    </Bread>
-  );
-};
 
 /**
  * Aside right menu component

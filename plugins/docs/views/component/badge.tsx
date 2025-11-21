@@ -5,7 +5,6 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Bread from 'components/Bread.js';
 import Badge from 'components/Badge.js';
 
 //plugins
@@ -39,21 +38,6 @@ const props = [
 // Components
 
 const { C, Code, Props, Preview } = Docs;
-
-/**
- * Crumbs component
- */
-export function Crumbs() {
-  return (
-    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
-      <Bread.Slicer />
-      <Bread.Crumb icon="icons" href="/component">
-        Components
-      </Bread.Crumb>
-      <Bread.Crumb>Badges</Bread.Crumb>
-    </Bread>
-  );
-};
 
 /**
  * Aside right menu component

@@ -10,7 +10,6 @@ import {
   ThemeHead,
   Code,
 } from 'plugins/app/index.js';
-import Bread from 'components/element/Bread.js';
 
 import {
   //Code,
@@ -42,28 +41,8 @@ import {
 //--------------------------------------------------------------------//
 // Constants
 
-const crumbs: Crumb[] = [
-  { icon: 'icons', label: 'Components', href: '/component' },
-  { label: 'Crumbs' }
-];
-
 //--------------------------------------------------------------------//
 // Components
-
-/**
- * Crumbs component
- */
-export function Crumbs() {
-  return (
-    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
-      <Bread.Slicer />
-      <Bread.Crumb icon="text-height" href="/view">
-        Formats
-      </Bread.Crumb>
-      <Bread.Crumb>Currency</Bread.Crumb>
-    </Bread>
-  );
-};
 
 export function Body() {
   //hooks
@@ -72,9 +51,6 @@ export function Body() {
   return (
     <LayoutPanel pathname="/view">
       <main className="flex flex-col h-full w-full">
-        <div className="p-3 theme-bg-2">
-          <Crumbs crumbs={crumbs} />
-        </div>
         <section className="flex-grow relative h-full">
           <h1 className="px-3 flex items-center uppercase font-bold text-xl">
             {_('Formats')}

@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Bread from 'components/Bread.js';
 import Button from 'components/Button.js';
 import Notifier from 'components/Notifier.js';
 
@@ -126,21 +125,6 @@ cookies.set('flash', JSON.stringify(flash), {/* cookie options */});`,
 // Components
 
 const { C, Code, Props, Preview } = Docs;
-
-/**
- * Crumbs component
- */
-export function Crumbs() {
-  return (
-    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
-      <Bread.Slicer />
-      <Bread.Crumb icon="icons" href="/component">
-        Components
-      </Bread.Crumb>
-      <Bread.Crumb>Notifiers</Bread.Crumb>
-    </Bread>
-  );
-};
 
 /**
  * Aside right menu component

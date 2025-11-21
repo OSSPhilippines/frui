@@ -5,7 +5,6 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Bread from 'components/element/Bread.js';
 import Taglist from 'components/view/Taglist.js';
 
 //plugins
@@ -29,21 +28,6 @@ const props = [
 // Components
 
 const { C, Code, Props, Preview } = Docs;
-
-/**
- * Crumbs component
- */
-export function Crumbs() {
-  return (
-    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
-      <Bread.Slicer />
-      <Bread.Crumb icon="text-height" href="/view">
-        Formats
-      </Bread.Crumb>
-      <Bread.Crumb>Tag List</Bread.Crumb>
-    </Bread>
-  );
-};
 
 /**
  * Aside right menu component

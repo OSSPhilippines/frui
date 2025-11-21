@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Bread from 'components/Bread.js';
 import Rating from 'components/form/Rating.js';
 
 //plugins
@@ -113,21 +112,6 @@ const CircleIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <circle cx="12" cy="12" r="10" />
   </svg>
 );
-
-/**
- * Crumbs component
- */
-export function Crumbs() {
-  return (
-    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
-      <Bread.Slicer />
-      <Bread.Crumb icon="rectangle-list" href="/form">
-        Fields
-      </Bread.Crumb>
-      <Bread.Crumb>Rating</Bread.Crumb>
-    </Bread>
-  );
-};
 
 /**
  * Aside right menu component

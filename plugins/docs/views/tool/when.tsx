@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Bread from 'components/Bread.js';
 import Button from 'components/Button.js';
 import { When, Otherwise } from 'components/When.js';
 
@@ -96,21 +95,6 @@ const examples = [
 // Components
 
 const { C, Code, Props, Preview } = Docs;
-
-/**
- * Crumbs component
- */
-export function Crumbs() {
-  return (
-    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
-      <Bread.Slicer />
-      <Bread.Crumb icon="screwdriver-wrench" href="/tool">
-        Tools
-      </Bread.Crumb>
-      <Bread.Crumb>When</Bread.Crumb>
-    </Bread>
-  );
-};
 
 /**
  * Aside right menu component

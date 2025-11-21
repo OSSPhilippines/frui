@@ -6,7 +6,6 @@ import { useLanguage } from 'r22n';
 
 //frui
 import type { FieldsProps, FieldsetProps } from 'components/form/Fieldset.js';
-import Bread from 'components/Bread.js';
 import make from 'components/form/Fieldset.js';
 
 //plugins
@@ -39,21 +38,6 @@ const props = [
 // Components
 
 const { C, Code, Props, Preview } = Docs;
-
-/**
- * Crumbs component
- */
-export function Crumbs() {
-  return (
-    <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
-      <Bread.Slicer />
-      <Bread.Crumb icon="icons" href="/component">
-        Components
-      </Bread.Crumb>
-      <Bread.Crumb>Fieldset</Bread.Crumb>
-    </Bread>
-  );
-};
 
 /**
  * Example fields component

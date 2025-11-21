@@ -39,8 +39,6 @@ const props = [
 
 const { C, Code, Props, Preview } = Docs;
 
-
-
 /**
  * Aside right menu component
  */

@@ -10,6 +10,10 @@
   position: absolute;
 }
 
+.frui-dropdown-absolute {
+  min-width: auto;
+}
+
 .frui-dropdown-options {
   padding-bottom: 8px;
   padding-top: 8px;

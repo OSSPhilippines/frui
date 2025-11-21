@@ -31,6 +31,8 @@ export type SelectControlProps = ClassStyleProps & ChildrenProps & {
   left?: boolean,
   //name used by forms
   name?: string,
+  //serialized list of options as array or object
+  options?: SelectData[]|Record<string, string>,
   //placeholder text when no option is selected
   placeholder?: string,
   //position of the dropdown
@@ -40,8 +42,8 @@ export type SelectControlProps = ClassStyleProps & ChildrenProps & {
 };
 
 export type SelectProps = ClassStyleProps & ChildrenProps & DropdownConfig & {
-  //slot: style to apply to the select display
-  display?: SlotStyleProp,
+  //slot: style to apply to the select control
+  control?: SlotStyleProp,
   //slot: style to apply to the select drop down
   dropdown?: SlotStyleProp,
   //whether the select is in an error state
@@ -144,6 +146,8 @@ export function SelectControl(props: SelectControlProps) {
     left, //?: boolean
     //name used by forms
     name, //?: string
+    //serialized list of options as array or object
+    options, //: SelectOption[]|Record<string, string>
     //placeholder text when no option is selected
     placeholder, //?: string
     //position of the dropdown
@@ -160,7 +164,7 @@ export function SelectControl(props: SelectControlProps) {
     opened, 
     clear, 
     selected,
-    options
+    options: optionsCount
   } = Dropdown.useContext();
   //variables
   // determine classes
@@ -175,8 +179,9 @@ export function SelectControl(props: SelectControlProps) {
     : right ? '▶' 
     : '▼';
   // get selected options
-  const components = Dropdown.getOptions(
+  const components = Dropdown.buildOptions(
     children,
+    options,
     selected,
     multiple
   );
@@ -197,7 +202,7 @@ export function SelectControl(props: SelectControlProps) {
             onClick={clear}
           >&times;</span>
         )}
-        {options > 0 && (
+        {optionsCount > 0 && (
           <span 
             className="frui-form-select-control-actions-toggle"
             onClick={toggle}
@@ -238,8 +243,8 @@ export function Select(props: SelectProps) {
     className,
     //uncontrolled serializable select value
     defaultValue, //?: T
-    //slot: style to apply to the select display
-    display, //: SlotStyleProp
+    //slot: style to apply to the select control
+    control, //: SlotStyleProp
     //slot: style to apply to the select drop down
     dropdown, //: SlotStyleProp
     //whether the select is in an error state
@@ -277,7 +282,7 @@ export function Select(props: SelectProps) {
     classes.push('frui-form-select-error');
   }
   // get slot styles
-  const displayStyles = display ? getSlotStyles(display, {}) : {};
+  const controlStyles = control ? getSlotStyles(control, {}) : {};
   const dropdownStyles = dropdown ? getSlotStyles(dropdown, {}) : {};
   //render
   return (
@@ -299,11 +304,12 @@ export function Select(props: SelectProps) {
     >
       <Dropdown.Control>
         <SelectControl 
-          className={displayStyles.className} 
-          style={displayStyles.style}
+          className={controlStyles.className} 
+          style={controlStyles.style}
           bottom={bottom}
           left={left}
           name={name}
+          options={options}
           placeholder={placeholder}
           right={right}
           top={top}

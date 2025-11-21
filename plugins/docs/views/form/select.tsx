@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 
 //frui
+import Alert from 'components/Alert.js';
+import Bread from 'components/Bread.js';
 import Table from 'components/Table.js';
 import Select from 'components/form/Select.js';
 
@@ -37,7 +39,7 @@ const props = [
     [ 'options', 'string[]', 'No', 'List of select options.' ],
     [ 'placeholder', 'string', 'No', 'Display text when no value set' ]
   ],
-  //select display props
+  //select control props
   [
     [ 'bottom', 'boolean', 'No', 'Display the dropdown below the field' ],
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
@@ -52,19 +54,12 @@ const props = [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
     [ 'style', 'CSS Object', 'No', 'Standard CSS object' ]
   ],
-  //select dropdown props
-  [
-    [ 'className', 'string', 'No', 'Standard HTML class names' ],
-    [ 'position', '[number, number]', 'No', 'X/Y position of the dropdown' ],
-    [ 'ref', 'Ref<HTMLDivElement>', 'No', 'Reference to the dropdown element' ],
-    [ 'style', 'CSS Object', 'No', 'Standard CSS object' ]
-  ],
-  //select dropdown head props
+  //select head props
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
     [ 'style', 'CSS Object', 'No', 'Standard CSS object' ]
   ],
-  //select dropdown foot props
+  //select foot props
   [
     [ 'className', 'string', 'No', 'Standard HTML class names' ],
     [ 'style', 'CSS Object', 'No', 'Standard CSS object' ]
@@ -197,16 +192,21 @@ return (
   <Select.Option value="bar">Bar</Select.Option>
 </Select>`,
 //11
-`<Select error value="foo" option="px-p-2-8-2-8">
+`<Select option="px-p-2-8-2-8" append="#dropdown-root">
   <Select.Option value="foo">Foo</Select.Option>
   <Select.Option value="bar">Bar</Select.Option>
 </Select>`,
 //12
+`<Select error value="foo" option="px-p-2-8-2-8">
+  <Select.Option value="foo">Foo</Select.Option>
+  <Select.Option value="bar">Bar</Select.Option>
+</Select>`,
+//13
 `<Select option="px-p-2-8-2-8">
   <Select.Option value="US">🇺🇸 United States</Select.Option>
   <Select.Option value="PH">🇵🇭 Philippines</Select.Option>
 </Select>`,
-//13
+//14
 `<Select option="px-p-2-8-2-8">
   <Select.Option value="product-1">
     <div className="flex items-start mb-3">
@@ -289,6 +289,9 @@ export function Menu() {
             <a href="#direction">{_('Dropdown Direction')}</a>
           </li>
           <li className="ml-2 pb-1">
+            <a href="#portal">{_('Portaling')}</a>
+          </li>
+          <li className="ml-2 pb-1">
             <a href="#events">{_('Events')}</a>
           </li>
           <li className="ml-2 pb-1">
@@ -336,7 +339,7 @@ export function Examples() {
             <Select.Option value="PH">🇵🇭 Philippines</Select.Option>
           </Select>
         </Preview.Example>
-        <Preview.Code>{examples[12]}</Preview.Code>
+        <Preview.Code>{examples[13]}</Preview.Code>
       </Preview>
       {/* Products Example */}
       <Preview 
@@ -372,7 +375,7 @@ export function Examples() {
             </Select.Option>
           </Select>
         </Preview.Example>
-        <Preview.Code>{examples[13]}</Preview.Code>
+        <Preview.Code>{examples[15]}</Preview.Code>
       </Preview>
     </div>
   );
@@ -720,6 +723,36 @@ export function Body() {
         </Preview>
       </div>
 
+      <h2 id="portal" className="uppercase font-bold text-lg mt-8">
+        {_('Portaling')}
+      </h2>
+      <div>
+        <p className="py-2">
+          <Translate>
+            You can portal the dropdown to a specific DOM node by passing a 
+            CSS selector to the <C value="append" /> prop. 
+          </Translate>
+        </p>
+        <Preview 
+          title="Portal to Dropdown Root Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <Select option="px-p-2-8-2-8" append="#dropdown-root">
+              <Select.Option value="foo">Foo</Select.Option>
+              <Select.Option value="bar">Bar</Select.Option>
+            </Select>
+          </Preview.Example>
+          <Preview.Code>{examples[11]}</Preview.Code>
+        </Preview>
+        <Alert info className="mt-4">
+          <i className="fas fa-info-circle mr-2"></i>
+          <Translate>
+            <strong>TIP:</strong> Make sure the target container element exists in the DOM.
+          </Translate>
+        </Alert>
+      </div>
+
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
         {_('Events')}
       </h2>
@@ -814,7 +847,7 @@ export function Body() {
               <Select.Option value="bar">Bar</Select.Option>
             </Select>
           </Preview.Example>
-          <Preview.Code>{examples[11]}</Preview.Code>
+          <Preview.Code>{examples[12]}</Preview.Code>
         </Preview>
       </div>
 
@@ -824,7 +857,8 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use 
-          the <C value="frui-form-select" />, <C value="frui-form-select-error" />, <C value="frui-form-select-display" />, <C value="frui-form-select-selected" />, <C value="frui-form-select-controls" />, <C value="frui-form-select-clear" />, <C value="frui-form-select-toggle" />, <C value="frui-form-select-dropdown" />, <C value="frui-form-select-bottom" />, <C value="frui-form-select-left" />, <C value="frui-form-select-right" />, <C value="frui-form-select-top" />, <C value="frui-form-select-option" />, 
+          {/* TODO: update styles */}
+          the <C value="frui-form-select" />, <C value="frui-form-select-error" />, <C value="frui-form-select-control" />, <C value="frui-form-select-selected" />, <C value="frui-form-select-controls" />, <C value="frui-form-select-clear" />, <C value="frui-form-select-toggle" />, <C value="frui-form-select-dropdown" />, <C value="frui-form-select-bottom" />, <C value="frui-form-select-left" />, <C value="frui-form-select-right" />, <C value="frui-form-select-top" />, <C value="frui-form-select-option" />, 
           and <C value="frui-form-select-selected" /> CSS classes to globally theme the select field.
         </Translate>
       </p>
@@ -847,10 +881,10 @@ export function Body() {
           </Translate>
         </p>
         <Props props={props[0]} />
-        <h3 className="font-semibold mt-4">{_('Item')}</h3>
+        <h3 className="font-semibold mt-4">{_('Control')}</h3>
         <p className="py-2">
           <Translate>
-            The <C value="<Select.Display>" /> component can be passed the 
+            The <C value="<Select.Control>" /> component can be passed the 
             following props.
           </Translate>
         </p>
@@ -863,14 +897,6 @@ export function Body() {
           </Translate>
         </p>
         <Props props={props[2]} />
-        <h3 className="font-semibold mt-4">{_('Dropdown')}</h3>
-        <p className="py-2">
-          <Translate>
-            The <C value="<Select.Dropdown>" /> component can be passed the 
-            following props.
-          </Translate>
-        </p>
-        <Props props={props[3]} />
         <h3 className="font-semibold mt-4">{_('Dropdown Head')}</h3>
         <p className="py-2">
           <Translate>
@@ -878,7 +904,7 @@ export function Body() {
             following props.
           </Translate>
         </p>
-        <Props props={props[4]} />
+        <Props props={props[3]} />
         <h3 className="font-semibold mt-4">{_('Dropdown Foot')}</h3>
         <p className="py-2">
           <Translate>
@@ -886,7 +912,7 @@ export function Body() {
             following props.
           </Translate>
         </p>
-        <Props props={props[5]} />
+        <Props props={props[4]} />
         <h3 className="font-semibold mt-4">{_('Option')}</h3>
         <p className="py-2">
           <Translate>
@@ -894,7 +920,7 @@ export function Body() {
             following props.
           </Translate>
         </p>
-        <Props props={props[6]} />
+        <Props props={props[5]} />
       </div>
 
       <Docs.Foot/>

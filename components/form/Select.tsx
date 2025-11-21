@@ -42,8 +42,8 @@ export type SelectControlProps = ClassStyleProps & ChildrenProps & {
 };
 
 export type SelectProps = ClassStyleProps & ChildrenProps & DropdownConfig & {
-  //slot: style to apply to the select display
-  display?: SlotStyleProp,
+  //slot: style to apply to the select control
+  control?: SlotStyleProp,
   //slot: style to apply to the select drop down
   dropdown?: SlotStyleProp,
   //whether the select is in an error state
@@ -243,8 +243,8 @@ export function Select(props: SelectProps) {
     className,
     //uncontrolled serializable select value
     defaultValue, //?: T
-    //slot: style to apply to the select display
-    display, //: SlotStyleProp
+    //slot: style to apply to the select control
+    control, //: SlotStyleProp
     //slot: style to apply to the select drop down
     dropdown, //: SlotStyleProp
     //whether the select is in an error state
@@ -282,7 +282,7 @@ export function Select(props: SelectProps) {
     classes.push('frui-form-select-error');
   }
   // get slot styles
-  const displayStyles = display ? getSlotStyles(display, {}) : {};
+  const controlStyles = control ? getSlotStyles(control, {}) : {};
   const dropdownStyles = dropdown ? getSlotStyles(dropdown, {}) : {};
   //render
   return (
@@ -304,8 +304,8 @@ export function Select(props: SelectProps) {
     >
       <Dropdown.Control>
         <SelectControl 
-          className={displayStyles.className} 
-          style={displayStyles.style}
+          className={controlStyles.className} 
+          style={controlStyles.style}
           bottom={bottom}
           left={left}
           name={name}

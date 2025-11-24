@@ -1,0 +1,23 @@
+name: FRUI Test Suite - Coverage Report
+on: ["push", "pull_request"]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - name: Install dependencies
+        run: yarn
+      - name: Building Code
+        run: yarn build
+      - name: Run Tests
+        run: yarn test
+      - name: Make Report
+        run: yarn report
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

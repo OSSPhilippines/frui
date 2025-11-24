@@ -1,150 +1,184 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
-import { render, screen, fireEvent, act } from '@testing-library/react'
+//--------------------------------------------------------------------//
 import '@testing-library/jest-dom'
-import { describe, expect, it, vi } from 'vitest'
-
 import {
-  Dialog,
+  act,
+  fireEvent,
+  render,
+  screen
+} from '@testing-library/react'
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest'
+
+//components
+import Dialog, {
   DialogClose,
   DialogContext,
   DialogOverlay,
-  DialogProvider,
-  DialogProviderContext,
   useDialog,
-  useDialogContext,
+  useDialogContext
 } from '../../components/Dialog'
 
-// -------------------------------------------------------------------
-// Helper component for hook testing
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// Helper Components
+//--------------------------------------------------------------------//
 const HookConsumer = () => {
   const { dialogOpened, handlers } = useDialog({ defaultOpen: false })
   return (
     <div>
       <button onClick={handlers.openDialog}>open</button>
-      <span data-testid="status">{dialogOpened ? 'open' : 'closed'}</span>
+      <span data-testid="status">
+        {dialogOpened ? 'open' : 'closed'}
+      </span>
     </div>
   )
 }
 
-// -------------------------------------------------------------------
-// Component Tests
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// <Dialog /> Component Tests
+//--------------------------------------------------------------------//
 describe('<Dialog />', () => {
-  it('closes when open toggles to false', () => {
-    const { rerender } = render(
-      <DialogProvider>
-        <Dialog open>body</Dialog>
-      </DialogProvider>
-    )
-    expect(screen.getByText('body')).toBeInTheDocument()
-    rerender(
-      <DialogProvider>
-        <Dialog open={false}>body</Dialog>
-      </DialogProvider>
-    )
+  //------------------------------------------------------------------//
+  // Default behaviour
+  //------------------------------------------------------------------//
+  it('is closed by default', () => {
+    render(<Dialog>body</Dialog>)
     expect(document.querySelector('.frui-dialog')).toBeNull()
   })
 
+  //------------------------------------------------------------------//
+  // Opened state
+  //------------------------------------------------------------------//
+  it('shows dialog when open={true}', () => {
+    render(<Dialog open>popup</Dialog>)
+    expect(screen.getByText('popup')).toBeInTheDocument()
+    expect(document.querySelector('.frui-dialog')).toBeInTheDocument()
+  })
+
+  //------------------------------------------------------------------//
+  // Toggle behaviour
+  //------------------------------------------------------------------//
+  it('closes when open toggles to false', () => {
+    const { rerender } = render(<Dialog open>test</Dialog>)
+    expect(screen.getByText('test')).toBeInTheDocument()
+
+    //simulate re-render with closed state
+    rerender(<Dialog open={false}>test</Dialog>)
+    expect(document.querySelector('.frui-dialog')).toBeNull()
+  })
+
+  //------------------------------------------------------------------//
+  // Overlay click
+  //------------------------------------------------------------------//
   it('closes when overlay.close = true and overlay clicked', () => {
     render(
-      <DialogProvider>
-        <Dialog open overlay={{ close: true }}>
-          popup
-        </Dialog>
-      </DialogProvider>
+      <Dialog open overlay={{ close: true }}>
+        inner
+      </Dialog>
     )
-    fireEvent.click(document.querySelector('.frui-dialog-overlay')!)
-    expect(document.querySelector('.frui-dialog')).toBeNull()
-  })
 
-  it('is closed by default', () => {
-    render(
-      <DialogProvider>
-        <Dialog>content</Dialog>
-      </DialogProvider>
-    )
-    expect(document.querySelector('.frui-dialog')).toBeNull()
-  })
+    const overlay = document.querySelector(
+      '.frui-dialog-overlay'
+    ) as HTMLElement
+    expect(overlay).toBeInTheDocument()
 
-  it('shows dialog when open={true}', () => {
-    render(
-      <DialogProvider>
-        <Dialog open>inside</Dialog>
-      </DialogProvider>
-    )
-    expect(screen.getByText('inside')).toBeInTheDocument()
+    fireEvent.click(overlay)
+    //if overlay clicked the dialog should close
+    expect(document.querySelector('.frui-dialog')).toBeNull()
   })
 })
 
+//--------------------------------------------------------------------//
+// <DialogClose /> Component Tests
+//--------------------------------------------------------------------//
 describe('<DialogClose />', () => {
-  it('calls context.closeDialog and its onClose prop', () => {
+  it('calls closeDialog from context and onClose prop', () => {
     const closeDialog = vi.fn()
     const onClose = vi.fn()
+
     render(
-      <DialogProviderContext.Provider value={{ containerId: 'dialog-root' }}>
-        <DialogContext.Provider value={{ closeDialog, dialogOpened: true, openDialog: vi.fn() }}>
-          <DialogClose onClose={onClose}>close</DialogClose>
-        </DialogContext.Provider>
-      </DialogProviderContext.Provider>
+      <DialogContext.Provider
+        value={{
+          closeDialog,
+          dialogOpened: true,
+          openDialog: vi.fn()
+        }}
+      >
+        <DialogClose onClose={onClose}>close</DialogClose>
+      </DialogContext.Provider>
     )
+
     fireEvent.click(screen.getByText('close'))
     expect(closeDialog).toHaveBeenCalled()
     expect(onClose).toHaveBeenCalled()
   })
 })
 
+//--------------------------------------------------------------------//
+// <DialogOverlay /> Component Tests
+//--------------------------------------------------------------------//
 describe('<DialogOverlay />', () => {
-  it('renders children with correct base class', () => {
+  it('renders with default class', () => {
     render(<DialogOverlay>overlay</DialogOverlay>)
-    expect(screen.getByText('overlay')).toHaveClass('frui-dialog-overlay')
+    const overlay = screen.getByText('overlay')
+    expect(overlay).toHaveClass('frui-dialog-overlay')
   })
 })
 
-describe('<DialogProvider />', () => {
-  it('renders #dialog-root container with correct class', () => {
-    render(<DialogProvider>child</DialogProvider>)
-    const container = document.getElementById('dialog-root')
-    expect(container).toBeInTheDocument()
-    expect(container).toHaveClass('frui-dialog-container')
-  })
-})
-
+//--------------------------------------------------------------------//
+// Hooks Tests
+//--------------------------------------------------------------------//
 describe('Hooks', () => {
-  it('useDialog toggles dialogOpened when handlers used', () => {
-    render(
-      <DialogProviderContext.Provider value={{ containerId: 'dialog-root' }}>
-        <HookConsumer />
-      </DialogProviderContext.Provider>
-    )
+  //------------------------------------------------------------------//
+  // useDialog
+  //------------------------------------------------------------------//
+  it('useDialog toggles open state through handlers', () => {
+    render(<HookConsumer />)
+
+    const button = screen.getByText('open')
     const status = screen.getByTestId('status')
-    const btn = screen.getByText('open')
-    expect(status).toHaveTextContent('closed')
-    act(() => fireEvent.click(btn))
-    expect(status).toHaveTextContent('open')
+
+    //initially closed
+    expect(status.textContent).toBe('closed')
+
+    //simulate click to open dialog
+    act(() => {
+      fireEvent.click(button)
+    })
+
+    expect(status.textContent).toBe('open')
   })
 
-  it('useDialogContext merges provider and dialog contexts', () => {
-    let captured: unknown
-    const Demo = () => {
-      captured = useDialogContext()
-      return null
-    }
-    const dialogCtx = {
+  //------------------------------------------------------------------//
+  // useDialogContext
+  //------------------------------------------------------------------//
+  it('useDialogContext returns context values', () => {
+    const ctxValue = {
       closeDialog: vi.fn(),
       dialogOpened: true,
-      openDialog: vi.fn(),
+      openDialog: vi.fn()
     }
+
+    let result: ReturnType<typeof useDialogContext> | undefined
+
+    const Demo = () => {
+      result = useDialogContext()
+      return null
+    }
+
     render(
-      <DialogProviderContext.Provider value={{ containerId: 'root-id' }}>
-        <DialogContext.Provider value={dialogCtx}>
-          <Demo />
-        </DialogContext.Provider>
-      </DialogProviderContext.Provider>
+      <DialogContext.Provider value={ctxValue}>
+        <Demo />
+      </DialogContext.Provider>
     )
-    expect(captured.containerId).toBe('root-id')
-    expect(captured.dialogOpened).toBe(true)
+
+    //verify context data is returned
+    expect(result?.dialogOpened).toBe(true)
+    expect(result?.closeDialog).toBe(ctxValue.closeDialog)
   })
 })

@@ -18,7 +18,7 @@ import {
   Tcol,
   Tooltip,
   Tabs
-} from 'components/element';
+} from 'components/index.js';
 import Button from 'components/Button.js';
 
 export function Body() {

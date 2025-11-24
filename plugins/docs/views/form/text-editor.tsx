@@ -7,7 +7,7 @@ import { useLanguage, Translate } from 'r22n';
 import clsx from 'clsx';
 
 //frui
-import WYSIWYG from 'components/form/WYSIWYG.js';
+import TextEditor from 'components/form/TextEditor.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -57,9 +57,9 @@ const contentStyles = clsx(
 //--------------------------------------------------------------------//
 //constants
 
-const uri = '/form/wysiwyg';
-const title = 'WYSIWYG Field';
-const description = 'WYSIWYG is a field component that provides a rich text editor '
+const uri = '/form/text-editor';
+const title = 'TextEditor Field';
+const description = 'TextEditor is a field component that provides a rich text editor '
   + 'with various formatting options.';
 
 const props = [
@@ -141,13 +141,13 @@ const props = [
 
 const examples = [
   //0
-  `<WYSIWYG 
+  `<TextEditor 
   className="w-full" 
   name="editorContent"
   value="<p>Hello, <b>World</b>!</p>"
 />`,
   //1
-  `<WYSIWYG 
+  `<TextEditor 
   className="w-full" 
   name="editorContent"
   history 
@@ -166,7 +166,7 @@ const examples = [
   value="<p>Formatted <i>text</i> here.</p>"
 />`,
   //2
-  `<WYSIWYG 
+  `<TextEditor 
   className="w-full" 
   name="editorContent"
   history 
@@ -204,7 +204,7 @@ const examples = [
   value="<p>Full-featured <b>editor</b>.</p>"
 />`,
   //3
-  `<WYSIWYG 
+  `<TextEditor 
   className="w-full" 
   name="editorContent"
   history 
@@ -214,7 +214,7 @@ const examples = [
   value="<p>مرحباً <b>بالعالم</b>!</p>"
 />`,
   //4
-  `<WYSIWYG 
+  `<TextEditor 
   className="w-full" 
   name="editorContent"
   history 
@@ -223,7 +223,7 @@ const examples = [
   onUpdate={({ value, action }) => console.log('update', value, action)}
 />`,
   //5
-  `<WYSIWYG 
+  `<TextEditor 
   className="w-full" 
   name="editorContent"
   table 
@@ -232,7 +232,7 @@ const examples = [
   value="<table border='1'><tr><td><b>Cell 1</b></td><td>Cell 2</td></tr></table>"
 />`,
   //6
-  `<WYSIWYG 
+  `<TextEditor 
   className="w-full" 
   name="editorContent"
   image 
@@ -241,7 +241,7 @@ const examples = [
   value="<p>Check this <a href='https://example.com'>link</a> and image below:</p>"
 />`,
   //7
-  `<WYSIWYG 
+  `<TextEditor 
   className="w-full" 
   name="editorContent"
   template 
@@ -269,7 +269,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('WYSIWYG')}
+          {_('TextEditor')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -365,16 +365,16 @@ export function Body() {
         id="top"
         className="flex items-center uppercase font-bold text-xl"
       >
-        {_('WYSIWYG')}
+        {_('TextEditor')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the WYSIWYG field like the following.
+            Import the TextEditor field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import WYSIWYG from 'frui/form/WYSIWYG';`}
+          {`import TextEditor from 'frui/form/TextEditor';`}
         </Code>
       </div>
 
@@ -384,7 +384,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            A <C value="WYSIWYG" /> is a rich text editor that allows users to
+            A <C value="TextEditor" /> is a rich text editor that allows users to
             format text, add media, and create rich content with a familiar
             word-processor-like interface.
           </Translate>
@@ -394,7 +394,7 @@ export function Body() {
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <WYSIWYG
+            <TextEditor
               className="w-full"
               name="editorContent"
               value="<p>Hello, <b>World</b>!</p>"
@@ -420,7 +420,7 @@ export function Body() {
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <WYSIWYG
+            <TextEditor
               className="w-full"
               name="editorContent"
               history
@@ -455,13 +455,13 @@ export function Body() {
           <div className="w-full">
             <p className="mb-4">
               <Translate>
-                To include the WYSIWYG content in a form submission, set the{" "}
+                To include the TextEditor content in a form submission, set the{" "}
                 <C value="name" /> prop. The content will be included as HTML in
                 the form data under that name.
               </Translate>
             </p>
             <form onSubmit={handleSubmit}>
-              <WYSIWYG
+              <TextEditor
                 className="w-full"
                 name="editorContent"
                 history
@@ -515,7 +515,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            A fully-loaded <C value="WYSIWYG" /> with all available features
+            A fully-loaded <C value="TextEditor" /> with all available features
             enabled.
           </Translate>
         </p>
@@ -524,7 +524,7 @@ export function Body() {
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <WYSIWYG
+            <TextEditor
               className="w-full"
               name="editorContent"
               history
@@ -581,7 +581,7 @@ export function Body() {
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <WYSIWYG
+            <TextEditor
               className="w-full"
               name="editorContent"
               history
@@ -611,7 +611,7 @@ export function Body() {
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <WYSIWYG
+            <TextEditor
               className="w-full"
               name="editorContent"
               history
@@ -656,7 +656,7 @@ export function Body() {
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <WYSIWYG
+            <TextEditor
               className="w-full"
               name="editorContent"
               table
@@ -686,7 +686,7 @@ export function Body() {
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <WYSIWYG
+            <TextEditor
               className="w-full"
               name="editorContent"
               image
@@ -714,7 +714,7 @@ export function Body() {
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <WYSIWYG
+            <TextEditor
               className="w-full"
               name="editorContent"
               template
@@ -732,10 +732,10 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C value="frui-form-wysiwyg-editor" />, <C value="frui-form-wysiwyg-editor-toolbar" />,
-          <C value="frui-form-wysiwyg-editor-btn" />, <C value="frui-form-wysiwyg-editor-btn-module" />,
-          <C value="frui-form-wysiwyg-editor-btn-select" />, and <C value="frui-form-wysiwyg-editor-editable" /> 
-          CSS classes to globally theme the WYSIWYG field.
+          the <C value="frui-form-text-editor" />, <C value="frui-form-text-editor-toolbar" />,
+          <C value="frui-form-text-editor-btn" />, <C value="frui-form-text-editor-btn-module" />,
+          <C value="frui-form-text-editor-btn-select" />, and <C value="frui-form-text-editor-editable" /> 
+          CSS classes to globally theme the TextEditor field.
         </Translate>
       </p>
 
@@ -745,7 +745,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The <C value="<WYSIWYG>" /> field can be passed the
+            The <C value="<TextEditor>" /> field can be passed the
             following props.
           </Translate>
         </p>

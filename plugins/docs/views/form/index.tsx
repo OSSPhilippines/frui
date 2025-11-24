@@ -10,8 +10,6 @@ import {
 import {
   Autocomplete,
   Checkbox,
-  Checklist,
-  ChecklistItem,
   CodeEditor,
   //ColorPicker,
   Country,
@@ -23,7 +21,6 @@ import {
   Image as ImageField,
   Imagelist,
   Input,
-  Knob,
   Markdown,
   Mask,
   Metadata,
@@ -80,23 +77,6 @@ export function Body() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Checkbox')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/checklist')} 
-            >
-              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                <Checklist name="Options">
-                  <ChecklistItem label="Option 1" value="option1" />
-                  <ChecklistItem label="Option 2" value="option2" />
-                  <ChecklistItem label="Option 3" value="option3" />
-                </Checklist>
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Checklist')}
                 </h2>
               </div>
             </div>
@@ -259,19 +239,6 @@ export function Body() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('JSON')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/knob')} 
-            >
-              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Knob defaultValue={30} />
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Knob')}
                 </h2>
               </div>
             </div>

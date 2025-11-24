@@ -6,7 +6,7 @@ import { useLanguage, Translate } from 'r22n';
 
 //frui
 import Table from 'components/Table.js';
-import Autocomplete from 'components/form/Autocomplete.js';
+import Autocomplete from 'components/form/SuggestInput.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

@@ -11,9 +11,9 @@ import currencies from '../data/currencies.js';
 import countries from '../data/countries.js';
 import { 
   Select, 
-  SelectDropdownHead,
-  SelectOption
 } from './Select.js';
+import SelectOption from './Select.js';
+import { DropdownHead } from 'components/Dropdown.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -99,7 +99,7 @@ export function CurrencySelect(props: CurrencySelectProps) {
       placeholder={placeholder || 'Select a currency'}
     >
       {!!searchable && (
-        <SelectDropdownHead>
+        <DropdownHead>
           <div>
             <input 
               type="text" 
@@ -110,7 +110,7 @@ export function CurrencySelect(props: CurrencySelectProps) {
             />
             <span>🔍</span>
           </div>
-        </SelectDropdownHead>
+        </DropdownHead>
       )}
       {options.map(option => (
         <SelectOption key={option.code} value={option.code}>

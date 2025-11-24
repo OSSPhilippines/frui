@@ -10,9 +10,9 @@ import type { SelectProps } from './Select.js';
 import countries from '../data/countries.js';
 import { 
   Select, 
-  SelectDropdownHead,
-  SelectOption
 } from './Select.js';
+import SelectOption from './Select.js';
+import { DropdownHead } from 'components/Dropdown.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -93,7 +93,7 @@ export function CountrySelect(props: CountrySelectProps) {
       placeholder={placeholder || 'Select a country'}
     >
       {!!searchable && (
-        <SelectDropdownHead>
+        <DropdownHead>
           <div>
             <input 
               type="text" 
@@ -104,7 +104,7 @@ export function CountrySelect(props: CountrySelectProps) {
             />
             <span>🔍</span>
           </div>
-        </SelectDropdownHead>
+        </DropdownHead>
       )}
       {options.map(option => (
         <SelectOption key={option.iso2} value={option.iso2}>

@@ -17,11 +17,13 @@ export { DateInput as Date } from './DateInput.js';
 
 export type { DatetimeInputProps } from './DatetimeInput.js';
 export { DatetimeInput as Datetime } from './DatetimeInput.js';
+
 export type { FieldControlProps } from './FieldControl.js';
 export { FieldControl } from './FieldControl.js';
 
 export type { FieldsetProps } from './Fieldset.js';
 export { useFieldset } from './Fieldset.js';
+
 export type { FileInputProps } from './FileInput.js';
 export { FileInput as File } from './FileInput.js';
 
@@ -82,7 +84,7 @@ export type { TextEditorProps } from './TextEditor.js';
 export { TextEditor } from './TextEditor.js';
 
 export type { TextlistProps } from './TextList.js';
-export { Textlist} from './TextList.js';
+export { Textlist } from './TextList.js';
 
 export type { TimeInputProps } from './TimeInput.js';
 export { TimeInput, TimeInput as Time } from './TimeInput.js';

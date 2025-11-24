@@ -95,7 +95,8 @@
     "build:tsc:esm": "tsc -p ./tsconfig.esm.json",
     "build:docs": "tsx scripts/build.ts",
     "dev": "tsx scripts/develop.ts",
-    "test": "vitest --config vitest.config.ts"
+    "test": "vitest --config vitest.config.ts",
+    "report": "vitest run --coverage"
   },
   "devDependencies": {
     "@codemirror/language-data": "6.5.1",

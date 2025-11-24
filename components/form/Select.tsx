@@ -10,17 +10,16 @@ import type {
   ChildrenProps,
   SlotStyleProp
 } from '../types.js';
-import type {
-  DropdownStates,
-  DropdownConfig
+import type { 
+  DropdownOptionProp,
+  DropdownStates, 
+  DropdownConfig 
 } from '../Dropdown.js';
 import Dropdown from '../Dropdown.js';
 import getSlotStyles from '../helpers/getSlotStyles.js';
 
 //--------------------------------------------------------------------//
 // Types
-
-export type SelectData = { label?: string, value: string };
 
 export type SelectPlaceholderProps = ClassStyleProps & ChildrenProps;
 
@@ -32,7 +31,7 @@ export type SelectControlProps = ClassStyleProps & ChildrenProps & {
   //name used by forms
   name?: string,
   //serialized list of options as array or object
-  options?: SelectData[]|Record<string, string>,
+  options?: DropdownOptionProp,
   //placeholder text when no option is selected
   placeholder?: string,
   //position of the dropdown
@@ -57,7 +56,7 @@ export type SelectProps = ClassStyleProps & ChildrenProps & DropdownConfig & {
   //slot: style to apply to the select control
   option?: CallableSlotStyleProp<DropdownStates>,
   //serialized list of options as array or object
-  options?: SelectData[]|Record<string, string>,
+  options?: DropdownOptionProp,
   //placeholder text when no option is selected
   placeholder?: string
 };
@@ -70,7 +69,7 @@ export type SelectProps = ClassStyleProps & ChildrenProps & DropdownConfig & {
  */
 export function getComponents(
   children?: ReactNode,
-  data?: SelectData[] | Record<string, string>,
+  data?: DropdownOptionProp,
   selected: string[] = [],
   multiple?: boolean
 ) {
@@ -158,14 +157,15 @@ export function SelectControl(props: SelectControlProps) {
     top //?: boolean
   } = props;
   //hooks
+  const context = { ...Dropdown.useContext() };
+  context.target = 'control';
   const {
     multiple,
     open, 
     opened, 
     clear, 
-    selected,
-    options: optionsCount
-  } = Dropdown.useContext();
+    selected
+  } = context;
   //variables
   // determine classes
   const classes = [ 'frui-form-select-control' ];
@@ -193,7 +193,9 @@ export function SelectControl(props: SelectControlProps) {
   return (
     <div className={classes.join(' ')} style={styles}>
       <div className="frui-form-select-control-selected">
-        {components.selected.length > 0  ? components.selected : label}
+        <Dropdown.Context.Provider value={context}>
+          {components.selected.length > 0 ? components.selected : label}
+        </Dropdown.Context.Provider>
       </div>
       <div className="frui-form-select-control-actions">
         {selected.length > 0 && (
@@ -202,14 +204,12 @@ export function SelectControl(props: SelectControlProps) {
             onClick={clear}
           >&times;</span>
         )}
-        {optionsCount > 0 && (
-          <span 
-            className="frui-form-select-control-actions-toggle"
-            onClick={toggle}
-          >
-            {direction}
-          </span>
-        )}
+        <span 
+          className="frui-form-select-control-actions-toggle"
+          onClick={toggle}
+        >
+          {direction}
+        </span>
       </div>
       {/* Hidden values (for form submission) */}
       {!!name && selected.map((selected, i) => typeof selected !== 'undefined' 
@@ -324,12 +324,26 @@ export function Select(props: SelectProps) {
 
 //defaults to select
 export default Object.assign(Select, {
+  getAbsolutePosition: Dropdown.getAbsolutePosition,
+  getComponent: Dropdown.getComponent,
+  getComponents,
+  getControl: Dropdown.getControl,
+  getFooter: Dropdown.getFooter,
+  getHeader: Dropdown.getHeader,
+  getOptions: Dropdown.getOptions,
+  getPlaceholder,
+  getRelativePosition: Dropdown.getRelativePosition,
+  makeOptions: Dropdown.makeOptions,
+  buildOptions: Dropdown.buildOptions,
+  useDropdown: Dropdown.useDropdown,
+  useDropdownContext: Dropdown.useDropdownContext,
+  use: Dropdown.useDropdown,
+  useContext: Dropdown.useDropdownContext,
+  useSelect: Dropdown.useDropdown,
   Context: Dropdown.Context,
   Control: SelectControl,
   Option: Dropdown.Option,
   Head: Dropdown.Head,
   Foot: Dropdown.Foot,
-  Placeholder: SelectPlaceholder,
-  getComponents,
-  getPlaceholder
+  Placeholder: SelectPlaceholder
 });

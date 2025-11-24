@@ -488,8 +488,10 @@ export function Body() {
           <Preview.Example center padding>
             <Select 
               multiple
-              option={({ active }) => active 
-                ? 'theme-bg-3 px-p-2-8-2-8 px-mr-4 theme-white' 
+              option={({ selected, target }) => selected && target === 'control'
+                ? 'inline-block theme-bg-3 px-p-2-8-2-8 px-mr-4 theme-white' 
+                : selected && target === 'dropdown'
+                ? 'theme-bg-3 theme-white px-p-2-8-2-8 px-m-4-8-4-8'
                 : 'px-p-2-8-2-8 px-m-4-8-4-8'
               } 
             >
@@ -521,16 +523,18 @@ export function Body() {
             <Select 
               name="active-state"
               multiple
-              option={({ active }) => active 
-                ? 'theme-bg-success px-p-2-8-2-8 px-mr-4 theme-white' 
+              option={({ selected, target }) => selected && target === 'control'
+                ? 'inline-block theme-bg-success px-p-2-8-2-8 px-mr-4 theme-white'
+                : selected && target === 'dropdown'
+                ? 'theme-bg-3 theme-white px-p-2-8-2-8 px-m-4-8-4-8'
                 : 'px-p-2-8-2-8 px-m-4-8-4-8'
               } 
             >
               <Select.Option value="foo">
-                {({ active }) => active ? 'Foo Active' : 'Foo'}
+                {({ selected }) => selected ? 'Foo Active' : 'Foo'}
               </Select.Option>
               <Select.Option value="bar">
-                {({ active }) => active ? 'Bar Active' : 'Bar'}
+                {({ selected }) => selected ? 'Bar Active' : 'Bar'}
               </Select.Option>
             </Select>
           </Preview.Example>
@@ -573,8 +577,10 @@ export function Body() {
           <Preview.Example center padding>
             <Select 
               multiple
-              option={({ active }) => active 
-                ? 'theme-bg-3 px-p-2-8-2-8 px-mr-4 theme-white' 
+              option={({ selected, target }) => selected && target === 'control'
+                ? 'inline-block theme-bg-success px-p-2-8-2-8 px-mr-4 theme-white'
+                : selected && target === 'dropdown'
+                ? 'theme-bg-3 theme-white px-p-2-8-2-8 px-m-4-8-4-8'
                 : 'px-p-2-8-2-8 px-m-4-8-4-8'
               } 
             >
@@ -650,12 +656,12 @@ export function Body() {
         >
           <Preview.Example center padding>
             <Select option="px-p-2-8-2-8">
-              <Select.Head className="theme-bg-2 theme-bc-2 px-3 py-2 border-b font-bold">
+              <Select.Head className="here theme-bg-2 theme-bc-2 px-3 py-2 border-b font-bold">
                 Header Content
               </Select.Head>
               <Select.Option value="foo">Foo</Select.Option>
               <Select.Option value="bar">Bar</Select.Option>
-              <Select.Foot className="theme-bg-2 theme-bc-2 px-3 py-2 border-b font-bold">
+              <Select.Foot className="here theme-bg-2 theme-bc-2 px-3 py-2 border-b font-bold">
                 Footer Content
               </Select.Foot>
             </Select>
@@ -674,7 +680,7 @@ export function Body() {
         >
           <Preview.Example center padding>
             <Select name="select-search" option="px-p-2-8-2-8" options={options}>
-              <Select.Head className="px-px-8 px-pt-8">
+              <Select.Head className="found px-px-8 px-pt-8">
                 <form 
                   className="flex items-center border theme-bc-3"
                   onSubmit={filter}

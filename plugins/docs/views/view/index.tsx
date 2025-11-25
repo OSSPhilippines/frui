@@ -35,7 +35,7 @@ import {
   Text,
   Yesno
 } from 'components/view';
-import Code from 'plugins/docs/components/Code';
+import CodeHighlighter from 'components/view/CodeHighlighter';
 
 //--------------------------------------------------------------------//
 // Constants
@@ -65,7 +65,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Code language='javascript'>{`console.log("Hello, World!");`}</Code>
+                  <CodeHighlighter language='javascript'>{`console.log("Hello, World!");`}</CodeHighlighter>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Code')}

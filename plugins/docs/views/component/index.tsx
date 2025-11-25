@@ -6,11 +6,9 @@ import {
   LayoutProvider, 
   ThemeHead
 } from 'plugins/app/index.js';
-import type { Crumb } from 'components/element/Crumbs.js';
 import {
   Alert,
-  Badge, 
-  Crumbs,
+  Badge,
   Loader,
   Table,
   Thead,

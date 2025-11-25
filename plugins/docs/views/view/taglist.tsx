@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Taglist from 'components/view/Taglist.js';
+import Taglist from 'components/view/TagList.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

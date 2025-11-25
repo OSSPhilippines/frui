@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Email from 'components/view/Email.js';
+import Email from 'components/view/EmailLink.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

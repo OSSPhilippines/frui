@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Number from 'components/view/Number.js';
+import Number from 'components/view/NumberFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

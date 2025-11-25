@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Separated from 'components/view/Separated.js';
+import Separated from 'components/view/Separate.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

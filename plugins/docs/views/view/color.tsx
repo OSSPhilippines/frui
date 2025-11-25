@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Color from 'components/view/Color.js';
+import Color from 'components/view/ColorFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

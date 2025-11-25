@@ -8,7 +8,6 @@ import {
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead,
-  Code,
 } from 'plugins/app/index.js';
 
 import {
@@ -22,7 +21,6 @@ import {
   HTML,
   Image as ImageFormat,
   Imagelist,
-  JSON,
   Link,
   List,
   Markdown,
@@ -37,6 +35,7 @@ import {
   Text,
   Yesno
 } from 'components/view';
+import Code from 'plugins/docs/components/Code';
 
 //--------------------------------------------------------------------//
 // Constants
@@ -190,21 +189,6 @@ export function Body() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Imagelist')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/json')} 
-            >
-              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <div className="text-left">
-                    <JSON value={{foo: 'foo', bar: 'bar'}} />
-                  </div>
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('JSON')}
                 </h2>
               </div>
             </div>

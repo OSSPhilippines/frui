@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Date from 'components/view/Date.js';
+import Date from 'components/view/DateFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

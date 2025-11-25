@@ -45,7 +45,7 @@ export default function plugin(server: HttpServer<Config>) {
     ctx.get('/form/select', '@/plugins/docs/views/form/select');
     ctx.get('/form/slider', '@/plugins/docs/views/form/slider');
     ctx.get('/form/slug-input', '@/plugins/docs/views/form/slug-input');
-    ctx.get('/form/suggest', '@/plugins/docs/views/form/suggest-input');
+    ctx.get('/form/suggest-input', '@/plugins/docs/views/form/suggest-input');
     ctx.get('/form/switch', '@/plugins/docs/views/form/switch');
     ctx.get('/form/tag-list', '@/plugins/docs/views/form/tag-list');
     ctx.get('/form/text-list', '@/plugins/docs/views/form/text-list');
@@ -64,7 +64,6 @@ export default function plugin(server: HttpServer<Config>) {
     ctx.get('/view/html', '@/plugins/docs/views/view/html');
     ctx.get('/view/image', '@/plugins/docs/views/view/image');
     ctx.get('/view/imagelist', '@/plugins/docs/views/view/imagelist');
-    ctx.get('/view/json', '@/plugins/docs/views/view/json');
     ctx.get('/view/link', '@/plugins/docs/views/view/link');
     ctx.get('/view/list', '@/plugins/docs/views/view/list');
     ctx.get('/view/markdown', '@/plugins/docs/views/view/markdown');

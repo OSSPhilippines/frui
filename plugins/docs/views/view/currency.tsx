@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Currency from 'components/view/Currency.js';
+import Currency from 'components/view/CurrencyFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

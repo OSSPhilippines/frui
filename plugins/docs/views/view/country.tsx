@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Country from 'components/view/Country.js';
+import Country from 'components/view/CountryFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

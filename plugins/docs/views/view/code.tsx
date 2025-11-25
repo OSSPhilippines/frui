@@ -5,8 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Code from 'components/view/Code.js';
-import { notify } from 'components/element/Notifier.js';
+import CodeHighlighter from 'components/view/CodeHighlighter.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -125,44 +124,40 @@ export function Body() {
         {_('Basics')}
       </h2>
       <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Code language="python">{'print("Hello, world!")'}</Code>
-        </div>
-        <Code
-          copy
-          numbers
-          language="ts"
-          onCopy={() => {
-            notify('success', _('Copied to clipboard'));
-          }}
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3"
         >
-          {`<Code language="python">\n  print("Hello, world!")\n</Code>`}
-        </Code>
+          <Preview.Example center padding>
+            <CodeHighlighter language="python">
+              {'print("Hello, world!")'}
+            </CodeHighlighter>
+          </Preview.Example>
+          <Preview.Code>
+            {`<Code language="python">\n  print("Hello, world!")\n</Code>`}
+          </Preview.Code>
+        </Preview>
 
         <p className="py-4">
           <Translate>
-            Defining a code block requires passing a <Code>language</Code>{' '}
-            prop to the component.
+            Defining a code block requires passing 
+            a <C value="language" /> prop to the component.
           </Translate>
         </p>
-
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Code language="ts">{`attributes: [Object object]`}</Code>
-        </div>
-        <Code
-          copy
-          numbers
-          language="ts"
-          onCopy={() => {
-            notify('success', _('Copied to clipboard'));
-          }}
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3"
         >
-          {`<Code>{\`attributes: [Object object]\`}</Code>`}
-        </Code>
-
+          <Preview.Example center padding>
+            <Code language="ts">{`attributes: [Object object]`}</Code>
+          </Preview.Example>
+          <Preview.Code>
+            {`<Code>{\`attributes: [Object object]\`}</Code>`}
+          </Preview.Code>
+        </Preview>
         <p className="py-4">
           <Translate>
-            Not supplying a <Code>language</Code> prop will instead create
+            Not supplying a <C value="language" /> prop will instead create
             an inline component.
           </Translate>
         </p>
@@ -182,56 +177,22 @@ export function Body() {
         <p className="py-4">
           <Translate>
             Line numbers can be added to a code block by passing the{' '}
-            <Code>numbers</Code> prop.
+            <C value="numbers" /> prop.
           </Translate>
         </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Code language="typescript" numbers>
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <CodeHighlighter language="typescript" numbers>
               {`console.log("Hello, world!");`}
-            </Code>
-          </div>
-          <Code
-            copy
-            numbers
-            language="ts"
-            onCopy={() => {
-              notify('success', _('Copied to clipboard'));
-            }}
-          >
+            </CodeHighlighter>
+          </Preview.Example>
+          <Preview.Code>
             {`<Code language="typescript" numbers>\n  console.log("Hello, world!");\n</Code>`}
-          </Code>
-        </div>
-
-        <h3 className="font-semibold text-md mt-8">{_('Copy Button')}</h3>
-        <p className="py-4">
-          <Translate>
-            A copy button can be added to a code block by passing the{' '}
-            <Code>copy</Code> prop. To customize the behavior of the copy
-            button, you can pass a function to the <Code>onCopy</Code> prop.
-          </Translate>
-        </p>
-        <div className="curved overflow-hidden">
-          <div className="flex items-center justify-center p-3 theme-bg-1">
-            <Code
-              language="typescript"
-              copy
-              onCopy={() => alert('Code copied!')}
-            >
-              {'console.log("Hello, world!");'}
-            </Code>
-          </div>
-          <Code
-            copy
-            numbers
-            language="ts"
-            onCopy={() => {
-              notify('success', _('Copied to clipboard'));
-            }}
-          >
-            {`<Code language="typescript"\n  copy onCopy={() => alert("Code copied!")}\n>\n  console.log("Hello, world!");\n</Code>`}
-          </Code>
-        </div>
+          </Preview.Code>
+        </Preview>
       </div>
       
       <h2 id="api" className="uppercase font-bold text-lg mt-8">

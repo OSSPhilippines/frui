@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Overflow from 'components/view/Overflow.js';
+import Overflow from 'components/view/TextFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

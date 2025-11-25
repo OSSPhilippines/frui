@@ -12,31 +12,38 @@ import type { ClassStyleProps } from '../types.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type CodeProps = ClassStyleProps & {
+export type CodeHighlighterProps = ClassStyleProps & {
   addDefaultStyles?: boolean,
+  children?: string,
   highlighter?: Highlighter,
   langClassName?: string,
   langStyle?: CSSProperties,
   language: string,
+  numbers?: boolean,
   showLanguage?: boolean,
   showLineNumbers?: boolean,
   startingLineNumber?: number,
   tabindex?: number,
   theme?: Theme | Themes,
-  value: string
+  value?: string
 };
 
 //--------------------------------------------------------------------//
 // Components
 
-export function Code(props: CodeProps) {
+export function CodeHighlighter(props: CodeHighlighterProps) {
   //props
   const { 
+    children,
     value, 
+    numbers,
     showLanguage = false, 
     theme = 'github-dark',
     ...attributes 
   } = props;
+  attributes.showLineNumbers = typeof attributes.showLineNumbers === 'boolean' 
+    ? attributes.showLineNumbers 
+    : numbers;
   //render
   return (
     <ShikiHighlighter 
@@ -44,7 +51,9 @@ export function Code(props: CodeProps) {
       showLanguage={showLanguage} 
       theme={theme}
     >
-      {value}
+      {children || value || ''}
     </ShikiHighlighter>
   );
 };
+
+export default CodeHighlighter;

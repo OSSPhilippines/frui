@@ -24,22 +24,6 @@
       "require": "./cjs/data/*.js",
       "import": "./esm/data/*.js"
     },
-    "./element": {
-      "require": "./cjs/element/index.js",
-      "import": "./esm/element/index.js"
-    },
-    "./element/*": {
-      "require": "./cjs/element/*.js",
-      "import": "./esm/element/*.js"
-    },
-    "./field": {
-      "require": "./cjs/field/index.js",
-      "import": "./esm/field/index.js"
-    },
-    "./field/*": {
-      "require": "./cjs/field/*.js",
-      "import": "./esm/field/*.js"
-    },
     "./form": {
       "require": "./cjs/form/index.js",
       "import": "./esm/form/index.js"
@@ -48,14 +32,74 @@
       "require": "./cjs/form/*.js",
       "import": "./esm/form/*.js"
     },
-    "./format": {
-      "require": "./cjs/format/index.js",
-      "import": "./esm/format/index.js"
+    "./view": {
+      "require": "./cjs/view/index.js",
+      "import": "./esm/view/index.js"
     },
-    "./format/*": {
-      "require": "./cjs/format/*.js",
-      "import": "./esm/format/*.js"
+    "./view/*": {
+      "require": "./cjs/view/*.js",
+      "import": "./esm/view/*.js"
     },
+    "./Accordion": {
+      "require": "./cjs/Accordion.js",
+      "import": "./esm/Accordion.js"
+    },
+    "./Alert": {
+      "require": "./cjs/Alert.js",
+      "import": "./esm/Alert.js"
+    },
+    "./Badge": {
+      "require": "./cjs/Badge.js",
+      "import": "./esm/Badge.js"
+    },
+    "./Bread": {
+      "require": "./cjs/Bread.js",
+      "import": "./esm/Bread.js"
+    },
+    "./Button": {
+      "require": "./cjs/Button.js",
+      "import": "./esm/Button.js"
+    },
+    "./Dialog": {
+      "require": "./cjs/Dialog.js",
+      "import": "./esm/Dialog.js"
+    },
+    "./Dropdown": {
+      "require": "./cjs/Dropdown.js",
+      "import": "./esm/Dropdown.js"
+    },
+    "./Loader": {
+      "require": "./cjs/Loader.js",
+      "import": "./esm/Loader.js"
+    },
+    "./Notifier": {
+      "require": "./cjs/Notifier.js",
+      "import": "./esm/Notifier.js"
+    },
+    "./Pager": {
+      "require": "./cjs/Pager.js",
+      "import": "./esm/Pager.js"
+    },
+    "./Progress": {
+      "require": "./cjs/Progress.js",
+      "import": "./esm/Progress.js"
+    },
+    "./Table": {
+      "require": "./cjs/Table.js",
+      "import": "./esm/Table.js"
+    },
+    "./Tabs": {
+      "require": "./cjs/Tabs.js",
+      "import": "./esm/Tabs.js"
+    },
+    "./Tooltip": {
+      "require": "./cjs/Tooltip.js",
+      "import": "./esm/Tooltip.js"
+    },
+    "./When": {
+      "require": "./cjs/When.js",
+      "import": "./esm/When.js"
+    },    
     "./frui.css": "./frui.css"
   },
   "typesVersions": {
@@ -63,14 +107,23 @@
       ".": [ "./cjs/index.d.ts" ],
       "types": [ "./cjs/types.d.ts" ],
       "data/*": [ "./cjs/data/*.d.ts" ],
-      "element": [ "./cjs/element/index.d.ts" ],
-      "element/*": [ "./cjs/element/*.d.ts" ],
-      "field": [ "./cjs/field/index.d.ts" ],
-      "field/*": [ "./cjs/field/*.d.ts" ],
-      "format": [ "./cjs/format/index.d.ts" ],
-      "format/*": [ "./cjs/format/*.d.ts" ],
       "form": [ "./cjs/form/index.d.ts" ],
-      "form/*": [ "./cjs/form/*.d.ts" ]
+      "form/*": [ "./cjs/form/*.d.ts" ],
+      "Accordion": [ "./cjs/Accordion.d.ts" ],
+      "Alert": [ "./cjs/Alert.d.ts" ],
+      "Badge": [ "./cjs/Badge.d.ts" ],
+      "Bread": [ "./cjs/Bread.d.ts" ],
+      "Button": [ "./cjs/Button.d.ts" ],
+      "Dialog": [ "./cjs/Dialog.d.ts" ],
+      "Dropdown": [ "./cjs/Dropdown.d.ts" ],
+      "Loader": [ "./cjs/Loader.d.ts" ],
+      "Notifier": [ "./cjs/Notifier.d.ts" ],
+      "Pager": [ "./cjs/Pager.d.ts" ],
+      "Progress": [ "./cjs/Progress.d.ts" ],
+      "Table": [ "./cjs/Table.d.ts" ],
+      "Tabs": [ "./cjs/Tabs.d.ts" ],
+      "Tooltip": [ "./cjs/Tooltip.d.ts" ],
+      "When": [ "./cjs/When.d.ts" ]      
     }
   },
   "files": [

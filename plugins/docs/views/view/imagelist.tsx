@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Imagelist from 'components/view/Imagelist.js';
+import Imagelist from 'components/view/ImageCarousel.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

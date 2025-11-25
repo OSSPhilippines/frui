@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Yesno from 'components/view/Yesno.js';
+import Yesno from 'components/view/BooleanFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

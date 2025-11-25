@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Phone from 'components/view/Phone.js';
+import Phone from 'components/view/PhoneLink.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

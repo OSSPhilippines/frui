@@ -2,11 +2,12 @@
 // Imports
 
 //modules
+import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 
 //frui
 import Table from 'components/Table.js';
-import Autocomplete from 'components/form/SuggestInput.js';
+import SuggestInput from 'components/form/SuggestInput.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -15,9 +16,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/autocomplete';
-const title = 'Autocomplete Field';
-const description = 'Autocomplete is a text input field that provides a list of '
+const uri = '/form/suggest-input';
+const title = 'Suggest Input Field';
+const description = 'Suggest Input is a text input field that provides a list of '
   + 'suggestions as the user types.';
 
 const props = [
@@ -36,31 +37,62 @@ const props = [
 
 const examples = [
 //0
-`<Autocomplete 
-  className="w-full" 
+`<SuggestInput 
   options={[ 'foo', 'bar' ]} 
   placeholder="Enter foo or bar"
 />`,
 //1
-`<Autocomplete 
-  className="w-full" 
-  options={['foo', 'bar']}
-  onQuery={(query, set) => setTimeout(
-    () => set(['boo', 'bar', 'baz']), 
-    1000
-  )}
-  onDropdown={open => console.log('dropdown', open)}
-  onChange={e => console.log('change', e)}
-  onUpdate={value => console.log('update', value)}
-  placeholder="Enter 'b'"
-/>`,
-//2
-`<Autocomplete 
-  error
-  className="w-full" 
+`<SuggestInput 
+  chars={2}
   options={[ 'foo', 'bar' ]} 
   placeholder="Enter foo or bar"
-/>`
+/>`,
+//2
+`const possible = ['foo', 'bar', 'food', 'fool', 'bard', 'bark', 'barge'];
+const [ options, setOptions ] = useState(possible);
+return (
+  <SuggestInput 
+    options={options} 
+    placeholder="Enter foo or bar"
+    onQuery={query => setOptions(
+      possible.filter(item => item.includes(query))
+    )}
+  />
+);`,
+//3
+`<SuggestInput 
+  append="#dropdown-root"
+  options={[ 'foo', 'bar' ]} 
+  placeholder="Enter foo or bar"
+/>`,
+//4
+`<SuggestInput placeholder="Enter product title">
+  <SuggestInput.Option value="KODAK PIXPRO FZ55-BK">
+    <div className="flex items-start mb-3">
+      <img width="70" src="https://m.media-amazon.com/images/I/81swjZCbdiL._AC_SL100_.jpg" />
+      <div className="ml-3">
+        <h3 className="font-semibold">
+          KODAK PIXPRO FZ55-BK 16MP Digital Camera with 5X 
+          Optical Zoom & 1080P Full HD Video
+        </h3>
+        <div className="mt-2">$299.99</div>
+      </div>
+    </div>
+  </SuggestInput.Option>
+  <SuggestInput.Option value="Canon EOS Rebel T7">
+    <div className="flex items-start">
+      <img width="70" src="https://m.media-amazon.com/images/I/714hINuPoBL._AC_SL100_.jpg" />
+      <div className="ml-3">
+        <h3 className="font-semibold">
+          Canon EOS Rebel T7 DSLR Camera with 18-55mm Lens | 
+          Built-in Wi-Fi | 24.1 MP CMOS Sensor | DIGIC 4+ 
+          Image Processor HD Videos
+        </h3>
+        <div className="mt-2">$999.99</div>
+      </div>
+    </div>
+  </SuggestInput.Option>
+</SuggestInput>`
 ];
 
 //--------------------------------------------------------------------//
@@ -88,7 +120,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Autocomplete')}
+          {_('Suggest Input')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -116,18 +148,141 @@ export function Menu() {
  * Examples component
  */
 export function Examples() {
+  const possible = [ 'foo', 'bar', 'food', 'fool', 'bard', 'bark', 'barge' ];
+  const [ options, setOptions ] = useState(possible);
   return (
     <div className="flex items-start rmd-block flex-wrap gap-4">
-      {/* Info Example */}
+      {/* Basic Example */}
       <Preview 
-        height={100}
-        title="Info Example" 
+        title="Basic Example" 
         className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
-          TODO
+          <SuggestInput 
+            append="#dropdown-root"
+            className="w-full" 
+            option={({ selected }) => selected 
+              ? 'theme-bg-3 theme-white px-mx-3'
+              : 'px-mx-3'
+            }
+            options={[ 'foo', 'bar' ]} 
+            placeholder="Enter foo or bar"
+          />
         </Preview.Example>
-        <Preview.Code>{''}</Preview.Code>
+        <Preview.Code>{examples[0]}</Preview.Code>
+      </Preview>
+      {/* Minimum Characters Example */}
+      <Preview 
+        title="Minimum Characters Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <SuggestInput 
+            append="#dropdown-root"
+            className="w-full" 
+            chars={2}
+            option={({ selected }) => selected 
+              ? 'theme-bg-3 theme-white px-mx-3'
+              : 'px-mx-3'
+            }
+            options={[ 'foo', 'bar' ]} 
+            placeholder="Enter foo or bar"
+          />
+        </Preview.Example>
+        <Preview.Code>{examples[1]}</Preview.Code>
+      </Preview>
+      {/* On Query Example */}
+      <Preview 
+        title="On Query Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <SuggestInput 
+            append="#dropdown-root"
+            className="w-full" 
+            option={({ selected }) => selected 
+              ? 'theme-bg-3 theme-white px-mx-3'
+              : 'px-mx-3'
+            }
+            options={options} 
+            placeholder="Enter foo or bar"
+            onQuery={query => setOptions(
+              possible.filter(item => item.includes(query))
+            )}
+          />
+        </Preview.Example>
+        <Preview.Code>{examples[2]}</Preview.Code>
+      </Preview>
+      {/* Portaling Example */}
+      <Preview 
+        title="Portaling Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <SuggestInput 
+            append="#dropdown-root"
+            className="w-full" 
+            option={({ selected }) => selected 
+              ? 'theme-bg-3 theme-white px-mx-3'
+              : 'px-mx-3'
+            }
+            placeholder="Enter foo or bar"
+            onQuery={query => setOptions(
+              possible.filter(item => item.includes(query))
+            )}
+          >
+            {options.map(option => (
+              <SuggestInput.Option key={option} value={option}>
+                {option}
+              </SuggestInput.Option>
+            ))}
+          </SuggestInput>
+        </Preview.Example>
+        <Preview.Code>{examples[3]}</Preview.Code>
+      </Preview>
+      {/* Designed Options Example */}
+      <Preview 
+        title="Products Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <SuggestInput 
+            append="#dropdown-root"
+            className="w-full" 
+            option={({ selected }) => selected 
+              ? 'theme-bg-3 theme-white px-mx-3'
+              : 'px-mx-3'
+            }
+            placeholder="Enter product title"
+          >
+            <SuggestInput.Option value="KODAK PIXPRO FZ55-BK">
+              <div className="flex items-start mb-3">
+                <img width="70" src="https://m.media-amazon.com/images/I/81swjZCbdiL._AC_SL100_.jpg" />
+                <div className="ml-3">
+                  <h3 className="font-semibold">
+                    KODAK PIXPRO FZ55-BK 16MP Digital Camera with 5X 
+                    Optical Zoom & 1080P Full HD Video
+                  </h3>
+                  <div className="mt-2">$299.99</div>
+                </div>
+              </div>
+            </SuggestInput.Option>
+            <SuggestInput.Option value="Canon EOS Rebel T7">
+              <div className="flex items-start">
+                <img width="70" src="https://m.media-amazon.com/images/I/714hINuPoBL._AC_SL100_.jpg" />
+                <div className="ml-3">
+                  <h3 className="font-semibold">
+                    Canon EOS Rebel T7 DSLR Camera with 18-55mm Lens | 
+                    Built-in Wi-Fi | 24.1 MP CMOS Sensor | DIGIC 4+ 
+                    Image Processor HD Videos
+                  </h3>
+                  <div className="mt-2">$999.99</div>
+                </div>
+              </div>
+            </SuggestInput.Option>
+          </SuggestInput>
+        </Preview.Example>
+        <Preview.Code>{examples[4]}</Preview.Code>
       </Preview>
     </div>
   );
@@ -139,6 +294,7 @@ export function Examples() {
 export function Body() {
   //hooks
   const { _ } = useLanguage();
+  
   //render
   return (
     <div className={
@@ -146,16 +302,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Autocomplete')}
+        {_('Suggest Input')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the autocomplete field like the following.
+            Import the input field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Autocomplete from 'frui/form/Autocomplete';`}
+          {`import SuggestInput from 'frui/form/SuggestInput';`}
         </Code>
       </div>
 
@@ -166,22 +322,10 @@ export function Body() {
         <p className="py-4">
           <Translate>
             The following is a basic example of an 
-            <C l value="Autocomplete" /> field.
+            <C l value="<SuggestInput>" /> field.
           </Translate>
         </p>
-        <Preview 
-          title="Basic Example" 
-          className="border border-2 theme-bc-3"
-        >
-          <Preview.Example center padding>
-            <Autocomplete 
-              className="w-full" 
-              options={[ 'foo', 'bar' ]} 
-              placeholder="Enter foo or bar"
-            />
-          </Preview.Example>
-          <Preview.Code>{examples[0]}</Preview.Code>
-        </Preview>
+        <Examples />
       </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
@@ -191,7 +335,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             The following example makes use of all the possible 
-            events for <C value="Autocomplete" />.
+            events for <C value="SuggestInput" />.
           </Translate>
         </p>
         <Preview 
@@ -199,13 +343,10 @@ export function Body() {
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <Autocomplete 
+            <SuggestInput 
               className="w-full" 
               options={['foo', 'bar']}
-              onQuery={(_query, set) => setTimeout(
-                () => set(['boo', 'bar', 'baz']), 
-                1000
-              )}
+              onQuery={(_query) => {}}
               onDropdown={open => console.log('dropdown', open)}
               onChange={e => console.log('change', e)}
               onUpdate={value => console.log('update', value)}
@@ -353,7 +494,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the Autocomplete field red.
+            the SuggestInput field red.
           </Translate>
         </p>
         <Preview 
@@ -361,7 +502,7 @@ export function Body() {
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <Autocomplete 
+            <SuggestInput 
               error
               className="w-full" 
               options={[ 'foo', 'bar' ]} 
@@ -379,8 +520,8 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C value="Autocomplete" />, <C value="frui-form-autocomplete" />, <C value="frui-form-autocomplete-dropdown" />, <C value="frui-form-autocomplete-options" />,
-          and <C value="frui-form-autocomplete-option" /> CSS classes to globally theme autocomplete.
+          the <C value="SuggestInput" />, <C value="frui-form-suggest-input" />, <C value="frui-form-suggest-input-dropdown" />, <C value="frui-form-suggest-input-options" />,
+          and <C value="frui-form-suggest-input-option" /> CSS classes to globally theme suggest input.
         </Translate>
       </p>
       
@@ -390,7 +531,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Autocomplete>" /> field can be passed the 
+            The <C value="<SuggestInput>" /> field can be passed the 
             following props.
           </Translate>
         </p>

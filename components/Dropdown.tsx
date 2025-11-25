@@ -30,7 +30,9 @@ export type DropdownData = { label?: string, value: string };
 
 export type DropdownStates = {
   //the current selected option/s
-  active: boolean
+  selected: boolean,
+  //ie. for dropdown or for the control
+  target: string
 };
 
 export type DropdownContextProps = {
@@ -44,12 +46,12 @@ export type DropdownContextProps = {
   option?: CallableSlotStyleProp<DropdownStates>,
   //toggle handler for dropdown
   open: (show: boolean) => void,
-  //options count
-  options: number,
   //select handler
-  select: (option: string) => void,
+  select: (option: string, close?: boolean) => void,
   //the current selected option/s
-  selected: string[]
+  selected: string[],
+  //ie. for dropdown or for the control
+  target: string
 };
 
 export type DropdownConfig = {
@@ -76,6 +78,8 @@ export type DropdownConfig = {
   value?: string|string[]
 };
 
+export type DropdownOptionProp = string[] | DropdownData[] | Record<string, string>;
+
 export type DropdownOptionProps = CallableClassStyleProps<DropdownStates> 
   & CallableChildrenProps<DropdownStates> 
   & { value: string };
@@ -101,7 +105,7 @@ export type DropdownProps = ClassStyleProps & ChildrenProps & DropdownConfig & {
   //slot: style to apply to the select control
   option?: CallableSlotStyleProp<DropdownStates>,
   //serialized list of options as array or object
-  options?: DropdownData[]|Record<string, string>
+  options?: DropdownOptionProp
 };
 
 //--------------------------------------------------------------------//
@@ -112,7 +116,7 @@ export type DropdownProps = ClassStyleProps & ChildrenProps & DropdownConfig & {
  */
 export function buildOptions(
   children?: ReactNode,
-  data?: DropdownData[] | Record<string, string>,
+  data?: DropdownOptionProp,
   selected: string[] = [],
   multiple?: boolean
 ) {
@@ -189,9 +193,16 @@ export function getComponent(
   for (const child of nodes) {
     //skip null/undefined child
     if (!child) continue;
-    //if child is a DropdownHead
-    if (child.type === component || child.props?.[propName]) {
+    //if child is a [DropdownHead]
+    if (child.type === component 
+      || child.props?.[propName]
+      || child[propName]
+    ) {
       return child;
+    }
+    if (Array.isArray(child)) {
+      const nested = getComponent(component, propName, child);
+      if (nested) return nested;
     }
   }
   return null;
@@ -202,7 +213,7 @@ export function getComponent(
  */
 export function getComponents(
   children?: ReactNode,
-  data?: DropdownData[] | Record<string, string>,
+  data?: DropdownOptionProp,
   selected: string[] = [],
   multiple?: boolean
 ) {
@@ -219,7 +230,7 @@ export function getComponents(
 export function getControl(children?: ReactNode) {
   return getComponent(
     DropdownControl, 
-    'selectDropdownControl', 
+    'dropdownControl', 
     children
   );
 };
@@ -230,7 +241,7 @@ export function getControl(children?: ReactNode) {
 export function getFooter(children?: ReactNode) {
   return getComponent(
     DropdownFoot, 
-    'selectDropdownFoot', 
+    'dropdownFoot', 
     children
   );
 };
@@ -241,7 +252,7 @@ export function getFooter(children?: ReactNode) {
 export function getHeader(children?: ReactNode) {
   return getComponent(
     DropdownHead, 
-    'selectDropdownHead', 
+    'dropdownHead', 
     children
   );
 };
@@ -259,6 +270,7 @@ export function getOptions<T = unknown>(
     : children;
   const options: ReactNode[] = [];
   const selected: ReactNode[] = [];
+  const unselected: ReactNode[] = [];
   const others: ReactNode[] = [];
   for (const child of nodes) {
     //skip null/undefined child
@@ -271,38 +283,42 @@ export function getOptions<T = unknown>(
       const nested = getOptions(child, values, multiple);
       options.push(...nested.options);
       selected.push(...nested.selected);
+      unselected.push(...nested.unselected);
       others.push(...nested.others);
       continue;
     }
     //if child is a DropdownOption
-    if (child.type === DropdownOption || child.props?.selectOption) {
+    if (child.type === DropdownOption 
+      || child.props?.dropdownOption
+      || child.dropdownOption
+    ) {
+      //either way, add to options list
+      options.push(child);
       //if multiple selections allowed
       if (multiple) {
         //check if option is selected
-        if (values.includes(child.props.value)) {
-          //add to selected
-          selected.push(child);
-        } else {
-          //add to options
-          options.push(child);
-        }
+        values.includes(child.props.value)
+          //add to selected if so
+          ? selected.push(child)
+          //add to unselected otherwise
+          : unselected.push(child);
       //single selection
       } else if (values.includes(child.props.value)) {
-        //only add first match
-        if (selected.length === 0) {
-          //add to selected
-          selected.push(child);
-        }
-        //dont add to options
+        //if no selection yet
+        selected.length === 0
+          //add to selected if so (only first match)
+          ? selected.push(child)
+          //add to unselected otherwise
+          : unselected.push(child);
       } else {
-        //add to options
-        options.push(child);
+        //add to unselected
+        unselected.push(child);
       }
       continue;
     }
     others.push(child);
   }
-  return { options, selected, others };
+  return { options, selected, unselected, others };
 };
 
 /**
@@ -350,7 +366,7 @@ export function getRelativePosition(
  * Make options from data (array or object)
  */
 export function makeOptions(
-  data: DropdownData[] | Record<string, string>,
+  data: DropdownOptionProp,
   selected: string[], 
   multiple?: boolean
 ) {
@@ -367,7 +383,10 @@ export function makeOptions(
   const style = { padding: '2px 8px' };
   const options: ReactNode[] = [];
   for (let i = 0; i < data.length; i++) {
-    const { label, value } = data[i];
+    const option = data[i];
+    const { label, value } = typeof option === 'string'
+      ? { label: option, value: option }
+      : option;
     options.push(
       <DropdownOption key={i} value={value} style={style}>
         {label || value}
@@ -432,7 +451,7 @@ export function useDropdown(config: DropdownConfig) {
   // whether the dropdown is open
   const [ opened, open ] = useState(false);
   // the current selected option/s
-  const [ selected, setDropdowned ] = useState(defaultValues);
+  const [ selected, setSelected ] = useState(defaultValues);
   // position of the dropdown (applicable for both relative and absolute dropdowns)
   const [ position, setPosition ] = useState<[ number, number ]>([0, 0]);
   // max width of the dropdown (should be applicable for absolute dropdowns)
@@ -445,7 +464,7 @@ export function useDropdown(config: DropdownConfig) {
   const absolute = Boolean(append);
   //handlers
   const handlers = {
-    clear: () => setDropdowned([]),
+    clear: () => setSelected([]),
     open,
     portal(dropdown: JSX.Element) {
       //if no append selector
@@ -457,26 +476,26 @@ export function useDropdown(config: DropdownConfig) {
       if (!container) return null;
       return createPortal(dropdown, container);
     },
-    select: (option: string) => {
+    select: (option: string, close = true) => {
       //if multiple selections allowed
       if (multiple) {
         //if option is already selected, remove it
         if (selected.includes(option)) {
-          const values = selected.filter(s => s !== option);
-          setDropdowned(values);
+          const values = selected.filter(value => value !== option);
+          setSelected(values);
           onUpdate && onUpdate(values);
         //else add it
         } else {
           const values = [ ...selected, option ];
-          setDropdowned(values);
+          setSelected(values);
           onUpdate && onUpdate(values);
         }
       //single selection
       } else {
-        setDropdowned([ option ]);
+        setSelected([ option ]);
         onUpdate && onUpdate(option);
         //close the dropdown
-        open(false);
+        close && open(false);
       }
     }
   };
@@ -489,7 +508,7 @@ export function useDropdown(config: DropdownConfig) {
       handlers.select(value);
     } else if (multiple && Array.isArray(value)) {
       //update selected values
-      setDropdowned(value);
+      setSelected(value);
     }
     //trigger update handler
     value && onUpdate && onUpdate(value);
@@ -602,12 +621,12 @@ export const DropdownContext = createContext<DropdownContextProps>({
   open: () => {},
   //whether the dropdown is open
   opened: false,
-  //options count
-  options: 0,
   //select an option
   select: () => {},
   //the current selected option/s
-  selected: []
+  selected: [],
+  //ie. for dropdown or for the control
+  target: 'dropdown'
 });
 
 /**
@@ -618,11 +637,11 @@ export function DropdownOption(props: DropdownOptionProps) {
   //props
   const { value, className, style, children } = props;
   //hooks
-  const { select, selected, option } = useDropdownContext();
+  const { target, select, selected, option } = useDropdownContext();
   //variables
   const active = selected.includes(value);
   // get slot styles
-  const slot = option ? getSlotStyles(option, { active }) : {};
+  const slot = option ? getSlotStyles(option, { target, selected: active }) : {};
   //get final classes and styles
   const { classes, styles } = getClassStyles({
     //default classes to apply
@@ -638,14 +657,17 @@ export function DropdownOption(props: DropdownOptionProps) {
       style: style || slot.style
     },
     //state to pass to callable props
-    state: { active }
+    state: { target, selected: active }
   });
   //handlers
   const onClick = () => select(value);
   //render
   return (
     <div className={classes.join(' ')} style={styles} onClick={onClick}>
-      {typeof children === 'function' ? children({ active }) : (children || value)}
+      {typeof children === 'function' 
+        ? children({ target, selected: active }) 
+        : (children || value)
+      }
     </div>
   );
 };
@@ -803,13 +825,16 @@ export function Dropdown(props: DropdownProps) {
     top: `${position[1]}px`
   };
   // get slot styles
-  const containerStyles = container 
-    ? getSlotStyles(container, {}) 
-    : {};
-  containerStyles.className = [ 
-    'dropdown-container', 
-    containerStyles.className || '' 
-  ].filter(Boolean).join(' ');
+  const containerStyles = getClassStyles({
+    //default classes to apply
+    classes: [ 'dropdown-container' ],
+    //style props
+    props: container 
+      ? getSlotStyles(container, {}) 
+      : {},
+    //state to pass to callable props
+    state: {}
+  });
   // determine provider
   const components = getComponents(
     children,
@@ -821,19 +846,19 @@ export function Dropdown(props: DropdownProps) {
     multiple,
     opened,
     option,
-    options: components.options.length,
     clear: handlers.clear,
     open: handlers.open,
     select: handlers.select,
-    selected
+    selected,
+    target: 'dropdown'
   };
   //render
   return (
     <DropdownContext.Provider value={provider}>
       <div 
         ref={refs.container} 
-        className={containerStyles.className} 
-        style={containerStyles.style} 
+        className={containerStyles.classes.join(' ')} 
+        style={containerStyles.styles} 
       >
         {components.control}
         {opened && components.options.length > 0 && handlers.portal(

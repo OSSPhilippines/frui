@@ -1,48 +1,51 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import type { 
-  ChangeEvent, 
-  FocusEvent, 
-  KeyboardEvent, 
-  CSSProperties 
-} from 'react';
-import { useState } from 'react';
 //frui
+import type { 
+  SlotStyleProp, 
+  CallableSlotStyleProp 
+} from '../types.js';
+import type { 
+  DropdownOptionProp,
+  DropdownStates, 
+  DropdownConfig 
+} from '../Dropdown.js';
 import type { InputProps } from './Input.js';
+import Dropdown from '../Dropdown.js';
 import Input from './Input.js';
+import getSlotStyles from '../helpers/getSlotStyles.js';
 
 //--------------------------------------------------------------------//
 // Types
 
-export type SuggestInputConfig = {
-  options?: string[],
-  defaultValue?: string|number|readonly string[],
-  onSelected?: (option: string) => void,
-  onQuery?: (query: string, set: Function) => void,
-  onDropdown?: (show: boolean) => void,
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
-  onUpdate?: (value: string) => void
+export type SuggestInputControlConfig = {
+  //number of characters to trigger suggestions
+  chars?: number,
+  //called whenever user types
+  onQuery?: (query: string) => void
 };
 
-export type SuggestInputDropdownProps = { 
-  options?: string[],
-  show: boolean,
-  styles?: Record<string, CSSProperties|false|undefined>|false,
-  classNames?: Record<string, string|false|undefined>|false,
-  select: (option: string) => void,
-  match: (option: string) => void
-};
+export type SuggestInputControlProps = SuggestInputControlConfig & InputProps;
 
-export type SuggestInputProps = InputProps & {
-  options?: string[],
-  styles?: Record<string, CSSProperties|false|undefined>|false,
-  classNames?: Record<string, string|false|undefined>|false,
-  onSelected?: (option: string) => void,
-  onQuery?: (query: string, set: Function) => void,
-  onDropdown?: (show: boolean) => void
-};
+export type SuggestInputProps = Omit<InputProps 
+  & DropdownConfig
+  & { 
+    //number of characters to trigger suggestions
+    chars?: number,
+    //slot: style to apply to the select control
+    control?: SlotStyleProp,
+    //slot: style to apply to the select drop down
+    dropdown?: SlotStyleProp,
+    //called whenever user types
+    onQuery?: (query: string) => void,
+    //slot: style to apply to the select control
+    option?: CallableSlotStyleProp<DropdownStates>,
+    //serialized list of options as array or object
+    options?: DropdownOptionProp
+  }, 
+  'multiple'
+>;
 
 //--------------------------------------------------------------------//
 // Hooks
@@ -50,105 +53,63 @@ export type SuggestInputProps = InputProps & {
 /**
  * SuggestInput Hook Aggregate
  */
-export function useSuggestInput(config: SuggestInputConfig) {
-  const { 
-    options: defaultOptions,
-    defaultValue,
-    onSelected,
-    onQuery,
-    onDropdown,
-    onChange,
-    onUpdate
-  } = config;
-  //hooks
-  //controlled input value
-  const [ value, setValue ] = useState(defaultValue || '');
-  //options
-  const [ options, setOptions ] = useState(defaultOptions || []);
-  //search query string
-  const [ query, setQuery ] = useState('');
-  //whether to show dropdown
-  const [ showing, show ] = useState(false);
-  //handlers
-  const handlers = {
-    //updates query string on key down
-    search: (e: KeyboardEvent) => {
-      show(true);
-      onDropdown && onDropdown(true);
-      setTimeout(() => {
-        const input = e.target as HTMLInputElement;
-        setQuery(input.value);
-        onQuery && onQuery(input.value, setOptions);
-      });
-    },
-    //send the input value on input change
-    update: (e: ChangeEvent<HTMLInputElement>) => {
-      onChange && onChange(e);
-      onUpdate && onUpdate(e.target.value);
-      setValue(e.target.value);
-    },
-    //matches options with query string
-    match: (option: string) => {
-      const keyword = (query || '').toLowerCase();
-      const phrase = option;
-      return query.length && phrase.toLowerCase().indexOf(keyword) >= 0;
-    },
-    //selects an option from the dropdown
-    select: (option: string) => {
-      show(false);
-      onDropdown && onDropdown(false);
-      onUpdate && onUpdate(option);
-      setValue(option);
-      if (onChange) {
-        //simulate input change event
-        const e = { target: { value: option } };
-        onChange(e as ChangeEvent<HTMLInputElement>);
-      }
-      onSelected && onSelected(option);
-    },
-    //hide dropdown on blur
-    blur: (_e: FocusEvent<HTMLInputElement>) => {
-      setTimeout(() => show(false), 10)
-    }
-  };
-
-  return { value, options, showing, handlers };
+export function useSuggestInputControl(config: SuggestInputControlConfig) {
+  const {} = config;
 };
 
 //--------------------------------------------------------------------//
 // Components
 
-/**
- * SuggestInput Dropdown
- */
-export function SuggestInputDropdown(props: SuggestInputDropdownProps) {
+export function SuggestInputControl(props: SuggestInputControlProps) {
+  //props
   const { 
-    options, 
-    show, 
-    select, 
-    match 
+    //number of characters to trigger suggestions
+    chars,
+    //custom class name
+    className,
+    //name used by forms
+    name, //?: string
+    //position of the dropdown
+    //called whenever user types
+    onQuery, //?: (query: string) => void
+    //custom inline styles
+    style,
+    ...inputProps
   } = props;
-
-  const style = !show ? { display: 'none' }: undefined;
-
-  if (!options || options.filter(match).length === 0) {
-    return null;
-  }
-
+  //variables
+  // determine classes
+  const classes = [ 'frui-form-suggest-input-control' ];
+  className && classes.push(className);
+  //hooks
+  const { open, select, selected } = Dropdown.useContext();
+  //handlers
+  const handlers = {
+    query(value: string) {
+      if (typeof value === 'string') {
+        select(value, false);
+        if (!chars || value.length >= chars) {
+          open(true);
+          onQuery && onQuery(value);
+        } else if (chars && value.length < chars) {
+          open(false);
+        }
+      }
+    },
+    hide() {
+      setTimeout(() => open(false));
+    }
+  };
+  //render
   return (
-    <div className="frui-form-input-suggest-dropdown" style={style}>
-      <div className="frui-form-input-suggest-options">
-        {options && options.filter(match).map((option, i) => (
-          <div 
-            key={i} 
-            onClick={_ => select(option)} 
-            className="frui-form-input-suggest-option"
-          >
-            {option}
-          </div>
-        ))}
-      </div>
-    </div>
+    <Input
+      {...inputProps}
+      className={classes.join(' ')}
+      style={style}
+      name={name}
+      value={selected[0] || ''}
+      onUpdate={handlers.query}
+      onBlur={handlers.hide}
+    />
   );
 };
 
@@ -156,50 +117,104 @@ export function SuggestInputDropdown(props: SuggestInputDropdownProps) {
  * SuggestInput  Component (Main)
  */
 export function SuggestInput(props: SuggestInputProps) {
+  //props
   const { 
-    options: defaultOptions,
+    //selector used to get the element to which the dialog will be
+    // appended to when activated
+    append, //?: string  
+    //position of the dropdown
+    bottom, //?: boolean
+    //children (options)
+    children,
+    //custom class name
     className,
+    //uncontrolled serializable select value
+    defaultValue, //?: T
+    //slot: style to apply to the select control
+    control, //: SlotStyleProp
+    //slot: style to apply to the select drop down
+    dropdown, //: SlotStyleProp
+    //whether the select is in an error state
+    error, //?: boolean
+    //position of the dropdown
+    left, //?: boolean
+    //dropdown handler
+    onDropdown, //?: (show: boolean) => void
+    //update handler
+    onUpdate, //?: (value: string) => void
+    //slot: style to apply to the select control
+    option, //: CallableSlotStyleProp<SelectStates>
+    //serialized list of options as array or object
+    options, //: SelectOption[]|Record<string, string>
+    //position of the dropdown
+    right, //?: boolean
+    //custom inline styles
     style,
-    defaultValue,
-    value: _value,
-    onQuery,
-    onDropdown,
-    onChange,
-    onUpdate,
-    ...attributes
+    //position of the dropdown
+    top, //?: boolean
+    //controlled select value
+    value, //?: T
+    ...inputProps
   } = props;
-  const { value, options, showing, handlers } = useSuggestInput({
-    defaultValue: defaultValue || _value,
-    options: defaultOptions,
-    onQuery,
-    onDropdown,
-    onChange,
-    onUpdate
-  });
   //variables
-  const classNames = [ 'frui-form-input-suggest' ];
-  if (className) {
-    classNames.push(className);
+  // determine classes
+  const classes = [ 'frui-form-suggest-input' ];
+  className && classes.push(className);
+  if (error) {
+    classes.push('frui-form-suggest-input-error');
   }
-
+  // get slot styles
+  const controlStyles = control ? getSlotStyles(control, {}) : {};
+  const dropdownStyles = dropdown ? getSlotStyles(dropdown, {}) : {};
+  //render
   return (
-    <div className={classNames.join(' ')} style={style}>
-      <Input 
-        onBlur={handlers.blur}
-        onKeyDown={handlers.search}
-        onChange={handlers.update}
-        {...attributes}
-        value={value}
-      />
-      <SuggestInputDropdown 
-        options={options} 
-        show={showing} 
-        select={handlers.select} 
-        match={handlers.match} 
-      />
-    </div>
+    <Dropdown
+      {...dropdownStyles}
+      append={append}
+      bottom={bottom}
+      defaultValue={defaultValue}
+      container={{ className: classes.join(' '), style }}
+      left={left}
+      onDropdown={onDropdown}
+      onUpdate={onUpdate}
+      option={option}
+      options={options}
+      right={right}
+      top={top}
+      value={value}
+    >
+      <Dropdown.Control>
+        <SuggestInputControl 
+          {...inputProps}
+          className={controlStyles.className} 
+          style={controlStyles.style}
+        />
+      </Dropdown.Control>
+      {children}
+    </Dropdown>
   );
 };
 
 //defaults to autocomplete
-export default SuggestInput;
+export default Object.assign(SuggestInput, {
+  getAbsolutePosition: Dropdown.getAbsolutePosition,
+  getComponent: Dropdown.getComponent,
+  getComponents: Dropdown.getComponents,
+  getControl: Dropdown.getControl,
+  getFooter: Dropdown.getFooter,
+  getHeader: Dropdown.getHeader,
+  getOptions: Dropdown.getOptions,
+  getRelativePosition: Dropdown.getRelativePosition,
+  makeOptions: Dropdown.makeOptions,
+  buildOptions: Dropdown.buildOptions,
+  useDropdown: Dropdown.useDropdown,
+  useDropdownContext: Dropdown.useDropdownContext,
+  use: Dropdown.useDropdown,
+  useContext: Dropdown.useDropdownContext,
+  useSelect: Dropdown.useDropdown,
+  Context: Dropdown.Context,
+  Control: SuggestInputControl,
+  Option: Dropdown.Option,
+  Head: Dropdown.Head,
+  Foot: Dropdown.Foot
+});

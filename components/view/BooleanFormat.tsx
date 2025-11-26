@@ -1,15 +1,15 @@
 //--------------------------------------------------------------------//
 // Types
 
-export type YesnoProps = { value: any, yes?: string, no?: string };
+export type BooleanFormatProps = { value: any, yes?: string, no?: string };
 
 //--------------------------------------------------------------------//
 // Components
 
 /**
- * Yesno Format Component (Main)
+ * Boolean Format Component (Main)
  */
-export function BooleanFormat(props: YesnoProps) {
+export function BooleanFormat(props: BooleanFormatProps) {
   const { value, yes = 'Yes', no = 'No' } = props;
   return (<>{!!value ? yes : no}</>);
 };

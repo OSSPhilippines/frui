@@ -58,7 +58,7 @@ import TagList from './TagList.js';
 export type { TextProps } from './TextFormat.js';
 import TextFormat from './TextFormat.js';
 
-export type { YesnoProps } from './BooleanFormat.js';
+export type { BooleanFormatProps } from './BooleanFormat.js';
 import BooleanFormat from './BooleanFormat.js';
 
 export {

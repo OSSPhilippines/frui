@@ -370,7 +370,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the TextEditor field like the following.
+            Import the text editor field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

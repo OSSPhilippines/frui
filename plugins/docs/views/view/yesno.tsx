@@ -106,7 +106,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the BooleanFormat format like the following.
+            Import the boolean format like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

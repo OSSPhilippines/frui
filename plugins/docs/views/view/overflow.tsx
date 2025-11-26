@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Overflow from 'components/view/TextFormat.js';
+import TextFormat from 'components/view/TextFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -16,8 +16,8 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/view/overflow';
-const title = 'Overflow Format';
-const description = 'Overflow formats convert clip values.';
+const title = 'Text Format';
+const description = 'TextFormat formats convert clip values.';
 
 const props = [
   [ 'hellip', 'boolean', 'No', 'Add ... after clipped value' ],
@@ -108,11 +108,11 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the overflow format like the following.
+            Import the text format like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Overflow from 'frui/view/Overflow';`}
+          {`import TextFormat from 'frui/view/TextFormat';`}
         </Code>
       </div>
 
@@ -121,10 +121,10 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Overflow value="Lorem Ipsum" length={8} hellip />
+          <TextFormat value="Lorem Ipsum" length={8} hellip />
         </div>
         <Code language="typescript">
-          {`<Overflow value="Lorem Ipsum" length={8} hellip />`}
+          {`<TextFormat value="Lorem Ipsum" length={8} hellip />`}
         </Code>
       </div>
 
@@ -134,7 +134,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Overflow>" /> format can be passed the 
+            The <C value="<TextFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

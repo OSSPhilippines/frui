@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Country from 'components/view/CountryFormat.js';
+import CountryFormat from 'components/view/CountryFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -115,7 +115,7 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Country from 'frui/view/Country';`}
+          {`import CountryFormat from 'frui/view/CountryFormat';`}
         </Code>
       </div>
 
@@ -124,10 +124,10 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Country value="US" />
+          <CountryFormat value="US" />
         </div>
         <Code language="typescript">
-          {`<Country value="US" />`}
+          {`<CountryFormat value="US" />`}
         </Code>
       </div>
 
@@ -151,10 +151,10 @@ export function Body() {
       </p>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Country flag={false} value="US" />
+          <CountryFormat flag={false} value="US" />
         </div>
         <Code language="typescript">
-          {`<Country flag={false} value="US" />`}
+          {`<CountryFormat flag={false} value="US" />`}
         </Code>
       </div>
 
@@ -169,10 +169,10 @@ export function Body() {
       </p>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Country lg value="US" />
+          <CountryFormat lg value="US" />
         </div>
         <Code language="typescript">
-          {`<Country lg value="US" />`}
+          {`<CountryFormat lg value="US" />`}
         </Code>
       </div>
 

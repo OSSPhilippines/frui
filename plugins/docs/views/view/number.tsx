@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Number from 'components/view/NumberFormat.js';
+import NumberFormat from 'components/view/NumberFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -114,7 +114,7 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Number from 'frui/view/Number';`}
+          {`import NumberFormat from 'frui/view/NumberFormat';`}
         </Code>
       </div>
 
@@ -123,10 +123,10 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Number value="12345.67" separator="," decimal="." decimals={2} />
+          <NumberFormat value="12345.67" separator="," decimal="." decimals={2} />
         </div>
         <Code language="typescript">
-          {`<Number value="12345.67" separator="," decimal="." decimals={2} />`}
+          {`<NumberFormat value="12345.67" separator="," decimal="." decimals={2} />`}
         </Code>
       </div>
 
@@ -136,7 +136,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Number>" /> format can be passed the 
+            The <C value="<NumberFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

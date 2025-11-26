@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Imagelist from 'components/view/ImageCarousel.js';
+import ImageCarousel from 'components/view/ImageCarousel.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -15,11 +15,11 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/view/imagelist';
-const title = 'Image List Format';
-const description = 'Image list formats display a list of images with various properties.';
+const title = 'Image Carousel Format';
+const description = 'Image carousel formats display a list of images with various properties.';
 
 const codeBasic = `
-<Imagelist className="flex" value={[
+<ImageCarousel className="flex" value={[
   'https://images.wsj.net/im-580612/8SR', 
   'https://images.wsj.net/im-580612/8SR'
 ]} width="50" />`.trim();
@@ -58,7 +58,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Image List')}
+          {_('Image Carousel')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -110,16 +110,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Imagelist')}
+        {_('Image Carousel')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the image list format like the following.
+            Import the image carousel format like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Imagelist from 'frui/view/Imagelist';`}
+          {`import ImageCarousel from 'frui/view/ImageCarousel';`}
         </Code>
       </div>
 
@@ -128,7 +128,7 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Imagelist className="flex" value={[
+          <ImageCarousel className="flex" value={[
             'https://images.wsj.net/im-580612/8SR', 
             'https://images.wsj.net/im-580612/8SR'
           ]} width="50" />
@@ -144,7 +144,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Imagelist>" /> format can be passed the 
+            The <C value="<ImageCarousel>" /> format can be passed the 
             following props.
           </Translate>
         </p>

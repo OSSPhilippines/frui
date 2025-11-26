@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Color from 'components/view/ColorFormat.js';
+import ColorFormat from 'components/view/ColorFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -115,7 +115,7 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Color from 'frui/view/Color';`}
+          {`import ColorFormat from 'frui/view/ColorFormat';`}
         </Code>
       </div>
 
@@ -124,10 +124,10 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Color value="salmon" />
+          <ColorFormat value="salmon" />
         </div>
         <Code language="typescript">
-          {`<Color value="salmon" />`}
+          {`<ColorFormat value="salmon" />`}
         </Code>
       </div>
 
@@ -137,7 +137,7 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can apply different sizes to the 
-          <C l value="Color" /> format.
+          <C l value="ColorFormat" /> format.
         </Translate>
       </p>
 
@@ -151,10 +151,10 @@ export function Body() {
       </p>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Color box={false} value="salmon" />
+          <ColorFormat box={false} value="salmon" />
         </div>
         <Code language="typescript">
-          {`<Color box={false} value="salmon" />`}
+          {`<ColorFormat box={false} value="salmon" />`}
         </Code>
       </div>
 
@@ -169,17 +169,17 @@ export function Body() {
       </p>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Color lg value="salmon" />
+          <ColorFormat lg value="salmon" />
         </div>
         <Code language="typescript">
-          {`<Color lg value="salmon" />`}
+          {`<ColorFormat lg value="salmon" />`}
         </Code>
       </div>
 
       <p className="py-4">
         <Translate>
           You can also add your own custom class to 
-          <C l value="Color" /> format or use any combination of 
+          <C l value="ColorFormat" /> format or use any combination of 
           <C l value="frui-format-color" />, and
           <C l value="frui-format-color-box" /> CSS classes.
         </Translate>
@@ -191,7 +191,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Color>" /> format can be passed the 
+            The <C value="<ColorFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

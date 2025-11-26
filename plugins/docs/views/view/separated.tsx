@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Separated from 'components/view/Separate.js';
+import Separate from 'components/view/Separate.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -15,8 +15,8 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/view/separated';
-const title = 'Separated Format';
-const description = 'Separated formats inserts a separator between multiple values.';
+const title = 'Separate Format';
+const description = 'Separate formats inserts a separator between multiple values.';
 
 const props = [
   [ 'separator', 'string', 'No', 'Characters between values' ],
@@ -48,7 +48,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Separated')}
+          {_('Separate')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -100,16 +100,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Separated')}
+        {_('Separate')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the separated format like the following.
+            Import the separate format like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Separated from 'frui/view/Separated';`}
+          {`import Separate from 'frui/view/Separate';`}
         </Code>
       </div>
 
@@ -118,10 +118,10 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Separated value={['Foo', 'bar']} separator=" - " />
+          <Separate value={['Foo', 'bar']} separator=" - " />
         </div>
         <Code language="typescript">
-          {`<Separated value={['Foo', 'bar']} separator=" - " />`}
+          {`<Separate value={['Foo', 'bar']} separator=" - " />`}
         </Code>
       </div>
 
@@ -131,7 +131,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Separated>" /> format can be passed the 
+            The <C value="<Separate>" /> format can be passed the 
             following props.
           </Translate>
         </p>

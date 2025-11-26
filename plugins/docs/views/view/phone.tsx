@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Phone from 'components/view/PhoneLink.js';
+import PhoneLink from 'components/view/PhoneLink.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -15,8 +15,8 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/view/phone';
-const title = 'Phone Format';
-const description = 'Phone formats convert values to clickable phone displays.';
+const title = 'PhoneLink Format';
+const description = 'PhoneLink formats convert values to clickable phone displays.';
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
@@ -106,11 +106,11 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the phone format like the following.
+            Import the phone link format like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Phone from 'frui/view/Phone';`}
+          {`import PhoneLink from 'frui/view/PhoneLink';`}
         </Code>
       </div>
 
@@ -119,10 +119,10 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Phone className="theme-2" value="+1 (410) 555-2424" />
+          <PhoneLink className="theme-2" value="+1 (410) 555-2424" />
         </div>
         <Code language="typescript">
-          {`<Phone className="theme-2" value="+1 (410) 555-2424" />`}
+          {`<PhoneLink className="theme-2" value="+1 (410) 555-2424" />`}
         </Code>
       </div>
 
@@ -132,7 +132,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Phone>" /> format can be passed the 
+            The <C value="<PhoneLink>" /> format can be passed the 
             following props.
           </Translate>
         </p>

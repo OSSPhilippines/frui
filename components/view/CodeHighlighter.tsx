@@ -56,4 +56,5 @@ export function CodeHighlighter(props: CodeHighlighterProps) {
   );
 };
 
+//defaults to code highlighter
 export default CodeHighlighter;

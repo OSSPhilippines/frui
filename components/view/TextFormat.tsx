@@ -35,9 +35,9 @@ export function Text({ value, format }: TextProps) {
 };
 
 /**
- * Overflow Format Component (Main)
+ * Text Format Component (Main)
  */
-export function Overflow(props: OverflowProps) {
+export function TextFormat(props: OverflowProps) {
   const { value, length, words, hellip } = props;
   const count = typeof length === 'string' ? Number(length) || undefined : length;
   if (words) {
@@ -66,5 +66,5 @@ export function Overflow(props: OverflowProps) {
   return (<>{value}</>);
 };
 
-//defaults to overflow
-export default Overflow;
+//defaults to text format
+export default TextFormat;

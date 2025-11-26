@@ -26,7 +26,7 @@ export type CountryProps = {
 /**
  * Country Format Component (Main)
  */
-export function Country(props: CountryProps) {
+export function CountryFormat(props: CountryProps) {
   const { 
     value, 
     flag = true, 
@@ -91,5 +91,5 @@ export function Country(props: CountryProps) {
   );
 };
 
-//defaults to country
-export default Country;
+//defaults to country format
+export default CountryFormat;

@@ -13,9 +13,9 @@ export type ImagelistProps = HTMLImageProps & { value: string[] };
 // Components
 
 /**
- * Imagelist Format Component (Main)
+ * ImageCarousel Format Component (Main)
  */
-export default function Imagelist(props: ImagelistProps) {
+export function ImageCarousel(props: ImagelistProps) {
   const { value, className, ...attributes } = props;
   const classNames = ['frui-format-imagelist'];
   if (className) {
@@ -29,3 +29,6 @@ export default function Imagelist(props: ImagelistProps) {
     </div>
   );
 };
+
+//defaults to image carousel
+export default ImageCarousel;

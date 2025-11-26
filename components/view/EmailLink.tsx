@@ -17,11 +17,11 @@ export type EmailProps = LinkProps;
 /**
  * Email Format Component (Main)
  */
-export function Email({ value, ...attributes }: EmailProps) {
+export function EmailLink({ value, ...attributes }: EmailProps) {
   return (
     <Link {...attributes} value={`mailto:${value}`} label={value} />
   );
 };
 
-//defaults to email
-export default Email;
+//defaults to email link format
+export default EmailLink;

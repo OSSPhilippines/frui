@@ -27,7 +27,7 @@ export type CurrencyProps = {
 /**
  * Currency Format Component (Main)
  */
-export function Currency(props: CurrencyProps) {
+export function CurrencyFormat(props: CurrencyProps) {
   const { 
     value, 
     flag = true, 
@@ -100,5 +100,5 @@ export function Currency(props: CurrencyProps) {
   );
 };
 
-//defaults to currency
-export default Currency;
+//defaults to currency format
+export default CurrencyFormat;

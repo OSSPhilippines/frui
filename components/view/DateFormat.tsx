@@ -62,5 +62,5 @@ export function DateFormat(props: DateProps) {
   );
 };
 
-//defaults to date
+//defaults to date format
 export default DateFormat;

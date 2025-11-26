@@ -20,11 +20,11 @@ export type PhoneProps = LinkProps;
 /**
  * Phone Format Component (Main)
  */
-export function Phone({ value, ...attributes }: PhoneProps) {
+export function PhoneLink({ value, ...attributes }: PhoneProps) {
   return (
     <Link {...attributes} value={`tel:${value}`} label={value} />
   );
 };
 
-//defaults to phone
-export default Phone;
+//defaults to phone link
+export default PhoneLink;

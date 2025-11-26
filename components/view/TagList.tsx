@@ -22,7 +22,7 @@ export type TaglistProps = BadgeProps & {
 /**
  * Taglist Format Component (Main)
  */
-export function Taglist(props: TaglistProps) {
+export function TagList(props: TaglistProps) {
   const { className, style, value, ...attributes } = props;
   return (
     <span className="frui-format-taglist">
@@ -34,4 +34,4 @@ export function Taglist(props: TaglistProps) {
 };
 
 //defaults to taglist
-export default Taglist;
+export default TagList;

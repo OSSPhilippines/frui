@@ -20,7 +20,7 @@ export type SeparatedProps = {
 /**
  * Separated Format Component (Main)
  */
-export function Separated(props: SeparatedProps) {
+export function Separate(props: SeparatedProps) {
   const { value, className, style, separator = ' ' } = props;
   if (separator === 'line') {
     return (
@@ -36,5 +36,5 @@ export function Separated(props: SeparatedProps) {
   );  
 };
 
-//defaults to separated
-export default Separated;
+//defaults to Separate
+export default Separate;

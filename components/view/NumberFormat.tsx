@@ -66,5 +66,5 @@ export function NumberFormat(props: NumberProps) {
   return (<>{number}</>);
 };
 
-//defaults to number
+//defaults to number format
 export default NumberFormat;

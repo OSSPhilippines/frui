@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Date from 'components/view/DateFormat.js';
+import DateFormat from 'components/view/DateFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -69,7 +69,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Date')}
+          {_('Date Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -121,7 +121,7 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Date')}
+        {_('Date Format')}
       </h1>
       <div>
         <p className="py-2">
@@ -130,7 +130,7 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Date from 'frui/view/Date';`}
+          {`import DateFormat from 'frui/view/DateFormat';`}
         </Code>
       </div>
 
@@ -139,10 +139,10 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Date value="2024-04-20" />
+          <DateFormat value="2024-04-20" />
         </div>
         <Code language="typescript">
-          {`<Date value="2024-04-20" />`}
+          {`<DateFormat value="2024-04-20" />`}
         </Code>
       </div>
 
@@ -152,7 +152,7 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can apply different locales and formats to the 
-          <C l value="Date" /> format.
+          <C l value="DateFormat" /> format.
         </Translate>
       </p>
 
@@ -166,7 +166,7 @@ export function Body() {
       </p>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Date format="MMMM Do YYYY, h:mm a" value="2024-04-20" />
+          <DateFormat format="MMMM Do YYYY, h:mm a" value="2024-04-20" />
         </div>
         <Code language="typescript">
           {examples[0]}
@@ -179,7 +179,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Date>" /> format can be passed the 
+            The <C value="<DateFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

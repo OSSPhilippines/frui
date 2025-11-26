@@ -54,7 +54,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Country')}
+          {_('Country Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -106,7 +106,7 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Country')}
+        {_('Country Format')}
       </h1>
       <div>
         <p className="py-2">
@@ -191,7 +191,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Country>" /> format can be passed the 
+            The <C value="<CountryFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

@@ -55,7 +55,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Code')}
+          {_('CodeHighlighter')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -107,17 +107,17 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Code')}
+        {_('CodeHighlighter')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the code format like the following.
+            Import the code highlighter format like the following.
           </Translate>
         </p>
-        <Code language="typescript" className="mt-2">
-          {`import Code from 'frui/view/Code';`}
-        </Code>
+        <CodeHighlighter language="typescript" className="mt-2">
+          {`import CodeHighlighter from 'frui/view/CodeHighlighter';`}
+        </CodeHighlighter>
       </div>
 
       <h2 id="basics" className="uppercase font-bold text-lg mt-8">
@@ -152,7 +152,7 @@ export function Body() {
             <Code language="ts">{`attributes: [Object object]`}</Code>
           </Preview.Example>
           <Preview.Code>
-            {`<Code>{\`attributes: [Object object]\`}</Code>`}
+            {`<CodeHighlighter>{\`attributes: [Object object]\`}</Code>`}
           </Preview.Code>
         </Preview>
         <p className="py-4">
@@ -201,7 +201,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Code>" /> format can be passed the 
+            The <C value="<CodeHighlighter>" /> format can be passed the 
             following props.
           </Translate>
         </p>

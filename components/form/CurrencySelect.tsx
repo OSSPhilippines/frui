@@ -9,12 +9,7 @@ import type { ExtendsType } from '../types.js';
 import type { SelectProps } from './Select.js';
 import currencies from '../data/currencies.js';
 import countries from '../data/countries.js';
-import { 
-  Select, 
-} from './Select.js';
-import SelectOption from './Select.js';
-import { DropdownHead } from 'components/Dropdown.js';
-
+import Select from  './Select.js';
 //--------------------------------------------------------------------//
 // Types
 
@@ -99,7 +94,7 @@ export function CurrencySelect(props: CurrencySelectProps) {
       placeholder={placeholder || 'Select a currency'}
     >
       {!!searchable && (
-        <DropdownHead>
+        <Select.Head>
           <div>
             <input 
               type="text" 
@@ -110,12 +105,12 @@ export function CurrencySelect(props: CurrencySelectProps) {
             />
             <span>🔍</span>
           </div>
-        </DropdownHead>
+        </Select.Head>
       )}
       {options.map(option => (
-        <SelectOption key={option.code} value={option.code}>
+        <Select.Option key={option.code} value={option.code}>
           {option.flag} {option.name} ({option.symbol})
-        </SelectOption>
+        </Select.Option>
       ))}
     </Select>
   );

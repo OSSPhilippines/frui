@@ -1,3 +1,6 @@
+export type { BooleanFormatProps } from './BooleanFormat.js';
+import BooleanFormat from './BooleanFormat.js';
+
 export type { ColorFormatProps } from './ColorFormat.js';
 import ColorFormat from './ColorFormat.js';
 
@@ -61,9 +64,6 @@ import TextFormat from './TextFormat.js';
 export type { TextProps } from './TextFormat.js';
 import { Text }  from './TextFormat.js';
 
-export type { BooleanFormatProps } from './BooleanFormat.js';
-import BooleanFormat from './BooleanFormat.js';
-
 export {
   BooleanFormat,
   ColorFormat,
@@ -85,6 +85,6 @@ export {
   Separate,
   TableFormat,
   TagListFormat,
-  TextFormat,
-  Text
-};
+  Text,
+  TextFormat
+};  

@@ -305,6 +305,9 @@ export {
 //--------------------------------------------------------------------//
 // View
 
+export type { BooleanFormatProps } from './view/BooleanFormat.js';
+import BooleanFormat from './view/BooleanFormat.js';
+
 export type { ColorFormatProps } from './view/ColorFormat.js';
 import ColorFormat from './view/ColorFormat.js';
 
@@ -364,9 +367,6 @@ import TagList from './view/TagList.js';
 
 export type { TextFormatProps } from './view/TextFormat.js';
 import TextFormat from './view/TextFormat.js';
-
-export type { BooleanFormatProps } from './view/BooleanFormat.js';
-import BooleanFormat from './view/BooleanFormat.js';
 
 export {
   BooleanFormat,

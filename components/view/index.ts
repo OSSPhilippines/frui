@@ -10,7 +10,7 @@ import CurrencyFormat from './CurrencyFormat.js';
 export type { DateFormatProps } from './DateFormat.js';
 import DateFormat from './DateFormat.js';
 
-export type { EmailProps } from './EmailLink.js';
+export type { EmailLinkProps } from './EmailLink.js';
 import EmailLink from './EmailLink.js';
 
 export type { FormulaProps } from './Formula.js';
@@ -40,11 +40,11 @@ import MetadataFormat from './Metadata.js';
 export type { NumberFormatProps } from './NumberFormat.js';
 import NumberFormat from './NumberFormat.js';
 
-export type { PhoneProps } from './PhoneLink.js';
+export type { PhoneLinkProps } from './PhoneLink.js';
 import PhoneLink from './PhoneLink.js';
 
 export type { RatingFormatProps } from './Rating.js';
-import Rating from './Rating.js';
+import RatingFormat from './Rating.js';
   
 export type { SeparateProps } from './Separate.js';
 import Separate from './Separate.js';
@@ -78,7 +78,7 @@ export {
   MetadataFormat,
   NumberFormat,
   PhoneLink,
-  Rating,
+  RatingFormat,
   Separate,
   TableFormat,
   TagList,

@@ -9,7 +9,7 @@ import Link from './Link.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type EmailProps = LinkProps;
+export type EmailLinkProps = LinkProps;
 
 //--------------------------------------------------------------------//
 // Components
@@ -17,7 +17,7 @@ export type EmailProps = LinkProps;
 /**
  * Email Format Component (Main)
  */
-export function EmailLink({ value, ...attributes }: EmailProps) {
+export function EmailLink({ value, ...attributes }: EmailLinkProps) {
   return (
     <Link {...attributes} value={`mailto:${value}`} label={value} />
   );

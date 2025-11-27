@@ -12,15 +12,15 @@ import Link from './Link.js';
 /**
  * Phone Props
  */
-export type PhoneProps = LinkProps;
+export type PhoneLinkProps = LinkProps;
 
 //--------------------------------------------------------------------//
 // Components
 
 /**
- * Phone Format Component (Main)
+ * Phone Link Format Component (Main)
  */
-export function PhoneLink({ value, ...attributes }: PhoneProps) {
+export function PhoneLink({ value, ...attributes }: PhoneLinkProps) {
   return (
     <Link {...attributes} value={`tel:${value}`} label={value} />
   );

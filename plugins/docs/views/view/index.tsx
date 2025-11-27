@@ -11,29 +11,28 @@ import {
 } from 'plugins/app/index.js';
 
 import {
-  //Code,
-  Color,
-  Country,
-  Currency,
-  Date,
-  Email,
+  BooleanFormat,
+  ColorFormat,
+  CountryFormat,
+  CurrencyFormat,
+  DateFormat,
+  EmailLink,
   Formula,
   HTML,
   Image as ImageFormat,
-  Imagelist,
+  ImageCarousel,
   Link,
   List,
   Markdown,
-  Metadata,
-  Number,
-  Overflow,
-  Phone,
-  Rating,
-  Separated,
-  Table,
-  Taglist,
+  MetadataFormat,
+  NumberFormat,
+  PhoneLink,
+  RatingFormat,
+  Separate,
+  TableFormat,
+  TagListFormat,
   Text,
-  Yesno
+  TextFormat,
 } from 'components/view';
 import CodeHighlighter from 'components/view/CodeHighlighter';
 
@@ -78,7 +77,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Color lg value="salmon" />
+                  <ColorFormat lg value="salmon" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Color')}
@@ -91,7 +90,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Country value="US" />
+                  <CountryFormat value="US" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Country')}
@@ -104,7 +103,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Currency value="USD" />
+                  <CurrencyFormat value="USD" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Currency')}
@@ -117,7 +116,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Date value="2024-02-03" />
+                  <DateFormat value="2024-02-03" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Date')}
@@ -130,7 +129,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Email className="theme-2" value="john@doe.com" />
+                  <EmailLink className="theme-2" value="john@doe.com" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Email')}
@@ -182,7 +181,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Imagelist className="flex" value={[
+                  <ImageCarousel className="flex" value={[
                     'https://images.wsj.net/im-580612/8SR', 
                     'https://images.wsj.net/im-580612/8SR'
                   ]} width="50" />
@@ -244,7 +243,7 @@ export function Body() {
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <div className="text-left">
-                    <Metadata 
+                    <MetadataFormat 
                       className="p-2 border-t theme-bc-0" 
                       value={{ id: '12345', upc: '67890' }} 
                     />
@@ -262,7 +261,7 @@ export function Body() {
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <div className="text-left">
-                    <Number value="12345.67" separator="," decimal="." decimals={2} />
+                    <NumberFormat value="12345.67" separator="," decimal="." decimals={2} />
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
@@ -277,7 +276,7 @@ export function Body() {
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <div className="text-left">
-                    <Overflow value="Lorem Ipsum" length={8} hellip />
+                    <TextFormat value="Lorem Ipsum" length={8} hellip />
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
@@ -291,7 +290,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Phone className="theme-2" value="+1 (410) 555-2424" />
+                  <PhoneLink className="theme-2" value="+1 (410) 555-2424" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Phone')}
@@ -305,7 +304,7 @@ export function Body() {
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <div className="text-t-warning">
-                    <Rating value="3.5" max={5} remainder round="floor" />
+                    <RatingFormat value="3.5" max={5} remainder round="floor" />
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
@@ -319,7 +318,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Separated value={['Foo', 'bar']} separator=" - " />
+                  <Separate value={['Foo', 'bar']} separator=" - " />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Separated')}
@@ -333,7 +332,7 @@ export function Body() {
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <div className="text-left text-black w-full">
-                    <Table value={[
+                    <TableFormat value={[
                       { id: 1, name: 'John Doe' },
                     ]} stripes={['#CCCCCC', '#EFEFEF', '#FCFCFC']} />
                   </div>
@@ -349,7 +348,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Taglist className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />
+                  <TagListFormat className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Taglist')}
@@ -375,7 +374,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Yesno value={true} />
+                  <BooleanFormat value={true} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Yesno')}

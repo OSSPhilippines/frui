@@ -53,10 +53,13 @@ export type { TableFormatProps } from './Table.js';
 import TableFormat from './Table.js';
 
 export type { TagListFormatProps } from './TagList.js';
-import TagList from './TagList.js';
+import TagListFormat from './TagList.js';
 
 export type { TextFormatProps } from './TextFormat.js';
 import TextFormat from './TextFormat.js';
+
+export type { TextProps } from './TextFormat.js';
+import { Text }  from './TextFormat.js';
 
 export type { BooleanFormatProps } from './BooleanFormat.js';
 import BooleanFormat from './BooleanFormat.js';
@@ -81,6 +84,7 @@ export {
   RatingFormat,
   Separate,
   TableFormat,
-  TagList,
-  TextFormat
+  TagListFormat,
+  TextFormat,
+  Text
 };

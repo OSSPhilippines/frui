@@ -100,6 +100,9 @@ import Table from './Table.js';
 import Tabs from './Tabs.js';
 import Tooltip from './Tooltip.js';
 
+//--------------------------------------------------------------------//
+// Helpers
+
 //tools
 export { BackgroundColorTool } from './helpers/tools/BackgroundColorTool.js';
 export { BorderColorTool } from './helpers/tools/BorderColorTool.js';

@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import TagList from 'components/view/TagList.js';
+import TagListFormat from 'components/view/TagList.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 
 const uri = '/view/taglist';
 const title = 'TagList Format';
-const description = 'TagList formats convert values to tags.';
+const description = 'TagListFormat formats convert values to tags.';
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names applied to all tags' ],
@@ -49,7 +49,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Tag List')}
+          {_('TagList Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -101,7 +101,7 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Taglist')}
+        {_('TagList Format')}
       </h1>
       <div>
         <p className="py-2">
@@ -110,7 +110,7 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import TagList from 'frui/view/TagList';`}
+          {`import TagListFormat from 'frui/view/TagListFormat';`}
         </Code>
       </div>
 
@@ -120,11 +120,11 @@ export function Body() {
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
           <div className="text-left text-black w-full">
-            <TagList className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />
+            <TagListFormat className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />
           </div>
         </div>
         <Code language="typescript">
-          {`TagList className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />`}
+          {`<TagListFormat className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />`}
         </Code>
       </div>
 
@@ -134,7 +134,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<TagList>" /> format can be passed the 
+            The <C value="<TagListFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

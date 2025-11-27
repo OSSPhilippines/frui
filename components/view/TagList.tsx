@@ -33,5 +33,5 @@ export function TagListFormat(props: TagListFormatProps) {
   );
 };
 
-//defaults to taglist
+//defaults to taglist format
 export default TagListFormat;

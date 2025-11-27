@@ -36,5 +36,5 @@ export function Separate(props: SeparateProps) {
   );  
 };
 
-//defaults to Separate
+//defaults to separate
 export default Separate;

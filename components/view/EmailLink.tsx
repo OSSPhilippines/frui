@@ -23,5 +23,5 @@ export function EmailLink({ value, ...attributes }: EmailLinkProps) {
   );
 };
 
-//defaults to email link format
+//defaults to email link
 export default EmailLink;

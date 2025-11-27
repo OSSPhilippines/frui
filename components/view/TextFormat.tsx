@@ -1,7 +1,7 @@
 //--------------------------------------------------------------------//
 // Types
 
-export type OverflowProps = { 
+export type TextFormatProps = { 
   value: string, 
   length?: string|number, 
   words?: boolean,
@@ -37,7 +37,7 @@ export function Text({ value, format }: TextProps) {
 /**
  * Text Format Component (Main)
  */
-export function TextFormat(props: OverflowProps) {
+export function TextFormat(props: TextFormatProps) {
   const { value, length, words, hellip } = props;
   const count = typeof length === 'string' ? Number(length) || undefined : length;
   if (words) {

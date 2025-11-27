@@ -7,7 +7,7 @@ import type { HTMLImageProps } from '../types.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type ImagelistProps = HTMLImageProps & { value: string[] };
+export type ImageCarouselProps = HTMLImageProps & { value: string[] };
 
 //--------------------------------------------------------------------//
 // Components
@@ -15,7 +15,7 @@ export type ImagelistProps = HTMLImageProps & { value: string[] };
 /**
  * ImageCarousel Format Component (Main)
  */
-export function ImageCarousel(props: ImagelistProps) {
+export function ImageCarousel(props: ImageCarouselProps) {
   const { value, className, ...attributes } = props;
   const classNames = ['frui-format-imagelist'];
   if (className) {

@@ -1,13 +1,13 @@
-export type { ColorProps } from './ColorFormat.js';
+export type { ColorFormatProps } from './ColorFormat.js';
 import ColorFormat from './ColorFormat.js';
 
-export type { CountryProps } from './CountryFormat.js';
+export type { CountryFormatProps } from './CountryFormat.js';
 import CountryFormat from './CountryFormat.js';
 
-export type { CurrencyProps } from './CurrencyFormat.js';
+export type { CurrencyFormatProps } from './CurrencyFormat.js';
 import CurrencyFormat from './CurrencyFormat.js';
 
-export type { DateProps } from './DateFormat.js';
+export type { DateFormatProps } from './DateFormat.js';
 import DateFormat from './DateFormat.js';
 
 export type { EmailProps } from './EmailLink.js';
@@ -22,7 +22,7 @@ import HTML from './HTML.js';
 export type { ImageProps } from './Image.js';
 import Image from './Image.js';
 
-export type { ImagelistProps } from './ImageCarousel.js';
+export type { ImageCarouselProps } from './ImageCarousel.js';
 import ImageCarousel from './ImageCarousel.js';
 
 export type { LinkProps } from './Link.js';
@@ -34,28 +34,28 @@ import List from './List.js';
 export type { MarkdownProps } from './Markdown.js';
 import Markdown from './Markdown.js';
 
-export type { MetadataProps } from './Metadata.js';
-import Metadata from './Metadata.js';
+export type { MetadataFormatProps } from './Metadata.js';
+import MetadataFormat from './Metadata.js';
 
-export type { NumberProps } from './NumberFormat.js';
+export type { NumberFormatProps } from './NumberFormat.js';
 import NumberFormat from './NumberFormat.js';
 
 export type { PhoneProps } from './PhoneLink.js';
 import PhoneLink from './PhoneLink.js';
 
-export type { RatingProps } from './Rating.js';
+export type { RatingFormatProps } from './Rating.js';
 import Rating from './Rating.js';
-
-export type { SeparatedProps } from './Separate.js';
+  
+export type { SeparateProps } from './Separate.js';
 import Separate from './Separate.js';
 
-export type { TableProps } from './Table.js';
+export type { TableFormatProps } from './Table.js';
 import TableFormat from './Table.js';
 
-export type { TaglistProps } from './TagList.js';
+export type { TagListFormatProps } from './TagList.js';
 import TagList from './TagList.js';
 
-export type { TextProps } from './TextFormat.js';
+export type { TextFormatProps } from './TextFormat.js';
 import TextFormat from './TextFormat.js';
 
 export type { BooleanFormatProps } from './BooleanFormat.js';
@@ -75,7 +75,7 @@ export {
   Link,
   List,
   Markdown,
-  Metadata,
+  MetadataFormat,
   NumberFormat,
   PhoneLink,
   Rating,

@@ -246,7 +246,7 @@ export type { SwitchProps } from './form/Switch.js';
 import Switch from './form/Switch.js';
 
 //tag list
-export type {  } from './form/TagList.js';
+export type { TaglistProps } from './form/TagList.js';
 import Taglist from './form/TagList.js';
 
 //textarea
@@ -305,16 +305,16 @@ export {
 //--------------------------------------------------------------------//
 // View
 
-export type { ColorProps } from './view/ColorFormat.js';
+export type { ColorFormatProps } from './view/ColorFormat.js';
 import ColorFormat from './view/ColorFormat.js';
 
-export type { CountryProps } from './view/CountryFormat.js';
+export type { CountryFormatProps } from './view/CountryFormat.js';
 import CountryFormat from './view/CountryFormat.js';
 
-export type { CurrencyProps } from './view/CurrencyFormat.js';
+export type { CurrencyFormatProps } from './view/CurrencyFormat.js';
 import CurrencyFormat from './view/CurrencyFormat.js';
 
-export type { DateProps } from './view/DateFormat.js';
+export type { DateFormatProps } from './view/DateFormat.js';
 import DateFormat from './view/DateFormat.js';
 
 export type { EmailProps } from './view/EmailLink.js';
@@ -329,7 +329,7 @@ import HTML from './view/HTML.js';
 export type { ImageProps } from './view/Image.js';
 import Image from './view/Image.js';
 
-export type { ImagelistProps } from './view/ImageCarousel.js';
+export type { ImageCarouselProps } from './view/ImageCarousel.js';
 import ImageCarousel from './view/ImageCarousel.js';
 
 export type { LinkProps } from './view/Link.js';
@@ -341,31 +341,31 @@ import List from './view/List.js';
 export type { MarkdownProps } from './view/Markdown.js';
 import Markdown from './view/Markdown.js';
 
-export type { MetadataProps } from './view/Metadata.js';
+export type { MetadataFormatProps } from './view/Metadata.js';
 import MetadataFormat from './view/Metadata.js';
 
-export type { NumberProps } from './view/NumberFormat.js';
+export type { NumberFormatProps } from './view/NumberFormat.js';
 import NumberFormat from './view/NumberFormat.js';
 
 export type { PhoneProps } from './view/PhoneLink.js';
 import PhoneLink from './view/PhoneLink.js';
 
-export type { RatingProps } from './view/Rating.js';
+export type { RatingFormatProps } from './view/Rating.js';
 import RatingFormat from './view/Rating.js';
 
-export type { SeparatedProps } from './view/Separate.js';
+export type { SeparateProps } from './view/Separate.js';
 import Separate from './view/Separate.js';
 
-export type { TableProps as TableFormProps } from './view/Table.js';
+export type { TableFormatProps } from './view/Table.js';
 import TableFormat from './view/Table.js';
 
-export type { TaglistProps } from './view/TagList.js';
+export type { TagListFormatProps } from './view/TagList.js';
 import TagList from './view/TagList.js';
 
-export type { TextProps } from './view/TextFormat.js';
+export type { TextFormatProps } from './view/TextFormat.js';
 import TextFormat from './view/TextFormat.js';
 
-export type { YesnoProps } from './view/BooleanFormat.js';
+export type { BooleanFormatProps } from './view/BooleanFormat.js';
 import BooleanFormat from './view/BooleanFormat.js';
 
 export {

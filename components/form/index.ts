@@ -1,5 +1,5 @@
 export type { CheckboxProps } from './Checkbox.js';
-import { useCheckbox, Checkbox } from './Checkbox.js';
+import Checkbox from './Checkbox.js';
 
 export type { CodeEditorProps } from './CodeEditor.js';
 import CodeEditor from './CodeEditor.js';
@@ -23,7 +23,7 @@ export type { FieldControlProps } from './FieldControl.js';
 import FieldControl from './FieldControl.js';
 
 export type { FieldsetProps } from './Fieldset.js';
-import { useFieldset } from './Fieldset.js';
+import Fieldset from './Fieldset.js';
 
 export type { FileInputProps } from './FileInput.js';
 import FileInput from './FileInput.js';
@@ -92,7 +92,6 @@ export type { TimeInputProps } from './TimeInput.js';
 import TimeInput from './TimeInput.js';
 
 export {
-  useCheckbox,
   Checkbox,
   CodeEditor,
   ColorInput,
@@ -101,7 +100,7 @@ export {
   DateInput,
   DatetimeInput,
   FieldControl,
-  useFieldset,
+  Fieldset,
   FileInput,
   ImageInput,
   FileList,

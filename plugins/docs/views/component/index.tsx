@@ -11,9 +11,6 @@ import {
   Badge,
   Loader,
   Table,
-  Thead,
-  Trow,
-  Tcol,
   Tooltip,
   Tabs
 } from 'components/index.js';
@@ -182,12 +179,12 @@ export function Body() {
                 <div className="flex items-center justify-center h-[100px] w-full bg-black px-3">
                   <div className="overflow-auto w-full">
                     <Table>
-                      <Thead className="theme-bg-2 text-left text-white !py-2">{_('ID')}</Thead>
-                      <Thead className="theme-bg-2 text-left text-white !py-2">{_('Name')}</Thead>
-                      <Trow>
-                        <Tcol className="theme-bg-1 text-left !py-2">1</Tcol>
-                        <Tcol className="theme-bg-1 text-left !py-2">Jacob</Tcol>
-                      </Trow>
+                      <Table.Head className="theme-bg-2 text-left text-white !py-2">{_('ID')}</Table.Head>
+                      <Table.Head className="theme-bg-2 text-left text-white !py-2">{_('Name')}</Table.Head>
+                      <Table.Row>
+                        <Table.Col className="theme-bg-1 text-left !py-2">1</Table.Col>
+                        <Table.Col className="theme-bg-1 text-left !py-2">Jacob</Table.Col>
+                      </Table.Row>
                     </Table>
                   </div>
                 </div>

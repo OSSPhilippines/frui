@@ -317,7 +317,7 @@ import CurrencyFormat from './view/CurrencyFormat.js';
 export type { DateFormatProps } from './view/DateFormat.js';
 import DateFormat from './view/DateFormat.js';
 
-export type { EmailProps } from './view/EmailLink.js';
+export type { EmailLinkProps } from './view/EmailLink.js';
 import EmailLink from './view/EmailLink.js';
 
 export type { FormulaProps } from './view/Formula.js';
@@ -347,7 +347,7 @@ import MetadataFormat from './view/Metadata.js';
 export type { NumberFormatProps } from './view/NumberFormat.js';
 import NumberFormat from './view/NumberFormat.js';
 
-export type { PhoneProps } from './view/PhoneLink.js';
+export type { PhoneLinkProps } from './view/PhoneLink.js';
 import PhoneLink from './view/PhoneLink.js';
 
 export type { RatingFormatProps } from './view/Rating.js';

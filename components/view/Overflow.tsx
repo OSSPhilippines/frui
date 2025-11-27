@@ -12,7 +12,7 @@ export type OverflowProps = {
 // Components
 
 /**
- * Text Format Component (Main)
+ * Overflow Format Component (Main)
  */
 export function Overflow(props: OverflowProps) {
   const { value, length, words, hellip } = props;
@@ -43,5 +43,5 @@ export function Overflow(props: OverflowProps) {
   return (<>{value}</>);
 };
 
-//defaults to text format
+//defaults to overflow
 export default Overflow;

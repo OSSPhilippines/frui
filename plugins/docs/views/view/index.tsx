@@ -377,7 +377,7 @@ export function Body() {
                   <BooleanFormat value={true} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Yesno')}
+                  {_('BooleanFormat')}
                 </h2>
               </div>
             </div>

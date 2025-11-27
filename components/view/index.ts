@@ -58,11 +58,11 @@ import TableFormat from './Table.js';
 export type { TagListFormatProps } from './TagList.js';
 import TagListFormat from './TagList.js';
 
-export type { TextFormatProps } from './TextFormat.js';
-import TextFormat from './TextFormat.js';
+export type { TextProps } from './Text.js';
+import Text from './Text.js';
 
-export type { TextProps } from './TextFormat.js';
-import { Text }  from './TextFormat.js';
+export type { OverflowProps } from './Overflow.js';
+import Overflow from './Overflow.js';
 
 export {
   BooleanFormat,
@@ -86,5 +86,5 @@ export {
   TableFormat,
   TagListFormat,
   Text,
-  TextFormat
-};  
+  Overflow
+};

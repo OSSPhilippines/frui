@@ -31,8 +31,8 @@ import {
   Separate,
   TableFormat,
   TagListFormat,
+  Overflow,
   Text,
-  TextFormat,
 } from 'components/view';
 import CodeHighlighter from 'components/view/CodeHighlighter';
 
@@ -276,7 +276,7 @@ export function Body() {
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <div className="text-left">
-                    <TextFormat value="Lorem Ipsum" length={8} hellip />
+                    <Overflow value="Lorem Ipsum" length={8} hellip />
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">

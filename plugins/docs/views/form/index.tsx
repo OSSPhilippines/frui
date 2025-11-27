@@ -8,34 +8,30 @@ import {
 } from 'plugins/app/index.js';
 
 import {
-  Autocomplete,
   Checkbox,
   CodeEditor,
-  //ColorPicker,
-  Country,
-  Currency,
-  Date,
-  Datetime,
-  File,
-  Filelist,
-  Image as ImageField,
-  Imagelist,
+  CountrySelect,
+  CurrencySelect,
+  DateInput,
+  FileInput,
+  FileList,
+  ImageInput,
+  ImageList,
   Input,
-  Markdown,
-  Mask,
+  MarkdownEditor,
+  MaskInput,
   Metadata,
-  Number,
-  Password,
+  NumberInput,
+  PasswordInput,
   Radio,
-  //Rating,
   Select,
   Slug,
+  SuggestInput,
   Switch,
   Taglist,
   Textarea,
   Textlist,
-  Time,
-  //WYSIWYG
+  TimeInput
 } from 'components/form/index.js';
 
 export function Body() {
@@ -60,7 +56,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Autocomplete options={[ 'foo', 'bar' ]} value="bar" />
+                  <SuggestInput options={[ 'foo', 'bar' ]} value="bar" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Autocomplete')}
@@ -99,7 +95,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Country className="w-full" value="US" />
+                  <CountrySelect className="w-full" value="US" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Country')}
@@ -112,7 +108,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Currency className="w-full" value="USD" />
+                  <CurrencySelect className="w-full" value="USD" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Currency')}
@@ -138,7 +134,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Datetime />
+                  <DateInput />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Datetime')}
@@ -166,7 +162,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <File className="bg-white w-[150px]" />
+                  <FileInput className="bg-white w-[150px]" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('File')}
@@ -179,7 +175,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Filelist className="bg-white w-[150px]" defaultValue={[
+                  <FileList className="bg-white w-[150px]" defaultValue={[
                     'https://images.wsj.net/8SR.pdf'
                   ]} />
                 </div>
@@ -194,7 +190,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] theme-bg-1 px-3">
-                  <ImageField className="bg-white w-[150px]" value="https://images.wsj.net/im-580612/8SR" />
+                  <ImageInput className="bg-white w-[150px]" value="https://images.wsj.net/im-580612/8SR" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Image')}
@@ -207,7 +203,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Imagelist className="bg-white w-[150px]" defaultValue={[
+                  <ImageList className="bg-white w-[150px]" defaultValue={[
                     'https://images.wsj.net/im-580612/8SR'
                   ]} />
                 </div>
@@ -248,7 +244,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Markdown rows={2} defaultValue="# FRUI" />
+                  <MarkdownEditor rows={2} defaultValue="# FRUI" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Markdown')}
@@ -261,7 +257,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Mask mask="999-999-9999" placeholder="999-999-9999" />
+                  <MaskInput mask="999-999-9999" placeholder="999-999-9999" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Mask')}
@@ -289,7 +285,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Number defaultValue="1234.56" />
+                  <NumberInput defaultValue="1234.56" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Number')}
@@ -302,7 +298,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Password value="1234567890" />
+                  <PasswordInput value="1234567890" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Password')}
@@ -458,7 +454,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Time />
+                  <TimeInput />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Time')}

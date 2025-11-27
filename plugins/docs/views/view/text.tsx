@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import TextFormat from 'components/view/TextFormat.js';
+import Text from 'components/view/Text.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -109,7 +109,7 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import TextFormat from 'frui/view/TextFormat';`}
+          {`import Text from 'frui/view/Text';`}
         </Code>
       </div>
 
@@ -118,10 +118,10 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <TextFormat format="capitalize" value="i am a title" />
+          <Text format="capitalize" value="i am a title" />
         </div>
         <Code language="typescript">
-          {`<TextFormat format="capitalize" value="i am a title" />`}
+          {`<Text format="capitalize" value="i am a title" />`}
         </Code>
       </div>
 
@@ -131,7 +131,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<TextFormat>" /> format can be passed the 
+            The <C value="<Text>" /> format can be passed the 
             following props.
           </Translate>
         </p>

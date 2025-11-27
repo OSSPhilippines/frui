@@ -31,10 +31,8 @@ import FileInput from './FileInput.js';
 export type { FilelistProps } from './FileList.js';
 import FileList from './FileList.js';
 
-export type { } from './ImageInput.js';
 import ImageInput from './ImageInput.js';
 
-export type { } from './ImageList.js';
 import ImageList from './ImageList.js';
 
 export type { InputProps } from './Input.js';

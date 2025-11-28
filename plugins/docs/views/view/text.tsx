@@ -105,7 +105,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the text format like the following.
+            Import the <C value="Text" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

@@ -106,7 +106,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the phone link format like the following.
+            Import the <C value="PhoneLink" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

@@ -111,7 +111,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the country format like the following.
+            Import the <C value="CountryFormat" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

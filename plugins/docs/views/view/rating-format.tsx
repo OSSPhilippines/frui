@@ -107,7 +107,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the rating format like the following.
+            Import the <C value="RatingFormat" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

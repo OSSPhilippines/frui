@@ -112,7 +112,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the code highlighter format like the following.
+            Import the <C value="CodeHighlighter" /> component as shown below.
           </Translate>
         </p>
         <CodeHighlighter language="typescript" className="mt-2">

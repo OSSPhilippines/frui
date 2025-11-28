@@ -105,9 +105,9 @@ export function Body() {
       </h1>
       <div>
         <p className="py-2">
-          <Translate>
-            Import the boolean format like the following.
-          </Translate>
+            <Translate>
+              Import the <C value="BooleanFormat" /> component as shown below.
+            </Translate>
         </p>
         <Code language="typescript" className="mt-2">
           {`import BooleanFormat from 'frui/view/BooleanFormat';`}

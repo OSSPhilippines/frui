@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import TagListFormat from 'components/view/TagList.js';
+import CurrencyFormat from 'components/view/CurrencyFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,14 +14,19 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/taglist';
-const title = 'TagList Format';
-const description = 'TagListFormat formats convert values to tags.';
+const uri = '/view/currency-format';
+const title = 'Currency Format';
+const description = 'CurrencyFormat formats convert values to currency displays.';
 
 const props = [
-  [ 'className', 'string', 'No', 'Standard HTML class names applied to all tags' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all tags' ],
-  [ 'value', 'string[]', 'Yes', 'Default value' ]
+  [ 'className', 'string', 'No', 'Standard HTML class names' ],
+  [ 'flag', 'boolean', 'No', 'Show flag' ],
+  [ 'lg', 'boolean', 'No', 'Show large currency flag' ],
+  [ 'md', 'boolean', 'No', 'Show medium size currency flag' ],
+  [ 'sm', 'boolean', 'No', 'Show small currency flag' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
+  [ 'text', 'boolean', 'No', 'Show currency text' ],
+  [ 'value', 'string', 'Yes', 'Default value' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -49,7 +54,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('TagList Format')}
+          {_('Currency Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -101,16 +106,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('TagList Format')}
+        {_('Currency Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the tag list format like the following.
+            Import the currency format like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import TagListFormat from 'frui/view/TagListFormat';`}
+          {`import CurrencyFormat from 'frui/view/CurrencyFormat';`}
         </Code>
       </div>
 
@@ -119,29 +124,81 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <div className="text-left text-black w-full">
-            <TagListFormat className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />
-          </div>
+          <CurrencyFormat value="USD" />
         </div>
         <Code language="typescript">
-          {`<TagListFormat className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />`}
+          {`<CurrencyFormat value="USD" />`}
         </Code>
       </div>
 
+      <h2 id="customize" className="uppercase font-bold text-lg mt-8">
+        {_('Customize')}
+      </h2>
+      <p className="py-4">
+        <Translate>
+          You can apply different sizes to the 
+          <C l value="CurrencyFormat" /> format.
+        </Translate>
+      </p>
+
+      <h3 className="font-semibold text-md mt-8">
+        {_('Flag')}
+      </h3>
+      <p className="py-4">
+        <Translate>
+          Use <C value="flag" /> prop to hide the currency flag.
+        </Translate>
+      </p>
+      <div className="curved overflow-hidden">
+        <div className="flex items-center justify-center p-3 theme-bg-1">
+          <CurrencyFormat flag={false} value="USD" />
+        </div>
+        <Code language="typescript">
+          {`<CurrencyFormat flag={false} value="USD" />`}
+        </Code>
+      </div>
+
+      <h3 className="font-semibold text-md mt-8">
+        {_('Sizes')}
+      </h3>
+      <p className="py-4">
+        <Translate>
+          Use <C value="sm" />, <C value="md" />, or <C value="lg" r /> 
+          props to change the size of the currency flag.
+        </Translate>
+      </p>
+      <div className="curved overflow-hidden">
+        <div className="flex items-center justify-center p-3 theme-bg-1">
+          <CurrencyFormat lg value="USD" />
+        </div>
+        <Code language="typescript">
+          {`<CurrencyFormat lg value="USD" />`}
+        </Code>
+      </div>
+
+      <p className="py-4">
+        <Translate>
+          You can also add your own custom class to 
+          <C l value="Currency" /> format or use any combination of 
+          <C l value="frui-format-country" />, and
+          <C l value="frui-format-country-flag" /> CSS classes.
+        </Translate>
+      </p>
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<TagListFormat>" /> format can be passed the 
+            The <C value="<CurrencyFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>
         <Props props={props} />
       </div>
 
-      <Docs.Foot />
+      <Docs.Foot/>
     </div>
   );
 };

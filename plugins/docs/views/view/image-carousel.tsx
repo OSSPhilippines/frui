@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import ColorFormat from 'components/view/ColorFormat.js';
+import ImageCarousel from 'components/view/ImageCarousel.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,19 +14,23 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/color';
-const title = 'Color Format';
-const description = 'Color formats convert values to color displays.';
+const uri = '/view/image-carousel';
+const title = 'Image Carousel Format';
+const description = 'ImageCarousel formats display a list of images with various properties.';
+
+const codeBasic = `
+<ImageCarousel className="flex" value={[
+  'https://images.wsj.net/im-580612/8SR', 
+  'https://images.wsj.net/im-580612/8SR'
+]} width="50" />`.trim();
 
 const props = [
-  [ 'box', 'boolean', 'No', 'Show color box' ],
-  [ 'className', 'string', 'No', 'Standard HTML class names' ],
-  [ 'lg', 'boolean', 'No', 'Show large color box' ],
-  [ 'md', 'boolean', 'No', 'Show medium size color box' ],
-  [ 'sm', 'boolean', 'No', 'Show small color box' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
-  [ 'text', 'boolean', 'No', 'Show color text' ],
-  [ 'value', 'string', 'Yes', 'Default value' ]
+  [ 'alt', 'string', 'No', 'Alt text for image' ],
+  [ 'className', 'string', 'No', 'Standard HTML class names applied to all images' ],
+  [ 'height', 'string|number', 'No', 'Height of image' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all images' ],
+  [ 'value', 'string[]', 'Yes', 'Default value' ],
+  [ 'width', 'string|number', 'No', 'Width of image' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -54,7 +58,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Color Format')}
+          {_('Image Carousel')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -106,16 +110,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Color Format')}
+        {_('Image Carousel')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the color format like the following.
+            Import the image carousel format like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import ColorFormat from 'frui/view/ColorFormat';`}
+          {`import ImageCarousel from 'frui/view/ImageCarousel';`}
         </Code>
       </div>
 
@@ -124,74 +128,23 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <ColorFormat value="salmon" />
+          <ImageCarousel className="flex" value={[
+            'https://images.wsj.net/im-580612/8SR', 
+            'https://images.wsj.net/im-580612/8SR'
+          ]} width="50" />
         </div>
         <Code language="typescript">
-          {`<ColorFormat value="salmon" />`}
+          {codeBasic}
         </Code>
       </div>
-
-      <h2 id="customize" className="uppercase font-bold text-lg mt-8">
-        {_('Customize')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          You can apply different sizes to the 
-          <C l value="ColorFormat" /> format.
-        </Translate>
-      </p>
-
-      <h3 className="font-semibold text-md mt-8">
-        {_('Box')}
-      </h3>
-      <p className="py-4">
-        <Translate>
-          Use <C value="box" /> prop to hide the color box.
-        </Translate>
-      </p>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <ColorFormat box={false} value="salmon" />
-        </div>
-        <Code language="typescript">
-          {`<ColorFormat box={false} value="salmon" />`}
-        </Code>
-      </div>
-
-      <h3 className="font-semibold text-md mt-8">
-        {_('Sizes')}
-      </h3>
-      <p className="py-4">
-        <Translate>
-          Use <C value="sm" />, <C value="md" />, or <C value="lg" r /> 
-          props to change the size of the color box.
-        </Translate>
-      </p>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <ColorFormat lg value="salmon" />
-        </div>
-        <Code language="typescript">
-          {`<ColorFormat lg value="salmon" />`}
-        </Code>
-      </div>
-
-      <p className="py-4">
-        <Translate>
-          You can also add your own custom class to 
-          <C l value="ColorFormat" /> format or use any combination of 
-          <C l value="frui-format-color" />, and
-          <C l value="frui-format-color-box" /> CSS classes.
-        </Translate>
-      </p>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<ColorFormat>" /> format can be passed the 
+            The <C value="<ImageCarousel>" /> format can be passed the 
             following props.
           </Translate>
         </p>

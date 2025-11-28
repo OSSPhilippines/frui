@@ -14,9 +14,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/code';
-const title = 'Code Format';
-const description = 'Code blocks with syntax highlighting and copy functionality.';
+const uri = '/view/code-highlighter';
+const title = 'Code Highlighter Format';
+const description = 'CodeHighlighter blocks with syntax highlighting and copy functionality.';
 
 const props = [
   [ 'children', 'string', 'Yes', 'Get code from children' ],
@@ -55,7 +55,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('CodeHighlighter')}
+          {_('Code Highlighter')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -107,7 +107,7 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('CodeHighlighter')}
+        {_('Code Highlighter')}
       </h1>
       <div>
         <p className="py-2">
@@ -149,10 +149,10 @@ export function Body() {
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <Code language="ts">{`attributes: [Object object]`}</Code>
+            <CodeHighlighter language="ts">{`attributes: [Object object]`}</CodeHighlighter>
           </Preview.Example>
           <Preview.Code>
-            {`<CodeHighlighter>{\`attributes: [Object object]\`}</Code>`}
+            {`<CodeHighlighter>{\`attributes: [Object object]\`}</CodeHighlighter>`}
           </Preview.Code>
         </Preview>
         <p className="py-4">

@@ -238,13 +238,13 @@ export type { ImageProps } from './view/Image.js';
 
 export type { ImageCarouselProps } from './view/ImageCarousel.js';
 
-export type { LinkProps } from './view/Link.js';
+export type { LinkProps } from './view/LinkFormat.js';
 
 export type { ListProps } from './view/List.js';
 
 export type { MarkdownProps } from './view/Markdown.js';
 
-export type { MetadataFormatProps } from './view/Metadata.js';
+export type { MetadataFormatProps } from './view/MetadataFormat.js';
 
 export type { NumberFormatProps } from './view/NumberFormat.js';
 
@@ -252,13 +252,13 @@ export type { OverflowProps } from './view/Overflow.js';
 
 export type { PhoneLinkProps } from './view/PhoneLink.js';
 
-export type { RatingFormatProps } from './view/Rating.js';
+export type { RatingFormatProps } from './view/RatingFormat.js';
 
 export type { SeparateProps } from './view/Separate.js';
 
-export type { TableFormatProps } from './view/Table.js';
+export type { TableFormatProps } from './view/TableFormat.js';
 
-export type { TagListFormatProps } from './view/TagList.js';
+export type { TagListFormatProps } from './view/TagListFormat.js';
 
 export type { TextProps } from './view/Text.js';
 

@@ -2,9 +2,9 @@
 // Imports
 
 //types
-import type { LinkProps } from './Link.js';
+import type { LinkProps } from './LinkFormat.js';
 //components
-import Link from './Link.js';
+import Link from './LinkFormat.js';
 
 //--------------------------------------------------------------------//
 // Types

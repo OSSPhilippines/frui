@@ -5,24 +5,27 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import LinkFormat from 'components/view/Link.js';
+import NumberFormat from 'components/view/NumberFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
 import Docs from '../../layout/Docs.js';
 
+
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/link';
-const title = 'Link Format';
-const description = 'Link formats convert values to clickable actions.';
+const uri = '/view/number-format';
+const title = 'Number Format';
+const description = 'Number formats convert values to numerical displays.';
 
 const props = [
-  [ 'className', 'string', 'No', 'Standard HTML class names' ],
-  [ 'label', 'string', 'No', 'Label text' ],
+  [ 'absolute', 'string', 'No', 'Remove negative sign' ],
+  [ 'decimal', 'string', 'No', 'Character for decimal' ],
+  [ 'decimals', 'number', 'No', 'Number of decimals to show' ],
+  [ 'separator', 'boolean', 'No', 'Character of comma separator' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
-  [ 'value', 'string', 'Yes', 'Default value' ]
+  [ 'value', 'string|number', 'Yes', 'Default value' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -50,7 +53,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Link')}
+          {_('Number Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -102,16 +105,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Link')}
+        {_('Number Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the link format like the following.
+            Import the number format like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Link from 'frui/view/Link';`}
+          {`import NumberFormat from 'frui/view/NumberFormat';`}
         </Code>
       </div>
 
@@ -120,20 +123,20 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <LinkFormat className="theme-2" value="https://images.wsj.net/im-580612/8SR" label="Click Link" />
+          <NumberFormat value="12345.67" separator="," decimal="." decimals={2} />
         </div>
         <Code language="typescript">
-          {`<Link className="theme-2" value="https://images.wsj.net/im-580612/8SR" label="Click Link" />`}
+          {`<NumberFormat value="12345.67" separator="," decimal="." decimals={2} />`}
         </Code>
       </div>
-      
+
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Link>" /> format can be passed the 
+            The <C value="<NumberFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

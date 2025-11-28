@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Metadata from 'components/view/Metadata.js';
+import TableFormat from 'components/view/TableFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,14 +14,25 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/metadata';
-const title = 'Metadata Format';
-const description = 'Metadata formats convert values to key value tables.';
+const uri = '/view/table-format';
+const title = 'Table Format';
+const description = 'TableFormat formats format values into a table.';
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names applied to all cells' ],
+  [ 'stripe', '[string, string, string]', 'No', 'Background color settings for head and rows' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all cells' ],
-  [ 'value', 'string', 'Yes', 'Default value' ]
+  [ 'value', 'string', 'Yes', 'Default value' ],
+];
+
+const examples = [
+`<Table 
+  value={[
+    { id: 1, name: 'John Doe', age: 30, created: '2021-01-01' },
+    { id: 2, name: 'Jane Doe', age: 25, created: '2021-01-02' }
+  ]} 
+  stripes={['#999999', '#EFEFEF', '#CCCCCC']} 
+/>`
 ];
 
 //--------------------------------------------------------------------//
@@ -49,7 +60,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Metadata')}
+          {_('Table Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -101,43 +112,51 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Metadata')}
+        {_('Table Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the metadata format like the following.
+            Import the table format like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Metadata from 'frui/view/Metadata';`}
+          {`import TableFormat from 'frui/view/TableFormat';`}
         </Code>
       </div>
 
       <h2 id="basic" className="uppercase font-bold text-lg mt-8">
         {_('Basics')}
       </h2>
+      <p>
+        <Translate>
+          The header values are based on the keys of the first row.
+        </Translate>
+      </p>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <div className="text-left">
-              <Metadata 
-                className="p-2 border-t theme-bg-0" 
-                value={{ id: '12345', upc: '67890' }} 
-              />
-            </div>
+          <div className="text-left text-black w-full">
+            <TableFormat 
+              value={[
+                { id: 1, name: 'John Doe', age: 30, created: '2021-01-01' },
+                { id: 2, name: 'Jane Doe', age: 25, created: '2021-01-02' }
+              ]} 
+              stripes={['#999999', '#EFEFEF', '#CCCCCC']} 
+            />
+          </div>
         </div>
         <Code language="typescript">
-          {`<Metadata value={{ id: '12345', upc: '67890' }} />`}
+          {examples[0]}
         </Code>
       </div>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Metadata>" /> format can be passed the 
+            The <C value="<TableFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

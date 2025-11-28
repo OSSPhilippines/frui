@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import BooleanFormat from 'components/view/BooleanFormat.js';
+import PhoneLink from 'components/view/PhoneLink.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,14 +14,14 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/yesno';
-const title = 'BooleanFormat Format';
-const description = 'BooleanFormat formats convert values to yes or no.';
+const uri = '/view/phone-link';
+const title = 'Phone Link Format';
+const description = 'PhoneLink formats convert values to clickable phone displays.';
 
 const props = [
-  [ 'no', 'string', 'No', 'Text for no' ],
-  [ 'value', 'string', 'Yes', 'Default value' ],
-  [ 'yes', 'string', 'No', 'Text for yes' ]
+  [ 'className', 'string', 'No', 'Standard HTML class names' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
+  [ 'value', 'string', 'Yes', 'Default value' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -49,7 +49,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('BooleanFormat')}
+          {_('Phone Link')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -101,16 +101,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('BooleanFormat')}
+        {_('Phone Link')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the boolean format like the following.
+            Import the phone link format like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import BooleanFormat from 'frui/view/BooleanFormat';`}
+          {`import PhoneLink from 'frui/view/PhoneLink';`}
         </Code>
       </div>
 
@@ -119,10 +119,10 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <BooleanFormat value={true} yes="Yep" no="Nope" />
+          <PhoneLink className="theme-2" value="+1 (410) 555-2424" />
         </div>
         <Code language="typescript">
-          {`<BooleanFormat value={true} yes="Yep" no="Nope" />`}
+          {`<PhoneLink className="theme-2" value="+1 (410) 555-2424" />`}
         </Code>
       </div>
 
@@ -132,7 +132,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<BooleanFormat>" /> format can be passed the 
+            The <C value="<PhoneLink>" /> format can be passed the 
             following props.
           </Translate>
         </p>

@@ -60,40 +60,53 @@ export function Body() {
           <div className="flex flex-wrap mt-4">
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/code')} 
+              onClick={() => window.location.href = ('/view/boolean-format')} 
+            >
+              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
+                  <BooleanFormat value={true} />
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Boolean Format')}
+                </h2>
+              </div>
+            </div>            
+            <div 
+              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => window.location.href = ('/view/code-highlighter')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <CodeHighlighter language='javascript'>{`console.log("Hello, World!");`}</CodeHighlighter>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Code')}
+                  {_('Code Highlighter')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/color')} 
+              onClick={() => window.location.href = ('/view/color-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <ColorFormat lg value="salmon" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Color')}
+                  {_('Color Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/country')} 
+              onClick={() => window.location.href = ('/view/country-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <CountryFormat value="US" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Country')}
+                  {_('Country Format')}
                 </h2>
               </div>
             </div>
@@ -365,19 +378,6 @@ export function Body() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Text')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/yesno')} 
-            >
-              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <BooleanFormat value={true} />
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('BooleanFormat')}
                 </h2>
               </div>
             </div>

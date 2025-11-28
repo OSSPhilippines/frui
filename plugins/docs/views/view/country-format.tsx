@@ -14,9 +14,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/country';
+const uri = '/view/country-format';
 const title = 'Country Format';
-const description = 'Country formats convert values to country displays.';
+const description = 'CountryFormat formats convert values to country displays.';
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
@@ -137,7 +137,7 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can apply different sizes to the 
-          <C l value="Country" /> format.
+          <C l value="CountryFormat" /> format.
         </Translate>
       </p>
 

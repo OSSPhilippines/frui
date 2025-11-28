@@ -28,8 +28,8 @@ import Image from './Image.js';
 export type { ImageCarouselProps } from './ImageCarousel.js';
 import ImageCarousel from './ImageCarousel.js';
 
-export type { LinkProps } from './Link.js';
-import Link from './Link.js';
+export type { LinkProps } from './LinkFormat.js';
+import Link from './LinkFormat.js';
 
 export type { ListProps } from './List.js';
 import List from './List.js';
@@ -37,8 +37,8 @@ import List from './List.js';
 export type { MarkdownProps } from './Markdown.js';
 import Markdown from './Markdown.js';
 
-export type { MetadataFormatProps } from './Metadata.js';
-import MetadataFormat from './Metadata.js';
+export type { MetadataFormatProps } from './MetadataFormat.js';
+import MetadataFormat from './MetadataFormat.js';
 
 export type { NumberFormatProps } from './NumberFormat.js';
 import NumberFormat from './NumberFormat.js';
@@ -46,17 +46,17 @@ import NumberFormat from './NumberFormat.js';
 export type { PhoneLinkProps } from './PhoneLink.js';
 import PhoneLink from './PhoneLink.js';
 
-export type { RatingFormatProps } from './Rating.js';
-import RatingFormat from './Rating.js';
+export type { RatingFormatProps } from './RatingFormat.js';
+import RatingFormat from './RatingFormat.js';
   
 export type { SeparateProps } from './Separate.js';
 import Separate from './Separate.js';
 
-export type { TableFormatProps } from './Table.js';
-import TableFormat from './Table.js';
+export type { TableFormatProps } from './TableFormat.js';
+import TableFormat from './TableFormat.js';
 
-export type { TagListFormatProps } from './TagList.js';
-import TagListFormat from './TagList.js';
+export type { TagListFormatProps } from './TagListFormat.js';
+import TagListFormat from './TagListFormat.js';
 
 export type { TextProps } from './Text.js';
 import Text from './Text.js';

@@ -14,7 +14,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/separated';
+const uri = '/view/separate';
 const title = 'Separate Format';
 const description = 'Separate formats inserts a separator between multiple values.';
 

@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import ImageCarousel from 'components/view/ImageCarousel.js';
+import RatingFormat from 'components/view/RatingFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,23 +14,15 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/imagelist';
-const title = 'Image Carousel Format';
-const description = 'Image carousel formats display a list of images with various properties.';
-
-const codeBasic = `
-<ImageCarousel className="flex" value={[
-  'https://images.wsj.net/im-580612/8SR', 
-  'https://images.wsj.net/im-580612/8SR'
-]} width="50" />`.trim();
+const uri = '/view/rating-format';
+const title = 'Rating Format';
+const description = 'RatingFormat formats convert values to star ratings.';
 
 const props = [
-  [ 'alt', 'string', 'No', 'Alt text for image' ],
-  [ 'className', 'string', 'No', 'Standard HTML class names applied to all images' ],
-  [ 'height', 'string|number', 'No', 'Height of image' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all images' ],
-  [ 'value', 'string[]', 'Yes', 'Default value' ],
-  [ 'width', 'string|number', 'No', 'Width of image' ]
+  [ 'max', 'number', 'No', 'Max stars' ],
+  [ 'remainder', 'boolean', 'No', 'Add remaining stars between value and max' ],
+  [ 'round', 'string', 'No', 'round, floor or ceil' ],
+  [ 'value', 'string|number', 'Yes', 'Default value' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -58,7 +50,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Image Carousel')}
+          {_('Rating Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -110,16 +102,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Image Carousel')}
+        {_('Rating Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the image carousel format like the following.
+            Import the rating format like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import ImageCarousel from 'frui/view/ImageCarousel';`}
+          {`import RatingFormat from 'frui/view/RatingFormat';`}
         </Code>
       </div>
 
@@ -128,23 +120,20 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <ImageCarousel className="flex" value={[
-            'https://images.wsj.net/im-580612/8SR', 
-            'https://images.wsj.net/im-580612/8SR'
-          ]} width="50" />
+          <RatingFormat value="3.5" max={5} remainder round="floor" />
         </div>
         <Code language="typescript">
-          {codeBasic}
+          {`<RatingFormat value="3.5" max={5} remainder round="floor" />`}
         </Code>
       </div>
-      
+
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<ImageCarousel>" /> format can be passed the 
+            The <C value="<RatingFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

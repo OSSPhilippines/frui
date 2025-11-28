@@ -22,14 +22,14 @@ import Formula from './Formula.js';
 export type { ClassStyleProps } from './HTML.js';
 import HTML from './HTML.js';
 
-export type { ImageProps } from './Image.js';
-import Image from './Image.js';
-
 export type { ImageCarouselProps } from './ImageCarousel.js';
 import ImageCarousel from './ImageCarousel.js';
 
+export type { ImageFormatProps } from './ImageFormat.js';
+import ImageFormat from './ImageFormat.js';
+
 export type { LinkProps } from './LinkFormat.js';
-import Link from './LinkFormat.js';
+import LinkFormat from './LinkFormat.js';
 
 export type { ListProps } from './List.js';
 import List from './List.js';
@@ -43,12 +43,15 @@ import MetadataFormat from './MetadataFormat.js';
 export type { NumberFormatProps } from './NumberFormat.js';
 import NumberFormat from './NumberFormat.js';
 
+export type { OverflowProps } from './Overflow.js';
+import Overflow from './Overflow.js';
+
 export type { PhoneLinkProps } from './PhoneLink.js';
 import PhoneLink from './PhoneLink.js';
 
 export type { RatingFormatProps } from './RatingFormat.js';
 import RatingFormat from './RatingFormat.js';
-  
+
 export type { SeparateProps } from './Separate.js';
 import Separate from './Separate.js';
 
@@ -61,9 +64,6 @@ import TagListFormat from './TagListFormat.js';
 export type { TextProps } from './Text.js';
 import Text from './Text.js';
 
-export type { OverflowProps } from './Overflow.js';
-import Overflow from './Overflow.js';
-
 export {
   BooleanFormat,
   ColorFormat,
@@ -73,9 +73,9 @@ export {
   EmailLink,
   Formula,
   HTML,
-  Image,
+  ImageFormat,
   ImageCarousel,
-  Link,
+  LinkFormat,
   List,
   Markdown,
   MetadataFormat,

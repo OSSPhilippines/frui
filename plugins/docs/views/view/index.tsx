@@ -19,9 +19,9 @@ import {
   EmailLink,
   Formula,
   HTML,
-  Image as ImageFormat,
+  ImageFormat,
   ImageCarousel,
-  Link,
+  LinkFormat,
   List,
   Markdown,
   MetadataFormat,
@@ -112,40 +112,40 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/currency')} 
+              onClick={() => window.location.href = ('/view/currency-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <CurrencyFormat value="USD" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Currency')}
+                  {_('Currency Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/date')} 
+              onClick={() => window.location.href = ('/view/date-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <DateFormat value="2024-02-03" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Date')}
+                  {_('Date Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/email')} 
+              onClick={() => window.location.href = ('/view/email-link')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <EmailLink className="theme-2" value="john@doe.com" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Email')}
+                  {_('Email Link')}
                 </h2>
               </div>
             </div>
@@ -177,20 +177,20 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/image')} 
+              onClick={() => window.location.href = ('/view/image-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <ImageFormat value="https://images.wsj.net/im-580612/8SR" width="100" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Image')}
+                  {_('Image Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/imagelist')} 
+              onClick={() => window.location.href = ('/view/image-carousel')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
@@ -200,22 +200,22 @@ export function Body() {
                   ]} width="50" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Imagelist')}
+                  {_('Image Carousel')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/json')} 
+              onClick={() => window.location.href = ('/view/link-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <div className="text-left">
-                    <Link className="theme-2" value="https://images.wsj.net/im-580612/8SR" />
+                    <LinkFormat className="theme-2" value="https://images.wsj.net/im-580612/8SR" />
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Link')}
+                  {_('Link Format')}
                 </h2>
               </div>
             </div>
@@ -251,7 +251,7 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/metadata')} 
+              onClick={() => window.location.href = ('/view/metadata-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
@@ -263,13 +263,13 @@ export function Body() {
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Metadata')}
+                  {_('Metadata Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/number')} 
+              onClick={() => window.location.href = ('/view/number-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
@@ -278,7 +278,7 @@ export function Body() {
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Number')}
+                  {_('Number Format')}
                 </h2>
               </div>
             </div>
@@ -299,20 +299,20 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/phone')} 
+              onClick={() => window.location.href = ('/view/phone-link')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <PhoneLink className="theme-2" value="+1 (410) 555-2424" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Phone')}
+                  {_('Phone Link')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/rating')} 
+              onClick={() => window.location.href = ('/view/rating-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
@@ -321,26 +321,26 @@ export function Body() {
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Rating')}
+                  {_('Rating Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/separated')} 
+              onClick={() => window.location.href = ('/view/separate')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <Separate value={['Foo', 'bar']} separator=" - " />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Separated')}
+                  {_('Separate')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/table')} 
+              onClick={() => window.location.href = ('/view/table-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
@@ -351,20 +351,20 @@ export function Body() {
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Table')}
+                  {_('Table Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/taglist')} 
+              onClick={() => window.location.href = ('/view/taglist-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <TagListFormat className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Taglist')}
+                  {_('Taglist Format')}
                 </h2>
               </div>
             </div>

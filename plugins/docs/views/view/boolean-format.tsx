@@ -14,7 +14,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/yesno';
+const uri = '/view/boolean-format';
 const title = 'BooleanFormat Format';
 const description = 'BooleanFormat formats convert values to yes or no.';
 

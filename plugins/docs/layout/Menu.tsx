@@ -393,8 +393,8 @@ export const menu: MenuItem[] = [
       },
       {
         label: 'Yes/No',
-        search: '/view/yesno',
-        href: '/view/yesno'
+        search: '/view/boolean-format',
+        href: '/view/boolean-format'
       },
     ]
   },

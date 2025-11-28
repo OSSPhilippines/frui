@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import ImageFormat from 'components/view/Image.js';
+import ImageFormat from 'components/view/ImageFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';

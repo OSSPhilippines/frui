@@ -66,11 +66,6 @@ export const menu: MenuItem[] = [
         href: '/component/badge'
       },
       {
-        label: 'Bread Crumbs',
-        search: '/component/bread',
-        href: '/component/bread'
-      },
-      {
         label: 'Buttons',
         search: '/component/button',
         href: '/component/button'
@@ -107,11 +102,11 @@ export const menu: MenuItem[] = [
       },
       {
         label: 'Tabs',
-        search: '/component/tabs',
+        search: '/component/tabs  ',
         href: '/component/tabs'
       },
       {
-        label: 'Tooltips',
+        label: 'Tooltip',
         search: '/component/tooltip',
         href: '/component/tooltip'
       }

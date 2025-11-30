@@ -234,7 +234,7 @@ export type { FormulaProps } from './view/Formula.js';
 
 export type { ClassStyleProps } from './view/HTML.js';
 
-export type { ImageProps } from './view/ImageFormat.js';
+export type { ImageFormatProps } from './view/ImageFormat.js';
 
 export type { ImageCarouselProps } from './view/ImageCarousel.js';
 

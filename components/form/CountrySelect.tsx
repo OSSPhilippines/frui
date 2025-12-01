@@ -112,4 +112,6 @@ export function CountrySelect(props: CountrySelectProps) {
 };
 
 //defaults to country
-export default CountrySelect;
+export default Object.assign(CountrySelect, {
+  countries
+});

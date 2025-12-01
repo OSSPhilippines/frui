@@ -190,4 +190,8 @@ export function SlugInput(props: SlugInputProps) {
 };
 
 //defaults to slug input
-export default SlugInput;
+export default Object.assign(SlugInput, {
+  slugify,
+  camelfy,
+  useSlug
+});

@@ -1252,4 +1252,6 @@ export function TextEditor(props: TextEditorProps) {
 };
 
 //defaults to text editor
-export default TextEditor;
+export default Object.assign(TextEditor, {
+  useTextEditor
+});

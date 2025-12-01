@@ -281,7 +281,7 @@ export function Body() {
           <Translate>
             You can pass the <C 
               value="error" 
-            /> prop to highlight the input field 
+            /> prop to highlight the file input field 
             red.
           </Translate>
         </p>

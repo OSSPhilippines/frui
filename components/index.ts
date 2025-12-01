@@ -101,26 +101,6 @@ import Tabs from './Tabs.js';
 import Tooltip from './Tooltip.js';
 
 //--------------------------------------------------------------------//
-// Helpers
-
-//tools
-export { BackgroundColorTool } from './helpers/tools/BackgroundColorTool.js';
-export { BorderColorTool } from './helpers/tools/BorderColorTool.js';
-export { BorderRadiusTool } from './helpers/tools/BorderRadiusTool.js';
-export { ColorTool } from './helpers/tools/ColorTool.js';
-export { DisplayTool } from './helpers/tools/DisplayTool.js';
-export { FillTool } from './helpers/tools/FillTool.js';
-export { PropTool } from './helpers/tools/PropTool.js';
-export { TextAlignTool } from './helpers/tools/TextAlignTool.js';
-export { TextColorTool } from './helpers/tools/TextColorTool.js';
-export { TextSizeTool } from './helpers/tools/TextSizeTool.js';
-
-export { getClassStyles } from './helpers/getClassStyles.js';
-export { getSlotStyles } from './helpers/getSlotStyles.js';
-export { removeThemeProps } from './helpers/removeThemeProps.js';
-export { toChildrenArray } from './helpers/toChildrenArray.js';
-
-//--------------------------------------------------------------------//
 // Form
 
 //checkbox
@@ -214,6 +194,27 @@ import * as Form from './form/index.js';
 
 //--------------------------------------------------------------------//
 // Tool
+
+export { BackgroundColorTool } from './helpers/tools/BackgroundColorTool.js';
+export { BorderColorTool } from './helpers/tools/BorderColorTool.js';
+export { BorderRadiusTool } from './helpers/tools/BorderRadiusTool.js';
+export { ColorTool } from './helpers/tools/ColorTool.js';
+export { DisplayTool } from './helpers/tools/DisplayTool.js';
+export { FillTool } from './helpers/tools/FillTool.js';
+export { PropTool } from './helpers/tools/PropTool.js';
+export { TextAlignTool } from './helpers/tools/TextAlignTool.js';
+export { TextColorTool } from './helpers/tools/TextColorTool.js';
+export { TextSizeTool } from './helpers/tools/TextSizeTool.js';
+
+
+//--------------------------------------------------------------------//
+// Helpers
+
+export { getClassStyles } from './helpers/getClassStyles.js';
+export { getSlotStyles } from './helpers/getSlotStyles.js';
+export { removeThemeProps } from './helpers/removeThemeProps.js';
+export { toChildrenArray } from './helpers/toChildrenArray.js';
+
 
 //--------------------------------------------------------------------//
 // View

@@ -17,7 +17,7 @@ import Docs from '../../layout/Docs.js';
 
 const uri = '/form/mask-input';
 const title = 'Mask Input Field';
-const description = 'Mask Input is a field component that provides an input mask '
+const description = 'MaskInput is a field component that provides an input mask '
   + 'to format user input according to a specified pattern.';
 
 const props = [

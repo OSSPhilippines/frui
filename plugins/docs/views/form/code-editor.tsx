@@ -20,7 +20,7 @@ import Docs from '../../layout/Docs.js';
 
 const uri = '/form/code-editor';
 const title = 'Code Editor Field';
-const description = 'Code Editor is a field component that provides a code '
+const description = 'CodeEditor is a field component that provides a code '
   + 'editing interface with syntax highlighting and other '
   + 'features powered by CodeMirror.';
 

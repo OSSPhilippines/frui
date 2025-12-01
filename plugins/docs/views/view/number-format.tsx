@@ -17,7 +17,7 @@ import Docs from '../../layout/Docs.js';
 
 const uri = '/view/number-format';
 const title = 'Number Format';
-const description = 'Number formats convert values to numerical displays.';
+const description = 'NumberFormat formats convert values to numerical displays.';
 
 const props = [
   [ 'absolute', 'string', 'No', 'Remove negative sign' ],

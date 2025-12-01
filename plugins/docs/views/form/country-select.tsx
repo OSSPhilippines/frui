@@ -17,7 +17,7 @@ import Docs from '../../layout/Docs.js';
 
 const uri = '/form/country-select';
 const title = 'Country Select Field';
-const description = 'Country select fields in FRUI, allow users select from a list of '
+const description = 'CountrySelect fields in FRUI, allow users select from a list of '
   + 'countries around the world.';
 
 const props = [

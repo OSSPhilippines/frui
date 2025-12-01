@@ -17,7 +17,7 @@ import Docs from '../../layout/Docs.js';
 
 const uri = '/form/markdown-editor';
 const title = 'Markdown Editor Field';
-const description = 'Markdown Editor is a field component that provides a markdown '
+const description = 'MarkdownEditor is a field component that provides a markdown '
   + 'editing interface with live preview.';
 
 const props = [

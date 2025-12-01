@@ -17,7 +17,7 @@ import Docs from '../../layout/Docs.js';
 
 const uri = '/form/currency-select';
 const title = 'Currency Select Field';
-const description = 'Currency Select fields in FRUI, allow users select from a list of '
+const description = 'CurrencySelect fields in FRUI, allow users select from a list of '
   + 'count riesaround the world.';
 
 const props = [

@@ -209,7 +209,4 @@ export function Metadata(props: MetadataProps) {
 };
 
 //defaults to metadata
-export default Object.assign(Metadata, {
-  MetadataFields,
-  useMetadata
-});
+export default Object.assign(Metadata, { MetadataFields, useMetadata });

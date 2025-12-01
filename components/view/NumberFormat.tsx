@@ -67,4 +67,4 @@ export function NumberFormat(props: NumberFormatProps) {
 };
 
 //defaults to number format
-export default Object.assign(NumberFormat, { NumberFormat });
+export default Object.assign(NumberFormat, { formatNumber });

@@ -127,6 +127,4 @@ export function Loader(props: LoaderProps) {
 };
 
 //defaults to loader
-export default Object.assign(Loader, {
-  Container: LoaderContainer
-});
+export default Object.assign(Loader, { Container: LoaderContainer });

@@ -109,7 +109,4 @@ export function MaskInput(props: MaskInputProps) {
 };
 
 //defaults to mask
-export default Object.assign(MaskInput, { 
-  useMaskInput, 
-  use: useMaskInput 
-});
+export default Object.assign(MaskInput, { useMaskInput, use: useMaskInput });

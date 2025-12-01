@@ -138,7 +138,4 @@ export function Checkbox(props: CheckboxProps) {
 };
 
 //defaults to checkbox
-export default Object.assign(Checkbox, { 
-  useCheckbox,
-  use: useCheckbox
-});
+export default Object.assign(Checkbox, { useCheckbox, use: useCheckbox });

@@ -19,7 +19,7 @@ import Docs from '../../layout/Docs.js';
 const uri = '/component/tooltip';
 const title = 'Tooltip Component';
 const description = 
-  'Tooltips display informative text when users hover '
+  'Tooltip display informative text when users hover '
   + 'over, focus on, or tap an element.';
 
 const props = [
@@ -358,7 +358,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the tooltip component like the following.
+            Import the <C value="Tooltip" /> component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -384,7 +384,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Tooltips can be placed in different positions around the
+            Tooltip can be placed in different positions around the
             target element using the <C value="top" />, <C value="bottom" />,
             <C value="left" />, and <C value="right" /> props. The default 
             placement is top.
@@ -427,7 +427,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Tooltips can be placed in different positions around the
+            Tooltip can be placed in different positions around the
             target element using the <C value="top" />, <C value="bottom" />,
             <C value="left" />, and <C value="right" /> props. The default 
             placement is top.
@@ -456,7 +456,7 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use the <C value="frui-tooltip" /> CSS class to
-          globally theme tooltips.
+          globally theme tooltip.
         </Translate>
       </p>
 

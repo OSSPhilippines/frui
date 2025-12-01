@@ -323,7 +323,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the progress bar component like the following.
+            Import the <C value="<Progress>" /> component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

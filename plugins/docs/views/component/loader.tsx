@@ -250,7 +250,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the loader component like the following.
+            Import the <C value="<Loader>" /> component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

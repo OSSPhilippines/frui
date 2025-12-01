@@ -115,7 +115,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the <C value="ImageCarousel" /> component as shown below.
+            Import the <C value="<ImageCarousel>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

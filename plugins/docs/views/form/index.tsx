@@ -13,6 +13,7 @@ import {
   CountrySelect,
   CurrencySelect,
   DateInput,
+  DatetimeInput,
   FileInput,
   FileList,
   ImageInput,
@@ -24,11 +25,13 @@ import {
   NumberInput,
   PasswordInput,
   Radio,
+  Rating,
   Select,
+  Slider,
   SlugInput,
   SuggestInput,
   Switch,
-  Taglist,
+  TagList,
   Textarea,
   Textlist,
   TimeInput
@@ -78,87 +81,72 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/country')} 
+              onClick={() => window.location.href = ('/form/country-select')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <CountrySelect className="w-full" value="US" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Country')}
+                  {_('Country Select')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/currency')} 
+              onClick={() => window.location.href = ('/form/currency-select')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <CurrencySelect className="w-full" value="USD" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Currency')}
+                  {_('Currency Select')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/date')} 
-            >
-              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Date />
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Date')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/datetime')} 
+              onClick={() => window.location.href = ('/form/date-input')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <DateInput />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Datetime')}
+                  {_('Date Input')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/formset')} 
+              onClick={() => window.location.href = ('/form/datetime-input')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <div className="text-left">
-                    <Textlist value={['foobar']} add="Add More" />
-                  </div>
+                  <DatetimeInput />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Fieldset')}
+                  {_('Datetime Input')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/file')} 
+              onClick={() => window.location.href = ('/form/file-input')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <FileInput className="bg-white w-[150px]" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('File')}
+                  {_('File Input')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/filelist')} 
+              onClick={() => window.location.href = ('/form/file-list')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
@@ -167,26 +155,26 @@ export function Body() {
                   ]} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Filelist')}
+                  {_('File List')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/image')} 
+              onClick={() => window.location.href = ('/form/image-input')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] theme-bg-1 px-3">
                   <ImageInput className="bg-white w-[150px]" value="https://images.wsj.net/im-580612/8SR" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Image')}
+                  {_('Image Input')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/imagelist')} 
+              onClick={() => window.location.href = ('/form/image-list')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
@@ -195,7 +183,7 @@ export function Body() {
                   ]} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Imagelist')}
+                  {_('Image List')}
                 </h2>
               </div>
             </div>
@@ -214,40 +202,27 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/json')} 
-            >
-              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  TODO
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('JSON')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/markdown')} 
+              onClick={() => window.location.href = ('/form/markdown-editor')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <MarkdownEditor rows={2} defaultValue="# FRUI" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Markdown')}
+                  {_('Markdown Editor')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/mask')} 
+              onClick={() => window.location.href = ('/form/mask-input')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <MaskInput mask="999-999-9999" placeholder="999-999-9999" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Mask')}
+                  {_('Mask Input')}
                 </h2>
               </div>
             </div>
@@ -268,27 +243,27 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/number')} 
+              onClick={() => window.location.href = ('/form/number-input')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <NumberInput defaultValue="1234.56" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Number')}
+                  {_('Number Input')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/password')} 
+              onClick={() => window.location.href = ('/form/password-input')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <PasswordInput value="1234567890" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Password')}
+                  {_('Password Input')}
                 </h2>
               </div>
             </div>
@@ -321,24 +296,11 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/range')} 
-            >
-              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  TODO
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Range Slider')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
               onClick={() => window.location.href = ('/form/rating')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  TODO
+                  <Rating value={3.5} max={5} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Rating')}
@@ -365,6 +327,19 @@ export function Body() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Select')}
+                </h2>
+              </div>
+            </div>
+            <div 
+              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => window.location.href = ('/form/range')} 
+            >
+              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
+                  <Slider min={0} max={100} step={1} value={50} className='w-full'/>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Slider')}
                 </h2>
               </div>
             </div>
@@ -409,27 +384,27 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/taglist')} 
+              onClick={() => window.location.href = ('/form/tag-list')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Taglist value={['foo', 'bar']} />
+                  <TagList value={['foo', 'bar']} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Taglist')}
+                  {_('Tag List')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/textarea')} 
+              onClick={() => window.location.href = ('/form/text-editor')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Textarea placeholder="Morbi tincidunt, dolor at sodales auctor, magna eros sagittis enim, ut aliquet velit nulla vel metus." />
+                  TODO
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Textarea')}
+                  {_('Text Editor')}
                 </h2>
               </div>
             </div>
@@ -450,14 +425,27 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/time')} 
+              onClick={() => window.location.href = ('/form/textarea')} 
+            >
+              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
+                  <Textarea placeholder="Morbi tincidunt, dolor at sodales auctor, magna eros sagittis enim, ut aliquet velit nulla vel metus." />
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Textarea')}
+                </h2>
+              </div>
+            </div>
+            <div 
+              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => window.location.href = ('/form/time-input')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <TimeInput />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Time')}
+                  {_('Time Input')}
                 </h2>
               </div>
             </div>

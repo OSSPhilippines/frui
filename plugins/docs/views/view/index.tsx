@@ -364,7 +364,7 @@ export function Body() {
                   <TagListFormat className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Taglist Format')}
+                  {_('TagList Format')}
                 </h2>
               </div>
             </div>

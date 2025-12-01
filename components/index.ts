@@ -176,7 +176,7 @@ export type { SuggestInputProps } from './form/SuggestInput.js';
 export type { SwitchProps } from './form/Switch.js';
 
 //tag list
-export type { TaglistProps } from './form/TagList.js';
+export type { TagListProps } from './form/TagList.js';
 
 //textarea
 export type { TextareaProps } from './form/Textarea.js';

@@ -74,8 +74,8 @@ import SuggestInput from './SuggestInput.js';
 export type { SwitchProps } from './Switch.js';
 import Switch from './Switch.js';
 
-export type { TaglistProps } from './TagList.js';
-import Taglist from './TagList.js';
+export type { TagListProps } from './TagList.js';
+import TagList from './TagList.js';
 
 export type { TextareaProps } from './Textarea.js';
 import Textarea from './Textarea.js';
@@ -116,7 +116,7 @@ export {
   SlugInput,
   SuggestInput,
   Switch,
-  Taglist,
+  TagList,
   Textarea,
   TextEditor,
   Textlist,

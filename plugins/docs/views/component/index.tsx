@@ -76,7 +76,7 @@ export function Body() {
             </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = '/component/crumbs'} 
+              onClick={() => window.location.href = '/component/bread'} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">

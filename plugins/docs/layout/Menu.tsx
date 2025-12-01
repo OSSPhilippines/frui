@@ -377,7 +377,7 @@ export const menu: MenuItem[] = [
         href: '/view/table-format'
       },
       {
-        label: 'Taglist Format',
+        label: 'TagList Format',
         search: '/view/taglist-format',
         href: '/view/taglist-format'
       },

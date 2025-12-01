@@ -31,7 +31,7 @@ export type CodeEditorProps = HTMLTextareaProps & {
   defaultValue?: string,
   extensions?: Extension[],
   language?: string,
-  //might not be needed 
+  // might not be needed 
   // there's nothing special about it
   // could just add to extensions if necessary
   numbers?: boolean, 
@@ -151,7 +151,7 @@ export function useCodeEditor(config: CodeEditorConfig) {
       onUpdate && onUpdate(value);
     }
   };
-  //effects
+  // effects
   // whenever value changes, update currentValue
   useEffect(() => {
     if (value !== undefined) {

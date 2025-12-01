@@ -15,7 +15,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/textlist';
+const uri = '/form/text-list';
 const title = 'TextList Field';
 const description = 'TextList is a field component that allows users to input '
   + 'a list of tags or values.';
@@ -133,7 +133,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the text list field like the following.
+            Import the <C value="TextList" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -225,7 +225,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the TextList field red.
+            the input field red.
           </Translate>
         </p>
         <Preview

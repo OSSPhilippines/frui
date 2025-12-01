@@ -187,7 +187,7 @@ export type { SelectProps } from './form/Select.js';
 export type { SliderProps } from './form/Slider.js';
 
 //slug input
-export type { SlugProps } from './form/SlugInput.js';
+export type { SlugInputProps } from './form/SlugInput.js';
 
 //suggest input
 export type { SuggestInputProps } from './form/SuggestInput.js';

@@ -15,7 +15,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/taglist';
+const uri = '/form/tag-list';
 const title = 'TagList Field';
 const description = 'TagList is a field component that allows users to input '
   + 'a list of tags or values.';
@@ -134,7 +134,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the tag list field like the following.
+            Import the <C value="TagList" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

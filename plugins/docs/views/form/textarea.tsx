@@ -127,7 +127,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the textarea field like the following.
+            Import the <C value="Textarea" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

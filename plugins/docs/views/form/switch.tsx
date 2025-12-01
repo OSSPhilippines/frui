@@ -150,7 +150,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the switch field like the following.
+            Import the <C value="Switch" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

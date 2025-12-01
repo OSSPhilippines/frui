@@ -18,7 +18,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/editor';
+const uri = '/form/code-editor';
 const title = 'Code Editor Field';
 const description = 'Code Editor is a field component that provides a code '
   + 'editing interface with syntax highlighting and other '
@@ -145,7 +145,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the code editor field like the following.
+            Import the <C value="CodeEditor" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -159,7 +159,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            A <C l value="CodeEditor" /> is not a standard input field 
+            A <C value="CodeEditor" /> is not a standard input field 
             but a specialized component for editing code that wraps 
             around the CodeMirror component. 
           </Translate>
@@ -187,7 +187,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            <C l value="CodeEditor" /> supports a variety of languages out of the box.
+            <C value="CodeEditor" /> supports a variety of languages out of the box.
           </Translate>
         </p>
         <Preview 
@@ -225,7 +225,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             Language support extensions can also be passed into the 
-            editor via the <C l value="extensions" /> prop.
+            editor via the <C value="extensions" /> prop.
           </Translate>
         </p>
         <Code language="typescript">

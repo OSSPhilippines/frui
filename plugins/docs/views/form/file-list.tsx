@@ -15,7 +15,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/filelist';
+const uri = '/form/file-list';
 const title = 'File List Field';
 const description = 'File list is a field component that allows users to '
   + 'upload and manage multiple files.';
@@ -123,7 +123,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the file list field like the following.
+            Import the <C value="FileList" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

@@ -65,8 +65,8 @@ import Select from './Select.js';
 export type { SliderProps } from './Slider.js';
 import Slider from './Slider.js';
 
-export type { SlugProps } from './SlugInput.js';
-import Slug from './SlugInput.js';
+export type { SlugInputProps } from './SlugInput.js';
+import SlugInput from './SlugInput.js';
 
 export type { SuggestInputProps } from './SuggestInput.js';
 import SuggestInput from './SuggestInput.js';
@@ -113,7 +113,7 @@ export {
   Rating,
   Select,
   Slider,
-  Slug,
+  SlugInput,
   SuggestInput,
   Switch,
   Taglist,

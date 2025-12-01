@@ -15,9 +15,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/file';
-const title = 'File Field';
-const description = 'File is a field component that wraps the standard HTML '
+const uri = '/form/file-input';
+const title = 'File Input Field';
+const description = 'File input is a field component that wraps the standard HTML '
   + 'file input element.';
 
 const props = [
@@ -78,7 +78,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Input File')}
+          {_('File Input')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -115,12 +115,12 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Input File')}
+        {_('File Input')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the file field like the following.
+            Import the <C value="FileInput" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -313,7 +313,7 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            The <C value="<File>" /> field accepts all props 
+            The <C value="<FileInput>" /> field accepts all props 
             of a standard HTML Input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"

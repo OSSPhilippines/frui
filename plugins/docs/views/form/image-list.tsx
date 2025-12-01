@@ -15,7 +15,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/imagelist';
+const uri = '/form/image-list';
 const title = 'Image List Field';
 const description = 'Image list is a field component that allows users to '
   + 'upload and manage multiple images.';
@@ -123,7 +123,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the image list field like the following.
+            Import the <C value="ImageList" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

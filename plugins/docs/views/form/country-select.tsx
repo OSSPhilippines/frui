@@ -15,9 +15,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/country';
-const title = 'Country Field';
-const description = 'Country fields in FRUI, allow users select from a list of '
+const uri = '/form/country-select';
+const title = 'Country Select Field';
+const description = 'Country select fields in FRUI, allow users select from a list of '
   + 'countries around the world.';
 
 const props = [
@@ -123,7 +123,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the country field like the following.
+            Import the <C value="CountrySelect" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

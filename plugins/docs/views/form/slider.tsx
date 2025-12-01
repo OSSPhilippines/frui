@@ -87,7 +87,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Slider Field')}
+          {_('Slider')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -288,12 +288,12 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Slider Field')}
+        {_('Slider')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the file field like the following.
+            Import the <C value="Slider" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

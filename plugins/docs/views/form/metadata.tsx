@@ -141,7 +141,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the metadata field like the following.
+            Import the <C value="Metadata" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -156,7 +156,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             The following is a basic example of a 
-            <C l value="Metadata" /> field.
+            <C value="Metadata" /> field.
           </Translate>
         </p>
         <Preview
@@ -173,12 +173,12 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can set different value types using the
-            <C l value="type" /> prop. Its value can be one of 
-            <C l value='type="text"' quote />,
-            <C l value='type="number"' quote />,
-            <C l value='type="date"' quote />,
-            <C l value='type="time"' quote />, or
-            <C l value='type="datetime"' quote />. 
+            <C value="type" /> prop. Its value can be one of 
+            <C value='type="text"' quote />,
+            <C value='type="number"' quote />,
+            <C value='type="date"' quote />,
+            <C value='type="time"' quote />, or
+            <C value='type="datetime"' quote />. 
           </Translate>
         </p>
         <Preview
@@ -196,7 +196,7 @@ export function Body() {
           <Translate>
             For <C value='type="number"' quote />, you can also
             set the <C value="min" />, <C value="max" />, and
-            <C l value="step" /> props.
+            <C value="step" /> props.
           </Translate>
         </p>
         <Preview
@@ -275,7 +275,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the Metadata field red.
+            the metadata field red.
           </Translate>
         </p>
         <Preview

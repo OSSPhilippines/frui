@@ -15,9 +15,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/currency';
-const title = 'Currency Field';
-const description = 'Currency fields in FRUI, allow users select from a list of '
+const uri = '/form/currency-select';
+const title = 'Currency Select Field';
+const description = 'Currency Select fields in FRUI, allow users select from a list of '
   + 'count riesaround the world.';
 
 const props = [
@@ -123,7 +123,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the currency field like the following.
+            Import the <C value="CurrencySelect" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -138,7 +138,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             The following is a basic example of 
-            a <C l value="CurrencySelect" /> field.
+            a <C value="CurrencySelect" /> field.
           </Translate>
         </p>
         <Preview 
@@ -160,7 +160,7 @@ export function Body() {
           <Translate>
             You can add a search field to the dropdown by passing
             the <C value="searchable" /> prop to the 
-            <C l value="CurrencySelect" /> component.
+            <C value="CurrencySelect" /> component.
           </Translate>
         </p>
         <Preview 
@@ -182,7 +182,7 @@ export function Body() {
           <Translate>
             You can enable multiple selection by passing the
             <C value="multiple" /> prop to the
-            <C l value="CurrencySelect" /> component.
+            <C value="CurrencySelect" /> component.
           </Translate>
         </p>
         <Preview
@@ -203,7 +203,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             The following example makes use of all the possible 
-            events for <C value="Currency" />.
+            events for <C value="CurrencySelect" />.
           </Translate>
         </p>
         <Preview

@@ -12,7 +12,7 @@ import Input from './Input.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type SlugConfig = ExtendsType<InputConfig, {
+export type SlugInputConfig = ExtendsType<InputConfig, {
   //whether to convert to camel case
   camel?: boolean,
   //whether to use dashes instead of underscores (default)
@@ -27,7 +27,7 @@ export type SlugConfig = ExtendsType<InputConfig, {
   value: string|number|readonly string[]|undefined
 }>;
 
-export type SlugProps = ExtendsType<InputProps, {
+export type SlugInputProps = ExtendsType<InputProps, {
   dash?: boolean,
   line?: boolean,
   camel?: boolean
@@ -92,7 +92,7 @@ export function camelfy(value: string) {
 /**
  * Slug Hook Aggregate
  */
-export function useSlug(config: SlugConfig) {
+export function useSlug(config: SlugInputConfig) {
   //config
   const {
     //whether to convert to camel case
@@ -148,9 +148,9 @@ export function useSlug(config: SlugConfig) {
 // Components
 
 /**
- * Styled Slug Component (Main)
+ * Styled SlugInput Component (Main)
  */
-export function Slug(props: SlugProps) {
+export function SlugInput(props: SlugInputProps) {
   const { 
     //whether to convert to camel case
     camel, //?: boolean
@@ -190,4 +190,4 @@ export function Slug(props: SlugProps) {
 };
 
 //defaults to slug
-export default Slug;
+export default SlugInput;

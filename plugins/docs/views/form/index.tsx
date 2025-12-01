@@ -25,7 +25,7 @@ import {
   PasswordInput,
   Radio,
   Select,
-  Slug,
+  SlugInput,
   SuggestInput,
   Switch,
   Taglist,
@@ -50,19 +50,6 @@ export function Body() {
             following fields have been unlocked and are free to use.
           </p>
           <div className="flex flex-wrap mt-4">
-            <div 
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/autocomplete')} 
-            >
-              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <SuggestInput options={[ 'foo', 'bar' ]} value="bar" />
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Autocomplete')}
-                </h2>
-              </div>
-            </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
               onClick={() => window.location.href = ('/form/checkbox')} 
@@ -383,17 +370,30 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/slug')} 
+              onClick={() => window.location.href = ('/form/slug-input')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Slug value="I am a Title" />
+                  <SlugInput value="I am a Title" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Slug')}
+                  {_('Slug Input')}
                 </h2>
               </div>
             </div>
+            <div 
+              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => window.location.href = ('/form/suggest-input')} 
+            >
+              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
+                  <SuggestInput options={[ 'foo', 'bar' ]} value="bar" />
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Suggest Input')}
+                </h2>
+              </div>
+            </div>            
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
               onClick={() => window.location.href = ('/form/switch')} 

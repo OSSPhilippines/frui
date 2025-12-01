@@ -15,7 +15,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/password';
+const uri = '/form/password-input';
 const title = 'PasswordInput Field';
 const description = 'PasswordInput is a field component that wraps the standard '
   + 'HTML input element for password values.';
@@ -56,7 +56,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Password')}
+          {_('Password Input')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -93,12 +93,12 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Password')}
+        {_('Password Input')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the password field like the following.
+            Import the <C value="PasswordInput" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

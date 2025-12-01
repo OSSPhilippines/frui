@@ -92,7 +92,7 @@ export function camelfy(value: string) {
 /**
  * Slug Hook Aggregate
  */
-export function useSlug(config: SlugInputConfig) {
+export function useSlugInput(config: SlugInputConfig) {
   //config
   const {
     //whether to convert to camel case
@@ -169,7 +169,7 @@ export function SlugInput(props: SlugInputProps) {
     ...attributes 
   } = props;
 
-  const { slug, handlers } = useSlug({
+  const { slug, handlers } = useSlugInput({
     dash,
     line,
     camel,
@@ -193,5 +193,5 @@ export function SlugInput(props: SlugInputProps) {
 export default Object.assign(SlugInput, {
   slugify,
   camelfy,
-  useSlug
+  useSlugInput
 });

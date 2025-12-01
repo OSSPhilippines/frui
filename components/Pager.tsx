@@ -199,6 +199,4 @@ export function Pager(props: PagerProps) {
 };
 
 //defaults to pager
-export default Object.assign(Pager, {
-  flatClass
-});
+export default Object.assign(Pager, { flatClass });

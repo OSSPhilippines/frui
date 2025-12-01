@@ -2,7 +2,7 @@
 // Imports
 
 //modules
-import { useLanguage, Translate} from 'r22n';
+import { useLanguage, Translate } from 'r22n';
 
 //frui
 import type { FieldsProps, FieldsetProps } from 'components/form/Fieldset.js';

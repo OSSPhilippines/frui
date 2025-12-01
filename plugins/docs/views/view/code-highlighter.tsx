@@ -115,9 +115,9 @@ export function Body() {
             Import the <C value="<CodeHighlighter>" /> component as shown below.
           </Translate>
         </p>
-        <CodeHighlighter language="typescript" className="mt-2">
-          {`import CodeHighlighter from 'frui/view/CodeHighlighter';`}
-        </CodeHighlighter>
+        <Code language="typescript" className="mt-2">
+          {`import Code from 'frui/view/Code';`}
+        </Code>
       </div>
 
       <h2 id="basics" className="uppercase font-bold text-lg mt-8">

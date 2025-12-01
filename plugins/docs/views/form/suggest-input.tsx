@@ -494,7 +494,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the suggest input field red.
+            the input field red.
           </Translate>
         </p>
         <Preview 

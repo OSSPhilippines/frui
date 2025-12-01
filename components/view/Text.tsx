@@ -7,7 +7,7 @@ export type TextProps = { value: string, format?: 'uppercase'|'lowercase'|'capit
 // Components
 
 /**
- * Text Format Component (Main)
+ * Text Component (Main)
  */
 export function Text({ value, format }: TextProps) {
   const styles: React.CSSProperties = {};

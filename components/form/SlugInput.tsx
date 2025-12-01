@@ -189,5 +189,5 @@ export function SlugInput(props: SlugInputProps) {
   );
 };
 
-//defaults to slug
+//defaults to slug input
 export default SlugInput;

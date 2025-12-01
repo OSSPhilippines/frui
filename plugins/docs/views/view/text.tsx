@@ -15,7 +15,7 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/view/text';
-const title = 'Text Format';
+const title = 'Text';
 const description = 'Text formats capitalizes, uppercase or lowercases values.';
 
 const props = [

@@ -152,7 +152,7 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can apply different locales and formats to the 
-          <C l value="DateFormat" /> format.
+          <C value="DateFormat" /> format.
         </Translate>
       </p>
 

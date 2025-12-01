@@ -102,7 +102,7 @@ export const menu: MenuItem[] = [
       },
       {
         label: 'Tabs',
-        search: '/component/tabs  ',
+        search: '/component/tabs',
         href: '/component/tabs'
       },
       {

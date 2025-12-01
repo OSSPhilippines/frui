@@ -194,6 +194,5 @@ export default Object.assign(SlugInput, {
   useSlugInput,
   camelfy,
   slugify,
-  Input: SlugInput,
   use: useSlugInput,
 });

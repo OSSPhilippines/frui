@@ -76,4 +76,4 @@ export function Textarea(props: TextareaProps) {
 };
 
 //defaults to textarea
-export default Object.assign(Textarea, { useTextarea });
+export default Object.assign(Textarea, { useTextarea, use: useTextarea });

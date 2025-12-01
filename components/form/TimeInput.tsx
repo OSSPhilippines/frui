@@ -150,5 +150,5 @@ export default Object.assign(TimeInput, {
   toDate,
   toTimeString,
   toTimeInputString,
-  useTimeInput
+  use: useTimeInput
 });

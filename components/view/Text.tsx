@@ -1,7 +1,10 @@
 //--------------------------------------------------------------------//
 // Types
 
-export type TextProps = { value: string, format?: 'uppercase'|'lowercase'|'capitalize'|'none' };
+export type TextProps = {
+  value: string,
+  format?: 'uppercase' | 'lowercase' | 'capitalize' | 'none'
+};
 
 //--------------------------------------------------------------------//
 // Components

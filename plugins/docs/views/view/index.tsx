@@ -12,6 +12,7 @@ import {
 
 import {
   BooleanFormat,
+  CodeHighlighter,
   ColorFormat,
   CountryFormat,
   CurrencyFormat,
@@ -34,7 +35,6 @@ import {
   Overflow,
   Text,
 } from 'components/view';
-import CodeHighlighter from 'components/view/CodeHighlighter';
 
 //--------------------------------------------------------------------//
 // Constants

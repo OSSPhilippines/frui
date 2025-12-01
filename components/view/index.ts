@@ -4,6 +4,9 @@ import BooleanFormat from './BooleanFormat.js';
 export type { ColorFormatProps } from './ColorFormat.js';
 import ColorFormat from './ColorFormat.js';
 
+export type { CodeHighlighterProps } from './CodeHighlighter.js';
+import CodeHighlighter from './CodeHighlighter.js';
+
 export type { CountryFormatProps } from './CountryFormat.js';
 import CountryFormat from './CountryFormat.js';
 
@@ -66,6 +69,7 @@ import Text from './Text.js';
 
 export {
   BooleanFormat,
+  CodeHighlighter,
   ColorFormat,
   CountryFormat,
   CurrencyFormat,

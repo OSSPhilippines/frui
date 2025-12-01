@@ -246,7 +246,7 @@ export function Rating(props: RatingProps) {
 
 //defaults to rating
 export default Object.assign(Rating, {
-  Star: RatingStar,
   useRating,
+  Star: RatingStar,
   use: useRating
 });

@@ -83,8 +83,8 @@ import Textarea from './Textarea.js';
 export type { TextEditorProps } from './TextEditor.js';
 import TextEditor from './TextEditor.js';
 
-export type { TextlistProps } from './TextList.js';
-import Textlist from './TextList.js';
+export type { TextListProps } from './TextList.js';
+import TextList from './TextList.js';
 
 export type { TimeInputProps } from './TimeInput.js';
 import TimeInput from './TimeInput.js';
@@ -119,6 +119,6 @@ export {
   TagList,
   Textarea,
   TextEditor,
-  Textlist,
+  TextList,
   TimeInput
 };

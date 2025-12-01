@@ -185,7 +185,7 @@ export type { TextareaProps } from './form/Textarea.js';
 export type { TextEditorProps } from './form/TextEditor.js';
 
 //text list
-export type { TextlistProps } from './form/TextList.js';
+export type { TextListProps } from './form/TextList.js';
 
 //time input
 export type { TimeInputProps } from './form/TimeInput.js';

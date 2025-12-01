@@ -33,7 +33,7 @@ import {
   Switch,
   TagList,
   Textarea,
-  Textlist,
+  TextList,
   TimeInput
 } from 'components/form/index.js';
 
@@ -410,16 +410,16 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/form/textlist')} 
+              onClick={() => window.location.href = ('/form/TextList')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <div className="text-left">
-                    <Textlist value={['foobar']} add="Add More" />
+                    <TextList value={['foobar']} add="Add More" />
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Textlist')}
+                  {_('TextList')}
                 </h2>
               </div>
             </div>

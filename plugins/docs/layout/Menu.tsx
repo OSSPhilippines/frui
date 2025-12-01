@@ -105,7 +105,7 @@ export const menu: MenuItem[] = [
         search: '/component/tabs',
         href: '/component/tabs'
       },
-      {
+      {   
         label: 'Tooltip',
         search: '/component/tooltip',
         href: '/component/tooltip'

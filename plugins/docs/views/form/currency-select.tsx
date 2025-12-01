@@ -280,7 +280,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the Currency field red.
+            the currency field red.
           </Translate>
         </p>
         <Preview

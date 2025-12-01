@@ -238,7 +238,7 @@ export type { ImageFormatProps } from './view/ImageFormat.js';
 
 export type { ImageCarouselProps } from './view/ImageCarousel.js';
 
-export type { LinkProps } from './view/LinkFormat.js';
+export type { LinkFormatProps } from './view/LinkFormat.js';
 
 export type { ListProps } from './view/List.js';
 

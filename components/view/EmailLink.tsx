@@ -2,14 +2,14 @@
 // Imports
 
 //types
-import type { LinkProps } from './LinkFormat.js';
+import type { LinkFormatProps } from './LinkFormat.js';
 //components
-import Link from './LinkFormat.js';
+import LinkFormat from './LinkFormat.js';
 
 //--------------------------------------------------------------------//
 // Types
 
-export type EmailLinkProps = LinkProps;
+export type EmailLinkProps = LinkFormatProps;
 
 //--------------------------------------------------------------------//
 // Components
@@ -19,7 +19,7 @@ export type EmailLinkProps = LinkProps;
  */
 export function EmailLink({ value, ...attributes }: EmailLinkProps) {
   return (
-    <Link {...attributes} value={`mailto:${value}`} label={value} />
+    <LinkFormat {...attributes} value={`mailto:${value}`} label={value} />
   );
 };
 

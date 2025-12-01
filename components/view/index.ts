@@ -28,7 +28,7 @@ import ImageCarousel from './ImageCarousel.js';
 export type { ImageFormatProps } from './ImageFormat.js';
 import ImageFormat from './ImageFormat.js';
 
-export type { LinkProps } from './LinkFormat.js';
+export type { LinkFormatProps } from './LinkFormat.js';
 import LinkFormat from './LinkFormat.js';
 
 export type { ListProps } from './List.js';

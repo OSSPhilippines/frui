@@ -338,7 +338,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             Use <C value="blue" />, <C value="orange" /> or 
-            <C l value="green" /> prop to change the color of 
+            <C value="green" /> prop to change the color of 
             switches.
           </Translate>
         </p>
@@ -359,7 +359,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             Use <C value="onoff" />, <C value="yesno" />, 
-            <C l value="checkex" /> or <C value="sunmoon" /> prop 
+            <C value="checkex" /> or <C value="sunmoon" /> prop 
             to change the color of switches.
           </Translate>
         </p>
@@ -394,8 +394,8 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can use
-            the <C l value="frui-form-option" />, <C l value="frui-form-option-control" />,
-            and <C l value="frui-form-option-label" />  CSS classes to globally theme the switch field.
+            the <C value="frui-form-option" />, <C value="frui-form-option-control" />,
+            and <C value="frui-form-option-label" />  CSS classes to globally theme the switch field.
           </Translate>
         </p>
       </div>

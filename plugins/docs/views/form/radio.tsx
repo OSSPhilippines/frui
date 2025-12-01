@@ -375,7 +375,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             Use <C value="circle" />, <C value="checked" /> or 
-            <C l value="checked" /> prop to change the color of 
+            <C value="checked" /> prop to change the color of 
             radios.
           </Translate>
         </p>

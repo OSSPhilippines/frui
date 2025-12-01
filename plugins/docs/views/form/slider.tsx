@@ -391,11 +391,11 @@ export function Body() {
         <Translate>
           You can add your own custom class to files
           or use any of the respective 
-          <C l value="frui-form-file" />, 
-          <C l value="frui-form-file-control" />, 
-          <C l value="frui-form-file-reset" />, 
-          <C l value="frui-form-file-file" />, and 
-          <C l value="frui-form-file-link" /> CSS classes. 
+          <C value="frui-form-file" />, 
+          <C value="frui-form-file-control" />, 
+          <C value="frui-form-file-reset" />, 
+          <C value="frui-form-file-file" />, and 
+          <C value="frui-form-file-link" /> CSS classes. 
         </Translate>
       </p>
       

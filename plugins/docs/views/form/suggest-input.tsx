@@ -322,7 +322,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             The following is a basic example of an 
-            <C l value="<SuggestInput>" /> field.
+            <C value="<SuggestInput>" /> field.
           </Translate>
         </p>
         <Examples />

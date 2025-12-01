@@ -128,7 +128,7 @@ export function Body() {
               value={`<input type="time" />`}
             /> element, but normalizes 
             values to ISO strings using <C value="toISOString()" />. 
-            <C l value="onUpdate" /> is like <C value="onChange" r /> 
+            <C value="onUpdate" /> is like <C value="onChange" r /> 
             except the value is passed instead of the change event.
           </Translate>
         </p>

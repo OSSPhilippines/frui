@@ -435,7 +435,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             The following is a basic example of a 
-            <C l value="Select" /> field.
+            <C value="Select" /> field.
           </Translate>
         </p>
 

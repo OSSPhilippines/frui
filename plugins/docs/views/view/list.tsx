@@ -132,7 +132,7 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can use the <C l value="ordered" /> prop to show an 
+          You can use the <C value="ordered" /> prop to show an 
           ordered list.
         </Translate>
       </p>

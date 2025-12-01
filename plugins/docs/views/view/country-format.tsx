@@ -137,7 +137,7 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can apply different sizes to the 
-          <C l value="CountryFormat" /> format.
+          <C value="CountryFormat" /> format.
         </Translate>
       </p>
 
@@ -179,9 +179,9 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can also add your own custom class to 
-          <C l value="Country" /> format or use any combination of 
-          <C l value="frui-format-country" />, and
-          <C l value="frui-format-country-flag" /> CSS classes.
+          <C value="Country" /> format or use any combination of 
+          <C value="frui-format-country" />, and
+          <C value="frui-format-country-flag" /> CSS classes.
         </Translate>
       </p>
       

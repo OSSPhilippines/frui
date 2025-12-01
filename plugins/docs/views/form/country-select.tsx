@@ -138,7 +138,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             The following is a basic example of 
-            a <C l value="CountrySelect" /> field.
+            a <C value="CountrySelect" /> field.
           </Translate>
         </p>
         <Preview 
@@ -160,7 +160,7 @@ export function Body() {
           <Translate>
             You can add a search field to the dropdown by passing
             the <C value="searchable" /> prop to the 
-            <C l value="CountrySelect" /> component.
+            <C value="CountrySelect" /> component.
           </Translate>
         </p>
         <Preview 
@@ -182,7 +182,7 @@ export function Body() {
           <Translate>
             You can enable multiple selection by passing the
             <C value="multiple" /> prop to the
-            <C l value="CountrySelect" /> component.
+            <C value="CountrySelect" /> component.
           </Translate>
         </p>
         <Preview

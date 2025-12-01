@@ -117,6 +117,4 @@ export function CurrencySelect(props: CurrencySelectProps) {
 };
 
 //defaults to currency
-export default Object.assign(CurrencySelect, {
-  currencyWithFlags
-});
+export default Object.assign(CurrencySelect, { currencyWithFlags });

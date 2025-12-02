@@ -136,8 +136,8 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can apply different sizes to the 
-          <C value="CurrencyFormat" /> format.
+          You can apply different sizes to 
+          the <C value="CurrencyFormat" /> format.
         </Translate>
       </p>
 
@@ -178,10 +178,10 @@ export function Body() {
 
       <p className="py-4">
         <Translate>
-          You can also add your own custom class to 
-          <C value="Currency" /> format or use any combination of 
-          <C value="frui-format-country" />, and
-          <C value="frui-format-country-flag" /> CSS classes.
+          You can also add your own custom class 
+          to <C value="Currency" /> format or use any combination 
+          of <C value="frui-format-country" />, 
+          and <C value="frui-format-country-flag" /> CSS classes.
         </Translate>
       </p>
       

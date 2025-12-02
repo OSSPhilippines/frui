@@ -307,7 +307,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following are some basic examples of slider fields.
+            The following are some basic examples of <C value="Slider" /> fields.
           </Translate>
         </p>
         <Examples />
@@ -365,10 +365,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C 
-              value="error" 
-            /> prop to highlight the slider field 
-            red.
+            You can pass 
+            the <C value="error" /> prop to highlight 
+            the slider field red.
           </Translate>
         </p>
         <Preview 
@@ -389,13 +388,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to files
-          or use any of the respective 
-          <C value="frui-form-file" />, 
-          <C value="frui-form-file-control" />, 
-          <C value="frui-form-file-reset" />, 
-          <C value="frui-form-file-file" />, and 
-          <C value="frui-form-file-link" /> CSS classes. 
+          You can add your own custom class to files or use any of 
+          the respective <C value="frui-form-file" />, <C value="frui-form-file-control" />, <C value="frui-form-file-reset" />, <C value="frui-form-file-file" />, 
+          and <C value="frui-form-file-link" /> CSS classes. 
         </Translate>
       </p>
       

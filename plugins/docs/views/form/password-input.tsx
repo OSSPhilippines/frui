@@ -112,8 +112,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Number fields display commas and can limit decimal length.
-            The value for numbers removes commas.
+            <C value="PasswordInput" /> fields allow users to enter 
+            and toggle password visibility securely.
           </Translate>
         </p>
         <Preview 

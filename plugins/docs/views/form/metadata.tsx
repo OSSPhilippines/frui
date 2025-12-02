@@ -155,8 +155,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following is a basic example of a 
-            <C value="Metadata" /> field.
+            The following is a basic example of
+            a <C value="Metadata" /> field.
           </Translate>
         </p>
         <Preview
@@ -172,13 +172,10 @@ export function Body() {
         </Preview>
         <p className="py-4">
           <Translate>
-            You can set different value types using the
-            <C value="type" /> prop. Its value can be one of 
-            <C value='type="text"' quote />,
-            <C value='type="number"' quote />,
-            <C value='type="date"' quote />,
-            <C value='type="time"' quote />, or
-            <C value='type="datetime"' quote />. 
+            You can set different value types using 
+            the <C value="type" /> prop. Its value can be one 
+            of <C value='type="text"' quote />, <C value='type="number"' quote />, <C value='type="date"' quote />, <C value='type="time"' quote />, 
+            or <C value='type="datetime"' quote />. 
           </Translate>
         </p>
         <Preview
@@ -194,9 +191,9 @@ export function Body() {
         </Preview>
         <p className="py-4">
           <Translate>
-            For <C value='type="number"' quote />, you can also
-            set the <C value="min" />, <C value="max" />, and
-            <C value="step" /> props.
+            For <C value='type="number"' quote />, you can also set 
+            the <C value="min" />, <C value="max" />, 
+            and <C value="step" /> props.
           </Translate>
         </p>
         <Preview

@@ -118,7 +118,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Input wraps the HTML standard <code 
+            <C value="Input" /> wraps the HTML standard <code 
               className="text-sm theme-2"
             >{'`<input />`'}</code> element. Therefore, you can 
             use any input attributes as props.

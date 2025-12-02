@@ -321,8 +321,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following is a basic example of an 
-            <C value="<SuggestInput>" /> field.
+            The following is a basic example of 
+            an <C value="SuggestInput" /> field.
           </Translate>
         </p>
         <Examples />

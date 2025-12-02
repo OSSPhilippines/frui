@@ -224,8 +224,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            By default, the Rating component is uncontrolled. Use <C value="defaultValue" /> to set an initial value.
-            It renders 5 stars.
+            By default, 
+            the <C value="Rating" /> component is uncontrolled. 
+            Use <C value="defaultValue" /> to set an initial value. It renders 5 stars.
           </Translate>
         </p>
         <Preview

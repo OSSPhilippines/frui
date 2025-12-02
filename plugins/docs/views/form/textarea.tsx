@@ -141,7 +141,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Textarea wraps the HTML standard <code 
+            <C value="Textarea" /> wraps the HTML standard <code 
               className="text-sm theme-2"
             >{'`<textarea />`'}</code> element. Therefore, you can 
             use any textarea attributes as props.

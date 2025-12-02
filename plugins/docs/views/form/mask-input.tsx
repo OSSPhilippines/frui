@@ -132,7 +132,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Masks are a wrapper for <a 
+            <C value="MaskInput" /> are a wrapper for <a 
               className="theme-2 underline"
               href="https://robinherbots.github.io/Inputmask/#/documentation"
               target="_blank"

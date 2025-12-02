@@ -123,13 +123,10 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Datetime input fields use the default <C 
-              quote={true}
-              value={`<input type="datetime-local" />`}
-            /> element, but normalizes 
-            values to ISO strings using <C value="toISOString()" />. 
-            <C value="onUpdate" /> is like <C value="onChange" r /> 
-            except the value is passed instead of the change event.
+            <C value="DatetimeInput" /> fields use the 
+            default <C quote={true} value={`<input type="datetime-local" />`} /> element, 
+            but normalizes values to ISO strings using <C value="toISOString()" />. <C value="onUpdate" /> is 
+            like <C value="onChange" r /> except the value is passed instead of the change event.
           </Translate>
         </p>
         <Preview 

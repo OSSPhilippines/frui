@@ -106,8 +106,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Number fields display commas and can limit decimal length.
-            The value for numbers removes commas.
+            <C value="SlugInput" /> fields automatically convert 
+            text into a URL-friendly slug, replacing spaces and special characters.
           </Translate>
         </p>
         <Preview 

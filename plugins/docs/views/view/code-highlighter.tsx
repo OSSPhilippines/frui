@@ -15,7 +15,7 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/view/code-highlighter';
-const title = 'Code Highlighter Format';
+const title = 'Code Highlighter';
 const description = 'CodeHighlighter blocks with syntax highlighting and copy functionality.';
 
 const props = [
@@ -112,11 +112,11 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the <C value="<CodeHighlighter>" /> component as shown below.
+            Import the <C value="<CodeHighlighter>" /> format like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Code from 'frui/view/Code';`}
+          {`import CodeHighlighter from 'frui/view/CodeHighlighter';`}
         </Code>
       </div>
 
@@ -134,7 +134,7 @@ export function Body() {
             </CodeHighlighter>
           </Preview.Example>
           <Preview.Code>
-            {`<Code language="python">\n  print("Hello, world!")\n</Code>`}
+            {`<CodeHighlighter language="python">\n  print("Hello, world!")\n</CodeHighlighter>`}
           </Preview.Code>
         </Preview>
 
@@ -190,7 +190,7 @@ export function Body() {
             </CodeHighlighter>
           </Preview.Example>
           <Preview.Code>
-            {`<Code language="typescript" numbers>\n  console.log("Hello, world!");\n</Code>`}
+            {`<CodeHighlighter language="typescript" numbers>\n  console.log("Hello, world!");\n</CodeHighlighter>`}
           </Preview.Code>
         </Preview>
       </div>

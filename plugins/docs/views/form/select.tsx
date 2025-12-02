@@ -425,6 +425,12 @@ export function Body() {
         {_('Examples')}
       </h2>
       <div className="relative z-[101]">
+        <p className="py-4">
+          <Translate>
+            The following is a basic example of  
+            a <C value="Select" /> field.
+          </Translate>
+        </p>
         <Examples />
       </div>
 
@@ -434,8 +440,8 @@ export function Body() {
       <div className="relative z-[100]">
         <p className="py-4">
           <Translate>
-            The following is a basic example of a 
-            <C value="Select" /> field.
+            The following is a basic example of 
+            a <C value="Select" /> field.
           </Translate>
         </p>
 

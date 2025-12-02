@@ -136,8 +136,8 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can apply different sizes to the 
-          <C value="ColorFormat" /> format.
+          You can apply different sizes to 
+          the <C value="ColorFormat" /> format.
         </Translate>
       </p>
 
@@ -178,10 +178,10 @@ export function Body() {
 
       <p className="py-4">
         <Translate>
-          You can also add your own custom class to 
-          <C value="ColorFormat" /> format or use any combination of 
-          <C value="frui-format-color" />, and
-          <C value="frui-format-color-box" /> CSS classes.
+          You can also add your own custom class 
+          to <C value="ColorFormat" /> format or use any combination 
+          of <C value="frui-format-color" />, 
+          and <C value="frui-format-color-box" /> CSS classes.
         </Translate>
       </p>
 

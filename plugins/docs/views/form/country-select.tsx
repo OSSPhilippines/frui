@@ -159,8 +159,8 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can add a search field to the dropdown by passing
-            the <C value="searchable" /> prop to the 
-            <C value="CountrySelect" /> component.
+            the <C value="searchable" /> prop to 
+            the <C value="CountrySelect" /> component.
           </Translate>
         </p>
         <Preview 
@@ -180,9 +180,9 @@ export function Body() {
       <div className="relative z-[98]">
         <p className="py-4">
           <Translate>
-            You can enable multiple selection by passing the
-            <C value="multiple" /> prop to the
-            <C value="CountrySelect" /> component.
+            You can enable multiple selection by passing 
+            the <C value="multiple" /> prop to 
+            the <C value="CountrySelect" /> component.
           </Translate>
         </p>
         <Preview

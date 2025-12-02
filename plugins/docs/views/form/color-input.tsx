@@ -163,7 +163,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following are some basic usages of color inputs.
+            The following are some basic usages of <C value="ColorInput" /> color inputs.
           </Translate>
         </p>
         <Examples />

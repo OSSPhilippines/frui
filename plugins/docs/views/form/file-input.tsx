@@ -131,15 +131,23 @@ export function Body() {
       <h2 id="examples" className="uppercase font-bold text-lg mt-8">
         {_('Examples')}
       </h2>
-      <Preview 
-        title="Basic Example" 
-        className="border border-2 theme-bc-3"
-      >
-        <Preview.Example center padding>
-          <FileInput className="bg-white w-full" value="https://images.wsj.net/im-580612/8SR"  />
-        </Preview.Example>
-        <Preview.Code>{examples[0]}</Preview.Code>
-      </Preview>
+      <div>
+        <p className="py-4">
+          <Translate>
+            The following is a basic example of 
+            a <C value="FileInput" /> field.
+          </Translate>
+        </p>
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <FileInput className="bg-white w-full" value="https://images.wsj.net/im-580612/8SR"  />
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>        
+      </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
         {_('Events')}
@@ -147,14 +155,10 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Files have an extra prop called <C 
-              value="onUpload" 
-            />. This is where you 
-            should add your logic for handling the file upload.
-            Using this in combination with <C 
-              value="onUpdate" 
-            /> will allow you to pass values 
-            from upload to form processing.
+            Files have an extra prop called <C value="onUpload" />. This 
+            is where you should add your logic for handling the file upload.
+            Using this in combination with <C value="onUpdate" /> will 
+            allow you to pass values from upload to form processing.
           </Translate>
         </p>
         <Preview 
@@ -279,10 +283,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C 
-              value="error" 
-            /> prop to highlight the file input field 
-            red.
+            You can pass the <C value="error" /> prop to highlight 
+            the file input field red.
           </Translate>
         </p>
         <Preview 

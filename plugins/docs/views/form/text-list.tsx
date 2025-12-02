@@ -147,8 +147,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following is a basic example of a 
-            <C value="TextList" /> field.
+            The following is a basic example of 
+            a <C value="TextList" /> field.
           </Translate>
         </p>
         <Preview

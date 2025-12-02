@@ -732,10 +732,9 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C value="frui-form-text-editor" />, <C value="frui-form-text-editor-toolbar" />,
-          <C value="frui-form-text-editor-btn" />, <C value="frui-form-text-editor-btn-module" />,
-          <C value="frui-form-text-editor-btn-select" />, and <C value="frui-form-text-editor-editable" /> 
-          CSS classes to globally theme the TextEditor field.
+          the <C value="frui-form-text-editor" />, <C value="frui-form-text-editor-toolbar" />, <C value="frui-form-text-editor-btn" />, <C value="frui-form-text-editor-btn-module" />, <C value="frui-form-text-editor-btn-select" />, 
+          and <C value="frui-form-text-editor-editable" /> CSS classes 
+          to globally theme the TextEditor field.
         </Translate>
       </p>
 

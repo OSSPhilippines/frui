@@ -29,7 +29,7 @@ export type {
 } from './form/Fieldset.js';
 export type {
   ColorProps,
-  ColorPropType,
+  ColorTypeProp,
   BackgroundColorProps,
   BorderColorProps,
   TextColorProps,

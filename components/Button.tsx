@@ -2,26 +2,35 @@
 // Imports
 
 //frui
-import type { ThemeProps, HTMLButtonProps } from './types.js';
-import BackgroundColorTool from './helpers/tools/BackgroundColorTool.js';
-import BorderColorTool from './helpers/tools/BorderColorTool.js';
-import BorderRadiusTool from './helpers/tools/BorderRadiusTool.js';
-import FillTool from './helpers/tools/FillTool.js';
-import TextAlignTool from './helpers/tools/TextAlignTool.js';
-import TextColorTool from './helpers/tools/TextColorTool.js';
-import TextSizeTool from './helpers/tools/TextSizeTool.js';
-import removeThemeProps from './helpers/removeThemeProps.js';
+import type { HTMLButtonProps } from './types.js';
+import type { 
+  BorderRadiusProps 
+} from './helpers/tools/BorderRadiusTool.js';
+import type {
+ BorderStyleProps
+} from './helpers/tools/BorderStyleTool.js';
+import type { ColorValueProps } from './helpers/tools/ColorTool.js';
+import type { DisplayProps } from './helpers/tools/DisplayTool.js';
+import type { FillProps } from './helpers/tools/FillTool.js';
+import type { SizeProps } from './helpers/tools/SizeTool.js';
+import type { TextAlignProps } from './helpers/tools/TextAlignTool.js';
+import Box from './Box.js';
 
 //--------------------------------------------------------------------//
 // Types
 
-export type ButtonProps = ThemeProps
+export type ButtonProps = ColorValueProps
+  & BorderRadiusProps
+  & BorderStyleProps
+  & DisplayProps
+  & FillProps
+  & SizeProps
+  & TextAlignProps 
   & HTMLButtonProps 
   & {
     href?: string,
     target?: string,
-    title?: string,
-    full?: boolean
+    title?: string
   };
 
 //--------------------------------------------------------------------//
@@ -32,87 +41,80 @@ export type ButtonProps = ThemeProps
  */
 export function Button(props: ButtonProps) {
   //props
-  // extract size props
-  const { 
-    xs,
-    sm,
-    md,
-    lg,
-    xl,
-    xl2,
-    xl3,
-    xl4,
-    xl5
-  } = TextSizeTool.get(props).config;
-  // extract other props
-  const { 
+  // extract box props
+  const boxProps = Box.getThemeProps(props);
+  // extract child props
+  const {
     children,
     className,
-    full,
     href,
     style,
     target,
     title,
-    ...attributes 
-  } = removeThemeProps(props);
+    ...buttonProps 
+  } = Box.removeThemeProps(props);
   //variables
-  // set default styles and classes
-  const styles = { ...style };
-  const classes = [ 'frui-button' ];
-  // - determine background color
-  BackgroundColorTool.get(props).getClassStyles({ classes, styles });
-  // - determine border color
-  BorderColorTool.get(props).getClassStyles({ classes, styles });
-  // - determine border radius
-  BorderRadiusTool.get(props).getClassStyles({ classes, styles });
-  // - determine fill
-  FillTool.get(props).getClassStyles({ classes, styles, key: 'fill' });
-  // - determine text align
-  TextAlignTool.get(props).getClassStyles({ classes, styles });
-  // - determine text color
-  TextColorTool.get(props).getClassStyles({ classes, styles });
-  // - determine text size
-  TextSizeTool.get(props).getClassStyles({ classes, styles });
-  //determine button size
-  classes.push(`frui-button-${
-    xs ? 'xs' 
-    : sm ? 'sm' 
-    : md ? 'md' 
-    : lg ? 'lg' 
-    : xl ? 'xl' 
-    : xl2 ? '2xl' 
-    : xl3 ? '3xl' 
-    : xl4 ? '4xl' 
-    : xl5 ? '5xl' 
-    : 'md'
-  }`);
-  //full width?
-  full && classes.push('frui-full');
-  // - add custom class
+  const classes: string[] = [ 'frui-button' ];
   className && classes.push(className);
+  //defaults
+  // make sure either fill or outline is set
+  if (!boxProps.outline) {
+    boxProps.fill = true;
+  }
+  // set align to center if no text align is set
+  if (!Box.hasTextAlignProps(props)) {
+    boxProps.center = true;
+  }
+  // if full prop is set, convert to w="full"
+  // because default applied size is txs
+  if (boxProps.full) {
+    boxProps.full = false;
+    boxProps.w = 'full';
+  }
+  // set default paddings if none are set
+  if (!Box.hasPaddingProps(props)) {
+    if (boxProps.xs) {
+      boxProps.px = boxProps.px || 'md';
+      boxProps.py = boxProps.py || 'xs';
+    } else if (boxProps.sm) {
+      boxProps.px = boxProps.px || 'xl';
+      boxProps.py = boxProps.py || 'sm';
+    } else {
+      boxProps.px = boxProps.px || '5xl';
+      boxProps.py = boxProps.py || 'lg';
+    }
+  }
+  
   if (href) {
     return (
-      <a 
-        href={href} 
-        target={target}
-        title={title}
+      <Box 
+        {...boxProps}
         className={classes.join(' ')} 
-        style={styles}
+        style={style} 
+        asChild
       >
-        {children}
-      </a>
+        <a 
+          href={href} 
+          target={target}
+          title={title}
+        >
+          {children}
+        </a>
+      </Box>
     );
   }
 
   return (
-    <button 
-      {...attributes}
-      title={title}
+    <Box 
+      {...boxProps}
       className={classes.join(' ')} 
-      style={styles}
+      style={style} 
+      asChild
     >
-      {children}
-    </button>
+      <button {...buttonProps} title={title}>
+        {children}
+      </button>
+    </Box>
   );
 };
 

@@ -79,6 +79,7 @@ export default function plugin(server: HttpServer<Config>) {
     ctx.get('/view/text', '@/plugins/docs/views/view/text');
 
     ctx.get('/tool/box', '@/plugins/docs/views/tool/box');
+    ctx.get('/tool/scope', '@/plugins/docs/views/tool/scope');
     ctx.get('/tool/when', '@/plugins/docs/views/tool/when');
   });
 }

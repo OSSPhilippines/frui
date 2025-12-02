@@ -1,6 +1,27 @@
-import type { DisplayProps, Hash } from '../../types.js';
+//--------------------------------------------------------------------//
+// Imports
+
+import type { Hash } from '../../types.js';
 import type { ClassStyleOptions } from './PropTool.js';
 import PropTool from './PropTool.js';
+
+//--------------------------------------------------------------------//
+// Types
+
+export type DisplayProps = {
+  block?: boolean,
+  inline?: boolean,
+  iblock?: boolean,
+  flex?: boolean,
+  iflex?: boolean,
+  grid?: boolean,
+  igrid?: boolean,
+  hidden?: boolean,
+  display?: string
+};
+
+//--------------------------------------------------------------------//
+// Classes
 
 export class DisplayTool<P extends Hash>
   extends PropTool<P, DisplayProps>
@@ -36,9 +57,9 @@ export class DisplayTool<P extends Hash>
    */
   public getClassStyles(options: ClassStyleOptions) {
     //extract options
-    const { classes = [], styles = {}, key: defaultKey } = options;
-    //get key and value
-    const key = this.key || defaultKey;
+    const { classes = [], styles = {} } = options;
+    //compute key (once)
+    const key = this.key;
     //if there is a key
     if (typeof key === 'string') {
       //form the class name

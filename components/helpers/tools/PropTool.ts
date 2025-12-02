@@ -1,19 +1,36 @@
+//--------------------------------------------------------------------//
+// Imports
+
 //modules
 import type { CSSProperties } from 'react';
 //frui
 import type { Hash } from '../../types.js';
 
+//--------------------------------------------------------------------//
+// Types
+
 export type ClassStyleOptions = {
   classes?: string[], 
-  styles?: CSSProperties,
-  key?: string
+  styles?: CSSProperties
 };
+
+//--------------------------------------------------------------------//
+// Classes
 
 export abstract class PropTool<P extends Hash, K extends Hash> {
   //names of special props
   protected _keys: string[];
   //arbitrary props
   protected _props: P;
+
+  /**
+   * Returns all special keys found in props
+   */
+  public get active() {
+    return this._keys.filter(
+      key => typeof this._props[key] !== 'undefined'
+    );
+  }
 
   /**
    * Returns attributes excluding color props

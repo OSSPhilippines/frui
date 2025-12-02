@@ -274,7 +274,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the number input field red.
+            the <C value="<NumberInput>" /> field red.
           </Translate>
         </p>
         <Preview 

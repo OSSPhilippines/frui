@@ -272,7 +272,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the metadata field red.
+            the <C value="<Metadata>" /> field red.
           </Translate>
         </p>
         <Preview

@@ -210,7 +210,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the slug input field red.
+            the <C value="<SlugInput>" /> field red.
           </Translate>
         </p>
         <Preview 

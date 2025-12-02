@@ -266,7 +266,7 @@ export function Body() {
           <Translate>
             You can pass 
             the <C value="error" /> prop to highlight 
-            the image list field red.
+            the <C value="<ImageList>" /> field red.
           </Translate>
         </p>
         <Preview 

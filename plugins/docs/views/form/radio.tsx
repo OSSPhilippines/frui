@@ -299,7 +299,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the radio field red.
+            the <C value="<Radio>" /> field red.
           </Translate>
         </p>
         <Preview

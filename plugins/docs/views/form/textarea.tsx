@@ -243,7 +243,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the textarea field red.
+            the <C value="<Textarea>" /> field red.
           </Translate>
         </p>
         <Preview

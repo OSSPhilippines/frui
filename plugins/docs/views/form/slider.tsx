@@ -367,7 +367,7 @@ export function Body() {
           <Translate>
             You can pass 
             the <C value="error" /> prop to highlight 
-            the slider field red.
+            the <C value="<Slider>" /> field red.
           </Translate>
         </p>
         <Preview 

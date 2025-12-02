@@ -266,7 +266,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the switch field red.
+            the <C value="<Switch>" /> field red.
           </Translate>
         </p>
         <Preview

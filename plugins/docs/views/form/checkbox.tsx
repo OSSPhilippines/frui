@@ -449,7 +449,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the checkbox field red.
+            the <C value="<Checkbox>" /> field red.
           </Translate>
         </p>
         <Preview title="Error Example" className="border border-2 theme-bc-3">

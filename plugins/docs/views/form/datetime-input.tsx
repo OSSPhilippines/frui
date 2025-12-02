@@ -225,7 +225,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the datetime input field red.
+            the <C value="<DatetimeInput>" /> field red.
           </Translate>
         </p>
         <Preview 

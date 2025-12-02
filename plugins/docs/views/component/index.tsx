@@ -7,6 +7,7 @@ import {
   ThemeHead
 } from 'plugins/app/index.js';
 import {
+  Accordion,
   Alert,
   Badge,
   Button,
@@ -43,7 +44,37 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  TODO
+                  <Accordion 
+                    defaultValue="1"
+                    className="w-full text-sm"
+                  >
+                    <Accordion.Bellow value="1">
+                      <Accordion.Label className="px-2 py-1 cursor-pointer border theme-bc-2 flex items-center justify-between">
+                        {({ active }) => (
+                          <>
+                            <span>{_('Item 1')}</span>
+                            <i className={`fas fa-chevron-${active ? 'up' : 'down'}`}></i>
+                          </>
+                        )}
+                      </Accordion.Label>
+                      <Accordion.Content className="px-2 py-1 text-xs border border-t-0 theme-bc-2">
+                        {_('Item 1 content')}
+                      </Accordion.Content>
+                    </Accordion.Bellow>
+                    <Accordion.Bellow value="2">
+                      <Accordion.Label className="px-2 py-1 cursor-pointer border border-t-0 theme-bc-2 flex items-center justify-between">
+                        {({ active }) => (
+                          <>
+                            <span>{_('Item 2')}</span>
+                            <i className={`fas fa-chevron-${active ? 'up' : 'down'}`}></i>
+                          </>
+                        )}
+                      </Accordion.Label>
+                      <Accordion.Content className="px-2 py-1 text-xs border border-t-0 theme-bc-2">
+                        {_('Item 2 content')}
+                      </Accordion.Content>
+                    </Accordion.Bellow>
+                  </Accordion>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Accordion')}
@@ -56,10 +87,20 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  <Alert curved info className="w-full">
-                    <i className="fas fa-check-circle mr-2"></i>
-                    {_('Success')}
-                  </Alert>
+                  <div className="w-full space-y-2">
+                    <Alert curved success className="w-full text-sm py-2 px-3">
+                      <i className="fas fa-check-circle mr-2"></i>
+                      {_('Success')}
+                    </Alert>
+                    <Alert curved warning className="w-full text-sm py-2 px-3">
+                      <i className="fas fa-exclamation-triangle mr-2"></i>
+                      {_('Warning')}
+                    </Alert>
+                    <Alert curved error className="w-full text-sm py-2 px-3">
+                      <i className="fas fa-times-circle mr-2"></i>
+                      {_('Error')}
+                    </Alert>
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Alert')}
@@ -85,10 +126,24 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  <Bread className="w-full">
-                    <Bread.Slicer href="#">{_('Home')}</Bread.Slicer>
-                    <Bread.Slicer href="#">{_('Library')}</Bread.Slicer>
-                    <Bread.Crumb active>{_('Data')}</Bread.Crumb>
+                  <Bread className="w-full text-sm">
+                    <Bread.Crumb 
+                      href="#" 
+                      className="text-info hover:underline"
+                    >
+                      {_('Home')}
+                    </Bread.Crumb>
+                    <Bread.Slicer className="mx-2">/</Bread.Slicer>
+                    <Bread.Crumb 
+                      href="#" 
+                      className="text-info hover:underline"
+                    >
+                      {_('Library')}
+                    </Bread.Crumb>
+                    <Bread.Slicer className="mx-2">/</Bread.Slicer>
+                    <Bread.Crumb className="theme-color-1 font-semibold">
+                      {_('Data')}
+                    </Bread.Crumb>
                   </Bread>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
@@ -102,7 +157,17 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
-                  <Button error rounded className="my-1">Submit</Button>
+                  <div className="flex gap-2">
+                    <Button success rounded className="text-xs">
+                      {_('Success')}
+                    </Button>
+                    <Button error rounded className="text-xs">
+                      {_('Error')}
+                    </Button>
+                    <Button info outline rounded className="text-xs">
+                      {_('Info')}
+                    </Button>
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Button')}
@@ -213,21 +278,21 @@ export function Body() {
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
                   <div className="w-full space-y-2">
                     <Progress 
-                      width={75} 
+                      style={{ width: '75%' }}
                       height={8}
                       bg="info"
                       rounded
                       container={{ bg: "muted" }}
                     />
                     <Progress 
-                      width={50} 
+                      style={{ width: '50%' }}
                       height={8}
                       bg="success"
                       rounded
                       container={{ bg: "muted" }}
                     />
                     <Progress 
-                      width={25} 
+                      style={{ width: '25%' }}
                       height={8}
                       bg="warning"
                       rounded

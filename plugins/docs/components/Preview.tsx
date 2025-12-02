@@ -35,7 +35,9 @@ export type PreviewCodeProps = ChildrenProps & {};
 
 export type PreviewProps = ClassStyleProps & ChildrenProps & {
   height?: number,
-  title: string
+  title?: string,
+  noCode?: boolean,
+  noExample?: boolean
 };
 
 //--------------------------------------------------------------------//
@@ -86,7 +88,15 @@ export function PreviewCode(props: PreviewCodeProps) {
 
 export function Preview(props: PreviewProps) {
   //props
-  const { title, height, className, style, children } = props;
+  const { 
+    children,
+    className, 
+    height, 
+    noCode,
+    noExample,
+    style, 
+    title, 
+  } = props;
   //hooks
   const { _ } = useLanguage();
   const [ active, setActive ] = useState<'example' | 'code'>('example');
@@ -100,17 +110,27 @@ export function Preview(props: PreviewProps) {
   return (
     <PreviewContext.Provider value={{ clip, active, height }}>
       <section className={className} style={style}>
-        <header className="flex items-center p-3 theme-bg-4 theme-white">
-          <h4 className="flex-grow">{title}</h4>
-          <div>
-            <i className="fas fa-fw fa-copy mr-2" onClick={copy}></i>
-            {active === 'example' ? (
-              <i className="fas fa-fw fa-code mr-2" onClick={() => setActive('code')}></i>
-            ) : (
-              <i className="fas fa-fw fa-eye mr-2" onClick={() => setActive('example')}></i>
-            )}
-          </div>
-        </header>
+        {!!title || (!noCode && !noExample) ? (
+          <header className="flex items-center p-3 theme-bg-4 theme-white">
+            {!!title 
+              ? (<h4 className="flex-grow">{title}</h4>) 
+              : (<div className="flex-grow" />)
+            }
+            <div>
+              {!noCode && (<i className="fas fa-fw fa-copy mr-2" onClick={copy}></i>)}
+              {!noExample && !noCode ? (
+                <>
+                  {active === 'example' ? (
+                    <i className="fas fa-fw fa-code mr-2" onClick={() => setActive('code')}></i>
+                  ) : (
+                    <i className="fas fa-fw fa-eye mr-2" onClick={() => setActive('example')}></i>
+                  )}
+                </>
+              ) : null}
+            </div>
+          </header>
+        ) : null}
+        
         {children}
       </section>
     </PreviewContext.Provider>

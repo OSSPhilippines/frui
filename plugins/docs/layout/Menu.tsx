@@ -410,6 +410,11 @@ export const menu: MenuItem[] = [
         href: '/tool/box'
       },
       {
+        label: 'Scope',
+        search: '/tool/scope',
+        href: '/tool/scope'
+      },
+      {
         label: 'When',
         search: '/tool/when',
         href: '/tool/when'

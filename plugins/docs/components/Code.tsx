@@ -1,4 +1,5 @@
 //modules
+import type { CSSProperties } from 'react';
 import { useLanguage } from 'r22n';
 import ShikiHighlighter from 'react-shiki';
 //frui
@@ -7,16 +8,21 @@ import { notify } from 'components/Notifier.js';
 export function InlineCode(props: { 
   l?: boolean,
   r?: boolean,
+  bg?: string,
+  color?: string,
   value?: string, 
   quote?: boolean, 
   children?: string 
 }) {
   const { value, quote, l, r, children } = props;
   const body = value || children;
+  const styles: CSSProperties = {};
+  if (props.bg) styles.backgroundColor = props.bg;
+  if (props.color) styles.color = props.color;
   return (
     <>
       {l?(<span>&nbsp;</span>):''}
-      <code className="text-sm text-t2 theme-bg-1 font-semibold inline-block p-0.5">
+      <code style={styles} className="text-sm text-t2 theme-bg-1 font-semibold inline-block p-0.5">
         {quote?'`':''}{body}{quote?'`':''}
       </code>
       {r?(<span>&nbsp;</span>):''}

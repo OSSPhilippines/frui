@@ -2,55 +2,78 @@
 // Imports
 
 //frui
-import type { ThemeProps, HTMLElementProps } from './types.js';
-import BackgroundColorTool from './helpers/tools/BackgroundColorTool.js';
-import BorderColorTool from './helpers/tools/BorderColorTool.js';
-import BorderRadiusTool from './helpers/tools/BorderRadiusTool.js';
-import FillTool from './helpers/tools/FillTool.js';
-import TextAlignTool from './helpers/tools/TextAlignTool.js';
-import TextColorTool from './helpers/tools/TextColorTool.js';
-import removeThemeProps from './helpers/removeThemeProps.js';
+import type { HTMLElementProps } from './types.js';
+import type { 
+  BorderRadiusProps 
+} from './helpers/tools/BorderRadiusTool.js';
+import type {
+ BorderStyleProps
+} from './helpers/tools/BorderStyleTool.js';
+import type { ColorValueProps } from './helpers/tools/ColorTool.js';
+import type { DisplayProps } from './helpers/tools/DisplayTool.js';
+import type { FillProps } from './helpers/tools/FillTool.js';
+import type { SizeProps } from './helpers/tools/SizeTool.js';
+import type { TextAlignProps } from './helpers/tools/TextAlignTool.js';
+
+import Box from './Box.js';
 
 //--------------------------------------------------------------------//
 // Types
 
-export type BadgeProps = ThemeProps & HTMLElementProps<HTMLDivElement>;
+export type BadgeProps = ColorValueProps
+  & BorderRadiusProps
+  & BorderStyleProps
+  & DisplayProps
+  & FillProps
+  & SizeProps
+  & TextAlignProps 
+  & HTMLElementProps<HTMLDivElement>;
 
 //--------------------------------------------------------------------//
 // Components
 
 /**
- * Badge component (main)
+ * Generic Badge Component (Main)
  */
 export function Badge(props: BadgeProps) {
   //props
-  const { children, className, style } = props;
+  // extract box props
+  const boxProps = Box.getThemeProps(props);
+  // extract child props
+  const {
+    children,
+    className,
+    style,
+    ...attributes 
+  } = Box.removeThemeProps(props);
   //variables
-  const attributes = removeThemeProps(props);
-  // set default styles and classes
-  const styles = { ...style };
-  const classes = [ 'frui-badge' ];
-  // - determine background color
-  BackgroundColorTool.get(props).getClassStyles({ classes, styles });
-  // - determine border color
-  BorderColorTool.get(props).getClassStyles({ classes, styles });
-  // - determine border radius
-  BorderRadiusTool.get(props).getClassStyles({ classes, styles });
-  // - determine fill
-  FillTool.get(props).getClassStyles({ classes, styles, key: 'fill' });
-  // - determine text align
-  TextAlignTool.get(props).getClassStyles({ classes, styles });
-  // - determine text color
-  TextColorTool.get(props).getClassStyles({ classes, styles });
-  // - add custom class
+  const classes: string[] = [ 'frui-badge' ];
   className && classes.push(className);
-  //render
+  //defaults
+  // make sure either fill or outline is set
+  if (!boxProps.outline) {
+    boxProps.fill = true;
+  }
+  // set text size to small if none is set
+  if (!Box.hasSizeProps(props) && !boxProps.txs) {
+    boxProps.txs = 'sm';
+  }
+  // set default paddings if none are set
+  if (!Box.hasPaddingProps(props)) {
+    boxProps.px = boxProps.px || 'md';
+    boxProps.py = boxProps.py || 'xs';
+  }
   return (
-    <span {...attributes} className={classes.join(' ')} style={styles}>
-      {children}
-    </span>
+    <Box 
+      {...boxProps} 
+      className={classes.join(' ')} 
+      style={style} 
+      asChild
+    >
+      <span {...attributes}>{children}</span>
+    </Box>
   );
 };
 
-//defaults to badge
+//defaults to button
 export default Badge;

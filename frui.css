@@ -1,8 +1,6 @@
 @import url('./styles/globals.css');
-@import url('./styles/alert.css');
-@import url('./styles/badge.css');
+@import url('./styles/box.css');
 @import url('./styles/bread.css');
-@import url('./styles/button.css');
 @import url('./styles/control.css');
 @import url('./styles/dialog.css');
 @import url('./styles/dropdown.css');

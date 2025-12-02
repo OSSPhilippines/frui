@@ -75,136 +75,19 @@ export type HTMLButtonProps = DetailedHTMLProps<
   HTMLButtonElement
 >;
 
-//theme props
-
-export type BackgroundColorProps = {
-  bginfo?: boolean, 
-  bgwarning?: boolean, 
-  bgsuccess?: boolean, 
-  bgerror?: boolean, 
-  bgmuted?: boolean, 
-  bgblack?: boolean, 
-  bgwhite?: boolean,
-  bgprimary?: boolean, 
-  bgsecondary?: boolean,
-  bgtertiary?: boolean,
-  bgcolor?: string
-};
-
-export type BorderColorProps = {
-  bdinfo?: boolean, 
-  bdwarning?: boolean, 
-  bdsuccess?: boolean, 
-  bderror?: boolean, 
-  bdmuted?: boolean, 
-  bdblack?: boolean, 
-  bdwhite?: boolean,
-  bdprimary?: boolean, 
-  bdsecondary?: boolean,
-  bdtertiary?: boolean,
-  bdcolor?: string,
-};
-
-export type BorderRadiusProps = {
-  curved?: boolean,
-  rounded?: boolean, 
-  pill?: boolean
-};
-
-export type BorderStyleProps = {
-  solid?: boolean,
-  dashed?: boolean,
-  dotted?: boolean
-};
-
-export type ColorProps = {
-  info?: boolean, 
-  warning?: boolean, 
-  success?: boolean, 
-  error?: boolean, 
-  muted?: boolean,
-  black?: boolean, 
-  white?: boolean,
-  primary?: boolean, 
-  secondary?: boolean,
-  tertiary?: boolean, 
-  color?: string
-};
-
-export type ColorPropType = 'tx' | 'bg' | 'bd'; 
-
-export type DisplayProps = {
-  block?: boolean,
-  inline?: boolean,
-  iblock?: boolean,
-  flex?: boolean,
-  iflex?: boolean,
-  grid?: boolean,
-  igrid?: boolean,
-  hidden?: boolean
-};
-
-export type FillProps = {
-  fill?: boolean,
-  outline?: boolean
-};
-
-export type TextAlignProps = {
-  left?: boolean,
-  center?: boolean,
-  right?: boolean,
-  justify?: boolean
-};
-
-export type TextColorProps = {
-  txinfo?: boolean, 
-  txwarning?: boolean, 
-  txsuccess?: boolean, 
-  txerror?: boolean, 
-  txmuted?: boolean, 
-  txblack?: boolean, 
-  txwhite?: boolean,
-  txprimary?: boolean, 
-  txsecondary?: boolean,
-  txtertiary?: boolean,
-  txcolor?: string,
-};
-
-export type TextSizeProps = {
-  xs?: boolean,
-  sm?: boolean,
-  md?: boolean,
-  lg?: boolean,
-  xl?: boolean,
-  xl2?: boolean,
-  xl3?: boolean,
-  xl4?: boolean,
-  xl5?: boolean
-};
-
-export type ThemeProps = BackgroundColorProps
-  & BorderColorProps
-  & BorderRadiusProps 
-  & BorderStyleProps
-  & ColorProps 
-  & DisplayProps
-  & FillProps 
-  & TextAlignProps
-  & TextSizeProps
-  & TextColorProps;
+//class name style props
 
 export type ReactType = {
   type: Function | Component,
   props: Record<string, unknown>
 };
 
-//class name style props
-
 export type CallableClassName<S> = (props: S) => string;
 
 export type CallableStyle<S> = (props: S) => CSSProperties;
 
-export type CallableSlotStyle<S> = (props: S) => string | CSSProperties | ClassStyleProps;
+export type CallableSlotStyle<S> = (props: S) => string 
+  | CSSProperties | ClassStyleProps;
 
 export type CallableClassNameProp<S> = string | CallableClassName<S>;
 

@@ -16,14 +16,12 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/format/email';
-const title = 'Email Format';
-const description = 'Email formats convert values to clickable email displays.';
+const uri = '/tool/when';
+const title = 'When Tool';
+const description = 'The When tool allows conditional rendering based on specified conditions.';
 
 const props = [
-  [ 'className', 'string', 'No', 'Standard HTML class names' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
-  [ 'value', 'string', 'Yes', 'Default value' ],
+  [ 'condition', 'boolean', 'Yes', 'Condition to evaluate for rendering' ]
 ];
 
 const examples = [
@@ -120,10 +118,16 @@ export function Menu() {
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#examples">{_('Examples')}</a>
+            <a href="#basic">{_('Basics')}</a>
           </li>
           <li className="ml-2 pb-1">
-            <a href="#styles">{_('Global Styles')}</a>
+            <a href="#basic">{_('Basics')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#nested">{_('Nested Conditions')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#deep">{_('Deep Conditions')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#api">{_('API Reference')}</a>
@@ -155,11 +159,11 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the <C value="<When>" /> tool like the following.
+            Import the <C value="<When>" /> tool component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import When from 'frui/tool/When';`}
+          {`import { When, Otherwise } from 'frui/When';`}
         </Code>
       </div>
 
@@ -249,8 +253,8 @@ export function Body() {
         </Preview>
       </div>
 
-      <h2 id="nested" className="uppercase font-bold text-lg mt-8">
-        {_('Deep Nested Conditions')}
+      <h2 id="deep" className="uppercase font-bold text-lg mt-8">
+        {_('Deep Conditions')}
       </h2>
       <div>
         <p className="py-2">
@@ -261,7 +265,7 @@ export function Body() {
           </Translate>
         </p>
         <Preview 
-          title="Deep Nested Example" 
+          title="Deep Conditions Example" 
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>

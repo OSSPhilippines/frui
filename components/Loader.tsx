@@ -2,14 +2,13 @@
 // Imports
 
 //frui
-import type { 
-  ColorProps, 
-  BorderStyleProps, 
-  HTMLElementProps 
-} from './types.js';
+import type { HTMLElementProps } from './types.js';
+import { ColorProps } from './helpers/tools/ColorTool.js';
+import { BorderStyleProps } from './helpers/tools/BorderStyleTool.js';
+
 import BorderStyleTool from './helpers/tools/BorderStyleTool.js';
 import ColorTool from './helpers/tools/ColorTool.js';
-import removeThemeProps from './helpers/removeThemeProps.js';
+import { removeThemeProps } from './Box.js';
 
 //--------------------------------------------------------------------//
 // Types

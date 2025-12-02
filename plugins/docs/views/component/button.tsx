@@ -19,30 +19,84 @@ const title = 'Button Component';
 const description = 'Buttons allow users to trigger actions and events.';
 
 const props = [
-  [ 'className', 'string', 'No', 'Standard HTML class names' ],
-  [ 'block', 'boolean', 'No', 'button display block' ],
-  [ 'color', 'string', 'No', 'Custom CSS hex or name' ],
-  [ 'curved', 'boolean', 'No', 'Slight curved corners' ],
-  [ 'error', 'boolean', 'No', 'Red badge' ],
-  [ 'full', 'boolean', 'No', 'button width 100%' ],
-  [ 'info', 'boolean', 'No', 'Blue badge' ],
-  [ 'muted', 'boolean', 'No', 'Gray badge' ],
-  [ 'outline', 'boolean', 'No', 'Border and text with color' ],
-  [ 'pill', 'boolean', 'No', 'Max rounded corners' ],
-  [ 'solid', 'boolean', 'No', 'Fills badge with color' ],
-  [ 'success', 'boolean', 'No', 'Green badge' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS input' ],
-  [ 'warning', 'boolean', 'No', 'Orange badge' ],
-  [ 'rounded', 'boolean', 'No', 'Rounded corners' ],
-  [ 'xs', 'boolean', 'No', 'Extra small button' ],
-  [ 'sm', 'boolean', 'No', 'Small button' ],
-  [ 'md', 'boolean', 'No', 'Medium button' ],
-  [ 'lg', 'boolean', 'No', 'Large button' ],
-  [ 'xl', 'boolean', 'No', 'Extra large button' ],
-  [ 'xl2', 'boolean', 'No', 'XXL button' ],
-  [ 'xl3', 'boolean', 'No', 'XXXL button' ],
-  [ 'xl4', 'boolean', 'No', 'XXXXL button' ],
-  [ 'xl5', 'boolean', 'No', 'XXXXXL button' ]
+  [ 'align', 'string', 'No', 'Custom text align value to apply to the button' ],
+  [ 'ba', 'string | number', 'No', 'Border all sides size value to apply to the button' ],
+  [ 'bb', 'string | number', 'No', 'Border bottom size value to apply to the button' ],
+  [ 'bdStyle', 'string', 'No', 'Custom border style value to apply to the button' ],
+  [ 'bl', 'string | number', 'No', 'Border left size value to apply to the button' ],
+  [ 'black', 'boolean', 'No', 'If true, applies the black color to the button' ],
+  [ 'block', 'boolean', 'No', 'If true, sets display to block' ],
+  [ 'br', 'string | number', 'No', 'Border right size value to apply to the button' ],
+  [ 'bt', 'string | number', 'No', 'Border top size value to apply to the button' ],
+  [ 'bx', 'string | number', 'No', 'Border horizontal size value to apply to the button' ],
+  [ 'by', 'string | number', 'No', 'Border vertical size value to apply to the button' ],
+  [ 'center', 'boolean', 'No', 'If true, centers text inside the button' ],
+  [ 'children', 'ReactNode', 'No', 'Child elements to be rendered inside the button' ],
+  [ 'className', 'string', 'No', 'Additional class names to apply to the button' ],
+  [ 'color', 'string', 'No', 'Custom color value to apply to the button' ],
+  [ 'curved', 'boolean', 'No', 'If true, applies curved border radius to the button' ],
+  [ 'dashed', 'boolean', 'No', 'If true, applies dashed border style to the button' ],
+  [ 'display', 'string', 'No', 'Custom display value to apply to the button' ],
+  [ 'dotted', 'boolean', 'No', 'If true, applies dotted border style to the button' ],
+  [ 'error', 'boolean', 'No', 'If true, applies the error color to the button' ],
+  [ 'fill', 'boolean', 'No', 'If true, makes the button take the full width of its container' ],
+  [ 'flex', 'boolean', 'No', 'If true, sets display to flex' ],
+  [ 'grid', 'boolean', 'No', 'If true, sets display to grid' ],
+  [ 'h', 'string | number', 'No', 'Height value to apply to the button' ],
+  [ 'hidden', 'boolean', 'No', 'If true, hides the button' ],
+  [ 'href', 'string', 'No', 'If set, renders the button as an anchor link' ],
+  [ 'iblock', 'boolean', 'No', 'If true, sets display to inline-block' ],
+  [ 'iflex', 'boolean', 'No', 'If true, sets display to inline-flex' ],
+  [ 'igrid', 'boolean', 'No', 'If true, sets display to inline-grid' ],
+  [ 'info', 'boolean', 'No', 'If true, applies the info color to the button' ],
+  [ 'inline', 'boolean', 'No', 'If true, sets display to inline' ],
+  [ 'justify', 'boolean', 'No', 'If true, justifies text inside the button' ],
+  [ 'left', 'boolean', 'No', 'If true, aligns text to the left inside the button' ],
+  [ 'lg', 'boolean', 'No', 'If true, applies large size to the button' ],
+  [ 'ma', 'string | number', 'No', 'Margin all sides size value to apply to the button' ],
+  [ 'maxh', 'string | number', 'No', 'Maximum height value to apply to the button' ],
+  [ 'maxw', 'string | number', 'No', 'Maximum width value to apply to the button' ],
+  [ 'mb', 'string | number', 'No', 'Margin bottom size value to apply to the button' ],
+  [ 'md', 'boolean', 'No', 'If true, applies medium size to the button' ],
+  [ 'minh', 'string | number', 'No', 'Minimum height value to apply to the button' ],
+  [ 'minw', 'string | number', 'No', 'Minimum width value to apply to the button' ],
+  [ 'ml', 'string | number', 'No', 'Margin left size value to apply to the button' ],
+  [ 'mr', 'string | number', 'No', 'Margin right size value to apply to the button' ],
+  [ 'mt', 'string | number', 'No', 'Margin top size value to apply to the button' ],
+  [ 'muted', 'boolean', 'No', 'If true, applies the muted color to the button' ],
+  [ 'mx', 'string | number', 'No', 'Margin horizontal size value to apply to the button' ],
+  [ 'my', 'string | number', 'No', 'Margin vertical size value to apply to the button' ],
+  [ 'outline', 'boolean', 'No', 'If true, applies an outline style to the button' ],
+  [ 'pa', 'string | number', 'No', 'Padding all sides size value to apply to the button' ],
+  [ 'pb', 'string | number', 'No', 'Padding bottom size value to apply to the button' ],
+  [ 'pill', 'boolean', 'No', 'If true, applies pill border radius to the button' ],
+  [ 'pl', 'string | number', 'No', 'Padding left size value to apply to the button' ],
+  [ 'pr', 'string | number', 'No', 'Padding right size value to apply to the button' ],
+  [ 'primary', 'boolean', 'No', 'If true, applies the primary color to the button' ],
+  [ 'pt', 'string | number', 'No', 'Padding top size value to apply to the button' ],
+  [ 'px', 'string | number', 'No', 'Padding horizontal size value to apply to the button' ],
+  [ 'py', 'string | number', 'No', 'Padding vertical size value to apply to the button' ],
+  [ 'radius', 'string | number', 'No', 'Custom border radius value to apply to the button' ],
+  [ 'right', 'boolean', 'No', 'If true, aligns text to the right inside the button' ],
+  [ 'rounded', 'boolean', 'No', 'If true, applies rounded border radius to the button' ],
+  [ 'secondary', 'boolean', 'No', 'If true, applies the secondary color to the button' ],
+  [ 'sm', 'boolean', 'No', 'If true, applies small size to the button' ],
+  [ 'solid', 'boolean', 'No', 'If true, applies solid border style to the button' ],
+  [ 'style', 'CSSProperties', 'No', 'Inline styles to apply to the button' ],
+  [ 'success', 'boolean', 'No', 'If true, applies the success color to the button' ],
+  [ 'target', 'string', 'No', 'Specifies where to open the linked document' ],
+  [ 'tertiary', 'boolean', 'No', 'If true, applies the tertiary color to the button' ],
+  [ 'title', 'string', 'No', 'Specifies extra information about the button' ],
+  [ 'txs', 'string | number', 'No', 'Text size value to apply to the button' ],
+  [ 'w', 'string | number', 'No', 'Width value to apply to the button' ],
+  [ 'warning', 'boolean', 'No', 'If true, applies the warning color to the button' ],
+  [ 'white', 'boolean', 'No', 'If true, applies the white color to the button' ],
+  [ 'xl', 'boolean', 'No', 'If true, applies extra large size to the button' ],
+  [ 'xl2', 'boolean', 'No', 'If true, applies 2x extra large size to the button' ],
+  [ 'xl3', 'boolean', 'No', 'If true, applies 3x extra large size to the button' ],
+  [ 'xl4', 'boolean', 'No', 'If true, applies 4x extra large size to the button' ],
+  [ 'xl5', 'boolean', 'No', 'If true, applies 5x extra large size to the button' ],
+  [ 'xs', 'boolean', 'No', 'If true, applies extra small size to the button' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -342,11 +396,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button info pill xs className="text-xs">Submit XS</Button>
+            <Button info pill xs>Submit XS</Button>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button info pill xs className="text-xs">Submit XS</Button>`}
+          {`<Button info pill xs>Submit XS</Button>`}
         </Preview.Code>
       </Preview>
       {/* SM Example */}
@@ -357,11 +411,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button info pill sm className="text-sm">Submit SM</Button>
+            <Button info pill sm>Submit SM</Button>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button info pill sm className="text-sm">Submit SM</Button>`}
+          {`<Button info pill sm>Submit SM</Button>`}
         </Preview.Code>
       </Preview>
       {/* MD Example */}
@@ -372,11 +426,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button info pill md className="text-md">Submit MD</Button>
+            <Button info pill md>Submit MD</Button>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button info pill md className="text-md">Submit MD</Button>`}
+          {`<Button info pill md>Submit MD</Button>`}
         </Preview.Code>
       </Preview>
       {/* LG Example */}
@@ -387,11 +441,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button info pill lg className="text-lg">Submit LG</Button>
+            <Button info pill lg>Submit LG</Button>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button info pill lg className="text-lg">Submit LG</Button>`}
+          {`<Button info pill lg>Submit LG</Button>`}
         </Preview.Code>
       </Preview>
       {/* XL Example */}
@@ -402,71 +456,71 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button info pill xl className="text-xl">Submit XL</Button>
+            <Button info pill xl>Submit XL</Button>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button info pill xl className="text-xl">Submit XL</Button>`}
+          {`<Button info pill xl>Submit XL</Button>`}
         </Preview.Code>
       </Preview>
-      {/* XL2 Example */}
+      {/* 2XL Example */}
       <Preview 
         height={110}
-        title="XL2 Example" 
+        title="2XL Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button info pill xl2 className="text-2xl">Submit XXL</Button>
+            <Button info pill xl2>Submit XXL</Button>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button info pill xl2 className="text-2xl">Submit XXL</Button>`}
+          {`<Button info pill xl2>Submit XXL</Button>`}
         </Preview.Code>
       </Preview>
-      {/* XL3 Example */}
+      {/* 3XL Example */}
       <Preview 
         height={110}
-        title="XL3 Example" 
+        title="3XL Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button info pill xl3 className="text-3xl">Submit XXXL</Button>
+            <Button info pill xl3>Submit XXXL</Button>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button info pill xl3 className="text-3xl">Submit XXXL</Button>`}
+          {`<Button info pill xl3>Submit XXXL</Button>`}
         </Preview.Code>
       </Preview>
-      {/* XL4 Example */}
+      {/* 4XL Example */}
       <Preview 
         height={110}
-        title="XL4 Example" 
+        title="4XL Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button info pill xl4 className="text-4xl">Submit IVL</Button>
+            <Button info pill xl4>Submit IVL</Button>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button info pill xl4 className="text-4xl">Submit IVL</Button>`}
+          {`<Button info pill xl4>Submit IVL</Button>`}
         </Preview.Code>
       </Preview>
-      {/* XL5 Example */}
+      {/* 5XL Example */}
       <Preview 
         height={110}
-        title="XL5 Example" 
+        title="5XL Example" 
         className="border border-2 theme-bc-3 px-w-33-7 r2xl-px-w-50-7 rmd-px-w-100-0"
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Button info pill xl5 className="text-5xl">Submit VL</Button>
+            <Button info pill xl5>Submit VL</Button>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {`<Button info pill xl5 className="text-5xl">Submit VL</Button>`}
+          {`<Button info pill xl5>Submit VL</Button>`}
         </Preview.Code>
       </Preview>
     </div>

@@ -1,6 +1,22 @@
-import type { BorderStyleProps, Hash } from '../../types.js';
+//--------------------------------------------------------------------//
+// Imports
+
+import type { Hash } from '../../types.js';
 import type { ClassStyleOptions } from './PropTool.js';
 import PropTool from './PropTool.js';
+
+//--------------------------------------------------------------------//
+// Types
+
+export type BorderStyleProps = {
+  solid?: boolean,
+  dashed?: boolean,
+  dotted?: boolean,
+  bdStyle?: string
+};
+
+//--------------------------------------------------------------------//
+// Classes
 
 export class BorderStyleTool<P extends Hash>
   extends PropTool<P, BorderStyleProps>
@@ -27,9 +43,9 @@ export class BorderStyleTool<P extends Hash>
    */
   public getClassStyles(options: ClassStyleOptions) {
     //extract options
-    const { classes = [], styles = {}, key: defaultKey } = options;
-    //get key and value
-    const key = this.key || defaultKey;
+    const { classes = [], styles = {} } = options;
+    //compute key (once)
+    const key = this.key;
     //if there is a key
     if (typeof key === 'string') {
       //form the class name

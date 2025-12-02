@@ -16,6 +16,7 @@ html, body, body > div {
 
 /* Themes
 ------------------------------*/
+
 .green-light {
   --bg-zero: #EBF3E1;
   --bg-first: #D0EDAA;
@@ -34,7 +35,7 @@ html, body, body > div {
   --secondary: #6EBA00;
   --info: #1474FC;
   --error: #DC3545;
-  --warning: #FFC107;
+  --warning: #FF7B07;
   --success: #28A745;
   --muted: #999999;
   --white: #FFFFFF;
@@ -58,10 +59,10 @@ html, body, body > div {
   --primary: #6EBA00;
   --secondary: #3a4d21;
   --info: #1474FC;
-  --error: #EC2727;
-  --warning: #FFC107;
+  --error: #DC3545;
+  --warning: #FF7B07;
   --success: #28A745;
-  --muted: #AAAAAA;
+  --muted: #999999;
   --white: #FFFFFF;
   --black: #000000;
 }
@@ -84,7 +85,7 @@ html, body, body > div {
   --secondary: #0069ba;
   --info: #1474FC;
   --error: #DC3545;
-  --warning: #FFC107;
+  --warning: #FF7B07;
   --success: #28A745;
   --muted: #999999;
   --white: #FFFFFF;
@@ -108,10 +109,10 @@ html, body, body > div {
   --primary: #0069ba;
   --secondary: #21394d;
   --info: #1474FC;
-  --error: #EC2727;
-  --warning: #FFC107;
+  --error: #DC3545;
+  --warning: #FF7B07;
   --success: #28A745;
-  --muted: #AAAAAA;
+  --muted: #999999;
   --white: #FFFFFF;
   --black: #000000;
 }
@@ -134,7 +135,7 @@ html, body, body > div {
   --secondary: #ba004d;
   --info: #1474FC;
   --error: #DC3545;
-  --warning: #FFC107;
+  --warning: #FF7B07;
   --success: #28A745;
   --muted: #999999;
   --white: #FFFFFF;
@@ -158,10 +159,10 @@ html, body, body > div {
   --primary: #ba004d;
   --secondary: #4d2136;
   --info: #1474FC;
-  --error: #EC2727;
-  --warning: #FFC107;
+  --error: #DC3545;
+  --warning: #FF7B07;
   --success: #28A745;
-  --muted: #AAAAAA;
+  --muted: #999999;
   --white: #FFFFFF;
   --black: #000000;
 }
@@ -184,7 +185,7 @@ html, body, body > div {
   --secondary: #7300ba;
   --info: #1474FC;
   --error: #DC3545;
-  --warning: #FFC107;
+  --warning: #FF7B07;
   --success: #28A745;
   --muted: #999999;
   --white: #FFFFFF;
@@ -210,10 +211,10 @@ html, body, body > div {
   --primary: #7000ba;
   --secondary: #3c214d;
   --info: #1474FC;
-  --error: #EC2727;
-  --warning: #FFC107;
+  --error: #DC3545;
+  --warning: #FF7B07;
   --success: #28A745;
-  --muted: #AAAAAA;
+  --muted: #999999;
   --white: #FFFFFF;
   --black: #000000;
 }
@@ -236,7 +237,7 @@ html, body, body > div {
   --secondary: #ba5400;
   --info: #1474FC;
   --error: #DC3545;
-  --warning: #FFC107;
+  --warning: #FF7B07;
   --success: #28A745;
   --muted: #999999;
   --white: #FFFFFF;
@@ -260,10 +261,10 @@ html, body, body > div {
   --primary: #ba5400;
   --secondary: #4d3421;
   --info: #1474FC;
-  --error: #EC2727;
-  --warning: #FFC107;
+  --error: #DC3545;
+  --warning: #FF7B07;
   --success: #28A745;
-  --muted: #AAAAAA;
+  --muted: #999999;
   --white: #FFFFFF;
   --black: #000000;
 }
@@ -286,207 +287,4 @@ html, body, body > div {
 .orange-light .logo-img,
 .orange-dark .logo-img {
   filter: hue-rotate(300deg);
-}
-
-/* Crumbs */
-
-.crumbs {
-  align-items: center;
-  display: flex; 
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-.crumbs-header {
-  align-items: center;
-  display: none;
-  overflow-x: hidden;
-  white-space: nowrap;
-}
-
-a.crumbs-header {
-  cursor: pointer;
-}
-
-.crumbs-header .back {
-  color: var(--tx2);
-  font-size: 20px;
-  margin-right: 5px;
-}
-
-.crumbs-header .icon {
-  font-size: 14px;
-  margin-right: 2px;
-}
-
-.crumbs-header .label {
-  font-weight: bold;
-}
-
-.crumbs .crumb {
-  align-items: center;
-  color: var(--tx1);
-  display: inline-flex;
-}
-
-.crumbs a.crumb {
-  color: var(--info);
-  font-weight: bold;
-}
-
-.crumbs .icon {
-  color: var(--tx1);
-  display: inline-block;
-  margin-right: 5px;
-}
-
-.crumbs .next {
-  color: var(--tx1);
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
-@media (max-width: 767px) {
-  .crumbs {
-    display: none;
-  }
-  .crumbs .header {
-    display: flex;
-  }
-}
-
-/* Pagination */
-
-.pagination {
-  background-color: var(--bg1);
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  padding-bottom: 12px;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 12px;
-}
-
-.pagination .prev, .pagination .next {
-  background-color: var(--bg2);
-  border-color: var(--bd1);
-  border-style: solid;
-  border-width: 1px;
-  color: var(--tx1);
-  font-size: 14px;
-  font-weight: normal;
-  padding-bottom: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  position: relative;
-}
-
-.pagination .page {
-  align-items: center;
-  background-color: var(--bg2);
-  border-color: var(--bd1);
-  border-style: solid;
-  border-width: 1px;
-  color: var(--tx1);
-  display: inline-flex;
-  font-size: 14px;
-  font-weight: bold;
-  padding-bottom: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 5px;
-  position: relative;
-  z-index: 10;
-}
-
-.pagination .page.active {
-  background-color: var(--bg1);
-}
-
-/* Modal */
-
-.modal-confirm {
-  border: 1px solid var(--bd0);
-  padding: 16px;
-  margin-top: 8px;
-}
-
-.modal-confirm .message {
-  font-size: 26px;
-}
-
-.modal-confirm .alert {
-  color: var(--muted);
-}
-
-.modal-confirm .icon {
-  margin-right: 5px;
-}
-
-.modal-confirm .confirm {
-  border-radius: 8px;
-  font-weight: bold;
-  margin-right: 10px;
-  margin-top: 16px;
-  text-transform: uppercase;
-}
-
-.modal-confirm .cancel {
-  border-radius: 8px;
-  color: var(--tx1);
-  font-weight: bold;
-  margin-top: 16px;
-  text-transform: uppercase;
-}
-
-.layout-modal {
-  background-color: var(--bg3);
-  border: 2px solid var(--bg2);
-  color: #222222;
-  padding: 16px;
-}
-
-/* Fieldset */
-
-.field-fieldset {
-  border: 1px solid var(--bd2);
-  margin: 10px 0;
-  position: relative;
-}
-
-.field-fieldset header a {
-  color: var(--error);
-  cursor: pointer;
-  font-size: 20px;
-}
-
-.field-fieldset.field-fieldset-error {
-  border-color: var(--error);
-}
-
-.field-fieldset.field-fieldset-multiple header {
-  align-items: center;
-  background-color: var(--bg1);
-  display: flex;
-  padding: 10px;
-}
-
-.field-fieldset.field-fieldset-multiple header h6 {
-  flex-grow: 1;
-}
-
-.field-fieldset.field-fieldset-optional header a {
-  position: absolute;
-  right: 10px;
-  top: 5px;
-}
-
-.field-fieldset main {
-  padding: 10px;
-}
-
-.field-fieldset .field-fieldset-control {
-  padding: 10px 0;
 }

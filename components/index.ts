@@ -57,35 +57,26 @@ export type {
   TableProps
 } from './Table.js';
 //tabs
-export type { 
-  TabsContextProps,
-  TabsHeadProps,
-  TabsLabelProps,
-  TabsBodyProps,
-  TabsContentProps,
-  TabsActiveProps,
-  TabsInactiveProps,
-  TabsProps
-} from './Tabs.js';
+export type { TabsProps } from './Tabs.js';
 //tooltip
-export type { 
-  TooltipConfig,
-  TooltipProps,
-  TooltipDirection
-} from './Tooltip.js';
+export type { TooltipProps } from './Tooltip.js';
+//when
+export type { WhenProps } from './When.js';
+
 import Accordion from './Accordion.js';
-import Alert from './Alert.js';
-import Badge from './Badge.js';
+import Alert from './Alert';
+import Badge from './Badge';
 import Bread from './Bread.js';
 import Button from './Button.js';
 import Dialog from './Dialog.js';
-import Loader from './Loader.js';
+import Loader from './Loader'; 
 import Notifier from './Notifier.js';
 import Pager from './Pager.js';
 import Progress from './Progress.js';
-import Table from './Table.js';
+import Table from './Table';
 import Tabs from './Tabs.js';
-import Tooltip from './Tooltip.js';
+import Tooltip from './Tooltip';
+import When from './When.js';
 
 //--------------------------------------------------------------------//
 // Form
@@ -106,8 +97,8 @@ export type { DateInputProps } from './form/DateInput.js';
 export type { DatetimeInputProps } from './form/DatetimeInput.js';
 //field control
 export type { FieldControlProps } from './form/FieldControl.js';
-//fieldset
-export type { FieldsetProps } from './form/Fieldset.js';
+
+ export type { FieldsetProps } from './form/Fieldset.js';
 //file input
 export type { FileInputProps } from './form/FileInput.js';
 //file list
@@ -155,20 +146,14 @@ import * as Form from './form/index.js';
 // Helpers
 
 //tools
-export { BackgroundColorTool } from './helpers/tools/BackgroundColorTool.js';
-export { BorderColorTool } from './helpers/tools/BorderColorTool.js';
 export { BorderRadiusTool } from './helpers/tools/BorderRadiusTool.js';
 export { ColorTool } from './helpers/tools/ColorTool.js';
 export { DisplayTool } from './helpers/tools/DisplayTool.js';
 export { FillTool } from './helpers/tools/FillTool.js';
 export { PropTool } from './helpers/tools/PropTool.js';
 export { TextAlignTool } from './helpers/tools/TextAlignTool.js';
-export { TextColorTool } from './helpers/tools/TextColorTool.js';
-export { TextSizeTool } from './helpers/tools/TextSizeTool.js';
-
 export { getClassStyles } from './helpers/getClassStyles.js';
 export { getSlotStyles } from './helpers/getSlotStyles.js';
-export { removeThemeProps } from './helpers/removeThemeProps.js';
 export { toChildrenArray } from './helpers/toChildrenArray.js';
 
 
@@ -189,7 +174,7 @@ export type { DateFormatProps } from './view/DateFormat.js';
 export type { EmailLinkProps } from './view/EmailLink.js';
 //formula
 export type { FormulaProps } from './view/Formula.js';
-//class style
+//html
 export type { ClassStyleProps } from './view/HTML.js';
 //image format
 export type { ImageFormatProps } from './view/ImageFormat.js';
@@ -237,5 +222,6 @@ export {
   Table,
   Tabs,
   Tooltip,
-  View
+  View,
+  When,
 };

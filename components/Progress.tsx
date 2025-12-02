@@ -3,18 +3,18 @@
 
 //frui
 import type {
-  BackgroundColorProps, 
-  ColorProps, 
   ClassStyleProps,
-  BorderRadiusProps,
   ChildrenProps,
   HTMLElementProps
 } from './types.js';
+import { BackgroundColorProps } from './helpers/tools/ColorTool.js';
+import { BorderRadiusProps } from './helpers/tools/BorderRadiusTool.js';
+import { ColorProps } from './helpers/tools/ColorTool.js';
 
-import BackgroundColorTool from './helpers/tools/BackgroundColorTool.js';
+import BackgroundColorTool from './helpers/tools/ColorTool.js';
 import BorderRadiusTool from './helpers/tools/BorderRadiusTool.js';
 import ColorTool from './helpers/tools/ColorTool.js';
-import removeThemeProps from './helpers/removeThemeProps.js';
+import { removeThemeProps } from './Box.js';
 
 //--------------------------------------------------------------------//
 // Types

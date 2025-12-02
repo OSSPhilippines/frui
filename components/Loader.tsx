@@ -3,12 +3,11 @@
 
 //frui
 import type { HTMLElementProps } from './types.js';
-import { ColorProps } from './helpers/tools/ColorTool.js';
 import { BorderStyleProps } from './helpers/tools/BorderStyleTool.js';
-
+import { ColorProps } from './helpers/tools/ColorTool.js';
+import { removeThemeProps } from './Box.js';
 import BorderStyleTool from './helpers/tools/BorderStyleTool.js';
 import ColorTool from './helpers/tools/ColorTool.js';
-import { removeThemeProps } from './Box.js';
 
 //--------------------------------------------------------------------//
 // Types

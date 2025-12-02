@@ -290,6 +290,7 @@ export function Box(props: BoxProps) {
   return (<div {...boxProps}>{children}</div>);
 };
 
+//defaults to box
 export default Object.assign(Box, {
   getThemeProps,
   hasBorderRadiusProps,

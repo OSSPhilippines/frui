@@ -323,6 +323,7 @@ export function Dialog(props: DialogProps) {
   );
 };
 
+//defaults to dialog
 export default Object.assign(Dialog, {
   useDialog,
   useDialogContext,

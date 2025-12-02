@@ -15,6 +15,8 @@ export type {
 export type { AlertProps } from './Alert.js';
 //badge
 export type { BadgeProps } from './Badge.js';
+//box
+export type { BoxProps } from './Box.js';
 //bread
 export type { 
   BreadConfig,
@@ -66,6 +68,7 @@ export type { WhenProps } from './When.js';
 import Accordion from './Accordion.js';
 import Alert from './Alert';
 import Badge from './Badge';
+import Box from './Box.js';
 import Bread from './Bread.js';
 import Button from './Button.js';
 import Dialog from './Dialog.js';
@@ -211,6 +214,7 @@ export {
   Accordion,
   Alert,
   Badge,
+  Box,
   Bread,
   Button,
   Dialog,

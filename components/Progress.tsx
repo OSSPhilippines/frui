@@ -10,11 +10,10 @@ import type {
 import { BackgroundColorProps } from './helpers/tools/ColorTool.js';
 import { BorderRadiusProps } from './helpers/tools/BorderRadiusTool.js';
 import { ColorProps } from './helpers/tools/ColorTool.js';
-
+import { removeThemeProps } from './Box.js';
 import BackgroundColorTool from './helpers/tools/ColorTool.js';
 import BorderRadiusTool from './helpers/tools/BorderRadiusTool.js';
 import ColorTool from './helpers/tools/ColorTool.js';
-import { removeThemeProps } from './Box.js';
 
 //--------------------------------------------------------------------//
 // Types

@@ -169,7 +169,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following example shows how to setup the basic pager component.
+            The following example shows how to setup the basic <C value="Pager" /> component.
           </Translate>
         </p>
         <Preview 

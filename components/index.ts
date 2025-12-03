@@ -33,6 +33,8 @@ export type {
   DialogProviderProps,
   DialogProps
 } from './Dialog.js';
+//dropdown
+export type { DropdownProps } from './Dropdown.js';
 //loader
 export type { LoaderContainerProps, LoaderProps } from './Loader.js';
 //notifier
@@ -48,6 +50,8 @@ export type {
 export type { PagerProps } from './Pager.js';
 //progress
 export type { ProgressProps } from './Progress.js';
+//scope
+export type { ScopeProps } from './Scope.js';
 //table
 export type { 
   TableContextProps,
@@ -72,10 +76,12 @@ import Box from './Box.js';
 import Bread from './Bread.js';
 import Button from './Button.js';
 import Dialog from './Dialog.js';
+import Dropdown from './Dropdown.js';
 import Loader from './Loader'; 
 import Notifier from './Notifier.js';
 import Pager from './Pager.js';
 import Progress from './Progress.js';
+import Scope from './Scope.js';
 import Table from './Table';
 import Tabs from './Tabs.js';
 import Tooltip from './Tooltip';
@@ -218,11 +224,13 @@ export {
   Bread,
   Button,
   Dialog,
+  Dropdown,
   Form,
   Loader,
   Notifier,
   Pager,
   Progress,
+  Scope,
   Table,
   Tabs,
   Tooltip,

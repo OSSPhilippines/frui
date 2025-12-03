@@ -372,7 +372,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following are some basic examples of badges.
+            The following are some basic examples of <C value="Tooltip" /> component.
           </Translate>
         </p>
         <Examples />

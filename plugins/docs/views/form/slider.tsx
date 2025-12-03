@@ -307,7 +307,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following are some basic examples of <C value="Slider" /> fields.
+            The following are some basic examples of <C value="Slider" /> component.
           </Translate>
         </p>
         <Examples />

@@ -535,7 +535,7 @@ export function Body() {
       <div className="curved overflow-hidden">
         <p className="py-2">
           <Translate>
-            The following are some basic examples of tables.
+            The following are some basic examples of <C value="Table" /> component.
           </Translate>
         </p>
         <Examples />

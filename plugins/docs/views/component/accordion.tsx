@@ -528,7 +528,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following are some basic examples of accordions.
+            The following are some basic examples of <C value="Accordion" /> component.
           </Translate>
         </p>
         <Examples />

@@ -264,7 +264,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following are some basic examples of loaders.
+            The following are some basic examples of <C value="Loader" /> component.
           </Translate>
         </p>
         <Examples />

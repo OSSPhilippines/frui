@@ -479,7 +479,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following are some basic examples of tabs.
+            The following are some basic examples of <C value="Tabs" /> component.
           </Translate>
         </p>
         <Examples />

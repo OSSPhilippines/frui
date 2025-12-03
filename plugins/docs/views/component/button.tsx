@@ -559,7 +559,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following are some basic examples of buttons.
+            The following are some basic examples of <C value="Button" /> component.
           </Translate>
         </p>
         <Examples />

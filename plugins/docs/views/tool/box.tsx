@@ -706,7 +706,8 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the when tool like the following.
+            The box tool is a low-level container component for adding 
+            styling props. Import the box tool like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

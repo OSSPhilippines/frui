@@ -2,14 +2,12 @@
 // Imports
 
 //frui
-import type { 
-  ColorProps, 
-  BorderStyleProps, 
-  HTMLElementProps 
-} from './types.js';
+import type { HTMLElementProps } from './types.js';
+import type { ColorProps } from './helpers/tools/ColorTool.js';
+import type { BorderStyleProps } from './helpers/tools/BorderStyleTool.js';
 import BorderStyleTool from './helpers/tools/BorderStyleTool.js';
 import ColorTool from './helpers/tools/ColorTool.js';
-import removeThemeProps from './helpers/removeThemeProps.js';
+import Box from './Box.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -72,8 +70,6 @@ export function Loader(props: LoaderProps) {
     container, //?: LoaderContainerProps
     //whether to show the loader or not
     show, //?: boolean
-    //size of loader in pixels
-    size = 20, //?: number
     //number of slices (0-3)
     slice = 0, //?: number
     //spin speed in milliseconds
@@ -83,7 +79,9 @@ export function Loader(props: LoaderProps) {
     //html 
     style,
     ...attributes 
-  } = removeThemeProps(props);
+  } = Box.removeThemeProps(props);
+  //size of loader in pixels
+  const size = typeof props.size === 'number' ? props.size : 20;
   //variables
   // set default styles and classes
   const styles = { 
@@ -98,7 +96,7 @@ export function Loader(props: LoaderProps) {
   // - determine border style
   BorderStyleTool.get(props).getClassStyles({ classes, styles });
   // - determine border color
-  ColorTool.get(props, 'bd').getClassStyles({ classes, styles });
+  ColorTool.get(props, 'bdc').getClassStyles({ classes, styles });
   //determine slices
   if (slice > 2) {
     classes.push('frui-loader-slice-3');

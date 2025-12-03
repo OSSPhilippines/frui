@@ -2,12 +2,12 @@ import {
   defineConfig, 
   definePreset, 
   presetAttributify, 
-  presetWind3 
+  presetWind3
 } from 'unocss';
 
-export const pxPreset = definePreset(() => {
+export const fruiPreset = definePreset(() => {
   return {
-    name: "unocss-stackpress",
+    name: "unocss-frui-preset",
     variants: [
       //desktop first rule set
       matcher => matcher.startsWith('r4xl-') ? {
@@ -153,6 +153,6 @@ export default defineConfig({
   presets: [
     presetAttributify(),
     presetWind3(),
-    pxPreset()
+    fruiPreset()
   ]
 })

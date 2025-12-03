@@ -1,16 +1,17 @@
 import type {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
   Component, 
-  ReactNode, 
   CSSProperties,
   DetailedHTMLProps,
+  HTMLAttributes,
   ImgHTMLAttributes,
   InputHTMLAttributes,
-  TextareaHTMLAttributes,
-  ButtonHTMLAttributes,
+  ReactNode, 
   TableHTMLAttributes,
-  ThHTMLAttributes,
+  TextareaHTMLAttributes,
   TdHTMLAttributes,
-  HTMLAttributes
+  ThHTMLAttributes
 } from 'react';
 
 //General types
@@ -20,18 +21,21 @@ export type Hash = Record<string, any>;
 
 //Native HTML types
 
+//Can be used for div, header, footer, section, article, span, etc.
 export type HTMLElementProps<T = HTMLElement> = DetailedHTMLProps<
   HTMLAttributes<T>,
   T
 >;
 
-export type HTMLPreProps = DetailedHTMLProps<
-  ImgHTMLAttributes<HTMLPreElement>, 
-  HTMLPreElement
+export type HTMLButtonProps = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>, 
+  HTMLButtonElement
 >;
 
+export type HTMLHeadingProps = HTMLElementProps<HTMLHeadingElement>;
+
 export type HTMLLinkProps = DetailedHTMLProps<
-  ImgHTMLAttributes<HTMLAnchorElement>, 
+  AnchorHTMLAttributes<HTMLAnchorElement>, 
   HTMLAnchorElement
 >;
 
@@ -44,6 +48,9 @@ export type HTMLInputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>, 
   HTMLInputElement
 >;
+
+export type HTMLParagraphProps = HTMLElementProps<HTMLParagraphElement>;
+export type HTMLPreProps = HTMLElementProps<HTMLPreElement>;
 
 export type HTMLTableProps = DetailedHTMLProps<
   TableHTMLAttributes<HTMLTableElement>, 
@@ -68,11 +75,6 @@ export type HTMLTableCellProps = DetailedHTMLProps<
 export type HTMLTextareaProps = DetailedHTMLProps<
   TextareaHTMLAttributes<HTMLTextAreaElement>, 
   HTMLTextAreaElement
->;
-
-export type HTMLButtonProps = DetailedHTMLProps<
-  ButtonHTMLAttributes<HTMLButtonElement>, 
-  HTMLButtonElement
 >;
 
 //class name style props

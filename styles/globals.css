@@ -104,11 +104,6 @@
   --h-5xl: 200px; 
 }
 
-/* Generic
----------------------------------*/
-
-.frui-full { width: 100%; }
-
 /* Display
 ---------------------------------*/
 
@@ -123,6 +118,12 @@
 
 /* Text
 ---------------------------------*/
+
+.frui-bold { font-weight: bold; }
+.frui-italic { font-style: italic; }
+.frui-uppercase { text-transform: uppercase; }
+.frui-lowercase { text-transform: lowercase; }
+.frui-capitalize { text-transform: capitalize; }
 
 .frui-tx-left { text-align: left; }
 .frui-tx-center { text-align: center; }
@@ -450,3 +451,23 @@
 .frui-w-third { width: 33.33%; }
 .frui-w-half { width: 50%; }
 .frui-w-full { width: 100%; }
+
+/* Flex
+---------------------------------*/
+
+.frui-fa-center { align-items: center; justify-content: center; }
+.frui-fa-grow { flex-grow: 1; }
+.frui-fa-nowrap { flex-wrap: nowrap; }
+.frui-fa-wrap { flex-wrap: wrap; }
+.frui-fx-center { justify-content: center; }
+.frui-fx-left { justify-content: flex-start; }
+.frui-fx-right { justify-content: flex-end; }
+.frui-fy-center { align-items: center; }
+
+/* Position
+---------------------------------*/
+
+.frui-absolute { position: absolute; }
+.frui-relative { position: relative; }
+.frui-fixed { position: fixed; }
+.frui-sticky { position: sticky; }

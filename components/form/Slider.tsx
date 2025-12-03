@@ -581,7 +581,7 @@ export function Slider(props: SliderProps) {
     track: track ? getSlotStyles(track, {}): {}
   };
   //add color props to handle and track styles
-  const colors = ColorTool.get(props, 'bgc').config;;
+  const colors = ColorTool.get(props, 'bgc').config;
   slots.handles = { ...slots.handles, ...colors };
   slots.connection = { ...slots.connection, ...colors };
   //render

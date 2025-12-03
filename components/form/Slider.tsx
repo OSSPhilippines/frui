@@ -17,14 +17,15 @@ import {
 
 //frui
 import type {
-  BackgroundColorProps,
   ChildrenProps,
   ClassStyleProps,
-  ColorProps,
   SlotStyleProp
 } from '../types.js';
+import type { 
+  BackgroundColorProps, 
+  ColorProps 
+} from '../helpers/tools/ColorTool.js';
 import type { InputProps } from './Input.js';
-import BackgroundColorTool from '../helpers/tools/BackgroundColorTool.js';
 import ColorTool from '../helpers/tools/ColorTool.js';
 import getSlotStyles from '../helpers/getSlotStyles.js';
 import Input from './Input.js';
@@ -410,7 +411,7 @@ export function SliderHandle(props: SliderHandleProps) {
   const styles = { ...style };
   styles.left = `${percent}%`;
   //set handle background color
-  ColorTool.get(props, 'bg').getClassStyles({ classes, styles });
+  ColorTool.get(props, 'bgc').getClassStyles({ classes, styles });
   //render
   return (
     <div 
@@ -462,7 +463,7 @@ export function SliderTrack(props: SliderTrackProps) {
   // determine CSS styles
   const styles = { ...style };
   //set handle background color
-  ColorTool.get(props, 'bg').getClassStyles({ classes, styles });
+  ColorTool.get(props, 'bgc').getClassStyles({ classes, styles });
   //render
   return (
     <div ref={ref} className={classes.join(' ')} style={styles}>
@@ -499,7 +500,7 @@ export function SliderConnection(props: SliderConnectionProps) {
   styles.left = `${percents[0]}%`;
   styles.width = `${percents[1] - percents[0]}%`;
   //set connection background color
-  ColorTool.get(props, 'bg').getClassStyles({ classes, styles });
+  ColorTool.get(props, 'bgc').getClassStyles({ classes, styles });
   //render
   return (
     <div className={classes.join(' ')} style={styles} />
@@ -580,11 +581,9 @@ export function Slider(props: SliderProps) {
     track: track ? getSlotStyles(track, {}): {}
   };
   //add color props to handle and track styles
-  const colors = ColorTool.get(props, 'bg').config;;
-  const bgcolors = BackgroundColorTool.get(props).toColorProps();
+  const colors = ColorTool.get(props, 'bgc').config;;
   slots.handles = { ...slots.handles, ...colors };
   slots.connection = { ...slots.connection, ...colors };
-  slots.track = { ...slots.track, ...bgcolors };
   //render
   return range ? (
     <SliderContext.Provider value={provider}>
@@ -596,7 +595,7 @@ export function Slider(props: SliderProps) {
           name={name} 
           onChange={handlers.updateValue1}
         />
-        <SliderTrack {...slots.track} ref={refs.track}>
+        <SliderTrack {...slots.track} ref={refs.track} color={props.bgc}>
           {connect && <SliderConnection {...slots.connection} />}
           <SliderHandle {...slots.handles} index={0} />
           <SliderHandle {...slots.handles} index={1} />

@@ -3,18 +3,22 @@
 
 //frui
 import type {
-  BackgroundColorProps, 
-  ColorProps, 
   ClassStyleProps,
-  BorderRadiusProps,
   ChildrenProps,
   HTMLElementProps
 } from './types.js';
 
-import BackgroundColorTool from './helpers/tools/BackgroundColorTool.js';
+import type { 
+  BackgroundColorProps, 
+  ColorProps 
+} from './helpers/tools/ColorTool.js';
+import type { 
+  BorderRadiusProps 
+} from './helpers/tools/BorderRadiusTool.js';
+
 import BorderRadiusTool from './helpers/tools/BorderRadiusTool.js';
 import ColorTool from './helpers/tools/ColorTool.js';
-import removeThemeProps from './helpers/removeThemeProps.js';
+import Box from './Box.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -51,7 +55,7 @@ export function ProgressContainer(props: ProgressContainerProps) {
     //html 
     style,
     ...attributes 
-  } = removeThemeProps(props);
+  } = Box.removeThemeProps(props);
   //variables
   // set default styles and classes
   const styles = { ...style };
@@ -59,7 +63,7 @@ export function ProgressContainer(props: ProgressContainerProps) {
   // - set bar radius
   BorderRadiusTool.get(props).getClassStyles({ classes, styles });
   // - set bar color (background color)
-  ColorTool.get(props, 'bg').getClassStyles({ classes, styles });
+  ColorTool.get(props, 'bgc').getClassStyles({ classes, styles });
   //set the container height
   if (height) {
     styles.height = typeof height === 'number' ? `${height}px` : height;
@@ -84,16 +88,15 @@ export function Progress(props: ProgressProps) {
     width = 0,
     height,
     container = {},
-    //html 
     style,
     ...attributes 
-  } = removeThemeProps(props);
+  } = Box.removeThemeProps(props);
   //variables
   // set default styles and classes
   const styles = { ...style };
   const classes = [ 'frui-progress' ];
   // - set bar color (background color)
-  ColorTool.get(props, 'bg').getClassStyles({ classes, styles });
+  ColorTool.get(props, 'bgc').getClassStyles({ classes, styles });
   // - set bar height
   if (height) {
     styles.height = typeof height === 'number' ? `${height}px` : height;
@@ -105,14 +108,13 @@ export function Progress(props: ProgressProps) {
   // setup the container props
   Object.assign(
     container, 
-    //add color props
-    BackgroundColorTool.get(props).toColorProps(),
+    //pass 'bgc' here to 'color' prop
+    { color: props.bgc },
     //add radius props
     BorderRadiusTool.get(props).config,
     //add height prop
     { height }
   );
-
   //render
   return (
     <ProgressContainer {...container}>

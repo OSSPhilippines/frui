@@ -262,6 +262,7 @@ export function Notifier(props: NotifierProps) {
   return null;
 };
 
+//defaults to notifier
 export default Object.assign(Notifier, {
   Container: NotifierContainer,
   Context: NotifierContext,

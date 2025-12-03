@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Color from 'components/view/Color.js';
+import PhoneLink from 'components/view/PhoneLink.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,18 +14,13 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/color';
-const title = 'Color Format';
-const description = 'Color formats convert values to color displays.';
+const uri = '/view/phone-link';
+const title = 'Phone Link Format';
+const description = 'PhoneLink formats convert values to clickable phone displays.';
 
 const props = [
-  [ 'box', 'boolean', 'No', 'Show color box' ],
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
-  [ 'lg', 'boolean', 'No', 'Show large color box' ],
-  [ 'md', 'boolean', 'No', 'Show medium size color box' ],
-  [ 'sm', 'boolean', 'No', 'Show small color box' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
-  [ 'text', 'boolean', 'No', 'Show color text' ],
   [ 'value', 'string', 'Yes', 'Default value' ]
 ];
 
@@ -54,7 +49,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Color')}
+          {_('Phone Link')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -106,16 +101,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Color')}
+        {_('Phone Link')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the color format like the following.
+            Import the <C value="<PhoneLink>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Color from 'frui/view/Color';`}
+          {`import PhoneLink from 'frui/view/PhoneLink';`}
         </Code>
       </div>
 
@@ -124,66 +119,12 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Color value="salmon" />
+          <PhoneLink className="theme-2" value="+1 (410) 555-2424" />
         </div>
         <Code language="typescript">
-          {`<Color value="salmon" />`}
+          {`<PhoneLink className="theme-2" value="+1 (410) 555-2424" />`}
         </Code>
       </div>
-
-      <h2 id="customize" className="uppercase font-bold text-lg mt-8">
-        {_('Customize')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          You can apply different sizes to the 
-          <C l value="Color" /> format.
-        </Translate>
-      </p>
-
-      <h3 className="font-semibold text-md mt-8">
-        {_('Box')}
-      </h3>
-      <p className="py-4">
-        <Translate>
-          Use <C value="box" /> prop to hide the color box.
-        </Translate>
-      </p>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Color box={false} value="salmon" />
-        </div>
-        <Code language="typescript">
-          {`<Color box={false} value="salmon" />`}
-        </Code>
-      </div>
-
-      <h3 className="font-semibold text-md mt-8">
-        {_('Sizes')}
-      </h3>
-      <p className="py-4">
-        <Translate>
-          Use <C value="sm" />, <C value="md" />, or <C value="lg" r /> 
-          props to change the size of the color box.
-        </Translate>
-      </p>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Color lg value="salmon" />
-        </div>
-        <Code language="typescript">
-          {`<Color lg value="salmon" />`}
-        </Code>
-      </div>
-
-      <p className="py-4">
-        <Translate>
-          You can also add your own custom class to 
-          <C l value="Color" /> format or use any combination of 
-          <C l value="frui-format-color" />, and
-          <C l value="frui-format-color-box" /> CSS classes.
-        </Translate>
-      </p>
 
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
@@ -191,7 +132,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Color>" /> format can be passed the 
+            The <C value="<PhoneLink>" /> format can be passed the 
             following props.
           </Translate>
         </p>

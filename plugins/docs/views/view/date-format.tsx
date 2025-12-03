@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import LinkFormat from 'components/view/Link.js';
+import DateFormat from 'components/view/DateFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,15 +14,34 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/link';
-const title = 'Link Format';
-const description = 'Link formats convert values to clickable actions.';
+const uri = '/view/date-format';
+const title = 'Date Format';
+const description = 'DateFormat formats convert values to date displays.';
 
 const props = [
-  [ 'className', 'string', 'No', 'Standard HTML class names' ],
-  [ 'label', 'string', 'No', 'Label text' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
-  [ 'value', 'string', 'Yes', 'Default value' ]
+  [ 'format', 'string', 'No', 'Date format' ],
+  [ 'locale', 'string', 'No', 'Localized settings' ],
+  [ 'value', 'string|number|Date', 'Yes', 'Default value' ]
+];
+
+const examples = [
+`<Date />                                  // 2024-04-21T15:27:42+08:00
+<Date format="MMMM Do YYYY, h:mm:ss a" /> // April 21st 2024, 3:27:14 pm
+<Date format="dddd" />                    // Sunday
+<Date format="MMM Do YY" />               // Apr 21st 24
+<Date format="YYYY [escaped] YYYY" />     // 2024 escaped 2024
+<Date format="LT" />                      // 3:24 PM
+<Date format="LTS" />                     // 3:24:21 PM
+<Date format="L" />                       // 04/21/2024
+<Date format="l" />                       // 4/21/2024
+<Date format="LL" />                      // April 21, 2024
+<Date format="ll" />                      // Apr 21, 2024
+<Date format="LLL" />                     // April 21, 2024 3:24 PM
+<Date format="lll" />                     // Apr 21, 2024 3:24 PM
+<Date format="LLL" />                     // Sunday, April 21, 2024 3:24 PM
+<Date format="llll" />                    // Sun, Apr 21, 2024 3:26 PM
+<Date format="ago" />                     // 5 minutes ago
+<Date format="a" />                       // 5m`
 ];
 
 //--------------------------------------------------------------------//
@@ -50,7 +69,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Link')}
+          {_('Date Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -102,16 +121,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Link')}
+        {_('Date Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the link format like the following.
+            Import the <C value="<DateFormat>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Link from 'frui/view/Link';`}
+          {`import DateFormat from 'frui/view/DateFormat';`}
         </Code>
       </div>
 
@@ -120,10 +139,37 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <LinkFormat className="theme-2" value="https://images.wsj.net/im-580612/8SR" label="Click Link" />
+          <DateFormat value="2024-04-20" />
         </div>
         <Code language="typescript">
-          {`<Link className="theme-2" value="https://images.wsj.net/im-580612/8SR" label="Click Link" />`}
+          {`<DateFormat value="2024-04-20" />`}
+        </Code>
+      </div>
+
+      <h2 id="customize" className="uppercase font-bold text-lg mt-8">
+        {_('Customize')}
+      </h2>
+      <p className="py-4">
+        <Translate>
+          You can apply different locales and formats to 
+          the <C  value="DateFormat" /> format.
+        </Translate>
+      </p>
+
+      <h3 className="font-semibold text-md mt-8">
+        {_('Format')}
+      </h3>
+      <p className="py-4">
+        <Translate>
+          Use <C value="format" /> prop to format the date output.
+        </Translate>
+      </p>
+      <div className="curved overflow-hidden">
+        <div className="flex items-center justify-center p-3 theme-bg-1">
+          <DateFormat format="MMMM Do YYYY, h:mm a" value="2024-04-20" />
+        </div>
+        <Code language="typescript">
+          {examples[0]}
         </Code>
       </div>
       
@@ -133,7 +179,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Link>" /> format can be passed the 
+            The <C value="<DateFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

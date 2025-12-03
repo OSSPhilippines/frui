@@ -15,9 +15,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/markdown';
-const title = 'Markdown Field';
-const description = 'Markdown is a field component that provides a markdown '
+const uri = '/form/markdown-editor';
+const title = 'Markdown Editor Field';
+const description = 'MarkdownEditor is a field component that provides a markdown '
   + 'editing interface with live preview.';
 
 const props = [
@@ -67,7 +67,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Markdown')}
+          {_('Markdown Editor')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -122,16 +122,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Markdown')}
+        {_('Markdown Editor')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the markdown field like the following.
+            Import the <C value="<MarkdownEditor>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Markdown from 'frui/form/Markdown';`}
+          {`import MarkdownEditor from 'frui/form/MarkdownEditor';`}
         </Code>
       </div>
 
@@ -141,7 +141,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Markdown wraps the HTML standard <code 
+            <C value="MarkdownEditor" /> wraps the HTML standard <code 
               className="text-sm theme-2"
             >{'`<textarea />`'}</code> element. Therefore, you can 
             use any textarea attributes as props.
@@ -251,7 +251,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the markdown field red.
+            the <C value="<MarkdownEditor>" /> field red.
           </Translate>
         </p>
         <Preview
@@ -277,7 +277,7 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            The <C value="<Markdown>" /> field accepts all props of a standard HTML Textarea 
+            The <C value="<MarkdownEditor>" /> field accepts all props of a standard HTML Textarea 
             element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea"

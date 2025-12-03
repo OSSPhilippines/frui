@@ -106,7 +106,4 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
 };
 
 //defaults to markdown
-export default Object.assign(MarkdownEditor, { 
-  useMarkdownEditor,
-  use: useMarkdownEditor
-});
+export default Object.assign(MarkdownEditor, { useMarkdownEditor, use: useMarkdownEditor });

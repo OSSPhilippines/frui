@@ -15,9 +15,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/time';
-const title = 'Time Field';
-const description = 'Time is a field component that wraps the standard '
+const uri = '/form/time-input';
+const title = 'Time Input Field';
+const description = 'TimeInput is a field component that wraps the standard '
   + 'HTML input element for time values.';
 
 const props = [
@@ -67,7 +67,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Time')}
+          {_('Time Input')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -104,12 +104,12 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Time')}
+        {_('Time Input')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the time field like the following.
+            Import the <C value="<TimeInput>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -123,13 +123,10 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Time fields use the default <C 
-              quote={true}
-              value={`<input type="time" />`}
-            /> element, but normalizes 
-            values to ISO strings using <C value="toISOString()" />. 
-            <C l value="onUpdate" /> is like <C value="onChange" r /> 
-            except the value is passed instead of the change event.
+            <C value="TimeInput" /> fields use 
+            the default <C quote={true} value={`<input type="time" />`} /> element, 
+            but normalizes values to ISO strings using <C value="toISOString()" />. <C value="onUpdate" /> is 
+            like <C value="onChange" r /> except the value is passed instead of the change event.
           </Translate>
         </p>
         <Preview 
@@ -228,7 +225,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the input field red.
+            the <C value="<TimeInput>" /> field red.
           </Translate>
         </p>
         <Preview 

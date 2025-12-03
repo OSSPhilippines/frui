@@ -10,14 +10,14 @@ import { useState, useEffect } from 'react';
 //--------------------------------------------------------------------//
 // Types
 
-export type TaglistConfig = {
+export type TagListConfig = {
   value?: string[],
   defaultValue?: string[],
   onChange?: Function, 
   onUpdate?: Function
 };
 
-export type TaglistProps = ExtendsType<HTMLInputProps, {
+export type TagListProps = ExtendsType<HTMLInputProps, {
   name?: string,
   error?: any,
   color?: string,
@@ -37,7 +37,7 @@ export type TaglistProps = ExtendsType<HTMLInputProps, {
 /**
  * Taglist Hook Aggregate
  */
-export function useTaglist(config: TaglistConfig) {
+export function useTagList(config: TagListConfig) {
   const { value, defaultValue, onChange, onUpdate } = config;
   const [ input, setInput ] = useState('');
   const [ isKeyReleased, setIsKeyReleased ] = useState(false);
@@ -102,9 +102,9 @@ export function useTaglist(config: TaglistConfig) {
 // Components
 
 /**
- * Generic Taglist  Component (Main)
+ * Generic TagList  Component (Main)
  */
-export function Taglist(props: TaglistProps) {
+export function TagList(props: TagListProps) {
   //separate component related props from field attributes
   const { 
     name,
@@ -124,7 +124,7 @@ export function Taglist(props: TaglistProps) {
     ...attributes 
   } = props;
   //hooks
-  const { input, tags, handlers } = useTaglist({ 
+  const { input, tags, handlers } = useTagList({ 
     onChange, 
     onUpdate,
     value: Array.isArray(value) 
@@ -192,4 +192,4 @@ export function Taglist(props: TaglistProps) {
 };
 
 //defaults to taglist
-export default Taglist;
+export default Object.assign(TagList, { useTagList, use: useTagList });

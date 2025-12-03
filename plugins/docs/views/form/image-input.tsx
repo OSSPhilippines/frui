@@ -15,9 +15,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/image';
-const title = 'Image Field';
-const description = 'Image is a field component that allows users to upload '
+const uri = '/form/image-input';
+const title = 'Image Input Field';
+const description = 'Image input is a field component that allows users to upload '
   + 'and manage images.';
 
 const props = [
@@ -78,7 +78,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Input Image')}
+          {_('Image Input')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -115,12 +115,12 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Input Image')}
+        {_('Image Input')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the image field like the following.
+            Import the <C value="<ImageInput>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -131,15 +131,23 @@ export function Body() {
       <h2 id="examples" className="uppercase font-bold text-lg mt-8">
         {_('Examples')}
       </h2>
-      <Preview 
-        title="Basic Example" 
-        className="border border-2 theme-bc-3"
-      >
-        <Preview.Example center padding>
-          <ImageInput className="bg-white w-full" value="https://images.wsj.net/im-580612/8SR"  />
-        </Preview.Example>
-        <Preview.Code>{examples[0]}</Preview.Code>
-      </Preview>
+      <div>
+        <p className="py-4">
+          <Translate>
+            The following is a basic example of  
+            a <C value="ImageInput" /> field.
+          </Translate>
+        </p>
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <ImageInput className="bg-white w-full" value="https://images.wsj.net/im-580612/8SR"  />
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>        
+      </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
         {_('Events')}
@@ -147,14 +155,10 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Images have an extra prop called <C 
-              value="onUpload" 
-            />. This is where you 
-            should add your logic for handling the image upload.
-            Using this in combination with <C 
-              value="onUpdate" 
-            /> will allow you to pass values 
-            from upload to form processing.
+            Images have an extra prop called <C value="onUpload" />. This
+            is where you should add your logic for handling the image upload.
+            Using this in combination with <C value="onUpdate" /> will 
+            allow you to pass values from upload to form processing.
           </Translate>
         </p>
         <Preview 
@@ -279,10 +283,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C 
-              value="error" 
-            /> prop to highlight the input field 
-            red.
+            You can pass 
+            the <C value="error" /> prop to highlight 
+            the <C value="<ImageInput>" /> field red.
           </Translate>
         </p>
         <Preview 
@@ -313,7 +316,7 @@ export function Body() {
       <div>
         <p>
           <Translate>
-            The <C value="<Image>" /> field accepts all props of a 
+            The <C value="<ImageInput>" /> field accepts all props of a 
             standard HTML Input element. See <a 
               className="theme-2 underline"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"

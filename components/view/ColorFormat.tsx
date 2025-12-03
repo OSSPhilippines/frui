@@ -7,7 +7,7 @@ import type { CSSProperties } from 'react';
 //--------------------------------------------------------------------//
 // Types
 
-export type ColorProps = { 
+export type ColorFormatProps = { 
   value: string, 
   box?: boolean, 
   text?: boolean,
@@ -24,7 +24,7 @@ export type ColorProps = {
 /**
  * Color Format Component (Main)
  */
-export function Color(props: ColorProps) {
+export function ColorFormat(props: ColorFormatProps) {
   const { 
     value, 
     box = true, 
@@ -78,5 +78,5 @@ export function Color(props: ColorProps) {
   );
 };
 
-//defaults to color
-export default Color;
+//defaults to color format
+export default ColorFormat;

@@ -140,7 +140,4 @@ export function FileInput(props: FileInputProps) {
 };
 
 //defaults to file
-export default Object.assign(FileInput, { 
-  useFileInput,
-  use: useFileInput
-});
+export default Object.assign(FileInput, { useFileInput, use: useFileInput });

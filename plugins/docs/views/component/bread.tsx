@@ -9,6 +9,7 @@ import { useLanguage, Translate } from 'r22n';
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
 import Docs from '../../layout/Docs.js';
+import { Bread } from 'components/Bread.js';
 
 //--------------------------------------------------------------------//
 // Constants
@@ -231,7 +232,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the bread crumbs component like the following.
+            Import the <C value="<Bread>" /> component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -245,7 +246,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following are some basic examples of bread.
+            The following are some basic examples of <C value="Bread" /> component.
           </Translate>
         </p>
         <Examples />

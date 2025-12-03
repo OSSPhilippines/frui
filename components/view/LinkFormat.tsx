@@ -7,7 +7,7 @@ import type { HTMLLinkProps } from '../types.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type LinkProps = HTMLLinkProps & { value: string, label?: string  };
+export type LinkFormatProps = HTMLLinkProps & { value: string, label?: string  };
 
 //--------------------------------------------------------------------//
 // Components
@@ -15,9 +15,9 @@ export type LinkProps = HTMLLinkProps & { value: string, label?: string  };
 /**
  * Link Format Component (Main)
  */
-export function Link({ value, label, ...attributes }: LinkProps) {
+export function LinkFormat({ value, label, ...attributes }: LinkFormatProps) {
   return (<a href={value} {...attributes}>{label || value}</a>);
 };
 
-//defaults to link
-export default Link;
+//defaults to link format
+export default LinkFormat;

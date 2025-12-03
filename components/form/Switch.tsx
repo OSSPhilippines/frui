@@ -160,4 +160,4 @@ export function Switch(props: SwitchProps) {
 };
 
 //defaults to switch
-export default Switch;
+export default Object.assign(Switch, { useSwitch, use: useSwitch });

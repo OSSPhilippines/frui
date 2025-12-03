@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Separated from 'components/view/Separated.js';
+import TableFormat from 'components/view/TableFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,13 +14,25 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/separated';
-const title = 'Separated Format';
-const description = 'Separated formats inserts a separator between multiple values.';
+const uri = '/view/table-format';
+const title = 'Table Format';
+const description = 'TableFormat formats format values into a table.';
 
 const props = [
-  [ 'separator', 'string', 'No', 'Characters between values' ],
-  [ 'value', 'string|number', 'Yes', 'Default value' ]
+  [ 'className', 'string', 'No', 'Standard HTML class names applied to all cells' ],
+  [ 'stripe', '[string, string, string]', 'No', 'Background color settings for head and rows' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all cells' ],
+  [ 'value', 'string', 'Yes', 'Default value' ],
+];
+
+const examples = [
+`<Table 
+  value={[
+    { id: 1, name: 'John Doe', age: 30, created: '2021-01-01' },
+    { id: 2, name: 'Jane Doe', age: 25, created: '2021-01-02' }
+  ]} 
+  stripes={['#999999', '#EFEFEF', '#CCCCCC']} 
+/>`
 ];
 
 //--------------------------------------------------------------------//
@@ -48,7 +60,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Separated')}
+          {_('Table Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -100,38 +112,51 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Separated')}
+        {_('Table Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the separated format like the following.
+            Import the <C value="<TableFormat>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Separated from 'frui/view/Separated';`}
+          {`import TableFormat from 'frui/view/TableFormat';`}
         </Code>
       </div>
 
       <h2 id="basic" className="uppercase font-bold text-lg mt-8">
         {_('Basics')}
       </h2>
+      <p>
+        <Translate>
+          The header values are based on the keys of the first row.
+        </Translate>
+      </p>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Separated value={['Foo', 'bar']} separator=" - " />
+          <div className="text-left text-black w-full">
+            <TableFormat 
+              value={[
+                { id: 1, name: 'John Doe', age: 30, created: '2021-01-01' },
+                { id: 2, name: 'Jane Doe', age: 25, created: '2021-01-02' }
+              ]} 
+              stripes={['#999999', '#EFEFEF', '#CCCCCC']} 
+            />
+          </div>
         </div>
         <Code language="typescript">
-          {`<Separated value={['Foo', 'bar']} separator=" - " />`}
+          {examples[0]}
         </Code>
       </div>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Separated>" /> format can be passed the 
+            The <C value="<TableFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

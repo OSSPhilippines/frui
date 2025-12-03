@@ -9,7 +9,7 @@ import countries from '../data/countries.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type CountryProps = { 
+export type CountryFormatProps = { 
   value: string, 
   flag?: boolean, 
   text?: boolean,
@@ -26,7 +26,7 @@ export type CountryProps = {
 /**
  * Country Format Component (Main)
  */
-export function Country(props: CountryProps) {
+export function CountryFormat(props: CountryFormatProps) {
   const { 
     value, 
     flag = true, 
@@ -91,5 +91,5 @@ export function Country(props: CountryProps) {
   );
 };
 
-//defaults to country
-export default Country;
+//defaults to country format
+export default CountryFormat;

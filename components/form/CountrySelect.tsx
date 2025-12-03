@@ -8,11 +8,7 @@ import { useState } from 'react';
 import type { ExtendsType } from '../types.js';
 import type { SelectProps } from './Select.js';
 import countries from '../data/countries.js';
-import { 
-  Select, 
-  SelectDropdownHead,
-  SelectOption
-} from './Select.js';
+import Select from  './Select.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -93,7 +89,7 @@ export function CountrySelect(props: CountrySelectProps) {
       placeholder={placeholder || 'Select a country'}
     >
       {!!searchable && (
-        <SelectDropdownHead>
+        <Select.Head>
           <div>
             <input 
               type="text" 
@@ -104,16 +100,16 @@ export function CountrySelect(props: CountrySelectProps) {
             />
             <span>🔍</span>
           </div>
-        </SelectDropdownHead>
+        </Select.Head>
       )}
       {options.map(option => (
-        <SelectOption key={option.iso2} value={option.iso2}>
+        <Select.Option key={option.iso2} value={option.iso2}>
           {option.flag} {option.name}
-        </SelectOption>
+        </Select.Option>
       ))}
     </Select>
   );
 };
 
 //defaults to country
-export default CountrySelect;
+export default Object.assign(CountrySelect, { countries });

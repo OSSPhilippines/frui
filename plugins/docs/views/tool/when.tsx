@@ -159,7 +159,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the when tool like the following.
+            Import the <C value="<When>" /> tool component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

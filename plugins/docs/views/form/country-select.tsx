@@ -15,9 +15,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/country';
-const title = 'Country Field';
-const description = 'Country fields in FRUI, allow users select from a list of '
+const uri = '/form/country-select';
+const title = 'Country Select Field';
+const description = 'CountrySelect fields in FRUI, allow users select from a list of '
   + 'countries around the world.';
 
 const props = [
@@ -123,7 +123,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the country field like the following.
+            Import the <C value="<CountrySelect>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -138,7 +138,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             The following is a basic example of 
-            a <C l value="CountrySelect" /> field.
+            a <C value="CountrySelect" /> field.
           </Translate>
         </p>
         <Preview 
@@ -159,8 +159,8 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can add a search field to the dropdown by passing
-            the <C value="searchable" /> prop to the 
-            <C l value="CountrySelect" /> component.
+            the <C value="searchable" /> prop to 
+            the <C value="CountrySelect" /> component.
           </Translate>
         </p>
         <Preview 
@@ -180,9 +180,9 @@ export function Body() {
       <div className="relative z-[98]">
         <p className="py-4">
           <Translate>
-            You can enable multiple selection by passing the
-            <C value="multiple" /> prop to the
-            <C l value="CountrySelect" /> component.
+            You can enable multiple selection by passing 
+            the <C value="multiple" /> prop to 
+            the <C value="CountrySelect" /> component.
           </Translate>
         </p>
         <Preview
@@ -280,7 +280,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the Country field red.
+            the <C value="<CountrySelect>" /> field red.
           </Translate>
         </p>
         <Preview

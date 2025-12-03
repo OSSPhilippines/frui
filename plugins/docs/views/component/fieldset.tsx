@@ -2,7 +2,7 @@
 // Imports
 
 //modules
-import { useLanguage } from 'r22n';
+import { useLanguage, Translate } from 'r22n';
 
 //frui
 import type { FieldsProps, FieldsetProps } from 'components/form/Fieldset.js';
@@ -113,6 +113,11 @@ export function Body() {
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
         {_('Fieldset')}
       </h1>
+        <p className="py-2">
+          <Translate>
+            Import the <C value="<Fieldset>" /> component like the following.
+          </Translate>
+        </p>
       <Code language="typescript" className="mt-2">
         {`import Fieldset from 'frui/form/Fieldset';`}
       </Code>

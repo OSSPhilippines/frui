@@ -514,7 +514,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the accordion component like the following.
+            Import the <C value="<Accordion>" /> component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -528,7 +528,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following are some basic examples of accordions.
+            The following are some basic examples of <C value="Accordion" /> component.
           </Translate>
         </p>
         <Examples />

@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Metadata from 'components/view/Metadata.js';
+import MetadataFormat from 'components/view/MetadataFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,9 +14,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/metadata';
+const uri = '/view/metadata-format';
 const title = 'Metadata Format';
-const description = 'Metadata formats convert values to key value tables.';
+const description = 'MetadataFormat formats convert values to key value tables.';
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names applied to all cells' ],
@@ -49,7 +49,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Metadata')}
+          {_('Metadata Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -101,16 +101,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Metadata')}
+        {_('Metadata Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the metadata format like the following.
+            Import the <C value="<MetadataFormat>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Metadata from 'frui/view/Metadata';`}
+          {`import MetadataFormat from 'frui/view/MetadataFormat';`}
         </Code>
       </div>
 
@@ -120,14 +120,14 @@ export function Body() {
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
           <div className="text-left">
-              <Metadata 
+              <MetadataFormat 
                 className="p-2 border-t theme-bg-0" 
                 value={{ id: '12345', upc: '67890' }} 
               />
             </div>
         </div>
         <Code language="typescript">
-          {`<Metadata value={{ id: '12345', upc: '67890' }} />`}
+          {`<MetadataFormat value={{ id: '12345', upc: '67890' }} />`}
         </Code>
       </div>
 
@@ -137,7 +137,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Metadata>" /> format can be passed the 
+            The <C value="<MetadataFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

@@ -75,5 +75,5 @@ export function Badge(props: BadgeProps) {
   );
 };
 
-//defaults to button
+//defaults to badge
 export default Badge;

@@ -1,7 +1,7 @@
 //--------------------------------------------------------------------//
 // Types
 
-export type NumberProps = { 
+export type NumberFormatProps = { 
   value: string|number,
   separator?: string,
   decimal?: string,
@@ -48,7 +48,7 @@ export const formatNumber = (
 /**
  * Number Format Component (Main)
  */
-export function NumberFormat(props: NumberProps) {
+export function NumberFormat(props: NumberFormatProps) {
   const {
     value,
     separator = '',
@@ -66,5 +66,5 @@ export function NumberFormat(props: NumberProps) {
   return (<>{number}</>);
 };
 
-//defaults to number
-export default NumberFormat;
+//defaults to number format
+export default Object.assign(NumberFormat, { formatNumber });

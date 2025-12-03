@@ -269,7 +269,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the notifier component like the following.
+            Import the <C value="<Notifier>" /> component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -283,7 +283,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following are some basic examples of dialogs.
+            The following are some basic examples of <C value="Notifier" /> component.
           </Translate>
         </p>
         <Examples />

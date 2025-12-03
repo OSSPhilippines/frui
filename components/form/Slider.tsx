@@ -629,10 +629,11 @@ export function Slider(props: SliderProps) {
 };
 
 export default Object.assign(Slider, {
+  useSlider,
   Context: SliderContext,
   Connection: SliderConnection,
   Handle: SliderHandle,
   Input: SliderInput,
   Track: SliderTrack,
-  useSlider
+  use: useSlider
 });

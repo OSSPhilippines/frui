@@ -11,16 +11,16 @@ import make from './Fieldset.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type TextlistType = string;
+export type TextListType = string;
 
-export type TextlistConfig = {
+export type TextListConfig = {
   type?: string,
-  values?: (TextlistType|undefined)[],
+  values?: (TextListType|undefined)[],
   index: number,
-  set: (values: (TextlistType|undefined)[]) => void
+  set: (values: (TextListType|undefined)[]) => void
 };
 
-export type TextlistProps = FieldsetProps<TextlistType> & {
+export type TextListProps = FieldsetProps<TextListType> & {
   placeholder?: string
 };
 
@@ -28,9 +28,9 @@ export type TextlistProps = FieldsetProps<TextlistType> & {
 // Hooks
 
 /**
- * Textlist Hook Aggregate
+ * TextList Hook Aggregate
  */
-export function useTextlists(config: TextlistConfig) {
+export function useTextLists(config: TextListConfig) {
   const { values, index, set } = config;
   //handlers
   const handlers = {
@@ -55,7 +55,7 @@ export function useTextlists(config: TextlistConfig) {
 /**
  * Text Item Component 
  */
-export function TextlistFields(props: FieldsProps<TextlistType>) {
+export function TextListFields(props: FieldsProps<TextListType>) {
   const { 
     name,
     config,
@@ -67,7 +67,7 @@ export function TextlistFields(props: FieldsProps<TextlistType>) {
   //variables
   const placeholder = config?.placeholder as string | undefined;
   //handlers
-  const { handlers } = useTextlists({ values, index, set });
+  const { handlers } = useTextLists({ values, index, set });
   //variables
   const value = values ? values[index]: undefined;
 
@@ -99,12 +99,12 @@ export function TextlistFields(props: FieldsProps<TextlistType>) {
   );
 };
 
-const Fieldset = make<TextlistType>(TextlistFields);
+const Fieldset = make<TextListType>(TextListFields);
 
 /**
- * Textlist set Component (Main)
+ * TextList set Component (Main)
  */
-export function Textlist(props: TextlistProps) {
+export function TextList(props: TextListProps) {
   const { placeholder, ...attributes } = props;
   const config = { placeholder };
   return (
@@ -112,5 +112,9 @@ export function Textlist(props: TextlistProps) {
   );
 };
 
-//defaults to textlist
-export default Textlist;
+//defaults to textList
+export default Object.assign(TextList, { 
+  TextListFields, 
+  useTextLists, 
+  use: useTextLists 
+});

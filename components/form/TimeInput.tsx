@@ -145,10 +145,11 @@ export function TimeInput(props: TimeInputProps) {
   );
 };
 
-//defaults to time
+//defaults to time input
 export default Object.assign(TimeInput, {
   toDate,
   toTimeString,
   toTimeInputString,
-  useTimeInput
+  useTimeInput,
+  use: useTimeInput
 });

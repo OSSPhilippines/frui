@@ -879,7 +879,7 @@ export function Dropdown(props: DropdownProps) {
   );
 };
 
-//defaults to select
+//defaults to dropdown
 export default Object.assign(Dropdown, {
   getAbsolutePosition,
   getComponent,

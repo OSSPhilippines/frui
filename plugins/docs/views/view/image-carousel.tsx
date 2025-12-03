@@ -5,27 +5,32 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Number from 'components/view/Number.js';
+import ImageCarousel from 'components/view/ImageCarousel.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
 import Docs from '../../layout/Docs.js';
 
-
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/number';
-const title = 'Number Format';
-const description = 'Number formats convert values to numerical displays.';
+const uri = '/view/image-carousel';
+const title = 'Image Carousel Format';
+const description = 'ImageCarousel formats display a list of images with various properties.';
+
+const codeBasic = `
+<ImageCarousel className="flex" value={[
+  'https://images.wsj.net/im-580612/8SR', 
+  'https://images.wsj.net/im-580612/8SR'
+]} width="50" />`.trim();
 
 const props = [
-  [ 'absolute', 'string', 'No', 'Remove negative sign' ],
-  [ 'decimal', 'string', 'No', 'Character for decimal' ],
-  [ 'decimals', 'number', 'No', 'Number of decimals to show' ],
-  [ 'separator', 'boolean', 'No', 'Character of comma separator' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
-  [ 'value', 'string|number', 'Yes', 'Default value' ]
+  [ 'alt', 'string', 'No', 'Alt text for image' ],
+  [ 'className', 'string', 'No', 'Standard HTML class names applied to all images' ],
+  [ 'height', 'string|number', 'No', 'Height of image' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all images' ],
+  [ 'value', 'string[]', 'Yes', 'Default value' ],
+  [ 'width', 'string|number', 'No', 'Width of image' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -53,7 +58,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Number')}
+          {_('Image Carousel')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -105,16 +110,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Number')}
+        {_('Image Carousel')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the number format like the following.
+            Import the <C value="<ImageCarousel>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Number from 'frui/view/Number';`}
+          {`import ImageCarousel from 'frui/view/ImageCarousel';`}
         </Code>
       </div>
 
@@ -123,20 +128,23 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Number value="12345.67" separator="," decimal="." decimals={2} />
+          <ImageCarousel className="flex" value={[
+            'https://images.wsj.net/im-580612/8SR', 
+            'https://images.wsj.net/im-580612/8SR'
+          ]} width="50" />
         </div>
         <Code language="typescript">
-          {`<Number value="12345.67" separator="," decimal="." decimals={2} />`}
+          {codeBasic}
         </Code>
       </div>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Number>" /> format can be passed the 
+            The <C value="<ImageCarousel>" /> format can be passed the 
             following props.
           </Translate>
         </p>

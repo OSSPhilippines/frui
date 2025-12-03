@@ -126,6 +126,4 @@ export function Progress(props: ProgressProps) {
 };
 
 //defaults to progress
-export default Object.assign(Progress, {
-  Container: ProgressContainer
-});
+export default Object.assign(Progress, { Container: ProgressContainer });

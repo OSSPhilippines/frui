@@ -150,7 +150,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the switch field like the following.
+            Import the <C value="<Switch>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -164,7 +164,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Switch wraps the HTML standard <code 
+            <C value="Switch" /> wraps the HTML standard <code 
               className="text-sm theme-2"
             >{'`<input />`'}</code> element. Therefore, you can 
             use any input attributes as props.
@@ -266,7 +266,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the Switch field red.
+            the <C value="<Switch>" /> field red.
           </Translate>
         </p>
         <Preview
@@ -287,11 +287,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can use
-            the <C value="frui-form-switch" />, <C value="frui-form-switch-rounded" />, 
-            <C value="frui-form-switch-onoff" />, <C value="frui-form-switch-yesno" />, 
-            <C value="frui-form-switch-sunmoon" />, <C value="frui-form-switch-checkex" />, 
-            <C value="frui-form-switch-ridge" />, <C value="frui-form-switch-smooth" />, 
-            <C value="frui-form-switch-blue" />, <C value="frui-form-switch-orange" />, 
+            the <C value="frui-form-switch" />, <C value="frui-form-switch-rounded" />, <C value="frui-form-switch-onoff" />, <C value="frui-form-switch-yesno" />, <C value="frui-form-switch-sunmoon" />, <C value="frui-form-switch-checkex" />, <C value="frui-form-switch-ridge" />, <C value="frui-form-switch-smooth" />, <C value="frui-form-switch-blue" />, <C value="frui-form-switch-orange" />, 
             and <C value="frui-form-switch-green" /> CSS classes to globally theme the switch field.
           </Translate>
         </p>
@@ -338,7 +334,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             Use <C value="blue" />, <C value="orange" /> or 
-            <C l value="green" /> prop to change the color of 
+            <C value="green" /> prop to change the color of 
             switches.
           </Translate>
         </p>
@@ -358,9 +354,8 @@ export function Body() {
         </h3>
         <p className="py-4">
           <Translate>
-            Use <C value="onoff" />, <C value="yesno" />, 
-            <C l value="checkex" /> or <C value="sunmoon" /> prop 
-            to change the color of switches.
+            Use <C value="onoff" />, <C value="yesno" />, <C value="checkex" /> 
+            or <C value="sunmoon" /> prop to change the color of switches.
           </Translate>
         </p>
         <div className="curved overflow-hidden">
@@ -394,8 +389,8 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can use
-            the <C l value="frui-form-option" />, <C l value="frui-form-option-control" />,
-            and <C l value="frui-form-option-label" />  CSS classes to globally theme the switch field.
+            the <C value="frui-form-option" />, <C value="frui-form-option-control" />,
+            and <C value="frui-form-option-label" />  CSS classes to globally theme the switch field.
           </Translate>
         </p>
       </div>

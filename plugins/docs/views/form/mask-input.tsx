@@ -15,9 +15,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/mask';
-const title = 'Mask Field';
-const description = 'Mask is a field component that provides an input mask '
+const uri = '/form/mask-input';
+const title = 'Mask Input Field';
+const description = 'MaskInput is a field component that provides an input mask '
   + 'to format user input according to a specified pattern.';
 
 const props = [
@@ -58,7 +58,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Mask')}
+          {_('Mask Input')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -113,16 +113,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Mask')}
+        {_('Mask Input')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the mask field like the following.
+            Import the <C value="<MaskInput>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Mask from 'frui/form/Mask';`}
+          {`import MaskInput from 'frui/form/MaskInput';`}
         </Code>
       </div>
 
@@ -132,7 +132,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Masks are a wrapper for <a 
+            <C value="MaskInput" /> are a wrapper for <a 
               className="theme-2 underline"
               href="https://robinherbots.github.io/Inputmask/#/documentation"
               target="_blank"
@@ -269,7 +269,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the input field red.
+            the <C value="<MaskInput>" /> field red.
           </Translate>
         </p>
         <Preview 

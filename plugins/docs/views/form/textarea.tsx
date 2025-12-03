@@ -127,7 +127,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the textarea field like the following.
+            Import the <C value="<Textarea>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -141,7 +141,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Textarea wraps the HTML standard <code 
+            <C value="Textarea" /> wraps the HTML standard <code 
               className="text-sm theme-2"
             >{'`<textarea />`'}</code> element. Therefore, you can 
             use any textarea attributes as props.
@@ -243,7 +243,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the textarea field red.
+            the <C value="<Textarea>" /> field red.
           </Translate>
         </p>
         <Preview

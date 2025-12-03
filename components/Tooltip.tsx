@@ -5,14 +5,12 @@
 import { useState, useRef, useEffect } from 'react';
 
 //frui
-import type { 
-  ColorProps, 
-  BorderRadiusProps, 
-  HTMLElementProps
-} from './types.js';
+import type { BorderRadiusProps } from './helpers/tools/BorderRadiusTool.js';
+import type { ColorProps } from './helpers/tools/ColorTool.js';
+import type { HTMLElementProps } from './types.js';
+import { removeThemeProps } from './Box.js';
 import BorderRadiusTool from './helpers/tools/BorderRadiusTool.js';
 import ColorTool from './helpers/tools/ColorTool.js';
-import removeThemeProps from './helpers/removeThemeProps.js';
 
 //--------------------------------------------------------------------//
 // Types

@@ -520,6 +520,11 @@ export function Body() {
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
         {_('Table')}
       </h1>
+        <p className="py-2">
+          <Translate>
+            Import the <C value="<Table>" /> component like the following.
+          </Translate>
+        </p>
       <Code language="typescript" className="mt-2">
         {`import Table from 'frui/Table';`}
       </Code>
@@ -530,7 +535,7 @@ export function Body() {
       <div className="curved overflow-hidden">
         <p className="py-2">
           <Translate>
-            The following are some basic examples of tables.
+            The following are some basic examples of <C value="Table" /> component.
           </Translate>
         </p>
         <Examples />

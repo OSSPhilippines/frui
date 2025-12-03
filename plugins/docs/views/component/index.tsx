@@ -6,20 +6,21 @@ import {
   LayoutProvider, 
   ThemeHead
 } from 'plugins/app/index.js';
-import type { Crumb } from 'components/element/Crumbs.js';
 import {
+  Accordion,
   Alert,
-  Badge, 
-  Crumbs,
+  Badge,
+  Button,
+  Bread,
   Loader,
   Table,
-  Thead,
-  Trow,
-  Tcol,
   Tooltip,
-  Tabs
-} from 'components/element';
-import Button from 'components/Button.js';
+  Tabs,
+  Pager,
+  Progress,
+  Dialog,
+  Notifier,
+} from 'components/index.js';
 
 export function Body() {
   //hooks
@@ -43,7 +44,37 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  TODO
+                  <Accordion 
+                    defaultValue="1"
+                    className="w-full text-sm"
+                  >
+                    <Accordion.Bellow value="1">
+                      <Accordion.Label className="px-2 py-1 cursor-pointer border theme-bc-2 flex items-center justify-between">
+                        {({ active }) => (
+                          <>
+                            <span>{_('Item 1')}</span>
+                            <i className={`fas fa-chevron-${active ? 'up' : 'down'}`}></i>
+                          </>
+                        )}
+                      </Accordion.Label>
+                      <Accordion.Content className="px-2 py-1 text-xs border border-t-0 theme-bc-2">
+                        {_('Item 1 content')}
+                      </Accordion.Content>
+                    </Accordion.Bellow>
+                    <Accordion.Bellow value="2">
+                      <Accordion.Label className="px-2 py-1 cursor-pointer border border-t-0 theme-bc-2 flex items-center justify-between">
+                        {({ active }) => (
+                          <>
+                            <span>{_('Item 2')}</span>
+                            <i className={`fas fa-chevron-${active ? 'up' : 'down'}`}></i>
+                          </>
+                        )}
+                      </Accordion.Label>
+                      <Accordion.Content className="px-2 py-1 text-xs border border-t-0 theme-bc-2">
+                        {_('Item 2 content')}
+                      </Accordion.Content>
+                    </Accordion.Bellow>
+                  </Accordion>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Accordion')}
@@ -56,10 +87,20 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  <Alert curved info className="w-full">
-                    <i className="fas fa-check-circle mr-2"></i>
-                    {_('Success')}
-                  </Alert>
+                  <div className="w-full space-y-2">
+                    <Alert curved success className="w-full text-sm py-2 px-3">
+                      <i className="fas fa-check-circle mr-2"></i>
+                      {_('Success')}
+                    </Alert>
+                    <Alert curved warning className="w-full text-sm py-2 px-3">
+                      <i className="fas fa-exclamation-triangle mr-2"></i>
+                      {_('Warning')}
+                    </Alert>
+                    <Alert curved error className="w-full text-sm py-2 px-3">
+                      <i className="fas fa-times-circle mr-2"></i>
+                      {_('Error')}
+                    </Alert>
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Alert')}
@@ -81,11 +122,29 @@ export function Body() {
             </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = '/component/crumbs'} 
+              onClick={() => window.location.href = '/component/bread'} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  TODO
+                  <Bread className="w-full text-sm">
+                    <Bread.Crumb 
+                      href="#" 
+                      className="text-info hover:underline"
+                    >
+                      {_('Home')}
+                    </Bread.Crumb>
+                    <Bread.Slicer className="mx-2">/</Bread.Slicer>
+                    <Bread.Crumb 
+                      href="#" 
+                      className="text-info hover:underline"
+                    >
+                      {_('Library')}
+                    </Bread.Crumb>
+                    <Bread.Slicer className="mx-2">/</Bread.Slicer>
+                    <Bread.Crumb className="theme-color-1 font-semibold">
+                      {_('Data')}
+                    </Bread.Crumb>
+                  </Bread>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Bread Crumbs')}
@@ -98,10 +157,54 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
-                  <Button error rounded className="my-1">Submit</Button>
+                  <div className="flex gap-2">
+                    <Button success rounded className="text-xs">
+                      {_('Success')}
+                    </Button>
+                    <Button error rounded className="text-xs">
+                      {_('Error')}
+                    </Button>
+                    <Button info outline rounded className="text-xs">
+                      {_('Info')}
+                    </Button>
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Button')}
+                </h2>
+              </div>
+            </div>
+            <div 
+              className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => window.location.href = '/component/dialog'} 
+            >
+              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
+                  <Dialog overlay={{ close: true }}>
+                    <div className="p-4">
+                      <h3 className="font-bold mb-2">Dialog Title</h3>
+                      <p>This is a sample dialog content.</p>
+                      <Dialog.Close className="mt-4 px-3 py-1 bg-error text-white rounded cursor-pointer">
+                        Close
+                      </Dialog.Close>
+                    </div>
+                  </Dialog>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Dialog')}
+                </h2>
+              </div>
+            </div>
+            <div 
+              className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => window.location.href = '/component/fieldset'} 
+            >
+              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
+                  TODO
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Fieldset')}
                 </h2>
               </div>
             </div>
@@ -120,46 +223,50 @@ export function Body() {
             </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = '/component/modal'} 
+              onClick={() => window.location.href = '/component/notifier'} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[100px] w-full bg-black px-3">
-                  <div className="rounded overflow-hidden w-full">
-                    <header className="flex items-center theme-bg-1 p-2">
-                      <h3 className="flex-grow uppercase font-semibold">Confirm</h3>
-                      <a href="#" className="float-right font-bold">&times;</a>
-                    </header>
-                    <div className="theme-bg-2 p-2">Are You Sure?</div>
-                  </div>
+                <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
+                  <Button
+                    info
+                    rounded
+                    className="text-xs"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      Notifier.notify('success', 'This is a success message!');
+                    }}
+                  >
+                    {_('Click to Notify')}
+                  </Button>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Modal')}
+                  {_('Notifier')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = '/component/accordion'} 
+              onClick={() => window.location.href = '/component/pager'} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  TODO
+                  <Pager
+                    total={500}
+                    skip={100}
+                    take={50}
+                    radius={2}
+                    start
+                    end
+                    prev
+                    next
+                    className={({ active }) => `
+                      px-2 py-1 mx-1 text-sm cursor-pointer rounded
+                      ${active ? 'theme-bg-2 font-bold' : 'border theme-bc-2'}
+                    `}
+                  />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Notify')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = '/component/pagination'} 
-            >
-              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  TODO
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Pagination')}
+                  {_('Pager')}
                 </h2>
               </div>
             </div>
@@ -169,7 +276,29 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  TODO
+                  <div className="w-full space-y-2">
+                    <Progress 
+                      style={{ width: '75%' }}
+                      height={8}
+                      bg="info"
+                      rounded
+                      container={{ bg: "muted" }}
+                    />
+                    <Progress 
+                      style={{ width: '50%' }}
+                      height={8}
+                      bg="success"
+                      rounded
+                      container={{ bg: "muted" }}
+                    />
+                    <Progress 
+                      style={{ width: '25%' }}
+                      height={8}
+                      bg="warning"
+                      rounded
+                      container={{ bg: "muted" }}
+                    />
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Progress Bar')}
@@ -184,12 +313,12 @@ export function Body() {
                 <div className="flex items-center justify-center h-[100px] w-full bg-black px-3">
                   <div className="overflow-auto w-full">
                     <Table>
-                      <Thead className="theme-bg-2 text-left text-white !py-2">{_('ID')}</Thead>
-                      <Thead className="theme-bg-2 text-left text-white !py-2">{_('Name')}</Thead>
-                      <Trow>
-                        <Tcol className="theme-bg-1 text-left !py-2">1</Tcol>
-                        <Tcol className="theme-bg-1 text-left !py-2">Jacob</Tcol>
-                      </Trow>
+                      <Table.Head className="theme-bg-2 text-left text-white !py-2">{_('ID')}</Table.Head>
+                      <Table.Head className="theme-bg-2 text-left text-white !py-2">{_('Name')}</Table.Head>
+                      <Table.Row>
+                        <Table.Col className="theme-bg-1 text-left !py-2">1</Table.Col>
+                        <Table.Col className="theme-bg-1 text-left !py-2">Jacob</Table.Col>
+                      </Table.Row>
                     </Table>
                   </div>
                 </div>
@@ -200,7 +329,7 @@ export function Body() {
             </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              
+              onClick={() => window.location.href = '/component/tabs'} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-auto">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">

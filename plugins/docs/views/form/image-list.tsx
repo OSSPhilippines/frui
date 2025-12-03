@@ -15,7 +15,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/imagelist';
+const uri = '/form/image-list';
 const title = 'Image List Field';
 const description = 'Image list is a field component that allows users to '
   + 'upload and manage multiple images.';
@@ -123,7 +123,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the image list field like the following.
+            Import the <C value="<ImageList>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -134,15 +134,23 @@ export function Body() {
       <h2 id="examples" className="uppercase font-bold text-lg mt-8">
         {_('Examples')}
       </h2>
-      <Preview 
-        title="Basic Example" 
-        className="border border-2 theme-bc-3"
-      >
-        <Preview.Example center padding>
-          <ImageList className="bg-white w-full" value={['https://images.wsj.net/im-580612/8SR']}  />
-        </Preview.Example>
-        <Preview.Code>{examples[0]}</Preview.Code>
-      </Preview>
+      <div>
+        <p className="py-4">
+          <Translate>
+            The following is a basic example of 
+            a <C value="ImageList" /> field.
+          </Translate>
+        </p>
+        <Preview 
+          title="Basic Example" 
+          className="border border-2 theme-bc-3"
+        >
+          <Preview.Example center padding>
+            <ImageList className="bg-white w-full" value={['https://images.wsj.net/im-580612/8SR']}  />
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>        
+      </div>
 
       <h2 id="events" className="uppercase font-bold text-lg mt-8">
         {_('Events')}
@@ -150,14 +158,10 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            ImageList have a prop called <C 
-              value="onUpload" 
-            />. This is where you 
+            ImageList have a prop called <C value="onUpload" />. This is where you 
             should add your logic for handling the file upload.
-            Using this in combination with <C 
-              value="onUpdate" 
-            /> will allow you to pass values 
-            from upload to form processing.
+            Using this in combination with <C value="onUpdate" /> will 
+            allow you to pass values from upload to form processing.
           </Translate>
         </p>
         <Preview 
@@ -260,10 +264,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C 
-              value="error" 
-            /> prop to highlight the input field 
-            red.
+            You can pass 
+            the <C value="error" /> prop to highlight 
+            the <C value="<ImageList>" /> field red.
           </Translate>
         </p>
         <Preview 

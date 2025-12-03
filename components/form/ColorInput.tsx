@@ -43,7 +43,7 @@ export type ColorPickerProps = {
 export type ColorInputProps = ExtendsType<InputProps, ColorInputConfig> & {
   //slot: color input styles
   input?: SlotStyleProp,
-  //slot: color picker styles
+  //slot: color input styles
   picker?: SlotStyleProp
 };
 

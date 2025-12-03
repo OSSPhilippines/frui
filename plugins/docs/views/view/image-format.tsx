@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Table from 'components/view/Table.js';
+import ImageFormat from 'components/view/ImageFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,25 +14,17 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/table';
-const title = 'Table Format';
-const description = 'Table formats format values into a table.';
+const uri = '/view/image-format';
+const title = 'Image Format';
+const description = 'ImageFormat formats convert values to viewable images.';
 
 const props = [
-  [ 'className', 'string', 'No', 'Standard HTML class names applied to all cells' ],
-  [ 'stripe', '[string, string, string]', 'No', 'Background color settings for head and rows' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all cells' ],
+  [ 'alt', 'string', 'No', 'Alt text for image' ],
+  [ 'className', 'string', 'No', 'Standard HTML class names' ],
+  [ 'height', 'string|number', 'No', 'Height of image' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
   [ 'value', 'string', 'Yes', 'Default value' ],
-];
-
-const examples = [
-`<Table 
-  value={[
-    { id: 1, name: 'John Doe', age: 30, created: '2021-01-01' },
-    { id: 2, name: 'Jane Doe', age: 25, created: '2021-01-02' }
-  ]} 
-  stripes={['#999999', '#EFEFEF', '#CCCCCC']} 
-/>`
+  [ 'width', 'string|number', 'No', 'Width of image' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -60,7 +52,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Table')}
+          {_('Image Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -112,51 +104,38 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Table')}
+        {_('Image Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the table format like the following.
+            Import the <C value="<ImageFormat>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Table from 'frui/view/Table';`}
+          {`import ImageFormat from 'frui/view/ImageFormat';`}
         </Code>
       </div>
 
       <h2 id="basic" className="uppercase font-bold text-lg mt-8">
         {_('Basics')}
       </h2>
-      <p>
-        <Translate>
-          The header values are based on the keys of the first row.
-        </Translate>
-      </p>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <div className="text-left text-black w-full">
-            <Table 
-              value={[
-                { id: 1, name: 'John Doe', age: 30, created: '2021-01-01' },
-                { id: 2, name: 'Jane Doe', age: 25, created: '2021-01-02' }
-              ]} 
-              stripes={['#999999', '#EFEFEF', '#CCCCCC']} 
-            />
-          </div>
+          <ImageFormat value="https://images.wsj.net/im-580612/8SR" width="100" />
         </div>
         <Code language="typescript">
-          {examples[0]}
+          {`<Image value="https://images.wsj.net/im-580612/8SR" width="100" />`}
         </Code>
       </div>
-      
+
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Table>" /> format can be passed the 
+            The <C value="<ImageFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

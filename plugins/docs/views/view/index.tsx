@@ -8,34 +8,32 @@ import {
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead,
-  Code,
 } from 'plugins/app/index.js';
 
 import {
-  //Code,
-  Color,
-  Country,
-  Currency,
-  Date,
-  Email,
+  BooleanFormat,
+  CodeHighlighter,
+  ColorFormat,
+  CountryFormat,
+  CurrencyFormat,
+  DateFormat,
+  EmailLink,
   Formula,
   HTML,
-  Image as ImageFormat,
-  Imagelist,
-  JSON,
-  Link,
+  ImageFormat,
+  ImageCarousel,
+  LinkFormat,
   List,
   Markdown,
-  Metadata,
-  Number,
+  MetadataFormat,
+  NumberFormat,
+  PhoneLink,
+  RatingFormat,
+  Separate,
+  TableFormat,
+  TagListFormat,
   Overflow,
-  Phone,
-  Rating,
-  Separated,
-  Table,
-  Taglist,
   Text,
-  Yesno
 } from 'components/view';
 
 //--------------------------------------------------------------------//
@@ -62,79 +60,92 @@ export function Body() {
           <div className="flex flex-wrap mt-4">
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/code')} 
+              onClick={() => window.location.href = ('/view/boolean-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Code language='javascript'>{`console.log("Hello, World!");`}</Code>
+                  <BooleanFormat value={true} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Code')}
+                  {_('Boolean Format')}
+                </h2>
+              </div>
+            </div>            
+            <div 
+              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => window.location.href = ('/view/code-highlighter')} 
+            >
+              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
+                  <CodeHighlighter language='javascript'>{`console.log("Hello, World!");`}</CodeHighlighter>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Code Highlighter')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/color')} 
+              onClick={() => window.location.href = ('/view/color-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Color lg value="salmon" />
+                  <ColorFormat lg value="salmon" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Color')}
+                  {_('Color Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/country')} 
+              onClick={() => window.location.href = ('/view/country-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Country value="US" />
+                  <CountryFormat value="US" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Country')}
+                  {_('Country Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/currency')} 
+              onClick={() => window.location.href = ('/view/currency-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Currency value="USD" />
+                  <CurrencyFormat value="USD" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Currency')}
+                  {_('Currency Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/date')} 
+              onClick={() => window.location.href = ('/view/date-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Date value="2024-02-03" />
+                  <DateFormat value="2024-02-03" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Date')}
+                  {_('Date Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/email')} 
+              onClick={() => window.location.href = ('/view/email-link')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Email className="theme-2" value="john@doe.com" />
+                  <EmailLink className="theme-2" value="john@doe.com" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Email')}
+                  {_('Email Link')}
                 </h2>
               </div>
             </div>
@@ -166,60 +177,45 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/image')} 
+              onClick={() => window.location.href = ('/view/image-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <ImageFormat value="https://images.wsj.net/im-580612/8SR" width="100" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Image')}
+                  {_('Image Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/imagelist')} 
+              onClick={() => window.location.href = ('/view/image-carousel')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Imagelist className="flex" value={[
+                  <ImageCarousel className="flex" value={[
                     'https://images.wsj.net/im-580612/8SR', 
                     'https://images.wsj.net/im-580612/8SR'
                   ]} width="50" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Imagelist')}
+                  {_('Image Carousel')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/json')} 
+              onClick={() => window.location.href = ('/view/link-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <div className="text-left">
-                    <JSON value={{foo: 'foo', bar: 'bar'}} />
+                    <LinkFormat className="theme-2" value="https://images.wsj.net/im-580612/8SR" />
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('JSON')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/json')} 
-            >
-              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <div className="text-left">
-                    <Link className="theme-2" value="https://images.wsj.net/im-580612/8SR" />
-                  </div>
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Link')}
+                  {_('Link Format')}
                 </h2>
               </div>
             </div>
@@ -255,34 +251,34 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/metadata')} 
+              onClick={() => window.location.href = ('/view/metadata-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <div className="text-left">
-                    <Metadata 
+                    <MetadataFormat 
                       className="p-2 border-t theme-bc-0" 
                       value={{ id: '12345', upc: '67890' }} 
                     />
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Metadata')}
+                  {_('Metadata Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/number')} 
+              onClick={() => window.location.href = ('/view/number-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <div className="text-left">
-                    <Number value="12345.67" separator="," decimal="." decimals={2} />
+                    <NumberFormat value="12345.67" separator="," decimal="." decimals={2} />
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Number')}
+                  {_('Number Format')}
                 </h2>
               </div>
             </div>
@@ -303,72 +299,72 @@ export function Body() {
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/phone')} 
+              onClick={() => window.location.href = ('/view/phone-link')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Phone className="theme-2" value="+1 (410) 555-2424" />
+                  <PhoneLink className="theme-2" value="+1 (410) 555-2424" />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Phone')}
+                  {_('Phone Link')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/rating')} 
+              onClick={() => window.location.href = ('/view/rating-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <div className="text-t-warning">
-                    <Rating value="3.5" max={5} remainder round="floor" />
+                    <RatingFormat value="3.5" max={5} remainder round="floor" />
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Rating')}
+                  {_('Rating Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/separated')} 
+              onClick={() => window.location.href = ('/view/separate')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Separated value={['Foo', 'bar']} separator=" - " />
+                  <Separate value={['Foo', 'bar']} separator=" - " />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Separated')}
+                  {_('Separate')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/table')} 
+              onClick={() => window.location.href = ('/view/table-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
                   <div className="text-left text-black w-full">
-                    <Table value={[
+                    <TableFormat value={[
                       { id: 1, name: 'John Doe' },
                     ]} stripes={['#CCCCCC', '#EFEFEF', '#FCFCFC']} />
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Table')}
+                  {_('Table Format')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/taglist')} 
+              onClick={() => window.location.href = ('/view/taglist-format')} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Taglist className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />
+                  <TagListFormat className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Taglist')}
+                  {_('TagList Format')}
                 </h2>
               </div>
             </div>
@@ -382,19 +378,6 @@ export function Body() {
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Text')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = ('/view/yesno')} 
-            >
-              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-                  <Yesno value={true} />
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Yesno')}
                 </h2>
               </div>
             </div>

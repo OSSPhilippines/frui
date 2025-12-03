@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import ImageFormat from 'components/view/Image.js';
+import TagListFormat from 'components/view/TagListFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,17 +14,14 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/image';
-const title = 'Image Format';
-const description = 'Image formats convert values to viewable images.';
+const uri = '/view/taglist-format';
+const title = 'TagList Format';
+const description = 'TagListFormat formats convert values to tags.';
 
 const props = [
-  [ 'alt', 'string', 'No', 'Alt text for image' ],
-  [ 'className', 'string', 'No', 'Standard HTML class names' ],
-  [ 'height', 'string|number', 'No', 'Height of image' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
-  [ 'value', 'string', 'Yes', 'Default value' ],
-  [ 'width', 'string|number', 'No', 'Width of image' ]
+  [ 'className', 'string', 'No', 'Standard HTML class names applied to all tags' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all tags' ],
+  [ 'value', 'string[]', 'Yes', 'Default value' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -52,7 +49,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Image')}
+          {_('TagList Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -104,16 +101,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Image')}
+        {_('TagList Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the image format like the following.
+            Import the <C value="<TagListFormat>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Image from 'frui/view/Image';`}
+          {`import TagListFormat from 'frui/view/TagListFormat';`}
         </Code>
       </div>
 
@@ -122,10 +119,12 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <ImageFormat value="https://images.wsj.net/im-580612/8SR" width="100" />
+          <div className="text-left text-black w-full">
+            <TagListFormat className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />
+          </div>
         </div>
         <Code language="typescript">
-          {`<Image value="https://images.wsj.net/im-580612/8SR" width="100" />`}
+          {`<TagListFormat className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />`}
         </Code>
       </div>
 
@@ -135,14 +134,14 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Image>" /> format can be passed the 
+            The <C value="<TagListFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>
         <Props props={props} />
       </div>
 
-      <Docs.Foot/>
+      <Docs.Foot />
     </div>
   );
 };

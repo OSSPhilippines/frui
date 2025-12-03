@@ -721,7 +721,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following are some basic examples of boxes.
+            The following are some basic examples of <C value="Box" /> component.
           </Translate>
         </p>
         <Examples />

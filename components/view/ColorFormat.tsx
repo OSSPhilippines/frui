@@ -22,7 +22,7 @@ export type ColorFormatProps = {
 // Components
 
 /**
- * Color Format Component (Main)
+ * ColorFormat Component (Main)
  */
 export function ColorFormat(props: ColorFormatProps) {
   const { 

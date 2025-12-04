@@ -18,7 +18,7 @@ export type PhoneLinkProps = LinkFormatProps;
 // Components
 
 /**
- * Phone Link Format Component (Main)
+ * PhoneLink Format Component (Main)
  */
 export function PhoneLink({ value, ...attributes }: PhoneLinkProps) {
   return (

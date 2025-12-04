@@ -114,7 +114,7 @@ export function SuggestInputControl(props: SuggestInputControlProps) {
 };
 
 /**
- * SuggestInput  Component (Main)
+ * SuggestInput Component (Main)
  */
 export function SuggestInput(props: SuggestInputProps) {
   //props

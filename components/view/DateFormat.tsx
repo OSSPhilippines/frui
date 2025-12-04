@@ -43,7 +43,7 @@ moment.locale('short', {
 // Components
 
 /**
- * Date Format Component (Main)
+ * DateFormat Component (Main)
  */
 export function DateFormat(props: DateFormatProps) {
   const { 

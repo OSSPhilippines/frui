@@ -86,7 +86,7 @@ export function useDateInput(config: DateInputConfig) {
 // Components
 
 /**
- * Date  Component
+ * Date Input Component
  */
 export function DateInput(props: DateInputProps) {
   //props
@@ -114,7 +114,7 @@ export function DateInput(props: DateInputProps) {
   );
 };
 
-//defaults to date
+//defaults to date input
 export default Object.assign(DateInput, {
   toDate,
   toDateString,

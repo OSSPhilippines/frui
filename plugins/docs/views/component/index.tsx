@@ -1,5 +1,11 @@
-import { useLanguage } from 'r22n';
+//--------------------------------------------------------------------//
+// Imports
 
+//modules
+import { useLanguage } from 'r22n';
+import { useState } from 'react';
+
+//plugins
 import type { PageProps } from 'plugins/app/types.js';
 import { 
   LayoutPanel, 
@@ -22,9 +28,13 @@ import {
   Notifier,
 } from 'components/index.js';
 
+/**
+ * Documentation body component
+ */
 export function Body() {
   //hooks
   const { _ } = useLanguage();
+  const [ open, setOpen ] = useState(false);
   //render
   return (
     <LayoutPanel pathname="/component">
@@ -44,36 +54,20 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  <Accordion 
+                  <Accordion
+                    content="px-2 py-1 text-xs border border-t-0 theme-bc-2"
                     defaultValue="1"
+                    label="px-2 py-1 cursor-pointer border theme-bc-2"
                     className="w-full text-sm"
                   >
-                    <Accordion.Bellow value="1">
-                      <Accordion.Label className="px-2 py-1 cursor-pointer border theme-bc-2 flex items-center justify-between">
-                        {({ active }) => (
-                          <>
-                            <span>{_('Item 1')}</span>
-                            <i className={`fas fa-chevron-${active ? 'up' : 'down'}`}></i>
-                          </>
-                        )}
-                      </Accordion.Label>
-                      <Accordion.Content className="px-2 py-1 text-xs border border-t-0 theme-bc-2">
-                        {_('Item 1 content')}
-                      </Accordion.Content>
-                    </Accordion.Bellow>
-                    <Accordion.Bellow value="2">
-                      <Accordion.Label className="px-2 py-1 cursor-pointer border border-t-0 theme-bc-2 flex items-center justify-between">
-                        {({ active }) => (
-                          <>
-                            <span>{_('Item 2')}</span>
-                            <i className={`fas fa-chevron-${active ? 'up' : 'down'}`}></i>
-                          </>
-                        )}
-                      </Accordion.Label>
-                      <Accordion.Content className="px-2 py-1 text-xs border border-t-0 theme-bc-2">
-                        {_('Item 2 content')}
-                      </Accordion.Content>
-                    </Accordion.Bellow>
+                    <Accordion.Item value="1">
+                      <Accordion.Label>{_('Item 1')}</Accordion.Label>
+                      <Accordion.Content>{_('Item 1 content')}</Accordion.Content>
+                    </Accordion.Item>
+                    <Accordion.Item value="2">
+                      <Accordion.Label>{_('Item 2')}</Accordion.Label>
+                      <Accordion.Content>{_('Item 2 content')}</Accordion.Content>
+                    </Accordion.Item>
                   </Accordion>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
@@ -88,17 +82,9 @@ export function Body() {
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
                   <div className="w-full space-y-2">
-                    <Alert curved success className="w-full text-sm py-2 px-3">
+                    <Alert curved success className="w-full text-center">
                       <i className="fas fa-check-circle mr-2"></i>
                       {_('Success')}
-                    </Alert>
-                    <Alert curved warning className="w-full text-sm py-2 px-3">
-                      <i className="fas fa-exclamation-triangle mr-2"></i>
-                      {_('Warning')}
-                    </Alert>
-                    <Alert curved error className="w-full text-sm py-2 px-3">
-                      <i className="fas fa-times-circle mr-2"></i>
-                      {_('Error')}
                     </Alert>
                   </div>
                 </div>
@@ -113,7 +99,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
-                  <Badge success pill className="text-xs my-3 inline-block">99</Badge>
+                  <Badge info>99</Badge>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Badge')}
@@ -126,24 +112,10 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  <Bread className="w-full text-sm">
-                    <Bread.Crumb 
-                      href="#" 
-                      className="text-info hover:underline"
-                    >
-                      {_('Home')}
-                    </Bread.Crumb>
-                    <Bread.Slicer className="mx-2">/</Bread.Slicer>
-                    <Bread.Crumb 
-                      href="#" 
-                      className="text-info hover:underline"
-                    >
-                      {_('Library')}
-                    </Bread.Crumb>
-                    <Bread.Slicer className="mx-2">/</Bread.Slicer>
-                    <Bread.Crumb className="theme-color-1 font-semibold">
-                      {_('Data')}
-                    </Bread.Crumb>
+                  <Bread className="text-sm">
+                    <Bread.Crumb href="#">{_('Home')}</Bread.Crumb>
+                    <Bread.Crumb href="#">{_('Library')}</Bread.Crumb>
+                    <Bread.Crumb>{_('Data')}</Bread.Crumb>
                   </Bread>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
@@ -180,15 +152,27 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
-                  <Dialog overlay={{ close: true }}>
-                    <div className="p-4">
-                      <h3 className="font-bold mb-2">Dialog Title</h3>
-                      <p>This is a sample dialog content.</p>
-                      <Dialog.Close className="mt-4 px-3 py-1 bg-error text-white rounded cursor-pointer">
-                        Close
-                      </Dialog.Close>
-                    </div>
-                  </Dialog>
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <Button info onClick={() => setOpen(true)}>Open Dialog</Button>
+                    <Dialog 
+                      open={open} 
+                      onClose={() => setOpen(false)}
+                      className="theme-bg-0 theme-bc-1 px-w-320 rounded-lg overflow-hidden shadow-lg"
+                    >
+                      <header className="flex items-center p-3 theme-bg-2">
+                        <h3 className="flex-grow font-semibold uppercase">Basic Example</h3>
+                        <Dialog.Close className="text-2xl theme-error cursor-pointer">
+                          &times;
+                        </Dialog.Close>
+                      </header>
+                      <p className="px-3 py-6">This is a basic dialog example.</p>
+                      <footer className="border-t theme-bc-1 p-3 flex justify-end">
+                        <Dialog.Close className="inline-block theme-error">
+                          <Button error>Close</Button>
+                        </Dialog.Close>
+                      </footer>
+                    </Dialog>
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Dialog')}
@@ -214,7 +198,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
-                  <Loader show={true} />
+                  <Loader info className="m-2">Loading...</Loader>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Loader')}
@@ -277,27 +261,10 @@ export function Body() {
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
                   <div className="w-full space-y-2">
-                    <Progress 
-                      style={{ width: '75%' }}
-                      height={8}
-                      bg="info"
-                      rounded
-                      container={{ bg: "muted" }}
-                    />
-                    <Progress 
-                      style={{ width: '50%' }}
-                      height={8}
-                      bg="success"
-                      rounded
-                      container={{ bg: "muted" }}
-                    />
-                    <Progress 
-                      style={{ width: '25%' }}
-                      height={8}
-                      bg="warning"
-                      rounded
-                      container={{ bg: "muted" }}
-                    />
+                    <Progress info className="theme-white text-xs w-[75%]">75%</Progress>
+                    <Progress success className="theme-white text-xs w-[50%]">50%</Progress>
+                    <Progress warning className="theme-white text-xs w-[35%]">35%</Progress>
+                    <Progress error className="theme-white text-xs w-[20%]">20%</Progress>
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
@@ -310,14 +277,14 @@ export function Body() {
               onClick={() => window.location.href = '/component/table'} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-auto">
-                <div className="flex items-center justify-center h-[100px] w-full bg-black px-3">
+                <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
                   <div className="overflow-auto w-full">
-                    <Table>
-                      <Table.Head className="theme-bg-2 text-left text-white !py-2">{_('ID')}</Table.Head>
-                      <Table.Head className="theme-bg-2 text-left text-white !py-2">{_('Name')}</Table.Head>
+                    <Table className="w-full text-xs">
+                      <Table.Head className="theme-bg-2 text-left text-white py-1">{_('ID')}</Table.Head>
+                      <Table.Head className="theme-bg-2 text-left text-white py-1">{_('Name')}</Table.Head>
                       <Table.Row>
-                        <Table.Col className="theme-bg-1 text-left !py-2">1</Table.Col>
-                        <Table.Col className="theme-bg-1 text-left !py-2">Jacob</Table.Col>
+                        <Table.Col className="theme-bg-1 text-left py-1">1</Table.Col>
+                        <Table.Col className="theme-bg-1 text-left py-1">John</Table.Col>
                       </Table.Row>
                     </Table>
                   </div>
@@ -334,45 +301,25 @@ export function Body() {
               <div className="m-2 border theme-bc-2 rounded overflow-auto">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
                   <div className="overflow-auto w-full">
-                    <Tabs 
-                      tabs={[
-                        { 
-                          label: (
-                            <div className="p-2 border border-b-0 theme-bc-2">
-                              Tab 1
-                            </div>
-                          ), 
-                          active: (
-                            <div className="p-2 border border-b-0 theme-bc-2 theme-bg-2">
-                              Tab 1
-                            </div>
-                          ), 
-                          content: (
-                            <div className="p-2 border theme-bc-2">
-                              Content for Tab 1
-                            </div>
-                          )
-                        },
-                        { 
-                          label: (
-                            <div className="p-2 border border-b-0 theme-bc-2">
-                              Tab 2
-                            </div>
-                          ), 
-                          active: (
-                            <div className="p-2 border border-b-0 theme-bc-2 theme-bg-2">
-                              Tab 2
-                            </div>
-                          ), 
-                          content: (
-                            <div className="p-2 border theme-bc-2">
-                              Content for Tab 2
-                            </div>
-                          )
-                        }
-                      ]}  
-                      className="flex items-center" 
-                    />
+                    <Tabs
+                      defaultValue="tab1"
+                      tab={({ active }) => active
+                        ? 'border border-b-0 px-3 py-1 text-xs theme-bc-2 theme-bg-2 font-semibold'
+                        : 'border border-b-0 px-3 py-1 text-xs theme-bc-2 cursor-pointer'
+                      }
+                      content="border theme-bc-2 p-2 text-xs"
+                    >
+                      <Tabs.Head className="flex">
+                        <Tabs.Label value="tab1">{_('Tab 1')}</Tabs.Label>
+                        <Tabs.Label value="tab2">{_('Tab 2')}</Tabs.Label>
+                        <Tabs.Label value="tab3">{_('Tab 3')}</Tabs.Label>
+                      </Tabs.Head>
+                      <Tabs.Body>
+                        <Tabs.Content value="tab1">{_('Content 1')}</Tabs.Content>
+                        <Tabs.Content value="tab2">{_('Content 2')}</Tabs.Content>
+                        <Tabs.Content value="tab3">{_('Content 3')}</Tabs.Content>
+                      </Tabs.Body>
+                    </Tabs>
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
@@ -386,10 +333,8 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
-                  <Tooltip text="Hello World">
-                    <Button warning rounded className="my-1">
-                      Hover over me
-                    </Button>
+                  <Tooltip warning text="This is a tooltip" hover>
+                    <Button warning>Hover over me</Button>
                   </Tooltip>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">

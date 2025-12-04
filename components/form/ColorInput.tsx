@@ -262,6 +262,7 @@ export function ColorInput(props: ColorInputProps) {
   );
 };
 
+//defaults to color input
 export default Object.assign(ColorInput, {
   clamp,
   componentToHex,

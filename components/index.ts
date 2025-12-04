@@ -27,6 +27,12 @@ export type {
 } from './Bread.js';
 //button
 export type { ButtonProps } from './Button.js';
+//card
+export type { 
+  CardProps,
+  CardTitleProps,
+  CardDescriptionProps
+} from './Card.js';
 //dialog
 export type { 
   DialogContextProps,
@@ -75,6 +81,7 @@ import Badge from './Badge';
 import Box from './Box.js';
 import Bread from './Bread.js';
 import Button from './Button.js';
+import Card from './Card.js';
 import Dialog from './Dialog.js';
 import Dropdown from './Dropdown.js';
 import Loader from './Loader'; 
@@ -223,6 +230,7 @@ export {
   Box,
   Bread,
   Button,
+  Card,
   Dialog,
   Dropdown,
   Form,

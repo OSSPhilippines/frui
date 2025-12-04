@@ -15,7 +15,7 @@ export type EmailLinkProps = LinkFormatProps;
 // Components
 
 /**
- * Email Format Component (Main)
+ * EmailLink Component (Main)
  */
 export function EmailLink({ value, ...attributes }: EmailLinkProps) {
   return (

@@ -428,6 +428,9 @@ export function useTextEditor(config: TextEditorConfig) {
 //--------------------------------------------------------------------//
 // Components
 
+/**
+ * Text Editor Component (Main)
+ */
 export function TextEditor(props: TextEditorProps) {
   //destructure props and separate out attributes to pass to hidden input
   const {

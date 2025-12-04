@@ -66,7 +66,7 @@ export function useFileInput(config: FileInputConfig) {
 // Components
 
 /**
- * Generic File  Component (Main)
+ * Generic File Input Component (Main)
  */
 export function FileInput(props: FileInputProps) {
   //separate component related props from field attributes
@@ -139,5 +139,5 @@ export function FileInput(props: FileInputProps) {
   );
 };
 
-//defaults to file
+//defaults to file input
 export default Object.assign(FileInput, { useFileInput, use: useFileInput });

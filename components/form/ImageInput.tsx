@@ -12,7 +12,7 @@ import Input from './Input.js';
 // Components
 
 /**
- * Generic Image  Component (Main)
+ * Generic Image Input Component (Main)
  */
 export function ImageInput(props: FileInputProps) {
   //separate component related props from field attributes
@@ -91,5 +91,8 @@ export function ImageInput(props: FileInputProps) {
   );
 };
 
-//defaults to image
-export default Object.assign(ImageInput, { useImageInput: useFileInput, use: useFileInput });
+//defaults to image input
+export default Object.assign(ImageInput, { 
+  seImageInput: useFileInput, 
+  use: useFileInput 
+});

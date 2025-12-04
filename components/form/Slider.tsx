@@ -508,7 +508,7 @@ export function SliderConnection(props: SliderConnectionProps) {
 };
 
 /**
- * Main slider component
+ * Slider Component (Main)
  */
 export function Slider(props: SliderProps) {
   //props
@@ -628,6 +628,7 @@ export function Slider(props: SliderProps) {
   );
 };
 
+//defaults to slider
 export default Object.assign(Slider, {
   useSlider,
   Context: SliderContext,

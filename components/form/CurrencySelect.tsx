@@ -43,6 +43,9 @@ export const currencyWithFlags = currencies.map(currency => {
 //--------------------------------------------------------------------//
 // Components
 
+/**
+ * Currency Select Component
+ */
 export function CurrencySelect(props: CurrencySelectProps) {
   //props
   const { className, onUpdate, placeholder, searchable } = props;
@@ -116,5 +119,5 @@ export function CurrencySelect(props: CurrencySelectProps) {
   );
 };
 
-//defaults to currency
+//defaults to currency select
 export default Object.assign(CurrencySelect, { currencyWithFlags });

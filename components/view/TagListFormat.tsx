@@ -20,7 +20,7 @@ export type TagListFormatProps = BadgeProps & {
 // Components
 
 /**
- * Taglist Format Component (Main)
+ * TaglistFormat Component (Main)
  */
 export function TagListFormat(props: TagListFormatProps) {
   const { className, style, value, ...attributes } = props;

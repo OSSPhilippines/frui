@@ -17,7 +17,7 @@ export type RatingFormatProps = {
 // Components
 
 /**
- * Rating Format Component (Main)
+ * RatingFormat Component (Main)
  */
 export function RatingFormat(props: RatingFormatProps) {
   const {

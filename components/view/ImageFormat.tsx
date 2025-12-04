@@ -13,7 +13,7 @@ export type ImageFormatProps = HTMLImageProps & { value: string };
 // Components
 
 /**
- * Image Format Component (Main)
+ * ImageFormat Component (Main)
  */
 export function ImageFormat({ value, ...attributes }: ImageFormatProps) {
   return (

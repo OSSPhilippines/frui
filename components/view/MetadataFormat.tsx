@@ -17,7 +17,7 @@ export type MetadataFormatProps = {
 // Components
 
 /**
- * Metadata Format Component (Main)
+ * MetadataFormat Component (Main)
  */
 export function MetadataFormat({ className, style, value }: MetadataFormatProps) {
   return (

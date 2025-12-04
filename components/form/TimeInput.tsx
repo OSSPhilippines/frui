@@ -113,7 +113,7 @@ export function useTimeInput(config: TimeInputConfig) {
 // Components
 
 /**
- * Time  Component
+ * Time Input Component (Main)
  */
 export function TimeInput(props: TimeInputProps) {
   const { 

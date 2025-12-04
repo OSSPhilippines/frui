@@ -94,7 +94,7 @@ export function useDatetimeInput(config: DatetimeInputConfig) {
 // Components
 
 /**
- * Datetime  Component
+ * Datetime Input Component
  */
 export function DatetimeInput(props: DatetimeInputProps) {
   //props
@@ -130,7 +130,7 @@ export function DatetimeInput(props: DatetimeInputProps) {
   );
 };
 
-//defaults to datetime
+//defaults to datetime input
 export default Object.assign(DatetimeInput, {
   toDate,
   toDatetimeString,

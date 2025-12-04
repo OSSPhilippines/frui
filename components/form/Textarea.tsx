@@ -42,7 +42,7 @@ export function useTextarea({ onChange, onUpdate }: TextareaConfig) {
 // Components
 
 /**
- * Generic Textarea  Component (Main)
+ * Generic Textarea Component (Main)
  */
 export function Textarea(props: TextareaProps) {
   //separate component related props from field attributes

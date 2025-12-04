@@ -10,7 +10,7 @@ import Input from './Input.js';
 // Components
 
 /**
- * Generic File  Component (Main)
+ * Generic Image List Component (Main)
  */
 export function ImageList(props: FilelistProps) {
   //separate component related props from field attributes

@@ -47,5 +47,5 @@ export function FieldControl(props: FieldControlProps) {
   );
 };
 
-//defaults to control
+//defaults to field control
 export default FieldControl;

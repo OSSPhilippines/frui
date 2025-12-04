@@ -102,7 +102,7 @@ export function useTagList(config: TagListConfig) {
 // Components
 
 /**
- * Generic TagList  Component (Main)
+ * Generic TagList Component (Main)
  */
 export function TagList(props: TagListProps) {
   //separate component related props from field attributes

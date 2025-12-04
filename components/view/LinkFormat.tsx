@@ -13,7 +13,7 @@ export type LinkFormatProps = HTMLLinkProps & { value: string, label?: string  }
 // Components
 
 /**
- * Link Format Component (Main)
+ * LinkFormat Component (Main)
  */
 export function LinkFormat({ value, label, ...attributes }: LinkFormatProps) {
   return (<a href={value} {...attributes}>{label || value}</a>);

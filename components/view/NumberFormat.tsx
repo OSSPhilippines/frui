@@ -46,7 +46,7 @@ export const formatNumber = (
 // Components
 
 /**
- * Number Format Component (Main)
+ * NumberFormat Component (Main)
  */
 export function NumberFormat(props: NumberFormatProps) {
   const {

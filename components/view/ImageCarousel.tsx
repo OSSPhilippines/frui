@@ -13,7 +13,7 @@ export type ImageCarouselProps = HTMLImageProps & { value: string[] };
 // Components
 
 /**
- * ImageCarousel Format Component (Main)
+ * ImageCarousel Component (Main)
  */
 export function ImageCarousel(props: ImageCarouselProps) {
   const { value, className, ...attributes } = props;

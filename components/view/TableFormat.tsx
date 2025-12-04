@@ -20,7 +20,7 @@ export type TableFormatProps = {
 // Components
 
 /**
- * Table Format Component (Main)
+ * TableFormat Component (Main)
  */
 export function TableFormat(props: TableFormatProps) {
   const { style = {}, className, value, stripes } = props;

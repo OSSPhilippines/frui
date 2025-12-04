@@ -24,7 +24,7 @@ export type CountryFormatProps = {
 // Components
 
 /**
- * Country Format Component (Main)
+ * CountryFormat Component (Main)
  */
 export function CountryFormat(props: CountryFormatProps) {
   const { 

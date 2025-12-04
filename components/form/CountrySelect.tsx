@@ -35,6 +35,9 @@ export type CountrySelectProps = ExtendsType<SelectProps, {
 //--------------------------------------------------------------------//
 // Components
 
+/**
+ * Country Select Component
+ */
 export function CountrySelect(props: CountrySelectProps) {
   //props
   const { className, onUpdate, placeholder, searchable } = props;
@@ -111,5 +114,5 @@ export function CountrySelect(props: CountrySelectProps) {
   );
 };
 
-//defaults to country
+//defaults to country select
 export default Object.assign(CountrySelect, { countries });

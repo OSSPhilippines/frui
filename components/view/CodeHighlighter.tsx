@@ -31,6 +31,9 @@ export type CodeHighlighterProps = ClassStyleProps & {
 //--------------------------------------------------------------------//
 // Components
 
+/**
+ * CodeHighlighter Component (Main)
+ */
 export function CodeHighlighter(props: CodeHighlighterProps) {
   //props
   const { 

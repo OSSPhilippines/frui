@@ -33,7 +33,7 @@ export type MaskInputProps = ExtendsType<InputProps, MaskInputConfig>;
 // Hooks
 
 /**
- * Mask Hook Aggregate
+ * Mask Input Hook Aggregate
  */
 export function useMaskInput(config: MaskInputConfig) {
   //config
@@ -74,7 +74,7 @@ export function useMaskInput(config: MaskInputConfig) {
 // Components
 
 /**
- * Mask  Component (Main)
+ * Mask Input Component (Main)
  */
 export function MaskInput(props: MaskInputProps) {
   //props
@@ -108,5 +108,5 @@ export function MaskInput(props: MaskInputProps) {
   );
 };
 
-//defaults to mask
+//defaults to mask input
 export default Object.assign(MaskInput, { useMaskInput, use: useMaskInput });

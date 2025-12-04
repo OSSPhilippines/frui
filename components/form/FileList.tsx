@@ -82,7 +82,7 @@ export function useFileList(config: FilelistConfig) {
 // Components
 
 /**
- * Generic File  Component (Main)
+ * Generic File List Component (Main)
  */
 export function FileList(props: FilelistProps) {
   //separate component related props from field attributes

@@ -25,7 +25,7 @@ export type CurrencyFormatProps = {
 // Components
 
 /**
- * Currency Format Component (Main)
+ * CurrencyFormat Component (Main)
  */
 export function CurrencyFormat(props: CurrencyFormatProps) {
   const { 

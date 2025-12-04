@@ -555,7 +555,7 @@ export function toHiddenValue(value: string) {
 // Hooks
 
 /**
- * Number Hook Aggregate
+ * Number Input Hook Aggregate
  */
 export function useNumberInput(config: NumberInputConfig) {
   //props
@@ -830,7 +830,7 @@ export function NumberInput(props: NumberInputProps) {
   );
 };
 
-//defaults to number
+//defaults to number input
 export default Object.assign(NumberInput, {
   useNumberInput,
   applyBounds,

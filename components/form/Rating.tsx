@@ -133,6 +133,9 @@ export function RatingStar({ style, ...props }: SVGProps<SVGSVGElement>) {
 //--------------------------------------------------------------------//
 // Components
 
+/**
+ * Rating Component (Main)
+ */
 export function Rating(props: RatingProps) {
   const {
     name: providedName,

@@ -53,7 +53,7 @@ export function useTextLists(config: TextListConfig) {
 // Components
 
 /**
- * Text Item Component 
+ * Text Item Component (Main)
  */
 export function TextListFields(props: FieldsProps<TextListType>) {
   const { 

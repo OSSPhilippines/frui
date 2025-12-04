@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/form/currency-select';
-const title = 'Currency Select Field';
+const title = 'CurrencySelect Field';
 const description = 'CurrencySelect fields in FRUI, allow users select from a list of '
   + 'count riesaround the world.';
 
@@ -303,7 +303,7 @@ export function Body() {
         <Translate>
           You can use
           the <C value="frui-form-currency-select" />, <C value="frui-form-select-control" />, <C value="frui-form-select-placeholder" />, <C value="frui-form-select-dropdown" />, <C value="frui-form-select-search" />, <C value="frui-form-select-search-control" />, <C value="frui-form-select-search-icon" />, <C value="frui-form-select-options" />, <C value="frui-form-select-option" />,
-          and <C value="frui-form-select-label" /> CSS classes to globally theme the currency field.
+          and <C value="frui-form-select-label" /> CSS classes to globally theme the currency select field.
         </Translate>
       </p>
                   

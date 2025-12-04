@@ -17,7 +17,7 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/form/date-input';
-const title = 'Date Input Field';
+const title = 'DateInput Field';
 const description = 'A date input field is a component that wraps the standard HTML '
   + 'date input element.';
 

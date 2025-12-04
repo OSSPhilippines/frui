@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/form/country-select';
-const title = 'Country Select Field';
+const title = 'CountrySelect Field';
 const description = 'CountrySelect fields in FRUI, allow users select from a list of '
   + 'countries around the world.';
 
@@ -303,7 +303,7 @@ export function Body() {
         <Translate>
           You can use
           the <C value="frui-form-country-select" />, <C value="frui-form-select-control" />, <C value="frui-form-select-placeholder" />, <C value="frui-form-select-dropdown" />,  <C value="frui-form-select-search" />,  <C value="frui-form-select-search-control" />,  <C value="frui-form-select-search-icon" />,  <C value="frui-form-select-options" />,  <C value="frui-form-select-option" />,
-          and <C value="frui-form-select-label" /> CSS classes to globally theme the country field.
+          and <C value="frui-form-select-label" /> CSS classes to globally theme the country select field.
         </Translate>
       </p>
                   

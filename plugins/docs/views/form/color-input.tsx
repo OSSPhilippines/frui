@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 // Constatnts
 
 const uri = '/form/color-input';
-const title = 'Color Input Field';
+const title = 'ColorInput Field';
 const description = 'A field componnet allowing users to select colors via a '
   + 'popover palette, sliders, and inputs.';
 

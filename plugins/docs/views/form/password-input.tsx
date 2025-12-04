@@ -239,7 +239,7 @@ export function Body() {
         <Translate>
           You can use 
           the <C value="frui-form-password" />, <C value="frui-form-password-control" />, 
-          and <C value="frui-form-password-toggle" /> CSS classes to globally theme the password field.
+          and <C value="frui-form-password-toggle" /> CSS classes to globally theme the password input field.
         </Translate>
       </p>
       

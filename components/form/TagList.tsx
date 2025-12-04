@@ -192,4 +192,7 @@ export function TagList(props: TagListProps) {
 };
 
 //defaults to taglist
-export default Object.assign(TagList, { useTagList, use: useTagList });
+export default Object.assign(TagList, { 
+  useTagList,
+  use: useTagList
+});

@@ -410,8 +410,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Enable various formatting options using boolean props like{" "}
-            <C value="history" />, <C value="font" />, <C value="style" />,
+            Enable various formatting options 
+            using boolean props like <C value="history" />, <C value="font" />, <C value="style" />,
             and more.
           </Translate>
         </p>
@@ -455,8 +455,9 @@ export function Body() {
           <div className="w-full">
             <p className="mb-4">
               <Translate>
-                To include the TextEditor content in a form submission, set the{" "}
-                <C value="name" /> prop. The content will be included as HTML in
+                To include 
+                the <C value="TextEditor" /> content in a form submission, set 
+                the <C value="name" /> prop. The content will be included as HTML in
                 the form data under that name.
               </Translate>
             </p>
@@ -675,8 +676,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Add images, videos, and links using <C value="image" />,{" "}
-            <C value="video" />, and <C value="link" /> props for rich
+            Add images, videos, 
+            and links using <C value="image" />,<C value="video" />, 
+            and <C value="link" /> props for rich
             content. Links can be clicked with Ctrl (Windows) or Cmd (Mac) 
             to open in a new tab.
           </Translate>
@@ -734,7 +736,7 @@ export function Body() {
           You can use
           the <C value="frui-form-text-editor" />, <C value="frui-form-text-editor-toolbar" />, <C value="frui-form-text-editor-btn" />, <C value="frui-form-text-editor-btn-module" />, <C value="frui-form-text-editor-btn-select" />, 
           and <C value="frui-form-text-editor-editable" /> CSS classes 
-          to globally theme the TextEditor field.
+          to globally theme the <C value="TextEditor" /> field.
         </Translate>
       </p>
 

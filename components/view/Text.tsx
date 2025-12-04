@@ -9,7 +9,6 @@ export type TextProps = {
 //--------------------------------------------------------------------//
 // Components
 
-
 /**
  * Text Component (Main)
  */

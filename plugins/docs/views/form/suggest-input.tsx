@@ -17,7 +17,7 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/form/suggest-input';
-const title = 'Suggest Input Field';
+const title = 'Suggestnput Field';
 const description = 'Suggest Input is a text input field that provides a list of '
   + 'suggestions as the user types.';
 
@@ -521,7 +521,7 @@ export function Body() {
         <Translate>
           You can use
           the <C value="SuggestInput" />, <C value="frui-form-suggest-input" />, <C value="frui-form-suggest-input-dropdown" />, <C value="frui-form-suggest-input-options" />,
-          and <C value="frui-form-suggest-input-option" /> CSS classes to globally theme suggest input.
+          and <C value="frui-form-suggest-input-option" /> CSS classes to globally theme suggest input field.
         </Translate>
       </p>
       

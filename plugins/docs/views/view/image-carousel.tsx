@@ -15,7 +15,7 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/view/image-carousel';
-const title = 'Image Carousel Format';
+const title = 'ImageCarousel Format';
 const description = 'ImageCarousel formats display a list of images with various properties.';
 
 const codeBasic = `

@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/form/time-input';
-const title = 'Time Input Field';
+const title = 'TimeInput Field';
 const description = 'TimeInput is a field component that wraps the standard '
   + 'HTML input element for time values.';
 
@@ -245,7 +245,7 @@ export function Body() {
       <p className="py-4">
         <Translate>
           You can use
-          the <C value="frui-form-date" /> CSS class to globally theme the time field.
+          the <C value="frui-form-date" /> CSS class to globally theme the time input field.
         </Translate>
       </p>
 

@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/form/file-input';
-const title = 'File Input Field';
+const title = 'FileInput Field';
 const description = 'File input is a field component that wraps the standard HTML '
   + 'file input element.';
 
@@ -305,7 +305,7 @@ export function Body() {
         <Translate>
           You can use
           the <C value="frui-form-file" />, <C value="frui-form-file-control" />, <C value="frui-form-file-reset" />, <C value="frui-form-file-file" />,
-          and <C value="frui-form-file-link" /> CSS classes to globally theme the file field.
+          and <C value="frui-form-file-link" /> CSS classes to globally theme the file input field.
         </Translate>
       </p>
       

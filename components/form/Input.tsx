@@ -76,4 +76,7 @@ export function Input(props: InputProps) {
 };
 
 //defaults to input
-export default Object.assign(Input, { useInput, use: useInput });
+export default Object.assign(Input, {
+  useInput,
+  use: useInput
+});

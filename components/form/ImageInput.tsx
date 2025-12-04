@@ -93,6 +93,6 @@ export function ImageInput(props: FileInputProps) {
 
 //defaults to image input
 export default Object.assign(ImageInput, { 
-  seImageInput: useFileInput, 
-  use: useFileInput 
+  seImageInput: useFileInput,
+  use: useFileInput
 });

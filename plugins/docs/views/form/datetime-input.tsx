@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/form/datetime-input';
-const title = 'Datetime Input Field';
+const title = 'DatetimeInput Field';
 const description = 'Datetime input is a field component that wraps the standard '
   + 'HTML datetime-local input element.';
 

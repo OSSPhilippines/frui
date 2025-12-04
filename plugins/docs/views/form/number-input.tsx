@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/form/number-input';
-const title = 'Number Input Field';
+const title = 'NumberInput Field';
 const description = 'NumberInput is a field component that wraps the standard '
   + 'HTML input element for numeric values.';
 

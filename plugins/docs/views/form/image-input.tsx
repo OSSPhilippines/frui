@@ -16,7 +16,7 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/form/image-input';
-const title = 'Image Input Field';
+const title = 'ImageInput Field';
 const description = 'Image input is a field component that allows users to upload '
   + 'and manage images.';
 
@@ -306,7 +306,7 @@ export function Body() {
         <Translate>
           You can use
           the <C value="frui-form-image" />, <C value="frui-form-image-control" />, <C value="frui-form-image-reset" />, <C value="frui-form-image-file" />,  <C value="frui-form-image-link" />,
-          and <C value="frui-form-image-image" /> CSS classes to globally theme the image field.
+          and <C value="frui-form-image-image" /> CSS classes to globally theme the image input field.
         </Translate>
       </p>
       

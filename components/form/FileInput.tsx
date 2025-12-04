@@ -26,7 +26,7 @@ export type FileInputProps = ExtendsType<InputProps, FileInputConfig & {
 // Hooks
 
 /**
- * File Hook Aggregate
+ * FileInput Hook Aggregate
  */
 export function useFileInput(config: FileInputConfig) {
   const {
@@ -66,7 +66,7 @@ export function useFileInput(config: FileInputConfig) {
 // Components
 
 /**
- * Generic File  Component (Main)
+ * Generic FileInput Component (Main)
  */
 export function FileInput(props: FileInputProps) {
   //separate component related props from field attributes
@@ -139,7 +139,7 @@ export function FileInput(props: FileInputProps) {
   );
 };
 
-//defaults to file
+//defaults to file input
 export default Object.assign(FileInput, { 
   useFileInput,
   use: useFileInput

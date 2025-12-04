@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Taglist from 'components/view/Taglist.js';
+import CountryFormat from 'components/view/CountryFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,14 +14,19 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/taglist';
-const title = 'Taglist Format';
-const description = 'Taglist formats convert values to tags.';
+const uri = '/view/country-format';
+const title = 'Country Format';
+const description = 'CountryFormat formats convert values to country displays.';
 
 const props = [
-  [ 'className', 'string', 'No', 'Standard HTML class names applied to all tags' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all tags' ],
-  [ 'value', 'string[]', 'Yes', 'Default value' ]
+  [ 'className', 'string', 'No', 'Standard HTML class names' ],
+  [ 'flag', 'boolean', 'No', 'Show flag' ],
+  [ 'lg', 'boolean', 'No', 'Show large country flag' ],
+  [ 'md', 'boolean', 'No', 'Show medium size country flag' ],
+  [ 'sm', 'boolean', 'No', 'Show small country flag' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
+  [ 'text', 'boolean', 'No', 'Show country text' ],
+  [ 'value', 'string', 'Yes', 'Default value' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -49,7 +54,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Tag List')}
+          {_('Country Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -101,16 +106,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Taglist')}
+        {_('Country Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the tag list format like the following.
+            Import the <C value="<CountryFormat>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Taglist from 'frui/view/Taglist';`}
+          {`import CountryFormat from 'frui/view/CountryFormat';`}
         </Code>
       </div>
 
@@ -119,29 +124,81 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <div className="text-left text-black w-full">
-            <Taglist className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />
-          </div>
+          <CountryFormat value="US" />
         </div>
         <Code language="typescript">
-          {`Taglist className="rounded-full bg-orange-600 mr-1" value={[ 'electronics', 'laptop' ]} />`}
+          {`<CountryFormat value="US" />`}
         </Code>
       </div>
 
+      <h2 id="customize" className="uppercase font-bold text-lg mt-8">
+        {_('Customize')}
+      </h2>
+      <p className="py-4">
+        <Translate>
+          You can apply different sizes to 
+          the <C value="CountryFormat" /> format.
+        </Translate>
+      </p>
+
+      <h3 className="font-semibold text-md mt-8">
+        {_('Flag')}
+      </h3>
+      <p className="py-4">
+        <Translate>
+          Use <C value="flag" /> prop to hide the country flag.
+        </Translate>
+      </p>
+      <div className="curved overflow-hidden">
+        <div className="flex items-center justify-center p-3 theme-bg-1">
+          <CountryFormat flag={false} value="US" />
+        </div>
+        <Code language="typescript">
+          {`<CountryFormat flag={false} value="US" />`}
+        </Code>
+      </div>
+
+      <h3 className="font-semibold text-md mt-8">
+        {_('Sizes')}
+      </h3>
+      <p className="py-4">
+        <Translate>
+          Use <C value="sm" />, <C value="md" />, or <C value="lg" r /> 
+          props to change the size of the country flag.
+        </Translate>
+      </p>
+      <div className="curved overflow-hidden">
+        <div className="flex items-center justify-center p-3 theme-bg-1">
+          <CountryFormat lg value="US" />
+        </div>
+        <Code language="typescript">
+          {`<CountryFormat lg value="US" />`}
+        </Code>
+      </div>
+
+      <p className="py-4">
+        <Translate>
+          You can also add your own custom class 
+          to <C value="Country" /> format or use any combination 
+          of <C value="frui-format-country" />, 
+          and <C value="frui-format-country-flag" /> CSS classes.
+        </Translate>
+      </p>
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Taglist>" /> format can be passed the 
+            The <C value="<CountryFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>
         <Props props={props} />
       </div>
 
-      <Docs.Foot />
+      <Docs.Foot/>
     </div>
   );
 };

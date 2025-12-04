@@ -210,7 +210,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the rating field like the following.
+            Import the <C value="<Rating>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -224,8 +224,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            By default, the Rating component is uncontrolled. Use <C value="defaultValue" /> to set an initial value.
-            It renders 5 stars.
+            By default, 
+            the <C value="Rating" /> component is uncontrolled. 
+            Use <C value="defaultValue" /> to set an initial value. It renders 5 stars.
           </Translate>
         </p>
         <Preview
@@ -281,8 +282,8 @@ export function Body() {
           <Translate>
             Use the <C value="size" /> prop to adjust the icon size. 
             The sizes correspond to CSS 
-            classes <C l value=".frui-rating-sizeSmall" />, <C l value=".frui-rating-sizeMedium" />, 
-            and <C l value=".frui-rating-sizeLarge" />.
+            classes <C value=".frui-rating-sizeSmall" />, <C value=".frui-rating-sizeMedium" />, 
+            and <C value=".frui-rating-sizeLarge" />.
           </Translate>
         </p>
         <Preview
@@ -309,8 +310,8 @@ export function Body() {
             Provide custom React nodes to the <C value="icon" /> (filled) 
             and <C value="emptyIcon" /> props. If <C value="emptyIcon" /> is 
             not provided, a faded version of the <C value="icon" /> is 
-            used. Styles target <C l value=".frui-rating-icon-filled" />, 
-            and <C l value=".frui-rating-icon-empty" />.
+            used. Styles target <C value=".frui-rating-icon-filled" />, 
+            and <C value=".frui-rating-icon-empty" />.
           </Translate>
         </p>
         <Preview
@@ -369,9 +370,9 @@ export function Body() {
         <p className="py-4">
           <Translate>
             Use <C value="readOnly" /> to display a rating that 
-            cannot be changed by the user (<C l value=".frui-rating-readOnly" /> class).
+            cannot be changed by the user (<C value=".frui-rating-readOnly" /> class).
             Use <C value="disabled" /> to prevent interaction 
-            and apply disabled styling (<C l value=".frui-rating-disabled" /> class).
+            and apply disabled styling (<C value=".frui-rating-disabled" /> class).
           </Translate>
         </p>
         <Preview
@@ -395,9 +396,9 @@ export function Body() {
         <p className="py-4">
           <Translate>
             Use <C value="readOnly" /> to display a rating that
-            cannot be changed by the user (<C l value=".frui-rating-readOnly" /> class).
+            cannot be changed by the user (<C value=".frui-rating-readOnly" /> class).
             Use <C value="disabled" /> to prevent interaction
-            and apply disabled styling (<C l value=".frui-rating-disabled" /> class).
+            and apply disabled styling (<C value=".frui-rating-disabled" /> class).
           </Translate>
         </p>
         <Preview

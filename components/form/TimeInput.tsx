@@ -76,7 +76,7 @@ export function toTimeInputString(date?: Date) {
 // Hooks
 
 /**
- * Time Hook Aggregate
+ * TimeInput Hook Aggregate
  */
 export function useTimeInput(config: TimeInputConfig) {
   //props
@@ -113,7 +113,7 @@ export function useTimeInput(config: TimeInputConfig) {
 // Components
 
 /**
- * Time  Component
+ * TimeInput Component (Main)
  */
 export function TimeInput(props: TimeInputProps) {
   const { 
@@ -145,10 +145,11 @@ export function TimeInput(props: TimeInputProps) {
   );
 };
 
-//defaults to time
+//defaults to time input
 export default Object.assign(TimeInput, {
   toDate,
   toTimeString,
   toTimeInputString,
-  useTimeInput
+  useTimeInput,
+  use: useTimeInput
 });

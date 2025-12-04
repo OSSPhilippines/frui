@@ -111,7 +111,7 @@ export const menu: MenuItem[] = [
         href: '/component/tabs'
       },
       {
-        label: 'Tooltips',
+        label: 'Tooltip',
         search: '/component/tooltip',
         href: '/component/tooltip'
       }
@@ -277,34 +277,39 @@ export const menu: MenuItem[] = [
     href: '/view',
     children: [
       {
-        label: 'Code',
-        search: '/view/code',
-        href: '/view/code'
+        label: 'Boolean Format',
+        search: '/view/boolean-format',
+        href: '/view/boolean-format'
+      },      
+      {
+        label: 'Code Highlighter',
+        search: '/view/code-highlighter',
+        href: '/view/code-highlighter'
       },
       {
-        label: 'Color',
-        search: '/view/color',
-        href: '/view/color'
+        label: 'Color Format',
+        search: '/view/color-format',
+        href: '/view/color-format'
       },
       {
-        label: 'Country',
-        search: '/view/country',
-        href: '/view/country'
+        label: 'Country Format',
+        search: '/view/country-format',
+        href: '/view/country-format'
       },
       {
-        label: 'Currency',
-        search: '/view/currency',
-        href: '/view/currency'
+        label: 'Currency Format',
+        search: '/view/currency-format',
+        href: '/view/currency-format'
       },
       {
-        label: 'Date',
-        search: '/view/date',
-        href: '/view/date'
+        label: 'Date Format',
+        search: '/view/date-format',
+        href: '/view/date-format'
       },
       {
-        label: 'Email',
-        search: '/view/email',
-        href: '/view/email'
+        label: 'Email Link',
+        search: '/view/email-link',
+        href: '/view/email-link'
       },
       {
         label: 'Formula',
@@ -317,24 +322,19 @@ export const menu: MenuItem[] = [
         href: '/view/html'
       },
       {
-        label: 'Image',
-        search: '/view/image',
-        href: '/view/image'
+        label: 'Image Carousel',
+        search: '/view/image-carousel',
+        href: '/view/image-carousel'
       },
       {
-        label: 'Imagelist',
-        search: '/view/imagelist',
-        href: '/view/imagelist'
+        label: 'Image Format',
+        search: '/view/image-format',
+        href: '/view/image-format'
       },
       {
-        label: 'JSON',
-        search: '/view/json',
-        href: '/view/json'
-      },
-      {
-        label: 'Link',
-        search: '/view/link',
-        href: '/view/link'
+        label: 'Link Format',
+        search: '/view/link-format',
+        href: '/view/link-format'
       },
       {
         label: 'List',
@@ -347,14 +347,14 @@ export const menu: MenuItem[] = [
         href: '/view/markdown'
       },
       {
-        label: 'Metadata',
-        search: '/view/metadata',
-        href: '/view/metadata'
+        label: 'Metadata Format',
+        search: '/view/metadata-format',
+        href: '/view/metadata-format'
       },
       {
-        label: 'Number',
-        search: '/view/number',
-        href: '/view/number'
+        label: 'Number Format',
+        search: '/view/number-format',
+        href: '/view/number-format'
       },
       {
         label: 'Overflow',
@@ -362,39 +362,34 @@ export const menu: MenuItem[] = [
         href: '/view/overflow'
       },
       {
-        label: 'Phone',
-        search: '/view/phone',
-        href: '/view/phone'
+        label: 'Phone Link',
+        search: '/view/phone-link',
+        href: '/view/phone-link'
       },
       {
-        label: 'Rating',
-        search: '/view/rating',
-        href: '/view/rating'
+        label: 'Rating Format',
+        search: '/view/rating-format',
+        href: '/view/rating-format'
       },
       {
-        label: 'Separated',
-        search: '/view/separated',
-        href: '/view/separated'
+        label: 'Separate',
+        search: '/view/separate',
+        href: '/view/separate'
       },
       {
-        label: 'Table',
-        search: '/view/table',
-        href: '/view/table'
+        label: 'Table Format',
+        search: '/view/table-format',
+        href: '/view/table-format'
       },
       {
-        label: 'Taglist',
-        search: '/view/taglist',
-        href: '/view/taglist'
+        label: 'TagList Format',
+        search: '/view/taglist-format',
+        href: '/view/taglist-format'
       },
       {
         label: 'Text',
         search: '/view/text',
         href: '/view/text'
-      },
-      {
-        label: 'Yes/No',
-        search: '/view/yesno',
-        href: '/view/yesno'
       },
     ]
   },

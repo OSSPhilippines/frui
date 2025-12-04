@@ -5,14 +5,12 @@
 import { useState, useRef, useEffect } from 'react';
 
 //frui
-import type { 
-  ColorProps, 
-  BorderRadiusProps, 
-  HTMLElementProps
-} from './types.js';
+import type { BorderRadiusProps } from './helpers/tools/BorderRadiusTool.js';
+import type { ColorProps } from './helpers/tools/ColorTool.js';
+import type { HTMLElementProps } from './types.js';
+import Box from './Box.js';
 import BorderRadiusTool from './helpers/tools/BorderRadiusTool.js';
 import ColorTool from './helpers/tools/ColorTool.js';
-import removeThemeProps from './helpers/removeThemeProps.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -270,7 +268,7 @@ export function Tooltip(props: TooltipProps) {
     //position tooltip at the top of the container
     top, //?: boolean
     ...attributes
-  } = removeThemeProps(props);
+  } = Box.removeThemeProps(props);
 
   const {
     position,
@@ -296,7 +294,7 @@ export function Tooltip(props: TooltipProps) {
   // - set bar radius
   BorderRadiusTool.get(props).getClassStyles({ classes, styles });
   // - set bar color (background color)
-  ColorTool.get(props, 'bg').getClassStyles({ classes, styles });
+  ColorTool.get(props, 'bgc').getClassStyles({ classes, styles });
   //determine opacity
   if (!isNaN(Number(opacity))) {
     styles.opacity = Number(opacity) / 100;

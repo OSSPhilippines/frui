@@ -5,27 +5,23 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Number from 'components/view/Number.js';
+import BooleanFormat from 'components/view/BooleanFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
 import Docs from '../../layout/Docs.js';
 
-
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/number';
-const title = 'Number Format';
-const description = 'Number formats convert values to numerical displays.';
+const uri = '/view/boolean-format';
+const title = 'BooleanFormat Format';
+const description = 'BooleanFormat formats convert values to yes or no.';
 
 const props = [
-  [ 'absolute', 'string', 'No', 'Remove negative sign' ],
-  [ 'decimal', 'string', 'No', 'Character for decimal' ],
-  [ 'decimals', 'number', 'No', 'Number of decimals to show' ],
-  [ 'separator', 'boolean', 'No', 'Character of comma separator' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
-  [ 'value', 'string|number', 'Yes', 'Default value' ]
+  [ 'no', 'string', 'No', 'Text for no' ],
+  [ 'value', 'string', 'Yes', 'Default value' ],
+  [ 'yes', 'string', 'No', 'Text for yes' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -53,7 +49,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Number')}
+          {_('Boolean Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -105,16 +101,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Number')}
+        {_('Boolean Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the number format like the following.
+            Import the <C value="<BooleanFormat>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Number from 'frui/view/Number';`}
+          {`import BooleanFormat from 'frui/view/BooleanFormat';`}
         </Code>
       </div>
 
@@ -123,10 +119,10 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Number value="12345.67" separator="," decimal="." decimals={2} />
+          <BooleanFormat value={true} yes="Yep" no="Nope" />
         </div>
         <Code language="typescript">
-          {`<Number value="12345.67" separator="," decimal="." decimals={2} />`}
+          {`<BooleanFormat value={true} yes="Yep" no="Nope" />`}
         </Code>
       </div>
 
@@ -136,7 +132,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Number>" /> format can be passed the 
+            The <C value="<BooleanFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

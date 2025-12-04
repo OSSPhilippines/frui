@@ -107,7 +107,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the list format like the following.
+            Import the <C value="<List>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -132,7 +132,7 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can use the <C l value="ordered" /> prop to show an 
+          You can use the <C value="ordered" /> prop to show an 
           ordered list.
         </Translate>
       </p>

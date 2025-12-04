@@ -14,9 +14,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/code';
-const title = 'Code Format';
-const description = 'Code blocks with syntax highlighting and copy functionality.';
+const uri = '/view/code-highlighter';
+const title = 'Code Highlighter';
+const description = 'CodeHighlighter blocks with syntax highlighting and copy functionality.';
 
 const props = [
   [ 'children', 'string', 'Yes', 'Get code from children' ],
@@ -55,7 +55,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Code')}
+          {_('Code Highlighter')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -107,16 +107,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Code')}
+        {_('Code Highlighter')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the code format like the following.
+            Import the <C value="<CodeHighlighter>" /> format like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Code from 'frui/view/Code';`}
+          {`import CodeHighlighter from 'frui/view/CodeHighlighter';`}
         </Code>
       </div>
 
@@ -134,7 +134,7 @@ export function Body() {
             </CodeHighlighter>
           </Preview.Example>
           <Preview.Code>
-            {`<Code language="python">\n  print("Hello, world!")\n</Code>`}
+            {`<CodeHighlighter language="python">\n  print("Hello, world!")\n</CodeHighlighter>`}
           </Preview.Code>
         </Preview>
 
@@ -149,10 +149,10 @@ export function Body() {
           className="border border-2 theme-bc-3"
         >
           <Preview.Example center padding>
-            <Code language="ts">{`attributes: [Object object]`}</Code>
+            <CodeHighlighter language="ts">{`attributes: [Object object]`}</CodeHighlighter>
           </Preview.Example>
           <Preview.Code>
-            {`<Code>{\`attributes: [Object object]\`}</Code>`}
+            {`<CodeHighlighter>{\`attributes: [Object object]\`}</CodeHighlighter>`}
           </Preview.Code>
         </Preview>
         <p className="py-4">
@@ -190,7 +190,7 @@ export function Body() {
             </CodeHighlighter>
           </Preview.Example>
           <Preview.Code>
-            {`<Code language="typescript" numbers>\n  console.log("Hello, world!");\n</Code>`}
+            {`<CodeHighlighter language="typescript" numbers>\n  console.log("Hello, world!");\n</CodeHighlighter>`}
           </Preview.Code>
         </Preview>
       </div>
@@ -201,7 +201,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Code>" /> format can be passed the 
+            The <C value="<CodeHighlighter>" /> format can be passed the 
             following props.
           </Translate>
         </p>

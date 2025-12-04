@@ -44,7 +44,7 @@ export function useInput({ onChange, onUpdate }: InputConfig) {
 // Components
 
 /**
- * Generic Input  Component (Main)
+ * Generic Input Component (Main)
  */
 export function Input(props: InputProps) {
   //separate component related props from field attributes
@@ -76,7 +76,7 @@ export function Input(props: InputProps) {
 };
 
 //defaults to input
-export default Object.assign(Input, { 
+export default Object.assign(Input, {
   useInput,
   use: useInput
 });

@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Rating from 'components/view/Rating.js';
+import ImageFormat from 'components/view/ImageFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,15 +14,17 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/rating';
-const title = 'Rating Format';
-const description = 'Rating formats convert values to star ratings.';
+const uri = '/view/image-format';
+const title = 'Image Format';
+const description = 'ImageFormat formats convert values to viewable images.';
 
 const props = [
-  [ 'max', 'number', 'No', 'Max stars' ],
-  [ 'remainder', 'boolean', 'No', 'Add remaining stars between value and max' ],
-  [ 'round', 'string', 'No', 'round, floor or ceil' ],
-  [ 'value', 'string|number', 'Yes', 'Default value' ]
+  [ 'alt', 'string', 'No', 'Alt text for image' ],
+  [ 'className', 'string', 'No', 'Standard HTML class names' ],
+  [ 'height', 'string|number', 'No', 'Height of image' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
+  [ 'value', 'string', 'Yes', 'Default value' ],
+  [ 'width', 'string|number', 'No', 'Width of image' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -50,7 +52,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Rating')}
+          {_('Image Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -102,16 +104,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Rating')}
+        {_('Image Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the rating format like the following.
+            Import the <C value="<ImageFormat>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Rating from 'frui/view/Rating';`}
+          {`import ImageFormat from 'frui/view/ImageFormat';`}
         </Code>
       </div>
 
@@ -120,10 +122,10 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Rating value="3.5" max={5} remainder round="floor" />
+          <ImageFormat value="https://images.wsj.net/im-580612/8SR" width="100" />
         </div>
         <Code language="typescript">
-          {`<Rating value="3.5" max={5} remainder round="floor" />`}
+          {`<Image value="https://images.wsj.net/im-580612/8SR" width="100" />`}
         </Code>
       </div>
 
@@ -133,7 +135,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Rating>" /> format can be passed the 
+            The <C value="<ImageFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

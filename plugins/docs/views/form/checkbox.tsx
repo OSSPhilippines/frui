@@ -338,7 +338,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the checkbox field like the following.
+            Import the <C value="<Checkbox>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -352,7 +352,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Checkbox wraps the HTML standard <code 
+            <C value='Checkbox' /> wraps the HTML standard <code 
               className="text-sm theme-2"
             >{'`<input />`'}</code> element. Therefore, you can 
             use any input attributes as props.
@@ -449,7 +449,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the Checkbox field red.
+            the <C value="<Checkbox>" /> field red.
           </Translate>
         </p>
         <Preview title="Error Example" className="border border-2 theme-bc-3">

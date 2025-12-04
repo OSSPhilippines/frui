@@ -465,7 +465,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the tab group component like the following.
+            Import the <C value="<Tabs>" /> group component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -479,7 +479,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following are some basic examples of tabs.
+            The following are some basic examples of <C value="Tabs" /> component.
           </Translate>
         </p>
         <Examples />

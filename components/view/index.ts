@@ -1,73 +1,98 @@
-export type { ColorProps } from './Color.js';
-export type { CountryProps } from './Country.js';
-export type { CurrencyProps } from './Currency.js';
-export type { DateProps } from './Date.js'; 
-export type { EmailProps } from './Email.js';
-export type { FormulaProps } from './Formula.js';
-export type { ClassStyleProps } from './HTML.js';
-export type { ImageProps } from './Image.js';
-export type { ImagelistProps } from './Imagelist.js';
-export type { JSONProps } from './JSON.js';
-export type { LinkProps } from './Link.js';
-export type { ListProps } from './List.js';
-export type { MarkdownProps } from './Markdown.js';
-export type { MetadataProps } from './Metadata.js';
-export type { NumberProps } from './Number.js';
-export type { OverflowProps } from './Overflow.js';
-export type { PhoneProps } from './Phone.js';
-export type { RatingProps } from './Rating.js';
-export type { SeparatedProps } from './Separated.js';
-export type { TableProps } from './Table.js';
-export type { TaglistProps } from './Taglist.js';
-export type { TextProps } from './Text.js';
-export type { YesnoProps } from './Yesno.js';
+//--------------------------------------------------------------------//
+// View
 
-import Color from './Color.js';
-import Country from './Country.js';
-import Currency from './Currency.js';
-import Date from './Date.js'; 
-import Email from './Email.js';
+//boolean format
+export type { BooleanFormatProps } from './BooleanFormat.js';
+import BooleanFormat from './BooleanFormat.js';
+//color format
+export type { ColorFormatProps } from './ColorFormat.js';
+import ColorFormat from './ColorFormat.js';
+//code highlighter
+export type { CodeHighlighterProps } from './CodeHighlighter.js';
+import CodeHighlighter from './CodeHighlighter.js';
+//country format
+export type { CountryFormatProps } from './CountryFormat.js';
+import CountryFormat from './CountryFormat.js';
+//currency format
+export type { CurrencyFormatProps } from './CurrencyFormat.js';
+import CurrencyFormat from './CurrencyFormat.js';
+//date format
+export type { DateFormatProps } from './DateFormat.js';
+import DateFormat from './DateFormat.js';
+//email link
+export type { EmailLinkProps } from './EmailLink.js';
+import EmailLink from './EmailLink.js';
+//formula
+export type { FormulaProps } from './Formula.js';
 import Formula from './Formula.js';
+//html
+export type { ClassStyleProps } from './HTML.js';
 import HTML from './HTML.js';
-import Image from './Image.js';
-import Imagelist from './Imagelist.js';
-import JSON from './JSON.js';
-import Link from './Link.js';
+//image carousel
+export type { ImageCarouselProps } from './ImageCarousel.js';
+import ImageCarousel from './ImageCarousel.js';
+//image format
+export type { ImageFormatProps } from './ImageFormat.js';
+import ImageFormat from './ImageFormat.js';
+//link format
+export type { LinkFormatProps } from './LinkFormat.js';
+import LinkFormat from './LinkFormat.js';
+//list
+export type { ListProps } from './List.js';
 import List from './List.js';
+//markdown
+export type { MarkdownProps } from './Markdown.js';
 import Markdown from './Markdown.js';
-import Metadata from './Metadata.js';
-import Number from './Number.js';
+//metadata format
+export type { MetadataFormatProps } from './MetadataFormat.js';
+import MetadataFormat from './MetadataFormat.js';
+//number format
+export type { NumberFormatProps } from './NumberFormat.js';
+import NumberFormat from './NumberFormat.js';
+//overflow
+export type { OverflowProps } from './Overflow.js';
 import Overflow from './Overflow.js';
-import Phone from './Phone.js';
-import Rating from './Rating.js';
-import Separated from './Separated.js';
-import Table from './Table.js';
-import Taglist from './Taglist.js';
+//phone link
+export type { PhoneLinkProps } from './PhoneLink.js';
+import PhoneLink from './PhoneLink.js';
+//rating format
+export type { RatingFormatProps } from './RatingFormat.js';
+import RatingFormat from './RatingFormat.js';
+//separate
+export type { SeparateProps } from './Separate.js';
+import Separate from './Separate.js';
+//table format
+export type { TableFormatProps } from './TableFormat.js';
+import TableFormat from './TableFormat.js';
+//tag list format
+export type { TagListFormatProps } from './TagListFormat.js';
+import TagListFormat from './TagListFormat.js';
+//text
+export type { TextProps } from './Text.js';
 import Text from './Text.js';
-import Yesno from './Yesno.js';
 
 export {
-  Color,
-  Country,
-  Currency,
-  Date,
-  Email,
+  BooleanFormat,
+  CodeHighlighter,
+  ColorFormat,
+  CountryFormat,
+  CurrencyFormat,
+  DateFormat,
+  EmailLink,
   Formula,
   HTML,
-  Image,
-  Imagelist,
-  JSON,
-  Link,
+  ImageFormat,
+  ImageCarousel,
+  LinkFormat,
   List,
   Markdown,
-  Metadata,
-  Number,
-  Overflow,
-  Phone,
-  Rating,
-  Separated,
-  Table,
-  Taglist,
+  MetadataFormat,
+  NumberFormat,
+  PhoneLink,
+  RatingFormat,
+  Separate,
+  TableFormat,
+  TagListFormat,
   Text,
-  Yesno
+  Overflow
 };

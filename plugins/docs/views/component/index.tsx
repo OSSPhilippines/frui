@@ -1,29 +1,40 @@
-import { useLanguage } from 'r22n';
+//--------------------------------------------------------------------//
+// Imports
 
+//modules
+import { useLanguage } from 'r22n';
+import { useState } from 'react';
+
+//plugins
 import type { PageProps } from 'plugins/app/types.js';
 import { 
   LayoutPanel, 
   LayoutProvider, 
   ThemeHead
 } from 'plugins/app/index.js';
-import type { Crumb } from 'components/element/Crumbs.js';
 import {
+  Accordion,
   Alert,
-  Badge, 
-  Crumbs,
+  Badge,
+  Button,
+  Bread,
   Loader,
   Table,
-  Thead,
-  Trow,
-  Tcol,
   Tooltip,
-  Tabs
-} from 'components/element';
-import Button from 'components/Button.js';
+  Tabs,
+  Pager,
+  Progress,
+  Dialog,
+  Notifier,
+} from 'components/index.js';
 
+/**
+ * Documentation body component
+ */
 export function Body() {
   //hooks
   const { _ } = useLanguage();
+  const [ open, setOpen ] = useState(false);
   //render
   return (
     <LayoutPanel pathname="/component">
@@ -43,7 +54,21 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  TODO
+                  <Accordion
+                    content="px-2 py-1 text-xs border border-t-0 theme-bc-2"
+                    defaultValue="1"
+                    label="px-2 py-1 cursor-pointer border theme-bc-2"
+                    className="w-full text-sm"
+                  >
+                    <Accordion.Item value="1">
+                      <Accordion.Label>{_('Item 1')}</Accordion.Label>
+                      <Accordion.Content>{_('Item 1 content')}</Accordion.Content>
+                    </Accordion.Item>
+                    <Accordion.Item value="2">
+                      <Accordion.Label>{_('Item 2')}</Accordion.Label>
+                      <Accordion.Content>{_('Item 2 content')}</Accordion.Content>
+                    </Accordion.Item>
+                  </Accordion>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Accordion')}
@@ -56,10 +81,12 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  <Alert curved info className="w-full">
-                    <i className="fas fa-check-circle mr-2"></i>
-                    {_('Success')}
-                  </Alert>
+                  <div className="w-full space-y-2">
+                    <Alert curved success className="w-full text-center">
+                      <i className="fas fa-check-circle mr-2"></i>
+                      {_('Success')}
+                    </Alert>
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Alert')}
@@ -72,7 +99,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
-                  <Badge success pill className="text-xs my-3 inline-block">99</Badge>
+                  <Badge info>99</Badge>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Badge')}
@@ -81,11 +108,15 @@ export function Body() {
             </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = '/component/crumbs'} 
+              onClick={() => window.location.href = '/component/bread'} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  TODO
+                  <Bread className="text-sm">
+                    <Bread.Crumb href="#">{_('Home')}</Bread.Crumb>
+                    <Bread.Crumb href="#">{_('Library')}</Bread.Crumb>
+                    <Bread.Crumb>{_('Data')}</Bread.Crumb>
+                  </Bread>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Bread Crumbs')}
@@ -98,10 +129,66 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
-                  <Button error rounded className="my-1">Submit</Button>
+                  <div className="flex gap-2">
+                    <Button success rounded className="text-xs">
+                      {_('Success')}
+                    </Button>
+                    <Button error rounded className="text-xs">
+                      {_('Error')}
+                    </Button>
+                    <Button info outline rounded className="text-xs">
+                      {_('Info')}
+                    </Button>
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Button')}
+                </h2>
+              </div>
+            </div>
+            <div 
+              className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => window.location.href = '/component/dialog'} 
+            >
+              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <Button info onClick={() => setOpen(true)}>Open Dialog</Button>
+                    <Dialog 
+                      open={open} 
+                      onClose={() => setOpen(false)}
+                      className="theme-bg-0 theme-bc-1 px-w-320 rounded-lg overflow-hidden shadow-lg"
+                    >
+                      <header className="flex items-center p-3 theme-bg-2">
+                        <h3 className="flex-grow font-semibold uppercase">Basic Example</h3>
+                        <Dialog.Close className="text-2xl theme-error cursor-pointer">
+                          &times;
+                        </Dialog.Close>
+                      </header>
+                      <p className="px-3 py-6">This is a basic dialog example.</p>
+                      <footer className="border-t theme-bc-1 p-3 flex justify-end">
+                        <Dialog.Close className="inline-block theme-error">
+                          <Button error>Close</Button>
+                        </Dialog.Close>
+                      </footer>
+                    </Dialog>
+                  </div>
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Dialog')}
+                </h2>
+              </div>
+            </div>
+            <div 
+              className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
+              onClick={() => window.location.href = '/component/fieldset'} 
+            >
+              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
+                <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
+                  TODO
+                </div>
+                <h2 className="my-2 font-semibold text-center uppercase">
+                  {_('Fieldset')}
                 </h2>
               </div>
             </div>
@@ -111,7 +198,7 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
-                  <Loader show={true} />
+                  <Loader info className="m-2">Loading...</Loader>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Loader')}
@@ -120,46 +207,50 @@ export function Body() {
             </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = '/component/modal'} 
+              onClick={() => window.location.href = '/component/notifier'} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[100px] w-full bg-black px-3">
-                  <div className="rounded overflow-hidden w-full">
-                    <header className="flex items-center theme-bg-1 p-2">
-                      <h3 className="flex-grow uppercase font-semibold">Confirm</h3>
-                      <a href="#" className="float-right font-bold">&times;</a>
-                    </header>
-                    <div className="theme-bg-2 p-2">Are You Sure?</div>
-                  </div>
+                <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
+                  <Button
+                    info
+                    rounded
+                    className="text-xs"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      Notifier.notify('success', 'This is a success message!');
+                    }}
+                  >
+                    {_('Click to Notify')}
+                  </Button>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Modal')}
+                  {_('Notifier')}
                 </h2>
               </div>
             </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = '/component/accordion'} 
+              onClick={() => window.location.href = '/component/pager'} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  TODO
+                  <Pager
+                    total={500}
+                    skip={100}
+                    take={50}
+                    radius={2}
+                    start
+                    end
+                    prev
+                    next
+                    className={({ active }) => `
+                      px-2 py-1 mx-1 text-sm cursor-pointer rounded
+                      ${active ? 'theme-bg-2 font-bold' : 'border theme-bc-2'}
+                    `}
+                  />
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Notify')}
-                </h2>
-              </div>
-            </div>
-            <div 
-              className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              onClick={() => window.location.href = '/component/pagination'} 
-            >
-              <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-                <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  TODO
-                </div>
-                <h2 className="my-2 font-semibold text-center uppercase">
-                  {_('Pagination')}
+                  {_('Pager')}
                 </h2>
               </div>
             </div>
@@ -169,7 +260,12 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-                  TODO
+                  <div className="w-full space-y-2">
+                    <Progress info className="theme-white text-xs w-[75%]">75%</Progress>
+                    <Progress success className="theme-white text-xs w-[50%]">50%</Progress>
+                    <Progress warning className="theme-white text-xs w-[35%]">35%</Progress>
+                    <Progress error className="theme-white text-xs w-[20%]">20%</Progress>
+                  </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
                   {_('Progress Bar')}
@@ -181,15 +277,15 @@ export function Body() {
               onClick={() => window.location.href = '/component/table'} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-auto">
-                <div className="flex items-center justify-center h-[100px] w-full bg-black px-3">
+                <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
                   <div className="overflow-auto w-full">
-                    <Table>
-                      <Thead className="theme-bg-2 text-left text-white !py-2">{_('ID')}</Thead>
-                      <Thead className="theme-bg-2 text-left text-white !py-2">{_('Name')}</Thead>
-                      <Trow>
-                        <Tcol className="theme-bg-1 text-left !py-2">1</Tcol>
-                        <Tcol className="theme-bg-1 text-left !py-2">Jacob</Tcol>
-                      </Trow>
+                    <Table className="w-full text-xs">
+                      <Table.Head className="theme-bg-2 text-left text-white py-1">{_('ID')}</Table.Head>
+                      <Table.Head className="theme-bg-2 text-left text-white py-1">{_('Name')}</Table.Head>
+                      <Table.Row>
+                        <Table.Col className="theme-bg-1 text-left py-1">1</Table.Col>
+                        <Table.Col className="theme-bg-1 text-left py-1">John</Table.Col>
+                      </Table.Row>
                     </Table>
                   </div>
                 </div>
@@ -200,50 +296,30 @@ export function Body() {
             </div>
             <div 
               className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
-              
+              onClick={() => window.location.href = '/component/tabs'} 
             >
               <div className="m-2 border theme-bc-2 rounded overflow-auto">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
                   <div className="overflow-auto w-full">
-                    <Tabs 
-                      tabs={[
-                        { 
-                          label: (
-                            <div className="p-2 border border-b-0 theme-bc-2">
-                              Tab 1
-                            </div>
-                          ), 
-                          active: (
-                            <div className="p-2 border border-b-0 theme-bc-2 theme-bg-2">
-                              Tab 1
-                            </div>
-                          ), 
-                          content: (
-                            <div className="p-2 border theme-bc-2">
-                              Content for Tab 1
-                            </div>
-                          )
-                        },
-                        { 
-                          label: (
-                            <div className="p-2 border border-b-0 theme-bc-2">
-                              Tab 2
-                            </div>
-                          ), 
-                          active: (
-                            <div className="p-2 border border-b-0 theme-bc-2 theme-bg-2">
-                              Tab 2
-                            </div>
-                          ), 
-                          content: (
-                            <div className="p-2 border theme-bc-2">
-                              Content for Tab 2
-                            </div>
-                          )
-                        }
-                      ]}  
-                      className="flex items-center" 
-                    />
+                    <Tabs
+                      defaultValue="tab1"
+                      tab={({ active }) => active
+                        ? 'border border-b-0 px-3 py-1 text-xs theme-bc-2 theme-bg-2 font-semibold'
+                        : 'border border-b-0 px-3 py-1 text-xs theme-bc-2 cursor-pointer'
+                      }
+                      content="border theme-bc-2 p-2 text-xs"
+                    >
+                      <Tabs.Head className="flex">
+                        <Tabs.Label value="tab1">{_('Tab 1')}</Tabs.Label>
+                        <Tabs.Label value="tab2">{_('Tab 2')}</Tabs.Label>
+                        <Tabs.Label value="tab3">{_('Tab 3')}</Tabs.Label>
+                      </Tabs.Head>
+                      <Tabs.Body>
+                        <Tabs.Content value="tab1">{_('Content 1')}</Tabs.Content>
+                        <Tabs.Content value="tab2">{_('Content 2')}</Tabs.Content>
+                        <Tabs.Content value="tab3">{_('Content 3')}</Tabs.Content>
+                      </Tabs.Body>
+                    </Tabs>
                   </div>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">
@@ -257,10 +333,8 @@ export function Body() {
             >
               <div className="m-2 border theme-bc-2 rounded overflow-hidden">
                 <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
-                  <Tooltip text="Hello World">
-                    <Button warning rounded className="my-1">
-                      Hover over me
-                    </Button>
+                  <Tooltip warning text="This is a tooltip" hover>
+                    <Button warning>Hover over me</Button>
                   </Tooltip>
                 </div>
                 <h2 className="my-2 font-semibold text-center uppercase">

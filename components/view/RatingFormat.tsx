@@ -6,7 +6,7 @@ import type { JSX } from 'react';
 //--------------------------------------------------------------------//
 // Types
 
-export type RatingProps = { 
+export type RatingFormatProps = { 
   value: string|number,
   max?: number,
   remainder?: boolean,
@@ -17,9 +17,9 @@ export type RatingProps = {
 // Components
 
 /**
- * Rating Format Component (Main)
+ * RatingFormat Component (Main)
  */
-export function Rating(props: RatingProps) {
+export function RatingFormat(props: RatingFormatProps) {
   const {
     value,
     max,
@@ -41,5 +41,5 @@ export function Rating(props: RatingProps) {
   return (<>{stars}</>);
 };
 
-//defaults to rating
-export default Rating;
+//defaults to rating format
+export default RatingFormat;

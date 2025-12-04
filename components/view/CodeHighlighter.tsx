@@ -31,6 +31,9 @@ export type CodeHighlighterProps = ClassStyleProps & {
 //--------------------------------------------------------------------//
 // Components
 
+/**
+ * CodeHighlighter Component (Main)
+ */
 export function CodeHighlighter(props: CodeHighlighterProps) {
   //props
   const { 
@@ -56,4 +59,5 @@ export function CodeHighlighter(props: CodeHighlighterProps) {
   );
 };
 
+//defaults to code highlighter
 export default CodeHighlighter;

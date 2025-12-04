@@ -105,6 +105,9 @@ export async function getLanguageExtension(
 //--------------------------------------------------------------------//
 // Hooks
 
+/**
+ * CodeEditor Hook Aggregate
+ */
 export function useCodeEditor(config: CodeEditorConfig) {
   //config
   const { 
@@ -193,7 +196,7 @@ export function useCodeEditor(config: CodeEditorConfig) {
 // Components
 
 /**
- * Code Editor Component
+ * CodeEditor Component (Main)
  */
 export function CodeEditor(props: CodeEditorProps) {
   //props

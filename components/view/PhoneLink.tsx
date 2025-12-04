@@ -2,9 +2,9 @@
 // Imports
 
 //types
-import type { LinkProps } from './Link.js';
+import type { LinkFormatProps } from './LinkFormat.js';
 //components
-import Link from './Link.js';
+import LinkFormat from './LinkFormat.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -12,19 +12,19 @@ import Link from './Link.js';
 /**
  * Phone Props
  */
-export type PhoneProps = LinkProps;
+export type PhoneLinkProps = LinkFormatProps;
 
 //--------------------------------------------------------------------//
 // Components
 
 /**
- * Phone Format Component (Main)
+ * PhoneLink Format Component (Main)
  */
-export function Phone({ value, ...attributes }: PhoneProps) {
+export function PhoneLink({ value, ...attributes }: PhoneLinkProps) {
   return (
-    <Link {...attributes} value={`tel:${value}`} label={value} />
+    <LinkFormat {...attributes} value={`tel:${value}`} label={value} />
   );
 };
 
-//defaults to phone
-export default Phone;
+//defaults to phone link
+export default PhoneLink;

@@ -55,6 +55,9 @@ export type TextEditorProps = {
 //--------------------------------------------------------------------//
 // Hooks
 
+/**
+ * TextEditor Hook Aggregate
+ */
 export function useTextEditor(config: TextEditorConfig) {
   const {
     value = '',
@@ -428,6 +431,9 @@ export function useTextEditor(config: TextEditorConfig) {
 //--------------------------------------------------------------------//
 // Components
 
+/**
+ * TextEditor Component (Main)
+ */
 export function TextEditor(props: TextEditorProps) {
   //destructure props and separate out attributes to pass to hidden input
   const {
@@ -1252,4 +1258,7 @@ export function TextEditor(props: TextEditorProps) {
 };
 
 //defaults to text editor
-export default TextEditor;
+export default Object.assign(TextEditor, { 
+  useTextEditor,
+  use: useTextEditor
+});

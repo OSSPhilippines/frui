@@ -508,7 +508,7 @@ export function SliderConnection(props: SliderConnectionProps) {
 };
 
 /**
- * Main slider component
+ * Slider Component (Main)
  */
 export function Slider(props: SliderProps) {
   //props
@@ -581,7 +581,7 @@ export function Slider(props: SliderProps) {
     track: track ? getSlotStyles(track, {}): {}
   };
   //add color props to handle and track styles
-  const colors = ColorTool.get(props, 'bgc').config;;
+  const colors = ColorTool.get(props, 'bgc').config;
   slots.handles = { ...slots.handles, ...colors };
   slots.connection = { ...slots.connection, ...colors };
   //render
@@ -628,11 +628,13 @@ export function Slider(props: SliderProps) {
   );
 };
 
+//defaults to slider
 export default Object.assign(Slider, {
+  useSlider,
   Context: SliderContext,
   Connection: SliderConnection,
   Handle: SliderHandle,
   Input: SliderInput,
   Track: SliderTrack,
-  useSlider
+  use: useSlider
 });

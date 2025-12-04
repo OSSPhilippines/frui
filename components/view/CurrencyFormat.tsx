@@ -10,7 +10,7 @@ import countries from '../data/countries.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type CurrencyProps = {
+export type CurrencyFormatProps = {
   value: string, 
   flag?: boolean, 
   text?: boolean,
@@ -25,9 +25,9 @@ export type CurrencyProps = {
 // Components
 
 /**
- * Currency Format Component (Main)
+ * CurrencyFormat Component (Main)
  */
-export function Currency(props: CurrencyProps) {
+export function CurrencyFormat(props: CurrencyFormatProps) {
   const { 
     value, 
     flag = true, 
@@ -100,5 +100,5 @@ export function Currency(props: CurrencyProps) {
   );
 };
 
-//defaults to currency
-export default Currency;
+//defaults to currency format
+export default CurrencyFormat;

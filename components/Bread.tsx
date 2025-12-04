@@ -415,6 +415,7 @@ export function Bread(props: BreadProps) {
   );
 };
 
+//defaults to bread
 export default Object.assign(Bread, {
   useBread,
   useBreadCrumb,

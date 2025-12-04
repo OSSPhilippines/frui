@@ -97,4 +97,8 @@ export function When(props: WhenProps & ChildrenProps) {
   return null;
 };
 
-export default Object.assign(When, { Otherwise, nextCondition });
+//defaults to when
+export default Object.assign(When, { 
+  Otherwise,
+  nextCondition
+});

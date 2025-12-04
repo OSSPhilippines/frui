@@ -15,9 +15,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/currency';
-const title = 'Currency Field';
-const description = 'Currency fields in FRUI, allow users select from a list of '
+const uri = '/form/currency-select';
+const title = 'CurrencySelect Field';
+const description = 'CurrencySelect fields in FRUI, allow users select from a list of '
   + 'count riesaround the world.';
 
 const props = [
@@ -123,7 +123,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the currency field like the following.
+            Import the <C value="<CurrencySelect>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -138,7 +138,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             The following is a basic example of 
-            a <C l value="CurrencySelect" /> field.
+            a <C value="CurrencySelect" /> field.
           </Translate>
         </p>
         <Preview 
@@ -159,8 +159,8 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can add a search field to the dropdown by passing
-            the <C value="searchable" /> prop to the 
-            <C l value="CurrencySelect" /> component.
+            the <C value="searchable" /> prop to 
+            the <C value="CurrencySelect" /> component.
           </Translate>
         </p>
         <Preview 
@@ -180,9 +180,9 @@ export function Body() {
       <div className="relative z-[98]">
         <p className="py-4">
           <Translate>
-            You can enable multiple selection by passing the
-            <C value="multiple" /> prop to the
-            <C l value="CurrencySelect" /> component.
+            You can enable multiple selection by passing 
+            the <C value="multiple" /> prop to 
+            the <C value="CurrencySelect" /> component.
           </Translate>
         </p>
         <Preview
@@ -203,7 +203,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             The following example makes use of all the possible 
-            events for <C value="Currency" />.
+            events for <C value="CurrencySelect" />.
           </Translate>
         </p>
         <Preview
@@ -280,7 +280,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the Currency field red.
+            the <C value="<CurrencySelect>" /> field red.
           </Translate>
         </p>
         <Preview
@@ -303,7 +303,7 @@ export function Body() {
         <Translate>
           You can use
           the <C value="frui-form-currency-select" />, <C value="frui-form-select-control" />, <C value="frui-form-select-placeholder" />, <C value="frui-form-select-dropdown" />, <C value="frui-form-select-search" />, <C value="frui-form-select-search-control" />, <C value="frui-form-select-search-icon" />, <C value="frui-form-select-options" />, <C value="frui-form-select-option" />,
-          and <C value="frui-form-select-label" /> CSS classes to globally theme the currency field.
+          and <C value="frui-form-select-label" /> CSS classes to globally theme the currency select field.
         </Translate>
       </p>
                   

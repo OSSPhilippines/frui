@@ -57,7 +57,7 @@ export function toDatetimeInputString(date?: Date) {
 // Hooks
 
 /**
- * Datetime Hook Aggregate
+ * DatetimeInput Hook Aggregate
  */
 export function useDatetimeInput(config: DatetimeInputConfig) {
   //props
@@ -94,7 +94,7 @@ export function useDatetimeInput(config: DatetimeInputConfig) {
 // Components
 
 /**
- * Datetime  Component
+ * DatetimeInput Component (Main)
  */
 export function DatetimeInput(props: DatetimeInputProps) {
   //props
@@ -130,7 +130,7 @@ export function DatetimeInput(props: DatetimeInputProps) {
   );
 };
 
-//defaults to datetime
+//defaults to datetime input
 export default Object.assign(DatetimeInput, {
   toDate,
   toDatetimeString,

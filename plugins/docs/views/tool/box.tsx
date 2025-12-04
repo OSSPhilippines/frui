@@ -706,7 +706,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The box tool is a low-level container component for adding 
+            The <C value="<Box>" /> tool is a low-level container component for adding 
             styling props. Import the box tool like the following.
           </Translate>
         </p>
@@ -721,7 +721,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following are some basic examples of boxes.
+            The following are some basic examples of <C value="<Box>" /> component.
           </Translate>
         </p>
         <Examples />

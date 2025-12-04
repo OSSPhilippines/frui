@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Date from 'components/view/Date.js';
+import RatingFormat from 'components/view/RatingFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,34 +14,15 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/date';
-const title = 'Date Format';
-const description = 'Date formats convert values to date displays.';
+const uri = '/view/rating-format';
+const title = 'Rating Format';
+const description = 'RatingFormat formats convert values to star ratings.';
 
 const props = [
-  [ 'format', 'string', 'No', 'Date format' ],
-  [ 'locale', 'string', 'No', 'Localized settings' ],
-  [ 'value', 'string|number|Date', 'Yes', 'Default value' ]
-];
-
-const examples = [
-`<Date />                                  // 2024-04-21T15:27:42+08:00
-<Date format="MMMM Do YYYY, h:mm:ss a" /> // April 21st 2024, 3:27:14 pm
-<Date format="dddd" />                    // Sunday
-<Date format="MMM Do YY" />               // Apr 21st 24
-<Date format="YYYY [escaped] YYYY" />     // 2024 escaped 2024
-<Date format="LT" />                      // 3:24 PM
-<Date format="LTS" />                     // 3:24:21 PM
-<Date format="L" />                       // 04/21/2024
-<Date format="l" />                       // 4/21/2024
-<Date format="LL" />                      // April 21, 2024
-<Date format="ll" />                      // Apr 21, 2024
-<Date format="LLL" />                     // April 21, 2024 3:24 PM
-<Date format="lll" />                     // Apr 21, 2024 3:24 PM
-<Date format="LLL" />                     // Sunday, April 21, 2024 3:24 PM
-<Date format="llll" />                    // Sun, Apr 21, 2024 3:26 PM
-<Date format="ago" />                     // 5 minutes ago
-<Date format="a" />                       // 5m`
+  [ 'max', 'number', 'No', 'Max stars' ],
+  [ 'remainder', 'boolean', 'No', 'Add remaining stars between value and max' ],
+  [ 'round', 'string', 'No', 'round, floor or ceil' ],
+  [ 'value', 'string|number', 'Yes', 'Default value' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -69,7 +50,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Date')}
+          {_('Rating Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -121,16 +102,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Date')}
+        {_('Rating Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the date format like the following.
+            Import the <C value="<RatingFormat>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Date from 'frui/view/Date';`}
+          {`import RatingFormat from 'frui/view/RatingFormat';`}
         </Code>
       </div>
 
@@ -139,47 +120,20 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Date value="2024-04-20" />
+          <RatingFormat value="3.5" max={5} remainder round="floor" />
         </div>
         <Code language="typescript">
-          {`<Date value="2024-04-20" />`}
+          {`<RatingFormat value="3.5" max={5} remainder round="floor" />`}
         </Code>
       </div>
 
-      <h2 id="customize" className="uppercase font-bold text-lg mt-8">
-        {_('Customize')}
-      </h2>
-      <p className="py-4">
-        <Translate>
-          You can apply different locales and formats to the 
-          <C l value="Date" /> format.
-        </Translate>
-      </p>
-
-      <h3 className="font-semibold text-md mt-8">
-        {_('Format')}
-      </h3>
-      <p className="py-4">
-        <Translate>
-          Use <C value="format" /> prop to format the date output.
-        </Translate>
-      </p>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Date format="MMMM Do YYYY, h:mm a" value="2024-04-20" />
-        </div>
-        <Code language="typescript">
-          {examples[0]}
-        </Code>
-      </div>
-      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Date>" /> format can be passed the 
+            The <C value="<RatingFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

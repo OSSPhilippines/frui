@@ -87,7 +87,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Slider Field')}
+          {_('Slider')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -288,12 +288,12 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Slider Field')}
+        {_('Slider')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the file field like the following.
+            Import the <C value="<Slider>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -307,7 +307,7 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following are some basic examples of slider fields.
+            The following are some basic examples of <C value="Slider" /> component.
           </Translate>
         </p>
         <Examples />
@@ -365,10 +365,9 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            You can pass the <C 
-              value="error" 
-            /> prop to highlight the input field 
-            red.
+            You can pass 
+            the <C value="error" /> prop to highlight 
+            the <C value="<Slider>" /> field red.
           </Translate>
         </p>
         <Preview 
@@ -389,13 +388,9 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can add your own custom class to files
-          or use any of the respective 
-          <C l value="frui-form-file" />, 
-          <C l value="frui-form-file-control" />, 
-          <C l value="frui-form-file-reset" />, 
-          <C l value="frui-form-file-file" />, and 
-          <C l value="frui-form-file-link" /> CSS classes. 
+          You can add your own custom class to files or use any of 
+          the respective <C value="frui-form-file" />, <C value="frui-form-file-control" />, <C value="frui-form-file-reset" />, <C value="frui-form-file-file" />, 
+          and <C value="frui-form-file-link" /> CSS classes. 
         </Translate>
       </p>
       

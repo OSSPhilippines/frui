@@ -448,7 +448,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the dialog component like the following.
+            Import the <C value="<Dialog>" /> component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -462,7 +462,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following are some basic examples of dialogs.
+            The following are some basic examples of <C value="Dialog" /> component.
           </Translate>
         </p>
         <Examples />

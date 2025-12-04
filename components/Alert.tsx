@@ -72,5 +72,5 @@ export function Alert(props: AlertProps) {
   );
 };
 
-//defaults to button
+//defaults to alert
 export default Alert;

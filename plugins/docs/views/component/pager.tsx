@@ -155,7 +155,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the pager component like the following.
+            Import the <C value="<Pager>" /> component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -169,7 +169,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following example shows how to setup the basic pager component.
+            The following example shows how to setup the basic <C value="Pager" /> component.
           </Translate>
         </p>
         <Preview 

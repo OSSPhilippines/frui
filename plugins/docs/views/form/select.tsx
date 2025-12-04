@@ -413,7 +413,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the select field like the following.
+            Import the <C value="<Select>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -425,6 +425,12 @@ export function Body() {
         {_('Examples')}
       </h2>
       <div className="relative z-[101]">
+        <p className="py-4">
+          <Translate>
+            The following is a basic example of  
+            a <C value="Select" /> field.
+          </Translate>
+        </p>
         <Examples />
       </div>
 
@@ -434,8 +440,8 @@ export function Body() {
       <div className="relative z-[100]">
         <p className="py-4">
           <Translate>
-            The following is a basic example of a 
-            <C l value="Select" /> field.
+            The following is a basic example of 
+            a <C value="Select" /> field.
           </Translate>
         </p>
 
@@ -839,7 +845,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the Select field red.
+            the <C value="<Select>" /> field red.
           </Translate>
         </p>
         <Preview 

@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Country from 'components/view/Country.js';
+import TableFormat from 'components/view/TableFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,19 +14,25 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/country';
-const title = 'Country Format';
-const description = 'Country formats convert values to country displays.';
+const uri = '/view/table-format';
+const title = 'Table Format';
+const description = 'TableFormat formats format values into a table.';
 
 const props = [
-  [ 'className', 'string', 'No', 'Standard HTML class names' ],
-  [ 'flag', 'boolean', 'No', 'Show flag' ],
-  [ 'lg', 'boolean', 'No', 'Show large country flag' ],
-  [ 'md', 'boolean', 'No', 'Show medium size country flag' ],
-  [ 'sm', 'boolean', 'No', 'Show small country flag' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
-  [ 'text', 'boolean', 'No', 'Show country text' ],
-  [ 'value', 'string', 'Yes', 'Default value' ]
+  [ 'className', 'string', 'No', 'Standard HTML class names applied to all cells' ],
+  [ 'stripe', '[string, string, string]', 'No', 'Background color settings for head and rows' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all cells' ],
+  [ 'value', 'string', 'Yes', 'Default value' ],
+];
+
+const examples = [
+`<Table 
+  value={[
+    { id: 1, name: 'John Doe', age: 30, created: '2021-01-01' },
+    { id: 2, name: 'Jane Doe', age: 25, created: '2021-01-02' }
+  ]} 
+  stripes={['#999999', '#EFEFEF', '#CCCCCC']} 
+/>`
 ];
 
 //--------------------------------------------------------------------//
@@ -54,7 +60,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Country')}
+          {_('Table Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -106,84 +112,43 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Country')}
+        {_('Table Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the country format like the following.
+            Import the <C value="<TableFormat>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Country from 'frui/view/Country';`}
+          {`import TableFormat from 'frui/view/TableFormat';`}
         </Code>
       </div>
 
       <h2 id="basic" className="uppercase font-bold text-lg mt-8">
         {_('Basics')}
       </h2>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Country value="US" />
-        </div>
-        <Code language="typescript">
-          {`<Country value="US" />`}
-        </Code>
-      </div>
-
-      <h2 id="customize" className="uppercase font-bold text-lg mt-8">
-        {_('Customize')}
-      </h2>
-      <p className="py-4">
+      <p>
         <Translate>
-          You can apply different sizes to the 
-          <C l value="Country" /> format.
-        </Translate>
-      </p>
-
-      <h3 className="font-semibold text-md mt-8">
-        {_('Flag')}
-      </h3>
-      <p className="py-4">
-        <Translate>
-          Use <C value="flag" /> prop to hide the country flag.
+          The header values are based on the keys of the first row.
         </Translate>
       </p>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Country flag={false} value="US" />
+          <div className="text-left text-black w-full">
+            <TableFormat 
+              value={[
+                { id: 1, name: 'John Doe', age: 30, created: '2021-01-01' },
+                { id: 2, name: 'Jane Doe', age: 25, created: '2021-01-02' }
+              ]} 
+              stripes={['#999999', '#EFEFEF', '#CCCCCC']} 
+            />
+          </div>
         </div>
         <Code language="typescript">
-          {`<Country flag={false} value="US" />`}
+          {examples[0]}
         </Code>
       </div>
-
-      <h3 className="font-semibold text-md mt-8">
-        {_('Sizes')}
-      </h3>
-      <p className="py-4">
-        <Translate>
-          Use <C value="sm" />, <C value="md" />, or <C value="lg" r /> 
-          props to change the size of the country flag.
-        </Translate>
-      </p>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Country lg value="US" />
-        </div>
-        <Code language="typescript">
-          {`<Country lg value="US" />`}
-        </Code>
-      </div>
-
-      <p className="py-4">
-        <Translate>
-          You can also add your own custom class to 
-          <C l value="Country" /> format or use any combination of 
-          <C l value="frui-format-country" />, and
-          <C l value="frui-format-country-flag" /> CSS classes.
-        </Translate>
-      </p>
       
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
@@ -191,7 +156,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Country>" /> format can be passed the 
+            The <C value="<TableFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import JSON from 'components/view/JSON.js';
+import LinkFormat from 'components/view/LinkFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,12 +14,15 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/json';
-const title = 'JSON Format';
-const description = 'JSON formats convert values to pretty JSON.';
+const uri = '/view/link-format';
+const title = 'Link Format';
+const description = 'LinkFormat formats convert values to clickable actions.';
 
 const props = [
-  [ 'value', 'Object', 'Yes', 'Default value' ]
+  [ 'className', 'string', 'No', 'Standard HTML class names' ],
+  [ 'label', 'string', 'No', 'Label text' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
+  [ 'value', 'string', 'Yes', 'Default value' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -47,7 +50,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('JSON')}
+          {_('Link Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -99,16 +102,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('JSON')}
+        {_('Link Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the JSON format like the following.
+            Import the <C value="<LinkFormat>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import JSON from 'frui/view/JSON';`}
+          {`import LinkFormat from 'frui/view/LinkFormat';`}
         </Code>
       </div>
 
@@ -117,22 +120,20 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <div className="w-full text-left">
-            <JSON value={{foo: 'foo', bar: 'bar'}} />
-          </div>
+          <LinkFormat className="theme-2" value="https://images.wsj.net/im-580612/8SR" label="Click Link" />
         </div>
         <Code language="typescript">
-          {`<JSON value={{foo: 'foo', bar: 'bar'}} />`}
+          {`<LinkFormat className="theme-2" value="https://images.wsj.net/im-580612/8SR" label="Click Link" />`}
         </Code>
       </div>
-
+      
       <h2 id="api" className="uppercase font-bold text-lg mt-8">
         {_('API Reference')}
       </h2>
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<JSON>" /> format can be passed the 
+            The <C value="<LinkFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

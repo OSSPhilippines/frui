@@ -17,7 +17,7 @@ import Docs from '../../layout/Docs.js';
 // Constants
 
 const uri = '/form/suggest-input';
-const title = 'Suggest Input Field';
+const title = 'Suggestnput Field';
 const description = 'Suggest Input is a text input field that provides a list of '
   + 'suggestions as the user types.';
 
@@ -307,7 +307,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the input field like the following.
+            Import the <C value="<SuggestInput>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -321,8 +321,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            The following is a basic example of an 
-            <C l value="<SuggestInput>" /> field.
+            The following is a basic example of 
+            an <C value="SuggestInput" /> field.
           </Translate>
         </p>
         <Examples />
@@ -494,7 +494,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the SuggestInput field red.
+            the <C value="<SuggestInput>" /> field red.
           </Translate>
         </p>
         <Preview 
@@ -521,7 +521,7 @@ export function Body() {
         <Translate>
           You can use
           the <C value="SuggestInput" />, <C value="frui-form-suggest-input" />, <C value="frui-form-suggest-input-dropdown" />, <C value="frui-form-suggest-input-options" />,
-          and <C value="frui-form-suggest-input-option" /> CSS classes to globally theme suggest input.
+          and <C value="frui-form-suggest-input-option" /> CSS classes to globally theme suggest input field.
         </Translate>
       </p>
       

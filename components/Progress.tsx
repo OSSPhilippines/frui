@@ -7,18 +7,14 @@ import type {
   ChildrenProps,
   HTMLElementProps
 } from './types.js';
-
+import type { BorderRadiusProps } from './helpers/tools/BorderRadiusTool.js';
 import type { 
-  BackgroundColorProps, 
-  ColorProps 
+  ColorProps, 
+  BackgroundColorProps 
 } from './helpers/tools/ColorTool.js';
-import type { 
-  BorderRadiusProps 
-} from './helpers/tools/BorderRadiusTool.js';
-
+import Box from './Box.js';
 import BorderRadiusTool from './helpers/tools/BorderRadiusTool.js';
 import ColorTool from './helpers/tools/ColorTool.js';
-import Box from './Box.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -88,6 +84,7 @@ export function Progress(props: ProgressProps) {
     width = 0,
     height,
     container = {},
+    //html 
     style,
     ...attributes 
   } = Box.removeThemeProps(props);
@@ -115,6 +112,7 @@ export function Progress(props: ProgressProps) {
     //add height prop
     { height }
   );
+
   //render
   return (
     <ProgressContainer {...container}>
@@ -126,6 +124,4 @@ export function Progress(props: ProgressProps) {
 };
 
 //defaults to progress
-export default Object.assign(Progress, {
-  Container: ProgressContainer
-});
+export default Object.assign(Progress, { Container: ProgressContainer });

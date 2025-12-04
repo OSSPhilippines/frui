@@ -25,7 +25,7 @@ export type MarkdownEditorProps = TextareaProps;
 // Hooks
 
 /**
- * Markdown Hook Aggregate
+ * MarkdownEditor Hook Aggregate
  */
 export function useMarkdownEditor({ onUpdate }: MarkdownEditorConfig) {
   const [ mode, setMode ] = useState<'preview'|'edit'>('edit');
@@ -45,7 +45,7 @@ export function useMarkdownEditor({ onUpdate }: MarkdownEditorConfig) {
 // Components
 
 /**
- * Form Markdown Component (Main)
+ * Form MarkdownEditor Component (Main)
  */
 export function MarkdownEditor(props: MarkdownEditorProps) {
   //props
@@ -64,13 +64,13 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
   const previewStyles = {
     display: mode === 'preview' ? 'block' : 'none'
   };
-  // determine current markdown content
+  // determine current markdown editor content
   const current = (children?.toString() 
     || value 
     || defaultValue
     || ''
   ) as string;
-  // render markdown to static markup
+  // render markdown editor to static markup
   const markdown = renderToStaticMarkup(
     <MarkdownFrame children={current} /> as ReactNode
   );
@@ -105,7 +105,7 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
   );
 };
 
-//defaults to markdown
+//defaults to markdown editor
 export default Object.assign(MarkdownEditor, { 
   useMarkdownEditor,
   use: useMarkdownEditor

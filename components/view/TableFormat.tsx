@@ -9,7 +9,7 @@ import { Table, Thead, Tcol, Trow } from '../Table.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type TableProps = { 
+export type TableFormatProps = { 
   style?: CSSProperties,
   className?: string,
   value: Record<string, string|number>[],
@@ -20,9 +20,9 @@ export type TableProps = {
 // Components
 
 /**
- * Table Format Component (Main)
+ * TableFormat Component (Main)
  */
-export function TableFormat(props: TableProps) {
+export function TableFormat(props: TableFormatProps) {
   const { style = {}, className, value, stripes } = props;
   if (!value || !value.length) return null;
   const styles = {

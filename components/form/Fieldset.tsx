@@ -171,7 +171,7 @@ export function make<ValueType = any>(
 };
 
 //defaults to make
-export default Object.assign(make, {
+export default Object.assign(make, { 
   useFieldset,
   use: useFieldset
 });

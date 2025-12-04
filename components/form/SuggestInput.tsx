@@ -114,7 +114,7 @@ export function SuggestInputControl(props: SuggestInputControlProps) {
 };
 
 /**
- * SuggestInput  Component (Main)
+ * SuggestInput Component (Main)
  */
 export function SuggestInput(props: SuggestInputProps) {
   //props
@@ -195,7 +195,7 @@ export function SuggestInput(props: SuggestInputProps) {
   );
 };
 
-//defaults to autocomplete
+//defaults to suggest input
 export default Object.assign(SuggestInput, {
   getAbsolutePosition: Dropdown.getAbsolutePosition,
   getComponent: Dropdown.getComponent,

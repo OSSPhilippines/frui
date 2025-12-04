@@ -43,7 +43,7 @@ export type ColorPickerProps = {
 export type ColorInputProps = ExtendsType<InputProps, ColorInputConfig> & {
   //slot: color input styles
   input?: SlotStyleProp,
-  //slot: color picker styles
+  //slot: color input styles
   picker?: SlotStyleProp
 };
 
@@ -182,7 +182,7 @@ export function useColorInput(config: ColorInputConfig) {
 // Components
 
 /**
- * Color Input Component
+ * ColorInput Component (Main)
  */
 export function ColorInput(props: ColorInputProps) {
   //props
@@ -262,6 +262,7 @@ export function ColorInput(props: ColorInputProps) {
   );
 };
 
+//defaults to color input
 export default Object.assign(ColorInput, {
   clamp,
   componentToHex,

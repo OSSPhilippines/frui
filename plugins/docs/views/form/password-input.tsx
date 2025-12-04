@@ -15,7 +15,7 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/form/password';
+const uri = '/form/password-input';
 const title = 'PasswordInput Field';
 const description = 'PasswordInput is a field component that wraps the standard '
   + 'HTML input element for password values.';
@@ -56,7 +56,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Password')}
+          {_('Password Input')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -93,12 +93,12 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Password')}
+        {_('Password Input')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the password field like the following.
+            Import the <C value="<PasswordInput>" /> field like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -112,8 +112,8 @@ export function Body() {
       <div>
         <p className="py-4">
           <Translate>
-            Number fields display commas and can limit decimal length.
-            The value for numbers removes commas.
+            <C value="PasswordInput" /> fields allow users to enter 
+            and toggle password visibility securely.
           </Translate>
         </p>
         <Preview 
@@ -216,7 +216,7 @@ export function Body() {
         <p className="py-4">
           <Translate>
             You can pass the <C value="error" /> prop to highlight 
-            the input field red.
+            the <C value="<PasswordInput>" /> field red.
           </Translate>
         </p>
         <Preview 
@@ -239,7 +239,7 @@ export function Body() {
         <Translate>
           You can use 
           the <C value="frui-form-password" />, <C value="frui-form-password-control" />, 
-          and <C value="frui-form-password-toggle" /> CSS classes to globally theme the password field.
+          and <C value="frui-form-password-toggle" /> CSS classes to globally theme the password input field.
         </Translate>
       </p>
       

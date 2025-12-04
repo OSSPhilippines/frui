@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Currency from 'components/view/Currency.js';
+import CurrencyFormat from 'components/view/CurrencyFormat.js';
 
 //plugins
 import type { PageProps } from 'plugins/app/types.js';
@@ -14,9 +14,9 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/currency';
+const uri = '/view/currency-format';
 const title = 'Currency Format';
-const description = 'Currency formats convert values to currency displays.';
+const description = 'CurrencyFormat formats convert values to currency displays.';
 
 const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
@@ -54,7 +54,7 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Currency')}
+          {_('Currency Format')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
@@ -106,16 +106,16 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Currency')}
+        {_('Currency Format')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the currency format like the following.
+            Import the <C value="<CurrencyFormat>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Currency from 'frui/view/Currency';`}
+          {`import CurrencyFormat from 'frui/view/CurrencyFormat';`}
         </Code>
       </div>
 
@@ -124,10 +124,10 @@ export function Body() {
       </h2>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Currency value="USD" />
+          <CurrencyFormat value="USD" />
         </div>
         <Code language="typescript">
-          {`<Currency value="USD" />`}
+          {`<CurrencyFormat value="USD" />`}
         </Code>
       </div>
 
@@ -136,8 +136,8 @@ export function Body() {
       </h2>
       <p className="py-4">
         <Translate>
-          You can apply different sizes to the 
-          <C l value="Currency" /> format.
+          You can apply different sizes to 
+          the <C value="CurrencyFormat" /> format.
         </Translate>
       </p>
 
@@ -151,10 +151,10 @@ export function Body() {
       </p>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Currency flag={false} value="USD" />
+          <CurrencyFormat flag={false} value="USD" />
         </div>
         <Code language="typescript">
-          {`<Currency flag={false} value="USD" />`}
+          {`<CurrencyFormat flag={false} value="USD" />`}
         </Code>
       </div>
 
@@ -169,19 +169,19 @@ export function Body() {
       </p>
       <div className="curved overflow-hidden">
         <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Currency lg value="USD" />
+          <CurrencyFormat lg value="USD" />
         </div>
         <Code language="typescript">
-          {`<Currency lg value="USD" />`}
+          {`<CurrencyFormat lg value="USD" />`}
         </Code>
       </div>
 
       <p className="py-4">
         <Translate>
-          You can also add your own custom class to 
-          <C l value="Currency" /> format or use any combination of 
-          <C l value="frui-format-country" />, and
-          <C l value="frui-format-country-flag" /> CSS classes.
+          You can also add your own custom class 
+          to <C value="Currency" /> format or use any combination 
+          of <C value="frui-format-country" />, 
+          and <C value="frui-format-country-flag" /> CSS classes.
         </Translate>
       </p>
       
@@ -191,7 +191,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Currency>" /> format can be passed the 
+            The <C value="<CurrencyFormat>" /> format can be passed the 
             following props.
           </Translate>
         </p>

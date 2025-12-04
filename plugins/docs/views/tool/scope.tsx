@@ -156,7 +156,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the scope tool like the following.
+            Import the <C value="<Scope>" /> tool component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -209,9 +209,10 @@ export function Body() {
 
         <p className="py-2">
           <Translate>
-            You can also create a scope using a hash object with the 
-            <C l value="hash" /> prop. In this case, the keys of the hash 
-            become the scope keys, and the corresponding values become 
+            You can also create a scope using a hash object with 
+            the <C l value="hash" /> prop. In this case, the keys of 
+            the hash become the scope keys, 
+            and the corresponding values become 
             the scope values.
           </Translate>
         </p>
@@ -241,8 +242,8 @@ export function Body() {
           <Translate>
             Finally, you can create a scope with a single value using 
             the <C value="value" /> prop. In this case, the entire value 
-            is passed to the scope, and you can access it using the 
-            <C value="Scope.use()" /> hook.
+            is passed to the scope, and you can access it using 
+            the <C value="Scope.use()" /> hook.
           </Translate>
         </p>
 

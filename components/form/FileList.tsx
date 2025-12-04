@@ -12,12 +12,12 @@ import Input, { useInput } from './Input.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type FilelistConfig = ExtendsType<InputConfig, {
+export type FileListConfig = ExtendsType<InputConfig, {
   defaultValue?: string[],
   onUpload?: (files: File[], update: (urls: string[]) => void) => void
 }>;
 
-export type FilelistProps = ExtendsType<InputProps, {
+export type FileListProps = ExtendsType<InputProps, {
   uploading?: string,
   defaultValue?: string[],
   value?: string[],
@@ -31,9 +31,9 @@ export type FilelistProps = ExtendsType<InputProps, {
 // Hooks
 
 /**
- * Filelist Hook Aggregate
+ * FileList Hook Aggregate
  */
-export function useFileList(config: FilelistConfig) {
+export function useFileList(config: FileListConfig) {
   const {
     defaultValue,
     onChange, 
@@ -82,9 +82,9 @@ export function useFileList(config: FilelistConfig) {
 // Components
 
 /**
- * Generic File List Component (Main)
+ * Generic FileList Component (Main)
  */
-export function FileList(props: FilelistProps) {
+export function FileList(props: FileListProps) {
   //separate component related props from field attributes
   const { 
     uploading = 'Uploading...',

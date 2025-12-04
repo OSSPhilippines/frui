@@ -182,7 +182,7 @@ export function useColorInput(config: ColorInputConfig) {
 // Components
 
 /**
- * Color Input Component
+ * ColorInput Component (Main)
  */
 export function ColorInput(props: ColorInputProps) {
   //props

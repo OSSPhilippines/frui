@@ -32,7 +32,7 @@ import Fieldset from './Fieldset.js';
 export type { FileInputProps } from './FileInput.js';
 import FileInput from './FileInput.js';
 // file list
-export type { FilelistProps } from './FileList.js';
+export type { FileListProps } from './FileList.js';
 import FileList from './FileList.js';
 // image input
 import ImageInput from './ImageInput.js';

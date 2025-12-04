@@ -118,7 +118,7 @@ export type { FieldControlProps } from './form/FieldControl.js';
 //file input
 export type { FileInputProps } from './form/FileInput.js';
 //file list
-export type { FilelistProps } from './form/FileList.js';
+export type { FileListProps } from './form/FileList.js';
 //input
 export type { InputProps } from './form/Input.js';
 //markdown editor

@@ -36,7 +36,7 @@ export type CountrySelectProps = ExtendsType<SelectProps, {
 // Components
 
 /**
- * Country Select Component
+ * CountrySelect Component (Main)
  */
 export function CountrySelect(props: CountrySelectProps) {
   //props

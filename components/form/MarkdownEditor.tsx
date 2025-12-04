@@ -25,7 +25,7 @@ export type MarkdownEditorProps = TextareaProps;
 // Hooks
 
 /**
- * Markdown Editor Hook Aggregate
+ * MarkdownEditor Hook Aggregate
  */
 export function useMarkdownEditor({ onUpdate }: MarkdownEditorConfig) {
   const [ mode, setMode ] = useState<'preview'|'edit'>('edit');
@@ -45,7 +45,7 @@ export function useMarkdownEditor({ onUpdate }: MarkdownEditorConfig) {
 // Components
 
 /**
- * Form Markdown Editor Component (Main)
+ * Form MarkdownEditor Component (Main)
  */
 export function MarkdownEditor(props: MarkdownEditorProps) {
   //props

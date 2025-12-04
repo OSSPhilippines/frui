@@ -12,7 +12,7 @@ import Input from './Input.js';
 // Components
 
 /**
- * Generic Image Input Component (Main)
+ * Generic ImageInput Component (Main)
  */
 export function ImageInput(props: FileInputProps) {
   //separate component related props from field attributes

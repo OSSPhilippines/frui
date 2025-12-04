@@ -35,7 +35,7 @@ export type TagListProps = ExtendsType<HTMLInputProps, {
 // Hooks
 
 /**
- * Taglist Hook Aggregate
+ * TagList Hook Aggregate
  */
 export function useTagList(config: TagListConfig) {
   const { value, defaultValue, onChange, onUpdate } = config;

@@ -23,7 +23,7 @@ export type PasswordInputProps = ExtendsType<InputProps, {
 // Hooks
 
 /**
- * Password Input Hook Aggregate
+ * PasswordInput Hook Aggregate
  */
 export function usePasswordInput() {
   const [ showing, show ] = useState(false);
@@ -35,7 +35,7 @@ export function usePasswordInput() {
 // Components
 
 /**
- * Password Input Component (Main)
+ * PasswordInput Component (Main)
  */
 export function PasswordInput(props: PasswordInputProps) {
   //remove type

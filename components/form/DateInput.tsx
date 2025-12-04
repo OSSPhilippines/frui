@@ -52,7 +52,7 @@ export function toDateString(date?: Date) {
 // Hooks
 
 /**
- * Date Hook Aggregate
+ * DateInput Hook Aggregate
  */
 export function useDateInput(config: DateInputConfig) {
   //props
@@ -86,7 +86,7 @@ export function useDateInput(config: DateInputConfig) {
 // Components
 
 /**
- * Date Input Component
+ * DateInput Component (Main)
  */
 export function DateInput(props: DateInputProps) {
   //props

@@ -2,7 +2,7 @@
 // Imports
 
 //frui
-import type { FilelistProps } from './FileList.js';
+import type { FileListProps } from './FileList.js';
 import { useFileList } from './FileList.js';
 import Input from './Input.js';
 
@@ -10,9 +10,9 @@ import Input from './Input.js';
 // Components
 
 /**
- * Generic Image List Component (Main)
+ * Generic ImageList Component (Main)
  */
-export function ImageList(props: FilelistProps) {
+export function ImageList(props: FileListProps) {
   //separate component related props from field attributes
   const { 
     uploading = 'Uploading...',

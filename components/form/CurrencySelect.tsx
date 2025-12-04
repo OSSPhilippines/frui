@@ -44,7 +44,7 @@ export const currencyWithFlags = currencies.map(currency => {
 // Components
 
 /**
- * Currency Select Component
+ * CurrencySelect Component (Main)
  */
 export function CurrencySelect(props: CurrencySelectProps) {
   //props

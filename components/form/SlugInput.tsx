@@ -90,7 +90,7 @@ export function camelfy(value: string) {
 // Hooks
 
 /**
- * Slug Input Hook Aggregate
+ * SlugInput Hook Aggregate
  */
 export function useSlugInput(config: SlugInputConfig) {
   //config

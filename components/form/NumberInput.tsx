@@ -555,7 +555,7 @@ export function toHiddenValue(value: string) {
 // Hooks
 
 /**
- * Number Input Hook Aggregate
+ * NumberInput Hook Aggregate
  */
 export function useNumberInput(config: NumberInputConfig) {
   //props
@@ -745,7 +745,7 @@ export function useNumberInput(config: NumberInputConfig) {
 // Components
 
 /**
- * Number Input Component (Main)
+ * NumberInput Component (Main)
  */
 export function NumberInput(props: NumberInputProps) {
   //props

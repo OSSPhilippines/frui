@@ -154,6 +154,6 @@ export function FileList(props: FileListProps) {
 
 //defaults to filelist
 export default Object.assign(FileList, { 
-  useFileList, 
-  use: useFileList 
+  useFileList,
+  use: useFileList
 });

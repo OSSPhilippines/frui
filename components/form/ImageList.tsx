@@ -84,6 +84,6 @@ export function ImageList(props: FileListProps) {
 
 //defaults to imagelist
 export default Object.assign(ImageList, { 
-  useImageList: useFileList, 
-  use: useFileList 
+  useImageList: useFileList,
+  use: useFileList
 });

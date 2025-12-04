@@ -141,4 +141,7 @@ export function Radio(props: RadioProps) {
 };
 
 //defaults to radio
-export default Object.assign(Radio, { useRadio, use: useRadio });
+export default Object.assign(Radio, { 
+  useRadio, 
+  use: useRadio 
+});

@@ -109,6 +109,6 @@ export function PasswordInput(props: PasswordInputProps) {
 
 //defaults to password input
 export default Object.assign(PasswordInput, { 
-  usePasswordInput, 
-  use: usePasswordInput 
+  usePasswordInput,
+  use: usePasswordInput
 });

@@ -99,6 +99,6 @@ export function When(props: WhenProps & ChildrenProps) {
 
 //defaults to when
 export default Object.assign(When, { 
-  Otherwise, 
-  nextCondition 
+  Otherwise,
+  nextCondition
 });

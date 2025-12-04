@@ -115,7 +115,7 @@ export function TextList(props: TextListProps) {
 
 //defaults to textList
 export default Object.assign(TextList, { 
-  TextListFields, 
-  useTextLists, 
-  use: useTextLists 
+  TextListFields,
+  useTextLists,
+  use: useTextLists
 });

@@ -16,7 +16,11 @@ export type { AlertProps } from './Alert.js';
 //badge
 export type { BadgeProps } from './Badge.js';
 //box
-export type { BoxProps } from './Box.js';
+export type { 
+  BoxProps,
+  BoxConfig,
+  BoxThemeConfig
+} from './Box.js';
 //bread
 export type { 
   BreadConfig,

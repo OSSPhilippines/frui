@@ -8,6 +8,8 @@ import { useState } from 'react';
 import type { ExtendsType } from '../types.js';
 import type { SelectProps } from './Select.js';
 import countries from '../data/countries.js';
+import getSlotStyles from '../helpers/getSlotStyles.js';
+import getClassStyles from 'src/helpers/getClassStyles.js';
 import Select from  './Select.js';
 
 //--------------------------------------------------------------------//
@@ -40,7 +42,13 @@ export type CountrySelectProps = ExtendsType<SelectProps, {
  */
 export function CountrySelect(props: CountrySelectProps) {
   //props
-  const { className, onUpdate, placeholder, searchable } = props;
+  const { 
+    className, 
+    dropdown, 
+    onUpdate, 
+    placeholder, 
+    searchable 
+  } = props;
   //hooks
   const [ keyword, setKeyword ] = useState('');
   const [ options, setOptions ] = useState(countries);
@@ -50,6 +58,15 @@ export function CountrySelect(props: CountrySelectProps) {
   const searchPlaceholder = typeof searchable === 'string' 
     ? searchable 
     : 'Search...';
+  // get slot styles
+  const dropdownStyles = getClassStyles({
+    //default classes to apply
+    classes: [ 'frui-form-country-select-dropdown' ],
+    //style props
+    props: dropdown ? getSlotStyles(dropdown, {}) : {},
+    //state to pass to callable props
+    state: {}
+  });
   //handlers
   const handlers = {
     filter: (e: KeyboardEvent<HTMLInputElement>) => {
@@ -88,6 +105,10 @@ export function CountrySelect(props: CountrySelectProps) {
     <Select
       {...props}
       className={classes.join(' ')}
+      dropdown={{ 
+        className: dropdownStyles.classes.join(' '), 
+        style: dropdownStyles.styles 
+      }}
       onUpdate={handlers.update}
       placeholder={placeholder || 'Select a country'}
     >

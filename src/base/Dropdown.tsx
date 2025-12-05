@@ -497,7 +497,7 @@ export function useDropdown(config: DropdownConfig) {
   //effects
   // when controlled value changes
   useEffect(() => {
-    if (value === undefined) return;
+    if (typeof value === 'undefined') return;
     if (!multiple && typeof value === 'string') {
       //update selected value
       handlers.select(value);

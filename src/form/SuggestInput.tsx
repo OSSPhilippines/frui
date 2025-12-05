@@ -12,9 +12,9 @@ import type {
   DropdownConfig 
 } from '../base/Dropdown.js';
 import type { InputProps } from './Input.js';
+import getSlotStyles from '../helpers/getSlotStyles.js';
 import Dropdown from '../base/Dropdown.js';
 import Input from './Input.js';
-import getSlotStyles from '../helpers/getSlotStyles.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -60,6 +60,9 @@ export function useSuggestInputControl(config: SuggestInputControlConfig) {
 //--------------------------------------------------------------------//
 // Components
 
+/**
+ * Suggest input control component
+ */
 export function SuggestInputControl(props: SuggestInputControlProps) {
   //props
   const { 

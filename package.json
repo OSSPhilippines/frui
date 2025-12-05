@@ -216,6 +216,7 @@
     "codemirror": "6.0.2",
     "inputmask": "5.0.9",
     "jsdom": "27.1.0",
+    "libphonenumber-js": "1.12.23",
     "markdown-to-jsx": "7.7.13",
     "moment": "2.30.1",
     "r22n": "1.0.10",

@@ -17,6 +17,7 @@ import type {
 } from '../base/Dropdown.js';
 import Dropdown from '../base/Dropdown.js';
 import getSlotStyles from '../helpers/getSlotStyles.js';
+import getClassStyles from 'src/helpers/getClassStyles.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -285,13 +286,20 @@ export function Select(props: SelectProps) {
   }
   // get slot styles
   const controlStyles = control ? getSlotStyles(control, {}) : {};
-  const dropdownStyles = dropdown ? getSlotStyles(dropdown, {}) : {};
+  const dropdownStyles = getClassStyles({
+    //default classes to apply
+    classes: [ 'frui-form-select-dropdown' ],
+    //style props
+    props: dropdown ? getSlotStyles(dropdown, {}) : {},
+    //state to pass to callable props
+    state: {}
+  });
   //render
   return (
     <Dropdown
-      {...dropdownStyles}
       append={append}
       bottom={bottom}
+      className={dropdownStyles.classes.join(' ')}
       defaultValue={defaultValue}
       container={{ className: classes.join(' '), style }}
       left={left}
@@ -301,6 +309,7 @@ export function Select(props: SelectProps) {
       option={option}
       options={options}
       right={right}
+      style={dropdownStyles.styles}
       top={top}
       value={value}
     >

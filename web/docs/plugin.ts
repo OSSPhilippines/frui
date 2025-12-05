@@ -40,6 +40,7 @@ export default function plugin(server: HttpServer<Config>) {
     ctx.get('/form/metadata', '@/web/docs/views/form/metadata');
     ctx.get('/form/number-input', '@/web/docs/views/form/number-input');
     ctx.get('/form/password-input', '@/web/docs/views/form/password-input');
+    ctx.get('/form/phone-input', '@/web/docs/views/form/phone-input');
     ctx.get('/form/radio', '@/web/docs/views/form/radio');
     ctx.get('/form/rating', '@/web/docs/views/form/rating');
     ctx.get('/form/select', '@/web/docs/views/form/select');

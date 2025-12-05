@@ -33,7 +33,8 @@
   padding-top: 7px;
 }
 
-.frui-form-currency-select .frui-dropdown-option {
+.frui-form-currency-select .frui-dropdown-option,
+.frui-form-currency-select-dropdown .frui-dropdown-option {
   padding-bottom: 7px;
   padding-left: 10.5px;
   padding-right: 10.5px;
@@ -47,6 +48,6 @@
   padding-top: 0;
 }
 
-.frui-form-currency-select .frui-dropdown-options .frui-dropdown-option-active {
+.frui-form-currency-select-dropdown .frui-dropdown-options .frui-dropdown-option-active {
   background-color: #E0E0E0;
 }

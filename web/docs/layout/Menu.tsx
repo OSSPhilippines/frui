@@ -209,6 +209,11 @@ export const menu: MenuItem[] = [
         href: '/form/password-input'
       },
       {
+        label: 'Phone Input',
+        search: '/form/phone-input',
+        href: '/form/phone-input'
+      },
+      {
         label: 'Radio',
         search: '/form/radio',
         href: '/form/radio'

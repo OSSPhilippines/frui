@@ -48,28 +48,51 @@ export type { TagListFormatProps } from './TagListFormat.js';
 //text
 export type { TextProps } from './Text.js';
 
+//boolean format
 import BooleanFormat from './BooleanFormat.js';
+//color format
 import ColorFormat from './ColorFormat.js';
+//code highlighter
 import CodeHighlighter from './CodeHighlighter.js';
+//country format
 import CountryFormat from './CountryFormat.js';
+//currency format
 import CurrencyFormat from './CurrencyFormat.js';
+//date format
 import DateFormat from './DateFormat.js';
+//email link
 import EmailLink from './EmailLink.js';
+//formula
 import Formula from './Formula.js';
+//html
 import HTML from './HTML.js';
+//image carousel
 import ImageCarousel from './ImageCarousel.js';
+//image format
 import ImageFormat from './ImageFormat.js';
+//link format
 import LinkFormat from './LinkFormat.js';
+//list
 import List from './List.js';
+//markdown
 import Markdown from './Markdown.js';
+//metadata format
 import MetadataFormat from './MetadataFormat.js';
+//number format
 import NumberFormat from './NumberFormat.js';
+//overflow
 import Overflow from './Overflow.js';
+//phone link
 import PhoneLink from './PhoneLink.js';
+//rating format
 import RatingFormat from './RatingFormat.js';
+//separate
 import Separate from './Separate.js';
+//table format
 import TableFormat from './TableFormat.js';
+//tag list format
 import TagListFormat from './TagListFormat.js';
+//text
 import Text from './Text.js';
 
 export {

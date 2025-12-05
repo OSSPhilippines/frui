@@ -3,13 +3,13 @@
 
 //accordion
 export type { 
-  AccordionStates,
+  AccordionBellowProps,
   AccordionConfig,
+  AccordionContentProps,
   AccordionContextProps,
   AccordionLabelProps,
-  AccordionContentProps,
-  AccordionBellowProps,
-  AccordionProps
+  AccordionProps,
+  AccordionStates
 } from './Accordion.js';
 //alert
 export type { AlertProps } from './Alert.js';
@@ -17,88 +17,154 @@ export type { AlertProps } from './Alert.js';
 export type { BadgeProps } from './Badge.js';
 //box
 export type { 
-  BoxProps,
   BoxConfig,
+  BoxProps,
   BoxThemeConfig
 } from './Box.js';
 //bread
 export type { 
   BreadConfig,
   BreadContextProps,
-  BreadSlicerProps,
   BreadCrumbProps,
-  BreadProps
+  BreadProps,
+  BreadSlicerProps,
+  BreadStates,
+  Crumb
 } from './Bread.js';
 //button
 export type { ButtonProps } from './Button.js';
 //card
 export type { 
+  CardBodyProps,
+  CardDescriptionProps,
+  CardFootProps,
+  CardHeadProps,
   CardProps,
-  CardTitleProps,
-  CardDescriptionProps
+  CardTitleProps
 } from './Card.js';
 //dialog
 export type { 
+  DialogCloseProps,
+  DialogConfig,
   DialogContextProps,
-  DialogProviderProps,
-  DialogProps
+  DialogOverlayProps,
+  DialogProps,
+  DialogProviderProps
 } from './Dialog.js';
 //dropdown
-export type { DropdownProps } from './Dropdown.js';
+export type { 
+  DropdownConfig,
+  DropdownContextProps,
+  DropdownControlProps,
+  DropdownData,
+  DropdownDropdownProps,
+  DropdownFootProps,
+  DropdownHeadProps,
+  DropdownOptionProp,
+  DropdownOptionProps,
+  DropdownProps
+} from './Dropdown.js';
 //loader
 export type { 
   LoaderContainerProps, 
-  LoaderProps 
+  LoaderProps
 } from './Loader.js';
 //notifier
 export type { 
   CookieOptions as NotifierCookieOptions,
   NotifierOptions,
-  NotifierProviderProps,
+  NotifierPayload,
   NotifierProps,
-  ToastOptions as NotifierToastOptions,
-  NotifierPayload
+  NotifierProviderProps,
+  ToastOptions as NotifierToastOptions
 } from './Notifier.js';
 //pager
-export type { PagerProps } from './Pager.js';
+export type { 
+  PagerProps,
+  PagerState
+} from './Pager.js';
 //progress
-export type { ProgressProps } from './Progress.js';
+export type { 
+  ProgressContainerProps,
+  ProgressProps
+} from './Progress.js';
 //scope
 export type { ScopeProps } from './Scope.js';
 //table
 export type { 
-  TableContextProps,
-  TableRuleProps,
+  AddClassStyle,
+  Column,
+  ColumnSlot,
+  Foot,
+  FootSlot,
+  Head,
+  HeadSlot,
   TableColProps,
+  TableContextProps,
   TableFootProps,
   TableHeadProps,
+  TableProps,
   TableRowProps,
-  TableProps
+  TableRuleProps
 } from './Table.js';
 //tabs
-export type { TabsProps } from './Tabs.js';
+export type { 
+  TabsActiveProps,
+  TabsBodyProps,
+  TabsConfig,
+  TabsContentProps,
+  TabsContextProps,
+  TabsHeadProps,
+  TabsInactiveProps,
+  TabsLabelProps,
+  TabsProps,
+  TabsStates
+} from './Tabs.js';
 //tooltip
-export type { TooltipProps } from './Tooltip.js';
+export type { 
+  TooltipConfig,
+  TooltipContainerProps,
+  TooltipDirection,
+  TooltipProps
+} from './Tooltip.js';
 //when
 export type { WhenProps } from './When.js';
 
+//accordion
 import Accordion from './Accordion.js';
+//alert
 import Alert from './Alert.js';
+//badge
 import Badge from './Badge.js';
+//box
 import Box from './Box.js';
+//bread
 import Bread from './Bread.js';
+//button
 import Button from './Button.js';
+//card
 import Card from './Card.js';
+//dialog
 import Dialog from './Dialog.js';
+//dropdown
 import Dropdown from './Dropdown.js';
+//loader
 import Loader from './Loader.js';
+//notifier
 import Notifier from './Notifier.js';
+//pager
 import Pager from './Pager.js';
+//progress
 import Progress from './Progress.js';
+//scope
 import Scope from './Scope.js';
+//table
 import Table from './Table.js';
+//tabs
 import Tabs from './Tabs.js';
+//tooltip
 import Tooltip from './Tooltip.js';
+//when
 import When from './When.js';
 
 //--------------------------------------------------------------------//
@@ -108,181 +174,200 @@ import When from './When.js';
 export type { CheckboxProps } from './form/Checkbox.js';
 //code editor
 export type { 
-  CodeEditorProps,
-  CodeEditorConfig
+  CodeEditorConfig,
+  CodeEditorProps
 } from './form/CodeEditor.js';
 //color input
 export type { 
-  ColorInputProps,
   ColorInputConfig,
+  ColorInputProps,
   ColorPickerProps,
   RgbaColor
 } from './form/ColorInput.js';
 //country select
 export type { 
-  CountrySelectProps, 
-  CountrySelectData 
+  CountrySelectData,
+  CountrySelectProps
 } from './form/CountrySelect.js';
 //currency select
 export type { 
-  CurrencySelectProps,
-  CurrencySelectData
+  CurrencySelectData,
+  CurrencySelectProps
 } from './form/CurrencySelect.js';
 //date input
 export type { 
-  DateInputProps,
-  DateInputConfig
+  DateInputConfig,
+  DateInputProps
 } from './form/DateInput.js';
 //datetime input
 export type { 
-  DatetimeInputProps,
-  DatetimeInputConfig
+  DatetimeInputConfig,
+  DatetimeInputProps
 } from './form/DatetimeInput.js';
 //field control
 export type { FieldControlProps } from './form/FieldControl.js';
 //fieldset
 export type { 
-  FieldsetProps,
   FieldsetConfig,
+  FieldsetProps,
   FieldsProps
 } from './form/Fieldset.js';
 //file input
 export type { 
-  FileInputProps,
-  FileInputConfig
+  FileInputConfig,
+  FileInputProps
 } from './form/FileInput.js';
 //file list
 export type { 
-  FileListProps,
-  FileListConfig
+  FileListConfig,
+  FileListProps
 } from './form/FileList.js';
 //input
 export type { 
-  InputProps,
-  InputConfig
+  InputConfig,
+  InputProps
 } from './form/Input.js';
 //markdown editor
 export type { 
-  MarkdownEditorProps,
-  MarkdownEditorConfig
+  MarkdownEditorConfig,
+  MarkdownEditorProps
 } from './form/MarkdownEditor.js';
 //mask input
 export type { 
-  MaskInputProps,
-  MaskInputConfig
+  MaskInputConfig,
+  MaskInputProps
 } from './form/MaskInput.js';
 //metadata
 export type { 
-  MetadataProps,
   MetadataConfig,
+  MetadataProps,
   MetadataType
 } from './form/Metadata.js';
 //number input
 export type { 
+  FormatOptions,
+  NumberInputConfig,
   NumberInputProps,
-  NumericState,
-  NumberInputConfig
- } from './form/NumberInput.js';
+  NumericState
+} from './form/NumberInput.js';
 //password input
 export type { PasswordInputProps } from './form/PasswordInput.js';
 //radio
 export type { RadioProps } from './form/Radio.js';
 //rating
 export type { 
-  RatingProps,
-  RatingConfig
+  RatingConfig,
+  RatingProps
 } from './form/Rating.js';
 //select
 export type { 
-  SelectProps,
   SelectControlProps,
-  SelectPlaceholderProps
+  SelectPlaceholderProps,
+  SelectProps
 } from './form/Select.js';
 //slider
 export type { 
+  SliderConfig,
+  SliderConnectionProps,
+  SliderContextProps,
+  SliderHandleConfig,
+  SliderHandleProps,
+  SliderInputProps,
   SliderProps,
-  SliderConfig
+  SliderTrackProps
 } from './form/Slider.js';
 //slug input
 export type { 
-  SlugInputProps,
-  SlugInputConfig
+  SlugInputConfig,
+  SlugInputProps
 } from './form/SlugInput.js';
 //suggest input
 export type { 
-  SuggestInputProps,
   SuggestInputControlConfig,
-  SuggestInputControlProps
+  SuggestInputControlProps,
+  SuggestInputProps
 } from './form/SuggestInput.js';
 //switch
 export type { SwitchProps } from './form/Switch.js';
 //tag list
 export type { 
-  TagListProps,
-  TagListConfig
+  TagListConfig,
+  TagListProps
 } from './form/TagList.js';
 //textarea
 export type { 
-  TextareaProps,
-  TextareaConfig
+  TextareaConfig,
+  TextareaProps
 } from './form/Textarea.js';
 //text editor
 export type { 
-  TextEditorProps,
-  TextEditorConfig 
+  TextEditorConfig,
+  TextEditorProps 
 } from './form/TextEditor.js';
 //text list
 export type { 
-  TextListProps,
   TextListConfig,
+  TextListProps,
   TextListType
 } from './form/TextList.js';
 //time input
 export type { 
-  TimeInputProps,
-  TimeInputConfig
+  TimeInputConfig,
+  TimeInputProps
 } from './form/TimeInput.js';
 
 import * as Form from './form/index.js';
-
 //--------------------------------------------------------------------//
 // Helpers
 
 //tools
-export type { BorderRadiusTool } from './helpers/tools/BorderRadiusTool.js';
-export type {
-  ColorTool,
+
+//border radius tool
+export type { 
+  BorderRadiusProps,
+  BorderRadiusTool
+} from './helpers/tools/BorderRadiusTool.js';
+//color tool
+export type { 
   BackgroundColorProps,
   BorderColorProps,
-  TextColorProps,
   ColorProps,
   ColorStyleKey,
+  ColorTool,
   ColorTypeProp,
   ColorValueProp,
-  ColorValueProps
+  ColorValueProps,
+  TextColorProps
 } from './helpers/tools/ColorTool.js';
-export type {
-  DisplayTool,
-  DisplayProps
-} from './helpers/tools/DisplayTool.js';
+//display tool
 export type { 
-  FillTool,
-  FillProps
+  DisplayProps,
+  DisplayTool
+} from './helpers/tools/DisplayTool.js';
+//fill tool
+export type { 
+  FillProps,
+  FillTool
 } from './helpers/tools/FillTool.js';
-export type {
-  PropTool,
-  ClassStyleOptions
+//prop tool
+export type { 
+  ClassStyleOptions,
+  PropTool
 } from './helpers/tools/PropTool.js';
-export type {
-  TextAlignTool,
-  TextAlignProps
+//text align tool
+export type { 
+  TextAlignProps,
+  TextAlignTool
 } from './helpers/tools/TextAlignTool.js';
+//get class styles
 export type { GetClassStylesOptions } from './helpers/getClassStyles.js';
 
+//get slot styles
 import { getClassStyles } from './helpers/getClassStyles.js';
+//get slot styles
 import { getSlotStyles } from './helpers/getSlotStyles.js';
+//to children array
 import { toChildrenArray } from './helpers/toChildrenArray.js';
-
 
 //--------------------------------------------------------------------//
 // View
@@ -357,5 +442,5 @@ export {
   toChildrenArray,
   Tooltip,
   View,
-  When,
+  When
 };

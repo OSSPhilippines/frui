@@ -13,7 +13,7 @@ import Select from  './Select.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type CurrencyData = {
+export type CurrencySelectData = {
   flag: string,
   type: string,
   code: string,
@@ -24,7 +24,7 @@ export type CurrencyData = {
 
 export type CurrencySelectProps = ExtendsType<SelectProps, {
   searchable?: boolean | string,
-  onUpdate?: (currency: CurrencyData | CurrencyData[]) => void
+  onUpdate?: (currency: CurrencySelectData | CurrencySelectData[]) => void
 }>;
 
 //--------------------------------------------------------------------//
@@ -78,12 +78,12 @@ export function CurrencySelect(props: CurrencySelectProps) {
       if (Array.isArray(value)) {
         const selected = currencies.filter(
           currency => value.includes(currency.code)
-        ) as CurrencyData[];
+        ) as CurrencySelectData[];
         onUpdate && onUpdate(selected);
       } else {
         const selected = currencies.find(
           currency => currency.code === value
-        ) as CurrencyData | undefined;
+        ) as CurrencySelectData | undefined;
         selected && onUpdate && onUpdate(selected);
       }
     }: undefined

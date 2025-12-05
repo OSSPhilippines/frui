@@ -13,7 +13,7 @@ import Select from  './Select.js';
 //--------------------------------------------------------------------//
 // Types
 
-export type CountryData = {
+export type CountrySelectData = {
   type: string,
   iso2: string,
   iso3: string,
@@ -29,7 +29,7 @@ export type CountryData = {
 
 export type CountrySelectProps = ExtendsType<SelectProps, {
   searchable?: boolean | string,
-  onUpdate?: (country: CountryData | CountryData[]) => void
+  onUpdate?: (country: CountrySelectData | CountrySelectData[]) => void
 }>;
 
 //--------------------------------------------------------------------//
@@ -73,12 +73,12 @@ export function CountrySelect(props: CountrySelectProps) {
       if (Array.isArray(value)) {
         const selected = countries.filter(
           country => value.includes(country.iso2)
-        ) as CountryData[];
+        ) as CountrySelectData[];
         onUpdate && onUpdate(selected);
       } else {
         const selected = countries.find(
           country => country.iso2 === value
-        ) as CountryData | undefined;
+        ) as CountrySelectData | undefined;
         selected && onUpdate && onUpdate(selected);
       }
     }: undefined

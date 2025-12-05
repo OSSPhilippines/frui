@@ -27,7 +27,7 @@ const props = [
   [ 'error', 'boolean', 'No', 'Whether the select is in an error state' ],
   [ 'name', 'string', 'No', 'Name used by forms' ],
   [ 'onDropdown', '(show: boolean) => void', 'No', 'Dropdown handler' ],
-  [ 'onUpdate', '(currency: CurrencyData | CurrencyData[]) => void', 'No', 'Update handler for currency data' ],
+  [ 'onUpdate', '(currency: CurrencySelectData | CurrencySelectData[]) => void', 'No', 'Update handler for currency data' ],
   [ 'option', 'CallableSlotStyleProp<SelectStates>', 'No', 'Style to apply to the select option' ],
   [ 'placeholder', 'string', 'No', 'Placeholder text when no option is selected' ],
   [ 'searchable', 'boolean | string', 'No', 'Whether the currency select is searchable' ],
@@ -264,7 +264,7 @@ export function Body() {
               {_('value')}
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
-              {_('CurrencyData')}
+              {_('CurrencySelectData')}
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
               <Code language="json" copy={false}>{examples[3]}</Code>

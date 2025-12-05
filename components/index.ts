@@ -42,7 +42,10 @@ export type {
 //dropdown
 export type { DropdownProps } from './Dropdown.js';
 //loader
-export type { LoaderContainerProps, LoaderProps } from './Loader.js';
+export type { 
+  LoaderContainerProps, 
+  LoaderProps 
+} from './Loader.js';
 //notifier
 export type { 
   CookieOptions as NotifierCookieOptions,
@@ -65,7 +68,7 @@ export type {
   TableColProps,
   TableFootProps,
   TableHeadProps,
-  TableRowProps, 
+  TableRowProps,
   TableProps
 } from './Table.js';
 //tabs
@@ -76,22 +79,22 @@ export type { TooltipProps } from './Tooltip.js';
 export type { WhenProps } from './When.js';
 
 import Accordion from './Accordion.js';
-import Alert from './Alert';
-import Badge from './Badge';
+import Alert from './Alert.js';
+import Badge from './Badge.js';
 import Box from './Box.js';
 import Bread from './Bread.js';
 import Button from './Button.js';
 import Card from './Card.js';
 import Dialog from './Dialog.js';
 import Dropdown from './Dropdown.js';
-import Loader from './Loader'; 
+import Loader from './Loader.js';
 import Notifier from './Notifier.js';
 import Pager from './Pager.js';
 import Progress from './Progress.js';
 import Scope from './Scope.js';
-import Table from './Table';
+import Table from './Table.js';
 import Tabs from './Tabs.js';
-import Tooltip from './Tooltip';
+import Tooltip from './Tooltip.js';
 import When from './When.js';
 
 //--------------------------------------------------------------------//
@@ -100,61 +103,141 @@ import When from './When.js';
 //checkbox
 export type { CheckboxProps } from './form/Checkbox.js';
 //code editor
-export type { CodeEditorProps } from './form/CodeEditor.js';
+export type { 
+  CodeEditorProps,
+  CodeEditorConfig
+} from './form/CodeEditor.js';
 //color input
-export type { ColorInputProps } from './form/ColorInput.js';
+export type { 
+  ColorInputProps,
+  ColorInputConfig,
+  ColorPickerProps,
+  RgbaColor
+} from './form/ColorInput.js';
 //country select
-export type { CountrySelectProps } from './form/CountrySelect.js';
+export type { 
+  CountrySelectProps, 
+  CountrySelectData 
+} from './form/CountrySelect.js';
 //currency select
-export type { CurrencySelectProps } from './form/CurrencySelect.js';
+export type { 
+  CurrencySelectProps,
+  CurrencySelectData
+} from './form/CurrencySelect.js';
 //date input
-export type { DateInputProps } from './form/DateInput.js';
+export type { 
+  DateInputProps,
+  DateInputConfig
+} from './form/DateInput.js';
 //datetime input
-export type { DatetimeInputProps } from './form/DatetimeInput.js';
+export type { 
+  DatetimeInputProps,
+  DatetimeInputConfig
+} from './form/DatetimeInput.js';
 //field control
 export type { FieldControlProps } from './form/FieldControl.js';
-
- export type { FieldsetProps } from './form/Fieldset.js';
+//fieldset
+export type { 
+  FieldsetProps,
+  FieldsetConfig,
+  FieldsProps
+} from './form/Fieldset.js';
 //file input
-export type { FileInputProps } from './form/FileInput.js';
+export type { 
+  FileInputProps,
+  FileInputConfig
+} from './form/FileInput.js';
 //file list
-export type { FileListProps } from './form/FileList.js';
+export type { 
+  FileListProps,
+  FileListConfig
+} from './form/FileList.js';
 //input
-export type { InputProps } from './form/Input.js';
+export type { 
+  InputProps,
+  InputConfig
+} from './form/Input.js';
 //markdown editor
-export type { MarkdownEditorProps } from './form/MarkdownEditor.js';
+export type { 
+  MarkdownEditorProps,
+  MarkdownEditorConfig
+} from './form/MarkdownEditor.js';
 //mask input
-export type { MaskInputProps } from './form/MaskInput.js';
+export type { 
+  MaskInputProps,
+  MaskInputConfig
+} from './form/MaskInput.js';
 //metadata
-export type { MetadataProps } from './form/Metadata.js';
+export type { 
+  MetadataProps,
+  MetadataConfig,
+  MetadataType
+} from './form/Metadata.js';
 //number input
-export type { NumberInputProps } from './form/NumberInput.js';
+export type { 
+  NumberInputProps,
+  NumericState,
+  NumberInputConfig
+ } from './form/NumberInput.js';
 //password input
 export type { PasswordInputProps } from './form/PasswordInput.js';
 //radio
 export type { RadioProps } from './form/Radio.js';
 //rating
-export type { RatingProps } from './form/Rating.js';
+export type { 
+  RatingProps,
+  RatingConfig
+} from './form/Rating.js';
 //select
-export type { SelectProps } from './form/Select.js';
+export type { 
+  SelectProps,
+  SelectControlProps,
+  SelectPlaceholderProps
+} from './form/Select.js';
 //slider
-export type { SliderProps } from './form/Slider.js';
+export type { 
+  SliderProps,
+  SliderConfig
+} from './form/Slider.js';
 //slug input
-export type { SlugInputProps } from './form/SlugInput.js';
+export type { 
+  SlugInputProps,
+  SlugInputConfig
+} from './form/SlugInput.js';
 //suggest input
-export type { SuggestInputProps } from './form/SuggestInput.js';
+export type { 
+  SuggestInputProps,
+  SuggestInputControlConfig,
+  SuggestInputControlProps
+} from './form/SuggestInput.js';
 //switch
 export type { SwitchProps } from './form/Switch.js';
 //tag list
-export type { TagListProps } from './form/TagList.js';
+export type { 
+  TagListProps,
+  TagListConfig
+} from './form/TagList.js';
 //textarea
-export type { TextareaProps } from './form/Textarea.js';
+export type { 
+  TextareaProps,
+  TextareaConfig
+} from './form/Textarea.js';
 //text editor
-export type { TextEditorProps } from './form/TextEditor.js';
+export type { 
+  TextEditorProps,
+  TextEditorConfig 
+} from './form/TextEditor.js';
 //text list
-export type { TextListProps } from './form/TextList.js';
+export type { 
+  TextListProps,
+  TextListConfig,
+  TextListType
+} from './form/TextList.js';
 //time input
-export type { TimeInputProps } from './form/TimeInput.js';
+export type { 
+  TimeInputProps,
+  TimeInputConfig
+} from './form/TimeInput.js';
 
 import * as Form from './form/index.js';
 
@@ -162,15 +245,39 @@ import * as Form from './form/index.js';
 // Helpers
 
 //tools
-export { BorderRadiusTool } from './helpers/tools/BorderRadiusTool.js';
-export { ColorTool } from './helpers/tools/ColorTool.js';
-export { DisplayTool } from './helpers/tools/DisplayTool.js';
-export { FillTool } from './helpers/tools/FillTool.js';
-export { PropTool } from './helpers/tools/PropTool.js';
-export { TextAlignTool } from './helpers/tools/TextAlignTool.js';
-export { getClassStyles } from './helpers/getClassStyles.js';
-export { getSlotStyles } from './helpers/getSlotStyles.js';
-export { toChildrenArray } from './helpers/toChildrenArray.js';
+export type { BorderRadiusTool } from './helpers/tools/BorderRadiusTool.js';
+export type {
+  ColorTool,
+  BackgroundColorProps,
+  BorderColorProps,
+  TextColorProps,
+  ColorProps,
+  ColorStyleKey,
+  ColorTypeProp,
+  ColorValueProp,
+  ColorValueProps
+} from './helpers/tools/ColorTool.js';
+export type {
+  DisplayTool,
+  DisplayProps
+} from './helpers/tools/DisplayTool.js';
+export type { 
+  FillTool,
+  FillProps
+} from './helpers/tools/FillTool.js';
+export type {
+  PropTool,
+  ClassStyleOptions
+} from './helpers/tools/PropTool.js';
+export type {
+  TextAlignTool,
+  TextAlignProps
+} from './helpers/tools/TextAlignTool.js';
+export type { GetClassStylesOptions } from './helpers/getClassStyles.js';
+
+import { getClassStyles } from './helpers/getClassStyles.js';
+import { getSlotStyles } from './helpers/getSlotStyles.js';
+import { toChildrenArray } from './helpers/toChildrenArray.js';
 
 
 //--------------------------------------------------------------------//
@@ -234,6 +341,8 @@ export {
   Dialog,
   Dropdown,
   Form,
+  getClassStyles,
+  getSlotStyles,
   Loader,
   Notifier,
   Pager,
@@ -241,6 +350,7 @@ export {
   Scope,
   Table,
   Tabs,
+  toChildrenArray,
   Tooltip,
   View,
   When,

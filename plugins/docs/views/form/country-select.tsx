@@ -27,7 +27,7 @@ const props = [
   [ 'error', 'boolean', 'No', 'Whether the select is in an error state' ],
   [ 'name', 'string', 'No', 'Name used by forms' ],
   [ 'onDropdown', '(show: boolean) => void', 'No', 'Dropdown handler' ],
-  [ 'onUpdate', '(country: CountryData | CountryData[]) => void', 'No', 'Update handler for country data' ],
+  [ 'onUpdate', '(country: CountrySelectData | CountrySelectData[]) => void', 'No', 'Update handler for country data' ],
   [ 'option', 'CallableSlotStyleProp<SelectStates>', 'No', 'Style to apply to the select option' ],
   [ 'placeholder', 'string', 'No', 'Placeholder text when no option is selected' ],
   [ 'searchable', 'boolean | string', 'No', 'Whether the country select is searchable' ],
@@ -264,7 +264,7 @@ export function Body() {
               {_('value')}
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
-              {_('CountryData')}
+              {_('CountrySelectData')}
             </Table.Col>
             <Table.Col className="theme-bg-1 text-left">
               <Code language="json" copy={false}>{examples[3]}</Code>

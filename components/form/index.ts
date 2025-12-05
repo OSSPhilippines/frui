@@ -3,94 +3,173 @@
 
 //checkbox
 export type { CheckboxProps } from './Checkbox.js';
-import Checkbox from './Checkbox.js';
 //code editor
-export type { CodeEditorProps } from './CodeEditor.js';
-import CodeEditor from './CodeEditor.js';
+export type { 
+  CodeEditorProps,
+  CodeEditorConfig
+} from './CodeEditor.js';
 //color input
-export type { ColorInputProps } from './ColorInput.js';
-import ColorInput from './ColorInput.js';
+export type { 
+  ColorInputProps,
+  ColorInputConfig,
+  ColorPickerProps,
+  RgbaColor
+} from './ColorInput.js';
 //country select
-export type { CountrySelectProps } from './CountrySelect.js';
-import CountrySelect from './CountrySelect.js';
+export type { 
+  CountrySelectProps, 
+  CountrySelectData 
+} from './CountrySelect.js';
 //currency select
-export type { CurrencySelectProps } from './CurrencySelect.js';
-import CurrencySelect from './CurrencySelect.js';
+export type { 
+  CurrencySelectProps,
+  CurrencySelectData
+} from './CurrencySelect.js';
 //date input
-export type { DateInputProps } from './DateInput.js';
-import DateInput from './DateInput.js';
+export type { 
+  DateInputProps,
+  DateInputConfig
+} from './DateInput.js';
 //datetime input
-export type { DatetimeInputProps } from './DatetimeInput.js';
-import DatetimeInput from './DatetimeInput.js';
+export type { 
+  DatetimeInputProps,
+  DatetimeInputConfig
+} from './DatetimeInput.js';
 //field control
 export type { FieldControlProps } from './FieldControl.js';
-import FieldControl from './FieldControl.js';
 //fieldset
-export type { FieldsetProps } from './Fieldset.js';
-import Fieldset from './Fieldset.js';
+export type { 
+  FieldsetProps,
+  FieldsetConfig,
+  FieldsProps
+} from './Fieldset.js';
 //file input
-export type { FileInputProps } from './FileInput.js';
-import FileInput from './FileInput.js';
+export type { 
+  FileInputProps,
+  FileInputConfig
+} from './FileInput.js';
 //file list
-export type { FileListProps } from './FileList.js';
-import FileList from './FileList.js';
-//image input
-import ImageInput from './ImageInput.js';
-//image list
-import ImageList from './ImageList.js';
+export type { 
+  FileListProps,
+  FileListConfig
+} from './FileList.js';
 //input
-export type { InputProps } from './Input.js';
-import Input from './Input.js';
+export type { 
+  InputProps,
+  InputConfig
+} from './Input.js';
 //markdown editor
-export type { MarkdownEditorProps } from './MarkdownEditor.js';
-import MarkdownEditor from './MarkdownEditor.js';
+export type { 
+  MarkdownEditorProps,
+  MarkdownEditorConfig
+} from './MarkdownEditor.js';
 //mask input
-export type { MaskInputProps } from './MaskInput.js';
-import MaskInput from './MaskInput.js';
+export type { 
+  MaskInputProps,
+  MaskInputConfig
+} from './MaskInput.js';
 //metadata
-export type { MetadataProps } from './Metadata.js';
-import Metadata from './Metadata.js';
+export type { 
+  MetadataProps,
+  MetadataConfig,
+  MetadataType
+} from './Metadata.js';
 //number input
-export type { NumberInputProps } from './NumberInput.js';
-import NumberInput from './NumberInput.js';
+export type { 
+  NumberInputProps,
+  NumericState,
+  NumberInputConfig
+} from './NumberInput.js';
 //password input
 export type { PasswordInputProps } from './PasswordInput.js';
-import PasswordInput from './PasswordInput.js';
 //radio
 export type { RadioProps } from './Radio.js';
-import Radio from './Radio.js';
 //rating
-export type { RatingProps } from './Rating.js';
-import Rating from './Rating.js';
+export type { 
+  RatingProps,
+  RatingConfig
+} from './Rating.js';
 //select
-export type { SelectProps } from './Select.js';
-import Select from './Select.js';
+export type { 
+  SelectProps,
+  SelectControlProps,
+  SelectPlaceholderProps
+} from './Select.js';
 //slider
-export type { SliderProps } from './Slider.js';
-import Slider from './Slider.js';
+export type { 
+  SliderProps,
+  SliderConfig
+} from './Slider.js';
 //slug input
-export type { SlugInputProps } from './SlugInput.js';
-import SlugInput from './SlugInput.js';
+export type { 
+  SlugInputProps,
+  SlugInputConfig
+} from './SlugInput.js';
 //suggest input
-export type { SuggestInputProps } from './SuggestInput.js';
-import SuggestInput from './SuggestInput.js';
+export type { 
+  SuggestInputProps,
+  SuggestInputControlConfig,
+  SuggestInputControlProps
+} from './SuggestInput.js';
 //switch
 export type { SwitchProps } from './Switch.js';
-import Switch from './Switch.js';
 //tag list
-export type { TagListProps } from './TagList.js';
-import TagList from './TagList.js';
+export type { 
+  TagListProps,
+  TagListConfig
+} from './TagList.js';
 //textarea
-export type { TextareaProps } from './Textarea.js';
-import Textarea from './Textarea.js';
+export type { 
+  TextareaProps,
+  TextareaConfig
+} from './Textarea.js';
 //text editor
-export type { TextEditorProps } from './TextEditor.js';
-import TextEditor from './TextEditor.js';
+export type { 
+  TextEditorProps,
+  TextEditorConfig 
+} from './TextEditor.js';
 //text list
-export type { TextListProps } from './TextList.js';
-import TextList from './TextList.js';
+export type { 
+  TextListProps,
+  TextListConfig,
+  TextListType
+} from './TextList.js';
 //time input
-export type { TimeInputProps } from './TimeInput.js';
+export type { 
+  TimeInputProps,
+  TimeInputConfig
+} from './TimeInput.js';
+
+import Checkbox from './Checkbox.js';
+import CodeEditor from './CodeEditor.js';
+import ColorInput from './ColorInput.js';
+import CountrySelect from './CountrySelect.js';
+import CurrencySelect from './CurrencySelect.js';
+import DateInput from './DateInput.js';
+import DatetimeInput from './DatetimeInput.js';
+import FieldControl from './FieldControl.js';
+import Fieldset from './Fieldset.js';
+import FileInput from './FileInput.js';
+import FileList from './FileList.js';
+import ImageInput from './ImageInput.js';
+import ImageList from './ImageList.js';
+import Input from './Input.js';
+import MarkdownEditor from './MarkdownEditor.js';
+import MaskInput from './MaskInput.js';
+import Metadata from './Metadata.js';
+import NumberInput from './NumberInput.js';
+import PasswordInput from './PasswordInput.js';
+import Radio from './Radio.js';
+import Rating from './Rating.js';
+import Select from './Select.js';
+import Slider from './Slider.js';
+import SlugInput from './SlugInput.js';
+import SuggestInput from './SuggestInput.js';
+import Switch from './Switch.js';
+import TagList from './TagList.js';
+import Textarea from './Textarea.js';
+import TextEditor from './TextEditor.js';
+import TextList from './TextList.js';
 import TimeInput from './TimeInput.js';
 
 export {

@@ -1,15 +1,13 @@
-.frui-form-currency-select .frui-form-select-options {
+.frui-form-currency-select .frui-dropdown-options {
   max-height: 300px;
   overflow-y: auto;
 }
 
-.frui-form-currency-select .frui-form-select-dropdown-head {
-  padding-left: 8px;
-  padding-top: 8px;
-  padding-right: 8px;
+.frui-form-currency-select .frui-dropdown-head {
+  padding: 8px;
 }
 
-.frui-form-currency-select .frui-form-select-dropdown-head div {
+.frui-form-currency-select .frui-dropdown-head div {
   align-items: center;
   border-color: var(--bg-third);
   border-style: solid;
@@ -17,7 +15,7 @@
   display: flex;
 }
 
-.frui-form-currency-select .frui-form-select-dropdown-head input {
+.frui-form-currency-select .frui-dropdown-head input {
   border-width: 0px;
   flex-grow: 1;
   outline: 2px solid transparent;
@@ -28,22 +26,27 @@
   padding-top: 7px;
 }
 
-.frui-form-currency-select .frui-form-select-dropdown-head span {
+.frui-form-currency-select .frui-dropdown-head span {
   padding-bottom: 7px;
   padding-left: 10.5px;
   padding-right: 10.5px;
   padding-top: 7px;
 }
 
-.frui-form-currency-select .frui-form-select-option {
+.frui-form-currency-select .frui-dropdown-option {
   padding-bottom: 7px;
   padding-left: 10.5px;
   padding-right: 10.5px;
   padding-top: 7px;
 }
 
-.frui-form-currency-select .frui-form-select-option-active {
+.frui-form-currency-select .frui-dropdown-control .frui-dropdown-option-active {
+  display: inline-block;
   padding-bottom: 0;
   padding-left: 0;
   padding-top: 0;
+}
+
+.frui-form-currency-select .frui-dropdown-options .frui-dropdown-option-active {
+  background-color: #E0E0E0;
 }

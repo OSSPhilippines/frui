@@ -16,29 +16,105 @@
       "require": "./cjs/index.js",
       "import": "./esm/index.js"
     },
+    "./Accordion": {
+      "require": "./cjs/base/Accordion.js",
+      "import": "./esm/base/Accordion.js"
+    },
+    "./Alert": {
+      "require": "./cjs/base/Alert.js",
+      "import": "./esm/base/Alert.js"
+    },
+    "./Badge": {
+      "require": "./cjs/base/Badge.js",
+      "import": "./esm/base/Badge.js"
+    },
+    "./Box": {
+      "require": "./cjs/base/Box.js",
+      "import": "./esm/base/Box.js"
+    },
+    "./Bread": {
+      "require": "./cjs/base/Bread.js",
+      "import": "./esm/base/Bread.js"
+    },
+    "./Button": {
+      "require": "./cjs/base/Button.js",
+      "import": "./esm/base/Button.js"
+    },
+    "./Card": {
+      "require": "./cjs/base/Card.js",
+      "import": "./esm/base/Card.js"
+    },
+    "./Dialog": {
+      "require": "./cjs/base/Dialog.js",
+      "import": "./esm/base/Dialog.js"
+    },
+    "./Dropdown": {
+      "require": "./cjs/base/Dropdown.js",
+      "import": "./esm/base/Dropdown.js"
+    },
+    "./Loader": {
+      "require": "./cjs/base/Loader.js",
+      "import": "./esm/base/Loader.js"
+    },
+    "./Notifier": {
+      "require": "./cjs/base/Notifier.js",
+      "import": "./esm/base/Notifier.js"
+    },
+    "./Pager": {
+      "require": "./cjs/base/Pager.js",
+      "import": "./esm/base/Pager.js"
+    },
+    "./Progress": {
+      "require": "./cjs/base/Progress.js",
+      "import": "./esm/base/Progress.js"
+    },
+    "./Scope": {
+      "require": "./cjs/tool/Scope.js",
+      "import": "./esm/tool/Scope.js"
+    },
+    "./Table": {
+      "require": "./cjs/base/Table.js",
+      "import": "./esm/base/Table.js"
+    },
+    "./Tabs": {
+      "require": "./cjs/base/Tabs.js",
+      "import": "./esm/base/Tabs.js"
+    },
+    "./Tooltip": {
+      "require": "./cjs/base/Tooltip.js",
+      "import": "./esm/base/Tooltip.js"
+    },
+    "./When": {
+      "require": "./cjs/tool/When.js",
+      "import": "./esm/tool/When.js"
+    },
     "./types": {
       "require": "./cjs/types.js",
       "import": "./esm/types.js"
+    },
+    "./unocss": {
+      "require": "./cjs/unocss.js",
+      "import": "./esm/unocss.js"
+    },
+    "./base": {
+      "require": "./cjs/base/index.js",
+      "import": "./esm/base/index.js"
+    },
+    "./base/*": {
+      "require": "./cjs/base/*.js",
+      "import": "./esm/base/*.js"
     },
     "./data/*": {
       "require": "./cjs/data/*.js",
       "import": "./esm/data/*.js"
     },
-    "./element": {
-      "require": "./cjs/element/index.js",
-      "import": "./esm/element/index.js"
+    "./component": {
+      "require": "./cjs/base/index.js",
+      "import": "./esm/base/index.js"
     },
-    "./element/*": {
-      "require": "./cjs/element/*.js",
-      "import": "./esm/element/*.js"
-    },
-    "./field": {
-      "require": "./cjs/field/index.js",
-      "import": "./esm/field/index.js"
-    },
-    "./field/*": {
-      "require": "./cjs/field/*.js",
-      "import": "./esm/field/*.js"
+    "./component/*": {
+      "require": "./cjs/base/*.js",
+      "import": "./esm/base/*.js"
     },
     "./form": {
       "require": "./cjs/form/index.js",
@@ -48,13 +124,21 @@
       "require": "./cjs/form/*.js",
       "import": "./esm/form/*.js"
     },
-    "./format": {
-      "require": "./cjs/format/index.js",
-      "import": "./esm/format/index.js"
+    "./tool": {
+      "require": "./cjs/tool/index.js",
+      "import": "./esm/tool/index.js"
     },
-    "./format/*": {
-      "require": "./cjs/format/*.js",
-      "import": "./esm/format/*.js"
+    "./tool/*": {
+      "require": "./cjs/tool/*.js",
+      "import": "./esm/tool/*.js"
+    },
+    "./view": {
+      "require": "./cjs/view/index.js",
+      "import": "./esm/view/index.js"
+    },
+    "./view/*": {
+      "require": "./cjs/view/*.js",
+      "import": "./esm/view/*.js"
     },
     "./frui.css": "./frui.css"
   },
@@ -62,15 +146,36 @@
     "*": {
       ".": [ "./cjs/index.d.ts" ],
       "types": [ "./cjs/types.d.ts" ],
+      "unocss": [ "./cjs/unocss.d.ts" ],
+      "Accordion": [ "./cjs/base/Accordion.d.ts" ],
+      "Alert": [ "./cjs/base/Alert.d.ts" ],
+      "Badge": [ "./cjs/base/Badge.d.ts" ],
+      "Box": [ "./cjs/base/Box.d.ts" ],
+      "Bread": [ "./cjs/base/Bread.d.ts" ],
+      "Button": [ "./cjs/base/Button.d.ts" ],
+      "Card": [ "./cjs/base/Card.d.ts" ],
+      "Dialog": [ "./cjs/base/Dialog.d.ts" ],
+      "Dropdown": [ "./cjs/base/Dropdown.d.ts" ],
+      "Loader": [ "./cjs/base/Loader.d.ts" ],
+      "Notifier": [ "./cjs/base/Notifier.d.ts" ],
+      "Pager": [ "./cjs/base/Pager.d.ts" ],
+      "Progress": [ "./cjs/base/Progress.d.ts" ],
+      "Scope": [ "./cjs/tool/Scope.d.ts" ],
+      "Table": [ "./cjs/base/Table.d.ts" ],
+      "Tabs": [ "./cjs/base/Tabs.d.ts" ],
+      "Tooltip": [ "./cjs/base/Tooltip.d.ts" ],
+      "When": [ "./cjs/tool/When.d.ts" ],
+      "base": [ "./cjs/base/index.d.ts" ],
+      "base/*": [ "./cjs/base/*.d.ts" ],
+      "component": [ "./cjs/base/index.d.ts" ],
+      "component/*": [ "./cjs/base/*.d.ts" ],
       "data/*": [ "./cjs/data/*.d.ts" ],
-      "element": [ "./cjs/element/index.d.ts" ],
-      "element/*": [ "./cjs/element/*.d.ts" ],
-      "field": [ "./cjs/field/index.d.ts" ],
-      "field/*": [ "./cjs/field/*.d.ts" ],
-      "format": [ "./cjs/format/index.d.ts" ],
-      "format/*": [ "./cjs/format/*.d.ts" ],
       "form": [ "./cjs/form/index.d.ts" ],
-      "form/*": [ "./cjs/form/*.d.ts" ]
+      "form/*": [ "./cjs/form/*.d.ts" ],
+      "tool": [ "./cjs/tool/index.d.ts" ],
+      "tool/*": [ "./cjs/tool/*.d.ts" ],
+      "view": [ "./cjs/view/index.d.ts" ],
+      "view/*": [ "./cjs/view/*.d.ts" ]
     }
   },
   "files": [
@@ -82,8 +187,8 @@
     "README.md"
   ],
   "plugins": [
-    "./plugins/app/plugin",
-    "./plugins/docs/plugin"
+    "./web/app/plugin",
+    "./web/docs/plugin"
   ],
   "scripts": {
     "build": "yarn build:tsc && yarn build:pkg && yarn build:docs",

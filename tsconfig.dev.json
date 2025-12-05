@@ -23,10 +23,10 @@
     "outDir": "esm/"
   },
   "include": [ 
-    "components/**/*.ts", 
-    "components/**/*.tsx",
-    "plugins/**/*.ts",
-    "plugins/**/*.tsx",
+    "src/**/*.ts", 
+    "src/**/*.tsx",
+    "web/**/*.ts",
+    "web/**/*.tsx",
     "scripts/**/*.ts",
   ],
   "exclude": [ "dist", "node_modules", "tests" ]

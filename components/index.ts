@@ -317,6 +317,7 @@ export type {
 } from './form/TimeInput.js';
 
 import * as Form from './form/index.js';
+
 //--------------------------------------------------------------------//
 // Helpers
 
@@ -327,6 +328,11 @@ export type {
   BorderRadiusProps,
   BorderRadiusTool
 } from './helpers/tools/BorderRadiusTool.js';
+//border style tool
+export type { 
+  BorderStyleProps,
+  BorderStyleTool
+} from './helpers/tools/BorderStyleTool.js';
 //color tool
 export type { 
   BackgroundColorProps,
@@ -354,14 +360,26 @@ export type {
   ClassStyleOptions,
   PropTool
 } from './helpers/tools/PropTool.js';
+export type {
+  BorderSizeProps,
+  DimensionSizeProps,
+  MarginSizeProps,
+  PaddingSizeProps,
+  SizeProps,
+  SizeStyleKey,
+  SizeTool,
+  SizeTypeProp,
+  SizeValueProps,
+  SizeValueProp,
+  TextSizeProps
+} from './helpers/tools/SizeTool.js';
 //text align tool
 export type { 
   TextAlignProps,
   TextAlignTool
 } from './helpers/tools/TextAlignTool.js';
-//get class styles
+//get class styles options
 export type { GetClassStylesOptions } from './helpers/getClassStyles.js';
-
 //get slot styles
 import { getClassStyles } from './helpers/getClassStyles.js';
 //get slot styles

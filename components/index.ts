@@ -380,12 +380,12 @@ export type {
 } from './helpers/tools/TextAlignTool.js';
 //get class styles options
 export type { GetClassStylesOptions } from './helpers/getClassStyles.js';
-//get slot styles
-import { getClassStyles } from './helpers/getClassStyles.js';
-//get slot styles
-import { getSlotStyles } from './helpers/getSlotStyles.js';
-//to children array
-import { toChildrenArray } from './helpers/toChildrenArray.js';
+//getClassStyles
+import getClassStyles from './helpers/getClassStyles.js';
+//getSlotStyles
+import getSlotStyles from './helpers/getSlotStyles.js';
+//toChildrenArray
+import toChildrenArray from './helpers/toChildrenArray.js';
 
 //--------------------------------------------------------------------//
 // View

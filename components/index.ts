@@ -303,42 +303,32 @@ import * as Form from './form/index.js';
 // Helpers
 
 //border radius tool
-export type { 
-  BorderRadiusProps,
-  BorderRadiusTool
-} from './helpers/tools/BorderRadiusTool.js';
+export type { BorderRadiusProps } from './helpers/tools/BorderRadiusTool.js';
+import BorderRadiusTool from './helpers/tools/BorderRadiusTool.js';
 //border style tool
-export type { 
-  BorderStyleProps,
-  BorderStyleTool
-} from './helpers/tools/BorderStyleTool.js';
+export type { BorderStyleProps } from './helpers/tools/BorderStyleTool.js';
+import BorderStyleTool from './helpers/tools/BorderStyleTool.js';
 //color tool
-export type { 
+export type {
   BackgroundColorProps,
   BorderColorProps,
   ColorProps,
   ColorStyleKey,
-  ColorTool,
   ColorTypeProp,
   ColorValueProp,
   ColorValueProps,
   TextColorProps
 } from './helpers/tools/ColorTool.js';
+import ColorTool from './helpers/tools/ColorTool.js';
 //display tool
-export type { 
-  DisplayProps,
-  DisplayTool
-} from './helpers/tools/DisplayTool.js';
+export type { DisplayProps } from './helpers/tools/DisplayTool.js';
+import DisplayTool from './helpers/tools/DisplayTool.js';
 //fill tool
-export type { 
-  FillProps,
-  FillTool
-} from './helpers/tools/FillTool.js';
+export type { FillProps } from './helpers/tools/FillTool.js';
+import FillTool from './helpers/tools/FillTool.js';
 //prop tool
-export type { 
-  ClassStyleOptions,
-  PropTool
-} from './helpers/tools/PropTool.js';
+export type { ClassStyleOptions } from './helpers/tools/PropTool.js';
+import PropTool from './helpers/tools/PropTool.js';
 //size tool
 export type {
   BorderSizeProps,
@@ -347,17 +337,15 @@ export type {
   PaddingSizeProps,
   SizeProps,
   SizeStyleKey,
-  SizeTool,
   SizeTypeProp,
   SizeValueProps,
   SizeValueProp,
   TextSizeProps
 } from './helpers/tools/SizeTool.js';
+import SizeTool from './helpers/tools/SizeTool.js';
 //text align tool
-export type { 
-  TextAlignProps,
-  TextAlignTool
-} from './helpers/tools/TextAlignTool.js';
+export type { TextAlignProps } from './helpers/tools/TextAlignTool.js';
+import TextAlignTool from './helpers/tools/TextAlignTool.js';
 //get class styles
 export type { GetClassStylesOptions } from './helpers/getClassStyles.js';
 import getClassStyles from './helpers/getClassStyles.js';
@@ -420,12 +408,17 @@ export {
   Accordion,
   Alert,
   Badge,
+  BorderRadiusTool,
+  BorderStyleTool,
   Box,
   Bread,
   Button,
   Card,
+  ColorTool,
   Dialog,
+  DisplayTool,
   Dropdown,
+  FillTool,
   Form,
   getClassStyles,
   getSlotStyles,
@@ -433,9 +426,12 @@ export {
   Notifier,
   Pager,
   Progress,
+  PropTool,
   Scope,
+  SizeTool,
   Table,
   Tabs,
+  TextAlignTool,
   toChildrenArray,
   Tooltip,
   View,

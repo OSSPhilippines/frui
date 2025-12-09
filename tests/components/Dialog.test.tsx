@@ -22,7 +22,7 @@ import Dialog, {
   DialogOverlay,
   useDialog,
   useDialogContext
-} from '../../components/Dialog'
+} from '../../src/Dialog'
 
 //--------------------------------------------------------------------//
 // Helper Components
@@ -84,7 +84,7 @@ describe('<Dialog />', () => {
 
     const overlay = document.querySelector(
       '.frui-dialog-overlay'
-    ) as HTMLElement
+    )
     expect(overlay).toBeInTheDocument()
 
     fireEvent.click(overlay)

@@ -1,10 +1,10 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
-import Tabs from "../../components/Tabs"; 
+import Tabs from "../../src/Tabs"; 
 
 // Helper render function
 const setup = (props: unknown = {}) => (

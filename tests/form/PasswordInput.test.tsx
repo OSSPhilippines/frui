@@ -1,26 +1,26 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, it, expect, vi } from 'vitest'
-import PasswordInput from '../../components/form/PasswordInput'
+import PasswordInput from '../../src/form/PasswordInput'
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Mock helpers and Input component
-// --------------------------------------------------------------------
-vi.mock('../../components/helpers/getClassStyles.js', () => ({
+//--------------------------------------------------------------------//
+vi.mock('../../src/helpers/getClassStyles.js', () => ({
   __esModule: true,
   default: ({ classes }: { classes: string[] }) => ({ classes, styles: {} }),
 }))
 
-vi.mock('../../components/helpers/getSlotStyles.js', () => ({
+vi.mock('../../src/helpers/getSlotStyles.js', () => ({
   __esModule: true,
   default: () => ({}),
 }))
 
-vi.mock('../../components/form/Input.js', () => ({
+vi.mock('../../src/form/Input.js', () => ({
   __esModule: true,
   default: ({
     type,
@@ -32,9 +32,9 @@ vi.mock('../../components/form/Input.js', () => ({
   ),
 }))
 
-// --------------------------------------------------------------------
-// Component Tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// Tests
+//--------------------------------------------------------------------//
 describe('<PasswordInput />', () => {
   it('renders wrapper and base input', () => {
     render(<PasswordInput />)

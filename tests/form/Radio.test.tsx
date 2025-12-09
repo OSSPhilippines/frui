@@ -1,15 +1,15 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { act, renderHook } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
-import { Radio, useRadio } from '../../components/form/Radio'
+import { Radio, useRadio } from '../../src/form/Radio'
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Hook tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 describe('useRadio()', () => {
   it('sets and updates checked state when changed', () => {
     const changeMock = vi.fn()
@@ -39,9 +39,9 @@ describe('useRadio()', () => {
   })
 })
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Component tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 describe('<Radio />', () => {
   it('applies shape, color, and error class names correctly', () => {
     const { container } = render(<Radio check blue error className="extra" label="R" />)

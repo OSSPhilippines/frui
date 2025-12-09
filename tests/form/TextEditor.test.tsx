@@ -1,14 +1,14 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import '@testing-library/jest-dom'
 import { act, fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
-import TextEditor, { useTextEditor } from '../../components/form/TextEditor'
+import TextEditor, { useTextEditor } from '../../src/form/TextEditor'
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Mocks
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 Object.defineProperty(window, 'getSelection', {
   writable: true,
   value: vi.fn(() => ({
@@ -31,9 +31,9 @@ Object.defineProperty(document, 'execCommand', {
   value: vi.fn(() => true) as unknown as Document['execCommand'],
 })
 
-// --------------------------------------------------------------------
-// Component Tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// Tests
+//--------------------------------------------------------------------//
 describe('useTextEditor', () => {
   const setupHook = (config = {}) => {
     let result: ReturnType<typeof useTextEditor> | undefined

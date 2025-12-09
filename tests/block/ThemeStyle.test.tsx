@@ -1,16 +1,16 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import '@testing-library/jest-dom'
 import { describe, expect, it, vi } from 'vitest'
 import { render } from '@testing-library/react'
 import React from 'react'
 
-import ThemeStyle, { useThemeStyle } from '../../components/block/ThemeStyle'
+import ThemeStyle, { useThemeStyle } from '../../src/block/ThemeStyle'
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Mocks
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 vi.mock('../../helpers/removeThemeProps.js', () => ({
   __esModule: true,
   default: (cfg: unknown) => cfg,
@@ -33,9 +33,9 @@ vi.mock('../../helpers/tools/TextAlignTool.js', () => ({ __esModule: true, defau
 vi.mock('../../helpers/tools/TextColorTool.js', () => ({ __esModule: true, default: mockTool }))
 vi.mock('../../helpers/tools/TextSizeTool.js', () => ({ __esModule: true, default: mockTool }))
 
-// --------------------------------------------------------------------
-// Component Tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// Tests
+//--------------------------------------------------------------------//
 describe('useThemeStyle hook', () => {
   it('returns merged default styles and class array', () => {
     const { styles, classes } = useThemeStyle({ style: { color: 'red' } }, 'base', { fontSize: '12px' })
@@ -56,7 +56,7 @@ describe('ThemeStyle component', () => {
         <div data-testid="child">Child</div>
       </ThemeStyle>
     )
-    const child = container.querySelector('[data-testid="child"]') as HTMLElement
+    const child = container.querySelector('[data-testid="child"]')
     expect(child).toHaveClass('parent-class')
     expect(child.style.backgroundColor).toBe('blue')
   })

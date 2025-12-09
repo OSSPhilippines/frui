@@ -22,6 +22,6 @@
     "moduleResolution": "node",
     "outDir": "esm/"
   },
-  "include": [ "components/**/*.ts", "components/**/*.tsx" ],
+  "include": [ "src/**/*.ts", "src/**/*.tsx" ],
   "exclude": [ "dist", "node_modules", "tests" ]
 }

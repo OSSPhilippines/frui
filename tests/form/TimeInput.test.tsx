@@ -1,15 +1,15 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
-import { TimeInput, toDate, toTimeInputString, toTimeString } from '../../components/form/TimeInput'
+import { TimeInput, toDate, toTimeInputString, toTimeString } from '../../src/form/TimeInput'
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Mocks
-// --------------------------------------------------------------------
-vi.mock('../../components/form/Input.js', () => ({
+//--------------------------------------------------------------------//
+vi.mock('../../src/form/Input.js', () => ({
   __esModule: true,
   default: ({
     className,
@@ -35,9 +35,9 @@ vi.mock('../../components/form/Input.js', () => ({
   ),
 }))
 
-// --------------------------------------------------------------------
-// Component Tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// Tests
+//--------------------------------------------------------------------//
 describe('Time helper functions', () => {
   it('toDate converts different input types correctly', () => {
     const d = new Date('2024-01-01T12:30:00')

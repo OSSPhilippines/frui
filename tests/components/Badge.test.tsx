@@ -1,20 +1,20 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
-import Badge from '../../components/Badge'
+import Badge from '../../src/Badge'
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Mocks
-// --------------------------------------------------------------------
-vi.mock('../../components/helpers/removeThemeProps.js', () => ({
+//--------------------------------------------------------------------//
+vi.mock('../../src/helpers/removeThemeProps.js', () => ({
   __esModule: true,
   default: (props: unknown) => props,
 }))
 
-vi.mock('../../components/helpers/tools/BackgroundColorTool.js', () => ({
+vi.mock('../../src/helpers/tools/BackgroundColorTool.js', () => ({
   __esModule: true,
   default: {
     get: () => ({
@@ -25,7 +25,7 @@ vi.mock('../../components/helpers/tools/BackgroundColorTool.js', () => ({
   },
 }))
 
-vi.mock('../../components/helpers/tools/BorderColorTool.js', () => ({
+vi.mock('../../src/helpers/tools/BorderColorTool.js', () => ({
   __esModule: true,
   default: {
     get: () => ({
@@ -36,7 +36,7 @@ vi.mock('../../components/helpers/tools/BorderColorTool.js', () => ({
   },
 }))
 
-vi.mock('../../components/helpers/tools/BorderRadiusTool.js', () => ({
+vi.mock('../../src/helpers/tools/BorderRadiusTool.js', () => ({
   __esModule: true,
   default: {
     get: () => ({
@@ -47,7 +47,7 @@ vi.mock('../../components/helpers/tools/BorderRadiusTool.js', () => ({
   },
 }))
 
-vi.mock('../../components/helpers/tools/FillTool.js', () => ({
+vi.mock('../../src/helpers/tools/FillTool.js', () => ({
   __esModule: true,
   default: {
     get: () => ({
@@ -64,7 +64,7 @@ vi.mock('../../components/helpers/tools/FillTool.js', () => ({
   },
 }))
 
-vi.mock('../../components/helpers/tools/TextAlignTool.js', () => ({
+vi.mock('../../src/helpers/tools/TextAlignTool.js', () => ({
   __esModule: true,
   default: {
     get: () => ({
@@ -73,7 +73,7 @@ vi.mock('../../components/helpers/tools/TextAlignTool.js', () => ({
   },
 }))
 
-vi.mock('../../components/helpers/tools/TextColorTool.js', () => ({
+vi.mock('../../src/helpers/tools/TextColorTool.js', () => ({
   __esModule: true,
   default: {
     get: () => ({
@@ -84,9 +84,9 @@ vi.mock('../../components/helpers/tools/TextColorTool.js', () => ({
   },
 }))
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 describe('Badge', () => {
   it('renders children content correctly', () => {
     render(<Badge>Sample</Badge>)

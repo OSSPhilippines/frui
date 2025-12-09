@@ -1,14 +1,14 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { describe, expect, it, vi } from 'vitest'
-import { Alert } from '../../components/Alert'
+import { Alert } from '../../src/Alert'
 
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Mock utilities
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
 vi.mock('./helpers/tools/BackgroundColorTool.js', () => ({
   default: class {
     static get(props: { color?: string; outline?: boolean }) {
@@ -100,9 +100,9 @@ vi.mock('./helpers/removeThemeProps.js', () => ({
   default: (props: Record<string, unknown>) => props,
 }))
 
-// -------------------------------------------------------------------
-// Component Tests
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// Tests
+//--------------------------------------------------------------------//
 describe('<Alert />', () => {
   it('adds a custom className when provided', () => {
     render(<Alert className="custom">message</Alert>)
@@ -141,7 +141,7 @@ describe('<Alert />', () => {
 
   it('renders with base class', () => {
     const { container } = render(<Alert>content</Alert>)
-    const alert = container.firstChild as HTMLElement
+    const alert = container.firstChild
     expect(alert).toHaveClass('frui-alert', 'frui-tx-white')
     expect(alert.textContent).toBe('content')
   })

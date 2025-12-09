@@ -1,11 +1,11 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
-import MaskInput from '../../components/form/MaskInput'
+import MaskInput from '../../src/form/MaskInput'
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Mocks 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 const mockMaskMethod = vi.fn()
 
 // Constructable mock for Inputmask
@@ -20,7 +20,7 @@ Object.defineProperty(globalThis, 'Inputmask', {
 })
 
 // Mock nested Input component
-vi.mock('../../components/form/Input.js', () => ({
+vi.mock('../../src/form/Input.js', () => ({
   __esModule: true,
   default: ({
     className,
@@ -36,9 +36,9 @@ vi.mock('../../components/form/Input.js', () => ({
   ),
 }))
 
-// --------------------------------------------------------------------
-// Component Tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// Tests
+//--------------------------------------------------------------------//
 describe('<MaskInput />', () => {
   it('renders basic input element', () => {
     render(<MaskInput />)

@@ -89,11 +89,13 @@ export function Progress(props: ProgressProps) {
     ...attributes 
   } = Box.removeThemeProps(props);
   //variables
+  const colors = ColorTool.get(props, 'bgc').config;
+  delete colors.bgc;
   // set default styles and classes
-  const styles = { ...style };
+  const styles = { ...style, width: `${width}%` };
   const classes = [ 'frui-progress' ];
   // - set bar color (background color)
-  ColorTool.get(props, 'bgc').getClassStyles({ classes, styles });
+  ColorTool.get(colors, 'bgc').getClassStyles({ classes, styles });
   // - set bar height
   if (height) {
     styles.height = typeof height === 'number' ? `${height}px` : height;

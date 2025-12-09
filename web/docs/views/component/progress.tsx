@@ -236,7 +236,7 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Progress width={60} muted bgc="muted" txc="white">60%</Progress>
+            <Progress width={60} black bgc="muted" txc="white">60%</Progress>
           </div>
         </Preview.Example>
         <Preview.Code>
@@ -292,7 +292,7 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Progress width={80} height={20} info bgc="muted" pill />
+            <Progress width={80} height={20} info bgc="muted" txc="white" pill />
           </div>
         </Preview.Example>
         <Preview.Code>

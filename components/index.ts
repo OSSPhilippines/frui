@@ -11,16 +11,20 @@ export type {
   AccordionProps,
   AccordionStates
 } from './Accordion.js';
+import Accordion from './Accordion.js';
 //alert
 export type { AlertProps } from './Alert.js';
+import Alert from './Alert.js';
 //badge
 export type { BadgeProps } from './Badge.js';
+import Badge from './Badge.js';
 //box
 export type { 
   BoxConfig,
   BoxProps,
   BoxThemeConfig
 } from './Box.js';
+import Box from './Box.js';
 //bread
 export type { 
   BreadConfig,
@@ -31,8 +35,10 @@ export type {
   BreadStates,
   Crumb
 } from './Bread.js';
+import Bread from './Bread.js';
 //button
 export type { ButtonProps } from './Button.js';
+import Button from './Button.js';
 //card
 export type { 
   CardBodyProps,
@@ -42,6 +48,7 @@ export type {
   CardProps,
   CardTitleProps
 } from './Card.js';
+import Card from './Card.js';
 //dialog
 export type { 
   DialogCloseProps,
@@ -51,6 +58,7 @@ export type {
   DialogProps,
   DialogProviderProps
 } from './Dialog.js';
+import Dialog from './Dialog.js';
 //dropdown
 export type { 
   DropdownConfig,
@@ -64,11 +72,13 @@ export type {
   DropdownOptionProps,
   DropdownProps
 } from './Dropdown.js';
+import Dropdown from './Dropdown.js';
 //loader
 export type { 
   LoaderContainerProps, 
   LoaderProps
 } from './Loader.js';
+import Loader from './Loader.js';
 //notifier
 export type { 
   CookieOptions as NotifierCookieOptions,
@@ -78,18 +88,22 @@ export type {
   NotifierProviderProps,
   ToastOptions as NotifierToastOptions
 } from './Notifier.js';
+import Notifier from './Notifier.js';
 //pager
 export type { 
   PagerProps,
   PagerState
 } from './Pager.js';
+import Pager from './Pager.js';
 //progress
 export type { 
   ProgressContainerProps,
   ProgressProps
 } from './Progress.js';
+import Progress from './Progress.js';
 //scope
 export type { ScopeProps } from './Scope.js';
+import Scope from './Scope.js';
 //table
 export type { 
   AddClassStyle,
@@ -107,6 +121,7 @@ export type {
   TableRowProps,
   TableRuleProps
 } from './Table.js';
+import Table from './Table.js';
 //tabs
 export type { 
   TabsActiveProps,
@@ -120,6 +135,7 @@ export type {
   TabsProps,
   TabsStates
 } from './Tabs.js';
+import Tabs from './Tabs.js';
 //tooltip
 export type { 
   TooltipConfig,
@@ -127,44 +143,9 @@ export type {
   TooltipDirection,
   TooltipProps
 } from './Tooltip.js';
-//when
-export type { WhenProps } from './When.js';
-
-//accordion
-import Accordion from './Accordion.js';
-//alert
-import Alert from './Alert.js';
-//badge
-import Badge from './Badge.js';
-//box
-import Box from './Box.js';
-//bread
-import Bread from './Bread.js';
-//button
-import Button from './Button.js';
-//card
-import Card from './Card.js';
-//dialog
-import Dialog from './Dialog.js';
-//dropdown
-import Dropdown from './Dropdown.js';
-//loader
-import Loader from './Loader.js';
-//notifier
-import Notifier from './Notifier.js';
-//pager
-import Pager from './Pager.js';
-//progress
-import Progress from './Progress.js';
-//scope
-import Scope from './Scope.js';
-//table
-import Table from './Table.js';
-//tabs
-import Tabs from './Tabs.js';
-//tooltip
 import Tooltip from './Tooltip.js';
 //when
+export type { WhenProps } from './When.js';
 import When from './When.js';
 
 //--------------------------------------------------------------------//
@@ -321,8 +302,6 @@ import * as Form from './form/index.js';
 //--------------------------------------------------------------------//
 // Helpers
 
-//tools
-
 //border radius tool
 export type { 
   BorderRadiusProps,
@@ -360,6 +339,7 @@ export type {
   ClassStyleOptions,
   PropTool
 } from './helpers/tools/PropTool.js';
+//size tool
 export type {
   BorderSizeProps,
   DimensionSizeProps,
@@ -378,13 +358,12 @@ export type {
   TextAlignProps,
   TextAlignTool
 } from './helpers/tools/TextAlignTool.js';
-//get class styles options
+//get class styles
 export type { GetClassStylesOptions } from './helpers/getClassStyles.js';
-//getClassStyles
 import getClassStyles from './helpers/getClassStyles.js';
-//getSlotStyles
+//get slot styles
 import getSlotStyles from './helpers/getSlotStyles.js';
-//toChildrenArray
+//to children array
 import toChildrenArray from './helpers/toChildrenArray.js';
 
 //--------------------------------------------------------------------//

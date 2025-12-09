@@ -1,16 +1,16 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 
-import { flatClass, Pager } from '../../components/Pager'
+import { flatClass, Pager } from '../../src/Pager'
 
-// -------------------------------------------------------------------
-// Component Tests
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// Tests
+//--------------------------------------------------------------------//
 describe('flatClass()', () => {
   it('ignores falsy values', () => {
     const result = flatClass('', ['x', ''], 'y')

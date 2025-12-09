@@ -1,15 +1,15 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import '@testing-library/jest-dom'
 import { act, renderHook } from '@testing-library/react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
-import Textlist, { TextlistFields, useTextlists } from '../../components/form/Textlist'
+import Textlist, { TextlistFields, useTextlists } from '../../src/form/Textlist'
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Hook Tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 describe('useTextlists()', () => {
   it('updates a value at given index', () => {
     const setMock = vi.fn()
@@ -39,9 +39,9 @@ describe('useTextlists()', () => {
   })
 })
 
-// --------------------------------------------------------------------
-// Component Tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// Tests
+//--------------------------------------------------------------------//
 describe('<TextlistFields />', () => {
   it('renders input and remove button', () => {
     const setMock = vi.fn()
@@ -109,9 +109,9 @@ describe('<TextlistFields />', () => {
   })
 })
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Textlist Wrapper Component Tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 describe('<Textlist />', () => {
   it('renders Fieldset add button', () => {
     render(<Textlist name="wrapper" placeholder="add..." />)

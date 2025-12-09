@@ -1,15 +1,15 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
-import { MetadataFields, useMetadata } from '../../components/form/Metadata'
+import { MetadataFields, useMetadata } from '../../src/form/Metadata'
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Module mocks 
-// --------------------------------------------------------------------
-vi.mock('../../components/Button.js', () => ({
+//--------------------------------------------------------------------//
+vi.mock('../../src/Button.js', () => ({
   __esModule: true,
   default: ({ onClick }: { onClick?: () => void }) => (
     <button data-testid="mock-button" onClick={onClick}>
@@ -19,7 +19,7 @@ vi.mock('../../components/Button.js', () => ({
 }))
 
 // helper factory defined *inside* each mock to avoid hoisting issues
-vi.mock('../../components/form/Input.js', () => ({
+vi.mock('../../src/form/Input.js', () => ({
   __esModule: true,
   default: ({ onUpdate, className }: { onUpdate?: (v: unknown) => void; className?: string }) => (
     <input
@@ -30,7 +30,7 @@ vi.mock('../../components/form/Input.js', () => ({
   ),
 }))
 
-vi.mock('../../components/form/NumberInput.js', () => ({
+vi.mock('../../src/form/NumberInput.js', () => ({
   __esModule: true,
   default: ({ onUpdate, className }: { onUpdate?: (v: unknown) => void; className?: string }) => (
     <input
@@ -41,7 +41,7 @@ vi.mock('../../components/form/NumberInput.js', () => ({
   ),
 }))
 
-vi.mock('../../components/form/DateInput.js', () => ({
+vi.mock('../../src/form/DateInput.js', () => ({
   __esModule: true,
   default: ({ onUpdate, className }: { onUpdate?: (v: unknown) => void; className?: string }) => (
     <input
@@ -52,7 +52,7 @@ vi.mock('../../components/form/DateInput.js', () => ({
   ),
 }))
 
-vi.mock('../../components/form/TimeInput.js', () => ({
+vi.mock('../../src/form/TimeInput.js', () => ({
   __esModule: true,
   default: ({ onUpdate, className }: { onUpdate?: (v: unknown) => void; className?: string }) => (
     <input
@@ -63,7 +63,7 @@ vi.mock('../../components/form/TimeInput.js', () => ({
   ),
 }))
 
-vi.mock('../../components/form/DatetimeInput.js', () => ({
+vi.mock('../../src/form/DatetimeInput.js', () => ({
   __esModule: true,
   default: ({ onUpdate, className }: { onUpdate?: (v: unknown) => void; className?: string }) => (
     <input
@@ -74,9 +74,9 @@ vi.mock('../../components/form/DatetimeInput.js', () => ({
   ),
 }))
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Hook tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 describe('useMetadata()', () => {
   const values: ([string, string | number | Date] | undefined)[] = [['key', 'val']]
 
@@ -96,9 +96,9 @@ describe('useMetadata()', () => {
   })
 })
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Component tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 describe('<MetadataFields />', () => {
   const values = [['name', 'val']] as unknown as ([string, string] | undefined)[]
   const renderField = (type: string, set = vi.fn()) =>

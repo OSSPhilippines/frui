@@ -1,15 +1,15 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import { fireEvent, render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { getTooltipPosition, Tooltip, TooltipContainer } from '../../components/Tooltip'
+import { getTooltipPosition, Tooltip, TooltipContainer } from '../../src/Tooltip'
 
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Mock tool utilities 
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
 vi.mock('./helpers/tools/BorderRadiusTool.js', () => ({
   default: class {
     static get() {
@@ -34,14 +34,14 @@ vi.mock('./helpers/removeThemeProps.js', () => ({
   default: (props: unknown) => props,
 }))
 
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Reset spies before each test
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
 beforeEach(() => vi.clearAllMocks())
 
-// -------------------------------------------------------------------
-// Component Tests
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// Tests
+//--------------------------------------------------------------------//
 describe('<Tooltip />', () => {
   it('renders only children when not visible', () => {
     const { container } = render(<Tooltip text="Hello">HoverMe</Tooltip>)
@@ -59,7 +59,7 @@ describe('<Tooltip />', () => {
 
   it('shows tooltip when hover=true and mouseEnter triggers visible state', () => {
     const { container } = render(<Tooltip hover text="HoverText">Hover</Tooltip>)
-    const outer = container.querySelector('.frui-tooltip-container') as HTMLElement
+    const outer = container.querySelector('.frui-tooltip-container')
     expect(outer).toBeInTheDocument()
     fireEvent.mouseEnter(outer)
     expect(screen.getByText('HoverText')).toBeInTheDocument()
@@ -73,13 +73,13 @@ describe('<TooltipContainer />', () => {
     const { container } = render(
       <TooltipContainer className="extra">content</TooltipContainer>
     )
-    const el = container.firstChild as HTMLElement
+    const el = container.firstChild
     expect(el).toHaveClass('frui-tooltip-container', 'extra')
   })
 
   it('renders with base class and children', () => {
     const { container } = render(<TooltipContainer>tip</TooltipContainer>)
-    const el = container.firstChild as HTMLElement
+    const el = container.firstChild
     expect(el).toHaveClass('frui-tooltip-container')
     expect(el).toHaveTextContent('tip')
   })

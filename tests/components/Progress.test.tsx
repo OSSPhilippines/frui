@@ -1,15 +1,15 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { describe, expect, it, vi } from 'vitest'
 
-import { Progress, ProgressContainer } from '../../components/Progress'
+import { Progress, ProgressContainer } from '../../src/Progress'
 
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Mock tool utilities 
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
 vi.mock('./helpers/tools/BackgroundColorTool.js', () => ({
   default: class {
     static get() {
@@ -46,9 +46,9 @@ vi.mock('./helpers/removeThemeProps.js', () => ({
   default: (props: unknown) => props,
 }))
 
-// -------------------------------------------------------------------
-// Component Tests
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// Tests
+//--------------------------------------------------------------------//
 describe('<Progress />', () => {
   it('applies background color, radius, and height to bar', () => {
     render(<Progress bgcolor="blue" curved height={8}>label</Progress>)

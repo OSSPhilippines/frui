@@ -20,12 +20,12 @@ import {
 import SuggestInput, {
   useSuggestInput,
   SuggestInputDropdown
-} from '../../components/form/SuggestInput'
+} from '../../src/form/SuggestInput'
 
 //--------------------------------------------------------------------//
 // Mocks
 //--------------------------------------------------------------------//
-vi.mock('../../components/form/Input.js', () => ({
+vi.mock('../../src/form/Input.js', () => ({
   __esModule: true,
   default: ({
     value,
@@ -193,7 +193,7 @@ describe('SuggestInputDropdown', () => {
 })
 
 //--------------------------------------------------------------------//
-// Component Tests
+// Tests
 //--------------------------------------------------------------------//
 describe('<SuggestInput />', () => {
   //preset options

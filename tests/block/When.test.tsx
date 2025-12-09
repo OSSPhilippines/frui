@@ -15,10 +15,10 @@ import {
 //components
 import When, {
   Otherwise
-} from '../../components/When'
+} from '../../src/When'
 
 //--------------------------------------------------------------------//
-// Component Tests
+// Tests
 //--------------------------------------------------------------------//
 describe('When / Otherwise conditional rendering', () => {
   //------------------------------------------------------------------//

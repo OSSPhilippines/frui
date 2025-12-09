@@ -1,6 +1,6 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { describe, expect, it, vi } from 'vitest'
@@ -14,12 +14,12 @@ import {
   AccordionInactive,
   AccordionLabel,
   useAccordionContext,
-} from '../../components/Accordion'
-import type { AccordionContextProps } from '../../components/Accordion'
+} from '../../src/Accordion'
+import type { AccordionContextProps } from '../../src/Accordion'
 
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Mock utilities
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
 vi.mock('../helpers/getClassStyles.js', () => ({
   __esModule: true,
   default: ({ classes }: any) => ({ classes, styles: {} }),
@@ -30,9 +30,9 @@ vi.mock('../helpers/getSlotStyles.js', () => ({
   default: () => ({}),
 }))
 
-// -------------------------------------------------------------------
-// Component Tests
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// Tests
+//--------------------------------------------------------------------//
 describe('<Accordion />', () => {
   it('renders wrapper div with correct class', () => {
     const { container } = render(<Accordion>content</Accordion>)
@@ -81,9 +81,9 @@ describe('<Accordion />', () => {
   })
 })
 
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Sub-component tests 
-// -------------------------------------------------------------------
+//--------------------------------------------------------------------//
 describe('<AccordionActive /> and <AccordionInactive />', () => {
   it('renders Active only when item is selected', () => {
     const ctx: AccordionContextProps = { change: vi.fn(), itemValue: 'x', value: 'x' }

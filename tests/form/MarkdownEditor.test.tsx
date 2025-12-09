@@ -1,16 +1,20 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
-import '@testing-library/jest-dom'
-import React from 'react'
-import { act, fireEvent, render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import { MarkdownEditor, useMarkdownEditor } from '../../components/form/MarkdownEditor'
 
-// --------------------------------------------------------------------
+//tests
+import '@testing-library/jest-dom';
+import React from 'react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
+//frui
+import MarkdownEditor, { 
+  useMarkdownEditor 
+} from '../../src/form/MarkdownEditor.js';
+
+//--------------------------------------------------------------------//
 // Mocks
-// --------------------------------------------------------------------
-vi.mock('../../components/form/Textarea.js', () => ({
+
+vi.mock('../../src/form/Textarea.js', () => ({
   __esModule: true,
   default: ({
     value,
@@ -30,10 +34,10 @@ vi.mock('../../components/form/Textarea.js', () => ({
         onUpdate?.(evt.target.value)
       }}
     />
-  ),
-}))
+  )
+}));
 
-vi.mock('../../components/Button.js', () => ({
+vi.mock('../../src/Button.js', () => ({
   __esModule: true,
   default: ({
     children,
@@ -55,9 +59,9 @@ vi.mock('markdown-to-jsx', () => ({
   default: ({ children }: { children?: React.ReactNode }) => <div>{children}</div>,
 }))
 
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Helper Hook Wrapper
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 function renderHookWithState<T>(hook: () => T): { current: T } {
   let currentValue: T
   function TestHook() {
@@ -68,9 +72,9 @@ function renderHookWithState<T>(hook: () => T): { current: T } {
   return { current: currentValue! }
 }
 
-// --------------------------------------------------------------------
-// Component Tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// Tests
+//--------------------------------------------------------------------//
 describe('useMarkdownEditor', () => {
   it('returns edit mode by default and switches correctly', () => {
     const state = renderHookWithState(() => useMarkdownEditor({}))

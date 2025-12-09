@@ -1,14 +1,14 @@
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 // Imports
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
-import Rating from '../../components/form/Rating'
+import Rating from '../../src/form/Rating'
 
-// --------------------------------------------------------------------
-// Component Tests
-// --------------------------------------------------------------------
+//--------------------------------------------------------------------//
+// Tests
+//--------------------------------------------------------------------//
 describe('<Rating />', () => {
   it('renders five default icons', () => {
     render(<Rating />)
@@ -20,7 +20,7 @@ describe('<Rating />', () => {
     const { container } = render(
       <Rating size="large" className="extra" style={{ color: 'red' }} />
     )
-    const root = container.firstChild as HTMLElement
+    const root = container.firstChild
     expect(root).toHaveClass('frui-rating-large')
     expect(root).toHaveClass('extra')
     expect(root).toHaveStyle({ color: 'rgb(255, 0, 0)' })

@@ -22,6 +22,7 @@ import type {
 } from '../types.js';
 import getClassStyles from '../helpers/getClassStyles.js';
 import getSlotStyles from '../helpers/getSlotStyles.js';
+import getChildComponent from '../helpers/getChildComponent.js';
 
 //--------------------------------------------------------------------//
 // Types
@@ -174,36 +175,6 @@ export function getAbsolutePosition(
 };
 
 /**
- * Get node from children or use default
- */
-export function getComponent(
-  component: Function,
-  propName: string,
-  children?: ReactNode
-): ReactNode {
-  if (!children) return null;
-  const nodes = !Array.isArray(children) 
-    ? [ children ].filter(Boolean)
-    : children;
-  for (const child of nodes) {
-    //skip null/undefined child
-    if (!child) continue;
-    //if child is a [DropdownHead]
-    if (child.type === component 
-      || child.props?.[propName]
-      || child[propName]
-    ) {
-      return child;
-    }
-    if (Array.isArray(child)) {
-      const nested = getComponent(component, propName, child);
-      if (nested) return nested;
-    }
-  }
-  return null;
-};
-
-/**
  * Extracts nodes from children, data, and selected values
  */
 export function getComponents(
@@ -223,7 +194,7 @@ export function getComponents(
  * Get first control component from children nodes
  */
 export function getControl(children?: ReactNode) {
-  return getComponent(
+  return getChildComponent(
     DropdownControl, 
     'dropdownControl', 
     children
@@ -234,7 +205,7 @@ export function getControl(children?: ReactNode) {
  * Get first foot component from children node
  */
 export function getFooter(children?: ReactNode) {
-  return getComponent(
+  return getChildComponent(
     DropdownFoot, 
     'dropdownFoot', 
     children
@@ -245,7 +216,7 @@ export function getFooter(children?: ReactNode) {
  * Get first head component from children node
  */
 export function getHeader(children?: ReactNode) {
-  return getComponent(
+  return getChildComponent(
     DropdownHead, 
     'dropdownHead', 
     children
@@ -877,7 +848,6 @@ export function Dropdown(props: DropdownProps) {
 //defaults to dropdown
 export default Object.assign(Dropdown, {
   getAbsolutePosition,
-  getComponent,
   getComponents,
   getControl,
   getFooter,

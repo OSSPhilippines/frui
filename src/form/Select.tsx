@@ -336,7 +336,6 @@ export function Select(props: SelectProps) {
 //defaults to select
 export default Object.assign(Select, {
   getAbsolutePosition: Dropdown.getAbsolutePosition,
-  getComponent: Dropdown.getComponent,
   getComponents,
   getControl: Dropdown.getControl,
   getFooter: Dropdown.getFooter,

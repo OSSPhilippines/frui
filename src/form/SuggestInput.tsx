@@ -201,7 +201,6 @@ export function SuggestInput(props: SuggestInputProps) {
 //defaults to suggest input
 export default Object.assign(SuggestInput, {
   getAbsolutePosition: Dropdown.getAbsolutePosition,
-  getComponent: Dropdown.getComponent,
   getComponents: Dropdown.getComponents,
   getControl: Dropdown.getControl,
   getFooter: Dropdown.getFooter,

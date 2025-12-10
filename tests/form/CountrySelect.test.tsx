@@ -3,15 +3,19 @@
 
 //tests
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
+import { render } from '@testing-library/react';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
 //frui
-import CountrySelect from '../../src/form/CountrySelect.js';
+import Country from '../../src/view/Country.js';
 
 //--------------------------------------------------------------------//
 // Mocks
-//--------------------------------------------------------------------//
+
 vi.mock('../../src/data/countries.js', () => ({
   __esModule: true,
   default: [
@@ -26,7 +30,7 @@ vi.mock('../../src/data/countries.js', () => ({
       cur: 'USD',
       tel: '+1',
       lang: 'en',
-      num: ['001', '002'],
+      num: [ '001', '002' ]
     },
     {
       type: 'country',
@@ -39,128 +43,62 @@ vi.mock('../../src/data/countries.js', () => ({
       cur: 'EUR',
       tel: '+33',
       lang: 'fr',
-      num: ['003', '004'],
+      num: [ '003', '004' ]
     }
   ]
 }));
 
-vi.mock('../../src/form/Select.js', () => {
-  let parentOnUpdate: ((value: string | string[]) => void) | undefined;
-
-  const MockSelect = ({
-    children,
-    className,
-    onUpdate,
-    placeholder,
-  }: {
-    children?: React.ReactNode
-    className?: string
-    onUpdate?: (value: string | string[]) => void
-    placeholder?: string
-  }) => {
-    parentOnUpdate = onUpdate
-    return (
-      <div data-testid="mock-select" className={className}>
-        <div className="frui-form-select-display">{placeholder}</div>
-        <div className="frui-form-select-dropdown">{children}</div>
-      </div>
-    );
-  };
-
-  const MockSelectDropdownHead = ({
-    children,
-  }: {
-    children?: React.ReactNode
-  }) => (<div data-testid="select-head">{children}</div>);
-
-  const MockSelectOption = ({
-    children,
-    value,
-  }: {
-    children?: React.ReactNode
-    value?: string
-  }) => (
-    <div
-      data-testid="select-option"
-      className="frui-form-select-option"
-      onClick={() => parentOnUpdate?.(value as string)}
-    >
-      {children}
-    </div>
-  );
-
-  return {
-    __esModule: true,
-    Select: MockSelect,
-    SelectDropdownHead: MockSelectDropdownHead,
-    SelectOption: MockSelectOption,
-  };
-});
-
 //--------------------------------------------------------------------//
 // Tests
 
-describe('<CountrySelect />', () => {
-  it('renders base layout and all options', () => {
-    render(<CountrySelect />);
-    expect(screen.getByText('Select a country')).toBeInTheDocument();
-
-    const options = screen.getAllByTestId('select-option');
-    expect(options.length).toBeGreaterThanOrEqual(2);
-
-    const optionTexts = options.map((o) => o.textContent ?? '');
-    expect(optionTexts.some((t) => t.includes('United States'))).toBe(true);
-    expect(optionTexts.some((t) => t.includes('France'))).toBe(true);
-  })
-
-  it('renders searchable head with placeholder', () => {
-    render(<CountrySelect searchable="Type here" />);
-    expect(screen.getByPlaceholderText('Type here')).toBeInTheDocument();
+describe('<Country />', () => {
+  it('renders both flag and name by default', () => {
+    const { container } = render(<Country value="USA" />);
+    const wrapper = container.querySelector('.frui-view-country')!;
+    expect(
+      wrapper.querySelector('.frui-view-country-flag')
+    ).toHaveTextContent('🇺🇸');
+    expect(
+      wrapper.querySelector('.frui-view-country-text')
+    ).toHaveTextContent('United States');
   });
-
-  it('updates search field text when typing', async () => {
-    render(<CountrySelect searchable />);
-    const input = screen.getByPlaceholderText('Search...');
-    await userEvent.type(input, 'Fra');
-    fireEvent.keyUp(input, { target: { value: 'Fra' } });
-    expect(input).toHaveValue('Fra');
-  });
-
-  it('calls onUpdate with a single selected country', () => {
-    const onUpdate = vi.fn();
-    render(<CountrySelect onUpdate={onUpdate} />);
-
-    const france = screen
-      .getAllByTestId('select-option')
-      .find((opt) => opt.textContent?.includes('France'));
-    expect(france).toBeInTheDocument();
-    france && fireEvent.click(france);
-
-    expect(onUpdate).toHaveBeenCalledWith(
-      expect.objectContaining({
-        iso2: 'FR',
-        name: 'France',
-        flag: '🇫🇷',
-      })
+  it('applies custom className and style', () => {
+    const { container } = render(
+      <Country
+        className="custom"
+        style={{ margin: '5px' }}
+        value="USA"
+      />
     );
+    const wrapper = container.querySelector('.frui-view-country');
+    expect(wrapper).toHaveClass('custom');
+    expect(wrapper).toHaveStyle({ margin: '5px' });
   });
-
-  it('calls onUpdate twice and includes both countries for multiple select', () => {
-    const onUpdate = vi.fn();
-    render(<CountrySelect multiple onUpdate={onUpdate} />);
-
-    const options = screen.getAllByTestId('select-option');
-    const us = options.find((n) => n.textContent?.includes('United States'));
-    const fr = options.find((n) => n.textContent?.includes('France'));
-    expect(us).toBeInTheDocument();
-    expect(fr).toBeInTheDocument();
-
-    us && fireEvent.click(us);
-    fr && fireEvent.click(fr);
-
-    expect(onUpdate).toHaveBeenCalledTimes(2);
-    const allArgs = onUpdate.mock.calls.flat();
-    const iso2Values = allArgs.map((arg) => arg.iso2);
-    expect(iso2Values).toEqual(expect.arrayContaining(['US', 'FR']));
+  it('renders only the flag when text is false', () => {
+    const { container } = render(<Country text={false} value="USA" />);
+    const flag = container.querySelector('.frui-view-country-flag');
+    expect(flag).toHaveTextContent('🇺🇸');
+    expect(container.querySelector('.frui-view-country-text')).toBeNull();
+  });
+  it('renders only the text when flag is false', () => {
+    const { container } = render(<Country flag={false} value="USA" />);
+    const text = container.querySelector('.frui-view-country-text');
+    expect(text).toHaveTextContent('United States');
+    expect(container.querySelector('.frui-view-country-flag')).toBeNull();
+  });
+  it('renders raw value when country code not found', () => {
+    const { container } = render(<Country value="UNKNOWN" />);
+    const wrapper = container.querySelector('.frui-view-country');
+    expect(wrapper).toHaveTextContent('UNKNOWN');
+  });
+  it('renders France flag and name correctly', () => {
+    const { container } = render(<Country value="FRA" />);
+    const wrapper = container.querySelector('.frui-view-country')!;
+    expect(
+      wrapper.querySelector('.frui-view-country-flag')
+    ).toHaveTextContent('🇫🇷');
+    expect(
+      wrapper.querySelector('.frui-view-country-text')
+    ).toHaveTextContent('France');
   });
 });

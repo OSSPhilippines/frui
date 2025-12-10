@@ -3,12 +3,21 @@
 
 //tests
 import '@testing-library/jest-dom';
-import { render, screen, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import {
+  render,
+  screen,
+  waitFor
+} from '@testing-library/react';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
 //frui
-import CodeEditor, { 
-  getEditorOptions, 
-  getLanguageExtension 
+import CodeEditor, {
+  getEditorOptions,
+  getLanguageExtension
 } from '../../src/form/CodeEditor.js';
 
 //--------------------------------------------------------------------//
@@ -18,35 +27,31 @@ vi.mock('@codemirror/state', () => ({
   __esModule: true,
   EditorState: { create: vi.fn(() => ({})) }
 }));
-
 vi.mock('@codemirror/view', () => ({
   __esModule: true,
   EditorView: class {
-    static updateListener = { of: vi.fn(() => ({})) }
+    static updateListener = { of: vi.fn(() => ({})) };
     constructor(_: unknown) {}
-    destroy = vi.fn()
+    destroy = vi.fn();
   },
   lineNumbers: vi.fn(() => ({}))
 }));
-
 vi.mock('codemirror', () => ({
   __esModule: true,
   minimalSetup: {},
   basicSetup: {}
 }));
-
 vi.mock('@codemirror/language-data', () => ({
   __esModule: true,
   languages: [
     {
       name: 'javascript',
-      alias: ['js'],
+      alias: [ 'js' ],
       load: vi.fn(async () => {}),
-      support: { language: 'mockLang' },
+      support: { language: 'mockLang' }
     }
   ]
 }));
-
 vi.mock('@codemirror/language', () => ({
   __esModule: true,
   LanguageSupport: class {},
@@ -54,7 +59,7 @@ vi.mock('@codemirror/language', () => ({
 }));
 
 //--------------------------------------------------------------------//
-// Tests
+// Helpers
 
 describe('getEditorOptions()', () => {
   it('includes minimal setup extensions', () => {
@@ -65,14 +70,16 @@ describe('getEditorOptions()', () => {
 
   it('adds line numbers when numbers=true', () => {
     const opts = getEditorOptions('basic', true, []);
-    expect((opts as unknown[]).length).toBeGreaterThanOrEqual(1);
+    expect((opts as unknown[]).length)
+      .toBeGreaterThanOrEqual(1);
   });
 });
-
 describe('getLanguageExtension()', () => {
   it('returns language support when language found', async () => {
     const ext = await getLanguageExtension('javascript');
-    expect(ext).toEqual(expect.objectContaining({ language: 'mockLang' }));
+    expect(ext).toEqual(expect.objectContaining({
+      language: 'mockLang'
+    }));
   });
 
   it('returns undefined for unsupported language', async () => {
@@ -81,11 +88,15 @@ describe('getLanguageExtension()', () => {
   });
 });
 
+//--------------------------------------------------------------------//
+// Tests
+
 describe('<CodeEditor />', () => {
   it('renders with default minimal setup and textarea', () => {
     render(<CodeEditor />);
     const field = screen.getByRole('textbox');
-    expect(field).toHaveClass('frui-form-code-editor-field');
+    expect(field)
+      .toHaveClass('frui-form-code-editor-field');
     expect(field).toHaveValue('');
   });
 
@@ -102,28 +113,30 @@ describe('<CodeEditor />', () => {
     ) as HTMLDivElement;
     expect(outer).toBeInTheDocument();
     expect(outer.style.width).toBe('300px');
-  })
+  });
 
   it('applies line numbers option when numbers=true', () => {
-    render(<CodeEditor numbers />)
-    expect(
-      screen.getByRole('textbox')
-    ).toHaveClass('frui-form-code-editor-field');
-  })
-
-  it('changes currentValue when controlled prop value changes', async () => {
-    const { rerender } = render(<CodeEditor value="first" />);
-    const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
-    expect(textarea.value).toBe('first');
-    rerender(<CodeEditor value="second" />);
-    await waitFor(() => expect(textarea.value).toBe('second'));
+    render(<CodeEditor numbers />);
+    expect(screen.getByRole('textbox'))
+      .toHaveClass('frui-form-code-editor-field');
   });
 
-  it('loads language extension when language prop provided', async () => {
-    render(<CodeEditor language="javascript" />);
-    await waitFor(() => {
-      const area = screen.getByRole('textbox');
-      expect(area).toBeInTheDocument();
+  it('updates currentValue when controlled prop value changes',
+    async () => {
+      const { rerender } = render(<CodeEditor value="first" />);
+      const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
+      expect(textarea.value).toBe('first');
+      rerender(<CodeEditor value="second" />);
+      await waitFor(() => expect(textarea.value)
+        .toBe('second'));
     });
-  });
+
+  it('loads language extension when language prop provided',
+    async () => {
+      render(<CodeEditor language="javascript" />);
+      await waitFor(() => {
+        const area = screen.getByRole('textbox');
+        expect(area).toBeInTheDocument();
+      });
+    });
 });

@@ -3,8 +3,15 @@
 
 //tests
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import {
+  render,
+  screen
+} from '@testing-library/react';
+import {
+  describe,
+  expect,
+  it
+} from 'vitest';
 //frui
 import Formula from '../../src/view/Formula.js';
 
@@ -38,8 +45,8 @@ describe('<Formula />', () => {
     expect(screen.getByText('0')).toBeInTheDocument();
   });
 
-  it('renders zero when value is non‑numeric', () => {
+  it('renders zero when value is non-numeric', () => {
     render(<Formula value="abc" formula="{this} * 2" />);
     expect(screen.getByText('0')).toBeInTheDocument();
   });
-})
+});

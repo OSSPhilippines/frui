@@ -3,20 +3,25 @@
 
 //tests
 import '@testing-library/jest-dom';
-import { 
-  render, 
-  screen, 
-  fireEvent, 
-  waitFor 
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor
 } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
 //frui
-import ColorInput, { 
-  clamp, 
-  componentToHex, 
-  rgbaToHex, 
-  toRGBA, 
-  toHex 
+import ColorInput, {
+  clamp,
+  componentToHex,
+  rgbaToHex,
+  toHex,
+  toRGBA
 } from '../../src/form/ColorInput.js';
 
 //--------------------------------------------------------------------//
@@ -24,14 +29,15 @@ import ColorInput, {
 
 vi.mock('../../../src/helpers/getClassStyles.js', () => ({
   __esModule: true,
-  default: ({ classes }: { classes: Record<string, string> }) => ({ classes, styles: {} })
+  default: ({ classes }: { classes: Record<string, string> }) => ({
+    classes,
+    styles: {}
+  })
 }));
-
 vi.mock('../../../src/helpers/getSlotStyles.js', () => ({
   __esModule: true,
   default: () => ({})
 }));
-
 vi.mock('../../../src/field/Input.js', () => ({
   __esModule: true,
   default: ({
@@ -40,10 +46,10 @@ vi.mock('../../../src/field/Input.js', () => ({
     value,
     type
   }: {
-    onChange?: React.ChangeEventHandler<HTMLInputElement>
-    className?: string
-    value?: string | number
-    type?: string
+    onChange?: React.ChangeEventHandler<HTMLInputElement>;
+    className?: string;
+    value?: string | number;
+    type?: string;
   }) => (
     <input
       data-testid="mock-input"
@@ -56,7 +62,7 @@ vi.mock('../../../src/field/Input.js', () => ({
 }));
 
 //--------------------------------------------------------------------//
-// Tests
+// Helpers
 
 describe('Color helper functions', () => {
   it('clamps value correctly', () => {
@@ -64,21 +70,39 @@ describe('Color helper functions', () => {
     expect(clamp(-20, 0, 255)).toBe(0);
     expect(clamp(123, 0, 255)).toBe(123);
   });
+
   it('componentToHex pads and clamps properly', () => {
     expect(componentToHex(255)).toBe('ff');
     expect(componentToHex(0)).toBe('00');
     expect(componentToHex(300)).toBe('ff');
   });
+
   it('rgbaToHex converts color object to hex string', () => {
-    expect(rgbaToHex({ r: 255, g: 0, b: 128, a: 1 })).toBe('#ff0080');
-  })
+    expect(rgbaToHex({ r: 255, g: 0, b: 128, a: 1 }))
+      .toBe('#ff0080');
+  });
+
   it('toRGBA parses rgba, hex and shortHex patterns', () => {
-    expect(toRGBA('rgba(255, 20, 10, 0.5)')).toEqual(
-      { r: 255, g: 20, b: 10, a: 0.5 }
-    );
-    expect(toRGBA('#ff0a14')).toEqual({ r: 255, g: 10, b: 20, a: 1 });
-    expect(toRGBA('#f0a')).toEqual({ r: 255, g: 0, b: 170, a: 1 });
-  })
+    expect(toRGBA('rgba(255, 20, 10, 0.5)')).toEqual({
+      r: 255,
+      g: 20,
+      b: 10,
+      a: 0.5
+    });
+    expect(toRGBA('#ff0a14')).toEqual({
+      r: 255,
+      g: 10,
+      b: 20,
+      a: 1
+    });
+    expect(toRGBA('#f0a')).toEqual({
+      r: 255,
+      g: 0,
+      b: 170,
+      a: 1
+    });
+  });
+
   it('toHex converts color names, rgba, and invalids to expected hex', () => {
     expect(toHex('rgba(255,0,0,1)')).toBe('#ff0000');
     expect(toHex('#00ff00')).toBe('#00ff00');
@@ -86,16 +110,19 @@ describe('Color helper functions', () => {
   });
 });
 
+//--------------------------------------------------------------------//
+// Tests
+
 describe('<ColorInput />', () => {
   it('renders base structure (picker + text input)', () => {
     const { container } = render(<ColorInput />);
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
     const colorPicker = container.querySelector(
       'input[type="color"]'
     ) as HTMLInputElement;
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
     expect(colorPicker).toBeInTheDocument();
     expect(colorPicker).toHaveAttribute('type', 'color');
-  })
+  });
 
   it('renders with provided defaultValue', () => {
     const { container } = render(<ColorInput defaultValue="#ff0000" />);
@@ -112,17 +139,21 @@ describe('<ColorInput />', () => {
     render(<ColorInput onUpdate={onUpdate} />);
     const text = screen.getByRole('textbox');
     fireEvent.change(text, { target: { value: '#123456' } });
-    await waitFor(() => expect(onUpdate).toHaveBeenCalledWith('#123456'));
+    await waitFor(() => expect(onUpdate)
+      .toHaveBeenCalledWith('#123456'));
   });
 
   it('updates picker when controlled value prop changes', async () => {
-    const { rerender, container } = render(<ColorInput value="#abc123" />);
+    const { rerender, container } = render(
+      <ColorInput value="#abc123" />
+    );
     const picker = container.querySelector(
       'input[type="color"]'
     ) as HTMLInputElement;
     expect(picker.value.toLowerCase()).toBe('#abc123');
     rerender(<ColorInput value="#ffffff" />);
-    await waitFor(() => expect(picker.value.toLowerCase()).toBe('#ffffff'));
+    await waitFor(() => expect(picker.value.toLowerCase())
+      .toBe('#ffffff'));
   });
 
   it('allows changing the color via color picker input', async () => {
@@ -132,6 +163,7 @@ describe('<ColorInput />', () => {
       'input[type="color"]'
     ) as HTMLInputElement;
     fireEvent.change(picker, { target: { value: '#ff8800' } });
-    await waitFor(() => expect(onUpdate).toHaveBeenCalledWith('#ff8800'));
+    await waitFor(() => expect(onUpdate)
+      .toHaveBeenCalledWith('#ff8800'));
   });
 });

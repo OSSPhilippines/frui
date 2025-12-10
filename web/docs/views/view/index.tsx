@@ -12,6 +12,7 @@ import {
   Currency,
   DateFormat,
   EmailLink,
+  Film,
   Formula,
   HTML,
   Image,
@@ -82,7 +83,7 @@ export function Body() {
         >
           <div className="m-2 border theme-bc-2 rounded overflow-hidden">
             <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-              <Code language='javascript'>{`console.log("Hello, World!");`}</Code>
+              <Code language='javascript'>{`console.log();`}</Code>
             </div>
             <h2 className="my-2 font-semibold text-center uppercase">
               {_('Code Highlighter')}
@@ -151,6 +152,22 @@ export function Body() {
             </div>
             <h2 className="my-2 font-semibold text-center uppercase">
               {_('Email Link')}
+            </h2>
+          </div>
+        </div>
+        <div 
+          className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+          onClick={() => window.location.href = ('/view/film')} 
+        >
+          <div className="m-2 border theme-bc-2 rounded overflow-hidden">
+            <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
+              <Film className="flex" value={[
+                'https://images.wsj.net/im-580612/8SR', 
+                'https://images.wsj.net/im-580612/8SR'
+              ]} width="50" />
+            </div>
+            <h2 className="my-2 font-semibold text-center uppercase">
+              {_('Film')}
             </h2>
           </div>
         </div>

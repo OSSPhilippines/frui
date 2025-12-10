@@ -62,6 +62,7 @@ export default function plugin(server: HttpServer<Config>) {
     ctx.get('/view/currency', '@/web/docs/views/view/currency');
     ctx.get('/view/date-format', '@/web/docs/views/view/date-format');
     ctx.get('/view/email-link', '@/web/docs/views/view/email-link');
+    ctx.get('/view/film', '@/web/docs/views/view/film');
     ctx.get('/view/formula', '@/web/docs/views/view/formula');
     ctx.get('/view/html', '@/web/docs/views/view/html');
     ctx.get('/view/image', '@/web/docs/views/view/image');

@@ -5,6 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
+import Button from 'src/base/Button.js';
 import Carousel from 'src/view/Carousel.js';
 
 //web
@@ -19,15 +20,54 @@ const title = 'Carousel';
 const description = 'Image carousel converts a list of strings '
   + 'into an image carousel';
 
-const codeBasic = `
-<Carousel className="flex" value={[
+const examples = [
+//0
+`<Carousel value={[
+  'https://images.wsj.net/im-580612/8SR', 
   'https://images.wsj.net/im-580612/8SR', 
   'https://images.wsj.net/im-580612/8SR'
-]} width="50" />`.trim();
+]} width="100" />`,
+ //1
+`<div className="w-[250px] m-auto">
+  <Carousel scroll value={[
+    'https://images.wsj.net/im-580612/8SR', 
+    'https://images.wsj.net/im-580612/8SR', 
+    'https://images.wsj.net/im-580612/8SR', 
+    'https://images.wsj.net/im-580612/8SR', 
+    'https://images.wsj.net/im-580612/8SR'
+  ]} width="200" />
+</div>`,
+ //2
+`<div className="w-[336px] m-auto">
+  <Carousel hidden value={[
+    'https://images.wsj.net/im-580612/8SR', 
+    'https://images.wsj.net/im-580612/8SR', 
+    'https://images.wsj.net/im-580612/8SR', 
+    'https://images.wsj.net/im-580612/8SR', 
+    'https://images.wsj.net/im-580612/8SR'
+  ]} width="200">
+    <Carousel.Prev asChild>
+      <Button info>Prev</Button>
+    </Carousel.Prev>
+    <Carousel.Next asChild>
+      <Button info>Next</Button>
+    </Carousel.Next>
+  </Carousel>
+</div>`,
+ //3
+`<Carousel auto image="rounded-full" wrapper="inline-block mx-3" value={[
+  'https://images.wsj.net/im-580612/8SR', 
+  'https://images.wsj.net/im-580612/8SR', 
+  'https://images.wsj.net/im-580612/8SR', 
+  'https://images.wsj.net/im-580612/8SR', 
+  'https://images.wsj.net/im-580612/8SR'
+]} width="200" />`,
+];
 
 const props = [
   [ 'alt', 'string', 'No', 'Alt text for image' ],
   [ 'className', 'string', 'No', 'Standard HTML class names applied to all images' ],
+  [ 'image' , 'SlotStyleProp', 'No', 'Class/style to apply to each image element' ],
   [ 'height', 'string|number', 'No', 'Height of image' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all images' ],
   [ 'value', 'string[]', 'Yes', 'Default value' ],
@@ -37,7 +77,7 @@ const props = [
 //--------------------------------------------------------------------//
 // Components
 
-const { C, Code, Props } = Docs;
+const { C, Code, Props, Preview } = Docs;
 
 /**
  * Aside right menu component
@@ -63,7 +103,16 @@ export function Menu() {
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#examples">{_('Examples')}</a>
+            <a href="#basic">{_('Basics')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#scrolling">{_('Scrolling')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#nav">{_('Navigation')}</a>
+          </li>
+          <li className="ml-2 pb-1">
+            <a href="#slots">{_('Slots')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#styles">{_('Global Styles')}</a>
@@ -106,16 +155,126 @@ export function Body() {
       <h2 id="basic" className="uppercase font-bold text-lg mt-8">
         {_('Basics')}
       </h2>
-      <div className="curved overflow-hidden">
-        <div className="flex items-center justify-center p-3 theme-bg-1">
-          <Carousel className="flex" value={[
-            'https://images.wsj.net/im-580612/8SR', 
-            'https://images.wsj.net/im-580612/8SR'
-          ]} width="50" />
-        </div>
-        <Code language="typescript">
-          {codeBasic}
-        </Code>
+      <div>
+        <p className="py-2">
+          <Translate>
+            The following example shows how to setup a basic image 
+            carousel.
+          </Translate>
+        </p>
+        <Preview title="Basic Example" className="border border-2 theme-bc-3">
+          <Preview.Example padding>
+            <Carousel value={[
+              'https://images.wsj.net/im-580612/8SR', 
+              'https://images.wsj.net/im-580612/8SR', 
+              'https://images.wsj.net/im-580612/8SR'
+            ]} width="100" />
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
+      </div>
+
+      <h2 id="scrolling" className="uppercase font-bold text-lg mt-8">
+        {_('Scrolling')}
+      </h2>
+      <div>
+        <p className="py-2">
+          <Translate>
+            You can use <C value="scroll" />, <C value="auto" />, 
+            and <C value="hidden" /> props to easily control the 
+            scrolling behavior of the carousel frame.
+          </Translate>
+        </p>
+        <Preview title="Scroll Auto" className="border border-2 theme-bc-3">
+          <Preview.Example padding>
+            <div className="w-[250px] m-auto">
+              <Carousel auto value={[
+                'https://images.wsj.net/im-580612/8SR', 
+                'https://images.wsj.net/im-580612/8SR', 
+                'https://images.wsj.net/im-580612/8SR', 
+                'https://images.wsj.net/im-580612/8SR', 
+                'https://images.wsj.net/im-580612/8SR'
+              ]} width="200" />
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
+      </div>
+
+      <h2 id="nav" className="uppercase font-bold text-lg mt-8">
+        {_('Navigation')}
+      </h2>
+      <div>
+        <p className="py-2">
+          <Translate>
+            You can use the <C value="<Carousel.Prev>" /> and 
+            <C value="<Carousel.Next>" /> components to add 
+            navigation to the carousel.
+          </Translate>
+        </p>
+        <Preview title="Previous Next" className="border border-2 theme-bc-3">
+          <Preview.Example padding>
+            <div className="w-[336px] m-auto">
+              <Carousel hidden value={[
+                'https://images.wsj.net/im-580612/8SR', 
+                'https://images.wsj.net/im-580612/8SR', 
+                'https://images.wsj.net/im-580612/8SR', 
+                'https://images.wsj.net/im-580612/8SR', 
+                'https://images.wsj.net/im-580612/8SR'
+              ]} width="200">
+                <Carousel.Prev asChild>
+                  <Button info>Prev</Button>
+                </Carousel.Prev>
+                <Carousel.Next asChild>
+                  <Button info>Next</Button>
+                </Carousel.Next>
+              </Carousel>
+            </div>
+          </Preview.Example>
+          <Preview.Code>{examples[2]}</Preview.Code>
+        </Preview>
+      </div>
+
+      <h2 id="slots" className="uppercase font-bold text-lg mt-8">
+        {_('Slots')}
+      </h2>
+      <div>
+        <p className="py-2">
+          <Translate>
+            Use the <C value="film" />, <C value="frame" />, 
+            <C l value="wrapper" />, and <C value="image" /> props to 
+            style different carousel components.
+          </Translate>
+        </p>
+        <Preview title="Slot Example" className="border border-2 theme-bc-3">
+          <Preview.Example center padding>
+            <Carousel auto image="rounded-full" wrapper="inline-block mx-3" value={[
+              'https://images.wsj.net/im-580612/8SR', 
+              'https://images.wsj.net/im-580612/8SR', 
+              'https://images.wsj.net/im-580612/8SR', 
+              'https://images.wsj.net/im-580612/8SR', 
+              'https://images.wsj.net/im-580612/8SR'
+            ]} width="200" />
+          </Preview.Example>
+          <Preview.Code>{examples[1]}</Preview.Code>
+        </Preview>
+      </div>
+
+      <h2 id="styles" className="uppercase font-bold text-lg mt-8">
+        {_('Global Styles')}
+      </h2>
+      <div>
+        <p className="py-2">
+          <Translate>
+            You can add use 
+            the <C value="frui-view-carousel" />, 
+            <C l value="frui-view-carousel-frame" />,
+            <C l value="frui-view-carousel-film" />, 
+            <C l value="frui-view-carousel-prev" />, 
+            and <C value="frui-view-carousel-next" /> CSS classes to 
+            globally theme carousels.
+          </Translate>
+        </p>
       </div>
       
       <h2 id="api" className="uppercase font-bold text-lg mt-8">

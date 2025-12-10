@@ -317,6 +317,11 @@ export const menu: MenuItem[] = [
         href: '/view/email-link'
       },
       {
+        label: 'Film',
+        search: '/view/film',
+        href: '/view/film'
+      },
+      {
         label: 'Formula',
         search: '/view/formula',
         href: '/view/formula'

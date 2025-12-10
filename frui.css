@@ -12,6 +12,7 @@
 @import url('./styles/table.css');
 @import url('./styles/tooltip.css');
 
+@import url('./styles/view/carousel.css');
 @import url('./styles/view/color.css');
 @import url('./styles/view/country.css');
 @import url('./styles/view/imagelist.css');

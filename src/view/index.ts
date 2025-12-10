@@ -19,6 +19,9 @@ import DateFormat from './DateFormat.js';
 //email link
 export type { EmailLinkProps } from './EmailLink.js';
 import EmailLink from './EmailLink.js';
+//film
+export type { FilmProps } from './Film.js';
+import { Film } from './Film.js';
 //formula
 export type { FormulaProps } from './Formula.js';
 import Formula from './Formula.js';
@@ -75,6 +78,7 @@ export {
   Currency,
   DateFormat,
   EmailLink,
+  Film,
   Formula,
   HTML,
   Image,

@@ -464,6 +464,19 @@
 .frui-fx-right { justify-content: flex-end; }
 .frui-fy-center { align-items: center; }
 
+/* Overflow
+---------------------------------*/
+
+.frui-scroll { overflow: scroll; }
+.frui-scroll-hidden { overflow: hidden; }
+.frui-scroll-auto { overflow: auto; }
+.frui-scroll-x { overflow-x: scroll; }
+.frui-scroll-x-hidden { overflow-x: hidden; }
+.frui-scroll-x-auto { overflow-x: auto; }
+.frui-scroll-y { overflow-y: scroll; }
+.frui-scroll-y-hidden { overflow-y: hidden; }
+.frui-scroll-y-auto { overflow-y: auto; }
+
 /* Position
 ---------------------------------*/
 

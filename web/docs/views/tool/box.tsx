@@ -354,8 +354,8 @@ const examples = [
 //14
 `<Box left>Box 1</Box>
 <Box center>Box 2</Box>
-<Box right>Box 2</Box>
-<Box justified>Box 2</Box>`
+<Box right>Box 3</Box>
+<Box justified>Box 4</Box>`
 ];
 
 //--------------------------------------------------------------------//
@@ -704,8 +704,12 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Box>" /> tool is a low-level container component for adding 
-            styling props. Import the box tool like the following.
+            The <C value="<Box>" /> tool is a low-level container 
+            used by <C value="<Alert>" />, <C value="<Badge>" />, 
+            <C l value="<Button>" />, <C value="<Card>" />, 
+            and <C value="<Progress>" /> to add color, size, margin, 
+            padding, dimensions and border styling props. Import the 
+            box tool like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">

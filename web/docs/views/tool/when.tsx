@@ -157,7 +157,9 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the <C value="<When>" /> tool component like the following.
+            The <C value="<When>" /> tool allows you to conditionally
+            render components based on the value of a condition. Import 
+            the <C value="<When>" /> tool component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -171,11 +173,10 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<When>" /> tool allows you to conditionally
-            render components based on the value of a condition. You can use
-            multiple <C value="<When>" /> components to create complex
-            conditional rendering logic. The <C value="<Otherwise>" /> tool
-            can be used to provide a fallback when no conditions are met.
+            You can use multiple <C value="<When>" /> components to 
+            create complex conditional rendering logic. 
+            The <C value="<Otherwise>" /> tool can be used to provide a 
+            fallback when no conditions are met.
           </Translate>
         </p>
         <Preview 

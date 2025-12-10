@@ -79,6 +79,7 @@ export default function plugin(server: HttpServer<Config>) {
     ctx.get('/view/text-overflow', '@/web/docs/views/view/text-overflow');
     ctx.get('/view/yesno', '@/web/docs/views/view/yesno');
 
+    ctx.get('/tool', '@/web/docs/views/tool/index');
     ctx.get('/tool/box', '@/web/docs/views/tool/box');
     ctx.get('/tool/card', '@/web/docs/views/tool/card');
     ctx.get('/tool/scope', '@/web/docs/views/tool/scope');

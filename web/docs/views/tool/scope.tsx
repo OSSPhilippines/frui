@@ -156,7 +156,10 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the <C value="<Scope>" /> tool component like the following.
+            The <C value="<Scope>" /> tool allows you to create a 
+            scope context for its children based on a list, hash, or 
+            single value. Import the <C value="<Scope>" /> tool 
+            component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -170,9 +173,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Scope>" /> tool allows you to create a 
-            scope context for its children based on a list, hash, or 
-            single value. You can then use the <C r value="Scope.use()" /> 
+            You can then use the <C r value="Scope.use()" /> 
             hook to access the current key and value within that scope.
             Instead of using <C value="map" /> in your components, you 
             can leverage the <C value="<Scope>" /> component to handle 

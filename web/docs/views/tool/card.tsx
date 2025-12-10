@@ -562,7 +562,9 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the <C value="<Card>" /> tool component like the following.
+            The <C value="<Card>" /> tool is a low-level component used 
+            to group related content and actions. Import 
+            the <C value="<Card>" /> tool component like the following.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
@@ -576,8 +578,8 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Card>" /> tool is a low-level component used 
-            to group related content and actions.
+            The following example shows how to setup a 
+            basic <C value="<Card>" />.
           </Translate>
         </p>
         <Preview 

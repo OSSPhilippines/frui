@@ -3,14 +3,19 @@
 
 //tests
 import '@testing-library/jest-dom';
-import { 
-  render, 
-  screen, 
-  fireEvent, 
-  waitFor 
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi } from 'vitest';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
 //frui
 import FileInput from '../../src/form/FileInput.js';
 
@@ -22,11 +27,11 @@ vi.mock('../../src/form/Input.js', () => ({
   default: ({
     onChange,
     type,
-    className,
+    className
   }: {
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-    type?: string
-    className?: string
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    type?: string;
+    className?: string;
   }) => (
     <input
       data-testid="mock-input"
@@ -59,10 +64,12 @@ describe('<FileInput />', () => {
     const onUpload = vi.fn((_: File, update: (url: string) => void) => {
       setTimeout(() => update('done.jpg'), 10);
     });
+
     render(<FileInput onUpload={onUpload} />);
     const input = screen.getByTestId('mock-input') as HTMLInputElement;
-    const file = new window.File(['dummy'], 'photo.jpg', { type: 'image/jpeg' });
+    const file = new File([ 'dummy' ], 'photo.jpg', { type: 'image/jpeg' });
     fireEvent.change(input, { target: { files: [file] } });
+
     await waitFor(() =>
       expect(screen.getByText('Uploading...')).toBeInTheDocument()
     );
@@ -76,11 +83,15 @@ describe('<FileInput />', () => {
       update('uploaded.png')
     );
     const onUpdate = vi.fn();
+
     render(<FileInput onUpload={onUpload} onUpdate={onUpdate} />);
     const input = screen.getByTestId('mock-input') as HTMLInputElement;
-    const file = new window.File(['x'], 'file.png', { type: 'image/png' });
+    const file = new File([ 'x' ], 'file.png', { type: 'image/png' });
     fireEvent.change(input, { target: { files: [file] } });
-    await waitFor(() => expect(onUpdate).toHaveBeenCalledWith('uploaded.png'));
+
+    await waitFor(() =>
+      expect(onUpdate).toHaveBeenCalledWith('uploaded.png')
+    );
   });
 
   it('removes uploaded file when "×" clicked', async () => {
@@ -94,10 +105,12 @@ describe('<FileInput />', () => {
     const onUpload = vi.fn((_: File, update: (url: string) => void) => {
       setTimeout(() => update('final.txt'), 10);
     });
+
     render(<FileInput uploading="Uploading File..." onUpload={onUpload} />);
     const input = screen.getByTestId('mock-input') as HTMLInputElement;
-    const file = new window.File(['z'], 'z.txt', { type: 'text/plain' });
+    const file = new File([ 'z' ], 'z.txt', { type: 'text/plain' });
     fireEvent.change(input, { target: { files: [file] } });
+
     await waitFor(() =>
       expect(screen.getByText('Uploading File...')).toBeInTheDocument()
     );

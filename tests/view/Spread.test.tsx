@@ -3,27 +3,38 @@
 
 //tests
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import {
+  render,
+  screen
+} from '@testing-library/react';
+import {
+  describe,
+  it,
+  expect
+} from 'vitest';
 //frui
 import Spread from '../../src/view/Spread.js';
+
 
 //--------------------------------------------------------------------//
 // Tests
 
 describe('<Spread />', () => {
   it('renders values joined by default space separator', () => {
-    render(<Spread value={['A', 'B', 'C']} />);
+    render(<Spread value={[ 'A', 'B', 'C' ]} />);
+
     expect(screen.getByText('A B C')).toBeInTheDocument();
   });
 
   it('renders values joined by a custom separator', () => {
-    render(<Spread value={['A', 'B', 'C']} separator="-" />);
+    render(<Spread value={[ 'A', 'B', 'C' ]} separator="-" />);
+
     expect(screen.getByText('A-B-C')).toBeInTheDocument();
   });
 
   it('renders each value on a separate line if separator="line"', () => {
-    render(<Spread value={['A', 'B', 'C']} separator="line" />);
+    render(<Spread value={[ 'A', 'B', 'C' ]} separator="line" />);
+
     expect(screen.getByText('A')).toBeInTheDocument();
     expect(screen.getByText('B')).toBeInTheDocument();
     expect(screen.getByText('C')).toBeInTheDocument();
@@ -34,8 +45,12 @@ describe('<Spread />', () => {
 
   it('applies className to the container', () => {
     const { container } = render(
-      <Spread value={['A', 'B']} className="my-class" />
+      <Spread
+        value={[ 'A', 'B' ]}
+        className="my-class"
+      />
     );
+
     const span = container.querySelector('span');
     expect(span).toHaveClass('my-class');
   });
@@ -43,8 +58,12 @@ describe('<Spread />', () => {
   it('applies style to the container', () => {
     const style = { color: 'red', fontWeight: 'bold' };
     const { container } = render(
-      <Spread value={['X', 'Y']} style={style} />
+      <Spread
+        value={[ 'X', 'Y' ]}
+        style={style}
+      />
     );
+
     const span = container.querySelector('span');
     expect(span).toHaveStyle({ color: 'rgb(255, 0, 0)' });
     expect(span).toHaveStyle({ fontWeight: 'bold' });

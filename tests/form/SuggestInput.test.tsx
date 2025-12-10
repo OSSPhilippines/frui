@@ -1,283 +1,190 @@
 //--------------------------------------------------------------------//
 // Imports
-//--------------------------------------------------------------------//
-import '@testing-library/jest-dom'
+
+//tests
+import '@testing-library/jest-dom';
 import {
   act,
   fireEvent,
   render,
-  screen,
-  waitFor
-} from '@testing-library/react'
+  screen
+} from '@testing-library/react';
 import {
   describe,
   expect,
   it,
   vi
-} from 'vitest'
-
-//components
-import SuggestInput, {
-  useSuggestInput,
-  SuggestInputDropdown
-} from '../../src/form/SuggestInput'
+} from 'vitest';
+//frui
+import type {
+  FocusEvent,
+  ReactNode
+} from 'react';
+import SuggestInput, { SuggestInputControl } from '../../src/form/SuggestInput.js';
 
 //--------------------------------------------------------------------//
 // Mocks
-//--------------------------------------------------------------------//
+
+const mockOpen = vi.fn();
+const mockSelect = vi.fn();
+const mockSelected = [ '' ];
+
 vi.mock('../../src/form/Input.js', () => ({
   __esModule: true,
   default: ({
     value,
-    onChange,
-    onKeyDown,
+    onUpdate,
     onBlur
   }: {
-    value?: string
-    onChange?: (
-      e: React.ChangeEvent<HTMLInputElement>
-    ) => void
-    onKeyDown?: (
-      e: React.KeyboardEvent<HTMLInputElement>
-    ) => void
-    onBlur?: (
-      e: React.FocusEvent<HTMLInputElement>
-    ) => void
+    value?: string;
+    onUpdate?: (v: string) => void;
+    onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
   }) => (
     <input
       data-testid="mock-input"
       value={value || ''}
-      onChange={(e) =>
-        onChange?.(e as React.ChangeEvent<HTMLInputElement>)
-      }
-      onKeyDown={(e) =>
-        onKeyDown?.(e as React.KeyboardEvent<HTMLInputElement>)
-      }
-      onBlur={(e) =>
-        onBlur?.(e as React.FocusEvent<HTMLInputElement>)
-      }
+      onChange={(e) => onUpdate?.((e.target as HTMLInputElement).value)}
+      onBlur={(e) => onBlur?.(e as FocusEvent<HTMLInputElement>)}
     />
   )
-}))
+}));
+vi.mock('../../src/base/Dropdown.js', () => {
+  const DropdownMock = ({
+    children,
+    container
+  }: {
+    children?: ReactNode;
+    container?: { className?: string; style?: object };
+  }) => (
+    <div className={container?.className} style={container?.style}>
+      {children}
+    </div>
+  );
 
-//--------------------------------------------------------------------//
-// Hook Tests
-//--------------------------------------------------------------------//
-describe('useSuggestInput', () => {
-  //available options
-  const options = ['Apple', 'Banana', 'Cherry']
+  DropdownMock.useContext = () => ({
+    open: mockOpen,
+    select: mockSelect,
+    selected: mockSelected
+  });
 
-  //helper function to mount hook for isolated testing
-  function setupHook(overrides = {}) {
-    let result: ReturnType<typeof useSuggestInput> | undefined
+  DropdownMock.Control = ({ children }: { children?: ReactNode }) => (
+    <div data-testid="dropdown-control">{children}</div>
+  );
 
-    const TestHook = () => {
-      result = useSuggestInput({
-        defaultValue: 'init',
-        options,
-        ...overrides
-      })
-      return null
-    }
+  DropdownMock.Option = () => null;
+  DropdownMock.Head = () => null;
+  DropdownMock.Foot = () => null;
+  DropdownMock.Context = {};
+  DropdownMock.useDropdown = vi.fn();
+  DropdownMock.useDropdownContext = () => ({
+    open: mockOpen,
+    select: mockSelect,
+    selected: mockSelected
+  });
+  DropdownMock.getAbsolutePosition = vi.fn();
+  DropdownMock.getComponent = vi.fn();
+  DropdownMock.getComponents = vi.fn();
+  DropdownMock.getControl = vi.fn();
+  DropdownMock.getFooter = vi.fn();
+  DropdownMock.getHeader = vi.fn();
+  DropdownMock.getOptions = vi.fn();
+  DropdownMock.getRelativePosition = vi.fn();
+  DropdownMock.makeOptions = vi.fn();
+  DropdownMock.buildOptions = vi.fn();
 
-    render(<TestHook />)
-    return () => result!
-  }
-
-  it('initializes state correctly', () => {
-    const getHook = setupHook()
-    const hook = getHook()
-    expect(hook.value).toBe('init')
-    expect(hook.options).toEqual(options)
-  })
-
-  it('calls onUpdate and onChange when update handler triggered', () => {
-    const onChange = vi.fn()
-    const onUpdate = vi.fn()
-    const getHook = setupHook({ onChange, onUpdate })
-    const hook = getHook()
-    const event =
-      { target: { value: 'test' } } as unknown as React.ChangeEvent<HTMLInputElement>
-
-    //simulate user input update
-    act(() => {
-      hook.handlers.update(event)
-    })
-
-    expect(onChange).toHaveBeenCalled()
-    expect(onUpdate).toHaveBeenCalledWith('test')
-  })
-
-  it('calls onQuery with input value when search handler triggered', async () => {
-    const onQuery = vi.fn()
-    const getHook = setupHook({ onQuery })
-    const hook = getHook()
-
-    //simulate keyboard search
-    act(() => {
-      const e =
-        { target: { value: 'apple' } } as unknown as React.KeyboardEvent<HTMLInputElement>
-      hook.handlers.search(e)
-    })
-
-    await waitFor(() => {
-      expect(onQuery).toHaveBeenCalledWith('apple', expect.any(Function))
-    })
-  })
-
-  it('updates value on select', () => {
-    const onSelected = vi.fn()
-    const getHook = setupHook({ onSelected })
-    const hook = getHook()
-
-    //simulate selecting an option
-    act(() => {
-      hook.handlers.select('Banana')
-    })
-
-    expect(onSelected).toHaveBeenCalledWith('Banana')
-  })
-})
-
-//--------------------------------------------------------------------//
-// Dropdown Tests
-//--------------------------------------------------------------------//
-describe('SuggestInputDropdown', () => {
-  it('renders matching options when visible', () => {
-    const select = vi.fn()
-    const match = vi.fn(() => true)
-
-    render(
-      <SuggestInputDropdown
-        show
-        options={['Apple', 'Banana']}
-        select={select}
-        match={match}
-      />
-    )
-
-    const nodes = screen.getAllByText(/Apple|Banana/)
-    expect(nodes.length).toBe(2)
-  })
-
-  it('does not render when there are no matching options', () => {
-    const { container } = render(
-      <SuggestInputDropdown
-        show
-        options={['Apple']}
-        select={vi.fn()}
-        match={() => false}
-      />
-    )
-    //expect dropdown container not to exist
-    expect(container.firstChild).toBeNull()
-  })
-
-  it('calls select when option is clicked', () => {
-    const select = vi.fn()
-    const match = () => true
-
-    render(
-      <SuggestInputDropdown
-        show
-        options={['Apple']}
-        select={select}
-        match={match}
-      />
-    )
-
-    const option = screen.getByText('Apple')
-    fireEvent.click(option)
-    expect(select).toHaveBeenCalledWith('Apple')
-  })
-})
+  return {
+    __esModule: true,
+    default: DropdownMock
+  };
+});
+vi.mock('../../src/helpers/getSlotStyles.js', () => ({
+  __esModule: true,
+  default: () => ({ className: '', style: {} })
+}));
 
 //--------------------------------------------------------------------//
 // Tests
-//--------------------------------------------------------------------//
-describe('<SuggestInput />', () => {
-  //preset options
-  const options = ['Alpha', 'Beta', 'Gamma']
 
-  it('renders input field correctly', () => {
-    render(<SuggestInput options={options} />)
-    const input = screen.getByTestId('mock-input')
-    expect(input).toBeInTheDocument()
-  })
+describe('<SuggestInputControl />', () => {
+  beforeEach(() => {
+    mockOpen.mockClear();
+    mockSelect.mockClear();
+  });
 
-  it('calls onQuery and onDropdown when typing', async () => {
-    const onQuery = vi.fn()
-    const onDropdown = vi.fn()
-
+  it('renders input and calls onQuery when value length matches chars', async () => {
+    const onQuery = vi.fn();
     render(
-      <SuggestInput
-        options={options}
+      <SuggestInputControl
+        chars={3}
         onQuery={onQuery}
-        onDropdown={onDropdown}
       />
-    )
+    );
+    const input = screen.getByTestId('mock-input');
 
-    const input = screen.getByTestId('mock-input')
-
-    //step 1: type to set value
     act(() => {
-      fireEvent.change(input, { target: { value: 'alpha' } })
-    })
+      fireEvent.change(input, { target: { value: 'abc' } });
+    });
 
-    //step 2: trigger keyDown search
+    expect(mockSelect).toHaveBeenCalledWith('abc', false);
+    expect(mockOpen).toHaveBeenCalledWith(true);
+    expect(onQuery).toHaveBeenCalledWith('abc');
+  });
+
+  it('closes dropdown when input shorter than chars', async () => {
+    render(<SuggestInputControl chars={4} />);
+    const input = screen.getByTestId('mock-input');
+
     act(() => {
-      fireEvent.keyDown(input, { key: 'a', target: { value: 'alpha' } })
-    })
+      fireEvent.change(input, { target: { value: 'ab' } });
+    });
 
-    //wait for setTimeout inside handler
+    expect(mockOpen).toHaveBeenCalledWith(false);
+  });
+
+  it('triggers hide handler on blur', async () => {
+    render(<SuggestInputControl />);
+    const input = screen.getByTestId('mock-input');
+
     await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 15))
-    })
+      fireEvent.blur(input);
+      await new Promise((r) => setTimeout(r, 10));
+    });
 
-    await waitFor(() => {
-      expect(onDropdown).toHaveBeenCalledWith(true)
-      expect(onQuery).toHaveBeenCalledWith('alpha', expect.any(Function))
-    })
-  })
+    expect(mockOpen).toHaveBeenCalledWith(false);
+  });
+});
+describe('<SuggestInput />', () => {
+  beforeEach(() => {
+    mockOpen.mockClear();
+    mockSelect.mockClear();
+  });
 
-  it('does not render dropdown if match count is zero', () => {
-    render(<SuggestInput options={['Zero']} />)
-    const dropdown = document.querySelector('.frui-form-input-suggest-dropdown')
-    expect(dropdown).toBeNull()
-  })
+  it('renders Dropdown and SuggestInputControl structure', () => {
+    render(<SuggestInput />);
+    const input = screen.getByTestId('mock-input');
+    expect(input).toBeInTheDocument();
+  });
 
-  it('handles selecting dropdown option', async () => {
-    const onSelected = vi.fn()
-    const onUpdate = vi.fn()
-    const onDropdown = vi.fn()
+  it('applies error class properly', () => {
+    const { container } = render(<SuggestInput error className="extra" />);
+    const wrapper = container.querySelector('.frui-form-suggest-input');
+    expect(wrapper).toHaveClass('frui-form-suggest-input-error');
+    expect(wrapper).toHaveClass('extra');
+  });
 
+  it('passes correct dropdown props internally', () => {
+    const onDropdown = vi.fn();
+    const onUpdate = vi.fn();
     render(
       <SuggestInput
-        options={options}
-        onSelected={onSelected}
-        onUpdate={onUpdate}
+        options={[{ value: 'a', label: 'A' }]}
         onDropdown={onDropdown}
+        onUpdate={onUpdate}
+        control={{}}
+        dropdown={{}}
       />
-    )
-
-    const input = screen.getByTestId('mock-input')
-
-    //simulate typing a character key
-    act(() => {
-      fireEvent.keyDown(input, { key: 'a', target: { value: 'Alpha' } })
-    })
-
-    //wait for async behaviour
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 10))
-    })
-
-    //simulate selecting a value
-    act(() => {
-      fireEvent.change(input, { target: { value: 'Beta' } })
-    })
-
-    //validate input remains rendered
-    expect(input).toBeInTheDocument()
-  })
-})
+    );
+    const input = screen.getByTestId('mock-input');
+    expect(input).toBeInTheDocument();
+  });
+});

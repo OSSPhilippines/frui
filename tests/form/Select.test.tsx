@@ -1,57 +1,60 @@
 //--------------------------------------------------------------------//
 // Imports
-//--------------------------------------------------------------------//
-import '@testing-library/jest-dom'
+
+//tests
+import '@testing-library/jest-dom';
 import {
   fireEvent,
   render,
   screen,
   waitFor
-} from '@testing-library/react'
+} from '@testing-library/react';
 import {
   describe,
   expect,
   it,
   vi
-} from 'vitest'
+} from 'vitest';
+//frui
+import Select, { SelectPlaceholder } from '../../src/form/Select.js';
 
-//components
-import Select, {
-  SelectPlaceholder
-} from '../../src/form/Select'
+//--------------------------------------------------------------------//
+// Mocks
+
+vi.mock('src/helpers/getClassStyles.js', () => ({
+  __esModule: true,
+  default: ({ classes, props, state }: { 
+    classes?: string[]; 
+    props?: { className?: string; style?: object }; 
+    state?: object 
+  }) => ({
+    classes: classes || [],
+    styles: props?.style || {}
+  })
+}));
 
 //--------------------------------------------------------------------//
 // Tests
-//--------------------------------------------------------------------//
+
 describe('<Select />', () => {
-  //------------------------------------------------------------------//
-  // Renders
-  //------------------------------------------------------------------//
   it('renders base wrapper and placeholder text', () => {
     render(
       <Select placeholder="Pick one">
         <SelectPlaceholder>Pick one</SelectPlaceholder>
       </Select>
-    )
+    );
+    const wrapper = document.querySelector('.frui-form-select');
+    expect(wrapper).toBeInTheDocument();
+    expect(screen.getByText('Pick one')).toBeInTheDocument();
+  });
 
-    const wrapper = document.querySelector('.frui-form-select')
-    expect(wrapper).toBeInTheDocument()
-    expect(screen.getByText('Pick one')).toBeInTheDocument()
-  })
-
-  //------------------------------------------------------------------//
-  // Error state
-  //------------------------------------------------------------------//
   it('applies error class when error prop set', () => {
-    const { container } = render(<Select error />)
-    const wrapper = container.querySelector('.frui-form-select')
-    expect(wrapper).toBeInTheDocument()
-    expect(wrapper?.className).toContain('frui-form-select-error')
-  })
+    const { container } = render(<Select error />);
+    const wrapper = container.querySelector('.frui-form-select');
+    expect(wrapper).toBeInTheDocument();
+    expect(wrapper?.className).toContain('frui-form-select-error');
+  });
 
-  //------------------------------------------------------------------//
-  // Dropdown toggle
-  //------------------------------------------------------------------//
   it('toggles dropdown open on placeholder click', () => {
     render(
       <Select
@@ -62,23 +65,16 @@ describe('<Select />', () => {
       >
         <SelectPlaceholder>Click me</SelectPlaceholder>
       </Select>
-    )
-
-    const toggle = screen.getByText('Click me')
-    fireEvent.click(toggle)
-
-    //assert visible dropdown toggle icon
+    );
+    const toggle = screen.getByText('Click me');
+    fireEvent.click(toggle);
     expect(
       document.querySelector('.frui-form-select-control-actions-toggle')
-    ).toBeInTheDocument()
-  })
+    ).toBeInTheDocument();
+  });
 
-  //------------------------------------------------------------------//
-  // Update handler
-  //------------------------------------------------------------------//
   it('calls onUpdate when external value changes', async () => {
-    const handleUpdate = vi.fn()
-
+    const onUpdate = vi.fn();
     const { rerender } = render(
       <Select
         value="yes"
@@ -86,11 +82,9 @@ describe('<Select />', () => {
           { value: 'yes', label: 'Yes' },
           { value: 'no', label: 'No' }
         ]}
-        onUpdate={handleUpdate}
+        onUpdate={onUpdate}
       />
-    )
-
-    //simulate external controlled value change
+    );
     rerender(
       <Select
         value="no"
@@ -98,49 +92,40 @@ describe('<Select />', () => {
           { value: 'yes', label: 'Yes' },
           { value: 'no', label: 'No' }
         ]}
-        onUpdate={handleUpdate}
+        onUpdate={onUpdate}
       />
-    )
-
+    );
     await waitFor(() => {
-      expect(handleUpdate).toHaveBeenCalledWith('no')
-    })
-  })
+      expect(onUpdate).toHaveBeenCalledWith('no');
+    });
+  });
 
-  //------------------------------------------------------------------//
-  // Hidden input simulation
-  //------------------------------------------------------------------//
-  it('adds hidden input after selection (manual value simulation)', async () => {
+  it('adds hidden input after selection', async () => {
     const { rerender } = render(
       <Select
         name="colors"
         value=""
         options={[{ value: 'blue', label: 'Blue' }]}
       />
-    )
-
-    //simulate programmatic value update
+    );
     rerender(
       <Select
         name="colors"
         value="blue"
         options={[{ value: 'blue', label: 'Blue' }]}
       />
-    )
-
+    );
     await waitFor(() => {
-      const hidden =
-        document.querySelector('input[type="hidden"]') as HTMLInputElement
-      expect(hidden).toBeInTheDocument()
-      expect(hidden.name).toBe('colors')
-      expect(hidden.value).toBe('blue')
-    })
-  })
+      const hidden = document.querySelector(
+        'input[type="hidden"]'
+      ) as HTMLInputElement;
+      expect(hidden).toBeInTheDocument();
+      expect(hidden.name).toBe('colors');
+      expect(hidden.value).toBe('blue');
+    });
+  });
 
-  //------------------------------------------------------------------//
-  // Multiple select behaviour
-  //------------------------------------------------------------------//
-  it('supports multiple selections and clear button (programmatic simulation)', async () => {
+  it('supports multiple selections and clear button', async () => {
     const { rerender } = render(
       <Select
         multiple
@@ -151,38 +136,29 @@ describe('<Select />', () => {
           { value: 'b', label: 'B' }
         ]}
       />
-    )
-
-    //simulate selecting multiple values
+    );
     rerender(
       <Select
         multiple
         name="multi"
-        value={['a', 'b']}
+        value={[ 'a', 'b' ]}
         options={[
           { value: 'a', label: 'A' },
           { value: 'b', label: 'B' }
         ]}
       />
-    )
-
+    );
     await waitFor(() => {
       const clearBtn = document.querySelector(
         '.frui-form-select-control-actions-clear'
-      )
-      expect(clearBtn).toBeInTheDocument()
+      );
+      expect(clearBtn).toBeInTheDocument();
+      fireEvent.click(clearBtn!);
+      const inputs = document.querySelectorAll('input[type="hidden"]');
+      expect(inputs.length).toBe(0);
+    });
+  });
 
-      //trigger clear all action
-      fireEvent.click(clearBtn!)
-
-      const inputs = document.querySelectorAll('input[type="hidden"]')
-      expect(inputs.length).toBe(0)
-    })
-  })
-
-  //------------------------------------------------------------------//
-  // Controlled value rendering
-  //------------------------------------------------------------------//
   it('renders correct selected option when value prop provided', async () => {
     const { rerender, container } = render(
       <Select
@@ -192,15 +168,12 @@ describe('<Select />', () => {
           { value: 'opt2', label: 'Opt2' }
         ]}
       />
-    )
-
+    );
     const control = container.querySelector(
       '.frui-form-select-control-selected'
-    )
-    expect(control).toBeInTheDocument()
-    expect(control?.textContent).toContain('Opt2')
-
-    //rerender to new controlled value
+    );
+    expect(control).toBeInTheDocument();
+    expect(control?.textContent).toContain('Opt2');
     rerender(
       <Select
         value="opt1"
@@ -209,14 +182,13 @@ describe('<Select />', () => {
           { value: 'opt2', label: 'Opt2' }
         ]}
       />
-    )
-
+    );
     await waitFor(() => {
-      const updatedControl = container.querySelector(
+      const updated = container.querySelector(
         '.frui-form-select-control-selected'
-      )
-      expect(updatedControl).toBeInTheDocument()
-      expect(updatedControl?.textContent).toContain('Opt1')
-    })
-  })
-})
+      );
+      expect(updated).toBeInTheDocument();
+      expect(updated?.textContent).toContain('Opt1');
+    });
+  });
+});

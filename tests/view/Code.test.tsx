@@ -3,22 +3,34 @@
 
 //tests
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import {
+  render,
+  screen
+} from '@testing-library/react';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
 //modules
 import type { ReactNode } from 'react';
 //frui
-import Code  from '../../src/view/Code.js'; 
+import Code from '../../src/view/Code.js';
 
 //--------------------------------------------------------------------//
 // Mocks
 
 vi.mock('react-shiki', () => ({
   __esModule: true,
-  default: ({ children, showLanguage, theme }: {
+  default: ({
+    children,
+    showLanguage,
+    theme
+  }: {
     children: ReactNode,
     showLanguage?: boolean,
-    theme?: string,
+    theme?: string
   }) => (
     <div
       data-testid="shiki"
@@ -55,13 +67,11 @@ describe('<Code />', () => {
     expect(screen.getByTestId('shiki')).toHaveAttribute('data-show', 'yes');
   });
 
-  it('renders multi‑line code and contains both lines', () => {
+  it('renders multi-line code and contains both lines', () => {
     const multi = `const a = 1;\nconst b = 2;`;
     render(<Code language="js" value={multi} />);
-
     const wrapper = screen.getByTestId('shiki');
     const text = wrapper.textContent || '';
-
     expect(text).toContain('const a = 1;');
     expect(text).toContain('const b = 2;');
   });

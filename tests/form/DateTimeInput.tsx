@@ -3,12 +3,21 @@
 
 //tests
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import {
+  fireEvent,
+  render,
+  screen
+} from '@testing-library/react';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
 //frui
-import DatetimeInput, { 
-  toDatetimeInputString, 
-  toDatetimeString 
+import DatetimeInput, {
+  toDatetimeInputString,
+  toDatetimeString
 } from '../../src/form/DatetimeInput.js';
 
 //--------------------------------------------------------------------//
@@ -16,17 +25,24 @@ import DatetimeInput, {
 
 vi.mock('../../src/form/Input.js', () => ({
   __esModule: true,
-  default: ({ className, onUpdate, type, value }: {
-    className?: string,
-    onUpdate?: (val?: string) => void,
-    type?: string,
-    value?: string
-    [key: string]: unknown
+  default: ({
+    className,
+    onUpdate,
+    type,
+    value
+  }: {
+    className?: string;
+    onUpdate?: (val?: string) => void;
+    type?: string;
+    value?: string;
+    [key: string]: unknown;
   }) => (
     <input
       className={className}
       data-testid="mock-input"
-      onChange={(e) => onUpdate && onUpdate(e.target.value)}
+      onChange={(e) =>
+        onUpdate?.((e.target as HTMLInputElement).value)
+      }
       type={type}
       value={value}
     />
@@ -34,7 +50,7 @@ vi.mock('../../src/form/Input.js', () => ({
 }));
 
 //--------------------------------------------------------------------//
-// Tests 
+// Tests
 
 describe('<DatetimeInput />', () => {
   it('applies custom className if provided', () => {
@@ -66,16 +82,21 @@ describe('<DatetimeInput />', () => {
     render(<DatetimeInput defaultValue="2024-07-15T09:45" />);
     const input = screen.getByTestId('mock-input') as HTMLInputElement;
     expect(input.value).toBe('2024-07-15T09:45');
-  })
+  });
 
   it('updates when controlled value prop changes', () => {
-    const { rerender } = render(<DatetimeInput value="2024-05-10T14:00" />);
+    const { rerender } = render(
+      <DatetimeInput value="2024-05-10T14:00" />
+    );
     const input = screen.getByTestId('mock-input') as HTMLInputElement;
     expect(input.value).toBe('2024-05-10T14:00');
     rerender(<DatetimeInput value="2024-08-20T18:30" />);
     expect(input.value).toBe('2024-08-20T18:30');
   });
 });
+
+//--------------------------------------------------------------------//
+// Helpers
 
 describe('Datetime helper functions', () => {
   it('formats dates correctly with toDatetimeInputString()', () => {
@@ -86,7 +107,7 @@ describe('Datetime helper functions', () => {
   it('formats dates correctly with toDatetimeString()', () => {
     const d = new Date('2024-03-10T08:30:00');
     expect(toDatetimeString(d)).toBe('2024-03-10 08:30:00');
-  })
+  });
 
   it('returns undefined for invalid date', () => {
     expect(toDatetimeString(new Date('invalid'))).toBeUndefined();

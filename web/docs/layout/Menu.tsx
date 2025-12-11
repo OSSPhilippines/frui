@@ -76,6 +76,11 @@ export const menu: MenuItem[] = [
         href: '/component/button'
       },
       {
+        label: 'Carousels',
+        search: '/component/carousel',
+        href: '/component/carousel'
+      },
+      {
         label: 'Dialogs',
         search: '/component/dialog',
         href: '/component/dialog'
@@ -282,11 +287,6 @@ export const menu: MenuItem[] = [
     href: '/view',
     children: [
       {
-        label: 'Carousel',
-        search: '/view/carousel',
-        href: '/view/carousel'
-      },
-      {
         label: 'Code Highlighter',
         search: '/view/code',
         href: '/view/code'
@@ -317,11 +317,6 @@ export const menu: MenuItem[] = [
         href: '/view/email-link'
       },
       {
-        label: 'Film',
-        search: '/view/film',
-        href: '/view/film'
-      },
-      {
         label: 'Formula',
         search: '/view/formula',
         href: '/view/formula'
@@ -335,6 +330,16 @@ export const menu: MenuItem[] = [
         label: 'Image',
         search: '/view/image',
         href: '/view/image'
+      },
+      {
+        label: 'Image Carousel',
+        search: '/view/image-carousel',
+        href: '/view/image-carousel'
+      },
+      {
+        label: 'Image Film',
+        search: '/view/image-film',
+        href: '/view/image-film'
       },
       {
         label: 'Link',
@@ -418,6 +423,11 @@ export const menu: MenuItem[] = [
         label: 'Card',
         search: '/tool/card',
         href: '/tool/card'
+      },
+      {
+        label: 'Film',
+        search: '/tool/film',
+        href: '/tool/film'
       },
       {
         label: 'Scope',

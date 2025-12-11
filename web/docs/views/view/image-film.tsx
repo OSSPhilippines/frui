@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Film from 'src/view/Film.js';
+import ImageFilm from 'src/view/ImageFilm.js';
 
 //web
 import type { PageProps } from '../../../app/types.js';
@@ -14,19 +14,19 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/film';
-const title = 'Film';
+const uri = '/view/image-film';
+const title = 'Image Film';
 const description = 'Image film converts a list of strings '
   + 'into an image film';
 
 const examples = [
 //0
-`<Film className="flex" value={[
+`<ImageFilm className="flex" value={[
   'https://images.wsj.net/im-580612/8SR', 
   'https://images.wsj.net/im-580612/8SR'
 ]} width="50" />`,
  //1
-`<Film className="flex" wrapper="py-3" image="mx-3" value={[
+`<ImageFilm className="flex" wrapper="py-3" image="mx-3" value={[
   'https://images.wsj.net/im-580612/8SR', 
   'https://images.wsj.net/im-580612/8SR'
 ]} width="50" />`
@@ -35,12 +35,12 @@ const examples = [
 const props = [
   [ 'alt', 'string', 'No', 'Alt text for image' ],
   [ 'className', 'string', 'No', 'Standard HTML class names applied to all images' ],
+  [ 'frame' , 'SlotStyleProp', 'No', 'Class/style to apply to each frame element' ],
   [ 'image' , 'SlotStyleProp', 'No', 'Class/style to apply to each image element' ],
   [ 'height', 'string|number', 'No', 'Height of image' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all images' ],
   [ 'value', 'string[]', 'Yes', 'Default value' ],
-  [ 'width', 'string|number', 'No', 'Width of image' ],
-  [ 'wrapper' , 'SlotStyleProp', 'No', 'Class/style to apply to each wrapper element' ]
+  [ 'width', 'string|number', 'No', 'Width of image' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -127,7 +127,7 @@ export function Body() {
         </p>
         <Preview title="Basic Example" className="border border-2 theme-bc-3">
           <Preview.Example center padding>
-            <Film className="flex" value={[
+            <ImageFilm className="flex" value={[
               'https://images.wsj.net/im-580612/8SR', 
               'https://images.wsj.net/im-580612/8SR'
             ]} width="50" />
@@ -148,7 +148,7 @@ export function Body() {
         </p>
         <Preview title="Slot Example" className="border border-2 theme-bc-3">
           <Preview.Example center padding>
-            <Film className="flex" wrapper="py-3" image="inline-block mx-3" value={[
+            <ImageFilm className="flex" frame="py-3" image="inline-block mx-3" value={[
               'https://images.wsj.net/im-580612/8SR', 
               'https://images.wsj.net/im-580612/8SR'
             ]} width="50" />
@@ -164,9 +164,8 @@ export function Body() {
         <p className="py-2">
           <Translate>
             You can add use 
-            the <C value="frui-view-film" />, 
-            <C l value="frui-view-film-wrapper" />,
-            and <C value="frui-view-film-image" /> CSS classes to 
+            the <C value="frui-view-image-film" />, 
+            and <C value="frui-view-image-film-image" /> CSS classes to 
             globally theme films.
           </Translate>
         </p>

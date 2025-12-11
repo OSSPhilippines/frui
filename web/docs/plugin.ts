@@ -13,6 +13,7 @@ export default function plugin(server: HttpServer<Config>) {
     ctx.get('/component/badge', '@/web/docs/views/component/badge');
     ctx.get('/component/bread', '@/web/docs/views/component/bread');
     ctx.get('/component/button', '@/web/docs/views/component/button');
+    ctx.get('/component/carousel', '@/web/docs/views/component/carousel');
     ctx.get('/component/dialog', '@/web/docs/views/component/dialog');
     ctx.get('/component/loader', '@/web/docs/views/component/loader');
     ctx.get('/component/notifier', '@/web/docs/views/component/notifier');
@@ -55,17 +56,17 @@ export default function plugin(server: HttpServer<Config>) {
     ctx.get('/form/time-input', '@/web/docs/views/form/time-input');
 
     ctx.get('/view', '@/web/docs/views/view/index');
-    ctx.get('/view/carousel', '@/web/docs/views/view/carousel');
     ctx.get('/view/code', '@/web/docs/views/view/code');
     ctx.get('/view/color', '@/web/docs/views/view/color');
     ctx.get('/view/country', '@/web/docs/views/view/country');
     ctx.get('/view/currency', '@/web/docs/views/view/currency');
     ctx.get('/view/date-format', '@/web/docs/views/view/date-format');
     ctx.get('/view/email-link', '@/web/docs/views/view/email-link');
-    ctx.get('/view/film', '@/web/docs/views/view/film');
     ctx.get('/view/formula', '@/web/docs/views/view/formula');
     ctx.get('/view/html', '@/web/docs/views/view/html');
     ctx.get('/view/image', '@/web/docs/views/view/image');
+    ctx.get('/view/image-film', '@/web/docs/views/view/image-film');
+    ctx.get('/view/image-carousel', '@/web/docs/views/view/image-carousel');
     ctx.get('/view/link', '@/web/docs/views/view/link');
     ctx.get('/view/list', '@/web/docs/views/view/list');
     ctx.get('/view/markdown', '@/web/docs/views/view/markdown');
@@ -83,6 +84,7 @@ export default function plugin(server: HttpServer<Config>) {
     ctx.get('/tool', '@/web/docs/views/tool/index');
     ctx.get('/tool/box', '@/web/docs/views/tool/box');
     ctx.get('/tool/card', '@/web/docs/views/tool/card');
+    ctx.get('/tool/film', '@/web/docs/views/tool/film');
     ctx.get('/tool/scope', '@/web/docs/views/tool/scope');
     ctx.get('/tool/when', '@/web/docs/views/tool/when');
   });

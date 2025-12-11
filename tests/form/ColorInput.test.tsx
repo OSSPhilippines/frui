@@ -78,8 +78,7 @@ describe('Color helper functions', () => {
   });
 
   it('rgbaToHex converts color object to hex string', () => {
-    expect(rgbaToHex({ r: 255, g: 0, b: 128, a: 1 }))
-      .toBe('#ff0080');
+    expect(rgbaToHex({ r: 255, g: 0, b: 128, a: 1 })).toBe('#ff0080');
   });
 
   it('toRGBA parses rgba, hex and shortHex patterns', () => {
@@ -139,8 +138,7 @@ describe('<ColorInput />', () => {
     render(<ColorInput onUpdate={onUpdate} />);
     const text = screen.getByRole('textbox');
     fireEvent.change(text, { target: { value: '#123456' } });
-    await waitFor(() => expect(onUpdate)
-      .toHaveBeenCalledWith('#123456'));
+    await waitFor(() => expect(onUpdate).toHaveBeenCalledWith('#123456'));
   });
 
   it('updates picker when controlled value prop changes', async () => {
@@ -152,8 +150,7 @@ describe('<ColorInput />', () => {
     ) as HTMLInputElement;
     expect(picker.value.toLowerCase()).toBe('#abc123');
     rerender(<ColorInput value="#ffffff" />);
-    await waitFor(() => expect(picker.value.toLowerCase())
-      .toBe('#ffffff'));
+    await waitFor(() => expect(picker.value.toLowerCase()).toBe('#ffffff'));
   });
 
   it('allows changing the color via color picker input', async () => {
@@ -163,7 +160,6 @@ describe('<ColorInput />', () => {
       'input[type="color"]'
     ) as HTMLInputElement;
     fireEvent.change(picker, { target: { value: '#ff8800' } });
-    await waitFor(() => expect(onUpdate)
-      .toHaveBeenCalledWith('#ff8800'));
+    await waitFor(() => expect(onUpdate).toHaveBeenCalledWith('#ff8800'));
   });
 });

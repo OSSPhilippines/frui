@@ -136,10 +136,9 @@ describe('make(Fieldset)', () => {
     expect(onChange).toHaveBeenCalledWith([ 'value', 'new' ]);
     expect(onUpdate).toHaveBeenCalledWith([ 'value', 'new' ]);
 
-    // Fix: multiple elements with "Add" text, use getAllByText
-    const addButtons = screen.getAllByText((content, node) =>
-      node?.textContent?.includes('Add')
-    );
+    const addButtons = screen.getAllByText((content, node) => {
+      return typeof node?.textContent === 'string' && node.textContent.includes('Add');
+    });
     expect(addButtons.length).toBeGreaterThan(0);
   });
 

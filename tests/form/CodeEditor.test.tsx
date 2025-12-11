@@ -70,8 +70,7 @@ describe('getEditorOptions()', () => {
 
   it('adds line numbers when numbers=true', () => {
     const opts = getEditorOptions('basic', true, []);
-    expect((opts as unknown[]).length)
-      .toBeGreaterThanOrEqual(1);
+    expect((opts as unknown[]).length).toBeGreaterThanOrEqual(1);
   });
 });
 describe('getLanguageExtension()', () => {
@@ -95,8 +94,7 @@ describe('<CodeEditor />', () => {
   it('renders with default minimal setup and textarea', () => {
     render(<CodeEditor />);
     const field = screen.getByRole('textbox');
-    expect(field)
-      .toHaveClass('frui-form-code-editor-field');
+    expect(field).toHaveClass('frui-form-code-editor-field');
     expect(field).toHaveValue('');
   });
 
@@ -117,8 +115,7 @@ describe('<CodeEditor />', () => {
 
   it('applies line numbers option when numbers=true', () => {
     render(<CodeEditor numbers />);
-    expect(screen.getByRole('textbox'))
-      .toHaveClass('frui-form-code-editor-field');
+    expect(screen.getByRole('textbox')).toHaveClass('frui-form-code-editor-field');
   });
 
   it('updates currentValue when controlled prop value changes',
@@ -127,8 +124,7 @@ describe('<CodeEditor />', () => {
       const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
       expect(textarea.value).toBe('first');
       rerender(<CodeEditor value="second" />);
-      await waitFor(() => expect(textarea.value)
-        .toBe('second'));
+      await waitFor(() => expect(textarea.value).toBe('second'));
     });
 
   it('loads language extension when language prop provided',

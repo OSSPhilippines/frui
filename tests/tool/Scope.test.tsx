@@ -161,17 +161,14 @@ describe('<Scope />', () => {
           <ScopeDisplay />
         </Scope>
       );
-      
-      // List item (index 0)
+
       const listScopes = screen.getAllByTestId('scope-0');
       expect(listScopes[0]).toBeInTheDocument();
       expect(listScopes[0]).toHaveTextContent('item1');
-      
-      // Hash item
+
       expect(screen.getByTestId('scope-key1')).toBeInTheDocument();
       expect(screen.getByTestId('scope-key1')).toHaveTextContent('value1');
-      
-      // Value item (also key 0)
+
       expect(listScopes[1]).toBeInTheDocument();
       expect(listScopes[1]).toHaveTextContent('singleValue');
     });

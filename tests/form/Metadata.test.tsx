@@ -191,8 +191,7 @@ describe('<MetadataFields />', () => {
     const setMock = vi.fn();
     renderField('text', setMock);
     const button = screen.getByTestId('mock-button');
-
-    // act needed here when interacting with React elements
+    
     fireEvent.click(button);
 
     expect(setMock).toHaveBeenCalled();

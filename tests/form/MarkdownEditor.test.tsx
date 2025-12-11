@@ -123,15 +123,13 @@ describe('<MarkdownEditor />', () => {
     const previewFrame = document.querySelector(
       '.frui-form-markdown-editor-preview'
     ) as HTMLIFrameElement;
-
-    // initial editor is edit mode (textarea visible)
+    
     expect(previewFrame).toHaveStyle({ display: 'none' });
 
     act(() => {
-      fireEvent.click(buttons[1]); // click second toggle
+      fireEvent.click(buttons[1]);
     });
 
-    // After toggle to preview mode, preview should be visible
     expect(previewFrame).toHaveStyle({ display: 'block' });
   });
 

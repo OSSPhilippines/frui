@@ -15,7 +15,6 @@ import {
 //frui
 import Spread from '../../src/view/Spread.js';
 
-
 //--------------------------------------------------------------------//
 // Tests
 

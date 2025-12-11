@@ -15,7 +15,6 @@ import {
 //frui
 import Rating from '../../src/view/Rating.js';
 
-
 //--------------------------------------------------------------------//
 // Tests
 

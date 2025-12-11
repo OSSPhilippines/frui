@@ -19,14 +19,9 @@ import {
   vi
 } from 'vitest';
 //types
-import type {
-  ChangeEvent
-} from 'react';
+import type { ChangeEvent } from 'react';
 //frui
-import Textarea, {
-  useTextarea
-} from '../../src/form/Textarea';
-
+import Textarea, { useTextarea } from '../../src/form/Textarea';
 
 //--------------------------------------------------------------------//
 // Hooks
@@ -63,7 +58,6 @@ describe('useTextarea()', () => {
     }).not.toThrow();
   });
 });
-
 
 //--------------------------------------------------------------------//
 // Tests

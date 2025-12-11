@@ -15,7 +15,6 @@ import {
 //frui
 import Metadata from '../../src/view/Metadata.js';
 
-
 //--------------------------------------------------------------------//
 // Tests
 

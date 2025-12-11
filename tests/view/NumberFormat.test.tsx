@@ -13,10 +13,7 @@ import {
   it
 } from 'vitest';
 //frui
-import NumberFormat, {
-  formatNumber
-} from '../../src/view/NumberFormat.js';
-
+import NumberFormat, { formatNumber } from '../../src/view/NumberFormat.js';
 
 //--------------------------------------------------------------------//
 // Tests
@@ -58,8 +55,6 @@ describe('formatNumber()', () => {
     expect(result).toBe('-42.5');
   });
 });
-
-
 describe('<NumberFormat />', () => {
   it('renders formatted number with default settings', () => {
     render(<NumberFormat value={1234.5} />);

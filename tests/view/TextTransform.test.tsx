@@ -15,7 +15,6 @@ import {
 //frui
 import TextTransform from '../../src/view/TextTransform.js';
 
-
 //--------------------------------------------------------------------//
 // Tests
 

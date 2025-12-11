@@ -1,5 +1,6 @@
 //--------------------------------------------------------------------
 // Imports
+
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -15,12 +16,12 @@ import {
 } from 'vitest';
 //frui
 import Carousel from '../../src/view/Carousel.js';
+
 //--------------------------------------------------------------------
 // Mocks
+
 beforeEach(() => {
-  // Mock scrollBy which is not available in JSDOM
   Element.prototype.scrollBy = vi.fn();
-  // Mock getBoundingClientRect
   Element.prototype.getBoundingClientRect = vi.fn(() => ({
     width: 100,
     height: 100,
@@ -33,8 +34,10 @@ beforeEach(() => {
     toJSON: () => {}
   }));
 });
+
 //--------------------------------------------------------------------
 // Tests
+
 describe('<Carousel />', () => {
   it('renders a wrapping div with the default class', () => {
     const { container } = render(<Carousel value={['a.jpg']} />);

@@ -15,7 +15,6 @@ import {
 //frui
 import PhoneLink from '../../src/view/PhoneLink.js';
 
-
 //--------------------------------------------------------------------//
 // Tests
 

@@ -17,7 +17,6 @@ import {
 //frui
 import Checkbox from '../../src/form/Checkbox.js';
 
-
 //--------------------------------------------------------------------//
 // Tests
 

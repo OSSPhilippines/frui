@@ -16,9 +16,7 @@ import {
   vi
 } from 'vitest';
 //frui
-import TextEditor, {
-  useTextEditor
-} from '../../src/form/TextEditor';
+import TextEditor, { useTextEditor } from '../../src/form/TextEditor';
 
 //--------------------------------------------------------------------//
 // Mocks

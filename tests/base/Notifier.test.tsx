@@ -141,7 +141,7 @@ describe('unload()', () => {
 
 describe('useNotifier()', () => {
   it('provides notifier API', () => {
-    let api: unknown;
+    let api: ReturnType<typeof useNotifier> | undefined;
     const Demo = () => {
       api = useNotifier();
       return null;
@@ -151,7 +151,7 @@ describe('useNotifier()', () => {
         <Demo />
       </NotifierContext.Provider>
     );
-    expect(api.config.name).toBe(defaults.name);
+    expect(api!.config.name).toBe(defaults.name);
     expect(api).toMatchObject({
       dismiss: expect.any(Function),
       flash: expect.any(Function),

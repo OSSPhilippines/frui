@@ -80,7 +80,6 @@ describe('toDate()', () => {
     expect(result?.getFullYear()).toBe(2024);
   });
 });
-
 describe('toDateString()', () => {
   it('returns undefined for undefined input', () => {
     expect(toDateString(undefined)).toBeUndefined();

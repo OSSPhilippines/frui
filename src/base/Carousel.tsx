@@ -15,32 +15,35 @@ import {
 import type { 
   ClassStyleProps,
   ChildrenProps, 
-  HTMLImageProps, 
   SlotStyleProp 
 } from '../types.js';
 import type { FilmProps } from './Film.js';
-import Film from './Film.js';
+import Film, { FilmFrame } from './Film.js';
 import getClassStyles from '../helpers/getClassStyles.js';
 import getSlotStyles from '../helpers/getSlotStyles.js';
-import getChildComponent from '../helpers/getChildComponent.js';
+import getChildComponent, {
+  getChildComponents
+} from '../helpers/getChildComponent.js';
 
 //--------------------------------------------------------------------//
 // Types
 
 export type CarouselContext = {
   index: number,
-  prev: () => void,
-  next: () => void
+  jump: (index: number) => void,
+  next: () => void,
+  prev: () => void
 };
 
 export type CarouselConfig = {
   //starting index (uncontrolled)
   defaultIndex?: number,
+  //number of frames
+  frames: number,
   //controlled index
   index?: number,
   //whether to repeat the carousel
-  repeat?: boolean,
-  value: string[]
+  repeat?: boolean
 };
 
 export type CarouselPreviousProps = ClassStyleProps & ChildrenProps & {
@@ -50,15 +53,13 @@ export type CarouselNextProps = ClassStyleProps & ChildrenProps & {
   asChild?: boolean
 };
 
-export type CarouselProps = HTMLImageProps & FilmProps & ChildrenProps & {
+export type CarouselProps = FilmProps & ChildrenProps & {
   //overflow auto sliding
   auto?: boolean,
   //starting index (uncontrolled)
   defaultIndex?: number,
   //slot: class/style to apply to film component
   film?: SlotStyleProp,
-  //slot: class/style to apply to carousel frame
-  frame?: SlotStyleProp,
   //overflow hidden
   hidden?: boolean,
   //controlled index
@@ -66,11 +67,24 @@ export type CarouselProps = HTMLImageProps & FilmProps & ChildrenProps & {
   //whether to repeat the carousel
   repeat?: boolean,
   //overflow scroll bars
-  scroll?: boolean
+  scroll?: boolean,
+  //slot: class/style to apply to carousel frame view
+  view?: SlotStyleProp
 };
 
 //--------------------------------------------------------------------//
 // Helpers
+
+/**
+ * Get all frame components from children node
+ */
+export function getFrames(children: ReactNode) {
+  return getChildComponents<ReactElement>(
+    FilmFrame, 
+    'filmFrame', 
+    children
+  );
+};
 
 /**
  * Get first previous component from children node
@@ -109,29 +123,29 @@ export function useCarouselContext() {
  */
 export function useCarousel(config: CarouselConfig) {
   //config
-  const { defaultIndex = 0, index, repeat, value } = config;
-  const [ active, setActive ] = useState(defaultIndex);
+  const { defaultIndex = 0, index, repeat, frames } = config;
+  const [ active, jump ] = useState(defaultIndex);
   //variables
   const refs = {
-    frame: useRef<HTMLDivElement>(null)
+    view: useRef<HTMLDivElement>(null)
   };
   //handlers
   const handlers = {
-    set: setActive,
+    jump,
     prev() {
-      setActive(index => {
+      jump(index => {
         const previous = index - 1;
-        if (previous < 0 && repeat) {
-          return value.length - 1;
+        if (previous < 0) {
+          return repeat ? frames - 1 : index;
         }
         return previous;
       });
     },
     next() {
-      setActive(index => {
+      jump(index => {
         const next = index + 1;
-        if (next >= value.length && repeat) {
-          return 0;
+        if (next >= frames) {
+          return repeat ? 0 : index;
         }
         return next;
       });
@@ -141,26 +155,26 @@ export function useCarousel(config: CarouselConfig) {
   // when index changes, update active
   useEffect(() => {
     if (typeof index === 'number') {
-      setActive(index);
+      jump(index);
     }
   }, [ index ]);
   // when active changes, slide to show active image
   useEffect(() => {
-    if (!refs.frame.current) return;
-    const images = Array
-      .from(refs.frame.current.querySelectorAll('img'))
-      .map(image => image.parentElement as HTMLElement);
-    const activeImage = images[active];
-    if (activeImage) {
-      const frameRect = refs.frame.current.getBoundingClientRect();
-      const imageRect = activeImage.getBoundingClientRect();
+    if (!refs.view.current) return;
+    const frames = Array.from(
+      refs.view.current.querySelectorAll('.frui-film-frame')
+    );
+    const activeFrame = frames[active];
+    if (activeFrame) {
+      const frameRect = refs.view.current.getBoundingClientRect();
+      const imageRect = activeFrame.getBoundingClientRect();
       const offset = imageRect.left - frameRect.left;
-      refs.frame.current.scrollBy({
+      refs.view.current.scrollBy({
         left: offset,
         behavior: 'smooth'
       });
     }
-  }, [ active, refs.frame.current ]);
+  }, [ active, refs.view.current ]);
 
   return { refs, active, handlers };
 };
@@ -173,6 +187,7 @@ export function useCarousel(config: CarouselConfig) {
  */
 export const CarouselContext = createContext<CarouselContext>({
   index: 0,
+  jump: () => {},
   prev: () => {},
   next: () => {}
 });
@@ -186,7 +201,7 @@ export function CarouselPrevious(props: CarouselPreviousProps) {
   //hooks
   const { prev } = useCarouselContext();
   //variables
-  const classes = [ 'frui-view-carousel-prev' ];
+  const classes = [ 'frui-carousel-prev' ];
   className && classes.push(className);
   const childProps = { 
     className: classes.join(' '), 
@@ -229,7 +244,7 @@ export function CarouselNext(props: CarouselNextProps) {
   //hooks
   const { next } = useCarouselContext();
   //variables
-  const classes = [ 'frui-view-carousel-next' ];
+  const classes = [ 'frui-carousel-next' ];
   className && classes.push(className);
   const childProps = { 
     className: classes.join(' '), 
@@ -274,32 +289,32 @@ export function Carousel(props: CarouselProps) {
     className, 
     defaultIndex,
     film, 
-    frame, 
+    frame,
     hidden,
     index,
     repeat,
     scroll,
     style, 
-    value, 
-    ...attributes 
+    view
   } = props;
+  const frames = getFrames(children);
   //hooks
   const { active, refs, handlers } = useCarousel(
-    { value, defaultIndex, index, repeat }
+    { frames: frames.length, defaultIndex, index, repeat }
   );
   //variables
-  const classes = [ 'frui-view-carousel' ];
+  const classes = [ 'frui-carousel' ];
   className && classes.push(className);
   // get slot styles
   const slots = {
     film: film ? getSlotStyles(film, {}) : {},
-    frame: frame ? getSlotStyles(frame, {}) : {}
+    view: view ? getSlotStyles(view, {}) : {}
   };
   // get final classes and styles
   const styles = {
     film: getClassStyles({
       //default classes to apply
-      classes: [ 'frui-view-carousel-film' ],
+      classes: [ 'frui-carousel-film' ],
       //style props
       props: {
         //prefer direct props over slot props
@@ -310,23 +325,23 @@ export function Carousel(props: CarouselProps) {
       //state to pass to callable props
       state: {}
     }),
-    frame: getClassStyles({
+    view: getClassStyles({
       //default classes to apply
-      classes: [ 'frui-view-carousel-frame' ],
+      classes: [ 'frui-carousel-view' ],
       //style props
       props: {
         //prefer direct props over slot props
-        className: slots.frame.className,
+        className: slots.view.className,
         //prefer direct props over slot props
-        style: slots.frame.style
+        style: slots.view.style
       },
       //state to pass to callable props
       state: {}
     })
   };
-  hidden && styles.frame.classes.push('frui-scroll-hidden');
-  scroll && styles.frame.classes.push('frui-scroll');
-  auto && styles.frame.classes.push('frui-scroll-auto');
+  hidden && styles.view.classes.push('frui-scroll-hidden');
+  scroll && styles.view.classes.push('frui-scroll');
+  auto && styles.view.classes.push('frui-scroll-auto');
   // get previous and next components
   const components = {
     previous: getPrevious(children),
@@ -335,8 +350,9 @@ export function Carousel(props: CarouselProps) {
   // make provider
   const provider = {
     index: active,
-    prev: handlers.prev,
-    next: handlers.next
+    jump: handlers.jump,
+    next: handlers.next,
+    prev: handlers.prev
   };
   //render
   return (
@@ -344,16 +360,17 @@ export function Carousel(props: CarouselProps) {
       <div className={classes.join(' ')} style={style}>
         {components.previous}
         <div 
-          ref={refs.frame}
-          className={styles.frame.classes.join(' ')} 
-          style={styles.frame.styles} 
+          ref={refs.view}
+          className={styles.view.classes.join(' ')} 
+          style={styles.view.styles} 
         >
           <Film 
-            {...attributes} 
             className={styles.film.classes.join(' ')} 
-            style={styles.film.styles} 
-            value={value} 
-          />
+            frame={frame}
+            style={styles.film.styles}
+          >
+            {frames}
+          </Film>
         </div>
         {components.next}
       </div>
@@ -363,8 +380,12 @@ export function Carousel(props: CarouselProps) {
 
 //defaults to image carousel
 export default Object.assign(Carousel, {
+  getFrames,
+  getPrevious,
+  getNext,
   useCarousel,
   useCarouselContext,
+  Frame: FilmFrame,
   Prev: CarouselPrevious,
   Previous: CarouselPrevious,
   Next: CarouselNext,

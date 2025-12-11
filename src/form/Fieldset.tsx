@@ -139,7 +139,7 @@ export function make<ValueType = any>(
     ).length;
 
     return (
-      <>
+      <div className="frui-form-fieldset">
         {values.map((value, index) => (
           typeof value !== 'undefined' ? (
             <Fields 
@@ -165,7 +165,7 @@ export function make<ValueType = any>(
             {add || 'Add'}
           </Button>
         )}
-      </>
+      </div>
     );
   };
 };

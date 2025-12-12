@@ -3,17 +3,10 @@
 
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
-import {
-  describe,
-  expect,
-  it
-} from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 //frui
-import Table from '../../src/base/Table';
+import Table from '../../src/base/Table.js';
 
 //--------------------------------------------------------------------//
 // Helpers
@@ -64,8 +57,12 @@ describe('<Table />', () => {
   it('assigns correct base classes to elements', () => {
     renderTable();
     const ths = Array.from(document.querySelectorAll('th'));
-    expect(ths.some(th => th.classList.contains('frui-table-head'))).toBe(true);
-    expect(ths.some(th => th.classList.contains('frui-table-foot'))).toBe(true);
+    expect(
+      ths.some(th => th.classList.contains('frui-table-head'))
+    ).toBe(true);
+    expect(
+      ths.some(th => th.classList.contains('frui-table-foot'))
+    ).toBe(true);
     document.querySelectorAll('tbody tr').forEach(tr =>
       expect(tr).toHaveClass('frui-table-row')
     );
@@ -75,7 +72,10 @@ describe('<Table />', () => {
   });
 
   it('applies custom className and inline style to root div', () => {
-    renderTable({ className: 'extra-class', style: { border: '1px solid red' } });
+    renderTable({
+      className: 'extra-class',
+      style: { border: '1px solid red' }
+    });
     const root = document.querySelector('.frui-table-overflow');
     expect(root).toHaveClass('extra-class');
     expect(root?.getAttribute('style') || '').toContain('border');
@@ -85,7 +85,7 @@ describe('<Table />', () => {
     render(
       <Table>
         <Table.Row>
-          <Table.Col stickyLeft stickyTop noWrap>
+          <Table.Col noWrap stickyLeft stickyTop>
             Cell
           </Table.Col>
         </Table.Row>

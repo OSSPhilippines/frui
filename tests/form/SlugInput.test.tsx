@@ -1,24 +1,13 @@
 //--------------------------------------------------------------------//
 // Imports
+//modules
+import type { ChangeEvent, FocusEvent } from 'react';
 
 //tests
 import '@testing-library/jest-dom';
-import {
-  fireEvent,
-  render,
-  screen
-} from '@testing-library/react';
-import {
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
-//types
-import type {
-  ChangeEvent,
-  FocusEvent
-} from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
+
 //frui
 import SlugInput, {
   camelfy,
@@ -32,25 +21,40 @@ import SlugInput, {
 vi.mock('../../src/form/Input.js', () => ({
   __esModule: true,
   default: ({
-    value,
     onBlur,
-    onChange
+    onChange,
+    value
   }: {
-    value?: string;
-    onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
-    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+    value?: string,
+    onBlur?: (e: FocusEvent<HTMLInputElement>) => void,
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void
   }) => (
     <input
       data-testid="mock-input"
+      onBlur={onBlur}
+      onChange={onChange}
       value={value || ''}
-      onBlur={(e) => onBlur?.(e as FocusEvent<HTMLInputElement>)}
-      onChange={(e) => onChange?.(e as ChangeEvent<HTMLInputElement>)}
     />
   )
 }));
 
 //--------------------------------------------------------------------//
 // Helpers
+
+function renderUseSlugInput(config: Parameters<typeof useSlugInput>[ 0 ]) {
+  let hookValue: ReturnType<typeof useSlugInput> | undefined;
+  const TestComponent = () => {
+    hookValue = useSlugInput(config);
+    return (
+      <input data-testid="mock" readOnly value={hookValue?.slug} />
+    );
+  };
+  render(<TestComponent />);
+  return () => hookValue!;
+}
+
+//--------------------------------------------------------------------//
+// Tests
 
 describe('slugify()', () => {
   it('converts string to slug with default options', () => {
@@ -65,6 +69,7 @@ describe('slugify()', () => {
     expect(slugify('-abc--def-')).toBe('abc-def');
   });
 });
+
 describe('camelfy()', () => {
   it('converts string to camelCase', () => {
     expect(camelfy('hello world')).toBe('helloWorld');
@@ -74,9 +79,6 @@ describe('camelfy()', () => {
     expect(camelfy(' test---slug_case')).toBe('testSlugCase');
   });
 });
-
-//--------------------------------------------------------------------//
-// Tests
 
 describe('<SlugInput />', () => {
   it('renders input with initial slugified value', () => {
@@ -104,33 +106,22 @@ describe('<SlugInput />', () => {
   });
 
   it('handles camel case mode properly', () => {
-    render(<SlugInput defaultValue="camel case value" camel />);
+    render(<SlugInput camel defaultValue="camel case value" />);
     const input = screen.getByTestId('mock-input');
     expect(input).toHaveValue('camelCaseValue');
   });
 
   it('renders controlled value and reacts to change', () => {
     const onChange = vi.fn();
-    render(<SlugInput value="Controlled Slug" onChange={onChange} />);
+    render(
+      <SlugInput onChange={onChange} value="Controlled Slug" />
+    );
     const input = screen.getByTestId('mock-input');
     expect(input).toHaveValue('controlled-slug');
     fireEvent.change(input, { target: { value: 'Another' } });
     expect(onChange).toHaveBeenCalled();
   });
 });
-
-//--------------------------------------------------------------------//
-// Hooks
-
-function renderUseSlugInput(config: Parameters<typeof useSlugInput>[0]) {
-  let hookValue: ReturnType<typeof useSlugInput> | undefined;
-  const TestComponent = () => {
-    hookValue = useSlugInput(config);
-    return <input data-testid="mock" readOnly value={hookValue?.slug} />;
-  };
-  render(<TestComponent />);
-  return () => hookValue!;
-}
 
 describe('useSlugInput()', () => {
   it('initializes slug from defaultValue', () => {

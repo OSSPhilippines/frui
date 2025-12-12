@@ -40,26 +40,26 @@ describe('<List />', () => {
     const { container } = render(<List value={[ 'Apple', 'Banana', 'Cherry' ]} />);
     const items = container.querySelectorAll('li');
     expect(items).toHaveLength(3);
-    expect(items[0]).toHaveTextContent('Apple');
-    expect(items[1]).toHaveTextContent('Banana');
-    expect(items[2]).toHaveTextContent('Cherry');
+    expect(items[ 0 ]).toHaveTextContent('Apple');
+    expect(items[ 1 ]).toHaveTextContent('Banana');
+    expect(items[ 2 ]).toHaveTextContent('Cherry');
   });
   it('renders list items with number values', () => {
     const { container } = render(<List value={[ 1, 2, 3 ]} />);
     const items = container.querySelectorAll('li');
     expect(items).toHaveLength(3);
-    expect(items[0]).toHaveTextContent('1');
-    expect(items[1]).toHaveTextContent('2');
-    expect(items[2]).toHaveTextContent('3');
+    expect(items[ 0 ]).toHaveTextContent('1');
+    expect(items[ 1 ]).toHaveTextContent('2');
+    expect(items[ 2 ]).toHaveTextContent('3');
   });
   it('renders list items with mixed string and number values', () => {
     const { container } = render(<List value={[ 'One', 2, 'Three', 4 ]} />);
     const items = container.querySelectorAll('li');
     expect(items).toHaveLength(4);
-    expect(items[0]).toHaveTextContent('One');
-    expect(items[1]).toHaveTextContent('2');
-    expect(items[2]).toHaveTextContent('Three');
-    expect(items[3]).toHaveTextContent('4');
+    expect(items[ 0 ]).toHaveTextContent('One');
+    expect(items[ 1 ]).toHaveTextContent('2');
+    expect(items[ 2 ]).toHaveTextContent('Three');
+    expect(items[ 3 ]).toHaveTextContent('4');
   });
   it('renders an ordered list when ordered prop is true', () => {
     const { container } = render(<List value={[ 'First', 'Second' ]} ordered />);
@@ -109,15 +109,15 @@ describe('<List />', () => {
     const { container } = render(<List value={[ 'Only Item' ]} />);
     const items = container.querySelectorAll('li');
     expect(items).toHaveLength(1);
-    expect(items[0]).toHaveTextContent('Only Item');
+    expect(items[ 0 ]).toHaveTextContent('Only Item');
   });
   it('renders large list with many items', () => {
     const values = Array.from({ length: 100 }, (_, i) => `Item ${i + 1}`);
     const { container } = render(<List value={values} />);
     const items = container.querySelectorAll('li');
     expect(items).toHaveLength(100);
-    expect(items[0]).toHaveTextContent('Item 1');
-    expect(items[99]).toHaveTextContent('Item 100');
+    expect(items[ 0 ]).toHaveTextContent('Item 1');
+    expect(items[ 99 ]).toHaveTextContent('Item 100');
   });
   it('assigns unique keys to list items based on index', () => {
     const { container } = render(<List value={[ 'A', 'B', 'C' ]} />);

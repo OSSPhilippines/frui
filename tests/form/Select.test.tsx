@@ -23,10 +23,13 @@ import Select, { SelectPlaceholder } from '../../src/form/Select.js';
 
 vi.mock('src/helpers/getClassStyles.js', () => ({
   __esModule: true,
-  default: ({ classes, props, state }: { 
-    classes?: string[]; 
-    props?: { className?: string; style?: object }; 
-    state?: object 
+  default: ({
+    classes,
+    props,
+  }: {
+    classes?: string[],
+    props?: { className?: string, style?: object },
+    state?: object
   }) => ({
     classes: classes || [],
     styles: props?.style || {}
@@ -69,7 +72,9 @@ describe('<Select />', () => {
     const toggle = screen.getByText('Click me');
     fireEvent.click(toggle);
     expect(
-      document.querySelector('.frui-form-select-control-actions-toggle')
+      document.querySelector(
+        '.frui-form-select-control-actions-toggle'
+      )
     ).toBeInTheDocument();
   });
 
@@ -77,22 +82,22 @@ describe('<Select />', () => {
     const onUpdate = vi.fn();
     const { rerender } = render(
       <Select
-        value="yes"
+        onUpdate={onUpdate}
         options={[
           { value: 'yes', label: 'Yes' },
           { value: 'no', label: 'No' }
         ]}
-        onUpdate={onUpdate}
+        value="yes"
       />
     );
     rerender(
       <Select
-        value="no"
+        onUpdate={onUpdate}
         options={[
           { value: 'yes', label: 'Yes' },
           { value: 'no', label: 'No' }
         ]}
-        onUpdate={onUpdate}
+        value="no"
       />
     );
     await waitFor(() => {
@@ -104,20 +109,20 @@ describe('<Select />', () => {
     const { rerender } = render(
       <Select
         name="colors"
+        options={[ { value: 'blue', label: 'Blue' } ]}
         value=""
-        options={[{ value: 'blue', label: 'Blue' }]}
       />
     );
     rerender(
       <Select
         name="colors"
+        options={[ { value: 'blue', label: 'Blue' } ]}
         value="blue"
-        options={[{ value: 'blue', label: 'Blue' }]}
       />
     );
     await waitFor(() => {
       const hidden = document.querySelector(
-        'input[type="hidden"]'
+        'input[ type="hidden" ]'
       ) as HTMLInputElement;
       expect(hidden).toBeInTheDocument();
       expect(hidden.name).toBe('colors');
@@ -130,22 +135,22 @@ describe('<Select />', () => {
       <Select
         multiple
         name="multi"
-        value={[]}
         options={[
           { value: 'a', label: 'A' },
           { value: 'b', label: 'B' }
         ]}
+        value={[]}
       />
     );
     rerender(
       <Select
         multiple
         name="multi"
-        value={[ 'a', 'b' ]}
         options={[
           { value: 'a', label: 'A' },
           { value: 'b', label: 'B' }
         ]}
+        value={[ 'a', 'b' ]}
       />
     );
     await waitFor(() => {
@@ -154,41 +159,46 @@ describe('<Select />', () => {
       );
       expect(clearBtn).toBeInTheDocument();
       fireEvent.click(clearBtn!);
-      const inputs = document.querySelectorAll('input[type="hidden"]');
+      const inputs = document.querySelectorAll(
+        'input[ type="hidden" ]'
+      );
       expect(inputs.length).toBe(0);
     });
   });
 
-  it('renders correct selected option when value prop provided', async () => {
-    const { rerender, container } = render(
-      <Select
-        value="opt2"
-        options={[
-          { value: 'opt1', label: 'Opt1' },
-          { value: 'opt2', label: 'Opt2' }
-        ]}
-      />
-    );
-    const control = container.querySelector(
-      '.frui-form-select-control-selected'
-    );
-    expect(control).toBeInTheDocument();
-    expect(control?.textContent).toContain('Opt2');
-    rerender(
-      <Select
-        value="opt1"
-        options={[
-          { value: 'opt1', label: 'Opt1' },
-          { value: 'opt2', label: 'Opt2' }
-        ]}
-      />
-    );
-    await waitFor(() => {
-      const updated = container.querySelector(
+  it(
+    'renders correct selected option when value prop provided',
+    async () => {
+      const { rerender, container } = render(
+        <Select
+          options={[
+            { value: 'opt1', label: 'Opt1' },
+            { value: 'opt2', label: 'Opt2' }
+          ]}
+          value="opt2"
+        />
+      );
+      const control = container.querySelector(
         '.frui-form-select-control-selected'
       );
-      expect(updated).toBeInTheDocument();
-      expect(updated?.textContent).toContain('Opt1');
-    });
-  });
+      expect(control).toBeInTheDocument();
+      expect(control?.textContent).toContain('Opt2');
+      rerender(
+        <Select
+          options={[
+            { value: 'opt1', label: 'Opt1' },
+            { value: 'opt2', label: 'Opt2' }
+          ]}
+          value="opt1"
+        />
+      );
+      await waitFor(() => {
+        const updated = container.querySelector(
+          '.frui-form-select-control-selected'
+        );
+        expect(updated).toBeInTheDocument();
+        expect(updated?.textContent).toContain('Opt1');
+      });
+    }
+  );
 });

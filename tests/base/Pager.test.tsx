@@ -18,25 +18,22 @@ import {
 import {
   flatClass,
   Pager
-} from '../../src/base/Pager';
+} from '../../src/base/Pager.js';
 
 //--------------------------------------------------------------------//
-// Helpers
+// Tests
 
 describe('flatClass()', () => {
   it('ignores falsy values', () => {
-    const result = flatClass('', ['x', ''], 'y');
+    const result = flatClass('', [ 'x', '' ], 'y');
     expect(result).toBe('x y');
   });
 
   it('joins string and array class names cleanly', () => {
-    const result = flatClass('a', ['b', 'c'], 'd');
+    const result = flatClass('a', [ 'b', 'c' ], 'd');
     expect(result).toBe('a b c d');
   });
 });
-
-//--------------------------------------------------------------------//
-// Tests
 
 describe('<Pager />', () => {
   it('applies active class to current page', () => {

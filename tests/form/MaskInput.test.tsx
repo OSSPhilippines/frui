@@ -1,20 +1,14 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//modules
+import type { InputHTMLAttributes } from 'react';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
-import {
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 //frui
-import MaskInput from '../../src/form/MaskInput';
+import MaskInput from '../../src/form/MaskInput.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -39,11 +33,11 @@ vi.mock('../../src/form/Input.js', () => ({
     className,
     type,
     ...props
-  }: React.InputHTMLAttributes<HTMLInputElement>) => (
+  }: InputHTMLAttributes<HTMLInputElement>) => (
     <input
       {...props}
-      data-testid="mock-input"
       className={className}
+      data-testid="mock-input"
       type={type ?? 'text'}
     />
   )
@@ -62,10 +56,18 @@ describe('<MaskInput />', () => {
 
   it('creates a new Inputmask instance and calls mask()', () => {
     const onReady = vi.fn();
-    render(<MaskInput mask="9999" alias="numeric" onReady={onReady} />);
+    render(
+      <MaskInput
+        alias="numeric"
+        mask="9999"
+        onReady={onReady}
+      />
+    );
     expect(mockMaskMethod).toHaveBeenCalled();
     expect(onReady).toHaveBeenCalledWith(
-      expect.objectContaining({ mask: expect.any(Function) })
+      expect.objectContaining({
+        mask: expect.any(Function)
+      })
     );
   });
 });

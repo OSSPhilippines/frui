@@ -109,9 +109,6 @@ describe('<TextEditor />', () => {
   });
 });
 
-//--------------------------------------------------------------------//
-// Hooks
-
 describe('useTextEditor()', () => {
   it('initializes with provided value', () => {
     const getHook = setupHook({ value: '<p>Sample</p>' });

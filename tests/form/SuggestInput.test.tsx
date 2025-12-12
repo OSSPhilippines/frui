@@ -4,188 +4,202 @@
 //tests
 import '@testing-library/jest-dom';
 import {
-  act,
   fireEvent,
   render,
-  screen
+  screen,
+  waitFor
 } from '@testing-library/react';
 import {
-  beforeEach,
   describe,
   expect,
   it,
   vi
 } from 'vitest';
 //frui
-import type {
-  FocusEvent,
-  ReactNode
-} from 'react';
-import SuggestInput, { SuggestInputControl } from '../../src/form/SuggestInput.js';
+import Select, { SelectPlaceholder } from '../../src/form/Select.js';
 
 //--------------------------------------------------------------------//
 // Mocks
 
-const mockOpen = vi.fn();
-const mockSelect = vi.fn();
-const mockSelected = [ '' ];
-
-vi.mock('../../src/form/Input.js', () => ({
+vi.mock('src/helpers/getClassStyles.js', () => ({
   __esModule: true,
   default: ({
-    value,
-    onUpdate,
-    onBlur
+    classes,
+    props,
+    state
   }: {
-    value?: string;
-    onUpdate?: (v: string) => void;
-    onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
-  }) => (
-    <input
-      data-testid="mock-input"
-      value={value || ''}
-      onChange={(e) => onUpdate?.((e.target as HTMLInputElement).value)}
-      onBlur={(e) => onBlur?.(e as FocusEvent<HTMLInputElement>)}
-    />
-  )
-}));
-vi.mock('../../src/base/Dropdown.js', () => {
-  const DropdownMock = ({
-    children,
-    container
-  }: {
-    children?: ReactNode;
-    container?: { className?: string; style?: object };
-  }) => (
-    <div className={container?.className} style={container?.style}>
-      {children}
-    </div>
-  );
-
-  DropdownMock.useContext = () => ({
-    open: mockOpen,
-    select: mockSelect,
-    selected: mockSelected
-  });
-
-  DropdownMock.Control = ({ children }: { children?: ReactNode }) => (
-    <div data-testid="dropdown-control">{children}</div>
-  );
-
-  DropdownMock.Option = () => null;
-  DropdownMock.Head = () => null;
-  DropdownMock.Foot = () => null;
-  DropdownMock.Context = {};
-  DropdownMock.useDropdown = vi.fn();
-  DropdownMock.useDropdownContext = () => ({
-    open: mockOpen,
-    select: mockSelect,
-    selected: mockSelected
-  });
-  DropdownMock.getAbsolutePosition = vi.fn();
-  DropdownMock.getComponent = vi.fn();
-  DropdownMock.getComponents = vi.fn();
-  DropdownMock.getControl = vi.fn();
-  DropdownMock.getFooter = vi.fn();
-  DropdownMock.getHeader = vi.fn();
-  DropdownMock.getOptions = vi.fn();
-  DropdownMock.getRelativePosition = vi.fn();
-  DropdownMock.makeOptions = vi.fn();
-  DropdownMock.buildOptions = vi.fn();
-
-  return {
-    __esModule: true,
-    default: DropdownMock
-  };
-});
-vi.mock('../../src/helpers/getSlotStyles.js', () => ({
-  __esModule: true,
-  default: () => ({ className: '', style: {} })
+    classes?: string[],
+    props?: { className?: string, style?: object },
+    state?: object
+  }) => ({
+    classes: classes || [],
+    styles: props?.style || {}
+  })
 }));
 
 //--------------------------------------------------------------------//
 // Tests
 
-describe('<SuggestInputControl />', () => {
-  beforeEach(() => {
-    mockOpen.mockClear();
-    mockSelect.mockClear();
-  });
-
-  it('renders input and calls onQuery when value length matches chars', async () => {
-    const onQuery = vi.fn();
+describe('<Select />', () => {
+  it('renders base wrapper and placeholder text', () => {
     render(
-      <SuggestInputControl
-        chars={3}
-        onQuery={onQuery}
-      />
+      <Select placeholder="Pick one">
+        <SelectPlaceholder>Pick one</SelectPlaceholder>
+      </Select>
     );
-    const input = screen.getByTestId('mock-input');
-
-    act(() => {
-      fireEvent.change(input, { target: { value: 'abc' } });
-    });
-
-    expect(mockSelect).toHaveBeenCalledWith('abc', false);
-    expect(mockOpen).toHaveBeenCalledWith(true);
-    expect(onQuery).toHaveBeenCalledWith('abc');
+    const wrapper = document.querySelector('.frui-form-select');
+    expect(wrapper).toBeInTheDocument();
+    expect(screen.getByText('Pick one')).toBeInTheDocument();
   });
 
-  it('closes dropdown when input shorter than chars', async () => {
-    render(<SuggestInputControl chars={4} />);
-    const input = screen.getByTestId('mock-input');
-
-    act(() => {
-      fireEvent.change(input, { target: { value: 'ab' } });
-    });
-
-    expect(mockOpen).toHaveBeenCalledWith(false);
+  it('applies error class when error prop set', () => {
+    const { container } = render(<Select error />);
+    const wrapper = container.querySelector('.frui-form-select');
+    expect(wrapper).toBeInTheDocument();
+    expect(wrapper?.className).toContain('frui-form-select-error');
   });
 
-  it('triggers hide handler on blur', async () => {
-    render(<SuggestInputControl />);
-    const input = screen.getByTestId('mock-input');
-
-    await act(async () => {
-      fireEvent.blur(input);
-      await new Promise((r) => setTimeout(r, 10));
-    });
-
-    expect(mockOpen).toHaveBeenCalledWith(false);
-  });
-});
-describe('<SuggestInput />', () => {
-  beforeEach(() => {
-    mockOpen.mockClear();
-    mockSelect.mockClear();
-  });
-
-  it('renders Dropdown and SuggestInputControl structure', () => {
-    render(<SuggestInput />);
-    const input = screen.getByTestId('mock-input');
-    expect(input).toBeInTheDocument();
+  it('toggles dropdown open on placeholder click', () => {
+    render(
+      <Select
+        options={[
+          { value: '1', label: 'One' },
+          { value: '2', label: 'Two' }
+        ]}
+      >
+        <SelectPlaceholder>Click me</SelectPlaceholder>
+      </Select>
+    );
+    const toggle = screen.getByText('Click me');
+    fireEvent.click(toggle);
+    expect(
+      document.querySelector(
+        '.frui-form-select-control-actions-toggle'
+      )
+    ).toBeInTheDocument();
   });
 
-  it('applies error class properly', () => {
-    const { container } = render(<SuggestInput error className="extra" />);
-    const wrapper = container.querySelector('.frui-form-suggest-input');
-    expect(wrapper).toHaveClass('frui-form-suggest-input-error');
-    expect(wrapper).toHaveClass('extra');
-  });
-
-  it('passes correct dropdown props internally', () => {
-    const onDropdown = vi.fn();
+  it('calls onUpdate when external value changes', async () => {
     const onUpdate = vi.fn();
-    render(
-      <SuggestInput
-        options={[{ value: 'a', label: 'A' }]}
-        onDropdown={onDropdown}
+    const { rerender } = render(
+      <Select
         onUpdate={onUpdate}
-        control={{}}
-        dropdown={{}}
+        options={[
+          { value: 'yes', label: 'Yes' },
+          { value: 'no', label: 'No' }
+        ]}
+        value="yes"
       />
     );
-    const input = screen.getByTestId('mock-input');
-    expect(input).toBeInTheDocument();
+    rerender(
+      <Select
+        onUpdate={onUpdate}
+        options={[
+          { value: 'yes', label: 'Yes' },
+          { value: 'no', label: 'No' }
+        ]}
+        value="no"
+      />
+    );
+    await waitFor(() => {
+      expect(onUpdate).toHaveBeenCalledWith('no');
+    });
   });
+
+  it('adds hidden input after selection', async () => {
+    const { rerender } = render(
+      <Select
+        name="colors"
+        options={[ { value: 'blue', label: 'Blue' } ]}
+        value=""
+      />
+    );
+    rerender(
+      <Select
+        name="colors"
+        options={[ { value: 'blue', label: 'Blue' } ]}
+        value="blue"
+      />
+    );
+    await waitFor(() => {
+      const hidden = document.querySelector(
+        'input[ type="hidden" ]'
+      ) as HTMLInputElement;
+      expect(hidden).toBeInTheDocument();
+      expect(hidden.name).toBe('colors');
+      expect(hidden.value).toBe('blue');
+    });
+  });
+
+  it('supports multiple selections and clear button', async () => {
+    const { rerender } = render(
+      <Select
+        multiple
+        name="multi"
+        options={[
+          { value: 'a', label: 'A' },
+          { value: 'b', label: 'B' }
+        ]}
+        value={[]}
+      />
+    );
+    rerender(
+      <Select
+        multiple
+        name="multi"
+        options={[
+          { value: 'a', label: 'A' },
+          { value: 'b', label: 'B' }
+        ]}
+        value={[ 'a', 'b' ]}
+      />
+    );
+    await waitFor(() => {
+      const clearBtn = document.querySelector(
+        '.frui-form-select-control-actions-clear'
+      );
+      expect(clearBtn).toBeInTheDocument();
+      fireEvent.click(clearBtn!);
+      const inputs = document.querySelectorAll(
+        'input[ type="hidden" ]'
+      );
+      expect(inputs.length).toBe(0);
+    });
+  });
+
+  it(
+    'renders correct selected option when value prop provided',
+    async () => {
+      const { rerender, container } = render(
+        <Select
+          options={[
+            { value: 'opt1', label: 'Opt1' },
+            { value: 'opt2', label: 'Opt2' }
+          ]}
+          value="opt2"
+        />
+      );
+      const control = container.querySelector(
+        '.frui-form-select-control-selected'
+      );
+      expect(control).toBeInTheDocument();
+      expect(control?.textContent).toContain('Opt2');
+      rerender(
+        <Select
+          options={[
+            { value: 'opt1', label: 'Opt1' },
+            { value: 'opt2', label: 'Opt2' }
+          ]}
+          value="opt1"
+        />
+      );
+      await waitFor(() => {
+        const updated = container.querySelector(
+          '.frui-form-select-control-selected'
+        );
+        expect(updated).toBeInTheDocument();
+        expect(updated?.textContent).toContain('Opt1');
+      });
+    }
+  );
 });

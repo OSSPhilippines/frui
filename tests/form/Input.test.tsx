@@ -31,7 +31,10 @@ describe('<Input />', () => {
   it('appends custom className when provided', () => {
     render(<Input className="custom-class" />);
     const input = screen.getByRole('textbox');
-    expect(input).toHaveClass('frui-form-input', 'custom-class');
+    expect(input).toHaveClass(
+      'frui-form-input',
+      'custom-class'
+    );
   });
 
   it('applies error styling when error prop is truthy', () => {
@@ -47,7 +50,9 @@ describe('<Input />', () => {
   it('calls onChange and onUpdate handlers when user types', () => {
     const handleChange = vi.fn();
     const handleUpdate = vi.fn();
-    render(<Input onChange={handleChange} onUpdate={handleUpdate} />);
+    render(
+      <Input onChange={handleChange} onUpdate={handleUpdate} />
+    );
     const input = screen.getByRole('textbox') as HTMLInputElement;
     fireEvent.change(input, { target: { value: 'hello' } });
     expect(handleChange).toHaveBeenCalledTimes(1);
@@ -56,6 +61,8 @@ describe('<Input />', () => {
 
   it('passes through arbitrary attributes (e.g. placeholder)', () => {
     render(<Input placeholder="Type here" />);
-    expect(screen.getByPlaceholderText('Type here')).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText('Type here')
+    ).toBeInTheDocument();
   });
 });

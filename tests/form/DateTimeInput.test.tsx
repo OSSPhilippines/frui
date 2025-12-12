@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//modules
+import type { ChangeEvent } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -26,25 +28,25 @@ import DatetimeInput, {
 vi.mock('../../src/form/Input.js', () => ({
   __esModule: true,
   default: ({
+    accept,
     className,
-    onUpdate,
-    type,
-    value
+    multiple,
+    onChange,
+    type
   }: {
-    className?: string;
-    onUpdate?: (val?: string) => void;
-    type?: string;
-    value?: string;
-    [key: string]: unknown;
+    accept?: string,
+    className?: string,
+    multiple?: boolean,
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void,
+    type?: string
   }) => (
     <input
+      accept={accept}
       className={className}
       data-testid="mock-input"
-      onChange={(e) =>
-        onUpdate?.((e.target as HTMLInputElement).value)
-      }
+      multiple={multiple}
+      onChange={onChange}
       type={type}
-      value={value}
     />
   )
 }));
@@ -65,13 +67,13 @@ describe('<DatetimeInput />', () => {
     const input = screen.getByTestId('mock-input');
     fireEvent.change(input, { target: { value: '2024-06-01T12:00' } });
     expect(onUpdate).toHaveBeenCalled();
-    expect(onUpdate.mock.calls[0][0]).toBeInstanceOf(Date);
+    expect(onUpdate.mock.calls[ 0 ][ 0 ]).toBeInstanceOf(Date);
   });
 
   it('renders main datetime-local input and hidden input', () => {
     const { container } = render(<DatetimeInput name="schedule" />);
     const input = screen.getByTestId('mock-input');
-    const hidden = container.querySelector('input[type="hidden"]');
+    const hidden = container.querySelector('input[ type="hidden" ]');
     expect(input).toHaveAttribute('type', 'datetime-local');
     expect(input).toHaveClass('frui-form-datetime-input');
     expect(hidden).toHaveAttribute('name', 'schedule');
@@ -94,9 +96,6 @@ describe('<DatetimeInput />', () => {
     expect(input.value).toBe('2024-08-20T18:30');
   });
 });
-
-//--------------------------------------------------------------------//
-// Helpers
 
 describe('Datetime helper functions', () => {
   it('formats dates correctly with toDatetimeInputString()', () => {

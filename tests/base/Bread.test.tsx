@@ -23,7 +23,7 @@ import Bread, {
 } from '../../src/base/Bread.js';
 
 //--------------------------------------------------------------------//
-// Helpers
+// Tests
 
 describe('buildBreadTrail()', () => {
   it('builds trail array from crumb children', () => {
@@ -35,9 +35,6 @@ describe('buildBreadTrail()', () => {
   });
 });
 
-//--------------------------------------------------------------------//
-// Tests
-
 describe('<Bread />', () => {
   it('renders base wrapper with class', () => {
     const { container } = render(<Bread>children</Bread>);
@@ -45,7 +42,7 @@ describe('<Bread />', () => {
   });
 
   it('renders crumbs when using controlled value prop', () => {
-    const value = [{ label: 'Home' }, { label: 'About' }];
+    const value = [ { label: 'Home' }, { label: 'About' } ];
     const { container } = render(<Bread value={value} />);
     const crumbs = container.querySelectorAll('.frui-bread-crumb');
     expect(crumbs.length).toBe(2);
@@ -64,6 +61,7 @@ describe('<Bread />', () => {
     });
   });
 });
+
 describe('<BreadCrumb />', () => {
   it('renders within Bread component', async () => {
     const { container } = render(
@@ -103,6 +101,7 @@ describe('<BreadCrumb />', () => {
     });
   });
 });
+
 describe('<BreadSlicer />', () => {
   it('renders separator within Bread component', async () => {
     const { container } = render(
@@ -134,9 +133,6 @@ describe('<BreadSlicer />', () => {
   });
 });
 
-//--------------------------------------------------------------------//
-// Hooks
-
 describe('useBreadContext()', () => {
   it('provides the same context value via hook', () => {
     let grabbed: unknown;
@@ -148,7 +144,7 @@ describe('useBreadContext()', () => {
       click: vi.fn(),
       pop: vi.fn(),
       push: vi.fn(),
-      trail: ['abc']
+      trail: [ 'abc' ]
     };
     render(
       <BreadContext.Provider value={contextValue}>

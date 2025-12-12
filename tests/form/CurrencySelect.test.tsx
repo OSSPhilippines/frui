@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//modules
+import type { ReactNode } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -16,8 +18,6 @@ import {
   it,
   vi
 } from 'vitest';
-//types
-import type { ReactNode } from 'react';
 //frui
 import CurrencySelect from '../../src/form/CurrencySelect.js';
 
@@ -45,13 +45,15 @@ vi.mock('../../src/data/currencies.js', () => ({
     }
   ]
 }));
+
 vi.mock('../../src/data/countries.js', () => ({
   __esModule: true,
   default: [
-    { iso3: 'USA', cur: 'USD', flag: '🇺🇸' },
-    { iso3: 'FRA', cur: 'EUR', flag: '🇫🇷' }
+    { cur: 'USD', flag: '🇺🇸', iso3: 'USA' },
+    { cur: 'EUR', flag: '🇫🇷', iso3: 'FRA' }
   ]
 }));
+
 vi.mock('../../src/helpers/getClassStyles.ts', () => ({
   __esModule: true,
   default: ({ classes }: { classes?: string[] }) => ({
@@ -59,39 +61,44 @@ vi.mock('../../src/helpers/getClassStyles.ts', () => ({
     styles: {}
   })
 }));
+
 vi.mock('../../src/helpers/getSlotStyles.js', () => ({
   __esModule: true,
   default: () => ({})
 }));
+
 vi.mock('../../src/form/Select.js', () => {
   const SelectMock = (props: {
-    children?: ReactNode;
-    className?: string;
-    onUpdate?: (value: string | string[]) => void;
-    placeholder?: string;
+    children?: ReactNode,
+    className?: string,
+    onUpdate?: (value: string | string[]) => void,
+    placeholder?: string
   }) => {
     capturedOnUpdate = props.onUpdate;
     return (
-      <div data-testid="select" className={props.className}>
+      <div className={props.className} data-testid="select">
         <div data-testid="placeholder">{props.placeholder}</div>
         {props.children}
       </div>
     );
   };
+
   SelectMock.Head = ({ children }: { children?: ReactNode }) => (
     <div data-testid="dropdown-head">{children}</div>
   );
+
   SelectMock.Option = ({
     children,
     value
   }: {
-    children?: ReactNode;
-    value?: string;
+    children?: ReactNode,
+    value?: string
   }) => (
     <div data-testid="option" data-value={value}>
       {children}
     </div>
   );
+
   return {
     __esModule: true,
     default: SelectMock,
@@ -116,11 +123,14 @@ describe('<CurrencySelect />', () => {
       'Select a currency'
     );
   });
+
   it('renders a searchable input with correct placeholder text', () => {
     render(<CurrencySelect searchable="Search currency" />);
     expect(screen.getByTestId('dropdown-head')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Search currency')).toBeInTheDocument();
+    const searchInput = screen.getByPlaceholderText('Search currency');
+    expect(searchInput).toBeInTheDocument();
   });
+
   it('updates filtered list when typing into search field', async () => {
     render(<CurrencySelect searchable />);
     const searchInput = screen.getByPlaceholderText('Search...');
@@ -130,6 +140,7 @@ describe('<CurrencySelect />', () => {
       expect(searchInput).toHaveValue('Euro');
     });
   });
+
   it('calls onUpdate with a single currency when a code is selected', () => {
     const onUpdate = vi.fn();
     render(<CurrencySelect onUpdate={onUpdate} />);
@@ -142,7 +153,8 @@ describe('<CurrencySelect />', () => {
       })
     );
   });
-  it('calls onUpdate with multiple currencies when array of codes selected', () => {
+
+  it('calls onUpdate with multiple currencies when array selected', () => {
     const onUpdate = vi.fn();
     render(<CurrencySelect onUpdate={onUpdate} />);
     capturedOnUpdate && capturedOnUpdate([ 'USD', 'EUR' ]);

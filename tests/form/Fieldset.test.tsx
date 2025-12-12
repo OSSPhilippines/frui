@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//modules
+import type { ReactNode } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -10,16 +12,9 @@ import {
   renderHook,
   screen
 } from '@testing-library/react';
-import {
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 //frui
-import make, {
-  useFieldset
-} from '../../src/form/Fieldset.js';
+import make, { useFieldset } from '../../src/form/Fieldset.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -28,46 +23,49 @@ vi.mock('../../src/base/Button.js', () => ({
   __esModule: true,
   default: ({
     children,
+    className,
     onClick,
-    type,
-    className
+    type
   }: {
-    children?: React.ReactNode;
-    onClick?: () => void;
-    type?: 'button' | 'submit' | 'reset';
-    className?: string;
+    children?: ReactNode,
+    className?: string,
+    onClick?: () => void,
+    type?: 'button' | 'submit' | 'reset'
   }) => (
     <button
-      data-testid="mock-button"
-      type={type ?? 'button'}
       className={className}
+      data-testid="mock-button"
       onClick={onClick}
+      type={type ?? 'button'}
     >
       {children}
     </button>
   )
 }));
 
+//--------------------------------------------------------------------//
+// Helpers
+
 const MockFields = ({
   index,
-  set,
-  name
+  name,
+  set
 }: {
-  index: number;
-  set: (values: (string | undefined)[]) => void;
-  name?: string;
+  index: number,
+  name?: string,
+  set: (values: (string | undefined)[]) => void
 }) => (
   <div data-testid={`mock-field-${index}`}>
     <input
       data-testid={`mock-input-${index}`}
-      value={name || ''}
       onChange={() => set([ 'updated' ])}
+      value={name || ''}
     />
   </div>
 );
 
 //--------------------------------------------------------------------//
-// Hooks
+// Tests
 
 describe('useFieldset()', () => {
   it('initializes with defaultValue', () => {
@@ -81,7 +79,11 @@ describe('useFieldset()', () => {
     const onChange = vi.fn();
     const onUpdate = vi.fn();
     const { result } = renderHook(() =>
-      useFieldset({ defaultValue: [ 'a' ], onChange, onUpdate })
+      useFieldset({
+        defaultValue: [ 'a' ],
+        onChange,
+        onUpdate
+      })
     );
     act(() => result.current.handlers.set([ 'a', 'b' ]));
     expect(onChange).toHaveBeenCalledWith([ 'a', 'b' ]);
@@ -105,9 +107,6 @@ describe('useFieldset()', () => {
   });
 });
 
-//--------------------------------------------------------------------//
-// Tests
-
 describe('make(Fieldset)', () => {
   const Fieldset = make(MockFields);
 
@@ -128,24 +127,34 @@ describe('make(Fieldset)', () => {
         onUpdate={onUpdate}
       />
     );
-
     const button = screen.getByTestId('mock-button');
-
     act(() => fireEvent.click(button));
-
     expect(onChange).toHaveBeenCalledWith([ 'value', 'new' ]);
     expect(onUpdate).toHaveBeenCalledWith([ 'value', 'new' ]);
-
-    const addButtons = screen.getAllByText((content, node) => {
-      return typeof node?.textContent === 'string' && node.textContent.includes('Add');
+    const addButtons = screen.getAllByText((_, node) => {
+      return (
+        typeof node?.textContent === 'string' &&
+        node.textContent.includes('Add')
+      );
     });
     expect(addButtons.length).toBeGreaterThan(0);
   });
 
-  it('respects limit by not showing add button when size >= limit', () => {
-    render(<Fieldset defaultValue={[ 'x', 'y' ]} emptyValue="z" limit={2} />);
-    expect(screen.queryByTestId('mock-button')).not.toBeInTheDocument();
-  });
+  it(
+    'respects limit by not showing add button when size >= limit',
+    () => {
+      render(
+        <Fieldset
+          defaultValue={[ 'x', 'y' ]}
+          emptyValue="z"
+          limit={2}
+        />
+      );
+      expect(
+        screen.queryByTestId('mock-button')
+      ).not.toBeInTheDocument();
+    }
+  );
 
   it('applies custom add text', () => {
     render(<Fieldset defaultValue={[ 'item' ]} add="Add Item" />);

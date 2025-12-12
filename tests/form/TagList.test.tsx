@@ -95,9 +95,6 @@ describe('<TagList />', () => {
   });
 });
 
-//--------------------------------------------------------------------//
-// Hooks
-
 describe('useTagList()', () => {
   it('adds and removes tags correctly', () => {
     const onUpdate = vi.fn();

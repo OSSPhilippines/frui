@@ -23,7 +23,7 @@ import When, {
 
 describe('nextCondition()', () => {
   it('returns -1 when no When or Otherwise components found', () => {
-    const children = [<span key="1">A</span>, <div key="2">B</div>];
+    const children = [ <span key="1">A</span>, <div key="2">B</div> ];
     const result = nextCondition(children, 0);
     expect(result).toBe(-1);
   });
@@ -47,9 +47,6 @@ describe('nextCondition()', () => {
     expect(result).toBe(1);
   });
 });
-
-//--------------------------------------------------------------------//
-// Tests
 
 describe('<When />', () => {
   it('renders its children when condition is true', () => {

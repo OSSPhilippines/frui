@@ -86,9 +86,6 @@ describe('<Switch />', () => {
   });
 });
 
-//--------------------------------------------------------------------//
-// Hooks
-
 describe('useSwitch()', () => {
   it('calls onChange and onUpdate when toggled', () => {
     const onChange = vi.fn();

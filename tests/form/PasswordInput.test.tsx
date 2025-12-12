@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//modules
+import type { InputHTMLAttributes } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -15,7 +17,7 @@ import {
   vi
 } from 'vitest';
 //frui
-import PasswordInput from '../../src/form/PasswordInput';
+import PasswordInput from '../../src/form/PasswordInput.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -27,22 +29,26 @@ vi.mock('../../src/helpers/getClassStyles.js', () => ({
     styles: {}
   })
 }));
+
 vi.mock('../../src/helpers/getSlotStyles.js', () => ({
   __esModule: true,
   default: () => ({})
 }));
+
 vi.mock('../../src/form/Input.js', () => ({
   __esModule: true,
   default: ({
-    type,
     className,
     error,
+    type,
     ...props
-  }: React.InputHTMLAttributes<HTMLInputElement> & { error?: boolean }) => (
+  }: InputHTMLAttributes<HTMLInputElement> & {
+    error?: boolean
+  }) => (
     <input
+      className={className}
       data-testid="password-input"
       type={type}
-      className={className}
       {...props}
     />
   )
@@ -50,7 +56,6 @@ vi.mock('../../src/form/Input.js', () => ({
 
 //--------------------------------------------------------------------//
 // Tests
-
 describe('<PasswordInput />', () => {
   it('renders wrapper and base input', () => {
     render(<PasswordInput />);
@@ -64,13 +69,17 @@ describe('<PasswordInput />', () => {
     render(<PasswordInput />);
     const toggle = screen.getByText('A');
     expect(toggle).toBeInTheDocument();
-    expect(toggle).toHaveClass('frui-form-input-password-toggle');
+    expect(toggle).toHaveClass(
+      'frui-form-input-password-toggle'
+    );
   });
 
   it('switches input type on toggle click', async () => {
     const user = userEvent.setup();
     render(<PasswordInput />);
-    const input = screen.getByTestId('password-input') as HTMLInputElement;
+    const input = screen.getByTestId(
+      'password-input'
+    ) as HTMLInputElement;
     const toggle = screen.getByText('A');
     expect(input.type).toBe('password');
     await user.click(toggle);
@@ -84,7 +93,10 @@ describe('<PasswordInput />', () => {
     const wrapper = screen
       .getByTestId('password-input')
       .closest('div') as HTMLDivElement;
-    expect(wrapper).toHaveClass('frui-form-input-password', 'custom-class');
+    expect(wrapper).toHaveClass(
+      'frui-form-input-password',
+      'custom-class'
+    );
   });
 
   it('renders error state correctly', () => {

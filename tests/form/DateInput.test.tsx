@@ -5,11 +5,9 @@
 import '@testing-library/jest-dom';
 import {
   act,
-  renderHook
-} from '@testing-library/react';
-import {
   fireEvent,
   render,
+  renderHook,
   screen
 } from '@testing-library/react';
 import {
@@ -24,6 +22,7 @@ import DateInput, {
   toDateString,
   useDateInput
 } from '../../src/form/DateInput.js';
+import { ChangeEvent } from 'react';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -31,28 +30,28 @@ import DateInput, {
 vi.mock('../../src/form/Input.js', () => ({
   __esModule: true,
   default: ({
+    accept,
     className,
     onUpdate,
-    type,
-    value
+    type
   }: {
-    className?: string;
-    onUpdate?: (value: string) => void;
-    type?: string;
-    value?: string;
+    accept?: string,
+    className?: string,
+    onUpdate?: (e: ChangeEvent<HTMLInputElement>) => void,
+    type?: string
   }) => (
     <input
-      data-testid="mock-input"
+      accept={accept}
       className={className}
+      data-testid="mock-input"
+      onChange={onUpdate}
       type={type}
-      value={value || ''}
-      onChange={(e) => onUpdate?.(e.target.value)}
     />
   )
 }));
 
 //--------------------------------------------------------------------//
-// Helpers
+// Tests
 
 describe('toDate()', () => {
   it('returns undefined for empty input', () => {
@@ -80,6 +79,7 @@ describe('toDate()', () => {
     expect(result?.getFullYear()).toBe(2024);
   });
 });
+
 describe('toDateString()', () => {
   it('returns undefined for undefined input', () => {
     expect(toDateString(undefined)).toBeUndefined();
@@ -99,9 +99,6 @@ describe('toDateString()', () => {
     expect(toDateString(date)).toBe('2024-05-05');
   });
 });
-
-//--------------------------------------------------------------------//
-// Tests
 
 describe('<DateInput />', () => {
   it('renders with default class name', () => {
@@ -145,9 +142,6 @@ describe('<DateInput />', () => {
   });
 });
 
-//--------------------------------------------------------------------//
-// Hooks
-
 describe('useDateInput()', () => {
   it('initializes with defaultValue', () => {
     const { result } = renderHook(() =>
@@ -165,37 +159,40 @@ describe('useDateInput()', () => {
   it('calls onUpdate when update handler is called', () => {
     const onUpdate = vi.fn();
     const { result } = renderHook(() => useDateInput({ onUpdate }));
-
     act(() => {
       result.current.handlers.update('2024-05-10');
     });
-
     expect(onUpdate).toHaveBeenCalledWith(expect.any(Date));
   });
 
   it('updates internal state when value prop changes', () => {
     const { result, rerender } = renderHook(
       ({ value }) => useDateInput({ value }),
-      { initialProps: { value: '2024-01-01' as string | undefined } }
+      {
+        initialProps: {
+          value: '2024-01-01' as string | undefined
+        }
+      }
     );
-
     expect(result.current.handlers.toString()).toBe('2024-01-01');
-
     rerender({ value: '2024-06-15' });
-
     expect(result.current.handlers.toString()).toBe('2024-06-15');
   });
 
   it('does not override existing value when value prop is undefined', () => {
     const { result, rerender } = renderHook(
-      ({ value }) => useDateInput({ value, defaultValue: '2024-03-01' }),
-      { initialProps: { value: undefined as string | undefined } }
+      ({ value }) => useDateInput({
+        defaultValue: '2024-03-01',
+        value
+      }),
+      {
+        initialProps: {
+          value: undefined as string | undefined
+        }
+      }
     );
-
     expect(result.current.handlers.toString()).toBe('2024-03-01');
-
     rerender({ value: undefined });
-
     expect(result.current.handlers.toString()).toBe('2024-03-01');
   });
 });

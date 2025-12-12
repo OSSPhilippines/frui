@@ -25,6 +25,7 @@ import Tooltip, {
 // Mocks
 
 vi.mock('../../src/helpers/tools/BorderRadiusTool.js', () => ({
+  __esModule: true,
   default: class {
     static get() {
       return {
@@ -33,7 +34,9 @@ vi.mock('../../src/helpers/tools/BorderRadiusTool.js', () => ({
     }
   }
 }));
+
 vi.mock('../../src/helpers/tools/ColorTool.js', () => ({
+  __esModule: true,
   default: class {
     static get() {
       return {
@@ -42,7 +45,9 @@ vi.mock('../../src/helpers/tools/ColorTool.js', () => ({
     }
   }
 }));
+
 vi.mock('../../src/base/Box.js', () => ({
+  __esModule: true,
   default: {
     removeThemeProps: (props: Record<string, unknown>) => {
       const {
@@ -62,7 +67,7 @@ vi.mock('../../src/base/Box.js', () => ({
 beforeEach(() => vi.clearAllMocks());
 
 //--------------------------------------------------------------------//
-// Helpers
+// Tests
 
 describe('getTooltipPosition()', () => {
   const createMockRect = (width: number, height: number): DOMRect => ({
@@ -80,16 +85,18 @@ describe('getTooltipPosition()', () => {
   it('returns correct bottom position and direction', () => {
     const container = document.createElement('div');
     const tooltip = document.createElement('div');
-    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(createMockRect(100, 20));
-    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(createMockRect(50, 10));
-
+    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(100, 20)
+    );
+    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(50, 10)
+    );
     const result = getTooltipPosition(container, tooltip, {
       bottom: true,
       left: false,
       right: false,
       top: false
     });
-
     expect(result.direction).toBe('top');
     expect(result.y).toBe(25);
     expect(result.x).toBe(25);
@@ -98,16 +105,18 @@ describe('getTooltipPosition()', () => {
   it('returns correct top position and direction', () => {
     const container = document.createElement('div');
     const tooltip = document.createElement('div');
-    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(createMockRect(100, 20));
-    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(createMockRect(50, 10));
-
+    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(100, 20)
+    );
+    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(50, 10)
+    );
     const result = getTooltipPosition(container, tooltip, {
       bottom: false,
       left: false,
       right: false,
       top: true
     });
-
     expect(result.direction).toBe('bottom');
     expect(result.y).toBe(-15);
     expect(result.x).toBe(25);
@@ -116,16 +125,18 @@ describe('getTooltipPosition()', () => {
   it('returns correct left position and direction', () => {
     const container = document.createElement('div');
     const tooltip = document.createElement('div');
-    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(createMockRect(100, 20));
-    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(createMockRect(50, 10));
-
+    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(100, 20)
+    );
+    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(50, 10)
+    );
     const result = getTooltipPosition(container, tooltip, {
       bottom: false,
       left: true,
       right: false,
       top: false
     });
-
     expect(result.direction).toBe('right');
     expect(result.y).toBe(5);
     expect(result.x).toBe(-55);
@@ -134,16 +145,18 @@ describe('getTooltipPosition()', () => {
   it('returns correct right position and direction', () => {
     const container = document.createElement('div');
     const tooltip = document.createElement('div');
-    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(createMockRect(100, 20));
-    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(createMockRect(50, 10));
-
+    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(100, 20)
+    );
+    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(50, 10)
+    );
     const result = getTooltipPosition(container, tooltip, {
       bottom: false,
       left: false,
       right: true,
       top: false
     });
-
     expect(result.direction).toBe('left');
     expect(result.y).toBe(5);
     expect(result.x).toBe(105);
@@ -152,16 +165,18 @@ describe('getTooltipPosition()', () => {
   it('returns correct bottom-left position and direction', () => {
     const container = document.createElement('div');
     const tooltip = document.createElement('div');
-    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(createMockRect(100, 20));
-    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(createMockRect(50, 10));
-
+    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(100, 20)
+    );
+    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(50, 10)
+    );
     const result = getTooltipPosition(container, tooltip, {
       bottom: true,
       left: true,
       right: false,
       top: false
     });
-
     expect(result.direction).toBe('top');
     expect(result.y).toBe(25);
     expect(result.x).toBe(0);
@@ -170,16 +185,18 @@ describe('getTooltipPosition()', () => {
   it('returns correct bottom-right position and direction', () => {
     const container = document.createElement('div');
     const tooltip = document.createElement('div');
-    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(createMockRect(100, 20));
-    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(createMockRect(50, 10));
-
+    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(100, 20)
+    );
+    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(50, 10)
+    );
     const result = getTooltipPosition(container, tooltip, {
       bottom: true,
       left: false,
       right: true,
       top: false
     });
-
     expect(result.direction).toBe('top');
     expect(result.y).toBe(25);
     expect(result.x).toBe(50);
@@ -188,16 +205,18 @@ describe('getTooltipPosition()', () => {
   it('returns correct top-left position and direction', () => {
     const container = document.createElement('div');
     const tooltip = document.createElement('div');
-    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(createMockRect(100, 20));
-    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(createMockRect(50, 10));
-
+    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(100, 20)
+    );
+    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(50, 10)
+    );
     const result = getTooltipPosition(container, tooltip, {
       bottom: false,
       left: true,
       right: false,
       top: true
     });
-
     expect(result.direction).toBe('bottom');
     expect(result.y).toBe(-15);
     expect(result.x).toBe(0);
@@ -206,24 +225,23 @@ describe('getTooltipPosition()', () => {
   it('returns correct top-right position and direction', () => {
     const container = document.createElement('div');
     const tooltip = document.createElement('div');
-    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(createMockRect(100, 20));
-    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(createMockRect(50, 10));
-
+    vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(100, 20)
+    );
+    vi.spyOn(tooltip, 'getBoundingClientRect').mockReturnValue(
+      createMockRect(50, 10)
+    );
     const result = getTooltipPosition(container, tooltip, {
       bottom: false,
       left: false,
       right: true,
       top: true
     });
-
     expect(result.direction).toBe('bottom');
     expect(result.y).toBe(-15);
     expect(result.x).toBe(50);
   });
 });
-
-//--------------------------------------------------------------------//
-// Tests
 
 describe('<Tooltip />', () => {
   it('renders container with children when not visible', () => {
@@ -231,64 +249,102 @@ describe('<Tooltip />', () => {
     const outer = container.querySelector('.frui-tooltip-container');
     expect(outer).toBeInTheDocument();
     expect(outer).toHaveTextContent('HoverMe');
-    expect(container.querySelector('.frui-tooltip')).not.toBeInTheDocument();
+    expect(
+      container.querySelector('.frui-tooltip')
+    ).not.toBeInTheDocument();
   });
 
   it('renders tooltip text when show is true', async () => {
-    const { container } = render(<Tooltip show text="Visible tip">Target</Tooltip>);
+    const { container } = render(
+      <Tooltip show text="Visible tip">
+        Target
+      </Tooltip>
+    );
     await waitFor(() => {
-      expect(container.querySelector('.frui-tooltip')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-tooltip')
+      ).toBeInTheDocument();
     });
-    expect(container.querySelector('.frui-tooltip')).toHaveTextContent('Visible tip');
-    expect(container.querySelector('.frui-tooltip')).toHaveClass('frui-tooltip');
+    expect(
+      container.querySelector('.frui-tooltip')
+    ).toHaveTextContent('Visible tip');
+    expect(
+      container.querySelector('.frui-tooltip')
+    ).toHaveClass('frui-tooltip');
   });
 
   it('shows tooltip when hover is true and mouseEnter triggers', async () => {
-    const { container } = render(<Tooltip hover text="HoverText">Hover</Tooltip>);
+    const { container } = render(
+      <Tooltip hover text="HoverText">
+        Hover
+      </Tooltip>
+    );
     const outer = container.querySelector('.frui-tooltip-container');
     expect(outer).toBeInTheDocument();
-    expect(container.querySelector('.frui-tooltip')).not.toBeInTheDocument();
-
+    expect(
+      container.querySelector('.frui-tooltip')
+    ).not.toBeInTheDocument();
     fireEvent.mouseEnter(outer as Element);
-
     await waitFor(() => {
-      expect(container.querySelector('.frui-tooltip')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-tooltip')
+      ).toBeInTheDocument();
     });
-    expect(container.querySelector('.frui-tooltip')).toHaveTextContent('HoverText');
+    expect(
+      container.querySelector('.frui-tooltip')
+    ).toHaveTextContent('HoverText');
   });
 
   it('hides tooltip when hover is true and mouseLeave triggers', async () => {
-    const { container } = render(<Tooltip hover text="HoverText">Hover</Tooltip>);
+    const { container } = render(
+      <Tooltip hover text="HoverText">
+        Hover
+      </Tooltip>
+    );
     const outer = container.querySelector('.frui-tooltip-container');
     expect(outer).toBeInTheDocument();
-
     fireEvent.mouseEnter(outer as Element);
-
     await waitFor(() => {
-      expect(container.querySelector('.frui-tooltip')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-tooltip')
+      ).toBeInTheDocument();
     });
-    expect(container.querySelector('.frui-tooltip')).toHaveTextContent('HoverText');
-
+    expect(
+      container.querySelector('.frui-tooltip')
+    ).toHaveTextContent('HoverText');
     fireEvent.mouseLeave(outer as Element);
-
     await waitFor(() => {
-      expect(container.querySelector('.frui-tooltip')).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-tooltip')
+      ).not.toBeInTheDocument();
     });
   });
 
   it('applies arrow class when arrow prop is true', async () => {
-    const { container } = render(<Tooltip arrow show text="Arrow tip">Target</Tooltip>);
+    const { container } = render(
+      <Tooltip arrow show text="Arrow tip">
+        Target
+      </Tooltip>
+    );
     await waitFor(() => {
-      expect(container.querySelector('.frui-tooltip')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-tooltip')
+      ).toBeInTheDocument();
     });
     const tip = container.querySelector('.frui-tooltip');
     expect(tip).toHaveClass('frui-tooltip-arrow');
   });
 
   it('applies custom className when provided', async () => {
-    const { container } = render(<Tooltip className="custom-tooltip" show text="Custom">Target</Tooltip>);
+    const { container } = render(
+      <Tooltip className="custom-tooltip" show text="Custom">
+        Target
+      </Tooltip>
+    );
     await waitFor(() => {
-      expect(container.querySelector('.frui-tooltip')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-tooltip')
+      ).toBeInTheDocument();
     });
     const tip = container.querySelector('.frui-tooltip');
     expect(tip).toHaveClass('frui-tooltip');
@@ -296,9 +352,15 @@ describe('<Tooltip />', () => {
   });
 
   it('applies custom opacity when provided', async () => {
-    const { container } = render(<Tooltip opacity={50} show text="Half opacity">Target</Tooltip>);
+    const { container } = render(
+      <Tooltip opacity={50} show text="Half opacity">
+        Target
+      </Tooltip>
+    );
     await waitFor(() => {
-      expect(container.querySelector('.frui-tooltip')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-tooltip')
+      ).toBeInTheDocument();
     });
     const tip = container.querySelector('.frui-tooltip');
     expect(tip).toHaveStyle({ opacity: 0.5 });
@@ -315,6 +377,7 @@ describe('<Tooltip />', () => {
     expect(outer).toHaveClass('custom-container');
   });
 });
+
 describe('<TooltipContainer />', () => {
   it('renders with base class and children', () => {
     const { container } = render(<TooltipContainer>tip</TooltipContainer>);
@@ -334,7 +397,9 @@ describe('<TooltipContainer />', () => {
 
   it('passes through additional HTML attributes', () => {
     const { container } = render(
-      <TooltipContainer data-testid="test-container">content</TooltipContainer>
+      <TooltipContainer data-testid="test-container">
+        content
+      </TooltipContainer>
     );
     const el = container.firstChild;
     expect(el).toHaveAttribute('data-testid', 'test-container');

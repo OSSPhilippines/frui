@@ -1,21 +1,17 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//modules
+import type { ChangeEvent } from 'react';
+import { describe, expect, it, vi } from 'vitest';
 //tests
 import '@testing-library/jest-dom';
-import React from 'react';
 import {
   act,
   fireEvent,
   render,
   screen
 } from '@testing-library/react';
-import {
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
 //frui
 import {
   Slider,
@@ -27,7 +23,7 @@ import {
   toNumber,
   toValues,
   useSlider
-} from '../../src/form/Slider';
+} from '../../src/form/Slider.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -35,27 +31,26 @@ import {
 vi.mock('../../src/form/Input.js', () => ({
   __esModule: true,
   default: ({
-    value,
+    className,
     onChange,
     type = 'number',
-    className
+    value
   }: {
-    value?: string | number;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    type?: string;
-    className?: string;
+    className?: string,
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
+    type?: string,
+    value?: string | number
   }) => (
     <input
-      data-testid="mock-input"
-      type={type}
       className={className}
+      data-testid="mock-input"
+      onChange={onChange}
+      type={type}
       value={value ?? ''}
-      onChange={(e) =>
-        onChange?.(e as React.ChangeEvent<HTMLInputElement>)
-      }
     />
   )
 }));
+
 vi.mock('../../helpers/tools/ColorTool.js', () => ({
   __esModule: true,
   default: {
@@ -67,6 +62,7 @@ vi.mock('../../helpers/tools/ColorTool.js', () => ({
     })
   }
 }));
+
 vi.mock('../../helpers/tools/BackgroundColorTool.js', () => ({
   __esModule: true,
   default: {
@@ -75,6 +71,7 @@ vi.mock('../../helpers/tools/BackgroundColorTool.js', () => ({
     })
   }
 }));
+
 vi.mock('../../helpers/getSlotStyles.js', () => ({
   __esModule: true,
   default: () => ({})
@@ -82,6 +79,19 @@ vi.mock('../../helpers/getSlotStyles.js', () => ({
 
 //--------------------------------------------------------------------//
 // Helpers
+
+function renderUseSlider(config: Parameters<typeof useSlider>[ 0 ]) {
+  let hookValue: ReturnType<typeof useSlider> | undefined;
+  const TestComponent = () => {
+    hookValue = useSlider(config);
+    return null;
+  };
+  render(<TestComponent />);
+  return () => hookValue!;
+}
+
+//--------------------------------------------------------------------//
+// Tests
 
 describe('Helper functions', () => {
   it('clamp bounds value within range', () => {
@@ -95,63 +105,62 @@ describe('Helper functions', () => {
   });
 
   it('toValues returns correct value pairs', () => {
-    expect(toValues(5, false, 0)).toEqual([0, 5]);
-    expect(toValues([2, 9], true, 0)).toEqual([2, 9]);
+    expect(toValues(5, false, 0)).toEqual([ 0, 5 ]);
+    expect(toValues([ 2, 9 ], true, 0)).toEqual([ 2, 9 ]);
   });
 });
 
-//--------------------------------------------------------------------//
-// Hooks
-
 describe('useSlider()', () => {
-  function renderUseSlider(config: Parameters<typeof useSlider>[0]) {
-    let hookValue: ReturnType<typeof useSlider> | undefined;
-    const TestComponent = () => {
-      hookValue = useSlider(config);
-      return null;
-    };
-    render(<TestComponent />);
-    return () => hookValue!;
-  }
-
   it('initializes with default values', () => {
     const getHook = renderUseSlider({ defaultValue: 5 });
     const hook = getHook();
-    expect(hook.values[1]).toBe(5);
+    expect(hook.values[ 1 ]).toBe(5);
   });
 
   it('calls onUpdate when values change', () => {
     const onUpdate = vi.fn();
-    const getHook = renderUseSlider({ defaultValue: 0, onUpdate });
+    const getHook = renderUseSlider({
+      defaultValue: 0,
+      onUpdate
+    });
     const hook = getHook();
     act(() => {
-      hook.handlers.update([0, 5]);
+      hook.handlers.update([ 0, 5 ]);
     });
     expect(onUpdate).toHaveBeenCalledWith(5);
   });
 });
 
-//--------------------------------------------------------------------//
-// Tests
-
 describe('<Slider />', () => {
   it('renders a basic non-range slider structure', () => {
     render(<Slider defaultValue={5} />);
-    expect(document.querySelector('.frui-form-slider')).toBeInTheDocument();
-    expect(document.querySelector('.frui-form-slider-track')).toBeInTheDocument();
-    expect(document.querySelector('.frui-form-slider-handle')).toBeInTheDocument();
-    expect(document.querySelector('.frui-form-slider-input')).toBeInTheDocument();
+    const slider = document.querySelector('.frui-form-slider');
+    const track = document.querySelector('.frui-form-slider-track');
+    const handle = document.querySelector('.frui-form-slider-handle');
+    const input = document.querySelector('.frui-form-slider-input');
+    expect(slider).toBeInTheDocument();
+    expect(track).toBeInTheDocument();
+    expect(handle).toBeInTheDocument();
+    expect(input).toBeInTheDocument();
   });
 
   it('renders a range slider when range=true', () => {
-    render(<Slider range defaultValue={[2, 8]} />);
-    expect(document.querySelectorAll('.frui-form-slider-handle')).toHaveLength(2);
-    expect(document.querySelectorAll('.frui-form-slider-input')).toHaveLength(2);
+    render(<Slider range defaultValue={[ 2, 8 ]} />);
+    const handles = document.querySelectorAll(
+      '.frui-form-slider-handle'
+    );
+    const inputs = document.querySelectorAll(
+      '.frui-form-slider-input'
+    );
+    expect(handles).toHaveLength(2);
+    expect(inputs).toHaveLength(2);
   });
 
   it('renders connection when connect=true', () => {
-    render(<Slider range defaultValue={[2, 8]} connect />);
-    const connection = document.querySelector('.frui-form-slider-connection');
+    render(<Slider range defaultValue={[ 2, 8 ]} connect />);
+    const connection = document.querySelector(
+      '.frui-form-slider-connection'
+    );
     expect(connection).toBeInTheDocument();
   });
 
@@ -165,10 +174,11 @@ describe('<Slider />', () => {
     expect(onUpdate).toHaveBeenCalled();
   });
 });
+
 describe('<SliderHandle />', () => {
   it('renders handle using context', () => {
     const ctx = {
-      values: [0, 5] as [number, number],
+      values: [ 0, 5 ] as [ number, number ],
       min: 0,
       max: 10,
       step: 1,
@@ -179,22 +189,23 @@ describe('<SliderHandle />', () => {
       range: false,
       angle: 0
     };
-
     render(
       <SliderContext.Provider value={ctx}>
         <SliderHandle index={1} />
       </SliderContext.Provider>
     );
-
-    const handle = document.querySelector('.frui-form-slider-handle');
+    const handle = document.querySelector(
+      '.frui-form-slider-handle'
+    );
     expect(handle).toBeInTheDocument();
     fireEvent.mouseDown(handle!);
   });
 });
+
 describe('<SliderConnection />', () => {
   it('renders connection with correct context', () => {
     const ctx = {
-      values: [2, 8] as [number, number],
+      values: [ 2, 8 ] as [ number, number ],
       min: 0,
       max: 10,
       step: 1,
@@ -205,22 +216,24 @@ describe('<SliderConnection />', () => {
       range: true,
       angle: 0
     };
-
     render(
       <SliderContext.Provider value={ctx}>
         <SliderConnection />
       </SliderContext.Provider>
     );
-
-    const connection = document.querySelector('.frui-form-slider-connection');
+    const connection = document.querySelector(
+      '.frui-form-slider-connection'
+    );
     expect(connection).toBeInTheDocument();
     expect(connection?.getAttribute('style')).toContain('left');
   });
 });
+
 describe('<SliderTrack />', () => {
   it('renders track element correctly', () => {
     const ref = { current: null };
     render(<SliderTrack ref={ref} />);
-    expect(document.querySelector('.frui-form-slider-track')).toBeInTheDocument();
+    const track = document.querySelector('.frui-form-slider-track');
+    expect(track).toBeInTheDocument();
   });
 });

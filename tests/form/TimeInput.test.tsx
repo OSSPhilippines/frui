@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//modules
+import type { ChangeEvent } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -9,19 +11,14 @@ import {
   screen,
   waitFor
 } from '@testing-library/react';
-import {
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 //frui
 import {
   TimeInput,
   toDate,
   toTimeInputString,
   toTimeString
-} from '../../src/form/TimeInput';
+} from '../../src/form/TimeInput.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -34,26 +31,23 @@ vi.mock('../../src/form/Input.js', () => ({
     type,
     value
   }: {
-    className?: string;
-    onUpdate?: (val: string) => void;
-    type?: string;
-    value: string;
+    className?: string,
+    onUpdate?: (e: ChangeEvent<HTMLInputElement>) => void,
+    type?: string,
+    value?: string
   }) => (
     <input
-      data-testid="mock-input"
       className={className}
-      onChange={(e) => {
-        const evt = e as React.ChangeEvent<HTMLInputElement>;
-        onUpdate?.(evt.target.value);
-      }}
+      data-testid="mock-input"
+      onChange={onUpdate}
       type={type}
-      value={value}
+      value={value || ''}
     />
   )
 }));
 
 //--------------------------------------------------------------------//
-// Helpers
+// Tests
 
 describe('Time helper functions', () => {
   it('converts various input types correctly', () => {
@@ -78,13 +72,15 @@ describe('Time helper functions', () => {
     expect(toTimeInputString(d)).toBe('09:30');
   });
 
-  it('returns undefined for invalid date in toTimeInputString', () => {
-    expect(toTimeInputString(new Date('invalid'))).toBeUndefined();
-  });
+  it(
+    'returns undefined for invalid date in toTimeInputString',
+    () => {
+      expect(
+        toTimeInputString(new Date('invalid'))
+      ).toBeUndefined();
+    }
+  );
 });
-
-//--------------------------------------------------------------------//
-// Tests
 
 describe('<TimeInput />', () => {
   it('renders with correct type and default class', () => {
@@ -96,7 +92,9 @@ describe('<TimeInput />', () => {
 
   it('applies provided defaultValue', () => {
     render(<TimeInput defaultValue="13:45" />);
-    const input = screen.getByTestId('mock-input') as HTMLInputElement;
+    const input = screen.getByTestId(
+      'mock-input'
+    ) as HTMLInputElement;
     expect(input.value).toBe('13:45');
   });
 
@@ -106,20 +104,30 @@ describe('<TimeInput />', () => {
     const input = screen.getByTestId('mock-input');
     fireEvent.change(input, { target: { value: '15:00' } });
     expect(onUpdate).toHaveBeenCalled();
-    expect(onUpdate.mock.calls[0][0]).toBeInstanceOf(Date);
+    expect(onUpdate.mock.calls[ 0 ][ 0 ]).toBeInstanceOf(Date);
   });
 
-  it('updates internal value when controlled prop changes', async () => {
-    const { rerender } = render(<TimeInput value="10:30" />);
-    const input = screen.getByTestId('mock-input') as HTMLInputElement;
-    expect(input.value).toBe('10:30');
-    rerender(<TimeInput value="16:45" />);
-    await waitFor(() => expect(input.value).toBe('16:45'));
-  });
+  it(
+    'updates internal value when controlled prop changes',
+    async () => {
+      const { rerender } = render(
+        <TimeInput value="10:30" />
+      );
+      const input = screen.getByTestId(
+        'mock-input'
+      ) as HTMLInputElement;
+      expect(input.value).toBe('10:30');
+      rerender(<TimeInput value="16:45" />);
+      await waitFor(() => expect(input.value).toBe('16:45'));
+    }
+  );
 
   it('merges custom className with existing ones', () => {
     render(<TimeInput className="custom-time" />);
     const input = screen.getByTestId('mock-input');
-    expect(input).toHaveClass('frui-form-input-time', 'custom-time');
+    expect(input).toHaveClass(
+      'frui-form-input-time',
+      'custom-time'
+    );
   });
 });

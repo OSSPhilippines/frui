@@ -9,12 +9,7 @@ import {
   render,
   screen
 } from '@testing-library/react';
-import {
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 //frui
 import Dialog, {
   DialogClose,
@@ -22,13 +17,15 @@ import Dialog, {
   DialogOverlay,
   useDialog,
   useDialogContext
-} from '../../src/base/Dialog';
+} from '../../src/base/Dialog.js';
 
 //--------------------------------------------------------------------//
 // Helpers
 
 const HookConsumer = () => {
-  const { dialogOpened, handlers } = useDialog({ defaultOpen: false });
+  const { dialogOpened, handlers } = useDialog({
+    defaultOpen: false
+  });
   return (
     <div>
       <button onClick={handlers.openDialog}>open</button>
@@ -73,6 +70,7 @@ describe('<Dialog />', () => {
     expect(document.querySelector('.frui-dialog')).toBeNull();
   });
 });
+
 describe('<DialogClose />', () => {
   it('calls closeDialog from context and onClose prop', () => {
     const closeDialog = vi.fn();
@@ -93,6 +91,7 @@ describe('<DialogClose />', () => {
     expect(onClose).toHaveBeenCalled();
   });
 });
+
 describe('<DialogOverlay />', () => {
   it('renders with default class', () => {
     render(<DialogOverlay>overlay</DialogOverlay>);
@@ -100,9 +99,6 @@ describe('<DialogOverlay />', () => {
     expect(overlay).toHaveClass('frui-dialog-overlay');
   });
 });
-
-//--------------------------------------------------------------------//
-// Hooks
 
 describe('useDialog()', () => {
   it('toggles open state through handlers', () => {
@@ -116,6 +112,7 @@ describe('useDialog()', () => {
     expect(status.textContent).toBe('open');
   });
 });
+
 describe('useDialogContext()', () => {
   it('returns context values', () => {
     const ctxValue = {

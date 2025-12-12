@@ -17,12 +17,13 @@ import {
 import {
   Progress,
   ProgressContainer
-} from '../../src/base/Progress';
+} from '../../src/base/Progress.js';
 
 //--------------------------------------------------------------------//
 // Mocks
 
 vi.mock('./helpers/tools/BackgroundColorTool.js', () => ({
+  __esModule: true,
   default: class {
     static get() {
       return {
@@ -32,7 +33,9 @@ vi.mock('./helpers/tools/BackgroundColorTool.js', () => ({
     }
   }
 }));
+
 vi.mock('./helpers/tools/BorderRadiusTool.js', () => ({
+  __esModule: true,
   default: class {
     static get() {
       return {
@@ -42,7 +45,9 @@ vi.mock('./helpers/tools/BorderRadiusTool.js', () => ({
     }
   }
 }));
+
 vi.mock('./helpers/tools/ColorTool.js', () => ({
+  __esModule: true,
   default: class {
     static get() {
       return {
@@ -51,7 +56,9 @@ vi.mock('./helpers/tools/ColorTool.js', () => ({
     }
   }
 }));
+
 vi.mock('./helpers/removeThemeProps.js', () => ({
+  __esModule: true,
   default: (props: unknown) => props
 }));
 
@@ -60,10 +67,16 @@ vi.mock('./helpers/removeThemeProps.js', () => ({
 
 describe('<Progress />', () => {
   it('applies background color, radius, and height to bar', () => {
-    render(<Progress bgc='blue' curved height={8}>label</Progress>);
+    render(
+      <Progress bgc="blue" curved height={8}>
+        label
+      </Progress>
+    );
     const bar = screen.getByText('label');
     expect(bar).toHaveClass('frui-progress');
-    expect(bar.parentElement).toHaveClass('frui-progress-container');
+    expect(bar.parentElement).toHaveClass(
+      'frui-progress-container'
+    );
   });
 
   it('passes container props and renders children', () => {
@@ -71,9 +84,13 @@ describe('<Progress />', () => {
     render(<Progress container={container}>40%</Progress>);
     const bar = screen.getByText('40%');
     expect(bar).toHaveClass('frui-progress');
-    expect(bar.parentElement).toHaveClass('frui-progress-container', 'custom-container');
+    expect(bar.parentElement).toHaveClass(
+      'frui-progress-container',
+      'custom-container'
+    );
   });
 });
+
 describe('<ProgressContainer />', () => {
   it('renders with base class and children', () => {
     render(<ProgressContainer>content</ProgressContainer>);

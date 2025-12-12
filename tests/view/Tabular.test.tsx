@@ -47,14 +47,14 @@ describe('<Tabular />', () => {
     const headers = within(table).getAllByRole('columnheader');
     const rows = within(table).getAllByRole('row').slice(1);
 
-    expect(headers[0]).toHaveStyle({
+    expect(headers[ 0 ]).toHaveStyle({
       backgroundColor: 'rgb(128, 128, 128)'
     });
     expect(
-      within(rows[0]).getAllByRole('cell')[0]
+      within(rows[ 0 ]).getAllByRole('cell')[ 0 ]
     ).toHaveStyle({ backgroundColor: 'rgb(255, 255, 255)' });
     expect(
-      within(rows[1]).getAllByRole('cell')[0]
+      within(rows[ 1 ]).getAllByRole('cell')[ 0 ]
     ).toHaveStyle({ backgroundColor: 'rgb(211, 211, 211)' });
   });
 

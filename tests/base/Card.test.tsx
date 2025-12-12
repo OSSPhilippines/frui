@@ -1,4 +1,4 @@
-//------------------------------------------------------------------//
+//--------------------------------------------------------------------//
 // Imports
 
 //tests
@@ -15,9 +15,8 @@ import {
 //frui
 import Card from '../../src/base/Card.js';
 
-//------------------------------------------------------------------//
+//--------------------------------------------------------------------//
 // Tests
-
 describe('<Card />', () => {
   it('renders a section element with frui-card class', () => {
     render(<Card data-testid="card">Card Content</Card>);
@@ -58,6 +57,7 @@ describe('<Card />', () => {
     expect(article).toHaveClass('frui-card');
   });
 });
+
 describe('<Card.Head />', () => {
   it('renders header element with base class', () => {
     render(
@@ -95,6 +95,7 @@ describe('<Card.Head />', () => {
     expect(screen.getByTestId('head')).toHaveAttribute('style');
   });
 });
+
 describe('<Card.Body />', () => {
   it('renders main element with base class', () => {
     render(
@@ -132,6 +133,7 @@ describe('<Card.Body />', () => {
     expect(screen.getByTestId('body')).toHaveAttribute('style');
   });
 });
+
 describe('<Card.Foot />', () => {
   it('renders footer element with base classes', () => {
     render(
@@ -160,12 +162,10 @@ describe('<Card.Foot />', () => {
       <Card.Foot center data-testid="foot">Footer</Card.Foot>
     );
     expect(screen.getByTestId('foot')).toHaveClass('frui-fx-center');
-
     rerender(
       <Card.Foot left data-testid="foot">Footer</Card.Foot>
     );
     expect(screen.getByTestId('foot')).toHaveClass('frui-fx-left');
-
     rerender(
       <Card.Foot right data-testid="foot">Footer</Card.Foot>
     );
@@ -181,8 +181,8 @@ describe('<Card.Foot />', () => {
 
   it('applies inline styles', () => {
     render(
-      <Card.Foot 
-        style={{ justifyContent: 'center' }} 
+      <Card.Foot
+        style={{ justifyContent: 'center' }}
         data-testid="foot"
       >
         Footer
@@ -191,6 +191,7 @@ describe('<Card.Foot />', () => {
     expect(screen.getByTestId('foot')).toHaveAttribute('style');
   });
 });
+
 describe('<Card.Title />', () => {
   it('renders h3 element by default with base class', () => {
     render(<Card.Title data-testid="title">Title</Card.Title>);
@@ -205,22 +206,18 @@ describe('<Card.Title />', () => {
       <Card.Title h1 data-testid="title">Title</Card.Title>
     );
     expect(screen.getByTestId('title').tagName).toBe('H1');
-
     rerender(
       <Card.Title h2 data-testid="title">Title</Card.Title>
     );
     expect(screen.getByTestId('title').tagName).toBe('H2');
-
     rerender(
       <Card.Title h4 data-testid="title">Title</Card.Title>
     );
     expect(screen.getByTestId('title').tagName).toBe('H4');
-
     rerender(
       <Card.Title h5 data-testid="title">Title</Card.Title>
     );
     expect(screen.getByTestId('title').tagName).toBe('H5');
-
     rerender(
       <Card.Title h6 data-testid="title">Title</Card.Title>
     );
@@ -242,12 +239,10 @@ describe('<Card.Title />', () => {
       <Card.Title upper data-testid="title">Title</Card.Title>
     );
     expect(screen.getByTestId('title')).toHaveClass('frui-uppercase');
-
     rerender(
       <Card.Title lower data-testid="title">Title</Card.Title>
     );
     expect(screen.getByTestId('title')).toHaveClass('frui-lowercase');
-
     rerender(
       <Card.Title capital data-testid="title">Title</Card.Title>
     );
@@ -275,6 +270,7 @@ describe('<Card.Title />', () => {
     expect(screen.getByTestId('title')).toHaveAttribute('style');
   });
 });
+
 describe('<Card.Description />', () => {
   it('renders paragraph element with base class', () => {
     render(
@@ -311,7 +307,6 @@ describe('<Card.Description />', () => {
     expect(screen.getByTestId('description')).toHaveClass(
       'frui-uppercase'
     );
-
     rerender(
       <Card.Description lower data-testid="description">
         Description
@@ -320,7 +315,6 @@ describe('<Card.Description />', () => {
     expect(screen.getByTestId('description')).toHaveClass(
       'frui-lowercase'
     );
-
     rerender(
       <Card.Description capital data-testid="description">
         Description
@@ -333,8 +327,8 @@ describe('<Card.Description />', () => {
 
   it('applies custom className', () => {
     render(
-      <Card.Description 
-        className="custom-desc" 
+      <Card.Description
+        className="custom-desc"
         data-testid="description"
       >
         Description
@@ -348,8 +342,8 @@ describe('<Card.Description />', () => {
 
   it('applies inline styles', () => {
     render(
-      <Card.Description 
-        style={{ lineHeight: '1.5' }} 
+      <Card.Description
+        style={{ lineHeight: '1.5' }}
         data-testid="description"
       >
         Description
@@ -358,6 +352,7 @@ describe('<Card.Description />', () => {
     expect(screen.getByTestId('description')).toHaveAttribute('style');
   });
 });
+
 describe('Card component integration', () => {
   it('renders complete card with all subcomponents', () => {
     render(
@@ -373,7 +368,6 @@ describe('Card component integration', () => {
         <Card.Foot data-testid="foot">Footer content</Card.Foot>
       </Card>
     );
-
     expect(screen.getByTestId('card')).toBeInTheDocument();
     expect(screen.getByTestId('head')).toBeInTheDocument();
     expect(screen.getByTestId('title')).toBeInTheDocument();
@@ -390,7 +384,6 @@ describe('Card component integration', () => {
         <Card.Foot center data-testid="foot">Footer</Card.Foot>
       </Card>
     );
-
     expect(screen.getByTestId('card')).toHaveClass(
       'frui-card',
       'frui-flex'
@@ -423,7 +416,6 @@ describe('Card component integration', () => {
         </Card.Body>
       </Card>
     );
-
     const title = screen.getByTestId('title');
     const description = screen.getByTestId('description');
     expect(title.tagName).toBe('H2');

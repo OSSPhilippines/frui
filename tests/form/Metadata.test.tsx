@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//modules
+import type { ChangeEvent, ReactNode } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -25,123 +27,131 @@ import {
 
 vi.mock('../../src/base/Button.js', () => ({
   __esModule: true,
-  default: ({ onClick }: { onClick?: () => void }) => (
-    <button
-      data-testid="mock-button"
-      onClick={onClick}
-    >
-      ×
+  default: ({
+    children,
+    onClick
+  }: {
+    children?: ReactNode,
+    onClick?: () => void
+  }) => (
+    <button data-testid="mock-button" onClick={onClick}>
+      {children}
     </button>
   )
 }));
+
 vi.mock('../../src/form/Input.js', () => ({
   __esModule: true,
   default: ({
-    onUpdate,
-    className
+    className,
+    onUpdate
   }: {
-    onUpdate?: (v: unknown) => void;
-    className?: string;
+    className?: string,
+    onUpdate?: (e: ChangeEvent<HTMLInputElement>) => void
   }) => (
     <input
-      data-testid="mock-input"
       className={className}
-      onChange={(e) => onUpdate?.((e.target as HTMLInputElement).value)}
+      data-testid="mock-input"
+      onChange={onUpdate}
     />
   )
 }));
+
 vi.mock('../../src/form/NumberInput.js', () => ({
   __esModule: true,
   default: ({
-    onUpdate,
-    className
+    className,
+    onUpdate
   }: {
-    onUpdate?: (v: unknown) => void;
-    className?: string;
+    className?: string,
+    onUpdate?: (e: ChangeEvent<HTMLInputElement>) => void
   }) => (
     <input
-      data-testid="mock-number"
       className={className}
-      onChange={(e) => onUpdate?.((e.target as HTMLInputElement).value)}
+      data-testid="mock-number"
+      onChange={onUpdate}
     />
   )
 }));
+
 vi.mock('../../src/form/DateInput.js', () => ({
   __esModule: true,
   default: ({
-    onUpdate,
-    className
+    className,
+    onUpdate
   }: {
-    onUpdate?: (v: unknown) => void;
-    className?: string;
+    className?: string,
+    onUpdate?: (e: ChangeEvent<HTMLInputElement>) => void
   }) => (
     <input
-      data-testid="mock-date"
       className={className}
-      onChange={(e) => onUpdate?.((e.target as HTMLInputElement).value)}
+      data-testid="mock-date"
+      onChange={onUpdate}
     />
   )
 }));
+
 vi.mock('../../src/form/TimeInput.js', () => ({
   __esModule: true,
   default: ({
-    onUpdate,
-    className
+    className,
+    onUpdate
   }: {
-    onUpdate?: (v: unknown) => void;
-    className?: string;
+    className?: string,
+    onUpdate?: (e: ChangeEvent<HTMLInputElement>) => void
   }) => (
     <input
-      data-testid="mock-time"
       className={className}
-      onChange={(e) => onUpdate?.((e.target as HTMLInputElement).value)}
+      data-testid="mock-time"
+      onChange={onUpdate}
     />
   )
 }));
+
 vi.mock('../../src/form/DatetimeInput.js', () => ({
   __esModule: true,
   default: ({
-    onUpdate,
-    className
+    className,
+    onUpdate
   }: {
-    onUpdate?: (v: unknown) => void;
-    className?: string;
+    className?: string,
+    onUpdate?: (e: ChangeEvent<HTMLInputElement>) => void
   }) => (
     <input
-      data-testid="mock-datetime"
       className={className}
-      onChange={(e) => onUpdate?.((e.target as HTMLInputElement).value)}
+      data-testid="mock-datetime"
+      onChange={onUpdate}
     />
   )
 }));
 
 //--------------------------------------------------------------------//
-// Hooks
+// Tests
 
 describe('useMetadata()', () => {
-  const values: ([string, string | number | Date] | undefined)[] = [
+  const values: ([ string, string | number | Date ] | undefined)[] = [
     [ 'key', 'val' ]
   ];
 
   it('removes entry', () => {
     const setMock = vi.fn();
     const { handlers } = useMetadata({
-      type: 'text',
-      values,
       index: 0,
-      set: setMock
+      set: setMock,
+      type: 'text',
+      values
     });
     handlers.remove();
-    expect(setMock).toHaveBeenCalledWith([undefined]);
+    expect(setMock).toHaveBeenCalledWith([ undefined ]);
   });
 
   it('updates name/value', () => {
     const setMock = vi.fn();
     const { handlers } = useMetadata({
-      type: 'text',
-      values,
       index: 0,
-      set: setMock
+      set: setMock,
+      type: 'text',
+      values
     });
     handlers.update('name', 'new');
     handlers.update('value', 'val');
@@ -149,19 +159,20 @@ describe('useMetadata()', () => {
   });
 });
 
-//--------------------------------------------------------------------//
-// Tests
-
 describe('<MetadataFields />', () => {
-  const values = [[ 'name', 'val' ]] as unknown as ([string, string] | undefined)[];
+  const values = [ [ 'name', 'val' ] ] as unknown as (
+    | [ string, string ]
+    | undefined
+  )[];
+
   const renderField = (type: string, set = vi.fn()) => {
     render(
       <MetadataFields
-        name="meta"
         config={{ type }}
-        values={values}
         index={0}
+        name="meta"
         set={set}
+        values={values}
       />
     );
   };
@@ -170,13 +181,17 @@ describe('<MetadataFields />', () => {
     'renders correct input for type=%s',
     (type) => {
       renderField(type);
-      expect(screen.getByTestId(`mock-${type}`)).toBeInTheDocument();
+      expect(
+        screen.getByTestId(`mock-${type}`)
+      ).toBeInTheDocument();
     }
   );
 
   it('renders hidden input with filled value', () => {
     renderField('text');
-    const hidden = document.querySelector('input[type="hidden"]') as HTMLInputElement;
+    const hidden = document.querySelector(
+      'input[ type="hidden" ]'
+    ) as HTMLInputElement;
     expect(hidden).toBeInTheDocument();
     expect(hidden.name).toContain('meta');
     expect(hidden.value).toBe('val');
@@ -191,9 +206,7 @@ describe('<MetadataFields />', () => {
     const setMock = vi.fn();
     renderField('text', setMock);
     const button = screen.getByTestId('mock-button');
-    
     fireEvent.click(button);
-
     expect(setMock).toHaveBeenCalled();
   });
 

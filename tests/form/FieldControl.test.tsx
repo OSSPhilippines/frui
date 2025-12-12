@@ -21,7 +21,9 @@ import FieldControl from '../../src/form/FieldControl.js';
 describe('<FieldControl />', () => {
   it('renders with default class', () => {
     render(<FieldControl />);
-    const container = document.querySelector('.frui-form-field-control');
+    const container = document.querySelector(
+      '.frui-form-field-control'
+    );
     expect(container).toBeInTheDocument();
     expect(container).toHaveClass('frui-form-field-control');
   });
@@ -56,7 +58,12 @@ describe('<FieldControl />', () => {
 
   it('applies custom className when passed', () => {
     render(<FieldControl className="custom-class" />);
-    const container = document.querySelector('.frui-form-field-control');
-    expect(container).toHaveClass('frui-form-field-control', 'custom-class');
+    const container = document.querySelector(
+      '.frui-form-field-control'
+    );
+    expect(container).toHaveClass(
+      'frui-form-field-control',
+      'custom-class'
+    );
   });
 });

@@ -1,22 +1,14 @@
 //--------------------------------------------------------------------//
 // Imports
+//modules
+import { describe, expect, it, vi } from 'vitest';
 
 //tests
 import '@testing-library/jest-dom';
-import {
-  fireEvent,
-  render,
-  screen
-} from '@testing-library/react';
-import {
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
-//types
-import type { AccordionContextProps } from '../../src/base/Accordion.js';
+import { fireEvent, render, screen } from '@testing-library/react';
+
 //frui
+import type { AccordionContextProps } from '../../src/base/Accordion.js';
 import {
   Accordion,
   AccordionActive,
@@ -29,7 +21,7 @@ import {
 } from '../../src/base/Accordion.js';
 
 //--------------------------------------------------------------------//
-// Hooks
+// Tests
 
 describe('useAccordionContext()', () => {
   it('returns provided context values', () => {
@@ -39,26 +31,19 @@ describe('useAccordionContext()', () => {
       value: 'a1',
       itemValue: 'a1'
     };
-
     let returnedContext: AccordionContextProps | undefined;
-
     const TestComponent = () => {
       returnedContext = useAccordionContext();
       return null;
     };
-
     render(
       <AccordionContext.Provider value={mockContext}>
         <TestComponent />
       </AccordionContext.Provider>
     );
-
     expect(returnedContext).toEqual(mockContext);
   });
 });
-
-//--------------------------------------------------------------------//
-// Tests
 
 describe('<Accordion />', () => {
   it('renders wrapper div with correct class', () => {
@@ -66,7 +51,7 @@ describe('<Accordion />', () => {
     expect(container.firstChild).toHaveClass('frui-accordion');
   });
 
-  it('applies custom className and triggers onChange when label clicked', () => {
+  it('applies className and triggers onChange', () => {
     const onChange = vi.fn();
     render(
       <Accordion className="custom" defaultValue="a1" onChange={onChange}>
@@ -75,7 +60,6 @@ describe('<Accordion />', () => {
         </AccordionBellow>
       </Accordion>
     );
-
     const label = screen.getByText('Label 1');
     expect(label).toHaveClass('frui-accordion-label');
     fireEvent.click(label);
@@ -92,7 +76,6 @@ describe('<Accordion />', () => {
       </Accordion>
     );
     expect(screen.getByText('Body')).toBeInTheDocument();
-
     rerender(
       <Accordion value="a2">
         <AccordionBellow value="a1">
@@ -108,9 +91,14 @@ describe('<Accordion />', () => {
     expect(screen.getByText('Body2')).toBeInTheDocument();
   });
 });
+
 describe('<AccordionActive /> and <AccordionInactive />', () => {
   it('renders Active only when selected', () => {
-    const ctx: AccordionContextProps = { change: vi.fn(), itemValue: 'x', value: 'x' };
+    const ctx: AccordionContextProps = {
+      change: vi.fn(),
+      itemValue: 'x',
+      value: 'x'
+    };
     render(
       <AccordionContext.Provider value={ctx}>
         <AccordionActive>Active</AccordionActive>
@@ -122,7 +110,11 @@ describe('<AccordionActive /> and <AccordionInactive />', () => {
   });
 
   it('renders Inactive when not selected', () => {
-    const ctx: AccordionContextProps = { change: vi.fn(), itemValue: 'x', value: 'y' };
+    const ctx: AccordionContextProps = {
+      change: vi.fn(),
+      itemValue: 'x',
+      value: 'y'
+    };
     render(
       <AccordionContext.Provider value={ctx}>
         <AccordionActive>Active</AccordionActive>
@@ -133,15 +125,14 @@ describe('<AccordionActive /> and <AccordionInactive />', () => {
     expect(screen.getByText('Inactive')).toBeInTheDocument();
   });
 });
+
 describe('<AccordionBellow />', () => {
   it('provides itemValue through context', () => {
     let capturedCtx: AccordionContextProps | undefined;
-
     const Child = () => {
       capturedCtx = useAccordionContext();
-      return <div>child</div>;
+      return (<div>child</div>);
     };
-
     render(
       <AccordionContext.Provider
         value={{ change: vi.fn(), itemValue: undefined, value: 'x' }}
@@ -151,10 +142,10 @@ describe('<AccordionBellow />', () => {
         </AccordionBellow>
       </AccordionContext.Provider>
     );
-
     expect(capturedCtx?.itemValue).toBe('x');
   });
 });
+
 describe('<AccordionContent />', () => {
   const setup = (ctx: AccordionContextProps) =>
     render(
@@ -173,6 +164,7 @@ describe('<AccordionContent />', () => {
     expect(screen.getByText('body')).toBeInTheDocument();
   });
 });
+
 describe('<AccordionLabel />', () => {
   const mockChange = vi.fn();
   const itemValue = 'v1';

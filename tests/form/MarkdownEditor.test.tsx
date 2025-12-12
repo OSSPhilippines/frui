@@ -1,21 +1,17 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//modules
+import type { ChangeEvent, ReactNode } from 'react';
 //tests
 import '@testing-library/jest-dom';
-import React from 'react';
 import {
   act,
   fireEvent,
   render,
   screen
 } from '@testing-library/react';
-import {
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 //frui
 import MarkdownEditor, {
   useMarkdownEditor
@@ -27,48 +23,47 @@ import MarkdownEditor, {
 vi.mock('../../src/form/Textarea.js', () => ({
   __esModule: true,
   default: ({
-    value,
     onUpdate,
-    rows
+    rows,
+    value
   }: {
-    value?: string;
-    onUpdate?: (v: string) => void;
-    rows?: number;
+    onUpdate?: (e: ChangeEvent<HTMLTextAreaElement>) => void,
+    rows?: number,
+    value?: string
   }) => (
     <textarea
       data-testid="mock-textarea"
+      onChange={onUpdate}
       rows={rows}
       value={value ?? ''}
-      onChange={(e) => {
-        const evt = e as React.ChangeEvent<HTMLTextAreaElement>;
-        onUpdate?.(evt.target.value);
-      }}
     />
   )
 }));
+
 vi.mock('../../src/base/Button.js', () => ({
   __esModule: true,
   default: ({
     children,
-    onClick,
-    muted
+    muted,
+    onClick
   }: {
-    children?: React.ReactNode;
-    onClick?: () => void;
-    muted?: boolean;
+    children?: ReactNode,
+    muted?: boolean,
+    onClick?: () => void
   }) => (
     <button
-      data-testid="mock-button"
       data-muted={muted}
+      data-testid="mock-button"
       onClick={onClick}
     >
       {children}
     </button>
   )
 }));
+
 vi.mock('markdown-to-jsx', () => ({
   __esModule: true,
-  default: ({ children }: { children?: React.ReactNode }) => (
+  default: ({ children }: { children?: ReactNode }) => (
     <div data-testid="mock-markdown">{children}</div>
   )
 }));
@@ -87,11 +82,13 @@ function renderHookWithState<T>(hook: () => T): { current: T } {
 }
 
 //--------------------------------------------------------------------//
-// Hooks
+// Tests
 
 describe('useMarkdownEditor()', () => {
   it('initializes in edit mode and toggles correctly', () => {
-    const state = renderHookWithState(() => useMarkdownEditor({}));
+    const state = renderHookWithState(() =>
+      useMarkdownEditor({})
+    );
     expect(state.current.mode).toBe('edit');
     act(() => state.current.handlers.mode('preview'));
     expect(typeof state.current.handlers.mode).toBe('function');
@@ -99,14 +96,13 @@ describe('useMarkdownEditor()', () => {
 
   it('calls onUpdate when update handler runs', () => {
     const onUpdate = vi.fn();
-    const state = renderHookWithState(() => useMarkdownEditor({ onUpdate }));
+    const state = renderHookWithState(() =>
+      useMarkdownEditor({ onUpdate })
+    );
     act(() => state.current.handlers.update('changed text'));
     expect(onUpdate).toHaveBeenCalledWith('changed text');
   });
 });
-
-//--------------------------------------------------------------------//
-// Tests
 
 describe('<MarkdownEditor />', () => {
   it('renders textarea and toggle buttons', () => {
@@ -123,13 +119,10 @@ describe('<MarkdownEditor />', () => {
     const previewFrame = document.querySelector(
       '.frui-form-markdown-editor-preview'
     ) as HTMLIFrameElement;
-    
     expect(previewFrame).toHaveStyle({ display: 'none' });
-
     act(() => {
-      fireEvent.click(buttons[1]);
+      fireEvent.click(buttons[ 1 ]);
     });
-
     expect(previewFrame).toHaveStyle({ display: 'block' });
   });
 
@@ -137,14 +130,14 @@ describe('<MarkdownEditor />', () => {
     const onUpdate = vi.fn();
     render(<MarkdownEditor onUpdate={onUpdate} />);
     const textarea = screen.getByTestId('mock-textarea');
-
     act(() => {
       fireEvent.change(textarea, {
         target: { value: 'Updated markdown content' }
       });
     });
-
-    expect(onUpdate).toHaveBeenCalledWith('Updated markdown content');
+    expect(onUpdate).toHaveBeenCalledWith(
+      'Updated markdown content'
+    );
   });
 
   it('renders markdown preview content', () => {

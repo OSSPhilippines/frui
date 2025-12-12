@@ -21,7 +21,7 @@ import Dropdown, {
 } from '../../src/base/Dropdown.js';
 
 //--------------------------------------------------------------------//
-// Helpers
+// Tests
 
 describe('buildOptions()', () => {
   it('returns empty arrays when no children or data provided', () => {
@@ -29,22 +29,26 @@ describe('buildOptions()', () => {
     expect(result.options).toEqual([]);
     expect(result.selected).toEqual([]);
   });
+
   it('builds options from data array', () => {
-    const data = ['Option 1', 'Option 2', 'Option 3'];
+    const data = [ 'Option 1', 'Option 2', 'Option 3' ];
     const result = buildOptions(undefined, data);
     expect(result.options.length).toBe(3);
   });
+
   it('builds options from data object', () => {
     const data = { label1: 'value1', label2: 'value2' };
     const result = buildOptions(undefined, data);
     expect(result.options.length).toBe(2);
   });
+
   it('identifies selected options', () => {
-    const data = ['Option 1', 'Option 2', 'Option 3'];
-    const result = buildOptions(undefined, data, ['Option 2']);
+    const data = [ 'Option 1', 'Option 2', 'Option 3' ];
+    const result = buildOptions(undefined, data, [ 'Option 2' ]);
     expect(result.selected.length).toBe(1);
   });
 });
+
 describe('getAbsolutePosition()', () => {
   it('calculates bottom position correctly', () => {
     const container = document.createElement('div');
@@ -80,6 +84,7 @@ describe('getAbsolutePosition()', () => {
     expect(position.y).toBe(150);
     expect(position.x).toBe(50);
   });
+
   it('calculates top position correctly', () => {
     const container = document.createElement('div');
     const dropdown = document.createElement('div');
@@ -115,6 +120,7 @@ describe('getAbsolutePosition()', () => {
     expect(position.x).toBe(50);
   });
 });
+
 describe('getRelativePosition()', () => {
   it('calculates bottom position correctly', () => {
     const container = document.createElement('div');
@@ -152,9 +158,6 @@ describe('getRelativePosition()', () => {
   });
 });
 
-//--------------------------------------------------------------------//
-// Tests
-
 describe('<Dropdown />', () => {
   it('renders dropdown container', () => {
     render(
@@ -164,32 +167,36 @@ describe('<Dropdown />', () => {
     );
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
+
   it('renders dropdown with options from data', () => {
     const { container } = render(
-      <Dropdown options={['Option 1', 'Option 2']}>
+      <Dropdown options={[ 'Option 1', 'Option 2' ]}>
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
     expect(container.querySelector('.dropdown-container')).toBeInTheDocument();
   });
+
   it('calls onUpdate when dropdown is configured', () => {
     const onUpdate = vi.fn();
     render(
-      <Dropdown options={['Option 1', 'Option 2']} onUpdate={onUpdate}>
+      <Dropdown options={[ 'Option 1', 'Option 2' ]} onUpdate={onUpdate}>
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
+
   it('supports multiple selection configuration', () => {
     const onUpdate = vi.fn();
     render(
-      <Dropdown multiple options={['Option 1', 'Option 2']} onUpdate={onUpdate}>
+      <Dropdown multiple options={[ 'Option 1', 'Option 2' ]} onUpdate={onUpdate}>
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
+
   it('applies custom className to dropdown', () => {
     const { container } = render(
       <Dropdown className="custom-dropdown">
@@ -198,22 +205,25 @@ describe('<Dropdown />', () => {
     );
     expect(container.querySelector('.dropdown-container')).toBeInTheDocument();
   });
+
   it('respects controlled value', () => {
     render(
-      <Dropdown value="Option 2" options={['Option 1', 'Option 2']}>
+      <Dropdown value="Option 2" options={[ 'Option 1', 'Option 2' ]}>
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
+
   it('applies direction class based on position props', () => {
     const { container } = render(
-      <Dropdown top options={['Option 1']}>
+      <Dropdown top options={[ 'Option 1' ]}>
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
     expect(container.querySelector('.dropdown-container')).toBeInTheDocument();
   });
+
   it('applies custom inline styles', () => {
     const { container } = render(
       <Dropdown style={{ backgroundColor: 'blue' }}>
@@ -223,6 +233,7 @@ describe('<Dropdown />', () => {
     expect(container.querySelector('.dropdown-container')).toBeInTheDocument();
   });
 });
+
 describe('<Dropdown.Control />', () => {
   it('renders control content', () => {
     render(
@@ -232,6 +243,7 @@ describe('<Dropdown.Control />', () => {
     );
     expect(screen.getByText('Click me')).toBeInTheDocument();
   });
+
   it('applies frui-dropdown-control class', () => {
     const { container } = render(
       <Dropdown>
@@ -240,6 +252,7 @@ describe('<Dropdown.Control />', () => {
     );
     expect(container.querySelector('.frui-dropdown-control')).toBeInTheDocument();
   });
+
   it('applies custom className', () => {
     const { container } = render(
       <Dropdown>
@@ -249,6 +262,7 @@ describe('<Dropdown.Control />', () => {
     const control = container.querySelector('.frui-dropdown-control');
     expect(control).toHaveClass('custom-control');
   });
+
   it('applies custom inline styles', () => {
     const { container } = render(
       <Dropdown>
@@ -258,6 +272,7 @@ describe('<Dropdown.Control />', () => {
     const control = container.querySelector('.frui-dropdown-control');
     expect(control).toHaveAttribute('style');
   });
+
   it('renders children content correctly', () => {
     render(
       <Dropdown>
@@ -270,6 +285,7 @@ describe('<Dropdown.Control />', () => {
     expect(screen.getByText('Content')).toBeInTheDocument();
   });
 });
+
 describe('<Dropdown.Option />', () => {
   it('renders option component with value prop', () => {
     render(
@@ -280,14 +296,16 @@ describe('<Dropdown.Option />', () => {
     );
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
+
   it('applies frui-dropdown-option class when rendered', () => {
     render(
-      <Dropdown options={['Option 1']}>
+      <Dropdown options={[ 'Option 1' ]}>
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
+
   it('supports active state with defaultValue', () => {
     render(
       <Dropdown defaultValue="opt1">
@@ -297,6 +315,7 @@ describe('<Dropdown.Option />', () => {
     );
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
+
   it('renders custom className on option', () => {
     render(
       <Dropdown>
@@ -308,6 +327,7 @@ describe('<Dropdown.Option />', () => {
     );
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
+
   it('renders children or value as fallback', () => {
     render(
       <Dropdown>
@@ -318,37 +338,41 @@ describe('<Dropdown.Option />', () => {
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
 });
+
 describe('<Dropdown.Head />', () => {
   it('renders header component', () => {
     render(
-      <Dropdown options={['Option 1']}>
+      <Dropdown options={[ 'Option 1' ]}>
         <Dropdown.Control>Select</Dropdown.Control>
         <Dropdown.Head>Header</Dropdown.Head>
       </Dropdown>
     );
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
+
   it('applies frui-dropdown-head class', () => {
     render(
-      <Dropdown options={['Option 1']}>
+      <Dropdown options={[ 'Option 1' ]}>
         <Dropdown.Control>Select</Dropdown.Control>
         <Dropdown.Head>Header</Dropdown.Head>
       </Dropdown>
     );
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
+
   it('applies custom className to header', () => {
     render(
-      <Dropdown options={['Option 1']}>
+      <Dropdown options={[ 'Option 1' ]}>
         <Dropdown.Control>Select</Dropdown.Control>
         <Dropdown.Head className="custom-head">Header</Dropdown.Head>
       </Dropdown>
     );
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
+
   it('renders children content in header', () => {
     render(
-      <Dropdown options={['Option 1']}>
+      <Dropdown options={[ 'Option 1' ]}>
         <Dropdown.Control>Select</Dropdown.Control>
         <Dropdown.Head>
           <span>Header</span> Content
@@ -358,37 +382,41 @@ describe('<Dropdown.Head />', () => {
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
 });
+
 describe('<Dropdown.Foot />', () => {
   it('renders footer component', () => {
     render(
-      <Dropdown options={['Option 1']}>
+      <Dropdown options={[ 'Option 1' ]}>
         <Dropdown.Control>Select</Dropdown.Control>
         <Dropdown.Foot>Footer</Dropdown.Foot>
       </Dropdown>
     );
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
+
   it('applies frui-dropdown-foot class', () => {
     render(
-      <Dropdown options={['Option 1']}>
+      <Dropdown options={[ 'Option 1' ]}>
         <Dropdown.Control>Select</Dropdown.Control>
         <Dropdown.Foot>Footer</Dropdown.Foot>
       </Dropdown>
     );
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
+
   it('applies custom className to footer', () => {
     render(
-      <Dropdown options={['Option 1']}>
+      <Dropdown options={[ 'Option 1' ]}>
         <Dropdown.Control>Select</Dropdown.Control>
         <Dropdown.Foot className="custom-foot">Footer</Dropdown.Foot>
       </Dropdown>
     );
     expect(screen.getByText('Select')).toBeInTheDocument();
   });
+
   it('renders children content in footer', () => {
     render(
-      <Dropdown options={['Option 1']}>
+      <Dropdown options={[ 'Option 1' ]}>
         <Dropdown.Control>Select</Dropdown.Control>
         <Dropdown.Foot>
           <span>Footer</span> Content

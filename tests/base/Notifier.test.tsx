@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//modules
+import { toast } from 'react-toastify';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -16,8 +18,6 @@ import {
   it,
   vi
 } from 'vitest';
-//modules
-import { toast } from 'react-toastify';
 //frui
 import {
   configure,
@@ -31,7 +31,7 @@ import {
   notify,
   unload,
   useNotifier
-} from '../../src/base/Notifier';
+} from '../../src/base/Notifier.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -47,12 +47,13 @@ vi.mock('react-toastify', () => ({
     warn: vi.fn(() => 'toast-id')
   }
 }));
+
 vi.mock('universal-cookie', () => ({
   __esModule: true,
   default: class {
-    get = vi.fn()
-    remove = vi.fn()
-    set = vi.fn()
+    get = vi.fn();
+    remove = vi.fn();
+    set = vi.fn();
   }
 }));
 
@@ -65,11 +66,16 @@ afterEach(() => vi.restoreAllMocks());
 describe('<Notifier />', () => {
   it('calls notify on mount and dismiss on unmount', async () => {
     const { unmount } = render(<Notifier info>Hello</Notifier>);
-    await waitFor(() => expect(vi.mocked(toast.info)).toHaveBeenCalled());
+    await waitFor(() =>
+      expect(vi.mocked(toast.info)).toHaveBeenCalled()
+    );
     unmount();
-    await waitFor(() => expect(vi.mocked(toast.dismiss)).toHaveBeenCalled());
+    await waitFor(() =>
+      expect(vi.mocked(toast.dismiss)).toHaveBeenCalled()
+    );
   });
 });
+
 describe('<NotifierProvider />', () => {
   it('renders children and ToastContainer', () => {
     render(
@@ -81,6 +87,7 @@ describe('<NotifierProvider />', () => {
     expect(screen.getByTestId('toast-container')).toBeInTheDocument();
   });
 });
+
 describe('configure()', () => {
   it('merges custom options with defaults', () => {
     const result = configure({ name: 'custom', path: '/x' });
@@ -88,23 +95,26 @@ describe('configure()', () => {
     expect(result.cookie.path).toBe('/x');
   });
 });
+
 describe('dismiss()', () => {
   it('calls toast.dismiss with provided key', () => {
     dismiss('key');
     expect(vi.mocked(toast.dismiss)).toHaveBeenCalledWith('key');
   });
 });
+
 describe('flash()', () => {
   it('uses global cookie.set with payload', () => {
     flash('info', 'Hi', { name: 'flash' });
     expect(vi.mocked(cookie.set)).toHaveBeenCalledTimes(1);
-    const [name, value] = vi.mocked(cookie.set).mock.calls[0];
+    const [ name, value ] = vi.mocked(cookie.set).mock.calls[ 0 ];
     expect(name).toBe('flash');
     const parsed = JSON.parse(value as string);
     expect(parsed.type).toBe('info');
     expect(parsed.message).toBe('Hi');
   });
 });
+
 describe('notify()', () => {
   it('invokes correct toast methods', () => {
     notify('info', 'i');
@@ -117,6 +127,7 @@ describe('notify()', () => {
     expect(vi.mocked(toast.warn)).toHaveBeenCalled();
   });
 });
+
 describe('unload()', () => {
   it('removes cookie and triggers toast', () => {
     vi.mocked(cookie.get).mockReturnValue(
@@ -135,9 +146,6 @@ describe('unload()', () => {
     expect(vi.mocked(cookie.get)).toHaveBeenCalled();
   });
 });
-
-//--------------------------------------------------------------------//
-// Hooks
 
 describe('useNotifier()', () => {
   it('provides notifier API', () => {

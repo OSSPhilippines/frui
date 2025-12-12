@@ -59,9 +59,6 @@ describe('useTextarea()', () => {
   });
 });
 
-//--------------------------------------------------------------------//
-// Tests
-
 describe('<Textarea />', () => {
   it('renders with base class', () => {
     render(<Textarea />);

@@ -111,7 +111,7 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Film from 'frui/view/Film';`}
+          {`import ImageFilm from 'frui/view/ImageFilm';`}
         </Code>
       </div>
 

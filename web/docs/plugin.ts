@@ -84,6 +84,7 @@ export default function plugin(server: HttpServer<Config>) {
     ctx.get('/tool', '@/web/docs/views/tool/index');
     ctx.get('/tool/box', '@/web/docs/views/tool/box');
     ctx.get('/tool/card', '@/web/docs/views/tool/card');
+    ctx.get('/tool/dropdown', '@/web/docs/views/tool/dropdown');
     ctx.get('/tool/film', '@/web/docs/views/tool/film');
     ctx.get('/tool/scope', '@/web/docs/views/tool/scope');
     ctx.get('/tool/when', '@/web/docs/views/tool/when');

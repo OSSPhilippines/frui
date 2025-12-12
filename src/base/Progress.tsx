@@ -67,7 +67,7 @@ export function ProgressContainer(props: ProgressContainerProps) {
   // - add custom class
   className && classes.push(className);
   return (
-    <div {...attributes} className={classes.join(' ')}>
+    <div {...attributes} className={classes.join(' ')} style={styles}>
       {children}
     </div>
   );

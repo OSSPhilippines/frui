@@ -3,7 +3,6 @@
 
 //modules
 import { useLanguage } from 'r22n';
-import { useState } from 'react';
 //frui
 import {
   Accordion,
@@ -11,6 +10,7 @@ import {
   Badge,
   Button,
   Bread,
+  Carousel,
   Loader,
   Table,
   Tooltip,
@@ -41,7 +41,6 @@ const description = 'Components in FRUI, are compounded interfaces '
 export function Body() {
   //hooks
   const { _ } = useLanguage();
-  const [ open, setOpen ] = useState(false);
   //render
   return (
     <div className={
@@ -61,20 +60,20 @@ export function Body() {
           onClick={() => window.location.href = '/component/accordion'} 
         >
           <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-            <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-              <Accordion
-                content="px-2 py-1 text-xs border border-t-0 theme-bc-2"
-                defaultValue="1"
-                label="px-2 py-1 cursor-pointer border theme-bc-2"
-                className="w-full text-sm"
+            <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3 text-left">
+              <Accordion 
+                className="w-full"
+                content="p-1 border theme-bc-2 text-sm"
+                defaultValue="item1"
+                label="p-1 border theme-bc-3 font-bold theme-bg-2 text-xs uppercase"
               >
-                <Accordion.Item value="1">
-                  <Accordion.Label>{_('Item 1')}</Accordion.Label>
-                  <Accordion.Content>{_('Item 1 content')}</Accordion.Content>
+                <Accordion.Item value="item1">
+                  <Accordion.Label>Item 1</Accordion.Label>
+                  <Accordion.Content>Content for Item 1</Accordion.Content>
                 </Accordion.Item>
-                <Accordion.Item value="2">
-                  <Accordion.Label>{_('Item 2')}</Accordion.Label>
-                  <Accordion.Content>{_('Item 2 content')}</Accordion.Content>
+                <Accordion.Item value="item2">
+                  <Accordion.Label>Item 2</Accordion.Label>
+                  <Accordion.Content>Content for Item 2</Accordion.Content>
                 </Accordion.Item>
               </Accordion>
             </div>
@@ -119,11 +118,11 @@ export function Body() {
           onClick={() => window.location.href = '/component/bread'} 
         >
           <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-            <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
-              <Bread className="text-sm">
-                <Bread.Crumb href="#">{_('Home')}</Bread.Crumb>
-                <Bread.Crumb href="#">{_('Library')}</Bread.Crumb>
-                <Bread.Crumb>{_('Data')}</Bread.Crumb>
+            <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3 text-xs">
+              <Bread crumb={({ active }) => active ? 'font-bold' : 'font-normal'}>
+                <Bread.Slicer />
+                <Bread.Crumb icon="folder">Crumb 1</Bread.Crumb>
+                <Bread.Crumb icon="file">Crumb 2</Bread.Crumb>
               </Bread>
             </div>
             <h2 className="my-2 font-semibold text-center uppercase">
@@ -141,16 +140,50 @@ export function Body() {
                 <Button success rounded className="text-xs">
                   {_('Success')}
                 </Button>
-                <Button error rounded className="text-xs">
+                <Button error rounded outline className="text-xs">
                   {_('Error')}
-                </Button>
-                <Button info outline rounded className="text-xs">
-                  {_('Info')}
                 </Button>
               </div>
             </div>
             <h2 className="my-2 font-semibold text-center uppercase">
               {_('Button')}
+            </h2>
+          </div>
+        </div>
+        <div
+          className="block basis-1/2 md:basis-1/3 text-center cursor-pointer"
+          onClick={() => window.location.href = '/component/carousel'} 
+        >
+          <div className="m-2 border theme-bc-2 rounded overflow-hidden">
+            <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
+              <div className="w-[180px] m-auto">
+                <Carousel auto repeat>
+                  <Carousel.Prev asChild>
+                    <Button info sm>&lt;</Button>
+                  </Carousel.Prev>
+                  <Carousel.Frame className="w-[60px]">
+                    <img src="https://images.wsj.net/im-580612/8SR" />
+                  </Carousel.Frame>
+                  <Carousel.Frame className="w-[60px]">
+                    <img src="https://images.wsj.net/im-580612/8SR" />
+                  </Carousel.Frame>
+                  <Carousel.Frame className="w-[60px]">
+                    <img src="https://images.wsj.net/im-580612/8SR" />
+                  </Carousel.Frame>
+                  <Carousel.Frame className="w-[60px]">
+                    <img src="https://images.wsj.net/im-580612/8SR" />
+                  </Carousel.Frame>
+                  <Carousel.Frame className="w-[60px]">
+                    <img src="https://images.wsj.net/im-580612/8SR" />
+                  </Carousel.Frame>
+                  <Carousel.Next asChild>
+                    <Button info sm>&gt;</Button>
+                  </Carousel.Next>
+                </Carousel>
+              </div>
+            </div>
+            <h2 className="my-2 font-semibold text-center uppercase">
+              {_('Carousel')}
             </h2>
           </div>
         </div>
@@ -160,23 +193,21 @@ export function Body() {
         >
           <div className="m-2 border theme-bc-2 rounded overflow-hidden">
             <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
-              <div onClick={(e) => e.stopPropagation()}>
-                <Button info onClick={() => setOpen(true)}>Open Dialog</Button>
+              <div className="relative w-full h-full">
                 <Dialog 
-                  open={open} 
-                  onClose={() => setOpen(false)}
-                  className="theme-bg-0 theme-bc-1 px-w-320 rounded-lg overflow-hidden shadow-lg"
+                  overlay={{ absolute: true }}
+                  open={true} 
+                  className="theme-bg-0 theme-bc-1 rounded-lg overflow-hidden shadow-lg w-[180px]"
                 >
-                  <header className="flex items-center p-3 theme-bg-2">
-                    <h3 className="flex-grow font-semibold uppercase">Basic Example</h3>
-                    <Dialog.Close className="text-2xl theme-error cursor-pointer">
-                      &times;
-                    </Dialog.Close>
+                  <header className="flex items-center p-1 theme-bg-2">
+                    <h3 className="text-xs flex-grow font-semibold uppercase">
+                      Are you sure?
+                    </h3>
                   </header>
-                  <p className="px-3 py-6">This is a basic dialog example.</p>
-                  <footer className="border-t theme-bc-1 p-3 flex justify-end">
+                  <p className="p-1 text-sm">Yes I am.</p>
+                  <footer className="border-t theme-bc-1 p-1 flex justify-end">
                     <Dialog.Close className="inline-block theme-error">
-                      <Button error>Close</Button>
+                      <Button error sm pill>Close</Button>
                     </Dialog.Close>
                   </footer>
                 </Dialog>
@@ -206,7 +237,7 @@ export function Body() {
         >
           <div className="m-2 border theme-bc-2 rounded overflow-hidden">
             <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
-              <Loader info className="m-2">Loading...</Loader>
+              <Loader info slice={1} className="m-2">Loading...</Loader>
             </div>
             <h2 className="my-2 font-semibold text-center uppercase">
               {_('Loader')}
@@ -225,7 +256,10 @@ export function Body() {
                 className="text-xs"
                 onClick={(e) => {
                   e.stopPropagation();
-                  Notifier.notify('success', 'This is a success message!');
+                  Notifier.notify('info', 'Loading...');
+                  setTimeout(() => {
+                    window.location.href = '/component/notifier';
+                  }, 2000);
                 }}
               >
                 {_('Click to Notify')}
@@ -246,9 +280,7 @@ export function Body() {
                 total={500}
                 skip={100}
                 take={50}
-                radius={2}
-                start
-                end
+                radius={1}
                 prev
                 next
                 className={({ active }) => `
@@ -269,10 +301,7 @@ export function Body() {
           <div className="m-2 border theme-bc-2 rounded overflow-hidden">
             <div className="flex items-center justify-center h-[100px] w-full theme-bg-1 px-3">
               <div className="w-full space-y-2">
-                <Progress info className="theme-white text-xs w-[75%]">75%</Progress>
-                <Progress success className="theme-white text-xs w-[50%]">50%</Progress>
-                <Progress warning className="theme-white text-xs w-[35%]">35%</Progress>
-                <Progress error className="theme-white text-xs w-[20%]">20%</Progress>
+                <Progress width={50} info pill bgc="#EFEFEF" txc="white">50%</Progress>
               </div>
             </div>
             <h2 className="my-2 font-semibold text-center uppercase">
@@ -341,8 +370,8 @@ export function Body() {
         >
           <div className="m-2 border theme-bc-2 rounded overflow-hidden">
             <div className="flex items-center justify-center h-[100px] w-full theme-bg-1">
-              <Tooltip warning text="This is a tooltip" hover>
-                <Button warning>Hover over me</Button>
+              <Tooltip warning text="This is a tooltip" hover arrow>
+                <Button black outline>Hover</Button>
               </Tooltip>
             </div>
             <h2 className="my-2 font-semibold text-center uppercase">

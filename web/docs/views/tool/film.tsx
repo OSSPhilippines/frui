@@ -74,7 +74,7 @@ export function Menu() {
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#examples">{_('Examples')}</a>
+            <a href="#basic">{_('Basics')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#slots">{_('Slots')}</a>
@@ -115,7 +115,7 @@ export function Body() {
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Film from 'frui/view/Film';`}
+          {`import Film from 'frui/Film';`}
         </Code>
       </div>
 
@@ -125,8 +125,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following example shows how to setup a basic image 
-            film.
+            The following example shows how to setup a basic film.
           </Translate>
         </p>
         <Preview title="Basic Example" className="border border-2 theme-bc-3">

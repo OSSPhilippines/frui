@@ -61,6 +61,8 @@ export type DropdownConfig = {
   append?: string,  
   //position of the dropdown
   bottom?: boolean,
+  //uncontrolled open state
+  defaultOpened?: boolean,
   //uncontrolled serializable select value
   defaultValue?: string|string[],
   //position of the dropdown
@@ -71,6 +73,8 @@ export type DropdownConfig = {
   onDropdown?: (show: boolean) => void,
   //update handler
   onUpdate?: (value: string|string[]) => void,
+  //controlled open state
+  opened?: boolean,
   //position of the dropdown
   top?: boolean,
   //position of the dropdown
@@ -383,6 +387,8 @@ export function useDropdown(config: DropdownConfig) {
     append, //?: string  
     //position of the dropdown
     bottom, //?: boolean
+    //uncontrolled open state
+    defaultOpened = false, //?: boolean
     //uncontrolled serializable select value
     defaultValue, //?: string|string[]
     //position of the dropdown
@@ -393,6 +399,8 @@ export function useDropdown(config: DropdownConfig) {
     onDropdown, //?: (show: boolean) => void
     //update handler
     onUpdate, //?: (value: string|string[]) => void
+    //controlled open state
+    opened: controlledOpened, //?: boolean
     //position of the dropdown
     top, //?: boolean
     //position of the dropdown
@@ -415,7 +423,7 @@ export function useDropdown(config: DropdownConfig) {
     : [ defaultValue ];
   //hooks
   // whether the dropdown is open
-  const [ opened, open ] = useState(false);
+  const [ opened, open ] = useState(defaultOpened);
   // the current selected option/s
   const [ selected, setSelected ] = useState(defaultValues);
   // position of the dropdown (applicable for both relative and absolute dropdowns)
@@ -479,6 +487,11 @@ export function useDropdown(config: DropdownConfig) {
     //trigger update handler
     value && onUpdate && onUpdate(value);
   }, [ value ]);
+  // when controlled opened changes
+  useEffect(() => {
+    if (typeof controlledOpened === 'undefined') return;
+    open(controlledOpened);
+  }, [ controlledOpened ]);
   // when dropdown opens/closes
   useEffect(() => {
     //trigger dropdown handler
@@ -713,6 +726,8 @@ export function Dropdown(props: DropdownProps) {
     children,
     //custom class name
     className,
+    //uncontrolled open state
+    defaultOpened, //?: boolean
     //uncontrolled serializable select value
     defaultValue, //?: string|string[]
     //slot: style to apply to the select drop down container
@@ -725,6 +740,8 @@ export function Dropdown(props: DropdownProps) {
     onDropdown, //?: (show: boolean) => void
     //update handler
     onUpdate, //?: (value: string) => void
+    //controlled open state
+    opened: controlledOpened, //?: boolean
     //slot: style to apply to the select control
     option, //: CallableSlotStyleProp<DropdownStates>
     //serialized list of options as array or object
@@ -757,11 +774,13 @@ export function Dropdown(props: DropdownProps) {
   } = useDropdown({
     append,
     bottom,
+    defaultOpened,
     defaultValue,
     left,
     multiple,
     onDropdown,
     onUpdate,
+    opened: controlledOpened,
     right,
     top,
     value
@@ -793,7 +812,7 @@ export function Dropdown(props: DropdownProps) {
   // get slot styles
   const containerStyles = getClassStyles({
     //default classes to apply
-    classes: [ 'dropdown-container' ],
+    classes: [ 'frui-dropdown-container' ],
     //style props
     props: container 
       ? getSlotStyles(container, {}) 

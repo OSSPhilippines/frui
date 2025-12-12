@@ -21,46 +21,92 @@ const description = 'Carousel aligns content side by side in order for it to sli
 
 const examples = [
 //0
-`<Carousel value={[
-  'https://images.wsj.net/im-580612/8SR', 
-  'https://images.wsj.net/im-580612/8SR', 
-  'https://images.wsj.net/im-580612/8SR'
-]} width="100" />`,
+`<Carousel>
+  <Carousel.Frame className="w-[100px]">
+    <img src="https://images.wsj.net/im-580612/8SR" />
+  </Carousel.Frame>
+  <Carousel.Frame className="w-[100px]">
+    <img src="https://images.wsj.net/im-580612/8SR" />
+  </Carousel.Frame>
+  <Carousel.Frame className="w-[100px]">
+    <img src="https://images.wsj.net/im-580612/8SR" />
+  </Carousel.Frame>
+</Carousel>`,
  //1
-`<div className="w-[250px] m-auto">
-  <Carousel scroll value={[
-    'https://images.wsj.net/im-580612/8SR', 
-    'https://images.wsj.net/im-580612/8SR', 
-    'https://images.wsj.net/im-580612/8SR', 
-    'https://images.wsj.net/im-580612/8SR', 
-    'https://images.wsj.net/im-580612/8SR'
-  ]} width="200" />
-</div>`,
+`<Carousel>
+  <Carousel.Frame className="theme-bc-2 p-3 border">
+    <h2 className="font-bold">First Frame</h2>
+    <p>This is the content of the first frame.</p>
+  </Carousel.Frame>
+  <Carousel.Frame className="theme-bc-2 p-3 border">
+    <h2 className="font-bold">Second Frame</h2>
+    <p>This is the content of the second frame.</p>
+  </Carousel.Frame>
+</Carousel>`,
  //2
+`<div className="w-[250px] m-auto">
+  <Carousel auto>
+    <Carousel.Frame className="w-[200px]">
+      <img src="https://images.wsj.net/im-580612/8SR" />
+    </Carousel.Frame>
+    <Carousel.Frame className="w-[200px]">
+      <img src="https://images.wsj.net/im-580612/8SR" />
+    </Carousel.Frame>
+    <Carousel.Frame className="w-[200px]">
+      <img src="https://images.wsj.net/im-580612/8SR" />
+    </Carousel.Frame>
+    <Carousel.Frame className="w-[200px]">
+      <img src="https://images.wsj.net/im-580612/8SR" />
+    </Carousel.Frame>
+    <Carousel.Frame className="w-[200px]">
+      <img src="https://images.wsj.net/im-580612/8SR" />
+    </Carousel.Frame>
+  </Carousel>
+</div>`,
+ //3
 `<div className="w-[336px] m-auto">
-  <Carousel hidden value={[
-    'https://images.wsj.net/im-580612/8SR', 
-    'https://images.wsj.net/im-580612/8SR', 
-    'https://images.wsj.net/im-580612/8SR', 
-    'https://images.wsj.net/im-580612/8SR', 
-    'https://images.wsj.net/im-580612/8SR'
-  ]} width="200">
+  <Carousel hidden repeat>
     <Carousel.Prev asChild>
       <Button info>Prev</Button>
     </Carousel.Prev>
+    <Carousel.Frame className="w-[200px]">
+      <img src="https://images.wsj.net/im-580612/8SR" width="200" />
+    </Carousel.Frame>
+    <Carousel.Frame className="w-[200px]">
+      <img src="https://images.wsj.net/im-580612/8SR" width="200" />
+    </Carousel.Frame>
+    <Carousel.Frame className="w-[200px]">
+      <img src="https://images.wsj.net/im-580612/8SR" width="200" />
+    </Carousel.Frame>
+    <Carousel.Frame className="w-[200px]">
+      <img src="https://images.wsj.net/im-580612/8SR" width="200" />
+    </Carousel.Frame>
+    <Carousel.Frame className="w-[200px]">
+      <img src="https://images.wsj.net/im-580612/8SR" width="200" />
+    </Carousel.Frame>
     <Carousel.Next asChild>
       <Button info>Next</Button>
     </Carousel.Next>
   </Carousel>
 </div>`,
- //3
-`<Carousel auto image="rounded-full" wrapper="inline-block mx-3" value={[
-  'https://images.wsj.net/im-580612/8SR', 
-  'https://images.wsj.net/im-580612/8SR', 
-  'https://images.wsj.net/im-580612/8SR', 
-  'https://images.wsj.net/im-580612/8SR', 
-  'https://images.wsj.net/im-580612/8SR'
-]} width="200" />`,
+//4
+`<Carousel auto frame="w-[200px] overflow-hidden rounded-full">
+  <Carousel.Frame>
+    <img src="https://images.wsj.net/im-580612/8SR" />
+  </Carousel.Frame>
+  <Carousel.Frame>
+    <img src="https://images.wsj.net/im-580612/8SR" />
+  </Carousel.Frame>
+  <Carousel.Frame>
+    <img src="https://images.wsj.net/im-580612/8SR" />
+  </Carousel.Frame>
+  <Carousel.Frame>
+    <img src="https://images.wsj.net/im-580612/8SR" />
+  </Carousel.Frame>
+  <Carousel.Frame>
+    <img src="https://images.wsj.net/im-580612/8SR" />
+  </Carousel.Frame>
+</Carousel>`
 ];
 
 const props = [
@@ -195,7 +241,7 @@ export function Body() {
               </Carousel.Frame>
             </Carousel>
           </Preview.Example>
-          <Preview.Code>{examples[0]}</Preview.Code>
+          <Preview.Code>{examples[1]}</Preview.Code>
         </Preview>
       </div>
 
@@ -232,7 +278,7 @@ export function Body() {
               </Carousel>
             </div>
           </Preview.Example>
-          <Preview.Code>{examples[1]}</Preview.Code>
+          <Preview.Code>{examples[2]}</Preview.Code>
         </Preview>
       </div>
 
@@ -275,7 +321,7 @@ export function Body() {
               </Carousel>
             </div>
           </Preview.Example>
-          <Preview.Code>{examples[2]}</Preview.Code>
+          <Preview.Code>{examples[3]}</Preview.Code>
         </Preview>
         <p className="py-2">
           <Translate>
@@ -339,7 +385,7 @@ export function Body() {
               </Carousel.Frame>
             </Carousel>
           </Preview.Example>
-          <Preview.Code>{examples[1]}</Preview.Code>
+          <Preview.Code>{examples[4]}</Preview.Code>
         </Preview>
       </div>
 

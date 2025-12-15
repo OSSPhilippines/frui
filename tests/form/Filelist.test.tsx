@@ -114,7 +114,7 @@ describe('<FileList />', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('resets list when defaultValue prop becomes empty array', async () => {
+  it('resets list when defaultValue is empty', async () => {
     const { rerender } = render(
       <FileList defaultValue={[ 'a.png', 'b.png' ]} />
     );

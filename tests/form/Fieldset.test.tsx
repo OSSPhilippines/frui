@@ -75,7 +75,7 @@ describe('useFieldset()', () => {
     expect(result.current.values).toEqual([ 'a', 'b' ]);
   });
 
-  it('calls onChange and onUpdate when set is called with new values', () => {
+  it('calls onChange and onUpdate', () => {
     const onChange = vi.fn();
     const onUpdate = vi.fn();
     const { result } = renderHook(() =>

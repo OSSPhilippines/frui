@@ -1,12 +1,11 @@
 //--------------------------------------------------------------------//
 // Imports
+
 //modules
 import { describe, expect, it, vi } from 'vitest';
-
 //tests
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-
 //frui
 import type { AccordionContextProps } from '../../src/base/Accordion.js';
 import {

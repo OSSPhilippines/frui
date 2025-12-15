@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------//
 // Imports
+
 //tests
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-
 //frui
 import Scope, {
   ScopeContext,
@@ -64,7 +64,9 @@ describe('<Scope />', () => {
         </Scope>
       );
 
-      expect(container.querySelector('[ data-testid^="scope-" ]')).toBeNull();
+      expect(
+        container.querySelector('[ data-testid^="scope-" ]')
+      ).toBeNull();
     });
   });
 
@@ -111,7 +113,9 @@ describe('<Scope />', () => {
         </Scope>
       );
 
-      expect(container.querySelector('[ data-testid^="scope-" ]')).toBeNull();
+      expect(
+        container.querySelector('[ data-testid^="scope-" ]')
+      ).toBeNull();
     });
   });
 
@@ -146,7 +150,9 @@ describe('<Scope />', () => {
         </Scope>
       );
 
-      expect(container.querySelector('[ data-testid^="scope-" ]')).toBeNull();
+      expect(
+        container.querySelector('[ data-testid^="scope-" ]')
+      ).toBeNull();
     });
   });
 
@@ -184,7 +190,9 @@ describe('<Scope />', () => {
         </Scope>
       );
 
-      expect(container.querySelector('[ data-testid^="scope-" ]')).toBeNull();
+      expect(
+        container.querySelector('[ data-testid^="scope-" ]')
+      ).toBeNull();
     });
   });
 });

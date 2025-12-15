@@ -17,6 +17,7 @@ import Card from '../../src/base/Card.js';
 
 //--------------------------------------------------------------------//
 // Tests
+
 describe('<Card />', () => {
   it('renders a section element with frui-card class', () => {
     render(<Card data-testid="card">Card Content</Card>);

@@ -3,15 +3,24 @@
 
 //tests
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import {
+  fireEvent,
+  render,
+  screen
+} from '@testing-library/react';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
 //frui
 import Checkbox from '../../src/form/Checkbox.js';
 
 //--------------------------------------------------------------------//
 // Tests
 
-describe('<Checkbox /> component', () => {
+describe('<Checkbox />', () => {
   it('applies error classes when error prop is provided', () => {
     render(<Checkbox error label="Error field" />);
     const wrapper = screen.getByText('Error field').closest('label')!;
@@ -19,7 +28,15 @@ describe('<Checkbox /> component', () => {
   });
 
   it('applies shape and color class combinations', () => {
-    render(<Checkbox blue circle className="own" label="Styled" rounded />);
+    render(
+      <Checkbox
+        blue
+        circle
+        className="own"
+        label="Styled"
+        rounded
+      />
+    );
     const wrapper = screen.getByText('Styled').closest('label')!;
     expect(wrapper).toHaveClass('frui-form-option');
     expect(wrapper).toHaveClass('frui-form-option-circle');
@@ -32,11 +49,11 @@ describe('<Checkbox /> component', () => {
     const onChange = vi.fn();
     const onUpdate = vi.fn();
     render(
-      <Checkbox 
-        label="Notify" 
-        onChange={onChange} 
-        onUpdate={onUpdate} 
-        value="newsletter" 
+      <Checkbox
+        label="Notify"
+        onChange={onChange}
+        onUpdate={onUpdate}
+        value="newsletter"
       />
     );
     const input = screen.getByRole('checkbox');
@@ -47,7 +64,7 @@ describe('<Checkbox /> component', () => {
     expect(onUpdate).toHaveBeenLastCalledWith(undefined, false);
   });
 
-  it('falls back to square/check shape and default color when none specified', () => {
+  it('defaults to check shape and color', () => {
     render(<Checkbox label="Plain" />);
     const wrapper = screen.getByText('Plain').closest('label')!;
     expect(wrapper).toHaveClass('frui-form-option-check');
@@ -56,10 +73,10 @@ describe('<Checkbox /> component', () => {
 
   it('passes through additional props to input element', () => {
     render(
-      <Checkbox 
+      <Checkbox
         data-testid="checkbox"
-        label="Spread" 
-        name="user-consent" 
+        label="Spread"
+        name="user-consent"
       />
     );
     const input = screen.getByTestId('checkbox');
@@ -72,8 +89,9 @@ describe('<Checkbox /> component', () => {
     const wrapper = screen.getByText('Accept Terms').closest('label');
     expect(wrapper).toHaveClass('frui-form-option');
     expect(screen.getByText('Accept Terms')).toBeInTheDocument();
-    expect(screen.getByRole('checkbox'))
-      .toHaveClass('frui-form-option-control');
+    expect(screen.getByRole('checkbox')).toHaveClass(
+      'frui-form-option-control'
+    );
   });
 
   it('respects controlled checked prop updates', () => {

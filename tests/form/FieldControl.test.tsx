@@ -3,8 +3,15 @@
 
 //tests
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import {
+  render,
+  screen
+} from '@testing-library/react';
+import {
+  describe,
+  expect,
+  it
+} from 'vitest';
 //frui
 import FieldControl from '../../src/form/FieldControl.js';
 
@@ -14,9 +21,11 @@ import FieldControl from '../../src/form/FieldControl.js';
 describe('<FieldControl />', () => {
   it('renders with default class', () => {
     render(<FieldControl />);
-    const containers = document.querySelectorAll('.frui-form-field-control');
-    expect(containers.length).toBe(1);
-    expect(containers[0]).toHaveClass('frui-form-field-control');
+    const container = document.querySelector(
+      '.frui-form-field-control'
+    );
+    expect(container).toBeInTheDocument();
+    expect(container).toHaveClass('frui-form-field-control');
   });
 
   it('renders label when provided', () => {
@@ -40,15 +49,21 @@ describe('<FieldControl />', () => {
       </FieldControl>
     );
     const child = screen.getByTestId('child-input');
+    const fieldContainer = document.querySelector(
+      '.frui-form-field-control-field'
+    );
     expect(child).toBeInTheDocument();
-
-    const fieldContainer = document.querySelector('.frui-form-field-control-field');
     expect(fieldContainer).toBeInTheDocument();
   });
 
   it('applies custom className when passed', () => {
     render(<FieldControl className="custom-class" />);
-    const container = document.querySelector('.frui-form-field-control');
-    expect(container).toHaveClass('frui-form-field-control', 'custom-class');
+    const container = document.querySelector(
+      '.frui-form-field-control'
+    );
+    expect(container).toHaveClass(
+      'frui-form-field-control',
+      'custom-class'
+    );
   });
 });

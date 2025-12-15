@@ -3,12 +3,21 @@
 
 //tests
 import '@testing-library/jest-dom';
-import { render, screen, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import {
+  render,
+  screen,
+  waitFor
+} from '@testing-library/react';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
 //frui
-import CodeEditor, { 
-  getEditorOptions, 
-  getLanguageExtension 
+import CodeEditor, {
+  getEditorOptions,
+  getLanguageExtension
 } from '../../src/form/CodeEditor.js';
 
 //--------------------------------------------------------------------//
@@ -22,17 +31,17 @@ vi.mock('@codemirror/state', () => ({
 vi.mock('@codemirror/view', () => ({
   __esModule: true,
   EditorView: class {
-    static updateListener = { of: vi.fn(() => ({})) }
+    static updateListener = { of: vi.fn(() => ({})) };
     constructor(_: unknown) {}
-    destroy = vi.fn()
+    destroy = vi.fn();
   },
   lineNumbers: vi.fn(() => ({}))
 }));
 
 vi.mock('codemirror', () => ({
   __esModule: true,
-  minimalSetup: {},
-  basicSetup: {}
+  basicSetup: {},
+  minimalSetup: {}
 }));
 
 vi.mock('@codemirror/language-data', () => ({
@@ -40,17 +49,17 @@ vi.mock('@codemirror/language-data', () => ({
   languages: [
     {
       name: 'javascript',
-      alias: ['js'],
+      alias: [ 'js' ],
       load: vi.fn(async () => {}),
-      support: { language: 'mockLang' },
+      support: { language: 'mockLang' }
     }
   ]
 }));
 
 vi.mock('@codemirror/language', () => ({
   __esModule: true,
-  LanguageSupport: class {},
-  LanguageDescription: class {}
+  LanguageDescription: class {},
+  LanguageSupport: class {}
 }));
 
 //--------------------------------------------------------------------//
@@ -72,7 +81,11 @@ describe('getEditorOptions()', () => {
 describe('getLanguageExtension()', () => {
   it('returns language support when language found', async () => {
     const ext = await getLanguageExtension('javascript');
-    expect(ext).toEqual(expect.objectContaining({ language: 'mockLang' }));
+    expect(ext).toEqual(
+      expect.objectContaining({
+        language: 'mockLang'
+      })
+    );
   });
 
   it('returns undefined for unsupported language', async () => {
@@ -102,16 +115,16 @@ describe('<CodeEditor />', () => {
     ) as HTMLDivElement;
     expect(outer).toBeInTheDocument();
     expect(outer.style.width).toBe('300px');
-  })
+  });
 
   it('applies line numbers option when numbers=true', () => {
-    render(<CodeEditor numbers />)
-    expect(
-      screen.getByRole('textbox')
-    ).toHaveClass('frui-form-code-editor-field');
-  })
+    render(<CodeEditor numbers />);
+    expect(screen.getByRole('textbox')).toHaveClass(
+      'frui-form-code-editor-field'
+    );
+  });
 
-  it('changes currentValue when controlled prop value changes', async () => {
+  it('updates value when prop changes', async () => {
     const { rerender } = render(<CodeEditor value="first" />);
     const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
     expect(textarea.value).toBe('first');

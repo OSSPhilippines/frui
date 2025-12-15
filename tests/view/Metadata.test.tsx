@@ -3,8 +3,15 @@
 
 //tests
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import {
+  render,
+  screen
+} from '@testing-library/react';
+import {
+  describe,
+  expect,
+  it
+} from 'vitest';
 //frui
 import Metadata from '../../src/view/Metadata.js';
 
@@ -16,6 +23,7 @@ describe('<Metadata />', () => {
     render(<Metadata value={{ key: 'value' }} />);
     const table = screen.getByRole('table');
     const tbody = table.querySelector('tbody');
+
     expect(table.tagName.toLowerCase()).toBe('table');
     expect(tbody).toBeInTheDocument();
   });
@@ -24,12 +32,14 @@ describe('<Metadata />', () => {
     const data = { name: 'John', age: 30, city: 'Paris' };
     render(<Metadata value={data} />);
     const rows = screen.getAllByRole('row');
+
     expect(rows).toHaveLength(Object.keys(data).length);
   });
 
   it('displays the correct key and value text', () => {
     const data = { name: 'Alice', age: 25 };
     render(<Metadata value={data} />);
+
     expect(screen.getByText('name')).toBeInTheDocument();
     expect(screen.getByText('Alice')).toBeInTheDocument();
     expect(screen.getByText('age')).toBeInTheDocument();
@@ -39,7 +49,11 @@ describe('<Metadata />', () => {
   it('applies className and style to all table cells', () => {
     const style = { color: 'red' };
     render(
-      <Metadata value={{ one: 1 }} className="custom" style={style} />
+      <Metadata
+        value={{ one: 1 }}
+        className="custom"
+        style={style}
+      />
     );
     const cells = screen.getAllByRole('cell');
 
@@ -52,6 +66,7 @@ describe('<Metadata />', () => {
   it('renders no rows when value is an empty object', () => {
     render(<Metadata value={{}} />);
     const rows = screen.queryAllByRole('row');
+
     expect(rows).toHaveLength(0);
   });
 });

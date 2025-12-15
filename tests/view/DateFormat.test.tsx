@@ -3,8 +3,17 @@
 
 //tests
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  render,
+  screen
+} from '@testing-library/react';
+import {
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
 //modules
 import moment from 'moment';
 //frui
@@ -36,14 +45,22 @@ describe('<DateFormat />', () => {
   it('renders relative time when format="ago"', () => {
     const past = new Date('2023-12-31T12:00:00Z');
     render(<DateFormat value={past} format="ago" />);
-    const expected = moment(past).locale('en').fromNow();
+
+    const expected = moment(past)
+      .locale('en')
+      .fromNow();
+
     expect(screen.getByText(expected)).toBeInTheDocument();
   });
 
   it('renders short relative time when format="a"', () => {
     const past = new Date('2023-12-31T12:00:00Z');
     render(<DateFormat value={past} format="a" />);
-    const expected = moment(past).locale('short').fromNow();
+
+    const expected = moment(past)
+      .locale('short')
+      .fromNow();
+
     expect(screen.getByText(expected)).toBeInTheDocument();
   });
 
@@ -55,9 +72,11 @@ describe('<DateFormat />', () => {
         format="MMMM YYYY"
       />
     );
+
     const expected = moment('2024-07-04T00:00:00Z')
       .locale('fr')
       .format('MMMM YYYY');
+
     expect(screen.getByText(expected)).toBeInTheDocument();
   });
 });

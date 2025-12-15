@@ -1,14 +1,25 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//modules
+import type { ChangeEvent, ReactNode } from 'react';
 //tests
 import '@testing-library/jest-dom';
-import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import {
+  act,
+  fireEvent,
+  render,
+  screen
+} from '@testing-library/react';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
 //frui
-import MarkdownEditor, { 
-  useMarkdownEditor 
+import MarkdownEditor, {
+  useMarkdownEditor
 } from '../../src/form/MarkdownEditor.js';
 
 //--------------------------------------------------------------------//
@@ -17,126 +28,137 @@ import MarkdownEditor, {
 vi.mock('../../src/form/Textarea.js', () => ({
   __esModule: true,
   default: ({
-    value,
+    defaultValue,
     onUpdate,
     rows,
+    value
   }: {
+    defaultValue?: string,
+    onUpdate?: (value?: string) => void,
+    rows?: number,
     value?: string
-    onUpdate?: (v: string) => void
-    rows?: number
-  }) => (
-    <textarea
-      data-testid="mock-textarea"
-      rows={rows}
-      value={value ?? ''}
-      onChange={(e) => {
-        const evt = e as React.ChangeEvent<HTMLTextAreaElement>
-        onUpdate?.(evt.target.value)
-      }}
-    />
-  )
+  }) => {
+    const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+      onUpdate?.(e.target.value);
+    };
+    return (
+      <textarea
+        data-testid="mock-textarea"
+        defaultValue={defaultValue}
+        onChange={handleChange}
+        rows={rows}
+        value={value}
+      />
+    );
+  }
 }));
 
-vi.mock('../../src/Button.js', () => ({
+vi.mock('../../src/base/Button.js', () => ({
   __esModule: true,
   default: ({
     children,
-    onClick,
     muted,
+    onClick
   }: {
-    children?: React.ReactNode
+    children?: ReactNode,
+    muted?: boolean,
     onClick?: () => void
-    muted?: boolean
   }) => (
-    <button data-testid="mock-button" data-muted={muted} onClick={onClick}>
+    <button
+      data-muted={muted}
+      data-testid="mock-button"
+      onClick={onClick}
+    >
       {children}
     </button>
-  ),
-}))
+  )
+}));
 
 vi.mock('markdown-to-jsx', () => ({
   __esModule: true,
-  default: ({ children }: { children?: React.ReactNode }) => <div>{children}</div>,
-}))
+  default: ({ children }: { children?: ReactNode }) => (
+    <div data-testid="mock-markdown">{children}</div>
+  )
+}));
 
 //--------------------------------------------------------------------//
-// Helper Hook Wrapper
-//--------------------------------------------------------------------//
+// Helpers
+
 function renderHookWithState<T>(hook: () => T): { current: T } {
-  let currentValue: T
+  let currentValue: T;
   function TestHook() {
-    currentValue = hook()
-    return null
+    currentValue = hook();
+    return null;
   }
-  render(<TestHook />)
-  return { current: currentValue! }
+  render(<TestHook />);
+  return { current: currentValue! };
 }
 
 //--------------------------------------------------------------------//
 // Tests
-//--------------------------------------------------------------------//
-describe('useMarkdownEditor', () => {
-  it('returns edit mode by default and switches correctly', () => {
-    const state = renderHookWithState(() => useMarkdownEditor({}))
-    expect(state.current.mode).toBe('edit')
 
-    act(() => {
-      state.current.handlers.mode('preview')
-    })
+describe('useMarkdownEditor()', () => {
+  it('initializes in edit mode and toggles correctly', () => {
+    const state = renderHookWithState(() =>
+      useMarkdownEditor({})
+    );
+    expect(state.current.mode).toBe('edit');
+    act(() => state.current.handlers.mode('preview'));
+    expect(typeof state.current.handlers.mode).toBe('function');
+  });
 
-    expect(typeof state.current.handlers.mode).toBe('function')
-  })
-
-  it('calls onUpdate when update handler is triggered', () => {
-    const onUpdate = vi.fn()
-    const state = renderHookWithState(() => useMarkdownEditor({ onUpdate }))
-    act(() => {
-      state.current.handlers.update('changed text')
-    })
-    expect(onUpdate).toHaveBeenCalledWith('changed text')
-  })
-})
+  it('calls onUpdate when update handler runs', () => {
+    const onUpdate = vi.fn();
+    const state = renderHookWithState(() =>
+      useMarkdownEditor({ onUpdate })
+    );
+    act(() => state.current.handlers.update('changed text'));
+    expect(onUpdate).toHaveBeenCalledWith('changed text');
+  });
+});
 
 describe('<MarkdownEditor />', () => {
-  it('renders textarea and buttons', () => {
-    render(<MarkdownEditor />)
-    const textarea = screen.getByTestId('mock-textarea')
-    const buttons = screen.getAllByTestId('mock-button')
-    expect(textarea).toBeInTheDocument()
-    expect(buttons.length).toBe(2)
-  })
+  it('renders textarea and toggle buttons', () => {
+    render(<MarkdownEditor />);
+    const textarea = screen.getByTestId('mock-textarea');
+    const buttons = screen.getAllByTestId('mock-button');
+    expect(textarea).toBeInTheDocument();
+    expect(buttons).toHaveLength(2);
+  });
 
-  it('switches to preview mode on button click', () => {
-    render(<MarkdownEditor defaultValue="**bold text**" />)
-    const buttons = screen.getAllByTestId('mock-button')
-    const previewFrame = document.querySelector('.frui-form-markdown-editor-preview') as HTMLIFrameElement
-
-    // initial display
-    expect(previewFrame).toHaveStyle({ display: 'none' })
-
+  it('switches to preview mode on toggle click', () => {
+    render(<MarkdownEditor defaultValue="**bold text**" />);
+    const buttons = screen.getAllByTestId('mock-button');
+    const previewFrame = document.querySelector(
+      '.frui-form-markdown-editor-preview'
+    ) as HTMLIFrameElement;
+    expect(previewFrame).toHaveStyle({ display: 'none' });
     act(() => {
-      fireEvent.click(buttons[1])
-    })
+      fireEvent.click(buttons[ 1 ]);
+    });
+    expect(previewFrame).toHaveStyle({ display: 'block' });
+  });
 
-    expect(buttons[1]).toBeInTheDocument()
-  })
-
-  it('calls onUpdate when user types in textarea', () => {
-    const onUpdate = vi.fn()
-    render(<MarkdownEditor onUpdate={onUpdate} />)
-    const textarea = screen.getByTestId('mock-textarea')
-
+  it('calls onUpdate when editing content', () => {
+    const onUpdate = vi.fn();
+    render(<MarkdownEditor onUpdate={onUpdate} />);
+    const textarea = screen.getByTestId('mock-textarea');
     act(() => {
-      fireEvent.change(textarea, { target: { value: 'Updated markdown content' } })
-    })
+      fireEvent.change(textarea, {
+        target: { value: 'Updated markdown content' }
+      });
+    });
+    expect(onUpdate).toHaveBeenCalledWith(
+      'Updated markdown content'
+    );
+  });
 
-    expect(onUpdate).toHaveBeenCalledWith('Updated markdown content')
-  })
-
-  it('renders markdown preview content properly', () => {
-    render(<MarkdownEditor defaultValue="Hello *Markdown*" />)
-    const iframe = document.querySelector('.frui-form-markdown-editor-preview') as HTMLIFrameElement
-    expect(iframe).toHaveAttribute('srcdoc')
-    expect(iframe.getAttribute('srcdoc')).toContain('Hello')
-  })
-})
+  it('renders markdown preview content', () => {
+    render(<MarkdownEditor defaultValue="Hello *Markdown*" />);
+    const iframe = document.querySelector(
+      '.frui-form-markdown-editor-preview'
+    ) as HTMLIFrameElement;
+    expect(iframe).toHaveAttribute('srcdoc');
+    expect(iframe.getAttribute('srcdoc')).toContain('Hello');
+  });
+});

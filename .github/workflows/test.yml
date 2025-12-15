@@ -12,7 +12,7 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Building Code
-        run: yarn build
+        run: yarn build:tsc && yarn build:pkg
       - name: Run Tests
         run: yarn test
       - name: Make Report

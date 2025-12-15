@@ -22,7 +22,7 @@ import type { InputProps } from './Input.js';
 import type { CountryData } from './CountrySelect.js';
 import countriesData from '../data/countries.js';
 import getSlotStyles from '../helpers/getSlotStyles.js';
-import getClassStyles from 'src/helpers/getClassStyles.js';
+import getClassStyles from '../helpers/getClassStyles.js';
 import Button from '../base/Button.js';
 import Dropdown from '../base/Dropdown.js';
 import Input from './Input.js';

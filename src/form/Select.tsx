@@ -17,7 +17,7 @@ import type {
 } from '../base/Dropdown.js';
 import Dropdown from '../base/Dropdown.js';
 import getSlotStyles from '../helpers/getSlotStyles.js';
-import getClassStyles from 'src/helpers/getClassStyles.js';
+import getClassStyles from '../helpers/getClassStyles.js';
 
 //--------------------------------------------------------------------//
 // Types

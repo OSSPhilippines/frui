@@ -9,7 +9,7 @@ import type { ExtendsType } from '../types.js';
 import type { SelectProps } from './Select.js';
 import countries from '../data/countries.js';
 import getSlotStyles from '../helpers/getSlotStyles.js';
-import getClassStyles from 'src/helpers/getClassStyles.js';
+import getClassStyles from '../helpers/getClassStyles.js';
 import Select from  './Select.js';
 
 //--------------------------------------------------------------------//

@@ -2,6 +2,7 @@
 // Imports
 
 //modules
+import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 //frui
 import Button from 'src/base/Button.js';
@@ -29,7 +30,7 @@ const props = [
 //--------------------------------------------------------------------//
 // Components
 
-const { C, Code, Props, Preview } = Docs;
+const { C, Code, Props, Preview, Terminal } = Docs;
 
 /**
  * Aside right menu component
@@ -81,6 +82,7 @@ export function Menu() {
 export function Body() {
   //hooks
   const { _ } = useLanguage();
+  const [ install, setInstall ] = useState('npm');
   //functions
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -99,6 +101,34 @@ export function Body() {
         {_('Phone Input')}
       </h1>
       <div>
+        <p className="py-2">
+          <Translate>
+            In order to use phone input, you need to import the 
+            following libraries first.
+          </Translate>
+        </p>
+        <div className="rounded-md overflow-auto">
+          <header className="theme-bg-1">
+            <span 
+              className={`inline-block py-1 px-6 ${install === 'npm' ? 'theme-bg-2' : 'theme-bg-1'}`}
+              onClick={() => setInstall('npm')}
+            >
+              <i className="fab fa-npm text-2xl"></i>
+            </span>
+            <span 
+              className={`inline-block py-1 px-6 ${install === 'yarn' ? 'theme-bg-2' : 'theme-bg-1'}`}
+              onClick={() => setInstall('yarn')}
+            >
+              <i className="fab fa-yarn text-2xl"></i>
+            </span>
+          </header>
+          <div className={install === 'npm' ? '': 'hidden'}>
+            <Terminal>npm install libphonenumber-js@1.12.23</Terminal>
+          </div> 
+          <div className={install === 'yarn' ? '': 'hidden'}>
+            <Terminal>yarn add libphonenumber-js@1.12.23</Terminal>
+          </div> 
+        </div>
         <p className="py-2">
           <Translate>
             Import the <C value="<PhoneInput>" /> field like the following.

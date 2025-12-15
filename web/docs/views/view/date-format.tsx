@@ -2,6 +2,7 @@
 // Imports
 
 //modules
+import { useState } from 'react';
 import { useLanguage, Translate } from 'r22n';
 //frui
 import DateFormat from 'src/view/DateFormat.js';
@@ -46,7 +47,7 @@ const examples = [
 //--------------------------------------------------------------------//
 // Components
 
-const { C, Code, Props } = Docs;
+const { C, Code, Props, Terminal } = Docs;
 
 /**
  * Aside right menu component
@@ -92,6 +93,7 @@ export function Menu() {
 export function Body() {
   //hooks
   const { _ } = useLanguage();
+  const [ install, setInstall ] = useState('npm');
   //render
   return (
     <div className={
@@ -102,6 +104,34 @@ export function Body() {
         {_('Date Format')}
       </h1>
       <div>
+        <p className="py-2">
+          <Translate>
+            In order to use date format, you need to import the 
+            following libraries first.
+          </Translate>
+        </p>
+        <div className="rounded-md overflow-auto">
+          <header className="theme-bg-1">
+            <span 
+              className={`inline-block py-1 px-6 ${install === 'npm' ? 'theme-bg-2' : 'theme-bg-1'}`}
+              onClick={() => setInstall('npm')}
+            >
+              <i className="fab fa-npm text-2xl"></i>
+            </span>
+            <span 
+              className={`inline-block py-1 px-6 ${install === 'yarn' ? 'theme-bg-2' : 'theme-bg-1'}`}
+              onClick={() => setInstall('yarn')}
+            >
+              <i className="fab fa-yarn text-2xl"></i>
+            </span>
+          </header>
+          <div className={install === 'npm' ? '': 'hidden'}>
+            <Terminal>npm install moment@2.30.1</Terminal>
+          </div> 
+          <div className={install === 'yarn' ? '': 'hidden'}>
+            <Terminal>yarn add moment@2.30.1</Terminal>
+          </div> 
+        </div>
         <p className="py-2">
           <Translate>
             Import the <C value="<DateFormat>" /> component as shown below.

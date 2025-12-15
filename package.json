@@ -44,6 +44,10 @@
       "require": "./cjs/base/Card.js",
       "import": "./esm/base/Card.js"
     },
+    "./Carousel": {
+      "require": "./cjs/base/Carousel.js",
+      "import": "./esm/base/Carousel.js"
+    },
     "./Dialog": {
       "require": "./cjs/base/Dialog.js",
       "import": "./esm/base/Dialog.js"
@@ -51,6 +55,10 @@
     "./Dropdown": {
       "require": "./cjs/base/Dropdown.js",
       "import": "./esm/base/Dropdown.js"
+    },
+    "./Film": {
+      "require": "./cjs/base/Film.js",
+      "import": "./esm/base/Film.js"
     },
     "./Loader": {
       "require": "./cjs/base/Loader.js",
@@ -154,8 +162,10 @@
       "Bread": [ "./cjs/base/Bread.d.ts" ],
       "Button": [ "./cjs/base/Button.d.ts" ],
       "Card": [ "./cjs/base/Card.d.ts" ],
+      "Carousel": [ "./cjs/base/Carousel.d.ts" ],
       "Dialog": [ "./cjs/base/Dialog.d.ts" ],
       "Dropdown": [ "./cjs/base/Dropdown.d.ts" ],
+      "Film": [ "./cjs/base/Film.d.ts" ],
       "Loader": [ "./cjs/base/Loader.d.ts" ],
       "Notifier": [ "./cjs/base/Notifier.d.ts" ],
       "Pager": [ "./cjs/base/Pager.d.ts" ],
@@ -207,7 +217,9 @@
     "@codemirror/language-data": "6.5.1",
     "@stackpress/ingest": "0.6.2",
     "@testing-library/dom": "10.4.1",
+    "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.0",
+    "@testing-library/user-event": "14.6.1",
     "@types/inputmask": "5.0.7",
     "@types/node": "24.3.1",
     "@types/react": "19.2.2",
@@ -234,11 +246,7 @@
     "vitest": "4.0.8"
   },
   "peerDependencies": {
-    "react": "19.1.1",
-    "react-dom": "19.1.1"
-  },
-  "dependencies": {
-    "@testing-library/jest-dom": "6.9.1",
-    "@testing-library/user-event": "14.6.1"
+    "react": "19.1.2",
+    "react-dom": "19.1.2"
   }
 }

@@ -122,7 +122,7 @@ cookies.set('flash', JSON.stringify(flash), {/* cookie options */});`,
 //--------------------------------------------------------------------//
 // Components
 
-const { C, Code, Props, Preview } = Docs;
+const { C, Code, Props, Preview, Terminal } = Docs;
 
 /**
  * Aside right menu component
@@ -255,6 +255,7 @@ export function Body() {
   //hooks
   const { _ } = useLanguage();
   const { flash } = Notifier.useNotifier();
+  const [ install, setInstall ] = useState('npm');
   //render
   return (
     <div className={
@@ -265,6 +266,34 @@ export function Body() {
         {_('Notifiers')}
       </h1>
       <div>
+        <p className="py-2">
+          <Translate>
+            In order to use notifiers, you need to import the 
+            following libraries first.
+          </Translate>
+        </p>
+        <div className="rounded-md overflow-auto">
+          <header className="theme-bg-1">
+            <span 
+              className={`inline-block py-1 px-6 ${install === 'npm' ? 'theme-bg-2' : 'theme-bg-1'}`}
+              onClick={() => setInstall('npm')}
+            >
+              <i className="fab fa-npm text-2xl"></i>
+            </span>
+            <span 
+              className={`inline-block py-1 px-6 ${install === 'yarn' ? 'theme-bg-2' : 'theme-bg-1'}`}
+              onClick={() => setInstall('yarn')}
+            >
+              <i className="fab fa-yarn text-2xl"></i>
+            </span>
+          </header>
+          <div className={install === 'npm' ? '': 'hidden'}>
+            <Terminal>npm install react-toastify@11.0.5 universal-cookie@8.0.1</Terminal>
+          </div> 
+          <div className={install === 'yarn' ? '': 'hidden'}>
+            <Terminal>yarn add react-toastify@11.0.5 universal-cookie@8.0.1</Terminal>
+          </div> 
+        </div>
         <p className="py-2">
           <Translate>
             Import the <C value="<Notifier>" /> component like the 

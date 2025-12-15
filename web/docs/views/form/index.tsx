@@ -4,35 +4,32 @@
 //modules
 import { useLanguage } from 'r22n';
 //frui
-import {
-  Checkbox,
-  CodeEditor,
-  CountrySelect,
-  CurrencySelect,
-  DateInput,
-  DatetimeInput,
-  FileInput,
-  FileList,
-  ImageInput,
-  ImageList,
-  Input,
-  MarkdownEditor,
-  MaskInput,
-  Metadata,
-  NumberInput,
-  PasswordInput,
-  Radio,
-  Rating,
-  Select,
-  Slider,
-  SlugInput,
-  SuggestInput,
-  Switch,
-  TagList,
-  Textarea,
-  TextList,
-  TimeInput
-} from 'src/form/index.js';
+import Checkbox from 'src/form/Checkbox.js';
+import CountrySelect from 'src/form/CountrySelect.js';
+import CurrencySelect from 'src/form/CurrencySelect.js';
+import DateInput from 'src/form/DateInput.js';
+import DatetimeInput from 'src/form/DatetimeInput.js';
+import FileInput from 'src/form/FileInput.js';
+import FileList from 'src/form/FileList.js';
+import ImageInput from 'src/form/ImageInput.js';
+import ImageList from 'src/form/ImageList.js';
+import Input from 'src/form/Input.js';
+import MarkdownEditor from 'src/form/MarkdownEditor.js';
+import MaskInput from 'src/form/MaskInput.js';
+import Metadata from 'src/form/Metadata.js';
+import NumberInput from 'src/form/NumberInput.js';
+import PasswordInput from 'src/form/PasswordInput.js';
+import Radio from 'src/form/Radio.js';
+import Rating from 'src/form/Rating.js';
+import Select from 'src/form/Select.js';
+import Slider from 'src/form/Slider.js';
+import SlugInput from 'src/form/SlugInput.js';
+import SuggestInput from 'src/form/SuggestInput.js';
+import Switch from 'src/form/Switch.js';
+import TagList from 'src/form/TagList.js';
+import Textarea from 'src/form/Textarea.js';
+import TextList from 'src/form/TextList.js';
+import TimeInput from 'src/form/TimeInput.js';
 //web
 import type { PageProps } from '../../../app/types.js';
 import Docs from '../../layout/Docs.js';
@@ -74,19 +71,6 @@ export function Body() {
             </div>
             <h2 className="my-2 font-semibold text-center uppercase">
               {_('Checkbox')}
-            </h2>
-          </div>
-        </div>
-        <div 
-          className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
-          onClick={() => window.location.href = ('/form/code-editor')} 
-        >
-          <div className="m-2 border theme-bc-2 rounded overflow-hidden">
-            <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-              <CodeEditor setup='basic' className="w-[60%] h-[50%] bg-white" value='console.log("Hello, World!");' language='ts'/>
-            </div>
-            <h2 className="my-2 font-semibold text-center uppercase">
-              {_('Code Editor')}
             </h2>
           </div>
         </div>

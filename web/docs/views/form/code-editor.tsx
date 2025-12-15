@@ -82,7 +82,7 @@ function CPPCodeEditor () {
 //--------------------------------------------------------------------//
 // Components
 
-const { C, Code, Props, Preview } = Docs;
+const { C, Code, Props, Preview, Terminal } = Docs;
 
 /**
  * Aside right menu component
@@ -133,6 +133,7 @@ export function Body() {
 
   const [ selectedLanguage, setSelectedLanguage ] = useState<string>('');
   const [ code, setCode ] = useState<string>('');
+  const [ install, setInstall ] = useState('npm');
 
   return (
     <div className={
@@ -143,6 +144,34 @@ export function Body() {
         {_('Code Editor')}
       </h1>
       <div>
+        <p className="py-2">
+          <Translate>
+            In order to use code editor, you need to import the 
+            following libraries first.
+          </Translate>
+        </p>
+        <div className="rounded-md overflow-auto">
+          <header className="theme-bg-1">
+            <span 
+              className={`inline-block py-1 px-6 ${install === 'npm' ? 'theme-bg-2' : 'theme-bg-1'}`}
+              onClick={() => setInstall('npm')}
+            >
+              <i className="fab fa-npm text-2xl"></i>
+            </span>
+            <span 
+              className={`inline-block py-1 px-6 ${install === 'yarn' ? 'theme-bg-2' : 'theme-bg-1'}`}
+              onClick={() => setInstall('yarn')}
+            >
+              <i className="fab fa-yarn text-2xl"></i>
+            </span>
+          </header>
+          <div className={install === 'npm' ? '': 'hidden'}>
+            <Terminal>npm install @codemirror/language-data@6.5.1 codemirror@6.0.2</Terminal>
+          </div> 
+          <div className={install === 'yarn' ? '': 'hidden'}>
+            <Terminal>yarn add @codemirror/language-data@6.5.1 codemirror@6.0.2</Terminal>
+          </div> 
+        </div>
         <p className="py-2">
           <Translate>
             Import the <C value="<CodeEditor>" /> field like the following.

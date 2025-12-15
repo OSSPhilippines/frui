@@ -16,6 +16,19 @@ const title = 'Getting Started';
 const description = 'Learn how to install and easily setup FRUI, '
   + 'a suite of free react components.';
 
+const optional = [
+  '@types/inputmask@5.0.7', 
+  '@codemirror/language-data@6.5.1',
+  'codemirror@6.0.2',
+  'inputmask@5.0.9',
+  'libphonenumber-js@1.12.23',
+  'markdown-to-jsx@7.7.13',
+  'moment@2.30.1',
+  'react-shiki@0.8.0',
+  'react-toastify@11.0.5',
+  'universal-cookie@8.0.1'
+]
+
 //--------------------------------------------------------------------//
 // Components
 
@@ -65,6 +78,37 @@ export function Body() {
         </div> 
         <div className={install === 'yarn' ? '': 'hidden'}>
           <Terminal>yarn add frui</Terminal>
+        </div> 
+      </div>
+      <p className="my-3">
+        <Translate>
+          By default, FRUI does not add additional 
+          dependencies that are dependant on some components to work.
+          These dependencies are described per component documentation.
+          An optional step is to install all these dependencies at once
+          by running the following command:
+        </Translate>
+      </p>
+      <div className="rounded-md overflow-auto">
+        <header className="theme-bg-1">
+          <span 
+            className={`inline-block py-1 px-6 ${install === 'npm' ? 'theme-bg-2' : 'theme-bg-1'}`}
+            onClick={() => setInstall('npm')}
+          >
+            <i className="fab fa-npm text-2xl"></i>
+          </span>
+          <span 
+            className={`inline-block py-1 px-6 ${install === 'yarn' ? 'theme-bg-2' : 'theme-bg-1'}`}
+            onClick={() => setInstall('yarn')}
+          >
+            <i className="fab fa-yarn text-2xl"></i>
+          </span>
+        </header>
+        <div className={install === 'npm' ? '': 'hidden'}>
+          <Terminal className="overflow-auto">{`npm install ${optional.join(' ')}`}</Terminal>
+        </div> 
+        <div className={install === 'yarn' ? '': 'hidden'}>
+          <Terminal className="overflow-auto">{`yarn add ${optional.join(' ')}`}</Terminal>
         </div> 
       </div>
       <h2 className="flex items-center uppercase font-bold text-lg mt-4">

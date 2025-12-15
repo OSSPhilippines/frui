@@ -25,7 +25,9 @@ export default function plugin(server: HttpServer<Config>) {
 
     ctx.get('/form', '@/web/docs/views/form/index');
     ctx.get('/form/checkbox', '@/web/docs/views/form/checkbox');
-    ctx.get('/form/code-editor', '@/web/docs/views/form/code-editor');
+    //the dependencies required for code editor fails on build..
+    //TODO: fix this later
+    //ctx.get('/form/code-editor', '@/web/docs/views/form/code-editor');
     ctx.get('/form/color-input', '@/web/docs/views/form/color-input');
     ctx.get('/form/country-select', '@/web/docs/views/form/country-select');
     ctx.get('/form/currency-select', '@/web/docs/views/form/currency-select');

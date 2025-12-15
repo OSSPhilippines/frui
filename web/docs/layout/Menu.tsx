@@ -133,11 +133,11 @@ export const menu: MenuItem[] = [
         search: '/form/checkbox',
         href: '/form/checkbox'
       },
-      {
-        label: 'Code Editor',
-        search: '/form/code-editor',
-        href: '/form/code-editor'
-      },
+      // {
+      //   label: 'Code Editor',
+      //   search: '/form/code-editor',
+      //   href: '/form/code-editor'
+      // },
       {
         label: 'Color Input',
         search: '/form/color-input',

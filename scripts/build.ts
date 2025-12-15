@@ -9,7 +9,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import Terminal from '@stackpress/lib/Terminal';
 import { server as http } from '@stackpress/ingest/http';
 //src
-import type { ViewPlugin } from '../plugins/app/types.js';
+import type { ViewPlugin } from '../web/app/types.js';
 
 type Config = typeof config;
 

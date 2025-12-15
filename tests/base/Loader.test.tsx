@@ -127,7 +127,7 @@ describe('<Loader />', () => {
     expect(loader).toHaveClass('frui-loader-slice-3');
   });
 
-  it('applies frui-loader-slice-3 class when slice is greater than 3', () => {
+  it('applies slice-3 class if slice > 3', () => {
     const { container } = render(<Loader slice={5} />);
     const loader = container.querySelector('.frui-loader');
     expect(loader).toHaveClass('frui-loader-slice-3');

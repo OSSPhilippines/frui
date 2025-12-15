@@ -183,7 +183,7 @@ describe('<Button />', () => {
     expect(button).toHaveClass('frui-button');
   });
 
-  it('applies default center alignment when no text align props set', () => {
+  it('applies center alignment by default', () => {
     render(<Button data-testid="button">Centered</Button>);
     const button = screen.getByTestId('button');
     expect(button).toHaveClass('frui-button');

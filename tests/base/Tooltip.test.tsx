@@ -273,7 +273,7 @@ describe('<Tooltip />', () => {
     ).toHaveClass('frui-tooltip');
   });
 
-  it('shows tooltip when hover is true and mouseEnter triggers', async () => {
+  it('shows tooltip on hover', async () => {
     const { container } = render(
       <Tooltip hover text="HoverText">
         Hover
@@ -295,7 +295,7 @@ describe('<Tooltip />', () => {
     ).toHaveTextContent('HoverText');
   });
 
-  it('hides tooltip when hover is true and mouseLeave triggers', async () => {
+  it('hides tooltip on mouseLeave', async () => {
     const { container } = render(
       <Tooltip hover text="HoverText">
         Hover

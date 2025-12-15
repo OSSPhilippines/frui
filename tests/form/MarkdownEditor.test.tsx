@@ -11,7 +11,12 @@ import {
   render,
   screen
 } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
 //frui
 import MarkdownEditor, {
   useMarkdownEditor
@@ -23,21 +28,29 @@ import MarkdownEditor, {
 vi.mock('../../src/form/Textarea.js', () => ({
   __esModule: true,
   default: ({
+    defaultValue,
     onUpdate,
     rows,
     value
   }: {
-    onUpdate?: (e: ChangeEvent<HTMLTextAreaElement>) => void,
+    defaultValue?: string,
+    onUpdate?: (value?: string) => void,
     rows?: number,
     value?: string
-  }) => (
-    <textarea
-      data-testid="mock-textarea"
-      onChange={onUpdate}
-      rows={rows}
-      value={value ?? ''}
-    />
-  )
+  }) => {
+    const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+      onUpdate?.(e.target.value);
+    };
+    return (
+      <textarea
+        data-testid="mock-textarea"
+        defaultValue={defaultValue}
+        onChange={handleChange}
+        rows={rows}
+        value={value}
+      />
+    );
+  }
 }));
 
 vi.mock('../../src/base/Button.js', () => ({

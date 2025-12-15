@@ -29,19 +29,19 @@ vi.mock('../../src/form/Input.js', () => ({
   default: ({
     accept,
     className,
-    onUpdate,
+    onChange,
     type
   }: {
     accept?: string,
     className?: string,
-    onUpdate?: (e: ChangeEvent<HTMLInputElement>) => void,
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
     type?: string
   }) => (
     <input
       accept={accept}
       className={className}
       data-testid="mock-input"
-      onChange={onUpdate}
+      onChange={onChange}
       type={type}
     />
   ),
@@ -77,13 +77,17 @@ describe('<ImageInput />', () => {
       setTimeout(() => update('done.jpg'), 10);
     });
     render(<ImageInput onUpload={onUpload} />);
-    const input = screen.getByTestId('mock-input') as HTMLInputElement;
+    const input = screen.getByTestId(
+      'mock-input'
+    ) as HTMLInputElement;
     const file = new File([ 'dummy' ], 'photo.jpg', {
       type: 'image/jpeg'
     });
     fireEvent.change(input, { target: { files: [ file ] } });
     await waitFor(() =>
-      expect(screen.getByText('Uploading...')).toBeInTheDocument()
+      expect(
+        screen.getByText('Uploading...')
+      ).toBeInTheDocument()
     );
     await waitFor(() =>
       expect(screen.getByText('done.jpg')).toBeInTheDocument()
@@ -99,7 +103,9 @@ describe('<ImageInput />', () => {
     render(
       <ImageInput onUpload={onUpload} onUpdate={onUpdate} />
     );
-    const input = screen.getByTestId('mock-input') as HTMLInputElement;
+    const input = screen.getByTestId(
+      'mock-input'
+    ) as HTMLInputElement;
     const file = new File([ 'data' ], 'file.png', {
       type: 'image/png'
     });
@@ -126,13 +132,22 @@ describe('<ImageInput />', () => {
       setTimeout(() => update('final.jpg'), 10);
     });
     render(
-      <ImageInput onUpload={onUpload} uploading="Uploading Image..." />
+      <ImageInput
+        onUpload={onUpload}
+        uploading="Uploading Image..."
+      />
     );
-    const input = screen.getByTestId('mock-input') as HTMLInputElement;
-    const file = new File([ 'z' ], 'z.jpg', { type: 'image/jpeg' });
+    const input = screen.getByTestId(
+      'mock-input'
+    ) as HTMLInputElement;
+    const file = new File([ 'z' ], 'z.jpg', {
+      type: 'image/jpeg'
+    });
     fireEvent.change(input, { target: { files: [ file ] } });
     await waitFor(() =>
-      expect(screen.getByText('Uploading Image...')).toBeInTheDocument()
+      expect(
+        screen.getByText('Uploading Image...')
+      ).toBeInTheDocument()
     );
   });
 });

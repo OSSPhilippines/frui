@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//modules
+import { ChangeEvent } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -22,7 +24,6 @@ import DateInput, {
   toDateString,
   useDateInput
 } from '../../src/form/DateInput.js';
-import { ChangeEvent } from 'react';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -30,22 +31,22 @@ import { ChangeEvent } from 'react';
 vi.mock('../../src/form/Input.js', () => ({
   __esModule: true,
   default: ({
-    accept,
     className,
     onUpdate,
-    type
+    type,
+    value
   }: {
-    accept?: string,
     className?: string,
     onUpdate?: (e: ChangeEvent<HTMLInputElement>) => void,
-    type?: string
+    type?: string,
+    value?: string
   }) => (
     <input
-      accept={accept}
       className={className}
       data-testid="mock-input"
       onChange={onUpdate}
       type={type}
+      value={value || ''}
     />
   )
 }));

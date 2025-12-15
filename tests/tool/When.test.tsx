@@ -19,7 +19,7 @@ import When, {
 } from '../../src/tool/When';
 
 //--------------------------------------------------------------------//
-// Helpers
+// Tests
 
 describe('nextCondition()', () => {
   it('returns -1 when no When or Otherwise components found', () => {

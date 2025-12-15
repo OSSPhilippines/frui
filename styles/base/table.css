@@ -1,0 +1,85 @@
+.frui-table {
+  border-collapse: collapse;
+  display: table;
+  width: 100%;
+}
+
+.frui-table-scroll {
+  overflow: auto;
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+}
+
+.frui-table-nowrap {
+  white-space: nowrap;
+}
+
+.frui-table-z0 {
+  z-index: 0;
+}
+.frui-table-z1 {
+  z-index: 1;
+}
+.frui-table-z2 {
+  z-index: 2;
+}
+.frui-table-z3 {
+  z-index: 3;
+}
+.frui-table-z4 {
+  z-index: 4;
+}
+
+.frui-table-sticky {
+  position: sticky;
+}
+.frui-table-sticky-b {
+  bottom: 0;
+}
+.frui-table-sticky-l {
+  left: 0;
+}
+.frui-table-sticky-t {
+  top: 0;
+}
+.frui-table-sticky-r {
+  right: 0;
+}
+
+.frui-table-col {
+  border-color: black;
+  border-style: solid;
+  border-top-width: 1px;
+  padding-bottom: 16px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 16px;
+}
+
+.frui-table-foot {
+  border-color: black;
+  border-style: solid;
+  border-top-width: 1px;
+  padding-bottom: 16px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 16px;
+}
+
+.frui-table-row {
+  padding-bottom: 16px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 16px;
+}
+
+.frui-table-head {
+  border-color: black;
+  border-style: solid;
+  border-top-width: 1px;
+  padding-bottom: 16px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 16px;
+}

@@ -1,0 +1,95 @@
+.frui-form-phone-input {
+  position: relative;
+  width: 100%;
+}
+
+.frui-form-phone-input-control {
+  align-items: center;
+  background-color: var(--white);
+  border: 1px solid var(--black);
+  display: flex;
+}
+
+.frui-form-phone-input-error .frui-form-phone-input-control {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.frui-form-phone-input-control .frui-button {
+  align-items: center;
+  border-right: 1px solid var(--black);
+  display: inline-flex;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.frui-form-phone-input-error .frui-form-phone-input-control .frui-button {
+  border-right: 1px solid var(--error);
+}
+
+.frui-form-phone-input-control .frui-form-phone-input-flag {
+  font-size: 20px
+}
+
+.frui-form-phone-input-control .frui-form-phone-input-tel {
+  color: var(--black);
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.frui-form-phone-input-control .frui-form-phone-input-direction {
+  color: var(--black);
+  font-size: 10px;
+}
+
+.frui-form-phone-input-control .frui-form-input {
+  border: 0;
+  flex-grow: 1;
+}
+
+.frui-form-phone-input-dropdown .frui-dropdown-head {
+  padding: 8px;
+}
+
+.frui-form-phone-input-dropdown .frui-dropdown-head div {
+  align-items: center;
+  border-color: var(--bg-third);
+  border-style: solid;
+  border-width: 1px;
+  display: flex;
+}
+
+.frui-form-phone-input-dropdown .frui-dropdown-head input {
+  border-width: 0px;
+  flex-grow: 1;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  padding-bottom: 7px;
+  padding-left: 10.5px;
+  padding-right: 10.5px;
+  padding-top: 7px;
+}
+
+.frui-form-phone-input-dropdown .frui-dropdown-head span {
+  padding-bottom: 7px;
+  padding-left: 10.5px;
+  padding-right: 10.5px;
+  padding-top: 7px;
+}
+
+.frui-form-phone-input-dropdown .frui-dropdown-options {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.frui-form-phone-input-dropdown .frui-dropdown-option {
+  padding-bottom: 7px;
+  padding-left: 10.5px;
+  padding-right: 10.5px;
+  padding-top: 7px;
+}
+
+.frui-form-phone-input-dropdown .frui-dropdown-option span {
+  display: inline-block;
+  margin-right: 5px;
+}

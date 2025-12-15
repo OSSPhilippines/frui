@@ -1,0 +1,23 @@
+.frui-bread {
+  align-items: center;
+  display: flex; 
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.frui-bread-crumb {
+  align-items: center;
+  display: inline-flex;
+}
+
+.frui-bread-crumb-icon {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.frui-bread-slicer {
+  font-size: 20px;
+  line-height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+}

@@ -13,6 +13,7 @@ import Scope, {
 
 //--------------------------------------------------------------------//
 // Helpers
+
 function ScopeDisplay() {
   const { key, value } = useScopeContext<string, string | number>();
   return (
@@ -25,6 +26,7 @@ function ScopeDisplay() {
 
 //--------------------------------------------------------------------//
 // Tests
+
 describe('<Scope />', () => {
   describe('with list prop', () => {
     it('renders children for each item in the list', () => {
@@ -241,10 +243,10 @@ describe('useScopeContext()', () => {
         </ScopeContext.Provider>
       );
 
-      expect(screen.getByTestId('ctx-key')).toHaveTextContent('testKey');
-      expect(screen.getByTestId('ctx-value')).toHaveTextContent(
-        'testValue'
-      );
+      expect(screen.getByTestId('ctx-key'))
+       .toHaveTextContent('testKey');
+      expect(screen.getByTestId('ctx-value'))
+       .toHaveTextContent('testValue');
     }
   );
 });

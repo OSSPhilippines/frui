@@ -16,14 +16,17 @@ import {
 import When, {
   Otherwise,
   nextCondition
-} from '../../src/tool/When';
+} from '../../src/tool/When.js';
 
 //--------------------------------------------------------------------//
 // Tests
 
 describe('nextCondition()', () => {
   it('returns -1 when no When or Otherwise components found', () => {
-    const children = [ <span key="1">A</span>, <div key="2">B</div> ];
+    const children = [
+      <span key="1">A</span>,
+      <div key="2">B</div>
+    ];
     const result = nextCondition(children, 0);
     expect(result).toBe(-1);
   });
@@ -58,7 +61,7 @@ describe('<When />', () => {
     expect(screen.getByTestId('content')).toBeInTheDocument();
   });
 
-  it('renders null when condition is false and no next When or Otherwise', () => {
+  it('renders null if false and no next', () => {
     const { container } = render(
       <When condition={false}>
         <div data-testid="content">Hidden</div>
@@ -67,7 +70,7 @@ describe('<When />', () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  it('renders next valid <When> children when initial condition is false', () => {
+  it('renders next <When> if false', () => {
     render(
       <When condition={false}>
         <div>First Layer</div>
@@ -91,7 +94,7 @@ describe('<When />', () => {
     expect(screen.getByTestId('content')).toBeInTheDocument();
   });
 
-  it('renders first <When> block and stops before next conditions', () => {
+  it('"renders first <When> only', () => {
     render(
       <When condition={true}>
         <div data-testid="first">First</div>
@@ -104,11 +107,15 @@ describe('<When />', () => {
       </When>
     );
     expect(screen.getByTestId('first')).toBeInTheDocument();
-    expect(screen.queryByTestId('second')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('otherwise')).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId('second')
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId('otherwise')
+    ).not.toBeInTheDocument();
   });
 
-  it('returns children of next valid <When> if current false and no Otherwise', () => {
+  it('renders next <When> if false and no Otherwise', () => {
     render(
       <When condition={false}>
         <div>Initial</div>

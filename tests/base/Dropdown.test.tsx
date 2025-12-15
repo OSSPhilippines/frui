@@ -174,13 +174,18 @@ describe('<Dropdown />', () => {
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
-    expect(container.querySelector('.dropdown-container')).toBeInTheDocument();
+    expect(
+      container.querySelector('.frui-dropdown-container')
+    ).toBeInTheDocument();
   });
 
   it('calls onUpdate when dropdown is configured', () => {
     const onUpdate = vi.fn();
     render(
-      <Dropdown options={[ 'Option 1', 'Option 2' ]} onUpdate={onUpdate}>
+      <Dropdown
+        options={[ 'Option 1', 'Option 2' ]}
+        onUpdate={onUpdate}
+      >
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
@@ -190,7 +195,11 @@ describe('<Dropdown />', () => {
   it('supports multiple selection configuration', () => {
     const onUpdate = vi.fn();
     render(
-      <Dropdown multiple options={[ 'Option 1', 'Option 2' ]} onUpdate={onUpdate}>
+      <Dropdown
+        multiple
+        options={[ 'Option 1', 'Option 2' ]}
+        onUpdate={onUpdate}
+      >
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
@@ -203,12 +212,17 @@ describe('<Dropdown />', () => {
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
-    expect(container.querySelector('.dropdown-container')).toBeInTheDocument();
+    expect(
+      container.querySelector('.frui-dropdown-container')
+    ).toBeInTheDocument();
   });
 
   it('respects controlled value', () => {
     render(
-      <Dropdown value="Option 2" options={[ 'Option 1', 'Option 2' ]}>
+      <Dropdown
+        value="Option 2"
+        options={[ 'Option 1', 'Option 2' ]}
+      >
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
@@ -221,7 +235,9 @@ describe('<Dropdown />', () => {
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
-    expect(container.querySelector('.dropdown-container')).toBeInTheDocument();
+    expect(
+      container.querySelector('.frui-dropdown-container')
+    ).toBeInTheDocument();
   });
 
   it('applies custom inline styles', () => {
@@ -230,7 +246,9 @@ describe('<Dropdown />', () => {
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
-    expect(container.querySelector('.dropdown-container')).toBeInTheDocument();
+    expect(
+      container.querySelector('.frui-dropdown-container')
+    ).toBeInTheDocument();
   });
 });
 
@@ -250,13 +268,17 @@ describe('<Dropdown.Control />', () => {
         <Dropdown.Control>Control</Dropdown.Control>
       </Dropdown>
     );
-    expect(container.querySelector('.frui-dropdown-control')).toBeInTheDocument();
+    expect(
+      container.querySelector('.frui-dropdown-control')
+    ).toBeInTheDocument();
   });
 
   it('applies custom className', () => {
     const { container } = render(
       <Dropdown>
-        <Dropdown.Control className="custom-control">Control</Dropdown.Control>
+        <Dropdown.Control className="custom-control">
+          Control
+        </Dropdown.Control>
       </Dropdown>
     );
     const control = container.querySelector('.frui-dropdown-control');
@@ -266,7 +288,9 @@ describe('<Dropdown.Control />', () => {
   it('applies custom inline styles', () => {
     const { container } = render(
       <Dropdown>
-        <Dropdown.Control style={{ padding: '10px' }}>Control</Dropdown.Control>
+        <Dropdown.Control style={{ padding: '10px' }}>
+          Control
+        </Dropdown.Control>
       </Dropdown>
     );
     const control = container.querySelector('.frui-dropdown-control');

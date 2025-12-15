@@ -156,7 +156,6 @@ export function useColorInput(config: ColorInputConfig) {
       handlers.update(event.target.value);
     },
     update: (color: string) => {
-      console.log('update color:', color);  
       setColor(color);
       onUpdate && onUpdate(color);
     }

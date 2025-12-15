@@ -180,7 +180,7 @@ describe('useDateInput()', () => {
     expect(result.current.handlers.toString()).toBe('2024-06-15');
   });
 
-  it('does not override existing value when value prop is undefined', () => {
+  it('keeps value if prop is undefined', () => {
     const { result, rerender } = renderHook(
       ({ value }) => useDateInput({
         defaultValue: '2024-03-01',

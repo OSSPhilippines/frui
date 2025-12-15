@@ -124,7 +124,7 @@ describe('<CodeEditor />', () => {
     );
   });
 
-  it('updates currentValue when controlled prop value changes', async () => {
+  it('updates value when prop changes', async () => {
     const { rerender } = render(<CodeEditor value="first" />);
     const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
     expect(textarea.value).toBe('first');

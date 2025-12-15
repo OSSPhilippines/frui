@@ -112,7 +112,7 @@ vi.mock('../../src/form/Select.js', () => {
 // Tests
 
 describe('<CurrencySelect />', () => {
-  it('renders with default placeholder and displays all currencies', () => {
+  it('renders with default placeholder', () => {
     render(<CurrencySelect />);
     const wrapper = screen.getByTestId('select');
     expect(wrapper).toBeInTheDocument();

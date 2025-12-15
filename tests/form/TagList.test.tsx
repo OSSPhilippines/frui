@@ -5,9 +5,6 @@
 import '@testing-library/jest-dom';
 import {
   act,
-  renderHook
-} from '@testing-library/react';
-import {
   fireEvent,
   render,
   screen
@@ -18,111 +15,210 @@ import {
   it,
   vi
 } from 'vitest';
-//types
-import type {
-  ChangeEvent,
-  KeyboardEvent
-} from 'react';
 //frui
-import TagList from '../../src/form/TagList.js';
+import TextEditor, {
+  useTextEditor
+} from '../../src/form/TextEditor';
+
+//--------------------------------------------------------------------//
+// Mocks
+
+Object.defineProperty(window, 'getSelection', {
+  writable: true,
+  value: vi.fn(() => ({
+    rangeCount: 0,
+    removeAllRanges: vi.fn(),
+    addRange: vi.fn(),
+    getRangeAt: vi.fn(() => ({
+      extractContents: vi.fn(
+        () => document.createDocumentFragment()
+      ),
+      insertNode: vi.fn(),
+      deleteContents: vi.fn(),
+      cloneContents: vi.fn(
+        () => document.createDocumentFragment()
+      )
+    }))
+  }))
+});
+Object.defineProperty(document, 'execCommand', {
+  configurable: true,
+  writable: true,
+  value: vi.fn(() => true)
+});
 
 //--------------------------------------------------------------------//
 // Helpers
 
-const getInput = () => screen.getByRole('textbox') as HTMLInputElement;
-const getTag = (text: string) => screen.getByText(text);
-
+const setupHook = (config = {}) => {
+  let hook: ReturnType<typeof useTextEditor> | undefined;
+  const TestComp = () => {
+    hook = useTextEditor(config);
+    return null;
+  };
+  render(<TestComp />);
+  return () => hook!;
+};
 //--------------------------------------------------------------------//
 // Tests
 
-describe('<TagList />', () => {
-  it('renders wrapper and existing tags', () => {
-    render(<TagList defaultValue={[ 'tag1', 'tag2' ]} />);
-    const wrapper = getInput().closest('div')!;
-    expect(wrapper).toHaveClass('frui-form-tag-list');
-    expect(screen.getAllByText(/tag/)).toHaveLength(2);
+describe('<TextEditor />', () => {
+  it('renders base structure', () => {
+    render(<TextEditor />);
+    const editor = document.querySelector(
+      '.frui-form-text-editor'
+    );
+    const editable = document.querySelector(
+      '.frui-form-text-editor-editable'
+    );
+    expect(editor).toBeInTheDocument();
+    expect(editable).toBeInTheDocument();
   });
-
-  it('adds a tag on Enter key and clears input', () => {
-    render(<TagList />);
-    const input = getInput();
-    fireEvent.change(input, { target: { value: 'newTag' } });
-    fireEvent.keyDown(input, { key: 'Enter' });
-    expect(getTag('newTag')).toBeInTheDocument();
-    expect(input.value).toBe('');
+  it('applies rtl direction class', () => {
+    render(<TextEditor dir="rtl" />);
+    const container = document.querySelector(
+      '.frui-form-text-editor-rtl'
+    );
+    expect(container).toBeInTheDocument();
   });
-
-  it('adds a tag on comma key', () => {
-    render(<TagList />);
-    const input = getInput();
-    fireEvent.change(input, { target: { value: 'commaTag' } });
-    fireEvent.keyDown(input, { key: ',' });
-    expect(getTag('commaTag')).toBeInTheDocument();
+  it('renders toolbar buttons for enabled props', () => {
+    render(
+      <TextEditor
+        history
+        font
+        size
+        format
+        paragraph
+        blockquote
+        style
+        color
+        highlight
+        text
+        list
+      />
+    );
+    const toolbar = document.querySelector(
+      '.frui-form-text-editor-toolbar'
+    );
+    expect(toolbar).toBeInTheDocument();
+    expect(
+      toolbar?.querySelectorAll('button').length
+    ).toBeGreaterThan(0);
   });
-
-  it('removes tag when × clicked', () => {
-    render(<TagList defaultValue={[ 'removeMe' ]} />);
-    fireEvent.click(screen.getByText('×'));
-    expect(screen.queryByText('removeMe')).not.toBeInTheDocument();
+  it('clicks bold button executes execCommand', () => {
+    render(<TextEditor style />);
+    const btn = screen.getByTitle('Bold');
+    act(() => {
+      fireEvent.click(btn);
+    });
+    expect(document.execCommand).toHaveBeenCalledWith(
+      'bold',
+      false,
+      undefined
+    );
   });
-
-  it('handles Backspace editing last tag', () => {
-    render(<TagList defaultValue={[ 'editMe' ]} />);
-    const input = getInput();
-    fireEvent.keyUp(input);
-    fireEvent.keyDown(input, { key: 'Backspace' });
-    expect(input.value).toBe('editMe');
+  it('toggles show blocks class on click', () => {
+    render(<TextEditor showblocks />);
+    const button = screen.getByTitle('Show Blocks');
+    const editable = document.querySelector(
+      '.frui-form-text-editor-editable'
+    ) as HTMLDivElement;
+    act(() => {
+      fireEvent.click(button);
+    });
+    expect(
+      editable.classList.contains(
+        'frui-form-text-editor-show-block'
+      )
+    ).toBe(true);
   });
-
-  it('calls onUpdate when tags change', () => {
-    const onUpdate = vi.fn();
-    render(<TagList onUpdate={onUpdate} />);
-    const input = getInput();
-    fireEvent.change(input, { target: { value: 'callMe' } });
-    fireEvent.keyDown(input, { key: 'Enter' });
-    expect(onUpdate).toHaveBeenCalled();
-  });
-
-  it('applies info color class', () => {
-    const { container } = render(<TagList info defaultValue={[ 'i' ]} />);
-    expect(container.querySelector('.frui-bg-info')).toBeInTheDocument();
-  });
-
-  it('applies inline color style when color prop provided', () => {
-    const { container } = render(<TagList color="red" defaultValue={[ 'r' ]} />);
-    const tag = container.querySelector('.frui-form-tag-list-tag')!;
-    expect(tag).toHaveAttribute('style', expect.stringContaining('background-color'));
+  it('toggles code view displaying textarea', () => {
+    render(<TextEditor code />);
+    const toggle = screen.getByLabelText(
+      'Switch to Code View'
+    );
+    act(() => {
+      fireEvent.click(toggle);
+    });
+    const textarea = document.querySelector('textarea');
+    expect(textarea).toBeInTheDocument();
   });
 });
 
-describe('useTagList()', () => {
-  it('adds and removes tags correctly', () => {
-    const onUpdate = vi.fn();
-    const { result, rerender } = renderHook(() =>
-      TagList.useTagList({ defaultValue: [ 'a' ], onUpdate })
-    );
-    act(() => result.current.handlers.remove(0));
-    expect(result.current.tags).toEqual([]);
-    const changeEvent = {
-      target: { value: 'test' }
-    } as unknown as ChangeEvent<HTMLInputElement>;
-    act(() => result.current.handlers.change(changeEvent));
-    rerender();
-    const keyEvent = {
-      key: 'Enter',
-      preventDefault: vi.fn()
-    } as unknown as KeyboardEvent<HTMLInputElement>;
-    act(() => result.current.handlers.edit(keyEvent));
-    expect(result.current.tags).toEqual([ 'test' ]);
+describe('useTextEditor()', () => {
+  it('initializes with provided value', () => {
+    const getHook = setupHook({ value: '<p>Sample</p>' });
+    const result = getHook();
+    expect(result.value).toBe('<p>Sample</p>');
   });
-
-  it('updates tags when value prop changes', () => {
-    const { result, rerender } = renderHook(
-      ({ value }) => TagList.useTagList({ value }),
-      { initialProps: { value: [ 'one' ] } }
+  it('execCommand triggers onUpdate', () => {
+    const onUpdate = vi.fn();
+    const getHook = setupHook({
+      value: 'test',
+      onUpdate
+    });
+    const hook = getHook();
+    hook.refs.editor.current = document.createElement(
+      'div'
     );
-    expect(result.current.tags).toEqual([ 'one' ]);
-    rerender({ value: [ 'two' ] });
-    expect(result.current.tags).toEqual([ 'two' ]);
+    hook.refs.hidden.current = document.createElement(
+      'input'
+    );
+    hook.refs.editor.current.innerHTML = 'data';
+    act(() => {
+      hook.handlers.execCommand('bold');
+    });
+    expect(document.execCommand).toHaveBeenCalledWith(
+      'bold',
+      false,
+      undefined
+    );
+    expect(onUpdate).toHaveBeenCalled();
+  });
+  it(
+    'input handler updates value and calls callbacks',
+    () => {
+      const onChange = vi.fn();
+      const onUpdate = vi.fn();
+      const getHook = setupHook({ onChange, onUpdate });
+      const hook = getHook();
+      hook.refs.editor.current = document.createElement(
+        'div'
+      );
+      hook.refs.hidden.current = document.createElement(
+        'input'
+      );
+      hook.refs.editor.current.innerHTML =
+        '<p>Hello World</p>';
+      act(() => {
+        hook.handlers.input();
+      });
+      expect(onChange).toHaveBeenCalledWith(
+        '<p>Hello World</p>'
+      );
+      expect(onUpdate).toHaveBeenCalled();
+    }
+  );
+  it('toggles code view and triggers updates', () => {
+    const onChange = vi.fn();
+    const onUpdate = vi.fn();
+    const getHook = setupHook({ onChange, onUpdate });
+    const hook = getHook();
+    hook.refs.editor.current = document.createElement(
+      'div'
+    );
+    hook.refs.textarea.current = document.createElement(
+      'textarea'
+    );
+    hook.refs.hidden.current = document.createElement(
+      'input'
+    );
+    hook.refs.editor.current.innerHTML = '<p>Edit</p>';
+    hook.refs.textarea.current.value = '<p>Edit</p>';
+    act(() => {
+      hook.blocks.codeViewToggle();
+    });
+    expect(onChange).toHaveBeenCalled();
+    expect(onUpdate).toHaveBeenCalled();
   });
 });

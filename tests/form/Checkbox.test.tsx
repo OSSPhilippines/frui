@@ -64,7 +64,7 @@ describe('<Checkbox />', () => {
     expect(onUpdate).toHaveBeenLastCalledWith(undefined, false);
   });
 
-  it('falls back to square/check shape and default color when none specified', () => {
+  it('defaults to check shape and color', () => {
     render(<Checkbox label="Plain" />);
     const wrapper = screen.getByText('Plain').closest('label')!;
     expect(wrapper).toHaveClass('frui-form-option-check');

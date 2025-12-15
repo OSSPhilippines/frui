@@ -106,7 +106,7 @@ describe('Color helper functions', () => {
     });
   });
 
-  it('toHex converts color names, rgba, and invalids to expected hex', () => {
+  it('toHex normalizes color input', () => {
     expect(toHex('rgba(255,0,0,1)')).toBe('#ff0000');
     expect(toHex('#00ff00')).toBe('#00ff00');
     expect(toHex('invalid')).toBe('#000000');

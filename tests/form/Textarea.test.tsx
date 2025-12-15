@@ -35,8 +35,9 @@ describe('useTextarea()', () => {
       useTextarea({ onChange, onUpdate })
     );
 
-    const mockEvent =
-      { target: { value: 'hello world' } } as unknown as ChangeEvent<HTMLTextAreaElement>;
+    const mockEvent = {
+      target: { value: 'hello world' }
+    } as unknown as ChangeEvent<HTMLTextAreaElement>;
 
     act(() => {
       result.current.handlers.change(mockEvent);
@@ -48,8 +49,9 @@ describe('useTextarea()', () => {
 
   it('handles missing callbacks without errors', () => {
     const { result } = renderHook(() => useTextarea({}));
-    const mockEvent =
-      { target: { value: 'noop' } } as unknown as ChangeEvent<HTMLTextAreaElement>;
+    const mockEvent = {
+      target: { value: 'noop' }
+    } as unknown as ChangeEvent<HTMLTextAreaElement>;
 
     expect(() => {
       act(() => {

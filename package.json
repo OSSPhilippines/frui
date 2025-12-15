@@ -225,6 +225,7 @@
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "@vitejs/plugin-react": "5.0.2",
+    "@vitest/coverage-v8": "4.0.15",
     "codemirror": "6.0.2",
     "inputmask": "5.0.9",
     "jsdom": "27.1.0",

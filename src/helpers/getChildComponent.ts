@@ -15,7 +15,26 @@ export function getChildComponent(
   children?: ReactNode,
   recursive = true
 ): ReactNode {
-  if (!children) return null;
+  const components = getChildComponents(
+    component, 
+    propName, 
+    children, 
+    recursive
+  );
+  return components.length > 0 ? components[0] : null;
+};
+
+/**
+ * Get node from children or use default
+ */
+export function getChildComponents<C = ReactNode>(
+  component: Function,
+  propName: string,
+  children?: ReactNode,
+  recursive = true
+) {
+  const components: C[] = [];
+  if (!children) return [];
   const nodes = !Array.isArray(children) 
     ? [ children ].filter(Boolean)
     : children;
@@ -27,14 +46,19 @@ export function getChildComponent(
       || child.props?.[propName]
       || child[propName]
     ) {
-      return child;
+      components.push(child as unknown as C);
     }
     if (Array.isArray(child) && recursive) {
-      const nested = getChildComponent(component, propName, child);
-      if (nested) return nested;
+      const nested = getChildComponents<C>(
+        component, 
+        propName, 
+        child, 
+        recursive
+      );
+      if (nested) components.push(...nested);
     }
   }
-  return null;
+  return components;
 };
 
 export default getChildComponent;

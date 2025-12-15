@@ -46,6 +46,15 @@ export type {
   CardProps
 } from './Card.js';
 import Card from './Card.js';
+//carousel
+export type {
+  CarouselContext,
+  CarouselConfig,
+  CarouselPreviousProps,
+  CarouselNextProps,
+  CarouselProps
+} from './Carousel.js';
+import Carousel from './Carousel.js';
 //dialog
 export type { 
   DialogContextProps,
@@ -70,6 +79,13 @@ export type {
   DropdownProps 
 } from './Dropdown.js';
 import Dropdown from './Dropdown.js';
+//film
+export type { 
+  FilmContext,
+  FilmProps,
+  FilmFrameProps 
+} from './Film.js';
+import Film from './Film.js';
 //loader
 export type { LoaderContainerProps, LoaderProps } from './Loader.js';
 import Loader from './Loader.js'; 
@@ -141,8 +157,10 @@ export {
   Bread,
   Button,
   Card,
+  Carousel,
   Dialog,
   Dropdown,
+  Film,
   Loader,
   Notifier,
   Pager,

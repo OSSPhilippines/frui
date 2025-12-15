@@ -99,11 +99,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Loader info className="m-2">Loading...</Loader>
+            <Loader info slice={3} className="m-2">Loading...</Loader>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {'<Loader info className="m-2">Loading...</Loader>'}
+          {'<Loader info slice={3} className="m-2">Loading...</Loader>'}
         </Preview.Code>
       </Preview>
       {/* Warning Example */}
@@ -114,11 +114,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Loader warning className="m-2">Loading...</Loader>
+            <Loader warning slice={3} className="m-2">Loading...</Loader>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {'<Loader warning className="m-2">Loading...</Loader>'}
+          {'<Loader warning slice={3} className="m-2">Loading...</Loader>'}
         </Preview.Code>
       </Preview>
       {/* Success Example */}
@@ -129,11 +129,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Loader success className="m-2">Loading...</Loader>
+            <Loader success slice={3} className="m-2">Loading...</Loader>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {'<Loader success className="m-2">Loading...</Loader>'}
+          {'<Loader success slice={3} className="m-2">Loading...</Loader>'}
         </Preview.Code>
       </Preview>
       {/* Error Example */}
@@ -144,11 +144,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Loader error className="m-2">Loading...</Loader>
+            <Loader error slice={3} className="m-2">Loading...</Loader>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {'<Loader error className="m-2">Loading...</Loader>'}
+          {'<Loader error slice={3} className="m-2">Loading...</Loader>'}
         </Preview.Code>
       </Preview>
       {/* Muted Example */}
@@ -159,11 +159,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Loader muted className="m-2">Loading...</Loader>
+            <Loader muted slice={3} className="m-2">Loading...</Loader>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {'<Loader muted className="m-2">Loading...</Loader>'}
+          {'<Loader muted slice={3} className="m-2">Loading...</Loader>'}
         </Preview.Code>
       </Preview>
       {/* Custom Color Example */}
@@ -174,11 +174,11 @@ export function Examples() {
       >
         <Preview.Example center padding>
           <div className="text-center">
-            <Loader color="salmon" className="m-2">Loading...</Loader>
+            <Loader color="salmon" slice={3} className="m-2">Loading...</Loader>
           </div>
         </Preview.Example>
         <Preview.Code>
-          {'<Loader color="salmon" className="m-2">Loading...</Loader>'}
+          {'<Loader color="salmon" slice={3} className="m-2">Loading...</Loader>'}
         </Preview.Code>
       </Preview>
       {/* Solid Shape Example */}
@@ -286,11 +286,11 @@ export function Body() {
         >
           <Preview.Example center padding>
             <div className="text-center">
-              <Loader info size={30} thickness={3} className="m-2">Loading...</Loader>
+              <Loader info size={30} slice={1} thickness={3} className="m-2">Loading...</Loader>
             </div>
           </Preview.Example>
           <Preview.Code>
-            {'<Loader info size={30} thickness={3} className="m-2">Loading...</Loader>'}
+            {'<Loader info size={30} slice={1} thickness={3} className="m-2">Loading...</Loader>'}
           </Preview.Code>
         </Preview>
 
@@ -301,11 +301,11 @@ export function Body() {
         >
           <Preview.Example center padding>
             <div className="text-center">
-              <Loader warning size={50} thickness={8} className="m-2">Loading...</Loader>
+              <Loader warning size={50} slice={1} thickness={8} className="m-2">Loading...</Loader>
             </div>
           </Preview.Example>
           <Preview.Code>
-            {'<Loader warning size={50} thickness={8} className="m-2">Loading...</Loader>'}
+            {'<Loader warning size={50} slice={1} thickness={8} className="m-2">Loading...</Loader>'}
           </Preview.Code>
         </Preview>
 
@@ -316,11 +316,11 @@ export function Body() {
         >
           <Preview.Example center padding>
             <div className="text-center">
-              <Loader success size={80} thickness={20} className="m-2">Loading...</Loader>
+              <Loader success size={80} slice={1} thickness={20} className="m-2">Loading...</Loader>
             </div>
           </Preview.Example>
           <Preview.Code>
-            {'<Loader success size={80} thickness={20} className="m-2">Loading...</Loader>'}
+            {'<Loader success size={80} slice={1} thickness={20} className="m-2">Loading...</Loader>'}
           </Preview.Code>
         </Preview>
       </div>
@@ -342,11 +342,11 @@ export function Body() {
         >
           <Preview.Example center padding>
             <div className="text-center">
-              <Loader info speed={500} className="m-2">Loading...</Loader>
+              <Loader info speed={500} dashed className="m-2">Loading...</Loader>
             </div>
           </Preview.Example>
           <Preview.Code>
-            {'<Loader info speed={500} className="m-2">Loading...</Loader>'}
+            {'<Loader info speed={500} dashed className="m-2">Loading...</Loader>'}
           </Preview.Code>
         </Preview>
 
@@ -357,11 +357,11 @@ export function Body() {
         >
           <Preview.Example center padding>
             <div className="text-center">
-              <Loader warning speed={1000} className="m-2">Loading...</Loader>
+              <Loader warning speed={1000} dashed className="m-2">Loading...</Loader>
             </div>
           </Preview.Example>
           <Preview.Code>
-            {'<Loader warning speed={1000} className="m-2">Loading...</Loader>'}
+            {'<Loader warning speed={1000} dashed className="m-2">Loading...</Loader>'}
           </Preview.Code>
         </Preview>
 
@@ -372,11 +372,11 @@ export function Body() {
         >
           <Preview.Example center padding>
             <div className="text-center">
-              <Loader success speed={5000} className="m-2">Loading...</Loader>
+              <Loader success speed={5000} dashed className="m-2">Loading...</Loader>
             </div>
           </Preview.Example>
           <Preview.Code>
-            {'<Loader success speed={5000} className="m-2">Loading...</Loader>'}
+            {'<Loader success speed={5000} dashed className="m-2">Loading...</Loader>'}
           </Preview.Code>
         </Preview>
       </div>

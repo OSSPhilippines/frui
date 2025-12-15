@@ -40,7 +40,12 @@ export type DialogCloseProps = ClassStyleProps & ChildrenProps & {
   onClose?: () => void
 };
 
-export type DialogOverlayProps = HTMLElementProps<HTMLDivElement>;
+export type DialogOverlayProps = HTMLElementProps<HTMLDivElement> & {
+  //whether to position the dialog absolutely (fixed by default)
+  absolute?: boolean,
+  //whether to close the dialog when clicking outside
+  close?: boolean
+};
 
 export type DialogConfig = {
   //selector used to get the element to which the dialog will be
@@ -61,8 +66,10 @@ export type DialogProps = DialogConfig
   & {
     //slot: props for overlay element
     overlay?: boolean | HTMLElementProps<HTMLDivElement> & {
+      //whether to position the dialog absolutely (fixed by default)
+      absolute?: boolean,
       //whether to close the dialog when clicking outside
-      close: boolean
+      close?: boolean
     }
   };
 
@@ -193,18 +200,31 @@ export function DialogClose(props: DialogCloseProps) {
 export function DialogOverlay(props: DialogOverlayProps) {
   //props
   const { 
+    //whether to position the dialog absolutely (fixed by default)
+    absolute, //?: boolean
     //contents of the dialog
     children, //?: ReactNode
     //dialog class name
-    className, //?: string=
+    className, //?: string
+    //whether to close the dialog when clicking outside
+    close, //?: boolean
     ...attributes
   } = props;
+  //hooks
+  const { closeDialog } = useDialogContext();
   //variables
   // configure classes
-  const classes = [ 'frui-dialog-overlay' ];
+  const classes = [ 
+    'frui-dialog-overlay', 
+    absolute ? 'frui-absolute' : 'frui-fixed' 
+  ];
   if (className) classes.push(className);
   return (
-    <div {...attributes} className={classes.join(' ')}>
+    <div 
+      {...attributes} 
+      className={classes.join(' ')} 
+      onClick={() => close && closeDialog()}
+    >
       {children}
     </div>
   );
@@ -223,6 +243,8 @@ export function Dialog(props: DialogProps) {
     children, //?: ReactNode
     //dialog class name
     className, //?: string
+    //slot: props for overlay element
+    overlay,
     //dialog styles
     style, //?: React.CSSProperties
     ...attributes
@@ -232,11 +254,8 @@ export function Dialog(props: DialogProps) {
   //variables
   // configure classes
   const classes = [ 'frui-dialog' ];
-  if (className) classes.push(className);
+  className && classes.push(className);
   // handlers
-  const onOverlayClick = () => {
-    close && handlers.closeDialog();
-  };
   const ignoreOverlayClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
@@ -283,16 +302,13 @@ export function Dialog(props: DialogProps) {
     );
   }
   //extract close from overlay
-  const { 
-    close, 
-    ...overlay 
-  } = typeof props.overlay === 'object' ? props.overlay: {};
+  const overlayProps = typeof overlay === 'object' ? overlay: {};
   // if append is provided, use portal (with overlay)
   if (append) {
     return (
       <DialogContext.Provider value={provider}>
         {handlers.portal(
-          <DialogOverlay {...overlay} onClick={onOverlayClick}>
+          <DialogOverlay {...overlayProps}>
             <div 
               {...attributes}
               className={classes.join(' ')} 
@@ -309,7 +325,7 @@ export function Dialog(props: DialogProps) {
   // otherwise, render normally (with overlay)
   return (
     <DialogContext.Provider value={provider}>
-      <DialogOverlay {...overlay} onClick={onOverlayClick}>
+      <DialogOverlay {...overlayProps}>
         <div 
           {...attributes}
           className={classes.join(' ')} 

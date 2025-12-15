@@ -177,7 +177,9 @@ import TextAlignTool from './helpers/tools/TextAlignTool.js';
 export type { GetClassStylesOptions } from './helpers/getClassStyles.js';
 import getClassStyles from './helpers/getClassStyles.js';
 
-import getChildComponent from './helpers/getChildComponent.js';
+import getChildComponent, { 
+  getChildComponents 
+} from './helpers/getChildComponent.js';
 import getSlotStyles from './helpers/getSlotStyles.js';
 import toChildrenArray from './helpers/toChildrenArray.js';
 
@@ -191,6 +193,7 @@ export {
   SizeTool,
   TextAlignTool,
   getChildComponent,
+  getChildComponents,
   getClassStyles,
   getSlotStyles,
   toChildrenArray,

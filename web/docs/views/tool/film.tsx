@@ -5,7 +5,7 @@
 import { useLanguage, Translate } from 'r22n';
 
 //frui
-import Film from 'src/view/Film.js';
+import Film from 'src/base/Film.js';
 
 //web
 import type { PageProps } from '../../../app/types.js';
@@ -14,33 +14,35 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/film';
+const uri = '/tool/film';
 const title = 'Film';
-const description = 'Image film converts a list of strings '
-  + 'into an image film';
+const description = 'Film layouts content side by side in a linear sequence.';
 
 const examples = [
 //0
-`<Film className="flex" value={[
-  'https://images.wsj.net/im-580612/8SR', 
-  'https://images.wsj.net/im-580612/8SR'
-]} width="50" />`,
+`<Film className="flex">
+  <Film.Frame>
+    <img src="https://images.wsj.net/im-580612/8SR" width="50" />
+  </Film.Frame>
+  <Film.Frame>
+    <img src="https://images.wsj.net/im-580612/8SR" width="50" />
+  </Film.Frame>
+</Film>`,
  //1
-`<Film className="flex" wrapper="py-3" image="mx-3" value={[
-  'https://images.wsj.net/im-580612/8SR', 
-  'https://images.wsj.net/im-580612/8SR'
-]} width="50" />`
+`<Film className="flex" frame="mx-3">
+  <Film.Frame>
+    <img src="https://images.wsj.net/im-580612/8SR" width="50" />
+  </Film.Frame>
+  <Film.Frame>
+    <img src="https://images.wsj.net/im-580612/8SR" width="50" />
+  </Film.Frame>
+</Film>`
 ];
 
 const props = [
-  [ 'alt', 'string', 'No', 'Alt text for image' ],
   [ 'className', 'string', 'No', 'Standard HTML class names applied to all images' ],
-  [ 'image' , 'SlotStyleProp', 'No', 'Class/style to apply to each image element' ],
-  [ 'height', 'string|number', 'No', 'Height of image' ],
-  [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all images' ],
-  [ 'value', 'string[]', 'Yes', 'Default value' ],
-  [ 'width', 'string|number', 'No', 'Width of image' ],
-  [ 'wrapper' , 'SlotStyleProp', 'No', 'Class/style to apply to each wrapper element' ]
+  [ 'frame' , 'SlotStyleProp', 'No', 'Class/style to apply to each frame element' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS object applied to all images' ]
 ];
 
 //--------------------------------------------------------------------//
@@ -68,11 +70,11 @@ export function Menu() {
       </h4>
       <div className="p-3">
         <a className="block pb-1 font-bold" href="#top">
-          {_('Image Film')}
+          {_('Film')}
         </a>
         <ul className="list-disc pl-2">
           <li className="ml-2 pb-1">
-            <a href="#examples">{_('Examples')}</a>
+            <a href="#basic">{_('Basics')}</a>
           </li>
           <li className="ml-2 pb-1">
             <a href="#slots">{_('Slots')}</a>
@@ -102,16 +104,18 @@ export function Body() {
       + 'pb-5 h-full overflow-auto'
     }>
       <h1 id="top" className="flex items-center uppercase font-bold text-xl">
-        {_('Image Film')}
+        {_('Film')}
       </h1>
       <div>
         <p className="py-2">
           <Translate>
-            Import the <C value="<Film>" /> component as shown below.
+            Films are a way to display a series of images or content 
+            frames in a linear sequence. Import 
+            the <C value="<Film>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Film from 'frui/view/Film';`}
+          {`import Film from 'frui/Film';`}
         </Code>
       </div>
 
@@ -121,16 +125,39 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The following example shows how to setup a basic image 
-            film.
+            The following example shows how to setup a basic film.
           </Translate>
         </p>
         <Preview title="Basic Example" className="border border-2 theme-bc-3">
           <Preview.Example center padding>
-            <Film className="flex" value={[
-              'https://images.wsj.net/im-580612/8SR', 
-              'https://images.wsj.net/im-580612/8SR'
-            ]} width="50" />
+            <Film className="flex">
+              <Film.Frame>
+                <img src="https://images.wsj.net/im-580612/8SR" width="50" />
+              </Film.Frame>
+              <Film.Frame>
+                <img src="https://images.wsj.net/im-580612/8SR" width="50" />
+              </Film.Frame>
+            </Film>
+          </Preview.Example>
+          <Preview.Code>{examples[0]}</Preview.Code>
+        </Preview>
+        <p className="py-2">
+          <Translate>
+            Film can also be used to layout content side by side.
+          </Translate>
+        </p>
+        <Preview title="Hero Slider" className="border border-2 theme-bc-3">
+          <Preview.Example center padding>
+            <Film className="flex">
+              <Film.Frame className="theme-bc-2 p-3 border">
+                <h2 className="font-bold">First Frame</h2>
+                <p>This is the content of the first frame.</p>
+              </Film.Frame>
+              <Film.Frame className="theme-bc-2 p-3 border">
+                <h2 className="font-bold">Second Frame</h2>
+                <p>This is the content of the second frame.</p>
+              </Film.Frame>
+            </Film>
           </Preview.Example>
           <Preview.Code>{examples[0]}</Preview.Code>
         </Preview>
@@ -142,16 +169,19 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Use the <C value="wrapper" />, and <C value="image" /> prop 
-            to style each image.
+            Use the <C value="frame" /> prop to style each image.
           </Translate>
         </p>
         <Preview title="Slot Example" className="border border-2 theme-bc-3">
           <Preview.Example center padding>
-            <Film className="flex" wrapper="py-3" image="inline-block mx-3" value={[
-              'https://images.wsj.net/im-580612/8SR', 
-              'https://images.wsj.net/im-580612/8SR'
-            ]} width="50" />
+            <Film className="flex" frame="mx-3">
+              <Film.Frame>
+                <img src="https://images.wsj.net/im-580612/8SR" width="50" />
+              </Film.Frame>
+              <Film.Frame>
+                <img src="https://images.wsj.net/im-580612/8SR" width="50" />
+              </Film.Frame>
+            </Film>
           </Preview.Example>
           <Preview.Code>{examples[1]}</Preview.Code>
         </Preview>
@@ -164,9 +194,8 @@ export function Body() {
         <p className="py-2">
           <Translate>
             You can add use 
-            the <C value="frui-view-film" />, 
-            <C l value="frui-view-film-wrapper" />,
-            and <C value="frui-view-film-image" /> CSS classes to 
+            the <C value="frui-film" />, 
+            and <C value="frui-film-view" /> CSS classes to 
             globally theme films.
           </Translate>
         </p>

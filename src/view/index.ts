@@ -1,6 +1,3 @@
-//image carousel
-export type { CarouselProps } from './Carousel.js';
-import Carousel from './Carousel.js';
 //code highlighter
 export type { CodeProps } from './Code.js';
 import Code from './Code.js';
@@ -19,9 +16,6 @@ import DateFormat from './DateFormat.js';
 //email link
 export type { EmailLinkProps } from './EmailLink.js';
 import EmailLink from './EmailLink.js';
-//film
-export type { FilmProps } from './Film.js';
-import { Film } from './Film.js';
 //formula
 export type { FormulaProps } from './Formula.js';
 import Formula from './Formula.js';
@@ -31,6 +25,12 @@ import HTML from './HTML.js';
 //image format
 export type { ImageProps } from './Image.js';
 import Image from './Image.js';
+//image carousel
+export type { ImageCarouselProps } from './ImageCarousel.js';
+import ImageCarousel from './ImageCarousel.js';
+//image film
+export type { ImageFilmProps } from './ImageFilm.js';
+import ImageFilm from './ImageFilm.js';
 //link format
 export type { LinkProps } from './Link.js';
 import Link from './Link.js';
@@ -78,11 +78,11 @@ export {
   Currency,
   DateFormat,
   EmailLink,
-  Film,
   Formula,
   HTML,
   Image,
-  Carousel,
+  ImageFilm,
+  ImageCarousel,
   Link,
   List,
   Markdown,

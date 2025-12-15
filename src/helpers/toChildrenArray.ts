@@ -8,7 +8,7 @@ export function toChildrenArray(children: ReactNode): ReactNode[] {
   if (typeof (children as any)[Symbol.iterator] === 'function') {
     return Array.from(children as Iterable<ReactNode>);
   } else {
-    children = [children];
+    children = [ children ];
   }
   return [ children ];
 };

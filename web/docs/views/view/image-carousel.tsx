@@ -6,7 +6,7 @@ import { useLanguage, Translate } from 'r22n';
 
 //frui
 import Button from 'src/base/Button.js';
-import Carousel from 'src/view/Carousel.js';
+import ImageCarousel from 'src/view/ImageCarousel.js';
 
 //web
 import type { PageProps } from '../../../app/types.js';
@@ -15,21 +15,21 @@ import Docs from '../../layout/Docs.js';
 //--------------------------------------------------------------------//
 // Constants
 
-const uri = '/view/carousel';
-const title = 'Carousel';
+const uri = '/view/image-carousel';
+const title = 'Image Carousel';
 const description = 'Image carousel converts a list of strings '
   + 'into an image carousel';
 
 const examples = [
 //0
-`<Carousel value={[
+`<ImageCarousel value={[
   'https://images.wsj.net/im-580612/8SR', 
   'https://images.wsj.net/im-580612/8SR', 
   'https://images.wsj.net/im-580612/8SR'
 ]} width="100" />`,
  //1
 `<div className="w-[250px] m-auto">
-  <Carousel scroll value={[
+  <ImageCarousel scroll value={[
     'https://images.wsj.net/im-580612/8SR', 
     'https://images.wsj.net/im-580612/8SR', 
     'https://images.wsj.net/im-580612/8SR', 
@@ -39,23 +39,23 @@ const examples = [
 </div>`,
  //2
 `<div className="w-[336px] m-auto">
-  <Carousel hidden value={[
+  <ImageCarousel hidden value={[
     'https://images.wsj.net/im-580612/8SR', 
     'https://images.wsj.net/im-580612/8SR', 
     'https://images.wsj.net/im-580612/8SR', 
     'https://images.wsj.net/im-580612/8SR', 
     'https://images.wsj.net/im-580612/8SR'
   ]} width="200">
-    <Carousel.Prev asChild>
+    <ImageCarousel.Prev asChild>
       <Button info>Prev</Button>
-    </Carousel.Prev>
-    <Carousel.Next asChild>
+    </ImageCarousel.Prev>
+    <ImageCarousel.Next asChild>
       <Button info>Next</Button>
-    </Carousel.Next>
-  </Carousel>
+    </ImageCarousel.Next>
+  </ImageCarousel>
 </div>`,
  //3
-`<Carousel auto image="rounded-full" wrapper="inline-block mx-3" value={[
+`<ImageCarousel auto image="rounded-full" wrapper="inline-block mx-3" value={[
   'https://images.wsj.net/im-580612/8SR', 
   'https://images.wsj.net/im-580612/8SR', 
   'https://images.wsj.net/im-580612/8SR', 
@@ -144,11 +144,11 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            Import the <C value="<Carousel>" /> component as shown below.
+            Import the <C value="<ImageCarousel>" /> component as shown below.
           </Translate>
         </p>
         <Code language="typescript" className="mt-2">
-          {`import Carousel from 'frui/view/Carousel';`}
+          {`import ImageCarousel from 'frui/view/ImageCarousel';`}
         </Code>
       </div>
 
@@ -164,7 +164,7 @@ export function Body() {
         </p>
         <Preview title="Basic Example" className="border border-2 theme-bc-3">
           <Preview.Example padding>
-            <Carousel value={[
+            <ImageCarousel value={[
               'https://images.wsj.net/im-580612/8SR', 
               'https://images.wsj.net/im-580612/8SR', 
               'https://images.wsj.net/im-580612/8SR'
@@ -188,7 +188,7 @@ export function Body() {
         <Preview title="Scroll Auto" className="border border-2 theme-bc-3">
           <Preview.Example padding>
             <div className="w-[250px] m-auto">
-              <Carousel auto value={[
+              <ImageCarousel auto value={[
                 'https://images.wsj.net/im-580612/8SR', 
                 'https://images.wsj.net/im-580612/8SR', 
                 'https://images.wsj.net/im-580612/8SR', 
@@ -207,28 +207,28 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            You can use the <C value="<Carousel.Prev>" /> and 
-            <C value="<Carousel.Next>" /> components to add 
+            You can use the <C value="<ImageCarousel.Prev>" /> and 
+            <C value="<ImageCarousel.Next>" /> components to add 
             navigation to the carousel.
           </Translate>
         </p>
         <Preview title="Previous Next" className="border border-2 theme-bc-3">
           <Preview.Example padding>
             <div className="w-[336px] m-auto">
-              <Carousel hidden value={[
+              <ImageCarousel hidden repeat value={[
                 'https://images.wsj.net/im-580612/8SR', 
                 'https://images.wsj.net/im-580612/8SR', 
                 'https://images.wsj.net/im-580612/8SR', 
                 'https://images.wsj.net/im-580612/8SR', 
                 'https://images.wsj.net/im-580612/8SR'
               ]} width="200">
-                <Carousel.Prev asChild>
+                <ImageCarousel.Prev asChild>
                   <Button info>Prev</Button>
-                </Carousel.Prev>
-                <Carousel.Next asChild>
+                </ImageCarousel.Prev>
+                <ImageCarousel.Next asChild>
                   <Button info>Next</Button>
-                </Carousel.Next>
-              </Carousel>
+                </ImageCarousel.Next>
+              </ImageCarousel>
             </div>
           </Preview.Example>
           <Preview.Code>{examples[2]}</Preview.Code>
@@ -248,13 +248,19 @@ export function Body() {
         </p>
         <Preview title="Slot Example" className="border border-2 theme-bc-3">
           <Preview.Example center padding>
-            <Carousel auto image="rounded-full" wrapper="inline-block mx-3" value={[
-              'https://images.wsj.net/im-580612/8SR', 
-              'https://images.wsj.net/im-580612/8SR', 
-              'https://images.wsj.net/im-580612/8SR', 
-              'https://images.wsj.net/im-580612/8SR', 
-              'https://images.wsj.net/im-580612/8SR'
-            ]} width="200" />
+            <ImageCarousel 
+              auto 
+              image="rounded-full" 
+              frame="inline-block mx-3" 
+              value={[
+                'https://images.wsj.net/im-580612/8SR', 
+                'https://images.wsj.net/im-580612/8SR', 
+                'https://images.wsj.net/im-580612/8SR', 
+                'https://images.wsj.net/im-580612/8SR', 
+                'https://images.wsj.net/im-580612/8SR'
+              ]} 
+              width="200" 
+            />
           </Preview.Example>
           <Preview.Code>{examples[1]}</Preview.Code>
         </Preview>
@@ -267,12 +273,9 @@ export function Body() {
         <p className="py-2">
           <Translate>
             You can add use 
-            the <C value="frui-view-carousel" />, 
-            <C l value="frui-view-carousel-frame" />,
-            <C l value="frui-view-carousel-film" />, 
-            <C l value="frui-view-carousel-prev" />, 
-            and <C value="frui-view-carousel-next" /> CSS classes to 
-            globally theme carousels.
+            the <C value="frui-view-image-carousel" />, 
+            and <C value="frui-view-image-carousel-image" /> CSS 
+            classes to globally theme carousels.
           </Translate>
         </p>
       </div>
@@ -283,7 +286,7 @@ export function Body() {
       <div>
         <p className="py-2">
           <Translate>
-            The <C value="<Carousel>" /> format can be passed the 
+            The <C value="<ImageCarousel>" /> format can be passed the 
             following props.
           </Translate>
         </p>

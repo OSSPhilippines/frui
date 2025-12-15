@@ -1,3 +1,7 @@
+.frui-dropdown-container {
+  position: relative;
+}
+
 .frui-dropdown {
   background-color: var(--white);
   border-color: var(--black);

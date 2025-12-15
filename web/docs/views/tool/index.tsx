@@ -5,7 +5,7 @@
 import { useState } from 'react';
 import { useLanguage } from 'r22n';
 //frui
-import { Box, Button, Card } from 'src/base/index.js';
+import { Box, Button, Card, Dropdown, Film } from 'src/base/index.js';
 import { Scope, When, Otherwise } from 'src/tool/index.js';
 //web
 import type { PageProps } from '../../../app/types.js';
@@ -54,7 +54,9 @@ export function Body() {
         >
           <div className="m-2 border theme-bc-2 rounded overflow-hidden">
             <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
-              <Box info fill pa="md">Info</Box>
+              <Box info fill pa="md" w={140} h={100} className="flex items-center justify-center">
+                Info
+              </Box>
             </div>
             <h2 className="my-2 font-semibold text-center uppercase">
               {_('Box')}
@@ -69,7 +71,7 @@ export function Body() {
             <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
               <Card ba="xs" solid bdc="black" left curved pa="2xl">
                 <Card.Title h2 bold>Card Title</Card.Title>
-                <Card.Description py="2xl">
+                <Card.Description pb="xl">
                   This is a card description.
                 </Card.Description>
                 <Button info>Action</Button>
@@ -77,6 +79,49 @@ export function Body() {
             </div>
             <h2 className="my-2 font-semibold text-center uppercase">
               {_('Card')}
+            </h2>
+          </div>
+        </div>
+        <div 
+          className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+          onClick={() => window.location.href = ('/tool/dropdown')} 
+        >
+          <div className="m-2 border theme-bc-2 rounded overflow-hidden">
+            <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
+              <Dropdown opened={true} container="w-full px-mt--80">
+                <Dropdown.Option className="border-b pb-2 mb-2" value="1">
+                  Option 1
+                </Dropdown.Option>
+                <Dropdown.Option value="2">
+                  Option 2
+                </Dropdown.Option>
+              </Dropdown>
+            </div>
+            <h2 className="my-2 font-semibold text-center uppercase">
+              {_('Dropdown')}
+            </h2>
+          </div>
+        </div>
+        <div 
+          className="block basis-full sm:basis-1/2 md:basis-1/3 text-center cursor-pointer"
+          onClick={() => window.location.href = ('/tool/film')} 
+        >
+          <div className="m-2 border theme-bc-2 rounded overflow-hidden">
+            <div className="flex items-center justify-center h-[130px] w-full theme-bg-1 px-3">
+              <Film className="flex">
+                <Film.Frame>
+                  <img src="https://images.wsj.net/im-580612/8SR" width="50" />
+                </Film.Frame>
+                <Film.Frame>
+                  <img src="https://images.wsj.net/im-580612/8SR" width="50" />
+                </Film.Frame>
+                <Film.Frame>
+                  <img src="https://images.wsj.net/im-580612/8SR" width="50" />
+                </Film.Frame>
+              </Film>
+            </div>
+            <h2 className="my-2 font-semibold text-center uppercase">
+              {_('Film')}
             </h2>
           </div>
         </div>

@@ -24,7 +24,7 @@ import type { ChangeEvent } from 'react';
 import Textarea, { useTextarea } from '../../src/form/Textarea';
 
 //--------------------------------------------------------------------//
-// Hooks
+// Tests
 
 describe('useTextarea()', () => {
   it('calls onChange and onUpdate with correct value', () => {

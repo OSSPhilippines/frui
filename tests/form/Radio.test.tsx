@@ -18,6 +18,7 @@ import { Radio, useRadio } from '../../src/form/Radio.js';
 
 //--------------------------------------------------------------------//
 // Tests
+
 describe('useRadio()', () => {
   it('sets and updates checked state when changed', () => {
     const onChange = vi.fn();

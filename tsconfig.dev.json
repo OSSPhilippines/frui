@@ -23,11 +23,11 @@
     "outDir": "esm/"
   },
   "include": [ 
+    "scripts/**/*.ts",
     "src/**/*.ts", 
     "src/**/*.tsx",
     "web/**/*.ts",
-    "web/**/*.tsx",
-    "scripts/**/*.ts",
+    "web/**/*.tsx"
   ],
   "exclude": [ "dist", "node_modules", "tests" ]
 }

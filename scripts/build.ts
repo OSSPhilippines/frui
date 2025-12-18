@@ -29,8 +29,8 @@ const config = {
     //filepath to a global css file
     cssFiles: [ 
       'virtual:uno.css',
-      //'react-toastify/dist/ReactToastify.css',
-      //path.join(process.cwd(), '../frui/frui.css')
+      'react-toastify/dist/ReactToastify.css',
+      path.join(process.cwd(), '../frui/frui.css')
     ],
     //vite plugins
     plugins: [ unocss(), tsconfigPaths() ],

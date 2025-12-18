@@ -2,6 +2,8 @@
   <img src="https://frui.js.org/frui-icon.png" width="100" />
   <h1>Free React UI (FRUI)</h1>
   <a href="https://www.npmjs.com/package/frui"><img src="https://img.shields.io/npm/v/frui.svg?style=flat" /></a>
+  <a href="https://github.com/OSSPhilippines/frui/actions"><img src="https://img.shields.io/github/actions/workflow/status/OSSPhilippines/frui/test.yml" /></a>
+  <a href="https://coveralls.io/github/OSSPhilippines/frui?branch=main"><img src="https://coveralls.io/repos/github/OSSPhilippines/frui/badge.svg?branch=main" /></a>
   <a href="https://github.com/OSSPhilippines/frui/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" /></a>
   <a href="https://github.com/OSSPhilippines/frui/commits/main/"><img src="https://img.shields.io/github/last-commit/OSSPhilippines/frui" /></a>
   <a href="https://github.com/OSSPhilippines/frui/blob/main/README.md#contributing"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" /></a>

@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "frui",
-  "version": "0.1.8",
+  "version": "0.2.1",
   "license": "MIT",
   "description": "A collection of vanilla react components written in typescript.",
   "author": "Chris <chris@incept.asia>",

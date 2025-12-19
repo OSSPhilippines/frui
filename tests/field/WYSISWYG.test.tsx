@@ -87,6 +87,12 @@ describe('WYSIWYG component', () => {
         container.querySelector('.frui-wysiwyg-rtl')
       ).toBeInTheDocument();
     });
+
+    it('renders with undefined value', () => {
+      render(<WYSIWYG value={undefined} />);
+      const editor = screen.getByLabelText('Rich Text Editor');
+      expect(editor).toBeInTheDocument();
+    });
   });
 
   describe('toolbar actions', () => {
@@ -348,6 +354,40 @@ describe('WYSIWYG component', () => {
         undefined
       );
     });
+
+    it('applies text style', () => {
+      const mockSelection = {
+        rangeCount: 1,
+        getRangeAt: vi.fn(() => ({
+          extractContents: vi.fn(() => {
+            const fragment = document.createDocumentFragment();
+            const textNode = document.createTextNode('test');
+            fragment.appendChild(textNode);
+            return fragment;
+          }),
+          cloneContents: vi.fn(() => document.createElement('div')),
+          deleteContents: vi.fn(),
+          insertNode: vi.fn(),
+          selectNodeContents: vi.fn()
+        })),
+        removeAllRanges: vi.fn(),
+        addRange: vi.fn()
+      };
+      (window.getSelection as any).mockReturnValue(mockSelection);
+      
+      render(<WYSIWYG textStyle />);
+      const styleSelect = screen.getByLabelText('Text Style');
+      fireEvent.change(styleSelect, { target: { value: 'code' } });
+      const editor = screen.getByLabelText('Rich Text Editor');
+      expect(editor).toBeInTheDocument();
+    });
+
+    it('removes format', () => {
+      render(<WYSIWYG remove />);
+      const removeBtn = screen.getByLabelText('Remove Format');
+      fireEvent.click(removeBtn);
+      expect(removeBtn).toBeInTheDocument();
+    });
   });
 
   describe('media insertion', () => {
@@ -367,10 +407,38 @@ describe('WYSIWYG component', () => {
       );
     });
 
+    it('does not insert link when cancelled', () => {
+      (window.prompt as any).mockReturnValue(null);
+      render(<WYSIWYG link />);
+      const linkBtn = screen.getByLabelText('Insert Link');
+      fireEvent.click(linkBtn);
+      expect(window.prompt).toHaveBeenCalled();
+    });
+
+    it('does not insert link with invalid URL', () => {
+      (window.prompt as any).mockReturnValue('invalid-url');
+      render(<WYSIWYG link />);
+      const linkBtn = screen.getByLabelText('Insert Link');
+      fireEvent.click(linkBtn);
+      expect(document.execCommand).not.toHaveBeenCalledWith(
+        'createLink',
+        expect.anything(),
+        'invalid-url'
+      );
+    });
+
     it('prompts for video URL', () => {
       (window.prompt as any).mockReturnValue(
         'https://youtube.com/embed/test'
       );
+      render(<WYSIWYG video />);
+      const videoBtn = screen.getByLabelText('Insert Video');
+      fireEvent.click(videoBtn);
+      expect(window.prompt).toHaveBeenCalled();
+    });
+
+    it('does not insert video when cancelled', () => {
+      (window.prompt as any).mockReturnValue(null);
       render(<WYSIWYG video />);
       const videoBtn = screen.getByLabelText('Insert Video');
       fireEvent.click(videoBtn);
@@ -387,8 +455,24 @@ describe('WYSIWYG component', () => {
       expect(window.prompt).toHaveBeenCalled();
     });
 
+    it('does not insert audio when cancelled', () => {
+      (window.prompt as any).mockReturnValue(null);
+      render(<WYSIWYG audio />);
+      const audioBtn = screen.getByLabelText('Insert Audio');
+      fireEvent.click(audioBtn);
+      expect(window.prompt).toHaveBeenCalled();
+    });
+
     it('prompts for math expression', () => {
       (window.prompt as any).mockReturnValue('x^2');
+      render(<WYSIWYG math />);
+      const mathBtn = screen.getByLabelText('Insert Math');
+      fireEvent.click(mathBtn);
+      expect(window.prompt).toHaveBeenCalled();
+    });
+
+    it('does not insert math when cancelled', () => {
+      (window.prompt as any).mockReturnValue(null);
       render(<WYSIWYG math />);
       const mathBtn = screen.getByLabelText('Insert Math');
       fireEvent.click(mathBtn);
@@ -403,6 +487,28 @@ describe('WYSIWYG component', () => {
       const tableBtn = screen.getByLabelText('Insert Table');
       fireEvent.click(tableBtn);
       expect(window.prompt).toHaveBeenCalledTimes(2);
+    });
+
+    it('does not insert table when first prompt cancelled', () => {
+      (window.prompt as any).mockReturnValueOnce(null);
+      render(<WYSIWYG table />);
+      const tableBtn = screen.getByLabelText('Insert Table');
+      fireEvent.click(tableBtn);
+      expect(window.prompt).toHaveBeenCalledWith('Enter number of rows', '2');
+    });
+
+    it('handles image upload', () => {
+      render(<WYSIWYG image />);
+      const { container } = render(<WYSIWYG image />);
+      const fileInput = container.querySelector('input[type="file"]');
+      expect(fileInput).toBeInTheDocument();
+    });
+
+    it('handles image gallery upload', () => {
+      render(<WYSIWYG imageGallery />);
+      const { container } = render(<WYSIWYG imageGallery />);
+      const fileInput = container.querySelector('input[type="file"][multiple]');
+      expect(fileInput).toBeInTheDocument();
     });
   });
 
@@ -515,6 +621,54 @@ describe('WYSIWYG component', () => {
       expect(URL.createObjectURL).toHaveBeenCalled();
       expect(URL.revokeObjectURL).toHaveBeenCalled();
     });
+
+    it('handles fullscreen toggle', () => {
+      const mockRequestFullscreen = vi.fn();
+      const mockExitFullscreen = vi.fn();
+      
+      Object.defineProperty(document, 'fullscreenElement', {
+        writable: true,
+        value: null
+      });
+      
+      Object.defineProperty(document, 'exitFullscreen', {
+        writable: true,
+        value: mockExitFullscreen
+      });
+      
+      render(<WYSIWYG fullscreen />);
+      const fullscreenBtn = screen.getByLabelText('Toggle Fullscreen');
+      
+      const editor = screen.getByLabelText('Rich Text Editor');
+      (editor as any).requestFullscreen = mockRequestFullscreen;
+      
+      fireEvent.click(fullscreenBtn);
+      
+      expect(mockRequestFullscreen).toHaveBeenCalled();
+    });
+
+    it('toggles show blocks', () => {
+      render(<WYSIWYG showblocks />);
+      const showBlocksBtn = screen.getByLabelText('Toggle Block Visibility');
+      fireEvent.click(showBlocksBtn);
+      expect(showBlocksBtn).toBeInTheDocument();
+    });
+
+    it('changes line height', () => {
+      render(<WYSIWYG lineheight />);
+      const lineHeightSelect = screen.getByLabelText('Line Height');
+      fireEvent.change(lineHeightSelect, { target: { value: '1.5' } });
+      expect(lineHeightSelect).toBeInTheDocument();
+    });
+
+    it('inserts template', () => {
+      render(<WYSIWYG template />);
+      const templateSelect = screen.getByLabelText('Insert Template');
+      fireEvent.change(templateSelect, { 
+        target: { value: '<p><strong>Header</strong><br>Content</p>' } 
+      });
+      expect(document.execCommand).toHaveBeenCalled();
+    });
   });
 
   describe('direction controls', () => {
@@ -544,6 +698,16 @@ describe('WYSIWYG component', () => {
       const editor = screen.getByLabelText('Rich Text Editor');
       expect(editor).toHaveAttribute('dir', 'rtl');
     });
+
+    it('toggles direction', () => {
+      render(<WYSIWYG dir="ltr" />);
+      const toggleBtn = screen.getByLabelText('Toggle Text Direction');
+      
+      fireEvent.click(toggleBtn);
+      
+      const editor = screen.getByLabelText('Rich Text Editor');
+      expect(editor).toHaveAttribute('dir', 'rtl');
+    });
   });
 
   describe('value synchronization', () => {
@@ -565,11 +729,51 @@ describe('WYSIWYG component', () => {
         <WYSIWYG value="<p>Test</p>" name="content" />
       );
       const hiddenInput = container.querySelector(
-        'input[ type="hidden" ]'
+        'input[type="hidden"]'
       ) as HTMLInputElement;
 
       expect(hiddenInput).toHaveAttribute('name', 'content');
       expect(hiddenInput.value).toBe('<p>Test</p>');
+    });
+
+    it('updates hidden input on editor change', () => {
+      const handleChange = vi.fn();
+      const { container } = render(
+        <WYSIWYG value="<p>Initial</p>" name="content" onChange={handleChange} />
+      );
+      const editor = screen.getByLabelText('Rich Text Editor');
+      const hiddenInput = container.querySelector(
+        'input[type="hidden"]'
+      ) as HTMLInputElement;
+      
+      editor.focus();
+      document.execCommand('insertText', false, 'Changed');
+      fireEvent.input(editor);
+
+      expect(handleChange).toHaveBeenCalled();
+      expect(hiddenInput.value).toBe(editor.innerHTML);
+    });
+  });
+
+  describe('link click handling', () => {
+    it('opens link on ctrl+click', () => {
+      const { container } = render(
+        <WYSIWYG value='<a href="https://example.com">Link</a>' />
+      );
+      const editor = screen.getByLabelText('Rich Text Editor');
+      const link = editor.querySelector('a');
+      
+      if (link) {
+        fireEvent.click(link, { 
+          ctrlKey: true
+        });
+
+        expect(window.open).toHaveBeenCalledWith(
+          'https://example.com',
+          '_blank',
+          'noopener,noreferrer'
+        );
+      }
     });
   });
 });

@@ -77,7 +77,7 @@ function createMockFile(
 function createMockFileList(files: File[]): FileList {
   const fileList = {
     length: files.length,
-    item: (index: number) => files[index] || null,
+    item: (index: number) => files[ index ] || null,
     [Symbol.iterator]: function* () {
       yield* files;
     }
@@ -286,7 +286,7 @@ describe('Filelist Component', () => {
   it('renders file input with multiple attribute', () => {
     const { container } = render(<Filelist />);
     const input = container.querySelector(
-      'input[type="file"]'
+      'input[ type="file" ]'
     ) as HTMLInputElement;
     expect(input).toBeInTheDocument();
     expect(input).toHaveAttribute('multiple');
@@ -346,7 +346,7 @@ describe('Filelist Component', () => {
       />
     );
     const hiddenInputs = container.querySelectorAll(
-      'input[type="hidden"]'
+      'input[ type="hidden" ]'
     );
     expect(hiddenInputs).toHaveLength(2);
     expect(hiddenInputs[ 0 ]).toHaveValue('file1.jpg');

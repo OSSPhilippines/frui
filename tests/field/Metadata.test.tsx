@@ -356,7 +356,7 @@ describe('MetadataFields', () => {
     );
 
     const hiddenInput = container.querySelector(
-      'input[type="hidden"]'
+      'input[ type="hidden" ]'
     ) as HTMLInputElement;
 
     expect(hiddenInput).toBeInTheDocument();
@@ -376,7 +376,7 @@ describe('MetadataFields', () => {
     );
 
     const hiddenInput = container.querySelector(
-      'input[type="hidden"]'
+      'input[ type="hidden" ]'
     ) as HTMLInputElement;
     expect(hiddenInput.value).toBe(date.toString());
   });
@@ -392,7 +392,7 @@ describe('MetadataFields', () => {
     );
 
     const hiddenInput = container.querySelector(
-      'input[type="hidden"]'
+      'input[ type="hidden" ]'
     );
     expect(hiddenInput).not.toBeInTheDocument();
   });

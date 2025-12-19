@@ -500,14 +500,14 @@ describe('WYSIWYG component', () => {
     it('handles image upload', () => {
       render(<WYSIWYG image />);
       const { container } = render(<WYSIWYG image />);
-      const fileInput = container.querySelector('input[type="file"]');
+      const fileInput = container.querySelector('input[ type="file" ]');
       expect(fileInput).toBeInTheDocument();
     });
 
     it('handles image gallery upload', () => {
       render(<WYSIWYG imageGallery />);
       const { container } = render(<WYSIWYG imageGallery />);
-      const fileInput = container.querySelector('input[type="file"][multiple]');
+      const fileInput = container.querySelector('input[ type="file" ][ multiple ]');
       expect(fileInput).toBeInTheDocument();
     });
   });
@@ -743,7 +743,7 @@ describe('WYSIWYG component', () => {
       );
       const editor = screen.getByLabelText('Rich Text Editor');
       const hiddenInput = container.querySelector(
-        'input[type="hidden"]'
+        'input[ type="hidden" ]'
       ) as HTMLInputElement;
       
       editor.focus();

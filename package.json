@@ -9,6 +9,21 @@
     "build:frui": "yarn --cwd frui build",
     "build:web": "yarn --cwd web build && cp .nojekyll docs/.nojekyll && cp CNAME docs/CNAME",
     "dev": "yarn --cwd web dev",
-    "start": "yarn --cwd web start"
+    "start": "yarn --cwd web start",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "6.9.1",
+    "@vitejs/plugin-react": "5.1.2",
+    "vite": "7.3.0"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "10.4.1",
+    "@testing-library/react": "16.3.1",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "@vitest/coverage-v8": "4.0.16",
+    "jsdom": "27.3.0",
+    "vitest": "4.0.15"
   }
 }

@@ -1,0 +1,347 @@
+/* Base styles for the WYSIWYG editor */
+.frui-form-text-editor {
+  background-color: #FFFFFF;
+  border: 1px solid #DADADA;
+  box-sizing: border-box;
+  color: #000000;
+  font-family: Arial, sans-serif;
+  height: auto;
+  user-select: none;
+  width: auto;
+}
+
+.frui-form-text-editor * {
+  box-sizing: border-box;
+}
+
+/* Toolbar container */
+.frui-form-text-editor-toolbar {
+  background-color: #F5F5F5;
+  border-bottom: 1px solid #DADADA;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px;
+}
+
+/* Button module (group of buttons/inputs/selects) */
+.frui-form-text-editor-btn-module {
+  align-items: center;
+  display: inline-flex;
+  gap: 4px;
+}
+
+/* Individual buttons */
+.frui-form-text-editor-btn {
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 34px;
+  padding: 0;
+  transition: background-color 0.2s, border-color 0.2s;
+  width: 34px;
+}
+
+.frui-form-text-editor-btn:hover:enabled,
+.frui-form-text-editor-btn:focus:enabled {
+  background-color: #E1E1E1;
+  border-color: #D1D1D1;
+}
+
+.frui-form-text-editor-btn:active:enabled {
+  background-color: #D1D1D1;
+  border-color: #C1C1C1;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.frui-form-text-editor-btn:disabled {
+  color: #BDBDBD;
+  cursor: not-allowed;
+}
+
+/* Icons inside buttons */
+.frui-form-text-editor-btn i {
+  font-size: 14px;
+  line-height: 34px;
+}
+
+.frui-form-text-editor svg {
+  fill: currentColor;
+}
+
+.frui-form-text-editor-btn > svg {
+  display: block;
+  height: 16px;
+  margin: auto;
+  width: 16px;
+}
+
+/* Dropdowns */
+.frui-form-text-editor-btn-select {
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  height: 34px;
+  padding: 0 8px;
+}
+
+.frui-form-text-editor-btn-select:focus {
+  border-color: #80BDFF;
+  box-shadow: 0 0 0 2px rgba(128, 189, 255, 0.3);
+}
+
+/* Color inputs */
+.frui-form-text-editor-btn-module input[type="color"] {
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 34px;
+  padding: 0;
+  width: 34px;
+}
+
+.frui-form-text-editor-btn-module input[type="color"]:focus {
+  border-color: #80BDFF;
+  box-shadow: 0 0 0 2px rgba(128, 189, 255, 0.3);
+}
+
+/* Editable content area */
+.frui-form-text-editor-editable {
+  background-color: #FFFFFF;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+  min-height: 200px;
+  overflow-x: auto;
+  overflow-y: auto;
+  padding: 16px;
+  position: relative;
+  user-select: auto;
+  width: 100%;
+}
+
+.frui-form-text-editor-editable:focus {
+  outline: none;
+}
+
+/* Content styling inside editable area */
+.frui-form-text-editor-editable p,
+.frui-form-text-editor-editable div {
+  margin: 0 0 8px 0;
+}
+
+.frui-form-text-editor-editable h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0.67em 0;
+}
+
+.frui-form-text-editor-editable h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0.83em 0;
+}
+
+.frui-form-text-editor-editable h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+.frui-form-text-editor-editable h4 {
+  font-size: 1em;
+  font-weight: bold;
+  margin: 1.33em 0;
+}
+
+.frui-form-text-editor-editable h5 {
+  font-size: 0.83em;
+  font-weight: bold;
+  margin: 1.67em 0;
+}
+
+.frui-form-text-editor-editable h6 {
+  font-size: 0.67em;
+  font-weight: bold;
+  margin: 2.33em 0;
+}
+
+.frui-form-text-editor-editable ul,
+.frui-form-text-editor-editable ol {
+  margin: 0 0 8px 0;
+  padding: 0 0 0 40px;
+}
+
+.frui-form-text-editor-editable ol {
+  list-style-type: decimal;
+}
+
+.frui-form-text-editor-editable ul {
+  list-style-type: disc;
+}
+
+.frui-form-text-editor-editable li {
+  display: list-item;
+}
+
+.frui-form-text-editor-editable pre {
+  background-color: #F9F9F9;
+  border: 1px solid #E1E1E1;
+  border-radius: 4px;
+  margin: 0 0 8px 0;
+  padding: 8px;
+  white-space: pre-wrap;
+}
+
+.frui-form-text-editor-editable table {
+  border-collapse: collapse;
+  margin: 0 0 8px 0;
+  width: 100%;
+}
+
+.frui-form-text-editor-editable table td,
+.frui-form-text-editor-editable table th {
+  border: 1px solid #E1E1E1;
+  padding: 8px;
+}
+
+.frui-form-text-editor-editable table th {
+  font-weight: bold;
+}
+
+.frui-form-text-editor-editable blockquote {
+  border-left: 5px solid #E1E1E1;
+  color: #999999;
+  margin: 0 0 8px 0;
+  padding: 0 0 0 15px;
+}
+
+.frui-form-text-editor-editable hr {
+  border: 0;
+  border-top: 1px solid #E1E1E1;
+  height: 1px;
+  margin: 8px 0;
+}
+
+.frui-form-text-editor-editable img {
+  height: auto;
+  max-width: 100%;
+}
+
+.frui-form-text-editor-editable a {
+  color: #004CFF;
+}
+
+.frui-form-text-editor-editable sub {
+  font-size: smaller;
+  vertical-align: sub;
+}
+
+.frui-form-text-editor-editable sup {
+  font-size: smaller;
+  vertical-align: super;
+}
+
+/* Custom text styles */
+.frui-form-text-editor-editable span.__frui-form-text-editor-t-code {
+  background-color: #F9F9F9;
+  border: 1px solid #E1E1E1;
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+.frui-form-text-editor-editable span.__frui-form-text-editor-t-translucent {
+  opacity: 0.6;
+}
+
+.frui-form-text-editor-editable span.__frui-form-text-editor-t-shadow {
+  text-shadow: 2px 2px 2px #B1B1B1;
+}
+
+/* Additional custom text styles */
+.frui-form-text-editor-editable span.__frui-form-text-editor-t-spaced {
+  letter-spacing: 2px;
+  word-spacing: 4px;
+}
+
+.frui-form-text-editor-editable span.__frui-form-text-editor-t-bordered {
+  border: 2px solid #000000;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.frui-form-text-editor-editable span.__frui-form-text-editor-t-neon {
+  background-color: #000000;
+  border-radius: 4px;
+  color: #FFFFFF;
+  padding: 2px 6px;
+  text-shadow: 0 0 5px #FFFFFF, 0 0 10px #FFFFFF, 0 0 20px #FF00DE, 0 0 30px #FF00DE, 0 0 40px #FF00DE;
+}
+
+/* Show blocks feature */
+.frui-form-text-editor-editable.frui-form-text-editor-show-block p,
+.frui-form-text-editor-editable.frui-form-text-editor-show-block div,
+.frui-form-text-editor-editable.frui-form-text-editor-show-block h1,
+.frui-form-text-editor-editable.frui-form-text-editor-show-block h2,
+.frui-form-text-editor-editable.frui-form-text-editor-show-block h3,
+.frui-form-text-editor-editable.frui-form-text-editor-show-block h4,
+.frui-form-text-editor-editable.frui-form-text-editor-show-block h5,
+.frui-form-text-editor-editable.frui-form-text-editor-show-block h6,
+.frui-form-text-editor-editable.frui-form-text-editor-show-block ul,
+.frui-form-text-editor-editable.frui-form-text-editor-show-block ol,
+.frui-form-text-editor-editable.frui-form-text-editor-show-block pre,
+.frui-form-text-editor-editable.frui-form-text-editor-show-block table,
+.frui-form-text-editor-editable.frui-form-text-editor-show-block blockquote {
+  outline: 1px dotted #80BDFF;
+}
+
+/* Fullscreen mode */
+.frui-form-text-editor.frui-form-text-editor-fullscreen {
+  border: none;
+  border-radius: 0;
+  height: 100%;
+  left: 0;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2147483647;
+}
+
+.frui-form-text-editor.frui-form-text-editor-fullscreen .frui-form-text-editor-toolbar {
+  width: 100%;
+}
+
+.frui-form-text-editor.frui-form-text-editor-fullscreen .frui-form-text-editor-editable {
+  height: calc(100% - 50px);
+}
+
+/* RTL support */
+.frui-form-text-editor.frui-form-text-editor-rtl {
+  direction: rtl;
+}
+
+.frui-form-text-editor.frui-form-text-editor-rtl .frui-form-text-editor-btn-select {
+  text-align: right;
+}
+
+/* Code view textarea */
+.frui-form-text-editor textarea {
+  background-color: #F9F9F9;
+  border: none;
+  font-family: monospace;
+  font-size: 13px;
+  min-height: 200px;
+  padding: 16px;
+  resize: vertical;
+  width: 100%;
+}
+
+.frui-form-text-editor textarea:focus {
+  box-shadow: 0 0 0 2px rgba(128, 189, 255, 0.3);
+  outline: none;
+}

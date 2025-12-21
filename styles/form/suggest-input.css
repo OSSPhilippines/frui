@@ -1,0 +1,32 @@
+.frui-form-suggest-input {
+  position: relative;
+}
+
+.frui-form-suggest-input-dropdown {
+  background-color: var(--white);
+  border-color: var(--black);
+  border-style: solid;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  position: absolute;
+  width: 100%;
+}
+
+.frui-form-suggest-input-options {
+  max-height: 256px;
+  overflow: auto;
+}
+
+.frui-form-suggest-input-option {
+  align-items: center;
+  border-color: #AAAAAA;
+  border-style: solid;
+  border-top-width: 1px;
+  cursor: pointer;
+  display: flex;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 8px;
+}

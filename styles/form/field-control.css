@@ -1,0 +1,7 @@
+.frui-form-field-control-label {
+  display: block;
+}
+
+.frui-form-field-control-error {
+  color: var(--error);
+}

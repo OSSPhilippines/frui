@@ -1,0 +1,13 @@
+.frui-carousel {
+  display: flex;
+}
+.frui-carousel-view {
+  flex-grow: 1;
+}
+.frui-carousel-film {
+  display: flex;
+}
+
+.frui-carousel-film .frui-film-frame {
+  flex-shrink: 0;
+}

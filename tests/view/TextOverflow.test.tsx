@@ -1,19 +1,19 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import TextOverflow from '../../src/view/TextOverflow.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
 import {
   describe,
   it,
   expect
 } from 'vitest';
-//frui
-import TextOverflow from '../../src/view/TextOverflow.js';
+import {
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests
@@ -62,7 +62,7 @@ describe('<TextOverflow />', () => {
     expect(screen.getByText('Hello World…')).toBeInTheDocument();
   });
 
-  it('renders full text when words option is true but under count', () => {
+  it('shows full text if words under count', () => {
     render(<TextOverflow value="Hello World" words length={5} />);
 
     expect(screen.getByText('Hello World')).toBeInTheDocument();

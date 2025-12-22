@@ -1,22 +1,23 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Code from '../../src/view/Code.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it,
   vi
 } from 'vitest';
+import {
+  render,
+  screen
+} from '@testing-library/react';
 //modules
 import type { ReactNode } from 'react';
-//frui
-import Code from '../../src/view/Code.js';
+
 
 //--------------------------------------------------------------------//
 // Mocks

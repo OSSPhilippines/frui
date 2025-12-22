@@ -1,12 +1,19 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import TextEditor, { 
+  useTextEditor 
+} from '../../src/form/TextEditor.js';
 //tests
 import '@testing-library/jest-dom';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { 
+  act, 
+  fireEvent, 
+  render, 
+  screen 
+} from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-//frui
-import TextEditor, { useTextEditor } from '../../src/form/TextEditor.js';
 
 //--------------------------------------------------------------------//
 // Mocks

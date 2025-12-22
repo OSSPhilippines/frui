@@ -1,6 +1,10 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Switch, { useSwitch } from '../../src/form/Switch.js';
+//modules
+import type { ChangeEvent } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -18,10 +22,6 @@ import {
   render,
   screen
 } from '@testing-library/react';
-//types
-import type { ChangeEvent } from 'react';
-//frui
-import Switch, { useSwitch } from '../../src/form/Switch.js';
 
 //--------------------------------------------------------------------//
 // Tests

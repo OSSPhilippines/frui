@@ -53,7 +53,11 @@ describe('<Accordion />', () => {
   it('applies className and triggers onChange', () => {
     const onChange = vi.fn();
     render(
-      <Accordion className="custom" defaultValue="a1" onChange={onChange}>
+      <Accordion 
+        className="custom" 
+        defaultValue="a1" 
+        onChange={onChange}
+      >
         <AccordionBellow value="a1">
           <AccordionLabel>Label 1</AccordionLabel>
         </AccordionBellow>

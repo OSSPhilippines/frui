@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import ImageList from '../../src/form/ImageList.js';
 //modules
 import { ChangeEvent, useState } from 'react';
 //tests
@@ -18,8 +20,6 @@ import {
   waitFor
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-//frui
-import ImageList from '../../src/form/ImageList.js';
 
 //--------------------------------------------------------------------//
 // Mocks

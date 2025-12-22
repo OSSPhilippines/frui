@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import PasswordInput from '../../src/form/PasswordInput.js';
 //modules
 import type { InputHTMLAttributes } from 'react';
 //tests
@@ -16,8 +18,6 @@ import {
   screen
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-//frui
-import PasswordInput from '../../src/form/PasswordInput.js';
 
 //--------------------------------------------------------------------//
 // Mocks

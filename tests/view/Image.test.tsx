@@ -1,19 +1,19 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Image from '../../src/view/Image.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it
 } from 'vitest';
-//frui
-import Image from '../../src/view/Image.js';
+import {
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests

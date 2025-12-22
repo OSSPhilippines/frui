@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Select, { SelectPlaceholder } from '../../src/form/Select.js';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -15,8 +17,6 @@ import {
   screen,
   waitFor
 } from '@testing-library/react';
-//frui
-import Select, { SelectPlaceholder } from '../../src/form/Select.js';
 
 //--------------------------------------------------------------------//
 // Mocks

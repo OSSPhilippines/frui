@@ -1,6 +1,11 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import TextList, {
+  TextListFields,
+  useTextList
+} from '../../src/form/TextList.js';
 //tests
 import '@testing-library/jest-dom';
 import { act, renderHook } from '@testing-library/react';
@@ -10,11 +15,6 @@ import {
   render,
   screen
 } from '@testing-library/react';
-//frui
-import TextList, {
-  TextListFields,
-  useTextList
-} from '../../src/form/TextList.js';
 
 //--------------------------------------------------------------------//
 // Tests

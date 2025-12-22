@@ -1,19 +1,21 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import NumberFormat, { 
+  formatNumber 
+} from '../../src/view/NumberFormat.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it
 } from 'vitest';
-//frui
-import NumberFormat, { formatNumber } from '../../src/view/NumberFormat.js';
+import {
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests

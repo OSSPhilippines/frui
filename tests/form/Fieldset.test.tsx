@@ -1,6 +1,11 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import type { FieldsProps } from '../../src/form/Fieldset.js';
+import makeFieldset, {
+  useFieldset
+} from '../../src/form/Fieldset.js';
 //modules
 import type { ReactNode } from 'react';
 //tests
@@ -13,11 +18,6 @@ import {
   waitFor
 } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-//frui
-import type { FieldsProps } from '../../src/form/Fieldset.js';
-import makeFieldset, {
-  useFieldset
-} from '../../src/form/Fieldset.js';
 
 //--------------------------------------------------------------------//
 // Mocks

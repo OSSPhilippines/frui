@@ -1,12 +1,6 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import type { ChangeEvent } from 'react';
-//tests
-import '@testing-library/jest-dom';
-import { act, fireEvent, render } from '@testing-library/react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 //frui
 import {
   Slider,
@@ -19,6 +13,12 @@ import {
   toValues,
   useSlider
 } from '../../src/form/Slider.js';
+//modules
+import type { ChangeEvent } from 'react';
+//tests
+import '@testing-library/jest-dom';
+import { act, fireEvent, render } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -220,7 +220,7 @@ describe('useSlider', () => {
       <TestControlledComponent value={5} />
     );
     const input = document.querySelector(
-      'input[data-testid="mock-input"]'
+      'input[ data-testid="mock-input" ]'
     ) as HTMLInputElement;
     expect(input.value).toBe('5');
 
@@ -325,7 +325,7 @@ describe('Slider', () => {
     const onUpdate = vi.fn();
     render(<Slider defaultValue={5} onUpdate={onUpdate} />);
     const input = document.querySelector(
-      'input[data-testid="mock-input"]'
+      'input[ data-testid="mock-input" ]'
     ) as HTMLInputElement;
 
     act(() => {
@@ -345,7 +345,7 @@ describe('Slider', () => {
       />
     );
     const input = document.querySelector(
-      'input[data-testid="mock-input"]'
+      'input[ data-testid="mock-input" ]'
     ) as HTMLInputElement;
 
     act(() => {
@@ -365,7 +365,7 @@ describe('Slider', () => {
       />
     );
     const input = document.querySelector(
-      'input[data-testid="mock-input"]'
+      'input[ data-testid="mock-input" ]'
     ) as HTMLInputElement;
 
     act(() => {
@@ -384,7 +384,7 @@ describe('Slider', () => {
       />
     );
     const inputs = document.querySelectorAll(
-      'input[data-testid="mock-input"]'
+      'input[ data-testid="mock-input" ]'
     );
 
     act(() => {
@@ -403,7 +403,7 @@ describe('Slider', () => {
       />
     );
     const inputs = document.querySelectorAll(
-      'input[data-testid="mock-input"]'
+      'input[ data-testid="mock-input" ]'
     );
 
     act(() => {

@@ -1,20 +1,20 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Tabular from '../../src/view/Tabular.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen,
-  within
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it
 } from 'vitest';
-//frui
-import Tabular from '../../src/view/Tabular.js';
+import {
+  render,
+  screen,
+  within
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests

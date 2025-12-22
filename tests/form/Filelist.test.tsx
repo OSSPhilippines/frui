@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import FileList from '../../src/form/FileList.js';
 //modules
 import type { ChangeEvent } from 'react';
 //tests
@@ -18,8 +20,6 @@ import {
   waitFor
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-//frui
-import FileList from '../../src/form/FileList.js';
 
 //--------------------------------------------------------------------//
 // Mocks

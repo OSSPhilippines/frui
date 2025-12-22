@@ -1,6 +1,10 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import TextEditor, {
+  useTextEditor
+} from '../../src/form/TextEditor';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -15,10 +19,6 @@ import {
   it,
   vi
 } from 'vitest';
-//frui
-import TextEditor, {
-  useTextEditor
-} from '../../src/form/TextEditor';
 
 //--------------------------------------------------------------------//
 // Mocks

@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import FieldControl from '../../src/form/FieldControl.js';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -12,8 +14,6 @@ import {
   render,
   screen
 } from '@testing-library/react';
-//frui
-import FieldControl from '../../src/form/FieldControl.js';
 
 //--------------------------------------------------------------------//
 // Tests

@@ -104,12 +104,15 @@ describe('<CodeEditor />', () => {
 
   it('renders with provided defaultValue', () => {
     render(<CodeEditor defaultValue="console.log('hi')" />);
-    const field = screen.getByRole('textbox') as HTMLTextAreaElement;
+    const field = 
+      screen.getByRole('textbox') as HTMLTextAreaElement;
     expect(field.value).toBe("console.log('hi')");
   });
 
   it('applies custom className and style', () => {
-    render(<CodeEditor className="custom" style={{ width: 300 }} />);
+    render(
+      <CodeEditor className="custom" style={{ width: 300 }} />
+    );
     const outer = document.querySelector(
       '.frui-form-code-editor.custom'
     ) as HTMLDivElement;
@@ -126,13 +129,14 @@ describe('<CodeEditor />', () => {
 
   it('updates value when prop changes', async () => {
     const { rerender } = render(<CodeEditor value="first" />);
-    const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
+    const textarea = 
+      screen.getByRole('textbox') as HTMLTextAreaElement;
     expect(textarea.value).toBe('first');
     rerender(<CodeEditor value="second" />);
     await waitFor(() => expect(textarea.value).toBe('second'));
   });
 
-  it('loads language extension when language prop provided', async () => {
+  it('loads language if language set', async () => {
     render(<CodeEditor language="javascript" />);
     await waitFor(() => {
       const area = screen.getByRole('textbox');

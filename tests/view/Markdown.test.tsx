@@ -1,20 +1,20 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Markdown from '../../src/view/Markdown.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it,
   vi
 } from 'vitest';
-//frui
-import Markdown from '../../src/view/Markdown.js';
+import {
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Mocks

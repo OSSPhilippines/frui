@@ -9,7 +9,12 @@ import type {
 } from 'react';
 //tests
 import '@testing-library/jest-dom';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { 
+  act, 
+  fireEvent, 
+  render, 
+  screen 
+} from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 //frui
 import {
@@ -523,7 +528,7 @@ describe('NumberInput', () => {
   it('renders hidden input with name', () => {
     render(<NumberInput defaultValue="5" name="amount" />);
     const hidden = document.querySelector(
-      'input[type="hidden"]'
+      'input[ type="hidden" ]'
     ) as HTMLInputElement;
 
     expect(hidden).toBeInTheDocument();
@@ -614,7 +619,7 @@ describe('NumberInput', () => {
       fireEvent.change(input, { target: { value: '-10' } });
     });
     const hiddenInput = document.querySelector(
-      'input[type="hidden"]'
+      'input[ type="hidden" ]'
     ) as HTMLInputElement;
     expect(hiddenInput.value).toBe('10');
   });
@@ -647,7 +652,7 @@ describe('NumberInput', () => {
       fireEvent.change(input, { target: { value: 'abc123' } });
     });
     const hiddenInput = document.querySelector(
-      'input[type="hidden"]'
+      'input[ type="hidden" ]'
     ) as HTMLInputElement;
     expect(hiddenInput.value).toBe('123');
   });

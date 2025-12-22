@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Formula from '../../src/view/Formula.js';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -12,8 +14,6 @@ import {
   expect,
   it
 } from 'vitest';
-//frui
-import Formula from '../../src/view/Formula.js';
 
 //--------------------------------------------------------------------//
 // Tests

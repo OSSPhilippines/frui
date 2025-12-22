@@ -89,7 +89,10 @@ describe('<Card.Head />', () => {
 
   it('applies inline styles', () => {
     render(
-      <Card.Head style={{ backgroundColor: 'blue' }} data-testid="head">
+      <Card.Head 
+        style={{ backgroundColor: 'blue' }} 
+        data-testid="head"
+      >
         Header
       </Card.Head>
     );

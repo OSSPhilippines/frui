@@ -1,17 +1,17 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Currency from '../../src/view/Currency.js';
 //tests
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 import {
   describe,
   expect,
   it,
   vi
 } from 'vitest';
-//frui
-import Currency from '../../src/view/Currency.js';
+import { render } from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -61,20 +61,27 @@ describe('<Currency />', () => {
   });
 
   it('renders only the flag when text is false', () => {
-    const { container } = render(<Currency text={false} value="USD" />);
+    const { container } = render(
+      <Currency text={false} value="USD" />
+    );
     const flag = container.querySelector('.frui-view-currency-flag');
     expect(flag).toHaveTextContent('🇺🇸');
   });
 
   it('renders only the text when flag is false', () => {
-    const { container } = render(<Currency flag={false} value="USD" />);
+    const { container } = render(
+      <Currency flag={false} value="USD" />
+    );
     const text = container.querySelector('.frui-view-currency-text');
     expect(text).toHaveTextContent('US Dollar');
   });
 
   it('renders raw value when currency code not found', () => {
-    const { container } = render(<Currency value="UNKNOWN" />);
-    const fallback = container.querySelector('.frui-view-currency-text');
+    const { container } = render(
+      <Currency value="UNKNOWN" />
+    );
+    const fallback = 
+      container.querySelector('.frui-view-currency-text');
     expect(fallback).toHaveTextContent('UNKNOWN');
   });
 });

@@ -1,20 +1,19 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import CountrySelect from '../../src/form/CountrySelect.js';
 //modules
 import type { ReactNode } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import { describe, expect, it, vi } from 'vitest';
-
 import {
   fireEvent,
   render,
   screen,
   waitFor
 } from '@testing-library/react';
-//frui
-import CountrySelect from '../../src/form/CountrySelect.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -191,7 +190,9 @@ describe('CountrySelect', () => {
 
   it('does not render search when searchable is false', () => {
     render(<CountrySelect />);
-    expect(screen.queryByTestId('select-head')).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId('select-head')
+    ).not.toBeInTheDocument();
   });
 
   it('renders search input when searchable is true', () => {

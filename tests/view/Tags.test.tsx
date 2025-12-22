@@ -1,19 +1,19 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Tags from '../../src/view/Tags.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it
 } from 'vitest';
-//frui
-import Tags from '../../src/view/Tags.js';
+import {
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests
@@ -57,7 +57,9 @@ describe('<Tags />', () => {
     const { container } = render(<Tags value={[]} />);
 
     expect(
-      container.querySelectorAll('span.frui-format-taglist > *').length
+      container.querySelectorAll(
+        'span.frui-format-taglist > *'
+      ).length
     ).toBe(0);
   });
 

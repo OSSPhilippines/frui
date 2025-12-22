@@ -45,7 +45,7 @@ describe('<Pager />', () => {
     expect(active?.textContent).toBe('2');
   });
 
-  it('calls onUpdate for visible controls (prev, next, end)', async () => {
+  it('onUpdate for prev/next/end', async () => {
     const onUpdate = vi.fn();
     render(
       <Pager
@@ -91,9 +91,15 @@ describe('<Pager />', () => {
     expect(screen.getByText('›')).toBeInTheDocument();
   });
 
-  it('shows start and end controls when radius > 0 (middle page)', () => {
+  it('shows start/end controls with radius', () => {
     render(
-      <Pager end radius={1} skip={100} start take={50} total={500} />
+      <Pager 
+        end 
+        radius={1} 
+        skip={100} 
+        start take={50} 
+        total={500} 
+      />
     );
     expect(screen.getByText('«')).toBeInTheDocument();
     expect(screen.getByText('≫')).toBeInTheDocument();

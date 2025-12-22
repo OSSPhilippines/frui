@@ -1,17 +1,17 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Metadata, {
+  MetadataFields,
+  useMetadata
+} from '../../src/form/Metadata.js';
 //modules
 import type { ReactNode } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 //tests
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-//frui
-import Metadata, {
-  MetadataFields,
-  useMetadata
-} from '../../src/form/Metadata.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -46,7 +46,7 @@ vi.mock('../../src/form/Input.js', () => ({
     onUpdate?: (val: string) => void,
     placeholder?: string,
     type?: string,
-    [key: string]: unknown
+    [ key: string ]: unknown
   }) => (
     <input
       className={className}
@@ -77,7 +77,7 @@ vi.mock('../../src/form/NumberInput.js', () => ({
     onUpdate?: (val: number) => void,
     placeholder?: string,
     step?: number | string,
-    [key: string]: unknown
+    [ key: string ]: unknown
   }) => (
     <input
       className={className}
@@ -106,14 +106,14 @@ vi.mock('../../src/form/DateInput.js', () => ({
       defaultValue?: string | Date,
       onUpdate?: (val: Date | null) => void,
       placeholder?: string,
-      [key: string]: unknown
+      [ key: string ]: unknown
     }) => (
       <input
         className={className}
         data-testid="mock-date-input"
         defaultValue={
           defaultValue instanceof Date
-            ? defaultValue.toISOString().split('T')[0]
+            ? defaultValue.toISOString().split('T')[ 0 ]
             : defaultValue
         }
         onChange={(e) => {
@@ -125,7 +125,7 @@ vi.mock('../../src/form/DateInput.js', () => ({
       />
     ),
     {
-      toDateString: (date: Date) => date.toISOString().split('T')[0]
+      toDateString: (date: Date) => date.toISOString().split('T')[ 0 ]
     }
   )
 }));
@@ -143,14 +143,14 @@ vi.mock('../../src/form/TimeInput.js', () => ({
       defaultValue?: string | Date,
       onUpdate?: (val: Date | null) => void,
       placeholder?: string,
-      [key: string]: unknown
+      [ key: string ]: unknown
     }) => (
       <input
         className={className}
         data-testid="mock-time-input"
         defaultValue={
           defaultValue instanceof Date
-            ? defaultValue.toTimeString().split(' ')[0]
+            ? defaultValue.toTimeString().split(' ')[ 0 ]
             : defaultValue
         }
         onChange={(e) => {
@@ -165,7 +165,7 @@ vi.mock('../../src/form/TimeInput.js', () => ({
     ),
     {
       toTimeString: (date: Date) =>
-        date.toTimeString().split(' ')[0]
+        date.toTimeString().split(' ')[ 0 ]
     }
   )
 }));
@@ -183,7 +183,7 @@ vi.mock('../../src/form/DatetimeInput.js', () => ({
       defaultValue?: string | Date,
       onUpdate?: (val: Date | null) => void,
       placeholder?: string,
-      [key: string]: unknown
+      [ key: string ]: unknown
     }) => (
       <input
         className={className}
@@ -240,6 +240,7 @@ vi.mock('../../src/form/Fieldset.js', () => ({
 
 //--------------------------------------------------------------------//
 // Helpers
+
 function renderHookWithState<T>(hook: () => T): { current: T } {
   let currentValue: T;
   function TestHook() {
@@ -252,6 +253,7 @@ function renderHookWithState<T>(hook: () => T): { current: T } {
 
 //--------------------------------------------------------------------//
 // Tests
+
 describe('useMetadata Hook', () => {
   it('should identify input types correctly', () => {
     const mockSet = vi.fn();
@@ -294,7 +296,7 @@ describe('useMetadata Hook', () => {
 
   it('should update name and value correctly', () => {
     const mockSet = vi.fn();
-    const values = [ [ 'key', 'value' ] as [string, string] ];
+    const values = [ [ 'key', 'value' ] as [ string, string ] ];
     const { current } = renderHookWithState(() =>
       useMetadata({ index: 0, set: mockSet, values })
     );
@@ -320,8 +322,8 @@ describe('useMetadata Hook', () => {
   it('should remove entry by setting to undefined', () => {
     const mockSet = vi.fn();
     const values = [
-      [ 'key1', 'value1' ] as [string, string],
-      [ 'key2', 'value2' ] as [string, string]
+      [ 'key1', 'value1' ] as [ string, string ],
+      [ 'key2', 'value2' ] as [ string, string ]
     ];
     const { current } = renderHookWithState(() =>
       useMetadata({ index: 0, set: mockSet, values })
@@ -338,7 +340,7 @@ describe('useMetadata Hook', () => {
 describe('MetadataFields Component', () => {
   it('should render text inputs by default', () => {
     const mockSet = vi.fn();
-    const values = [ [ 'key', 'value' ] as [string, string] ];
+    const values = [ [ 'key', 'value' ] as [ string, string ] ];
 
     render(
       <MetadataFields
@@ -353,13 +355,13 @@ describe('MetadataFields Component', () => {
 
     const inputs = screen.getAllByTestId('mock-input');
     expect(inputs).toHaveLength(2);
-    expect(inputs[0]).toHaveClass('frui-form-metadata-name');
-    expect(inputs[1]).toHaveClass('frui-form-metadata-value');
+    expect(inputs[ 0 ]).toHaveClass('frui-form-metadata-name');
+    expect(inputs[ 1 ]).toHaveClass('frui-form-metadata-value');
   });
 
   it('should render number input with constraints', () => {
     const mockSet = vi.fn();
-    const values = [ [ 'age', 25 ] as [string, number] ];
+    const values = [ [ 'age', 25 ] as [ string, number ] ];
 
     render(
       <MetadataFields
@@ -424,7 +426,7 @@ describe('MetadataFields Component', () => {
 
   it('should handle placeholders correctly', () => {
     const mockSet = vi.fn();
-    const values = [ [ '', '' ] as [string, string] ];
+    const values = [ [ '', '' ] as [ string, string ] ];
 
     render(
       <MetadataFields
@@ -438,13 +440,13 @@ describe('MetadataFields Component', () => {
     );
 
     const inputs = screen.getAllByTestId('mock-input');
-    expect(inputs[0]).toHaveAttribute('placeholder', 'Key');
-    expect(inputs[1]).toHaveAttribute('placeholder', 'Value');
+    expect(inputs[ 0 ]).toHaveAttribute('placeholder', 'Key');
+    expect(inputs[ 1 ]).toHaveAttribute('placeholder', 'Value');
   });
 
   it('should call remove handler when button clicked', () => {
     const mockSet = vi.fn();
-    const values = [ [ 'key', 'value' ] as [string, string] ];
+    const values = [ [ 'key', 'value' ] as [ string, string ] ];
 
     render(
       <MetadataFields
@@ -464,7 +466,7 @@ describe('MetadataFields Component', () => {
 
   it('should render hidden input when value has valid key', () => {
     const mockSet = vi.fn();
-    const values = [ [ 'testKey', 'testValue' ] as [string, string] ];
+    const values = [ [ 'testKey', 'testValue' ] as [ string, string ] ];
 
     render(
       <MetadataFields
@@ -490,7 +492,7 @@ describe('MetadataFields Component', () => {
 
   it('should not render hidden input when key is empty', () => {
     const mockSet = vi.fn();
-    const values = [ [ '', 'value' ] as [string, string] ];
+    const values = [ [ '', 'value' ] as [ string, string ] ];
 
     render(
       <MetadataFields
@@ -512,7 +514,7 @@ describe('MetadataFields Component', () => {
   it('should convert Date to ISO string in hidden input', () => {
     const mockSet = vi.fn();
     const testDate = new Date('2024-01-15T14:30:00.000Z');
-    const values = [ [ 'date', testDate ] as [string, Date] ];
+    const values = [ [ 'date', testDate ] as [ string, Date ] ];
 
     render(
       <MetadataFields
@@ -536,7 +538,7 @@ describe('MetadataFields Component', () => {
 
   it('should update handlers when inputs change', () => {
     const mockSet = vi.fn();
-    const values = [ [ 'key', 'value' ] as [string, string] ];
+    const values = [ [ 'key', 'value' ] as [ string, string ] ];
 
     render(
       <MetadataFields
@@ -551,10 +553,10 @@ describe('MetadataFields Component', () => {
 
     const inputs = screen.getAllByTestId('mock-input');
     
-    fireEvent.change(inputs[0], { target: { value: 'newKey' } });
+    fireEvent.change(inputs[ 0 ], { target: { value: 'newKey' } });
     expect(mockSet).toHaveBeenCalledWith([ [ 'newKey', 'value' ] ]);
 
-    fireEvent.change(inputs[1], { target: { value: 'newValue' } });
+    fireEvent.change(inputs[ 1 ], { target: { value: 'newValue' } });
     expect(mockSet).toHaveBeenCalledWith([ [ 'key', 'newValue' ] ]);
   });
 });
@@ -579,15 +581,15 @@ describe('Metadata Component', () => {
     render(<Metadata name="test" placeholder="Placeholder" />);
 
     const inputs = screen.getAllByTestId('mock-input');
-    expect(inputs[0]).toHaveAttribute('placeholder', 'Placeholder');
-    expect(inputs[1]).toHaveAttribute('placeholder', 'Placeholder');
+    expect(inputs[ 0 ]).toHaveAttribute('placeholder', 'Placeholder');
+    expect(inputs[ 1 ]).toHaveAttribute('placeholder', 'Placeholder');
   });
 
   it('should pass emptyValue as tuple', () => {
     render(<Metadata name="test" />);
 
     const inputs = screen.getAllByTestId('mock-input');
-    expect(inputs[0]).toHaveValue('');
-    expect(inputs[1]).toHaveValue('');
+    expect(inputs[ 0 ]).toHaveValue('');
+    expect(inputs[ 1 ]).toHaveValue('');
   });
 });

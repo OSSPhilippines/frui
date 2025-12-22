@@ -134,7 +134,9 @@ describe('<Alert />', () => {
       </Alert>
     );
     const element = screen.getByText('outlined');
-    expect(element).toHaveClass('frui-alert', 'frui-solid', 'frui-thin');
+    expect(element).toHaveClass(
+      'frui-alert', 'frui-solid', 'frui-thin'
+    );
     expect(element.style.borderColor).toBe('blue');
     expect(element.style.color).toBe('blue');
   });

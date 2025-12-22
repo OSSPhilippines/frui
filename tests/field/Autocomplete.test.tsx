@@ -2,7 +2,12 @@
 // Imports
 
 //modules
-import type { ChangeEvent } from 'react';
+import type { 
+  ChangeEvent, 
+  FocusEvent, 
+  InputHTMLAttributes, 
+  KeyboardEvent 
+} from 'react';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -31,17 +36,17 @@ vi.mock('../../frui/src/field/Input.js', () => ({
     value,
     ...rest
   }: {
-    onBlur?: () => void,
+    onBlur?: (e: FocusEvent<HTMLInputElement>) => void,
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
-    onKeyDown?: (e: any) => void,
+    onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void,
     value?: string
-  }) => (
+  } & InputHTMLAttributes<HTMLInputElement>) => (
     <input
       data-testid="mock-input"
       onBlur={onBlur}
       onChange={onChange}
       onKeyDown={onKeyDown}
-      value={value || ''}
+      value={value ?? ''}
       {...rest}
     />
   )
@@ -107,7 +112,8 @@ describe('useAutocomplete Hook', () => {
     await act(async () => {
       const mockEvent = {
         target: { value: 'app' }
-      } as unknown as KeyboardEvent;
+      } as unknown as KeyboardEvent<Element>;
+
       hook.handlers.search(mockEvent);
       await new Promise(resolve => setTimeout(resolve, 10));
     });

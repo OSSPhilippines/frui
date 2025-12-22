@@ -2,7 +2,7 @@
 // Imports
 
 //modules
-import { ChangeEvent, ReactNode } from 'react';
+import { ChangeEvent, InputHTMLAttributes, ReactNode } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import { describe, expect, it, vi } from 'vitest';
@@ -30,16 +30,14 @@ vi.mock('../../frui/src/field/Input.js', () => ({
     className?: string,
     defaultValue?: string,
     error?: boolean,
-    onUpdate?: (value: string) => void,
+    onUpdate?: (e: ChangeEvent<HTMLInputElement>) => void,
     placeholder?: string,
     required?: boolean
-  }) => (
+  } & InputHTMLAttributes<HTMLInputElement>) => (
     <input
       className={className}
       defaultValue={defaultValue}
-      onChange={(e: ChangeEvent<HTMLInputElement>) => 
-        onUpdate && onUpdate(e.target.value)
-      }
+      onChange={onUpdate}
       placeholder={placeholder}
       required={required}
       {...props}

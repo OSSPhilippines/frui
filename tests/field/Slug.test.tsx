@@ -85,6 +85,7 @@ describe('useSlug Hook', () => {
   });
   it('slugifies defaultValue correctly', () => {
     const getHook = renderHookWithUseSlug({
+      value: undefined,
       defaultValue: 'Hello World',
       dash: true,
       line: false,

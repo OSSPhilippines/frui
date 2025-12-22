@@ -90,7 +90,7 @@ describe('Tooltip Component', () => {
     });
 
     it('applies custom styles', () => {
-      const customStyle: CSSProperties = { fontSize: '14px' };
+      const customStyle = { fontSize: '14px' };
       render(
         <Tooltip text="Tooltip text" style={customStyle}>
           <button>Hover me</button>

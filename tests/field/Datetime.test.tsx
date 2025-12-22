@@ -7,12 +7,16 @@ import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render } from '@testing-library/react';
 //frui
 import Datetime, { useDatetime } from '../../frui/src/field/Datetime.js';
+import { ChangeEvent, InputHTMLAttributes } from 'react';
 
 //--------------------------------------------------------------------//
 // Mocks
 
 vi.mock('../../frui/src/field/Input.js', async () => {
-  const actual = await vi.importActual('../../frui/src/field/Input.js');
+  const actual = await vi.importActual<
+    typeof import('../../frui/src/field/Input.js')
+  >('../../frui/src/field/Input.js');
+
   return {
     ...actual,
     default: ({
@@ -21,11 +25,16 @@ vi.mock('../../frui/src/field/Input.js', async () => {
       className,
       onUpdate,
       ...rest
-    }: any) => (
+    }: {
+      type?: string,
+      defaultValue?: string,
+      className?: string,
+      onUpdate?: (e: ChangeEvent<HTMLInputElement>) => void
+    } & InputHTMLAttributes<HTMLInputElement>) => (
       <input
         className={className}
         defaultValue={defaultValue}
-        onChange={(e: any) => onUpdate && onUpdate(e.target.value)}
+        onChange={onUpdate}
         type={type}
         {...rest}
       />

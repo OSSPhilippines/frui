@@ -112,9 +112,7 @@ describe('<Control />', () => {
         </Control>
       );
       const control = container.firstChild;
-      expect(control).toHaveAttribute(
-        'data-testid', 'custom-control'
-      );
+      expect(control).toHaveAttribute('data-testid', 'custom-control');
       expect(control).toHaveAttribute('id', 'test-id');
     });
   });

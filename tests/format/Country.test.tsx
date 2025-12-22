@@ -89,7 +89,7 @@ describe('Country component', () => {
   });
 
   it('applies style prop correctly', () => {
-    const customStyle: CSSProperties = { margin: '8px' };
+    const customStyle = { margin: '8px' };
     render(<Country value={defaultCountry} style={customStyle} />);
     const wrapper = document.querySelector('.frui-format-country');
     expect(wrapper).toHaveStyle(customStyle);

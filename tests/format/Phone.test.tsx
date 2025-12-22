@@ -7,13 +7,18 @@ import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 //frui
 import Phone from '../../frui/src/format/Phone.js';
+import { LinkProps } from '../../frui/src/format/Link.js';
 
 //--------------------------------------------------------------------//
 // Mocks
 
 vi.mock('../../frui/src/format/Link.js', () => ({
   __esModule: true,
-  default: ({ value, label, ...rest }: any) => (
+  default: ({
+    value,
+    label,
+    ...rest
+  }: LinkProps) => (
     <a data-testid="mock-link" href={value} {...rest}>
       {label}
     </a>

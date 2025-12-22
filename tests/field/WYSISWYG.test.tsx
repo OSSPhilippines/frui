@@ -373,7 +373,8 @@ describe('WYSIWYG component', () => {
         removeAllRanges: vi.fn(),
         addRange: vi.fn()
       };
-      (window.getSelection as any).mockReturnValue(mockSelection);
+      const mockGetSelection = window.getSelection as unknown as ReturnType<typeof vi.fn>;
+      mockGetSelection.mockReturnValue(mockSelection);
       
       render(<WYSIWYG textStyle />);
       const styleSelect = screen.getByLabelText('Text Style');
@@ -392,7 +393,8 @@ describe('WYSIWYG component', () => {
 
   describe('media insertion', () => {
     it('prompts for link URL', () => {
-      (window.prompt as any).mockReturnValue('https://example.com');
+      const mockPrompt = window.prompt as unknown as ReturnType<typeof vi.fn>;
+      mockPrompt.mockReturnValue('https://example.com');
       render(<WYSIWYG link />);
       const linkBtn = screen.getByLabelText('Insert Link');
       fireEvent.click(linkBtn);
@@ -408,7 +410,8 @@ describe('WYSIWYG component', () => {
     });
 
     it('does not insert link when cancelled', () => {
-      (window.prompt as any).mockReturnValue(null);
+      const mockPrompt = window.prompt as unknown as ReturnType<typeof vi.fn>;
+      mockPrompt.mockReturnValue(null);
       render(<WYSIWYG link />);
       const linkBtn = screen.getByLabelText('Insert Link');
       fireEvent.click(linkBtn);
@@ -416,7 +419,8 @@ describe('WYSIWYG component', () => {
     });
 
     it('does not insert link with invalid URL', () => {
-      (window.prompt as any).mockReturnValue('invalid-url');
+      const mockPrompt = window.prompt as unknown as ReturnType<typeof vi.fn>;
+      mockPrompt.mockReturnValue('invalid-url');
       render(<WYSIWYG link />);
       const linkBtn = screen.getByLabelText('Insert Link');
       fireEvent.click(linkBtn);
@@ -428,9 +432,8 @@ describe('WYSIWYG component', () => {
     });
 
     it('prompts for video URL', () => {
-      (window.prompt as any).mockReturnValue(
-        'https://youtube.com/embed/test'
-      );
+      const mockPrompt = window.prompt as unknown as ReturnType<typeof vi.fn>;
+      mockPrompt.mockReturnValue('https://youtube.com/embed/test');
       render(<WYSIWYG video />);
       const videoBtn = screen.getByLabelText('Insert Video');
       fireEvent.click(videoBtn);
@@ -438,7 +441,8 @@ describe('WYSIWYG component', () => {
     });
 
     it('does not insert video when cancelled', () => {
-      (window.prompt as any).mockReturnValue(null);
+      const mockPrompt = window.prompt as unknown as ReturnType<typeof vi.fn>;
+      mockPrompt.mockReturnValue(null);
       render(<WYSIWYG video />);
       const videoBtn = screen.getByLabelText('Insert Video');
       fireEvent.click(videoBtn);
@@ -446,9 +450,8 @@ describe('WYSIWYG component', () => {
     });
 
     it('prompts for audio URL', () => {
-      (window.prompt as any).mockReturnValue(
-        'https://example.com/audio.mp3'
-      );
+      const mockPrompt = window.prompt as unknown as ReturnType<typeof vi.fn>;
+      mockPrompt.mockReturnValue('https://example.com/audio.mp3');
       render(<WYSIWYG audio />);
       const audioBtn = screen.getByLabelText('Insert Audio');
       fireEvent.click(audioBtn);
@@ -456,7 +459,8 @@ describe('WYSIWYG component', () => {
     });
 
     it('does not insert audio when cancelled', () => {
-      (window.prompt as any).mockReturnValue(null);
+      const mockPrompt = window.prompt as unknown as ReturnType<typeof vi.fn>;
+      mockPrompt.mockReturnValue(null);
       render(<WYSIWYG audio />);
       const audioBtn = screen.getByLabelText('Insert Audio');
       fireEvent.click(audioBtn);
@@ -464,7 +468,8 @@ describe('WYSIWYG component', () => {
     });
 
     it('prompts for math expression', () => {
-      (window.prompt as any).mockReturnValue('x^2');
+      const mockPrompt = window.prompt as unknown as ReturnType<typeof vi.fn>;
+      mockPrompt.mockReturnValue('x^2');
       render(<WYSIWYG math />);
       const mathBtn = screen.getByLabelText('Insert Math');
       fireEvent.click(mathBtn);
@@ -472,7 +477,8 @@ describe('WYSIWYG component', () => {
     });
 
     it('does not insert math when cancelled', () => {
-      (window.prompt as any).mockReturnValue(null);
+      const mockPrompt = window.prompt as unknown as ReturnType<typeof vi.fn>;
+      mockPrompt.mockReturnValue(null);
       render(<WYSIWYG math />);
       const mathBtn = screen.getByLabelText('Insert Math');
       fireEvent.click(mathBtn);
@@ -480,7 +486,8 @@ describe('WYSIWYG component', () => {
     });
 
     it('inserts table with prompt values', () => {
-      (window.prompt as any)
+      const mockPrompt = window.prompt as unknown as ReturnType<typeof vi.fn>;
+      mockPrompt
         .mockReturnValueOnce('2')
         .mockReturnValueOnce('3');
       render(<WYSIWYG table />);
@@ -490,7 +497,8 @@ describe('WYSIWYG component', () => {
     });
 
     it('does not insert table when first prompt cancelled', () => {
-      (window.prompt as any).mockReturnValueOnce(null);
+      const mockPrompt = window.prompt as unknown as ReturnType<typeof vi.fn>;
+      mockPrompt.mockReturnValueOnce(null);
       render(<WYSIWYG table />);
       const tableBtn = screen.getByLabelText('Insert Table');
       fireEvent.click(tableBtn);
@@ -640,7 +648,10 @@ describe('WYSIWYG component', () => {
       const fullscreenBtn = screen.getByLabelText('Toggle Fullscreen');
       
       const editor = screen.getByLabelText('Rich Text Editor');
-      (editor as any).requestFullscreen = mockRequestFullscreen;
+      const editorElement = editor as HTMLDivElement & { 
+        requestFullscreen: () => Promise<void> 
+      };
+      editorElement.requestFullscreen = mockRequestFullscreen;
       
       fireEvent.click(fullscreenBtn);
       
@@ -757,7 +768,7 @@ describe('WYSIWYG component', () => {
 
   describe('link click handling', () => {
     it('opens link on ctrl+click', () => {
-      const { container } = render(
+      render(
         <WYSIWYG value='<a href="https://example.com">Link</a>' />
       );
       const editor = screen.getByLabelText('Rich Text Editor');

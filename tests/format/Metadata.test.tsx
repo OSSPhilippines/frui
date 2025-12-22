@@ -69,7 +69,7 @@ describe('Metadata component', () => {
     });
 
     it('applies custom style to both <td> cells', () => {
-      const customStyle: CSSProperties = { 
+      const customStyle = { 
         color: 'red', 
         fontWeight: 'bold' 
       };
@@ -90,7 +90,7 @@ describe('Metadata component', () => {
     });
 
     it('applies both className and style together', () => {
-      const customStyle: CSSProperties = { 
+      const customStyle = { 
         padding: '8px' 
       };
       const { container } = render(
@@ -165,7 +165,7 @@ describe('Metadata component', () => {
     });
 
     it('matches snapshot with className and style', () => {
-      const customStyle: CSSProperties = { 
+      const customStyle = { 
         fontWeight: 'bold' 
       };
       const { container } = render(

@@ -1,6 +1,20 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import {
+  configure,
+  cookie,
+  defaults,
+  dismiss,
+  flash,
+  Notifier,
+  NotifierContext,
+  NotifierProvider,
+  notify,
+  unload,
+  useNotifier
+} from '../../src/base/Notifier.js';
 //modules
 import { toast } from 'react-toastify';
 //tests
@@ -18,20 +32,6 @@ import {
   it,
   vi
 } from 'vitest';
-//frui
-import {
-  configure,
-  cookie,
-  defaults,
-  dismiss,
-  flash,
-  Notifier,
-  NotifierContext,
-  NotifierProvider,
-  notify,
-  unload,
-  useNotifier
-} from '../../src/base/Notifier.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -84,7 +84,9 @@ describe('<NotifierProvider />', () => {
       </NotifierProvider>
     );
     expect(screen.getByText('Child')).toBeInTheDocument();
-    expect(screen.getByTestId('toast-container')).toBeInTheDocument();
+    expect(
+      screen.getByTestId('toast-container')
+    ).toBeInTheDocument();
   });
 });
 

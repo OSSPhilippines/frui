@@ -1,6 +1,14 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Bread, {
+  BreadContext,
+  BreadCrumb,
+  BreadSlicer,
+  buildBreadTrail,
+  useBreadContext
+} from '../../src/base/Bread.js';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -13,14 +21,6 @@ import {
   it,
   vi
 } from 'vitest';
-//frui
-import Bread, {
-  BreadContext,
-  BreadCrumb,
-  BreadSlicer,
-  buildBreadTrail,
-  useBreadContext
-} from '../../src/base/Bread.js';
 
 //--------------------------------------------------------------------//
 // Tests

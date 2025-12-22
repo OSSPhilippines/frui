@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Tabs from '../../src/base/Tabs.js';
 //modules
 import type { TabsProps } from '../../src/base/Tabs.js';
 //tests
@@ -11,8 +13,6 @@ import {
   screen
 } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-//frui
-import Tabs from '../../src/base/Tabs.js';
 
 //--------------------------------------------------------------------//
 // Helpers
@@ -140,8 +140,10 @@ describe('<Tabs />', () => {
 
   it('applies data-active attribute to active tab label', () => {
     render(setup());
-    const tab1 = screen.getByText('Tab 1').closest('[ data-active ]');
-    const tab2 = screen.getByText('Tab 2').closest('[ data-active ]');
+    const tab1 = 
+      screen.getByText('Tab 1').closest('[ data-active ]');
+    const tab2 = 
+      screen.getByText('Tab 2').closest('[ data-active ]');
     expect(tab1).toHaveAttribute('data-active', 'true');
     expect(tab2).toHaveAttribute('data-active', 'false');
   });
@@ -156,13 +158,15 @@ describe('<Tabs />', () => {
 
   it('applies frui-tabs-label-active class to active tab', () => {
     render(setup());
-    const tab1 = screen.getByText('Tab 1').closest('.frui-tabs-label');
-    const tab2 = screen.getByText('Tab 2').closest('.frui-tabs-label');
+    const tab1 = 
+      screen.getByText('Tab 1').closest('.frui-tabs-label');
+    const tab2 = 
+      screen.getByText('Tab 2').closest('.frui-tabs-label');
     expect(tab1).toHaveClass('frui-tabs-label-active');
     expect(tab2).not.toHaveClass('frui-tabs-label-active');
   });
 
-  it('renders children function with active state in TabsLabel', () => {
+  it('children fn gets active state in Label', () => {
     render(
       <Tabs defaultValue="tab1">
         <Tabs.Head>

@@ -1,19 +1,19 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Card from '../../src/base/Card.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it
 } from 'vitest';
-//frui
-import Card from '../../src/base/Card.js';
+import {
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests
@@ -235,22 +235,30 @@ describe('<Card.Title />', () => {
       </Card.Title>
     );
     const title = screen.getByTestId('title');
-    expect(title).toHaveClass('frui-bold', 'frui-semi', 'frui-italic');
+    expect(title).toHaveClass(
+      'frui-bold', 'frui-semi', 'frui-italic'
+    );
   });
 
   it('applies text transform classes', () => {
     const { rerender } = render(
       <Card.Title upper data-testid="title">Title</Card.Title>
     );
-    expect(screen.getByTestId('title')).toHaveClass('frui-uppercase');
+    expect(
+      screen.getByTestId('title')
+    ).toHaveClass('frui-uppercase');
     rerender(
       <Card.Title lower data-testid="title">Title</Card.Title>
     );
-    expect(screen.getByTestId('title')).toHaveClass('frui-lowercase');
+    expect(
+      screen.getByTestId('title')
+    ).toHaveClass('frui-lowercase');
     rerender(
       <Card.Title capital data-testid="title">Title</Card.Title>
     );
-    expect(screen.getByTestId('title')).toHaveClass('frui-capitalize');
+    expect(
+      screen.getByTestId('title')
+    ).toHaveClass('frui-capitalize');
   });
 
   it('applies custom className', () => {
@@ -353,7 +361,9 @@ describe('<Card.Description />', () => {
         Description
       </Card.Description>
     );
-    expect(screen.getByTestId('description')).toHaveAttribute('style');
+    expect(
+      screen.getByTestId('description')
+    ).toHaveAttribute('style');
   });
 });
 
@@ -380,7 +390,7 @@ describe('Card component integration', () => {
     expect(screen.getByTestId('foot')).toBeInTheDocument();
   });
 
-  it('applies all classes correctly in horizontal card layout', () => {
+  it('applies classes in horizontal layout', () => {
     render(
       <Card horizontal data-testid="card">
         <Card.Head stretch data-testid="head">Header</Card.Head>

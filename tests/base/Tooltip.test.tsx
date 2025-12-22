@@ -1,6 +1,11 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Tooltip, {
+  getTooltipPosition,
+  TooltipContainer
+} from '../../src/base/Tooltip.js';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -15,11 +20,6 @@ import {
   it,
   vi
 } from 'vitest';
-//frui
-import Tooltip, {
-  getTooltipPosition,
-  TooltipContainer
-} from '../../src/base/Tooltip.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -70,7 +70,10 @@ beforeEach(() => vi.clearAllMocks());
 // Tests
 
 describe('getTooltipPosition()', () => {
-  const createMockRect = (width: number, height: number): DOMRect => ({
+  const createMockRect = (
+    width: number, 
+    height: number
+  ): DOMRect => ({
     bottom: 0,
     height,
     left: 0,

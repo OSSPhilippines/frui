@@ -1,21 +1,6 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import type {
-  ChangeEvent,
-  FocusEvent,
-  KeyboardEvent
-} from 'react';
-//tests
-import '@testing-library/jest-dom';
-import { 
-  act, 
-  fireEvent, 
-  render, 
-  screen 
-} from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
 //frui
 import {
   NumberInput,
@@ -38,6 +23,26 @@ import {
   toHiddenValue,
   useNumberInput
 } from '../../src/form/NumberInput.js';
+//modules
+import type {
+  ChangeEvent,
+  FocusEvent,
+  KeyboardEvent
+} from 'react';
+//tests
+import '@testing-library/jest-dom';
+import { 
+  act, 
+  fireEvent, 
+  render, 
+  screen 
+} from '@testing-library/react';
+import { 
+  describe, 
+  expect, 
+  it, 
+  vi 
+} from 'vitest';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -324,8 +329,12 @@ describe('Helper functions', () => {
     });
 
     it('returns undefined for invalid', () => {
-      expect(resolveNumericBound('abc', defaultOptions)).toBeUndefined();
-      expect(resolveNumericBound(undefined, defaultOptions)).toBeUndefined();
+      expect(
+        resolveNumericBound('abc', defaultOptions)
+      ).toBeUndefined();
+      expect(
+        resolveNumericBound(undefined, defaultOptions)
+      ).toBeUndefined();
     });
   });
 
@@ -341,7 +350,9 @@ describe('Helper functions', () => {
     });
 
     it('handles decimals', () => {
-      expect(sanitizeNumericString('5.25', defaultOptions)).toBe('5.25');
+      expect(
+        sanitizeNumericString('5.25', defaultOptions)
+      ).toBe('5.25');
     });
 
     it('removes separators', () => {
@@ -362,7 +373,9 @@ describe('Helper functions', () => {
 
     it('normalizes leading dots', () => {
       expect(sanitizeNumericString('.5', defaultOptions)).toBe('0.5');
-      expect(sanitizeNumericString('-.5', defaultOptions)).toBe('-0.5');
+      expect(
+        sanitizeNumericString('-.5', defaultOptions)
+      ).toBe('-0.5');
     });
   });
 

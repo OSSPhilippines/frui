@@ -1,6 +1,14 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Dialog, {
+  DialogClose,
+  DialogContext,
+  DialogOverlay,
+  useDialog,
+  useDialogContext
+} from '../../src/base/Dialog.js';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -10,15 +18,13 @@ import {
   screen,
   waitFor
 } from '@testing-library/react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
-//frui
-import Dialog, {
-  DialogClose,
-  DialogContext,
-  DialogOverlay,
-  useDialog,
-  useDialogContext
-} from '../../src/base/Dialog.js';
+import { 
+  afterEach, 
+  describe, 
+  expect, 
+  it, 
+  vi 
+} from 'vitest';
 
 //--------------------------------------------------------------------//
 // Helpers

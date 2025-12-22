@@ -1,13 +1,12 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Table from '../../src/base/Table.js';
 //tests
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-
-//frui
-import Table from '../../src/base/Table.js';
 
 //--------------------------------------------------------------------//
 // Helpers

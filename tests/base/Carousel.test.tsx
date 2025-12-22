@@ -1,12 +1,12 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Carousel from '../../src/base/Carousel.js';
 //tests
 import '@testing-library/jest-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
-//frui
-import Carousel from '../../src/base/Carousel.js';
 
 //--------------------------------------------------------------------//
 // Mocks

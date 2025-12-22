@@ -1,19 +1,19 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Button from '../../src/base/Button.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it
 } from 'vitest';
-//frui
-import Button from '../../src/base/Button.js';
+import {
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests

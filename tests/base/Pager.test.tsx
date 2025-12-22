@@ -1,6 +1,11 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import {
+  flatClass,
+  Pager
+} from '../../src/base/Pager.js';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -14,11 +19,6 @@ import {
   it,
   vi
 } from 'vitest';
-//frui
-import {
-  flatClass,
-  Pager
-} from '../../src/base/Pager.js';
 
 //--------------------------------------------------------------------//
 // Tests
@@ -74,7 +74,7 @@ describe('<Pager />', () => {
     expect(onUpdate).toHaveBeenCalledWith(50);
   });
 
-  it('renders correct number of pages when no radius provided', () => {
+  it('renders correct page count (no radius)', () => {
     render(<Pager take={50} total={200} />);
     const pages = screen.getAllByText(/\d+/);
     expect(pages).toHaveLength(4);

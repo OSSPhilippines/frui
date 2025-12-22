@@ -1,18 +1,18 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import type { ReactElement } from 'react';
-//tests
-import '@testing-library/jest-dom';
-import { describe, expect, it, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
 //frui
 import Film, {
   FilmContext,
   FilmFrame,
   useFilmContext
 } from '../../src/base/Film.js';
+//modules
+import type { ReactElement } from 'react';
+//tests
+import '@testing-library/jest-dom';
+import { describe, expect, it, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Mocks

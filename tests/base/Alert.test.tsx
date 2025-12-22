@@ -1,14 +1,19 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import type { ReactElement, ReactNode } from 'react';
-import { describe, expect, it, vi } from 'vitest';
-//tests
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 //frui
 import { Alert } from '../../src/base/Alert.js';
+//modules
+import type { ReactElement, ReactNode } from 'react';
+//tests
+import '@testing-library/jest-dom';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
+import { render, screen } from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Mocks

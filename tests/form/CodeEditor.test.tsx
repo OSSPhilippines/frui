@@ -1,24 +1,25 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import CodeEditor, {
+  getEditorOptions,
+  getLanguageExtension
+} from '../../src/form/CodeEditor.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen,
-  waitFor
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it,
   vi
 } from 'vitest';
-//frui
-import CodeEditor, {
-  getEditorOptions,
-  getLanguageExtension
-} from '../../src/form/CodeEditor.js';
+import {
+  render,
+  screen,
+  waitFor
+} from '@testing-library/react';
+
 
 //--------------------------------------------------------------------//
 // Mocks

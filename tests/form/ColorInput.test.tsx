@@ -1,6 +1,14 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import ColorInput, {
+  clamp,
+  componentToHex,
+  rgbaToHex,
+  toHex,
+  toRGBA
+} from '../../src/form/ColorInput.js';
 //modules
 import type { ChangeEventHandler } from 'react';
 //tests
@@ -17,14 +25,6 @@ import {
   screen,
   waitFor
 } from '@testing-library/react';
-//frui
-import ColorInput, {
-  clamp,
-  componentToHex,
-  rgbaToHex,
-  toHex,
-  toRGBA
-} from '../../src/form/ColorInput.js';
 
 //--------------------------------------------------------------------//
 // Mocks

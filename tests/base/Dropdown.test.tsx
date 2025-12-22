@@ -1,6 +1,14 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Dropdown, {
+  buildOptions,
+  getAbsolutePosition,
+  getComponents,
+  getRelativePosition,
+  makeOptions
+} from '../../src/base/Dropdown.js';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -14,14 +22,6 @@ import {
   it,
   vi
 } from 'vitest';
-//frui
-import Dropdown, {
-  buildOptions,
-  getAbsolutePosition,
-  getComponents,
-  getRelativePosition,
-  makeOptions
-} from '../../src/base/Dropdown.js';
 
 //--------------------------------------------------------------------//
 // Helpers
@@ -231,11 +231,16 @@ describe('<Dropdown />', () => {
   it('calls onUpdate when value changes', () => {
     const onUpdate = vi.fn();
     const { container } = render(
-      <Dropdown defaultOpened options={[ 'Option 1' ]} onUpdate={onUpdate}>
+      <Dropdown 
+        defaultOpened 
+        options={[ 'Option 1' ]} 
+        onUpdate={onUpdate}
+      >
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
-    const option = container.querySelector('.frui-dropdown-option');
+    const option = 
+      container.querySelector('.frui-dropdown-option');
     if (option) {
       fireEvent.click(option);
       expect(onUpdate).toHaveBeenCalledWith('Option 1');
@@ -254,7 +259,8 @@ describe('<Dropdown />', () => {
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
-    const options = container.querySelectorAll('.frui-dropdown-option');
+    const options = 
+      container.querySelectorAll('.frui-dropdown-option');
     fireEvent.click(options[0]);
     fireEvent.click(options[1]);
     expect(onUpdate).toHaveBeenCalledWith([ 'A', 'B' ]);
@@ -284,11 +290,17 @@ describe('<Dropdown />', () => {
 
   it('applies custom className', () => {
     const { container } = render(
-      <Dropdown className="custom" defaultOpened options={[ 'A' ]}>
+      <Dropdown 
+        className="custom" 
+        defaultOpened 
+        options={[ 'A' ]}
+      >
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
-    expect(container.querySelector('.custom')).toBeInTheDocument();
+    expect(
+      container.querySelector('.custom')
+    ).toBeInTheDocument();
   });
 
   it('applies direction classes', () => {
@@ -324,7 +336,11 @@ describe('<Dropdown />', () => {
   it('calls onDropdown handler', () => {
     const onDropdown = vi.fn();
     render(
-      <Dropdown defaultOpened options={[ 'A' ]} onDropdown={onDropdown}>
+      <Dropdown 
+        defaultOpened 
+        options={[ 'A' ]} 
+        onDropdown={onDropdown}
+      >
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
@@ -349,7 +365,8 @@ describe('<Dropdown />', () => {
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
-    const option = container.querySelector('.frui-dropdown-option');
+    const option = 
+      container.querySelector('.frui-dropdown-option');
     if (option) {
       fireEvent.click(option);
       expect(
@@ -364,7 +381,8 @@ describe('<Dropdown />', () => {
         <Dropdown.Control>Select</Dropdown.Control>
       </Dropdown>
     );
-    const option = container.querySelector('.frui-dropdown-option');
+    const option = 
+      container.querySelector('.frui-dropdown-option');
     if (option) {
       fireEvent.click(option);
       expect(
@@ -406,7 +424,8 @@ describe('<Dropdown.Control />', () => {
         </Dropdown.Control>
       </Dropdown>
     );
-    const control = container.querySelector('.frui-dropdown-control');
+    const control = 
+      container.querySelector('.frui-dropdown-control');
     expect(control).toHaveClass('custom');
     expect(control).toHaveAttribute('style');
   });
@@ -445,7 +464,8 @@ describe('<Dropdown.Option />', () => {
         <Dropdown.Option value="opt1">Option 1</Dropdown.Option>
       </Dropdown>
     );
-    const option = container.querySelector('.frui-dropdown-option');
+    const option = 
+      container.querySelector('.frui-dropdown-option');
     if (option) {
       fireEvent.click(option);
       expect(onUpdate).toHaveBeenCalledWith('opt1');

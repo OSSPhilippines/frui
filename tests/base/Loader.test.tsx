@@ -214,7 +214,9 @@ describe('<LoaderContainer />', () => {
 
   it('renders children content', () => {
     render(<LoaderContainer>Container Content</LoaderContainer>);
-    expect(screen.getByText('Container Content')).toBeInTheDocument();
+    expect(
+      screen.getByText('Container Content')
+    ).toBeInTheDocument();
   });
 
   it('applies custom className', () => {

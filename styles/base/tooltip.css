@@ -1,0 +1,97 @@
+.frui-tooltip-container {
+  display: inline-block;
+  position: relative;
+}
+
+.frui-tooltip {
+  background-color: #333333;
+  border-radius: 6px;
+  color: #FFFFFF;
+  min-width: 70px;
+  padding: 5px 10px;
+  position: absolute;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+/* Arrow styling */
+.frui-tooltip-arrow::after {
+  border-color: #333333;
+  content: " ";
+  display: block;
+  height: 0;
+  position: absolute;
+  width: 0;
+}
+
+.frui-tooltip-arrow-bottom::after {
+  border-left: 6px solid transparent !important;
+  border-right: 6px solid transparent !important;
+  border-top-style: solid;
+  border-top-width: 6px;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.frui-tooltip-arrow-top::after {
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+  border-left: 6px solid transparent !important;
+  border-right: 6px solid transparent !important;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.frui-tooltip-arrow-left::after {
+  border-top: 6px solid transparent !important;
+  border-bottom: 6px solid transparent !important;
+  border-right-style: solid;
+  border-right-width: 6px;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.frui-tooltip-arrow-right::after {
+  border-top: 6px solid transparent !important;
+  border-bottom: 6px solid transparent !important;
+  border-left-style: solid;
+  border-left-width: 6px;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.frui-tooltip-arrow.frui-bg-black::after{
+  border-color: var(--black);
+}
+.frui-tooltip-arrow.frui-bg-white::after {
+  border-color: var(--white);
+}
+.frui-tooltip-arrow.frui-bg-info::after {
+  border-color: var(--info);
+}
+.frui-tooltip-arrow.frui-bg-error::after {
+  border-color: var(--error);
+}
+.frui-tooltip-arrow.frui-bg-warning::after {
+  border-color: var(--warning);
+}
+.frui-tooltip-arrow.frui-bg-success::after {
+  border-color: var(--success);
+}
+.frui-tooltip-arrow.frui-bg-muted::after {
+  border-color: var(--muted);
+}
+.frui-tooltip-arrow.frui-bg-primary::after {
+  border-color: var(--primary);
+}
+.frui-tooltip-arrow.frui-bg-secondary::after {
+  border-color: var(--secondary);
+}
+.frui-tooltip-arrow.frui-bg-tertiary::after {
+  border-color: var(--tertiary);
+}

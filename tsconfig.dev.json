@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "lib": [ "es2022", "dom", "dom.iterable" ],
+    "module": "esnext",
+  
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "preserveConstEnums": true,
+    "skipLibCheck": true,
+    "strict": true,
+
+    "declaration": true,
+    "removeComments": true,
+    "sourceMap": false,
+    "target": "es2022",
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "outDir": "esm/"
+  },
+  "include": [ 
+    "scripts/**/*.ts",
+    "src/**/*.ts", 
+    "src/**/*.tsx",
+    "web/**/*.ts",
+    "web/**/*.tsx"
+  ],
+  "exclude": [ "dist", "node_modules", "tests" ]
+}

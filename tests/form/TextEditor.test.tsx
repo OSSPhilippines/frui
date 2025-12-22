@@ -469,7 +469,7 @@ describe('TextEditor', () => {
     it('uploads and inserts image', async () => {
       render(<TextEditor image />);
       const fileInput = document.querySelector(
-        'input[type="file"][accept="image/*"]:not([multiple])'
+        'input[ type="file" ][ accept="image/*" ]:not([ multiple ])'
       ) as HTMLInputElement;
       const file = createFile('test.png', 'image/png');
       await act(async () => {
@@ -486,7 +486,7 @@ describe('TextEditor', () => {
     it('uploads multiple images from gallery', async () => {
       render(<TextEditor imageGallery />);
       const fileInput = document.querySelector(
-        'input[type="file"][accept="image/*"][multiple]'
+        'input[ type="file" ][ accept="image/*" ][ multiple ]'
       ) as HTMLInputElement;
       const file1 = createFile('test1.png', 'image/png');
       const file2 = createFile('test2.png', 'image/png');
@@ -717,7 +717,7 @@ describe('TextEditor', () => {
         '.frui-form-text-editor-editable'
       ) as HTMLDivElement;
       const hidden = document.querySelector(
-        'input[type="hidden"]'
+        'input[ type="hidden" ]'
       ) as HTMLInputElement;
       editable.innerHTML = '<p>Content</p>';
       fireEvent.input(editable);
@@ -738,7 +738,7 @@ describe('TextEditor', () => {
     it('passes attributes to hidden input', () => {
       render(<TextEditor name="editor" data-test="value" />);
       const hidden = document.querySelector(
-        'input[type="hidden"]'
+        'input[ type="hidden" ]'
       ) as HTMLInputElement;
       expect(hidden.name).toBe('editor');
       expect(hidden.getAttribute('data-test')).toBe('value');

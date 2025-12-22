@@ -480,7 +480,7 @@ describe('MetadataFields Component', () => {
     );
 
     const hiddenInput = document.querySelector(
-      'input[type="hidden"]'
+      'input[ type="hidden" ]'
     );
     expect(hiddenInput).toBeInTheDocument();
     expect(hiddenInput).toHaveAttribute(
@@ -506,7 +506,7 @@ describe('MetadataFields Component', () => {
     );
 
     const hiddenInput = document.querySelector(
-      'input[type="hidden"]'
+      'input[ type="hidden" ]'
     );
     expect(hiddenInput).not.toBeInTheDocument();
   });
@@ -528,7 +528,7 @@ describe('MetadataFields Component', () => {
     );
 
     const hiddenInput = document.querySelector(
-      'input[type="hidden"]'
+      'input[ type="hidden" ]'
     );
     expect(hiddenInput).toHaveAttribute(
       'value',

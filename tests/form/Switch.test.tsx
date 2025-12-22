@@ -8,16 +8,16 @@ import {
   renderHook
 } from '@testing-library/react';
 import {
-  fireEvent,
-  render,
-  screen
-} from '@testing-library/react';
-import {
   describe,
   expect,
   it,
   vi
 } from 'vitest';
+import {
+  fireEvent,
+  render,
+  screen
+} from '@testing-library/react';
 //types
 import type { ChangeEvent } from 'react';
 //frui

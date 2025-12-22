@@ -4,14 +4,14 @@
 //tests
 import '@testing-library/jest-dom';
 import {
-  render,
-  screen
-} from '@testing-library/react';
-import {
   describe,
   expect,
   it
 } from 'vitest';
+import {
+  render,
+  screen
+} from '@testing-library/react';
 //frui
 import FieldControl from '../../src/form/FieldControl.js';
 

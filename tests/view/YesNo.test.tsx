@@ -3,68 +3,87 @@
 
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen,
-  cleanup
-} from '@testing-library/react';
-import {
-  describe,
-  expect,
-  it,
-  afterEach
-} from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { render } from '@testing-library/react';
 //frui
-import YesNo from '../../src/view/YesNo.js';
+import Yesno from '../../src/view/YesNo.js';
+
+//--------------------------------------------------------------------//
+// Helpers
+
+function renderText(
+  value: unknown,
+  yes?: string,
+  no?: string
+): string {
+  const { container } = render(
+    <Yesno 
+      value={value} 
+      yes={yes} 
+      no={no} 
+    />
+  );
+  return container.textContent ?? '';
+}
 
 //--------------------------------------------------------------------//
 // Tests
 
-describe('<YesNo />', () => {
-  afterEach(() => cleanup());
-
-  it('renders "Yes" when value is truthy', () => {
-    render(<YesNo value={true} />);
-
-    expect(screen.getByText('Yes')).toBeInTheDocument();
+describe('Yesno component', () => {
+  it('renders "Yes" when value is truthy (default yes/no)', () => {
+    const result = renderText(true);
+    expect(result).toBe('Yes');
   });
 
-  it('renders "No" when value is falsy', () => {
-    render(<YesNo value={false} />);
-
-    expect(screen.getByText('No')).toBeInTheDocument();
+  it('renders "No" when value is falsy (default yes/no)', () => {
+    const result = renderText(false);
+    expect(result).toBe('No');
   });
 
-  it('accepts custom yes/no labels', () => {
-    render(<YesNo value={1} yes="Affirmative" no="Negative" />);
-
-    expect(screen.getByText('Affirmative')).toBeInTheDocument();
+  it('renders Yes for truthy string', () => {
+    const result = renderText('hello');
+    expect(result).toBe('Yes');
   });
 
-  it('treats other truthy values (strings, numbers) as "Yes"', () => {
-    render(<YesNo value="non-empty string" />);
-
-    expect(screen.getByText('Yes')).toBeInTheDocument();
-
-    cleanup();
-    render(<YesNo value={123} />);
-    expect(screen.getByText('Yes')).toBeInTheDocument();
+  it('renders "No" for falsy values like 0 or empty string', () => {
+    expect(renderText(0)).toBe('No');
+    expect(renderText('')).toBe('No');
+    expect(renderText(undefined)).toBe('No');
+    expect(renderText(null)).toBe('No');
   });
 
-  it('treats falsy values (0, empty, null, undefined) as "No"', () => {
-    render(<YesNo value={0} />);
-    expect(screen.getByText('No')).toBeInTheDocument();
+  it('respects custom yes/no labels', () => {
+    const result = renderText(true, 'On', 'Off');
+    expect(result).toBe('On');
+    const resultFalse = renderText(false, 'On', 'Off');
+    expect(resultFalse).toBe('Off');
+  });
 
-    cleanup();
-    render(<YesNo value="" />);
-    expect(screen.getByText('No')).toBeInTheDocument();
+  it('renders correctly with numeric values', () => {
+    expect(renderText(1)).toBe('Yes');
+    expect(renderText(-5)).toBe('Yes');
+    expect(renderText(0)).toBe('No');
+  });
 
-    cleanup();
-    render(<YesNo value={null} />);
-    expect(screen.getByText('No')).toBeInTheDocument();
+  it('renders correctly with object or array values', () => {
+    expect(renderText({ a: 1 })).toBe('Yes');
+    expect(renderText([ 1, 2, 3 ])).toBe('Yes');
+  });
 
-    cleanup();
-    render(<YesNo value={undefined} />);
-    expect(screen.getByText('No')).toBeInTheDocument();
+  it('matches snapshot for true value', () => {
+    const { container } = render(<Yesno value={true} />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it('matches snapshot for false value', () => {
+    const { container } = render(<Yesno value={false} />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it('matches snapshot for custom yes/no text', () => {
+    const { container } = render(
+      <Yesno value={true} yes="Y" no="N" />
+    );
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

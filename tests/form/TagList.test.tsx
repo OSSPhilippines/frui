@@ -41,6 +41,7 @@ Object.defineProperty(window, 'getSelection', {
     }))
   }))
 });
+
 Object.defineProperty(document, 'execCommand', {
   configurable: true,
   writable: true,
@@ -59,6 +60,7 @@ const setupHook = (config = {}) => {
   render(<TestComp />);
   return () => hook!;
 };
+
 //--------------------------------------------------------------------//
 // Tests
 

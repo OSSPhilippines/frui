@@ -23,6 +23,7 @@ vi.mock('../../src/data/currencies.js', () => ({
     { code: 'EUR', name: 'Euro', type: 'fiat' }
   ]
 }));
+
 vi.mock('../../src/data/countries.js', () => ({
   __esModule: true,
   default: [

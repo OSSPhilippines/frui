@@ -3,10 +3,9 @@
 
 //modules
 import type { ReactElement } from 'react';
-import { cloneElement } from 'react';
-import { describe, expect, it, vi } from 'vitest';
 //tests
 import '@testing-library/jest-dom';
+import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 //frui
 import Film, {

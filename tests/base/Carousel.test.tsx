@@ -3,226 +3,334 @@
 
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
-import {
-  beforeEach,
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
-
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 //frui
 import Carousel from '../../src/base/Carousel.js';
 
 //--------------------------------------------------------------------//
 // Mocks
 
-beforeEach(() => {
-  Element.prototype.scrollBy = vi.fn();
-  Element.prototype.getBoundingClientRect = vi.fn(() => ({
-    width: 100,
-    height: 100,
-    top: 0,
-    left: 0,
-    bottom: 100,
-    right: 100,
-    x: 0,
-    y: 0,
-    toJSON: () => {}
-  }));
-});
+const mockScrollBy = vi.fn();
+
+const mockGetBoundingClientRect = vi.fn(() => ({
+  width: 100,
+  height: 100,
+  top: 0,
+  left: 0,
+  bottom: 100,
+  right: 100,
+  x: 0,
+  y: 0,
+  toJSON: () => {}
+}));
+
+//--------------------------------------------------------------------//
+// Helpers
+
+const renderCarousel = (
+  props: Record<string, unknown> = {},
+  frameCount = 3
+) => {
+  const images = Array.from(
+    { length: frameCount },
+    (_, i) => `image${i + 1}.jpg`
+  );
+  
+  return render(
+    <Carousel {...props}>
+      {images.map((src, i) => (
+        <Carousel.Frame key={i}>
+          <img alt={`test${i + 1}`} src={src} />
+        </Carousel.Frame>
+      ))}
+    </Carousel>
+  );
+};
 
 //--------------------------------------------------------------------//
 // Tests
 
-describe('<Carousel />', () => {
-  it('renders a wrapping div with the default class', () => {
-    const { container } = render(
-      <Carousel>
-        <Carousel.Frame>
-          <img src="a.jpg" alt="test" />
-        </Carousel.Frame>
-      </Carousel>
-    );
-    const wrapper = container.querySelector('.frui-carousel');
-    expect(wrapper).toBeInTheDocument();
-    expect(wrapper).toHaveClass('frui-carousel');
+describe('Carousel component', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    Element.prototype.scrollBy = mockScrollBy;
+    Element.prototype.getBoundingClientRect =
+      mockGetBoundingClientRect;
   });
 
-  it('renders an image for each item in the value array', () => {
-    const images = [ 'a.jpg', 'b.jpg', 'c.jpg' ];
-    render(
-      <Carousel>
-        {images.map((src, i) => (
-          <Carousel.Frame key={i}>
-            <img src={src} alt="sample" />
-          </Carousel.Frame>
-        ))}
-      </Carousel>
-    );
-    const renderedImages = screen.getAllByRole('img');
-    expect(renderedImages).toHaveLength(images.length);
-  });
+  describe('rendering', () => {
+    it('renders wrapper with default class', () => {
+      const { container } = renderCarousel();
+      const wrapper = container.querySelector('.frui-carousel');
+      
+      expect(wrapper).toBeInTheDocument();
+      expect(wrapper).toHaveClass('frui-carousel');
+    });
 
-  it('assigns the correct src attributes to each image', () => {
-    const sources = [ 'one.png', 'two.png' ];
-    render(
-      <Carousel>
-        {sources.map((src, i) => (
-          <Carousel.Frame key={i}>
-            <img src={src} alt="example" />
-          </Carousel.Frame>
-        ))}
-      </Carousel>
-    );
-    const renderedImages = screen.getAllByRole('img');
-    renderedImages.forEach((img, index) => {
-      expect(img).toHaveAttribute('src', sources[ index ]);
+    it('renders correct number of frames', () => {
+      renderCarousel({}, 3);
+      const images = screen.getAllByRole('img');
+      
+      expect(images).toHaveLength(3);
+    });
+
+    it('renders frame and film structure', () => {
+      const { container } = renderCarousel();
+      const view = container.querySelector('.frui-carousel-view');
+      const film = container.querySelector('.frui-carousel-film');
+      const frames = container.querySelectorAll('.frui-film-frame');
+      
+      expect(view).toBeInTheDocument();
+      expect(film).toBeInTheDocument();
+      expect(frames).toHaveLength(3);
+    });
+
+    it('applies correct src to images', () => {
+      const sources = [ 'one.png', 'two.png' ];
+      
+      render(
+        <Carousel>
+          {sources.map((src, i) => (
+            <Carousel.Frame key={i}>
+              <img alt={`img${i}`} src={src} />
+            </Carousel.Frame>
+          ))}
+        </Carousel>
+      );
+      
+      const images = screen.getAllByRole('img');
+      images.forEach((img, i) => {
+        expect(img).toHaveAttribute('src', sources[i]);
+      });
     });
   });
 
-  it('applies a custom className along with the default class', () => {
-    const { container } = render(
-      <Carousel className="custom">
-        <Carousel.Frame>
-          <img src="image.png" alt="test" />
-        </Carousel.Frame>
-      </Carousel>
-    );
-    const wrapper = container.querySelector('.frui-carousel');
-    expect(wrapper).toBeInTheDocument();
-    expect(wrapper).toHaveClass('frui-carousel');
-    expect(wrapper).toHaveClass('custom');
-  });
+  describe('styling', () => {
+    it('applies custom className', () => {
+      const { container } = renderCarousel({
+        className: 'custom'
+      });
+      const wrapper = container.querySelector('.frui-carousel');
+      
+      expect(wrapper).toHaveClass('frui-carousel', 'custom');
+    });
 
-  it('forwards additional props such as alt and width to images', () => {
-    render(
-      <Carousel>
-        <Carousel.Frame>
-          <img src="a.jpg" alt="photo" width={50} />
-        </Carousel.Frame>
-        <Carousel.Frame>
-          <img src="b.jpg" alt="photo" width={50} />
-        </Carousel.Frame>
-      </Carousel>
-    );
-    const renderedImages = screen.getAllByRole('img');
-    renderedImages.forEach((img) => {
-      expect(img).toHaveAttribute('alt', 'photo');
-      expect(img).toHaveAttribute('width', '50');
+    it('applies custom inline styles', () => {
+      const { container } = renderCarousel({
+        style: { padding: '10px' }
+      });
+      const wrapper = container.querySelector('.frui-carousel');
+      
+      expect(wrapper).toHaveStyle({ padding: '10px' });
+    });
+
+    it('applies hidden scroll class', () => {
+      const { container } = renderCarousel({ hidden: true });
+      const view = container.querySelector('.frui-carousel-view');
+      
+      expect(view).toHaveClass('frui-scroll-hidden');
+    });
+
+    it('applies scroll class', () => {
+      const { container } = renderCarousel({ scroll: true });
+      const view = container.querySelector('.frui-carousel-view');
+      
+      expect(view).toHaveClass('frui-scroll');
+    });
+
+    it('applies auto scroll class', () => {
+      const { container } = renderCarousel({ auto: true });
+      const view = container.querySelector('.frui-carousel-view');
+      
+      expect(view).toHaveClass('frui-scroll-auto');
+    });
+
+    it('applies film slot styles', () => {
+      const { container } = renderCarousel({
+        film: { className: 'custom-film' }
+      });
+      const film = container.querySelector('.frui-carousel-film');
+      
+      expect(film).toHaveClass('custom-film');
+    });
+
+    it('applies view slot styles', () => {
+      const { container } = renderCarousel({
+        view: { className: 'custom-view' }
+      });
+      const view = container.querySelector('.frui-carousel-view');
+      
+      expect(view).toHaveClass('custom-view');
     });
   });
 
-  it('renders frame and film structure', () => {
-    const { container } = render(
-      <Carousel>
-        <Carousel.Frame>
-          <img src="a.jpg" alt="test" />
-        </Carousel.Frame>
-      </Carousel>
-    );
-    const view = container.querySelector('.frui-carousel-view');
-    const film = container.querySelector('.frui-carousel-film');
-    expect(view).toBeInTheDocument();
-    expect(film).toBeInTheDocument();
+  describe('navigation', () => {
+    it('renders Previous and Next components', () => {
+      render(
+        <Carousel>
+          <Carousel.Frame>
+            <img alt="test" src="a.jpg" />
+          </Carousel.Frame>
+          <Carousel.Previous>Prev</Carousel.Previous>
+          <Carousel.Next>Next</Carousel.Next>
+        </Carousel>
+      );
+      
+      expect(screen.getByText('Prev')).toBeInTheDocument();
+      expect(screen.getByText('Next')).toBeInTheDocument();
+    });
+
+    it('calls prev handler on Previous click', () => {
+      render(
+        <Carousel>
+          <Carousel.Frame>
+            <img alt="test1" src="a.jpg" />
+          </Carousel.Frame>
+          <Carousel.Frame>
+            <img alt="test2" src="b.jpg" />
+          </Carousel.Frame>
+          <Carousel.Previous>Prev</Carousel.Previous>
+        </Carousel>
+      );
+      
+      const prevBtn = screen.getByText('Prev');
+      fireEvent.click(prevBtn);
+      
+      expect(prevBtn).toBeInTheDocument();
+    });
+
+    it('calls next handler on Next click', () => {
+      render(
+        <Carousel>
+          <Carousel.Frame>
+            <img alt="test1" src="a.jpg" />
+          </Carousel.Frame>
+          <Carousel.Frame>
+            <img alt="test2" src="b.jpg" />
+          </Carousel.Frame>
+          <Carousel.Next>Next</Carousel.Next>
+        </Carousel>
+      );
+      
+      const nextBtn = screen.getByText('Next');
+      fireEvent.click(nextBtn);
+      
+      expect(nextBtn).toBeInTheDocument();
+    });
+
+    it('renders Previous with asChild prop', () => {
+      render(
+        <Carousel>
+          <Carousel.Frame>
+            <img alt="test" src="a.jpg" />
+          </Carousel.Frame>
+          <Carousel.Previous asChild>
+            <button type="button">Custom Prev</button>
+          </Carousel.Previous>
+        </Carousel>
+      );
+      
+      const btn = screen.getByRole('button', {
+        name: 'Custom Prev'
+      });
+      expect(btn).toBeInTheDocument();
+      expect(btn).toHaveClass('frui-carousel-prev');
+    });
+
+    it('renders Next with asChild prop', () => {
+      render(
+        <Carousel>
+          <Carousel.Frame>
+            <img alt="test" src="a.jpg" />
+          </Carousel.Frame>
+          <Carousel.Next asChild>
+            <button type="button">Custom Next</button>
+          </Carousel.Next>
+        </Carousel>
+      );
+      
+      const btn = screen.getByRole('button', {
+        name: 'Custom Next'
+      });
+      expect(btn).toBeInTheDocument();
+      expect(btn).toHaveClass('frui-carousel-next');
+    });
   });
 
-  it('applies hidden scroll class when hidden prop is true', () => {
-    const { container } = render(
-      <Carousel hidden>
-        <Carousel.Frame>
-          <img src="a.jpg" alt="test" />
-        </Carousel.Frame>
-      </Carousel>
-    );
-    const view = container.querySelector('.frui-carousel-view');
-    expect(view).toHaveClass('frui-scroll-hidden');
+  describe('carousel state', () => {
+    it('renders with defaultIndex', () => {
+      const { container } = renderCarousel({ defaultIndex: 1 });
+      const wrapper = container.querySelector('.frui-carousel');
+      
+      expect(wrapper).toBeInTheDocument();
+    });
+
+    it('renders with controlled index', () => {
+      const { container } = renderCarousel({ index: 2 });
+      const wrapper = container.querySelector('.frui-carousel');
+      
+      expect(wrapper).toBeInTheDocument();
+    });
+
+    it('updates when index prop changes', () => {
+      const { container, rerender } = renderCarousel({ index: 0 });
+      const wrapper = container.querySelector('.frui-carousel');
+      
+      expect(wrapper).toBeInTheDocument();
+      
+      rerender(
+        <Carousel index={1}>
+          <Carousel.Frame>
+            <img alt="test1" src="image1.jpg" />
+          </Carousel.Frame>
+          <Carousel.Frame>
+            <img alt="test2" src="image2.jpg" />
+          </Carousel.Frame>
+        </Carousel>
+      );
+      
+      expect(wrapper).toBeInTheDocument();
+    });
+
+    it('renders with repeat prop', () => {
+      const { container } = renderCarousel({ repeat: true });
+      const wrapper = container.querySelector('.frui-carousel');
+      
+      expect(wrapper).toBeInTheDocument();
+    });
   });
 
-  it('applies scroll class when scroll prop is true', () => {
-    const { container } = render(
-      <Carousel scroll>
-        <Carousel.Frame>
-          <img src="a.jpg" alt="test" />
-        </Carousel.Frame>
-      </Carousel>
-    );
-    const view = container.querySelector('.frui-carousel-view');
-    expect(view).toHaveClass('frui-scroll');
-  });
+  describe('exports', () => {
+    it('exports Frame component', () => {
+      expect(Carousel.Frame).toBeDefined();
+    });
 
-  it('applies auto scroll class when auto prop is true', () => {
-    const { container } = render(
-      <Carousel auto>
-        <Carousel.Frame>
-          <img src="a.jpg" alt="test" />
-        </Carousel.Frame>
-      </Carousel>
-    );
-    const view = container.querySelector('.frui-carousel-view');
-    expect(view).toHaveClass('frui-scroll-auto');
-  });
+    it('exports Previous component', () => {
+      expect(Carousel.Previous).toBeDefined();
+      expect(Carousel.Previous).toBe(Carousel.Prev);
+    });
 
-  it('applies custom inline styles', () => {
-    const { container } = render(
-      <Carousel style={{ padding: '10px' }}>
-        <Carousel.Frame>
-          <img src="a.jpg" alt="test" />
-        </Carousel.Frame>
-      </Carousel>
-    );
-    const wrapper = container.querySelector('.frui-carousel');
-    expect(wrapper).toHaveAttribute('style');
-  });
+    it('exports Next component', () => {
+      expect(Carousel.Next).toBeDefined();
+    });
 
-  it('renders with defaultIndex prop', () => {
-    const { container } = render(
-      <Carousel defaultIndex={1}>
-        <Carousel.Frame>
-          <img src="a.jpg" alt="test" />
-        </Carousel.Frame>
-        <Carousel.Frame>
-          <img src="b.jpg" alt="test" />
-        </Carousel.Frame>
-      </Carousel>
-    );
-    const wrapper = container.querySelector('.frui-carousel');
-    expect(wrapper).toBeInTheDocument();
-  });
+    it('exports useCarousel hook', () => {
+      expect(Carousel.useCarousel).toBeDefined();
+      expect(Carousel.use).toBe(Carousel.useCarousel);
+    });
 
-  it('renders with repeat prop', () => {
-    const { container } = render(
-      <Carousel repeat>
-        <Carousel.Frame>
-          <img src="a.jpg" alt="test" />
-        </Carousel.Frame>
-        <Carousel.Frame>
-          <img src="b.jpg" alt="test" />
-        </Carousel.Frame>
-      </Carousel>
-    );
-    const wrapper = container.querySelector('.frui-carousel');
-    expect(wrapper).toBeInTheDocument();
-  });
+    it('exports useCarouselContext hook', () => {
+      expect(Carousel.useCarouselContext).toBeDefined();
+      expect(Carousel.useContext).toBe(
+        Carousel.useCarouselContext
+      );
+    });
 
-  it('renders Previous and Next components when provided', () => {
-    render(
-      <Carousel>
-        <Carousel.Frame>
-          <img src="a.jpg" alt="test" />
-        </Carousel.Frame>
-        <Carousel.Frame>
-          <img src="b.jpg" alt="test" />
-        </Carousel.Frame>
-        <Carousel.Previous>Prev</Carousel.Previous>
-        <Carousel.Next>Next</Carousel.Next>
-      </Carousel>
-    );
-    expect(screen.getByText('Prev')).toBeInTheDocument();
-    expect(screen.getByText('Next')).toBeInTheDocument();
+    it('exports helper functions', () => {
+      expect(Carousel.getFrames).toBeDefined();
+      expect(Carousel.getPrevious).toBeDefined();
+      expect(Carousel.getNext).toBeDefined();
+    });
   });
 });

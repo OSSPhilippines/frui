@@ -6,18 +6,18 @@ import { ChangeEvent, useState } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
+import {
   fireEvent,
   render,
   screen,
   waitFor
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
 //frui
 import ImageList from '../../src/form/ImageList.js';
 

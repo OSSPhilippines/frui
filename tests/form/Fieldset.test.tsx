@@ -14,10 +14,10 @@ import {
 } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 //frui
-import type { FieldsProps } from '../../frui/src/form/Fieldset.js';
+import type { FieldsProps } from '../../src/form/Fieldset.js';
 import makeFieldset, {
   useFieldset
-} from '../../frui/src/form/Fieldset.js';
+} from '../../src/form/Fieldset.js';
 
 //--------------------------------------------------------------------//
 // Mocks

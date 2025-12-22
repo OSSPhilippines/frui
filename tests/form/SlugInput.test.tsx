@@ -5,8 +5,8 @@
 import type { ChangeEvent, FocusEvent } from 'react';
 //tests
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 //frui
 import SlugInput, {
   camelfy,

@@ -6,17 +6,17 @@ import type { ChangeEventHandler } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import {
-  fireEvent,
-  render,
-  screen,
-  waitFor
-} from '@testing-library/react';
-import {
   describe,
   expect,
   it,
   vi
 } from 'vitest';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor
+} from '@testing-library/react';
 //frui
 import ColorInput, {
   clamp,

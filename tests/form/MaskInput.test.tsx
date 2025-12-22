@@ -5,8 +5,8 @@
 import type { InputHTMLAttributes } from 'react';
 //tests
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 //frui
 import MaskInput from '../../src/form/MaskInput.js';
 

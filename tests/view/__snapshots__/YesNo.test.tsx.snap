@@ -1,7 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`Yesno component > matches snapshot for custom yes/no text 1`] = `Y`;
-
-exports[`Yesno component > matches snapshot for false value 1`] = `No`;
-
-exports[`Yesno component > matches snapshot for true value 1`] = `Yes`;

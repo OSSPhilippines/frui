@@ -61,6 +61,23 @@ describe('buildBreadTrail()', () => {
     ]);
     expect(trail.length).toBe(3);
   });
+
+  it('handles single non-array child', () => {
+    const trail = buildBreadTrail(
+      <BreadCrumb key="1">Single</BreadCrumb>
+    );
+    expect(trail.length).toBe(1);
+  });
+
+  it('handles breadSlicer prop alternative', () => {
+    const customSlicer = <span key="s" breadSlicer={true}>|</span>;
+    const trail = buildBreadTrail([
+      <BreadCrumb key="1">A</BreadCrumb>,
+      customSlicer,
+      <BreadCrumb key="2">B</BreadCrumb>
+    ]);
+    expect(trail.length).toBe(3);
+  });
 });
 
 describe('<Bread />', () => {
@@ -81,7 +98,10 @@ describe('<Bread />', () => {
   });
 
   it('renders crumbs when using controlled value prop', () => {
-    const value = [ { label: 'Home' }, { label: 'About' } ];
+    const value = [ 
+      { label: 'Home', className: '', style: {} }, 
+      { label: 'About', className: '', style: {} } 
+    ];
     const { container } = render(<Bread value={value} />);
     const crumbs = container.querySelectorAll('.frui-bread-crumb');
     expect(crumbs.length).toBe(2);
@@ -95,22 +115,24 @@ describe('<Bread />', () => {
       </Bread>
     );
     await waitFor(() => {
-      const crumbs =
-       container.querySelectorAll('.frui-bread-crumb');
+      const crumbs = container.querySelectorAll('.frui-bread-crumb');
       expect(crumbs.length).toBe(2);
     });
   });
 
   it('updates when controlled value changes', async () => {
     const { container, rerender } = render(
-      <Bread value={[ { label: 'Home' } ]} />
+      <Bread value={[ { label: 'Home', className: '', style: {} } ]} />
     );
     expect(
       container.querySelectorAll('.frui-bread-crumb').length
     ).toBe(1);
 
     rerender(
-      <Bread value={[ { label: 'Home' }, { label: 'About' } ]} />
+      <Bread value={[ 
+        { label: 'Home', className: '', style: {} }, 
+        { label: 'About', className: '', style: {} } 
+      ]} />
     );
     await waitFor(() => {
       expect(
@@ -121,13 +143,16 @@ describe('<Bread />', () => {
 
   it('uses defaultValue for uncontrolled mode', () => {
     const { container } = render(
-      <Bread defaultValue={[ { label: 'Initial' } ]} />
+      <Bread defaultValue={[ {
+         label: 'Initial', 
+         className: '', 
+         style: {} 
+        } ]} 
+      />
     );
     expect(
       container.querySelector('.frui-bread-crumb')
-    ).toHaveTextContent(
-      'Initial'
-    );
+    ).toHaveTextContent('Initial');
   });
 
   it('calls onClick handler when crumb clicked', async () => {
@@ -139,7 +164,8 @@ describe('<Bread />', () => {
       </Bread>
     );
     await waitFor(() => {
-      const crumbs = container.querySelectorAll('.frui-bread-crumb');
+      const crumbs = 
+        container.querySelectorAll('.frui-bread-crumb');
       fireEvent.click(crumbs[ 0 ]);
     });
     expect(onClick).toHaveBeenCalled();
@@ -147,8 +173,18 @@ describe('<Bread />', () => {
 
   it('renders crumbs with href and icon from value prop', () => {
     const value = [
-      { label: 'Home', href: '/', icon: 'home' },
-      { label: 'About', href: '/about' }
+      { 
+        label: 'Home', 
+        href: '/', icon: 'home', 
+        className: '', 
+        style: {} 
+      },
+      { 
+        label: 'About', 
+        href: '/about', 
+        className: '', 
+        style: {} 
+      }
     ];
     const { container } = render(<Bread value={value} />);
     expect(
@@ -157,6 +193,15 @@ describe('<Bread />', () => {
     expect(
       container.querySelector('.fa-home')
     ).toBeInTheDocument();
+  });
+
+  it('renders crumbs with className and style from value', () => {
+    const value = [
+      { label: 'Styled', className: 'custom', style: { color: 'red' } }
+    ];
+    const { container } = render(<Bread value={value} />);
+    const crumb = container.querySelector('.custom') as HTMLElement;
+    expect(crumb.style.color).toBe('red');
   });
 });
 
@@ -241,11 +286,33 @@ describe('<BreadCrumb />', () => {
       ).toBe(3);
     });
     const crumbs = container.querySelectorAll('.frui-bread-crumb');
-    fireEvent.click(crumbs[1]);
+    fireEvent.click(crumbs[ 1 ]);
     await waitFor(() => {
       expect(
         container.querySelectorAll('.frui-bread-crumb').length
       ).toBe(2);
+    });
+  });
+
+  it('handles span click to remove trailing crumbs', async () => {
+    const { container } = render(
+      <Bread>
+        <BreadCrumb>Home</BreadCrumb>
+        <BreadCrumb>Products</BreadCrumb>
+        <BreadCrumb>Details</BreadCrumb>
+      </Bread>
+    );
+    await waitFor(() => {
+      expect(
+        container.querySelectorAll('.frui-bread-crumb').length
+      ).toBe(3);
+    });
+    const spans = container.querySelectorAll('span.frui-bread-crumb');
+    fireEvent.click(spans[ 0 ]);
+    await waitFor(() => {
+      expect(
+        container.querySelectorAll('.frui-bread-crumb').length
+      ).toBe(1);
     });
   });
 
@@ -280,6 +347,19 @@ describe('<BreadCrumb />', () => {
     });
   });
 
+  it('applies slot style object from context', async () => {
+    const { container } = render(
+      <Bread crumb={{ style: { fontWeight: 'bold' } }}>
+        <BreadCrumb>Home</BreadCrumb>
+      </Bread>
+    );
+    await waitFor(() => {
+      const crumb = 
+        container.querySelector('.frui-bread-crumb') as HTMLElement;
+      expect(crumb.style.fontWeight).toBe('bold');
+    });
+  });
+
   it('prefers direct props over slot props', async () => {
     const { container } = render(
       <Bread crumb={{ className: 'slot' }}>
@@ -304,9 +384,7 @@ describe('<BreadCrumb />', () => {
     await waitFor(() => {
       expect(
         container.querySelector('.frui-bread-crumb')
-      ).toHaveTextContent(
-        'Active'
-      );
+      ).toHaveTextContent('Active');
     });
   });
 
@@ -314,7 +392,9 @@ describe('<BreadCrumb />', () => {
     const { container } = render(
       <Bread>
         <BreadCrumb
-          className={({ active }) => (active ? 'is-active' : 'is-inactive')}
+          className={({ active }) => (
+            active ? 'is-active' : 'is-inactive'
+          )}
         >
           Home
         </BreadCrumb>
@@ -342,6 +422,33 @@ describe('<BreadCrumb />', () => {
         '.frui-bread-crumb'
       ) as HTMLElement;
       expect(crumb.style.color).toBe('blue');
+    });
+  });
+
+  it('handles click on anchor crumb with href', async () => {
+    const onClick = vi.fn();
+    const { container } = render(
+      <Bread onClick={onClick}>
+        <BreadCrumb href="/home">Home</BreadCrumb>
+        <BreadCrumb href="/products">Products</BreadCrumb>
+        <BreadCrumb href="/details">Details</BreadCrumb>
+      </Bread>
+    );
+    
+    await waitFor(() => {
+      expect(
+        container.querySelectorAll('.frui-bread-crumb').length
+      ).toBe(3);
+    });
+
+    const anchors = container.querySelectorAll('a.frui-bread-crumb');
+    fireEvent.click(anchors[ 0 ]);
+
+    await waitFor(() => {
+      expect(onClick).toHaveBeenCalled();
+      expect(
+        container.querySelectorAll('.frui-bread-crumb').length
+      ).toBe(1);
     });
   });
 });
@@ -468,7 +575,7 @@ describe('Context operations', () => {
       push: vi.fn(),
       trail: []
     };
-    const { rerender } = render(
+    render(
       <BreadContext.Provider value={contextValue}>
         <div>Test</div>
       </BreadContext.Provider>

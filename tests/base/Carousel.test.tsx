@@ -543,7 +543,7 @@ describe('Carousel component', () => {
       expect(btn).toHaveClass('frui-carousel-next');
     });
 
-    it('falls back to div when Previous asChild has invalid children', () => {
+    it('Previous asChild falls back to div', () => {
       const { container } = render(
         <Carousel>
           <Carousel.Frame>
@@ -557,7 +557,7 @@ describe('Carousel component', () => {
       expect(div).toBeInTheDocument();
     });
 
-    it('falls back to div when Next asChild has invalid children', () => {
+    it('Next asChild falls back to div', () => {
       const { container } = render(
         <Carousel>
           <Carousel.Frame>
@@ -870,7 +870,9 @@ describe('Carousel component', () => {
         </Carousel>
       );
 
-      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-carousel')
+      ).toBeInTheDocument();
     });
   });
 
@@ -1013,7 +1015,8 @@ describe('Carousel component', () => {
         </Film>
       );
 
-      const film = container.querySelector('.frui-film') as HTMLElement;
+      const film = 
+        container.querySelector('.frui-film') as HTMLElement;
       expect(film.style.gap).toBe('20px');
     });
 
@@ -1181,7 +1184,9 @@ describe('Carousel component', () => {
         </Carousel>
       );
 
-      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-carousel')
+      ).toBeInTheDocument();
     });
 
     it('handles null children', () => {
@@ -1191,7 +1196,9 @@ describe('Carousel component', () => {
         </Carousel>
       );
 
-      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-carousel')
+      ).toBeInTheDocument();
     });
 
     it('handles mixed children types', () => {
@@ -1206,7 +1213,9 @@ describe('Carousel component', () => {
         </Carousel>
       );
 
-      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-carousel')
+      ).toBeInTheDocument();
     });
 
     it('handles index change to same value', async () => {
@@ -1231,16 +1240,20 @@ describe('Carousel component', () => {
     it('handles negative defaultIndex', () => {
       const { container } = renderCarousel({ defaultIndex: -1 });
       
-      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-carousel')
+      ).toBeInTheDocument();
     });
 
     it('handles defaultIndex larger than frame count', () => {
       const { container } = renderCarousel({ defaultIndex: 100 }, 2);
       
-      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-carousel')
+      ).toBeInTheDocument();
     });
 
-    it('Previous component handles empty array children with asChild', () => {
+    it('Next asChild handles empty array', () => {
       const { container } = render(
         <Carousel>
           <Carousel.Frame>
@@ -1252,10 +1265,12 @@ describe('Carousel component', () => {
         </Carousel>
       );
 
-      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-carousel')
+      ).toBeInTheDocument();
     });
 
-    it('Next component handles empty array children with asChild', () => {
+    it('Next asChild handles empty array', () => {
       const { container } = render(
         <Carousel>
           <Carousel.Frame>
@@ -1267,7 +1282,9 @@ describe('Carousel component', () => {
         </Carousel>
       );
 
-      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-carousel')
+      ).toBeInTheDocument();
     });
 
     it('Frame handles empty array children with asChild', () => {
@@ -1279,7 +1296,9 @@ describe('Carousel component', () => {
         </Carousel>
       );
 
-      expect(container.querySelector('.frui-film-frame')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-film-frame')
+      ).toBeInTheDocument();
     });
 
     it('handles slot prop as callable returning invalid value', () => {
@@ -1287,19 +1306,27 @@ describe('Carousel component', () => {
         film: () => null
       });
 
-      expect(container.querySelector('.frui-carousel-film')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-carousel-film')
+      ).toBeInTheDocument();
     });
 
     it('handles frame with both className and style from slot', () => {
       const { container } = render(
-        <Carousel frame={{ className: 'slot-class', style: { padding: '5px' } }}>
+        <Carousel 
+          frame={{ 
+            className: 'slot-class', 
+            style: { padding: '5px' } 
+          }}
+        >
           <Carousel.Frame>
             <img alt="test" src="a.jpg" />
           </Carousel.Frame>
         </Carousel>
       );
 
-      const frame = container.querySelector('.frui-film-frame') as HTMLElement;
+      const frame = 
+        container.querySelector('.frui-film-frame') as HTMLElement;
       expect(frame).toHaveClass('slot-class');
       expect(frame.style.padding).toBe('5px');
     });
@@ -1308,7 +1335,9 @@ describe('Carousel component', () => {
       const { container } = render(<Carousel index={0} />);
       
       await waitFor(() => {
-        expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+        expect(
+          container.querySelector('.frui-carousel')
+        ).toBeInTheDocument();
       });
     });
   });

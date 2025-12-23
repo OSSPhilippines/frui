@@ -1,16 +1,22 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import type { ReactNode } from 'react';
-import { describe, expect, it, vi } from 'vitest';
-
-//tests
-import '@testing-library/jest-dom';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-
 //frui
 import Select, { SelectPlaceholder } from '../../src/form/Select.js';
+//tests
+import '@testing-library/jest-dom';
+import { 
+  describe, 
+  expect, 
+  it, 
+  vi 
+} from 'vitest';
+import { 
+  fireEvent, 
+  render, 
+  screen, 
+  waitFor 
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -231,7 +237,7 @@ describe('<Select />', () => {
     expect(onDropdown).toHaveBeenCalledWith(true);
   });
 
-  it('renders multiple hidden inputs for multiple selection', async () => {
+  it('multiple selection renders hidden inputs', async () => {
     const { rerender } = render(
       <Select
         multiple

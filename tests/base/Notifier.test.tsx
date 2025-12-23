@@ -1,9 +1,22 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import {
+  configure,
+  cookie,
+  defaults,
+  dismiss,
+  flash,
+  Notifier,
+  NotifierContext,
+  NotifierProvider,
+  notify,
+  unload,
+  useNotifier
+} from '../../src/base/Notifier.js';
 //modules
 import { toast } from 'react-toastify';
-
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -19,21 +32,6 @@ import {
   it,
   vi
 } from 'vitest';
-
-//frui
-import {
-  configure,
-  cookie,
-  defaults,
-  dismiss,
-  flash,
-  Notifier,
-  NotifierContext,
-  NotifierProvider,
-  notify,
-  unload,
-  useNotifier
-} from '../../src/base/Notifier.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -247,7 +245,9 @@ describe('Notifier', () => {
 
     it('calls toast.dismiss without key', () => {
       dismiss();
-      expect(vi.mocked(toast.dismiss)).toHaveBeenCalledWith(undefined);
+      expect(
+        vi.mocked(toast.dismiss)
+      ).toHaveBeenCalledWith(undefined);
     });
   });
 
@@ -255,7 +255,7 @@ describe('Notifier', () => {
     it('sets cookie with payload', () => {
       flash('info', 'Hi', { name: 'flash' });
       expect(vi.mocked(cookie.set)).toHaveBeenCalledTimes(1);
-      const [ name, value ] = vi.mocked(cookie.set).mock.calls[0];
+      const [ name, value ] = vi.mocked(cookie.set).mock.calls[ 0 ];
       expect(name).toBe('flash');
       const parsed = JSON.parse(value as string);
       expect(parsed.type).toBe('info');
@@ -264,20 +264,20 @@ describe('Notifier', () => {
 
     it('uses default name when not specified', () => {
       flash('success', 'Done');
-      const [ name ] = vi.mocked(cookie.set).mock.calls[0];
+      const [ name ] = vi.mocked(cookie.set).mock.calls[ 0 ];
       expect(name).toBe(defaults.name);
     });
 
     it('includes custom options in payload', () => {
       flash('warning', 'Alert', { autoClose: 10000 });
-      const [ , value ] = vi.mocked(cookie.set).mock.calls[0];
+      const [ , value ] = vi.mocked(cookie.set).mock.calls[ 0 ];
       const parsed = JSON.parse(value as string);
       expect(parsed.config.autoClose).toBe(10000);
     });
 
     it('uses cookie options for cookie.set', () => {
       flash('info', 'Test', { path: '/custom', secure: true });
-      const [ , , options ] = vi.mocked(cookie.set).mock.calls[0];
+      const [ , , options ] = vi.mocked(cookie.set).mock.calls[ 0 ];
       expect(options?.path).toBe('/custom');
       expect(options?.secure).toBe(true);
     });
@@ -342,7 +342,11 @@ describe('Notifier', () => {
   describe('unload()', () => {
     it('retrieves cookie and triggers toast', () => {
       vi.mocked(cookie.get).mockReturnValue(
-        JSON.stringify({ type: 'info', message: 'Hi', config: {} })
+        JSON.stringify({
+          type: 'info', 
+          message: 'Hi', 
+          config: {} 
+        })
       );
       unload();
       expect(vi.mocked(cookie.get)).toHaveBeenCalled();
@@ -376,7 +380,9 @@ describe('Notifier', () => {
         JSON.stringify({ type: 'info', message: 'Hi', config: {} })
       );
       unload(undefined, 'custom-name');
-      expect(vi.mocked(cookie.get)).toHaveBeenCalledWith('custom-name');
+      expect(
+        vi.mocked(cookie.get)
+      ).toHaveBeenCalledWith('custom-name');
       expect(vi.mocked(cookie.remove)).toHaveBeenCalledWith(
         'custom-name',
         expect.any(Object)
@@ -396,7 +402,11 @@ describe('Notifier', () => {
 
     it('triggers correct toast type from cookie', () => {
       vi.mocked(cookie.get).mockReturnValue(
-        JSON.stringify({ type: 'error', message: 'Failed', config: {} })
+        JSON.stringify({
+          type: 'error', 
+          message: 'Failed', 
+          config: {} 
+        })
       );
       unload();
       expect(vi.mocked(toast.error)).toHaveBeenCalledWith(
@@ -434,7 +444,9 @@ describe('Notifier', () => {
         return null;
       }
       render(
-        <NotifierContext.Provider value={{ name: 'custom', autoClose: 7000 }}>
+        <NotifierContext.Provider 
+          value={{ name: 'custom', autoClose: 7000 }}
+        >
           <Demo />
         </NotifierContext.Provider>
       );
@@ -477,7 +489,8 @@ describe('Notifier', () => {
         </NotifierContext.Provider>
       );
       api!.flash('info', 'Message', { secure: true });
-      const [ name, , options ] = vi.mocked(cookie.set).mock.calls[0];
+      const [ name, , options ] = 
+        vi.mocked(cookie.set).mock.calls[ 0 ];
       expect(name).toBe('test');
       expect(options?.path).toBe('/app');
       expect(options?.secure).toBe(true);
@@ -498,7 +511,9 @@ describe('Notifier', () => {
         JSON.stringify({ type: 'info', message: 'Hi', config: {} })
       );
       api!.unload();
-      expect(vi.mocked(cookie.get)).toHaveBeenCalledWith('custom-flash');
+      expect(
+        vi.mocked(cookie.get)
+      ).toHaveBeenCalledWith('custom-flash');
     });
   });
 

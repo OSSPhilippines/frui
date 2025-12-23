@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Carousel from '../../src/base/Carousel.js';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -16,9 +18,6 @@ import {
   screen,
   waitFor
 } from '@testing-library/react';
-
-//frui
-import Carousel from '../../src/base/Carousel.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -181,7 +180,7 @@ describe('Carousel component', () => {
       });
       const frames = container.querySelectorAll('.frui-film-frame');
 
-      expect(frames[0]).toHaveClass('custom-frame');
+      expect(frames[ 0 ]).toHaveClass('custom-frame');
     });
 
     it('applies multiple scroll classes', () => {
@@ -426,7 +425,11 @@ describe('Carousel component', () => {
           <Carousel.Frame>
             <img alt="test" src="a.jpg" />
           </Carousel.Frame>
-          <Carousel.Next style={{ padding: '5px' }}>Next</Carousel.Next>
+          <Carousel.Next 
+            style={{ padding: '5px' }}
+          >
+            Next
+          </Carousel.Next>
         </Carousel>
       );
 
@@ -476,7 +479,7 @@ describe('Carousel component', () => {
       expect(wrapper).toBeInTheDocument();
     });
 
-    it('wraps to last frame when prev on first with repeat', async () => {
+    it('prev wraps to last with repeat', async () => {
       render(
         <Carousel repeat>
           <Carousel.Frame>
@@ -500,7 +503,7 @@ describe('Carousel component', () => {
       });
     });
 
-    it('wraps to first frame when next on last with repeat', async () => {
+    it('next wraps to first with repeat', async () => {
       render(
         <Carousel repeat defaultIndex={2}>
           <Carousel.Frame>
@@ -571,7 +574,9 @@ describe('Carousel component', () => {
 
     it('handles missing active frame gracefully', () => {
       const { container } = renderCarousel({ defaultIndex: 10 });
-      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-carousel')
+      ).toBeInTheDocument();
     });
   });
 

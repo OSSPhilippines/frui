@@ -1,6 +1,12 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import CodeEditor, {
+  getEditorOptions,
+  getLanguageExtension,
+  useCodeEditor
+} from '../../src/form/CodeEditor.js';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -10,18 +16,10 @@ import {
   vi
 } from 'vitest';
 import {
-  fireEvent,
   render,
   screen,
   waitFor
 } from '@testing-library/react';
-
-//frui
-import CodeEditor, {
-  getEditorOptions,
-  getLanguageExtension,
-  useCodeEditor
-} from '../../src/form/CodeEditor.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -213,13 +211,15 @@ describe('CodeEditor', () => {
 
     it('renders with provided defaultValue', () => {
       render(<CodeEditor defaultValue="console.log('hi')" />);
-      const field = screen.getByRole('textbox') as HTMLTextAreaElement;
+      const field = 
+        screen.getByRole('textbox') as HTMLTextAreaElement;
       expect(field.value).toBe("console.log('hi')");
     });
 
     it('renders with controlled value', () => {
       render(<CodeEditor value="const x = 1;" />);
-      const field = screen.getByRole('textbox') as HTMLTextAreaElement;
+      const field = 
+        screen.getByRole('textbox') as HTMLTextAreaElement;
       expect(field.value).toBe('const x = 1;');
     });
 
@@ -227,7 +227,8 @@ describe('CodeEditor', () => {
       const { container } = render(
         <CodeEditor className="custom-editor" />
       );
-      const wrapper = container.querySelector('.frui-form-code-editor');
+      const wrapper = 
+        container.querySelector('.frui-form-code-editor');
       expect(wrapper).toHaveClass('custom-editor');
     });
 
@@ -288,7 +289,8 @@ describe('CodeEditor', () => {
 
     it('updates value when prop changes', async () => {
       const { rerender } = render(<CodeEditor value="first" />);
-      const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
+      const textarea = 
+        screen.getByRole('textbox') as HTMLTextAreaElement;
       expect(textarea.value).toBe('first');
 
       rerender(<CodeEditor value="second" />);
@@ -314,7 +316,9 @@ describe('CodeEditor', () => {
     });
 
     it('handles language changes', async () => {
-      const { rerender } = render(<CodeEditor language="javascript" />);
+      const { rerender } = render(
+        <CodeEditor language="javascript" />
+      );
       await waitFor(() => {
         expect(screen.getByRole('textbox')).toBeInTheDocument();
       });
@@ -327,12 +331,15 @@ describe('CodeEditor', () => {
 
     it('renders textarea as readOnly', () => {
       render(<CodeEditor />);
-      const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
+      const textarea = 
+        screen.getByRole('textbox') as HTMLTextAreaElement;
       expect(textarea).toHaveAttribute('readonly');
     });
 
     it('passes additional HTML attributes to textarea', () => {
-      render(<CodeEditor data-testid="custom-editor" aria-label="Code" />);
+      render(
+      <CodeEditor data-testid="custom-editor" aria-label="Code" />
+    );
       const textarea = screen.getByRole('textbox');
       expect(textarea).toHaveAttribute('data-testid', 'custom-editor');
       expect(textarea).toHaveAttribute('aria-label', 'Code');

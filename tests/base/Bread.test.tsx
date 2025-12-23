@@ -1,10 +1,14 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import type { ReactNode } from 'react';
-import { useState } from 'react';
-
+//frui
+import Bread, {
+  BreadContext,
+  BreadCrumb,
+  BreadSlicer,
+  buildBreadTrail,
+  useBreadContext
+} from '../../src/base/Bread.js';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -18,15 +22,6 @@ import {
   it,
   vi
 } from 'vitest';
-
-//frui
-import Bread, {
-  BreadContext,
-  BreadCrumb,
-  BreadSlicer,
-  buildBreadTrail,
-  useBreadContext
-} from '../../src/base/Bread.js';
 
 //--------------------------------------------------------------------//
 // Tests
@@ -100,7 +95,8 @@ describe('<Bread />', () => {
       </Bread>
     );
     await waitFor(() => {
-      const crumbs = container.querySelectorAll('.frui-bread-crumb');
+      const crumbs =
+       container.querySelectorAll('.frui-bread-crumb');
       expect(crumbs.length).toBe(2);
     });
   });
@@ -109,11 +105,17 @@ describe('<Bread />', () => {
     const { container, rerender } = render(
       <Bread value={[ { label: 'Home' } ]} />
     );
-    expect(container.querySelectorAll('.frui-bread-crumb').length).toBe(1);
+    expect(
+      container.querySelectorAll('.frui-bread-crumb').length
+    ).toBe(1);
 
-    rerender(<Bread value={[ { label: 'Home' }, { label: 'About' } ]} />);
+    rerender(
+      <Bread value={[ { label: 'Home' }, { label: 'About' } ]} />
+    );
     await waitFor(() => {
-      expect(container.querySelectorAll('.frui-bread-crumb').length).toBe(2);
+      expect(
+        container.querySelectorAll('.frui-bread-crumb').length
+      ).toBe(2);
     });
   });
 
@@ -121,7 +123,9 @@ describe('<Bread />', () => {
     const { container } = render(
       <Bread defaultValue={[ { label: 'Initial' } ]} />
     );
-    expect(container.querySelector('.frui-bread-crumb')).toHaveTextContent(
+    expect(
+      container.querySelector('.frui-bread-crumb')
+    ).toHaveTextContent(
       'Initial'
     );
   });
@@ -136,7 +140,7 @@ describe('<Bread />', () => {
     );
     await waitFor(() => {
       const crumbs = container.querySelectorAll('.frui-bread-crumb');
-      fireEvent.click(crumbs[0]);
+      fireEvent.click(crumbs[ 0 ]);
     });
     expect(onClick).toHaveBeenCalled();
   });
@@ -147,8 +151,12 @@ describe('<Bread />', () => {
       { label: 'About', href: '/about' }
     ];
     const { container } = render(<Bread value={value} />);
-    expect(container.querySelector('a[href="/"]')).toBeInTheDocument();
-    expect(container.querySelector('.fa-home')).toBeInTheDocument();
+    expect(
+      container.querySelector('a[href="/"]')
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector('.fa-home')
+    ).toBeInTheDocument();
   });
 });
 
@@ -160,7 +168,9 @@ describe('<BreadCrumb />', () => {
       </Bread>
     );
     await waitFor(() => {
-      expect(container.querySelector('.frui-bread-crumb')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-bread-crumb')
+      ).toBeInTheDocument();
     });
   });
 
@@ -183,7 +193,9 @@ describe('<BreadCrumb />', () => {
       </Bread>
     );
     await waitFor(() => {
-      expect(container.querySelector('span.frui-bread-crumb')).toBeTruthy();
+      expect(
+        container.querySelector('span.frui-bread-crumb')
+      ).toBeTruthy();
     });
   });
 
@@ -199,7 +211,7 @@ describe('<BreadCrumb />', () => {
     });
   });
 
-  it('applies active class and data-active to last crumb', async () => {
+  it('marks last crumb active', async () => {
     const { container } = render(
       <Bread>
         <BreadCrumb>Home</BreadCrumb>
@@ -208,10 +220,10 @@ describe('<BreadCrumb />', () => {
     );
     await waitFor(() => {
       const crumbs = container.querySelectorAll('.frui-bread-crumb');
-      expect(crumbs[0]).not.toHaveClass('frui-bread-crumb-active');
-      expect(crumbs[1]).toHaveClass('frui-bread-crumb-active');
-      expect(crumbs[0]).toHaveAttribute('data-active', 'false');
-      expect(crumbs[1]).toHaveAttribute('data-active', 'true');
+      expect(crumbs[ 0 ]).not.toHaveClass('frui-bread-crumb-active');
+      expect(crumbs[ 1 ]).toHaveClass('frui-bread-crumb-active');
+      expect(crumbs[ 0 ]).toHaveAttribute('data-active', 'false');
+      expect(crumbs[ 1 ]).toHaveAttribute('data-active', 'true');
     });
   });
 
@@ -224,12 +236,16 @@ describe('<BreadCrumb />', () => {
       </Bread>
     );
     await waitFor(() => {
-      expect(container.querySelectorAll('.frui-bread-crumb').length).toBe(3);
+      expect(
+        container.querySelectorAll('.frui-bread-crumb').length
+      ).toBe(3);
     });
     const crumbs = container.querySelectorAll('.frui-bread-crumb');
     fireEvent.click(crumbs[1]);
     await waitFor(() => {
-      expect(container.querySelectorAll('.frui-bread-crumb').length).toBe(2);
+      expect(
+        container.querySelectorAll('.frui-bread-crumb').length
+      ).toBe(2);
     });
   });
 
@@ -258,7 +274,9 @@ describe('<BreadCrumb />', () => {
       </Bread>
     );
     await waitFor(() => {
-      expect(container.querySelector('.slot-class')).toBeInTheDocument();
+      expect(
+        container.querySelector('.slot-class')
+      ).toBeInTheDocument();
     });
   });
 
@@ -284,7 +302,9 @@ describe('<BreadCrumb />', () => {
       </Bread>
     );
     await waitFor(() => {
-      expect(container.querySelector('.frui-bread-crumb')).toHaveTextContent(
+      expect(
+        container.querySelector('.frui-bread-crumb')
+      ).toHaveTextContent(
         'Active'
       );
     });
@@ -301,7 +321,9 @@ describe('<BreadCrumb />', () => {
       </Bread>
     );
     await waitFor(() => {
-      expect(container.querySelector('.is-active')).toBeInTheDocument();
+      expect(
+        container.querySelector('.is-active')
+      ).toBeInTheDocument();
     });
   });
 
@@ -334,7 +356,9 @@ describe('<BreadSlicer />', () => {
       </Bread>
     );
     await waitFor(() => {
-      expect(container.querySelector('.frui-bread-slicer')).toBeInTheDocument();
+      expect(
+        container.querySelector('.frui-bread-slicer')
+      ).toBeInTheDocument();
     });
   });
 
@@ -361,9 +385,9 @@ describe('<BreadSlicer />', () => {
       </Bread>
     );
     await waitFor(() => {
-      expect(container.querySelector('.frui-bread-slicer')?.textContent).toBe(
-        '->'
-      );
+      expect(
+        container.querySelector('.frui-bread-slicer')?.textContent
+      ).toBe('->');
     });
   });
 
@@ -496,12 +520,16 @@ describe('Integration', () => {
       </Bread>
     );
     await waitFor(() => {
-      expect(container.querySelectorAll('.frui-bread-crumb').length).toBe(3);
+      expect(
+        container.querySelectorAll('.frui-bread-crumb').length
+      ).toBe(3);
     });
     const crumbs = container.querySelectorAll('.frui-bread-crumb');
-    fireEvent.click(crumbs[1]);
+    fireEvent.click(crumbs[ 1 ]);
     await waitFor(() => {
-      expect(container.querySelectorAll('.frui-bread-crumb').length).toBe(2);
+      expect(
+        container.querySelectorAll('.frui-bread-crumb').length
+      ).toBe(2);
     });
   });
 
@@ -514,14 +542,16 @@ describe('Integration', () => {
       </Bread>
     );
     await waitFor(() => {
-      expect(container.querySelectorAll('.frui-bread-crumb').length).toBe(3);
+      expect(
+        container.querySelectorAll('.frui-bread-crumb').length
+      ).toBe(3);
     });
     let crumbs = container.querySelectorAll('.frui-bread-crumb');
-    expect(crumbs[2]).toHaveAttribute('data-active', 'true');
-    fireEvent.click(crumbs[1]);
+    expect(crumbs[ 2 ]).toHaveAttribute('data-active', 'true');
+    fireEvent.click(crumbs[ 1 ]);
     await waitFor(() => {
       crumbs = container.querySelectorAll('.frui-bread-crumb');
-      expect(crumbs[1]).toHaveAttribute('data-active', 'true');
+      expect(crumbs[ 1 ]).toHaveAttribute('data-active', 'true');
     });
   });
 });

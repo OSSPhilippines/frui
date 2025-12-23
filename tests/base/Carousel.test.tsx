@@ -18,6 +18,7 @@ import {
 } from 'vitest';
 //frui
 import Carousel from '../../src/base/Carousel.js';
+import Film from '../../src/base/Film.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -324,6 +325,17 @@ describe('Carousel component', () => {
       expect(film).toHaveClass('callable-string-film');
     });
 
+    it('applies film slot as callable returning pure style object', () => {
+      const { container } = renderCarousel({
+        film: () => ({ flexDirection: 'column' })
+      });
+      const film = container.querySelector(
+        '.frui-carousel-film'
+      ) as HTMLElement;
+
+      expect(film.style.flexDirection).toBe('column');
+    });
+
     it('applies view slot with className object', () => {
       const { container } = renderCarousel({
         view: { className: 'custom-view' }
@@ -380,6 +392,26 @@ describe('Carousel component', () => {
       const frame = container.querySelector('.frui-film-frame');
 
       expect(frame).toHaveClass('string-frame-class');
+    });
+
+    it('applies frame slot as callable function', () => {
+      const { container } = renderCarousel({
+        frame: () => ({ className: 'dynamic-frame' })
+      });
+      const frame = container.querySelector('.frui-film-frame');
+
+      expect(frame).toHaveClass('dynamic-frame');
+    });
+
+    it('applies frame slot as callable returning style', () => {
+      const { container } = renderCarousel({
+        frame: () => ({ style: { padding: '8px' } })
+      });
+      const frame = container.querySelector(
+        '.frui-film-frame'
+      ) as HTMLElement;
+
+      expect(frame.style.padding).toBe('8px');
     });
   });
 
@@ -623,6 +655,45 @@ describe('Carousel component', () => {
         expect(mockScrollBy).toHaveBeenCalled();
       });
     });
+
+    it('triggers prev with asChild button click', async () => {
+      render(
+        <Carousel defaultIndex={1}>
+          <Carousel.Frame>
+            <img alt="test1" src="a.jpg" />
+          </Carousel.Frame>
+          <Carousel.Frame>
+            <img alt="test2" src="b.jpg" />
+          </Carousel.Frame>
+          <Carousel.Previous asChild>
+            <button type="button">Back</button>
+          </Carousel.Previous>
+        </Carousel>
+      );
+
+      const btn = screen.getByRole('button', { name: 'Back' });
+      fireEvent.click(btn);
+
+      await waitFor(() => {
+        expect(mockScrollBy).toHaveBeenCalled();
+      });
+    });
+
+    it('Next without onClick when not asChild', () => {
+      render(
+        <Carousel>
+          <Carousel.Frame>
+            <img alt="test" src="a.jpg" />
+          </Carousel.Frame>
+          <Carousel.Next>Click Me</Carousel.Next>
+        </Carousel>
+      );
+
+      const nextBtn = screen.getByText('Click Me');
+      fireEvent.click(nextBtn);
+      
+      expect(nextBtn).toBeInTheDocument();
+    });
   });
 
   describe('carousel state', () => {
@@ -789,6 +860,18 @@ describe('Carousel component', () => {
         expect(mockScrollBy).toHaveBeenCalled();
       });
     });
+
+    it('handles missing view ref', () => {
+      const { container } = render(
+        <Carousel index={0}>
+          <Carousel.Frame>
+            <img alt="test" src="a.jpg" />
+          </Carousel.Frame>
+        </Carousel>
+      );
+
+      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+    });
   });
 
   describe('FilmFrame component', () => {
@@ -864,6 +947,191 @@ describe('Carousel component', () => {
       ) as HTMLElement;
       expect(frame.style.padding).toBe('10px');
     });
+
+    it('prefers direct props over slot frame props', () => {
+      const { container } = render(
+        <Carousel frame={{ className: 'slot-frame' }}>
+          <Carousel.Frame className="direct-frame">
+            <img alt="test" src="a.jpg" />
+          </Carousel.Frame>
+        </Carousel>
+      );
+
+      const frame = container.querySelector('.frui-film-frame');
+      expect(frame).toHaveClass('direct-frame');
+      expect(frame).not.toHaveClass('slot-frame');
+    });
+
+    it('uses slot frame props when no direct props', () => {
+      const { container } = render(
+        <Carousel frame={{ className: 'slot-frame' }}>
+          <Carousel.Frame>
+            <img alt="test" src="a.jpg" />
+          </Carousel.Frame>
+        </Carousel>
+      );
+
+      const frame = container.querySelector('.frui-film-frame');
+      expect(frame).toHaveClass('slot-frame');
+    });
+
+    it('handles asChild with invalid array children', () => {
+      const { container } = render(
+        <Carousel>
+          <Carousel.Frame asChild>
+            {[ 'invalid' ]}
+          </Carousel.Frame>
+        </Carousel>
+      );
+
+      const frame = container.querySelector('.frui-film-frame');
+      expect(frame).toBeInTheDocument();
+      expect(frame?.tagName).toBe('DIV');
+    });
+  });
+
+  describe('Film component integration', () => {
+    it('renders Film with custom className', () => {
+      const { container } = render(
+        <Film className="custom-film">
+          <Film.Frame>
+            <img alt="test" src="a.jpg" />
+          </Film.Frame>
+        </Film>
+      );
+
+      const film = container.querySelector('.frui-film');
+      expect(film).toHaveClass('custom-film');
+    });
+
+    it('renders Film with custom style', () => {
+      const { container } = render(
+        <Film style={{ gap: '20px' }}>
+          <Film.Frame>
+            <img alt="test" src="a.jpg" />
+          </Film.Frame>
+        </Film>
+      );
+
+      const film = container.querySelector('.frui-film') as HTMLElement;
+      expect(film.style.gap).toBe('20px');
+    });
+
+    it('passes frame slot to children via context', () => {
+      const { container } = render(
+        <Film frame={{ className: 'context-frame' }}>
+          <Film.Frame>
+            <img alt="test" src="a.jpg" />
+          </Film.Frame>
+        </Film>
+      );
+
+      const frame = container.querySelector('.frui-film-frame');
+      expect(frame).toHaveClass('context-frame');
+    });
+
+    it('passes frame slot with style via context', () => {
+      const { container } = render(
+        <Film frame={{ style: { margin: '15px' } }}>
+          <Film.Frame>
+            <img alt="test" src="a.jpg" />
+          </Film.Frame>
+        </Film>
+      );
+
+      const frame = container.querySelector(
+        '.frui-film-frame'
+      ) as HTMLElement;
+      expect(frame.style.margin).toBe('15px');
+    });
+
+    it('handles frame slot as callable', () => {
+      const { container } = render(
+        <Film frame={() => ({ className: 'dynamic-context' })}>
+          <Film.Frame>
+            <img alt="test" src="a.jpg" />
+          </Film.Frame>
+        </Film>
+      );
+
+      const frame = container.querySelector('.frui-film-frame');
+      expect(frame).toHaveClass('dynamic-context');
+    });
+
+    it('renders empty Film', () => {
+      const { container } = render(<Film />);
+      const film = container.querySelector('.frui-film');
+
+      expect(film).toBeInTheDocument();
+    });
+  });
+
+  describe('helper functions', () => {
+    it('getFrames returns all Frame components', () => {
+      const { container } = render(
+        <Carousel>
+          <Carousel.Frame>
+            <img alt="1" src="a.jpg" />
+          </Carousel.Frame>
+          <Carousel.Frame>
+            <img alt="2" src="b.jpg" />
+          </Carousel.Frame>
+        </Carousel>
+      );
+
+      const frames = container.querySelectorAll('.frui-film-frame');
+      expect(frames).toHaveLength(2);
+    });
+
+    it('getFrames returns empty array with no frames', () => {
+      const frames = Carousel.getFrames(<div>No frames</div>);
+
+      expect(frames).toHaveLength(0);
+    });
+
+    it('getPrevious returns Previous component', () => {
+      const children = [
+        <Carousel.Previous key="prev">Prev</Carousel.Previous>,
+        <Carousel.Frame key="frame">
+          <img alt="test" src="a.jpg" />
+        </Carousel.Frame>
+      ];
+
+      const prev = Carousel.getPrevious(children);
+      expect(prev).toBeDefined();
+    });
+
+    it('getPrevious returns null with no Previous', () => {
+      const prev = Carousel.getPrevious(
+        <Carousel.Frame>
+          <img alt="test" src="a.jpg" />
+        </Carousel.Frame>
+      );
+
+      expect(prev).toBeNull();
+    });
+
+    it('getNext returns Next component', () => {
+      const children = [
+        <Carousel.Next key="next">Next</Carousel.Next>,
+        <Carousel.Frame key="frame">
+          <img alt="test" src="a.jpg" />
+        </Carousel.Frame>
+      ];
+
+      const next = Carousel.getNext(children);
+      expect(next).toBeDefined();
+    });
+
+    it('getNext returns null with no Next', () => {
+      const next = Carousel.getNext(
+        <Carousel.Frame>
+          <img alt="test" src="a.jpg" />
+        </Carousel.Frame>
+      );
+
+      expect(next).toBeNull();
+    });
   });
 
   describe('exports', () => {
@@ -894,6 +1162,154 @@ describe('Carousel component', () => {
       expect(Carousel.getFrames).toBeDefined();
       expect(Carousel.getPrevious).toBeDefined();
       expect(Carousel.getNext).toBeDefined();
+    });
+
+    it('exports Film component exports', () => {
+      expect(Film.useFilmContext).toBeDefined();
+      expect(Film.Frame).toBeDefined();
+      expect(Film.useContext).toBe(Film.useFilmContext);
+      expect(Film.useFilm).toBe(Film.useFilmContext);
+      expect(Film.use).toBe(Film.useFilmContext);
+    });
+  });
+
+  describe('edge cases', () => {
+    it('handles undefined children', () => {
+      const { container } = render(
+        <Carousel>
+          {undefined}
+        </Carousel>
+      );
+
+      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+    });
+
+    it('handles null children', () => {
+      const { container } = render(
+        <Carousel>
+          {null}
+        </Carousel>
+      );
+
+      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+    });
+
+    it('handles mixed children types', () => {
+      const { container } = render(
+        <Carousel>
+          <Carousel.Frame>
+            <img alt="test" src="a.jpg" />
+          </Carousel.Frame>
+          {null}
+          {undefined}
+          <div>Random div</div>
+        </Carousel>
+      );
+
+      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+    });
+
+    it('handles index change to same value', async () => {
+      const { rerender } = renderCarousel({ index: 1 });
+      
+      mockScrollBy.mockClear();
+
+      rerender(
+        <Carousel index={1}>
+          <Carousel.Frame>
+            <img alt="test1" src="image1.jpg" />
+          </Carousel.Frame>
+          <Carousel.Frame>
+            <img alt="test2" src="image2.jpg" />
+          </Carousel.Frame>
+        </Carousel>
+      );
+
+      expect(mockScrollBy).not.toHaveBeenCalled();
+    });
+
+    it('handles negative defaultIndex', () => {
+      const { container } = renderCarousel({ defaultIndex: -1 });
+      
+      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+    });
+
+    it('handles defaultIndex larger than frame count', () => {
+      const { container } = renderCarousel({ defaultIndex: 100 }, 2);
+      
+      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+    });
+
+    it('Previous component handles empty array children with asChild', () => {
+      const { container } = render(
+        <Carousel>
+          <Carousel.Frame>
+            <img alt="test" src="a.jpg" />
+          </Carousel.Frame>
+          <Carousel.Previous asChild>
+            {[]}
+          </Carousel.Previous>
+        </Carousel>
+      );
+
+      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+    });
+
+    it('Next component handles empty array children with asChild', () => {
+      const { container } = render(
+        <Carousel>
+          <Carousel.Frame>
+            <img alt="test" src="a.jpg" />
+          </Carousel.Frame>
+          <Carousel.Next asChild>
+            {[]}
+          </Carousel.Next>
+        </Carousel>
+      );
+
+      expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+    });
+
+    it('Frame handles empty array children with asChild', () => {
+      const { container } = render(
+        <Carousel>
+          <Carousel.Frame asChild>
+            {[]}
+          </Carousel.Frame>
+        </Carousel>
+      );
+
+      expect(container.querySelector('.frui-film-frame')).toBeInTheDocument();
+    });
+
+    it('handles slot prop as callable returning invalid value', () => {
+      const { container } = renderCarousel({
+        film: () => null
+      });
+
+      expect(container.querySelector('.frui-carousel-film')).toBeInTheDocument();
+    });
+
+    it('handles frame with both className and style from slot', () => {
+      const { container } = render(
+        <Carousel frame={{ className: 'slot-class', style: { padding: '5px' } }}>
+          <Carousel.Frame>
+            <img alt="test" src="a.jpg" />
+          </Carousel.Frame>
+        </Carousel>
+      );
+
+      const frame = container.querySelector('.frui-film-frame') as HTMLElement;
+      expect(frame).toHaveClass('slot-class');
+      expect(frame.style.padding).toBe('5px');
+    });
+
+    it('handles view ref without frames', async () => {
+      const { container } = render(<Carousel index={0} />);
+      
+      await waitFor(() => {
+        expect(container.querySelector('.frui-carousel')).toBeInTheDocument();
+      });
     });
   });
 });

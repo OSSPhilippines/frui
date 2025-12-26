@@ -1,11 +1,6 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import { describe, expect, it } from 'vitest';
-//tests
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 //frui
 import Box, {
   getThemeProps,
@@ -24,6 +19,14 @@ import Box, {
   removeThemeProps,
   useBox
 } from '../../src/base/Box.js';
+//tests
+import '@testing-library/jest-dom';
+import {
+  describe,
+  expect,
+  it
+} from 'vitest';
+import { render, screen } from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests

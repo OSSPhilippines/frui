@@ -1,15 +1,15 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//tests
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
 //frui
 import Scope, {
   ScopeContext,
   useScopeContext
 } from '../../src/tool/Scope.js';
+//tests
+import '@testing-library/jest-dom';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Helpers
@@ -215,10 +215,12 @@ describe('useScopeContext()', () => {
 
       render(<DefaultContextDisplay />);
 
-      expect(screen.getByTestId('default-key')).toHaveTextContent('-1');
-      expect(screen.getByTestId('default-value')).toHaveTextContent(
-        'undefined'
-      );
+      expect(
+        screen.getByTestId('default-key')
+      ).toHaveTextContent('-1');
+      expect(
+        screen.getByTestId('default-value')
+      ).toHaveTextContent('undefined');
     }
   );
 

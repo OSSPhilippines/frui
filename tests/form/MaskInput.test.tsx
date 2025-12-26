@@ -1,14 +1,14 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import MaskInput from '../../src/form/MaskInput.js';
 //modules
 import type { InputHTMLAttributes } from 'react';
 //tests
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-//frui
-import MaskInput from '../../src/form/MaskInput.js';
+import { render, screen } from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Mocks

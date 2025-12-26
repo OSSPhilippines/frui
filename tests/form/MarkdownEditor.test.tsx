@@ -1,6 +1,10 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import MarkdownEditor, {
+  useMarkdownEditor
+} from '../../src/form/MarkdownEditor.js';
 //modules
 import type { ChangeEvent, ReactNode } from 'react';
 //tests
@@ -17,10 +21,6 @@ import {
   it,
   vi
 } from 'vitest';
-//frui
-import MarkdownEditor, {
-  useMarkdownEditor
-} from '../../src/form/MarkdownEditor.js';
 
 //--------------------------------------------------------------------//
 // Mocks

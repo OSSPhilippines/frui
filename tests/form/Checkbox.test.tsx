@@ -1,21 +1,21 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Checkbox from '../../src/form/Checkbox.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  fireEvent,
-  render,
-  screen
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it,
   vi
 } from 'vitest';
-//frui
-import Checkbox from '../../src/form/Checkbox.js';
+import {
+  fireEvent,
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests

@@ -1,6 +1,11 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import {
+  flatClass,
+  Pager
+} from '../../src/base/Pager.js';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -14,11 +19,6 @@ import {
   it,
   vi
 } from 'vitest';
-//frui
-import {
-  flatClass,
-  Pager
-} from '../../src/base/Pager.js';
 
 //--------------------------------------------------------------------//
 // Tests
@@ -45,7 +45,7 @@ describe('<Pager />', () => {
     expect(active?.textContent).toBe('2');
   });
 
-  it('calls onUpdate for visible controls (prev, next, end)', async () => {
+  it('onUpdate for prev/next/end', async () => {
     const onUpdate = vi.fn();
     render(
       <Pager
@@ -74,7 +74,7 @@ describe('<Pager />', () => {
     expect(onUpdate).toHaveBeenCalledWith(50);
   });
 
-  it('renders correct number of pages when no radius provided', () => {
+  it('renders correct page count (no radius)', () => {
     render(<Pager take={50} total={200} />);
     const pages = screen.getAllByText(/\d+/);
     expect(pages).toHaveLength(4);
@@ -91,9 +91,15 @@ describe('<Pager />', () => {
     expect(screen.getByText('›')).toBeInTheDocument();
   });
 
-  it('shows start and end controls when radius > 0 (middle page)', () => {
+  it('shows start/end controls with radius', () => {
     render(
-      <Pager end radius={1} skip={100} start take={50} total={500} />
+      <Pager 
+        end 
+        radius={1} 
+        skip={100} 
+        start take={50} 
+        total={500} 
+      />
     );
     expect(screen.getByText('«')).toBeInTheDocument();
     expect(screen.getByText('≫')).toBeInTheDocument();

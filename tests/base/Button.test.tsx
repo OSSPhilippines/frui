@@ -1,19 +1,19 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Button from '../../src/base/Button.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it
 } from 'vitest';
-//frui
-import Button from '../../src/base/Button.js';
+import {
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests
@@ -114,7 +114,9 @@ describe('<Button />', () => {
   });
 
   it('applies color theme props', () => {
-    render(<Button color="primary" data-testid="button">Themed</Button>);
+    render(
+      <Button color="primary" data-testid="button">Themed</Button>
+    );
     const button = screen.getByTestId('button');
     expect(button).toHaveClass('frui-button');
   });
@@ -213,7 +215,7 @@ describe('<Button />', () => {
     expect(button).toHaveClass('frui-button');
   });
 
-  it('does not apply default padding when custom padding is set', () => {
+  it('skips default padding with custom', () => {
     render(
       <Button px="xl" py="md" data-testid="button">
         Custom Padding
@@ -225,7 +227,9 @@ describe('<Button />', () => {
 
   it('renders children content correctly', () => {
     render(<Button data-testid="button">Button Text</Button>);
-    expect(screen.getByTestId('button')).toHaveTextContent('Button Text');
+    expect(
+      screen.getByTestId('button')).toHaveTextContent('Button Text'
+    );
   });
 
   it('renders complex children elements', () => {

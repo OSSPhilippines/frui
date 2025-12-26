@@ -1,21 +1,21 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Input from '../../src/form/Input.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  fireEvent,
-  render,
-  screen
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it,
   vi
 } from 'vitest';
-//frui
-import Input from '../../src/form/Input.js';
+import {
+  fireEvent,
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests
@@ -59,7 +59,7 @@ describe('<Input />', () => {
     expect(handleUpdate).toHaveBeenCalledWith('hello');
   });
 
-  it('passes through arbitrary attributes (e.g. placeholder)', () => {
+  it('passes arbitrary props (placeholder)', () => {
     render(<Input placeholder="Type here" />);
     expect(
       screen.getByPlaceholderText('Type here')

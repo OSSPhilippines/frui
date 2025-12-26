@@ -1,6 +1,11 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import {
+  Progress,
+  ProgressContainer
+} from '../../src/base/Progress.js';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -13,11 +18,6 @@ import {
   it,
   vi
 } from 'vitest';
-//frui
-import {
-  Progress,
-  ProgressContainer
-} from '../../src/base/Progress.js';
 
 //--------------------------------------------------------------------//
 // Mocks

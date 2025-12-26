@@ -1,6 +1,11 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import DatetimeInput, {
+  toDatetimeInputString,
+  toDatetimeString
+} from '../../src/form/DatetimeInput.js';
 //modules
 import type { ChangeEvent } from 'react';
 //tests
@@ -16,11 +21,6 @@ import {
   it,
   vi
 } from 'vitest';
-//frui
-import DatetimeInput, {
-  toDatetimeInputString,
-  toDatetimeString
-} from '../../src/form/DatetimeInput.js';
 
 //--------------------------------------------------------------------//
 // Mocks

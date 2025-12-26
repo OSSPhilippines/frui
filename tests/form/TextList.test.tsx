@@ -1,20 +1,20 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//tests
-import '@testing-library/jest-dom';
-import { act, renderHook } from '@testing-library/react';
-import {
-  fireEvent,
-  render,
-  screen
-} from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
 //frui
 import TextList, {
   TextListFields,
   useTextList
 } from '../../src/form/TextList.js';
+//tests
+import '@testing-library/jest-dom';
+import { act, renderHook } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
+import {
+  fireEvent,
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests

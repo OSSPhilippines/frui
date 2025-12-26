@@ -1,23 +1,23 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import PasswordInput from '../../src/form/PasswordInput.js';
 //modules
 import type { InputHTMLAttributes } from 'react';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import {
   describe,
   expect,
   it,
   vi
 } from 'vitest';
-//frui
-import PasswordInput from '../../src/form/PasswordInput.js';
+import {
+  render,
+  screen
+} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 //--------------------------------------------------------------------//
 // Mocks

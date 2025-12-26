@@ -1,10 +1,18 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import FileInput from '../../src/form/FileInput.js';
 //modules
 import { ChangeEvent } from 'react';
 //tests
 import '@testing-library/jest-dom';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
 import {
   fireEvent,
   render,
@@ -12,14 +20,6 @@ import {
   waitFor
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
-//frui
-import FileInput from '../../src/form/FileInput.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -67,7 +67,7 @@ describe('<FileInput />', () => {
     );
   });
 
-  it('shows uploading placeholder and then uploaded link', async () => {
+  it('shows uploading then uploaded', async () => {
       const onUpload = vi.fn(
         (_file: File, update: (url: string) => void) => {
           setTimeout(() => update('done.jpg'), 10);

@@ -1,6 +1,10 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import TextEditor, {
+  useTextEditor
+} from '../../src/form/TextEditor';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -15,10 +19,6 @@ import {
   it,
   vi
 } from 'vitest';
-//frui
-import TextEditor, {
-  useTextEditor
-} from '../../src/form/TextEditor';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -41,6 +41,7 @@ Object.defineProperty(window, 'getSelection', {
     }))
   }))
 });
+
 Object.defineProperty(document, 'execCommand', {
   configurable: true,
   writable: true,
@@ -59,6 +60,7 @@ const setupHook = (config = {}) => {
   render(<TestComp />);
   return () => hook!;
 };
+
 //--------------------------------------------------------------------//
 // Tests
 

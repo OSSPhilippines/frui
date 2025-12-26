@@ -1,22 +1,6 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import type { ChangeEventHandler } from 'react';
-//tests
-import '@testing-library/jest-dom';
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor
-} from '@testing-library/react';
-import {
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
 //frui
 import ColorInput, {
   clamp,
@@ -25,6 +9,22 @@ import ColorInput, {
   toHex,
   toRGBA
 } from '../../src/form/ColorInput.js';
+//modules
+import type { ChangeEventHandler } from 'react';
+//tests
+import '@testing-library/jest-dom';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -82,7 +82,9 @@ describe('Color helper functions', () => {
   });
 
   it('rgbaToHex converts color object to hex string', () => {
-    expect(rgbaToHex({ a: 1, b: 128, g: 0, r: 255 })).toBe('#ff0080');
+    expect(
+      rgbaToHex({ a: 1, b: 128, g: 0, r: 255 })
+    ).toBe('#ff0080');
   });
 
   it('toRGBA parses rgba, hex and shortHex patterns', () => {
@@ -125,7 +127,9 @@ describe('<ColorInput />', () => {
   });
 
   it('renders with provided defaultValue', () => {
-    const { container } = render(<ColorInput defaultValue="#ff0000" />);
+    const { container } = render(
+      <ColorInput defaultValue="#ff0000" />
+    );
     const text = screen.getByRole('textbox') as HTMLInputElement;
     const colorPicker = container.querySelector(
       'input[ type="color" ]'
@@ -144,7 +148,7 @@ describe('<ColorInput />', () => {
     );
   });
 
-  it('updates picker when controlled value prop changes', async () => {
+  it('picker updates when value changes', async () => {
     const { rerender, container } = render(
       <ColorInput value="#abc123" />
     );
@@ -158,7 +162,7 @@ describe('<ColorInput />', () => {
     );
   });
 
-  it('allows changing the color via color picker input', async () => {
+  it('picker input changes color', async () => {
     const onUpdate = vi.fn();
     const { container } = render(<ColorInput onUpdate={onUpdate} />);
     const picker = container.querySelector(

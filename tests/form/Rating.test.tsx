@@ -1,21 +1,21 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Rating from '../../src/form/Rating.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  fireEvent,
-  render,
-  screen
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it,
   vi
 } from 'vitest';
-//frui
-import Rating from '../../src/form/Rating.js';
+import {
+  fireEvent,
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests

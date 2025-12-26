@@ -1,6 +1,10 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Textarea, { useTextarea } from '../../src/form/Textarea';
+//modules
+import type { ChangeEvent } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -18,10 +22,6 @@ import {
   it,
   vi
 } from 'vitest';
-//types
-import type { ChangeEvent } from 'react';
-//frui
-import Textarea, { useTextarea } from '../../src/form/Textarea';
 
 //--------------------------------------------------------------------//
 // Tests
@@ -87,7 +87,9 @@ describe('<Textarea />', () => {
     const onUpdate = vi.fn();
 
     render(<Textarea onUpdate={onUpdate} />);
-    const element = screen.getByRole('textbox') as HTMLTextAreaElement;
+    const element = screen.getByRole(
+      'textbox'
+    ) as HTMLTextAreaElement;
 
     fireEvent.change(element, { target: { value: 'updated text' } });
     expect(onUpdate).toHaveBeenCalledWith('updated text');
@@ -104,7 +106,8 @@ describe('<Textarea />', () => {
   });
 
   it('forwards ref when passRef prop provided', () => {
-    const ref = { current: null } as { current: HTMLTextAreaElement | null };
+    const ref = 
+      { current: null } as { current: HTMLTextAreaElement | null };
     render(<Textarea passRef={ref} />);
 
     expect(ref.current).toBeInstanceOf(HTMLTextAreaElement);

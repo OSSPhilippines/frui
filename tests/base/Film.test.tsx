@@ -1,19 +1,18 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import type { ReactElement } from 'react';
-import { cloneElement } from 'react';
-import { describe, expect, it, vi } from 'vitest';
-//tests
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 //frui
 import Film, {
   FilmContext,
   FilmFrame,
   useFilmContext
 } from '../../src/base/Film.js';
+//modules
+import type { ReactElement } from 'react';
+//tests
+import '@testing-library/jest-dom';
+import { describe, expect, it, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -81,7 +80,7 @@ describe('<FilmFrame />', () => {
     expect(el).toHaveClass('mock-style');
   });
 
-  it('clones first valid element when children array is passed', () => {
+  it('clones first valid from array', () => {
     const childrenArray: ReactElement[] = [
       (<span data-testid="child1">First</span>),
       (<span>Second</span>)
@@ -98,7 +97,10 @@ describe('<FilmFrame />', () => {
 
   it('uses slot styles when frame context provided', () => {
     const contextValue = {
-      frame: { className: 'slot-style', style: { background: 'yellow' } }
+      frame: { 
+        className: 'slot-style', 
+        style: { background: 'yellow' } 
+      }
     };
     render(
       <FilmContext.Provider value={contextValue}>
@@ -117,7 +119,9 @@ describe('<Film />', () => {
   });
 
   it('applies custom className and style', () => {
-    render(<Film className="extra" style={{ margin: '5px' }}>test</Film>);
+    render(
+      <Film className="extra" style={{ margin: '5px' }}>test</Film>
+    );
     const wrapper = screen.getByText('test').closest('div');
     expect(wrapper).toHaveClass('frui-film');
     expect(wrapper).toHaveClass('extra');

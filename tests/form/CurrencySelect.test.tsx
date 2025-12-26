@@ -1,10 +1,18 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import CurrencySelect from '../../src/form/CurrencySelect.js';
 //modules
 import type { ReactNode } from 'react';
 //tests
 import '@testing-library/jest-dom';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
 import {
   fireEvent,
   render,
@@ -12,14 +20,6 @@ import {
   waitFor
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
-//frui
-import CurrencySelect from '../../src/form/CurrencySelect.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -124,14 +124,19 @@ describe('<CurrencySelect />', () => {
     );
   });
 
-  it('renders a searchable input with correct placeholder text', () => {
-    render(<CurrencySelect searchable="Search currency" />);
-    expect(screen.getByTestId('dropdown-head')).toBeInTheDocument();
-    const searchInput = screen.getByPlaceholderText('Search currency');
+  it('renders searchable input with placeholder', () => {
+    render(
+      <CurrencySelect searchable="Search currency" />
+    );
+    expect(
+      screen.getByTestId('dropdown-head')
+    ).toBeInTheDocument();
+    const searchInput = 
+      screen.getByPlaceholderText('Search currency');
     expect(searchInput).toBeInTheDocument();
   });
 
-  it('updates filtered list when typing into search field', async () => {
+  it('filters list when typing in search', async () => {
     render(<CurrencySelect searchable />);
     const searchInput = screen.getByPlaceholderText('Search...');
     await userEvent.type(searchInput, 'Euro');
@@ -141,7 +146,7 @@ describe('<CurrencySelect />', () => {
     });
   });
 
-  it('calls onUpdate with a single currency when a code is selected', () => {
+  it('onUpdate with one currency', () => {
     const onUpdate = vi.fn();
     render(<CurrencySelect onUpdate={onUpdate} />);
     capturedOnUpdate && capturedOnUpdate('EUR');
@@ -154,7 +159,7 @@ describe('<CurrencySelect />', () => {
     );
   });
 
-  it('calls onUpdate with multiple currencies when array selected', () => {
+  it('onUpdate with multiple currencies', () => {
     const onUpdate = vi.fn();
     render(<CurrencySelect onUpdate={onUpdate} />);
     capturedOnUpdate && capturedOnUpdate([ 'USD', 'EUR' ]);

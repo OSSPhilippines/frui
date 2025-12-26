@@ -1,11 +1,11 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Badge from '../../src/base/Badge.js';
 //modules
 import type {
-  ReactElement,
-  ReactNode
-} from 'react';
+  ReactElement, ReactNode } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -18,8 +18,6 @@ import {
   it,
   vi
 } from 'vitest';
-//frui
-import Badge from '../../src/base/Badge.js';
 
 //--------------------------------------------------------------------//
 // Mocks

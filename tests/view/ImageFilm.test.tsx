@@ -1,14 +1,22 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import type { ReactNode } from 'react';
-import { describe, expect, it, vi } from 'vitest';
-//tests
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 //frui
 import ImageFilm from '../../src/view/ImageFilm.js';
+//modules
+import type { ReactNode } from 'react';
+//tests
+import '@testing-library/jest-dom';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
+import {
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -90,9 +98,9 @@ describe('<ImageFilm />', () => {
     render(<ImageFilm value={[ 'a.jpg', 'b.jpg', 'c.jpg' ]} />);
     const images = screen.getAllByRole('img');
     expect(images).toHaveLength(3);
-    expect(images[0]).toHaveAttribute('src', 'a.jpg');
-    expect(images[1]).toHaveAttribute('src', 'b.jpg');
-    expect(images[2]).toHaveAttribute('src', 'c.jpg');
+    expect(images[ 0 ]).toHaveAttribute('src', 'a.jpg');
+    expect(images[ 1 ]).toHaveAttribute('src', 'b.jpg');
+    expect(images[ 2 ]).toHaveAttribute('src', 'c.jpg');
   });
 
   it('applies class and style from getClassStyles', () => {
@@ -100,7 +108,9 @@ describe('<ImageFilm />', () => {
     const img = screen.getByRole('img');
     expect(img).toHaveClass('mock-img-class');
     const styleAttr = img.getAttribute('style') || '';
-    expect(styleAttr.includes('border: 1px solid red')).toBe(true);
+    expect(
+      styleAttr.includes('border: 1px solid red')
+    ).toBe(true);
   });
 
   it('renders Film.Frame component for each image', () => {

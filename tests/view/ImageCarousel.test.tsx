@@ -1,14 +1,22 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import type { ReactNode } from 'react';
-import { describe, expect, it, vi } from 'vitest';
-//tests
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 //frui
 import ImageCarousel from '../../src/view/ImageCarousel.js';
+//modules
+import type { ReactNode } from 'react';
+//tests
+import '@testing-library/jest-dom';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
+import {
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -93,12 +101,14 @@ describe('<ImageCarousel />', () => {
   });
 
   it('renders <img> elements from provided value prop', () => {
-    render(<ImageCarousel value={[ 'a.png', 'b.png', 'c.png' ]} />);
+    render(
+      <ImageCarousel value={[ 'a.png', 'b.png', 'c.png' ]} />
+    );
     const images = screen.getAllByRole('img');
     expect(images).toHaveLength(3);
-    expect(images[0]).toHaveAttribute('src', 'a.png');
-    expect(images[1]).toHaveAttribute('src', 'b.png');
-    expect(images[2]).toHaveAttribute('src', 'c.png');
+    expect(images[ 0 ]).toHaveAttribute('src', 'a.png');
+    expect(images[ 1 ]).toHaveAttribute('src', 'b.png');
+    expect(images[ 2 ]).toHaveAttribute('src', 'c.png');
   });
 
   it('applies generated class and inline style to image', () => {
@@ -115,7 +125,7 @@ describe('<ImageCarousel />', () => {
     expect(screen.getByTestId('mock-next')).toBeInTheDocument();
   });
 
-  it('calls getSlotStyles when image slot prop is provided', async () => {
+  it('calls getSlotStyles for image slot', async () => {
     const getSlotStyles = (
       await import('../../src/helpers/getSlotStyles.js')
     ).default as ReturnType<typeof vi.fn>;

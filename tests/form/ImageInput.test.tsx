@@ -1,10 +1,18 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import ImageInput from '../../src/form/ImageInput.js';
 //modules
 import type { ChangeEvent } from 'react';
 //tests
 import '@testing-library/jest-dom';
+import {
+  describe,
+  expect,
+  it,
+  vi
+} from 'vitest';
 import {
   fireEvent,
   render,
@@ -12,14 +20,6 @@ import {
   waitFor
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
-//frui
-import ImageInput from '../../src/form/ImageInput.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -62,14 +62,14 @@ describe('<ImageInput />', () => {
     );
   });
 
-  it('renders uploaded image preview when defaultValue provided', () => {
+  it('shows preview if defaultValue', () => {
     render(<ImageInput defaultValue="preview.jpg" />);
     const img = screen.getByAltText('preview') as HTMLImageElement;
     expect(img).toHaveAttribute('src', 'preview.jpg');
     expect(screen.getByText('preview.jpg')).toBeInTheDocument();
   });
 
-  it('shows uploading placeholder, then uploaded preview', async () => {
+  it('shows uploading then preview', async () => {
     const onUpload = vi.fn((
       _file: File,
       update: (url: string) => void

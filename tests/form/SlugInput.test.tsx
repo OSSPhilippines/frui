@@ -1,18 +1,23 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import type { ChangeEvent, FocusEvent } from 'react';
-//tests
-import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
 //frui
 import SlugInput, {
   camelfy,
   slugify,
   useSlugInput
 } from '../../src/form/SlugInput.js';
+//modules
+import type { ChangeEvent, FocusEvent } from 'react';
+//tests
+import '@testing-library/jest-dom';
+import { 
+  describe, 
+  expect, 
+  it, 
+  vi 
+} from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -40,7 +45,9 @@ vi.mock('../../src/form/Input.js', () => ({
 //--------------------------------------------------------------------//
 // Helpers
 
-function renderUseSlugInput(config: Parameters<typeof useSlugInput>[ 0 ]) {
+function renderUseSlugInput(
+  config: Parameters<typeof useSlugInput>[ 0 ]
+) {
   let hookValue: ReturnType<typeof useSlugInput> | undefined;
   const TestComponent = () => {
     hookValue = useSlugInput(config);
@@ -61,7 +68,9 @@ describe('slugify()', () => {
   });
 
   it('uses underscores when dashes are disabled', () => {
-    expect(slugify('my slug text', true, false)).toBe('my_slug_text');
+    expect(
+      slugify('my slug text', true, false)
+    ).toBe('my_slug_text');
   });
 
   it('trims extra dashes and underscores', () => {

@@ -1,6 +1,11 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Tooltip, {
+  getTooltipPosition,
+  TooltipContainer
+} from '../../src/base/Tooltip.js';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -15,11 +20,6 @@ import {
   it,
   vi
 } from 'vitest';
-//frui
-import Tooltip, {
-  getTooltipPosition,
-  TooltipContainer
-} from '../../src/base/Tooltip.js';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -70,7 +70,10 @@ beforeEach(() => vi.clearAllMocks());
 // Tests
 
 describe('getTooltipPosition()', () => {
-  const createMockRect = (width: number, height: number): DOMRect => ({
+  const createMockRect = (
+    width: number, 
+    height: number
+  ): DOMRect => ({
     bottom: 0,
     height,
     left: 0,
@@ -245,7 +248,9 @@ describe('getTooltipPosition()', () => {
 
 describe('<Tooltip />', () => {
   it('renders container with children when not visible', () => {
-    const { container } = render(<Tooltip text="Hello">HoverMe</Tooltip>);
+    const { container } = render(
+      <Tooltip text="Hello">HoverMe</Tooltip>
+    );
     const outer = container.querySelector('.frui-tooltip-container');
     expect(outer).toBeInTheDocument();
     expect(outer).toHaveTextContent('HoverMe');
@@ -368,7 +373,10 @@ describe('<Tooltip />', () => {
 
   it('passes container props to TooltipContainer', () => {
     const { container } = render(
-      <Tooltip container={{ className: 'custom-container' }} text="Test">
+      <Tooltip 
+        container={{ className: 'custom-container' }} 
+        text="Test"
+      >
         Content
       </Tooltip>
     );
@@ -380,7 +388,9 @@ describe('<Tooltip />', () => {
 
 describe('<TooltipContainer />', () => {
   it('renders with base class and children', () => {
-    const { container } = render(<TooltipContainer>tip</TooltipContainer>);
+    const { container } = render(
+      <TooltipContainer>tip</TooltipContainer>
+    );
     const el = container.firstChild;
     expect(el).toHaveClass('frui-tooltip-container');
     expect(el).toHaveTextContent('tip');

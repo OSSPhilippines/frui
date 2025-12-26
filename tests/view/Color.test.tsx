@@ -1,16 +1,16 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Color from '../../src/view/Color.js';
 //tests
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 import {
   describe,
   expect,
   it
 } from 'vitest';
-//frui
-import Color from '../../src/view/Color.js';
+import { render } from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests

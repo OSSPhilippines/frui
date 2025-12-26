@@ -1,11 +1,6 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import { describe, expect, it, vi } from 'vitest';
-//tests
-import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
 //frui
 import type { AccordionContextProps } from '../../src/base/Accordion.js';
 import {
@@ -18,6 +13,19 @@ import {
   AccordionLabel,
   useAccordionContext
 } from '../../src/base/Accordion.js';
+//tests
+import '@testing-library/jest-dom';
+import { 
+  describe, 
+  expect, 
+  it, 
+  vi 
+} from 'vitest';
+import { 
+  fireEvent, 
+  render, 
+  screen 
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests
@@ -53,7 +61,11 @@ describe('<Accordion />', () => {
   it('applies className and triggers onChange', () => {
     const onChange = vi.fn();
     render(
-      <Accordion className="custom" defaultValue="a1" onChange={onChange}>
+      <Accordion 
+        className="custom" 
+        defaultValue="a1" 
+        onChange={onChange}
+      >
         <AccordionBellow value="a1">
           <AccordionLabel>Label 1</AccordionLabel>
         </AccordionBellow>

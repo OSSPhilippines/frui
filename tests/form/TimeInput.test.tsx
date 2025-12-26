@@ -1,17 +1,6 @@
 //--------------------------------------------------------------------//
 // Imports
 
-//modules
-import type { ChangeEvent } from 'react';
-//tests
-import '@testing-library/jest-dom';
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor
-} from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
 //frui
 import {
   TimeInput,
@@ -19,6 +8,17 @@ import {
   toTimeInputString,
   toTimeString
 } from '../../src/form/TimeInput.js';
+//modules
+import type { ChangeEvent } from 'react';
+//tests
+import '@testing-library/jest-dom';
+import { describe, expect, it, vi } from 'vitest';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Mocks

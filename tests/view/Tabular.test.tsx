@@ -1,20 +1,20 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Tabular from '../../src/view/Tabular.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen,
-  within
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it
 } from 'vitest';
-//frui
-import Tabular from '../../src/view/Tabular.js';
+import {
+  render,
+  screen,
+  within
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests
@@ -87,7 +87,9 @@ describe('<Tabular />', () => {
     const headers = within(table).getAllByRole('columnheader');
     const cells = within(table).getAllByRole('cell');
 
-    expect(headers.map((h) => h.textContent)).toEqual([ 'Name', 'Age' ]);
+    expect(
+      headers.map((h) => h.textContent)
+    ).toEqual([ 'Name', 'Age' ]);
     expect(cells.map((c) => c.textContent)).toEqual([
       'Alice',
       '25',

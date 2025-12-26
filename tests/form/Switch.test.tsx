@@ -1,6 +1,10 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Switch, { useSwitch } from '../../src/form/Switch.js';
+//modules
+import type { ChangeEvent } from 'react';
 //tests
 import '@testing-library/jest-dom';
 import {
@@ -8,20 +12,16 @@ import {
   renderHook
 } from '@testing-library/react';
 import {
-  fireEvent,
-  render,
-  screen
-} from '@testing-library/react';
-import {
   describe,
   expect,
   it,
   vi
 } from 'vitest';
-//types
-import type { ChangeEvent } from 'react';
-//frui
-import Switch, { useSwitch } from '../../src/form/Switch.js';
+import {
+  fireEvent,
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests

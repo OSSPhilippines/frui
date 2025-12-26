@@ -1,22 +1,22 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Select, { SelectPlaceholder } from '../../src/form/Select.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor
-} from '@testing-library/react';
 import {
   describe,
   expect,
   it,
   vi
 } from 'vitest';
-//frui
-import Select, { SelectPlaceholder } from '../../src/form/Select.js';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Mocks

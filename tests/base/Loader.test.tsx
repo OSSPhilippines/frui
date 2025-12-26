@@ -43,7 +43,9 @@ describe('<Loader />', () => {
   });
 
   it('applies custom className to loader element', () => {
-    const { container } = render(<Loader className="custom-loader" />);
+    const { container } = render(
+      <Loader className="custom-loader" />
+    );
     const loader = container.querySelector('.frui-loader');
     expect(loader).toHaveClass('frui-loader');
     expect(loader).toHaveClass('custom-loader');
@@ -154,7 +156,9 @@ describe('<Loader />', () => {
   });
 
   it('applies custom inline styles', () => {
-    const { container } = render(<Loader style={{ opacity: 0.5 }} />);
+    const { container } = render(
+      <Loader style={{ opacity: 0.5 }} />
+    );
     const loader = container.querySelector('.frui-loader');
     expect(loader).toHaveAttribute('style');
     expect(loader).toHaveStyle({ opacity: 0.5 });
@@ -210,7 +214,9 @@ describe('<LoaderContainer />', () => {
 
   it('renders children content', () => {
     render(<LoaderContainer>Container Content</LoaderContainer>);
-    expect(screen.getByText('Container Content')).toBeInTheDocument();
+    expect(
+      screen.getByText('Container Content')
+    ).toBeInTheDocument();
   });
 
   it('applies custom className', () => {

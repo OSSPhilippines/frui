@@ -1,19 +1,19 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Spread from '../../src/view/Spread.js';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
 import {
   describe,
   it,
   expect
 } from 'vitest';
-//frui
-import Spread from '../../src/view/Spread.js';
+import {
+  render,
+  screen
+} from '@testing-library/react';
 
 //--------------------------------------------------------------------//
 // Tests
@@ -31,7 +31,7 @@ describe('<Spread />', () => {
     expect(screen.getByText('A-B-C')).toBeInTheDocument();
   });
 
-  it('renders each value on a separate line if separator="line"', () => {
+  it('renders each value on its own line', () => {
     render(<Spread value={[ 'A', 'B', 'C' ]} separator="line" />);
 
     expect(screen.getByText('A')).toBeInTheDocument();

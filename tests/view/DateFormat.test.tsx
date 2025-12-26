@@ -1,12 +1,12 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import DateFormat from '../../src/view/DateFormat.js';
+//modules
+import moment from 'moment';
 //tests
 import '@testing-library/jest-dom';
-import {
-  render,
-  screen
-} from '@testing-library/react';
 import {
   beforeEach,
   describe,
@@ -14,10 +14,11 @@ import {
   it,
   vi
 } from 'vitest';
-//modules
-import moment from 'moment';
-//frui
-import DateFormat from '../../src/view/DateFormat.js';
+import {
+  render,
+  screen
+} from '@testing-library/react';
+
 
 //--------------------------------------------------------------------//
 // Tests
@@ -29,7 +30,9 @@ beforeEach(() => {
 
 describe('<DateFormat />', () => {
   it('renders formatted date with default format', () => {
-    render(<DateFormat value="2024-01-01T00:00:00Z" />);
+    render(
+      <DateFormat value="2024-01-01T00:00:00Z" />
+    );
     const formatted = moment('2024-01-01T00:00:00Z')
       .locale('en')
       .format('MMMM Do YYYY, h:mm:ss a');
@@ -38,7 +41,12 @@ describe('<DateFormat />', () => {
   });
 
   it('renders formatted date using custom format', () => {
-    render(<DateFormat value="2024-03-15T08:00:00Z" format="YYYY-MM-DD" />);
+    render(
+      <DateFormat 
+        value="2024-03-15T08:00:00Z" 
+        format="YYYY-MM-DD" 
+      />
+    );
     expect(screen.getByText('2024-03-15')).toBeInTheDocument();
   });
 

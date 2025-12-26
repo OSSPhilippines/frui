@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import { Radio, useRadio } from '../../src/form/Radio.js';
 //modules
 import type { ChangeEvent } from 'react';
 //tests
@@ -12,9 +14,12 @@ import {
   renderHook,
   screen
 } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
-//frui
-import { Radio, useRadio } from '../../src/form/Radio.js';
+import { 
+  describe, 
+  expect, 
+  it, 
+  vi 
+} from 'vitest';
 
 //--------------------------------------------------------------------//
 // Tests

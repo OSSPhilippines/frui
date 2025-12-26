@@ -36,14 +36,14 @@ describe('toChildrenArray', () => {
     expect(result).toEqual([]);
   });
 
-  it('should return array as-is when children is already an array', () => {
+  it('returns array as-is if already array', () => {
     const children = [ 'child1', 'child2', 'child3' ];
     const result = toChildrenArray(children);
     expect(result).toBe(children);
     expect(result).toEqual([ 'child1', 'child2', 'child3' ]);
   });
 
-  it('should return empty array as-is when children is empty array', () => {
+  it('returns empty array as-is if empty', () => {
     const children: ReactNode[] = [];
     const result = toChildrenArray(children);
     expect(result).toBe(children);
@@ -68,7 +68,7 @@ describe('toChildrenArray', () => {
     ]);
   });
 
-  it('should convert string to array when treated as iterable', () => {
+  it('converts string to array if iterable', () => {
     const result = toChildrenArray('hello');
     expect(result).toEqual([ 'h', 'e', 'l', 'l', 'o' ]);
   });

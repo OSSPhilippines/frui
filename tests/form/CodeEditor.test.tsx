@@ -374,7 +374,8 @@ describe('CodeEditor', () => {
 
     it('renders empty editor when no value provided', () => {
       render(<CodeEditor />);
-      const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
+      const textarea = 
+        screen.getByRole('textbox') as HTMLTextAreaElement;
       expect(textarea.value).toBe('');
     });
 

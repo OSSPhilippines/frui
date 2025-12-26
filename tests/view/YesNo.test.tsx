@@ -1,15 +1,13 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//frui
+import Yesno from '../../src/view/YesNo.js';
 //modules
 import { describe, expect, it } from 'vitest';
-
 //tests
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-
-//frui
-import Yesno from '../../src/view/YesNo.js';
 
 //--------------------------------------------------------------------//
 // Helpers

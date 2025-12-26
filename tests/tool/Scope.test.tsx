@@ -215,10 +215,12 @@ describe('useScopeContext()', () => {
 
       render(<DefaultContextDisplay />);
 
-      expect(screen.getByTestId('default-key')).toHaveTextContent('-1');
-      expect(screen.getByTestId('default-value')).toHaveTextContent(
-        'undefined'
-      );
+      expect(
+        screen.getByTestId('default-key')
+      ).toHaveTextContent('-1');
+      expect(
+        screen.getByTestId('default-value')
+      ).toHaveTextContent('undefined');
     }
   );
 

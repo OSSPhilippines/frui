@@ -52,8 +52,8 @@ describe('SizeTool', () => {
     });
   });
 
-  describe('getClassStyles - size prop with predefined values', () => {
-    it('should handle size prop with predefined value for text', () => {
+  describe('getClassStyles - size with preset', () => {
+    it('handles preset size for text', () => {
       const tool = new SizeTool({ size: 'md' }, 'txs');
       const result = tool.getClassStyles({});
       expect(result.classes).toEqual([ 'frui-tx-md' ]);

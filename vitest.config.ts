@@ -1,16 +1,23 @@
-// vitest.config.ts
-import { defineConfig, UserConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+//--------------------------------------------------------------------//
+// Imports
+//node
+import path from 'node:path';
 
+//modules
+import react from '@vitejs/plugin-react';
+import type { UserConfig } from 'vite';
+import { defineConfig } from 'vite';
+
+//--------------------------------------------------------------------//
+// Config
 export default defineConfig({
-  plugins: [react()],
+  plugins: [ react() ],
   resolve: {
     alias: {
       components: path.resolve(__dirname, 'components'),
-      plugins: path.resolve(__dirname, 'plugins'),
+      plugins: path.resolve(__dirname, 'plugins')
     },
-    dedupe: ['react', 'react-dom']
+    dedupe: [ 'react', 'react-dom' ]
   },
   test: {
     environment: 'jsdom',
@@ -18,15 +25,12 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reportsDirectory: './coverage',
-      reporter: ['text', 'html', 'lcov']
+      reporter: [ 'text', 'html', 'lcov' ]
     },
     //memory optimization settings
     pool: 'forks',
-    poolOptions: {
-      forks: {
-        singleFork: true
-      }
-    },
+    //migrated from poolOptions.forks to top-level
+    singleFork: true,
     //increase timeout if needed
     testTimeout: 10000,
     //isolate environment for each test file
@@ -35,5 +39,5 @@ export default defineConfig({
     restoreMocks: true,
     clearMocks: true,
     unstubGlobals: true
-  },
-} as UserConfig)
+  }
+} as UserConfig);

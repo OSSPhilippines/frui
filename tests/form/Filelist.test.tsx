@@ -607,7 +607,7 @@ describe('<FileList />', () => {
     it('handles rapid consecutive uploads', async () => {
       const onUpload = vi.fn((files, update) => {
         setTimeout(
-          () => update(files.map(f => f.name)),
+          () => update(files.map((f: File) => f.name)),
           10
         );
       });

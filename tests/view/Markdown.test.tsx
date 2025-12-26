@@ -40,7 +40,9 @@ describe('<Markdown />', () => {
   it('renders plain text content without markdown syntax', () => {
     render(<Markdown value="Simple text value" />);
 
-    expect(screen.getByText('Simple text value')).toBeInTheDocument();
+    expect(
+      screen.getByText('Simple text value')
+    ).toBeInTheDocument();
   });
 
   it('renders wrapper element from markdown renderer', () => {

@@ -48,8 +48,12 @@ vi.mock('react-shiki', () => ({
 
 describe('<Code />', () => {
   it('renders the provided code value', () => {
-    render(<Code language="ts" value="console.log('Hello');" />);
-    expect(screen.getByText("console.log('Hello');")).toBeInTheDocument();
+    render(
+      <Code language="ts" value="console.log('Hello');" />
+    );
+    expect(
+      screen.getByText("console.log('Hello');")
+    ).toBeInTheDocument();
   });
 
   it('uses default theme "github-dark"', () => {
@@ -59,13 +63,21 @@ describe('<Code />', () => {
   });
 
   it('accepts a custom theme', () => {
-    render(<Code language="js" value="alert('x');" theme="nord" />);
-    expect(screen.getByTestId('shiki')).toHaveAttribute('data-theme', 'nord');
+    render(
+      <Code language="js" value="alert('x');" theme="nord" />
+    );
+    expect(
+      screen.getByTestId('shiki')
+    ).toHaveAttribute('data-theme', 'nord');
   });
 
   it('passes showLanguage flag through', () => {
-    render(<Code language="js" value="let x = 1;" showLanguage />);
-    expect(screen.getByTestId('shiki')).toHaveAttribute('data-show', 'yes');
+    render(
+      <Code language="js" value="let x = 1;" showLanguage />
+    );
+    expect(
+      screen.getByTestId('shiki')
+    ).toHaveAttribute('data-show', 'yes');
   });
 
   it('renders multi-line code and contains both lines', () => {

@@ -101,7 +101,9 @@ describe('<ImageCarousel />', () => {
   });
 
   it('renders <img> elements from provided value prop', () => {
-    render(<ImageCarousel value={[ 'a.png', 'b.png', 'c.png' ]} />);
+    render(
+      <ImageCarousel value={[ 'a.png', 'b.png', 'c.png' ]} />
+    );
     const images = screen.getAllByRole('img');
     expect(images).toHaveLength(3);
     expect(images[ 0 ]).toHaveAttribute('src', 'a.png');
@@ -123,7 +125,7 @@ describe('<ImageCarousel />', () => {
     expect(screen.getByTestId('mock-next')).toBeInTheDocument();
   });
 
-  it('calls getSlotStyles when image slot prop is provided', async () => {
+  it('calls getSlotStyles for image slot', async () => {
     const getSlotStyles = (
       await import('../../src/helpers/getSlotStyles.js')
     ).default as ReturnType<typeof vi.fn>;

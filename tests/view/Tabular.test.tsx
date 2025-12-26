@@ -87,7 +87,9 @@ describe('<Tabular />', () => {
     const headers = within(table).getAllByRole('columnheader');
     const cells = within(table).getAllByRole('cell');
 
-    expect(headers.map((h) => h.textContent)).toEqual([ 'Name', 'Age' ]);
+    expect(
+      headers.map((h) => h.textContent)
+    ).toEqual([ 'Name', 'Age' ]);
     expect(cells.map((c) => c.textContent)).toEqual([
       'Alice',
       '25',

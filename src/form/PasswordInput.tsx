@@ -51,7 +51,7 @@ export function PasswordInput(props: PasswordInputProps) {
   const { showing, toggle } = usePasswordInput();
 
   //configure classes
-  const classes = [ 'frui-form-input-password' ];
+  const classes = [ 'frui-form-password-input' ];
   className && classes.push(className);
   //get slot styles
   const slots = {
@@ -61,7 +61,7 @@ export function PasswordInput(props: PasswordInputProps) {
   const styles = {
     input: getClassStyles({
       //default classes to apply
-      classes: [ 'frui-form-input-password-control' ],
+      classes: [ 'frui-form-password-input-control' ],
       //style props
       props: {
         //prefer direct props over slot props
@@ -74,7 +74,7 @@ export function PasswordInput(props: PasswordInputProps) {
     }),
     toggle: getClassStyles({
       //default classes to apply
-      classes: [ 'frui-form-input-password-toggle' ],
+      classes: [ 'frui-form-password-input-toggle' ],
       //style props
       props: {
         //prefer direct props over slot props

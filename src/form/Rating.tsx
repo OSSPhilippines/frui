@@ -37,7 +37,7 @@ export type RatingProps = {
   onChangeActive?: (event: MouseEvent, value: number | null) => void, 
   readOnly?: boolean,
   disabled?: boolean,
-  size?: 'small' | 'medium' | 'large',
+  size?: string, //'small' | 'medium' | 'large',
   icon?: ReactNode,
   emptyIcon?: ReactNode,
   getLabelText?: (value: number) => string,
@@ -175,20 +175,20 @@ export function Rating(props: RatingProps) {
   const filledIcon = icon || <RatingStar />;
   const unfilledIcon = emptyIcon || <RatingStar style={{ opacity: 0.4 }} />;
 
-  const classNames = [ 'frui-rating-root' ];
+  const classNames = [ 'frui-form-rating-root' ];
   if (size === 'small') {
-    classNames.push(`frui-rating-small`);
+    classNames.push(`frui-form-rating-small`);
   } else if (size === 'large') {
-    classNames.push(`frui-rating-large`);
+    classNames.push(`frui-form-rating-large`);
   } else {
-    classNames.push(`frui-rating-medium`);
+    classNames.push(`frui-form-rating-medium`);
   }
 
   if (disabled) {
-    classNames.push('frui-rating-disabled');
+    classNames.push('frui-form-rating-disabled');
   }
   if (readOnly) {
-    classNames.push('frui-rating-readonly');
+    classNames.push('frui-form-rating-readonly');
   }
   classNames.push(className);
 
@@ -209,27 +209,27 @@ export function Rating(props: RatingProps) {
         }
 
         const iconNode = isFilled ? filledIcon : unfilledIcon;
-        const classNames = [ 'frui-rating-icon' ];
+        const classNames = [ 'frui-form-rating-icon' ];
         if (isFilled) {
-          classNames.push('frui-rating-icon-filled');
+          classNames.push('frui-form-rating-icon-filled');
         } else {
-          classNames.push('frui-rating-icon-empty');
+          classNames.push('frui-form-rating-icon-empty');
         }
         if (hoverValue === itemValue) {
-          classNames.push('frui-rating-icon-hover');
+          classNames.push('frui-form-rating-icon-hover');
         }
         if (value === itemValue) {
-          classNames.push('frui-rating-icon-active');
+          classNames.push('frui-form-rating-icon-active');
         }
         return (
           <Fragment key={itemValue}>
             <label
-              className="frui-rating-icon-label"
+              className="frui-form-rating-icon-label"
               onMouseEnter={(e) => handlers.mouseEnter(e, itemValue)}
               aria-label={getLabelText(itemValue)}
             >
               <input
-                className="frui-rating-visually-hidden"
+                className="frui-form-rating-visually-hidden"
                 type="radio"
                 name={name}
                 value={itemValue}

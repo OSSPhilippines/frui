@@ -10,7 +10,7 @@ export type RatingProps = {
   value: string|number,
   max?: number,
   remainder?: boolean,
-  round?: 'round'|'ceil'|'floor'
+  round?: string //'round' | 'ceil' | 'floor'
 };
 
 //--------------------------------------------------------------------//

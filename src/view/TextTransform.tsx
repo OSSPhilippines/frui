@@ -8,7 +8,7 @@ import type { CSSProperties } from 'react';
 
 export type TextTransformProps = { 
   value: string, 
-  format?: 'uppercase' | 'lowercase' | 'capitalize' | 'none',
+  format?: string //'uppercase' | 'lowercase' | 'capitalize' | 'none',
 };
 
 //--------------------------------------------------------------------//

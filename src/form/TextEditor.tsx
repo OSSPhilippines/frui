@@ -46,7 +46,7 @@ export type TextEditorProps = {
   print?: boolean,
   save?: boolean,
   template?: boolean,
-  dir?: 'ltr' | 'rtl',
+  dir?: string, //'ltr' | 'rtl',
   onChange?: (value: string) => void,
   onUpdate?: (state: { value: string; action: string }) => void,
   [key: string]: any

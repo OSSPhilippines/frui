@@ -36,7 +36,7 @@ export type CodeEditorProps = HTMLTextareaProps & {
   // could just add to extensions if necessary
   numbers?: boolean, 
   onUpdate?: (value?: string) => void,
-  setup?: 'minimal' | 'basic' | 'custom',
+  setup?: string, //'minimal' | 'basic' | 'custom',
   value?: string
 };
 

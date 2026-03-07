@@ -20,12 +20,24 @@ const description = 'Phone input is a field component that wraps the standard '
   + 'HTML input element for phone number values.';
 
 const props = [
-  [ 'name', 'string', 'No', 'Used for form submission. Hidden input generates value like `+11234567890`.' ],
-  [ 'initialValue', 'string', 'No', 'Initial value of the phone input. Can include dial code (e.g. "+14155552671").' ],
-  [ 'placeholder', 'string', 'No', 'Placeholder text for the phone number input.' ],
-  [ 'searchable', 'boolean', 'No', 'Whether the country dropdown should include a search filter (default: true).' ],
-  [ 'error', 'boolean', 'No', 'If true, applies error styling via frui-phone-input-error class.' ],
-];
+  [ 'bottom', 'boolean', 'No', 'Position dropdown below the control' ],
+  [ 'className', 'string', 'No', 'Standard HTML class names' ],
+  [ 'control', 'SlotStyleProp', 'No', 'Style to apply to the select control' ],
+  [ 'defaultCountry', 'string', 'No', 'Default country ISO2 code' ],
+  [ 'defaultValue', 'string', 'No', 'Default value (Uncontrolled)' ],
+  [ 'dropdown', 'SlotStyleProp', 'No', 'Style to apply to the select drop down' ],
+  [ 'error', 'string|boolean', 'No', 'Any error message' ],
+  [ 'left', 'boolean', 'No', 'Position dropdown to the left of the control' ],
+  [ 'name', 'string', 'No', 'Used for react server components.' ],
+  [ 'onChange', 'Function', 'No', 'Event handler when value has changed' ],
+  [ 'onUpdate', 'Function', 'No', 'Update event handler' ],
+  [ 'option', 'CallableSlotStyleProp<DropdownStates>', 'No', 'Style to apply to the select option' ],
+  [ 'right', 'boolean', 'No', 'Position dropdown to the right of the control' ],
+  [ 'searchable', 'boolean|string', 'No', 'Whether the country dropdown should include a search filter (default: true).' ],
+  [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
+  [ 'top', 'boolean', 'No', 'Position dropdown above the control' ],
+  [ 'value', 'string', 'No', 'Default value (Controlled)' ]
+]
 
 //--------------------------------------------------------------------//
 // Components

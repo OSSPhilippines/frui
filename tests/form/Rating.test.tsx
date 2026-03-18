@@ -36,7 +36,7 @@ describe('<Rating />', () => {
       />
     );
     const root = container.firstChild as HTMLElement;
-    expect(root).toHaveClass('frui-rating-large');
+    expect(root).toHaveClass('frui-form-rating-large');
     expect(root).toHaveClass('extra');
     expect(root).toHaveStyle({ color: 'rgb(255, 0, 0)' });
   });
@@ -44,7 +44,7 @@ describe('<Rating />', () => {
   it('renders highlightSelectedOnly correctly', () => {
     render(<Rating defaultValue={3} highlightSelectedOnly />);
     const filled = document.querySelectorAll(
-      '.frui-rating-icon-filled'
+      '.frui-form-rating-icon-filled'
     );
     expect(filled.length).toBe(1);
   });
@@ -79,9 +79,9 @@ describe('<Rating />', () => {
     () => {
       const onChange = vi.fn();
       render(<Rating disabled onChange={onChange} readOnly />);
-      const root = document.querySelector('.frui-rating-root')!;
-      expect(root.className).toContain('frui-rating-disabled');
-      expect(root.className).toContain('frui-rating-readonly');
+      const root = document.querySelector('.frui-form-rating-root')!;
+      expect(root.className).toContain('frui-form-rating-disabled');
+      expect(root.className).toContain('frui-form-rating-readonly');
       const radios = screen.getAllByRole('radio');
       fireEvent.click(radios[ 1 ]);
       expect(onChange).not.toHaveBeenCalled();
@@ -91,11 +91,11 @@ describe('<Rating />', () => {
   it('shows correct filled icons when value prop provided', () => {
     const { rerender } = render(<Rating value={2} />);
     expect(
-      document.querySelectorAll('.frui-rating-icon-filled')
+      document.querySelectorAll('.frui-form-rating-icon-filled')
     ).toHaveLength(2);
     rerender(<Rating value={4} />);
     expect(
-      document.querySelectorAll('.frui-rating-icon-filled')
+      document.querySelectorAll('.frui-form-rating-icon-filled')
     ).toHaveLength(4);
   });
 });

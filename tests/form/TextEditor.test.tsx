@@ -729,10 +729,8 @@ describe('TextEditor', () => {
         <TextEditor value="<p>Initial</p>" />
       );
       rerender(<TextEditor value="<p>Updated</p>" />);
-      const editable = document.querySelector(
-        '.frui-form-text-editor-editable'
-      ) as HTMLDivElement;
-      expect(editable.innerHTML).toBe('<p>Updated</p>');
+      const editable = document.querySelector('textarea') as HTMLTextAreaElement;
+      expect(editable.value).toBe('<p>Updated</p>');
     });
 
     it('passes attributes to hidden input', () => {
@@ -749,7 +747,7 @@ describe('TextEditor', () => {
 describe('useTextEditor', () => {
   it('initializes with provided value', () => {
     const hook = setupHook({ value: '<p>Sample</p>' });
-    expect(hook.value).toBe('<p>Sample</p>');
+    expect(hook.currentValue).toBe('<p>Sample</p>');
   });
 
   it('updates value on input', () => {

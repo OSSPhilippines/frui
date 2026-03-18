@@ -372,7 +372,7 @@ export function Examples() {
             </Select.Option>
           </Select>
         </Preview.Example>
-        <Preview.Code>{examples[15]}</Preview.Code>
+        <Preview.Code>{examples[14]}</Preview.Code>
       </Preview>
     </div>
   );

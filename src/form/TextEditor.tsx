@@ -8,12 +8,14 @@ import { useEffect, useRef, useState } from 'react';
 // Types
 
 export type TextEditorConfig = {
+  defaultValue?: string,
   value?: string,
   onChange?: (value: string) => void,
   onUpdate?: (state: { value: string; action: string }) => void,
 };
 
 export type TextEditorProps = {
+  defaultValue?: string,
   value?: string,
   history?: boolean,
   font?: boolean,
@@ -60,27 +62,14 @@ export type TextEditorProps = {
  */
 export function useTextEditor(config: TextEditorConfig) {
   const {
-    value = '',
+    defaultValue,
+    value = defaultValue,
     onChange,
     onUpdate
   } = config;
 
-  const [isCodeView, setIsCodeView] = useState(false);
-  const [currentValue, setCurrentValue] = useState(value);
-
-  useEffect(() => {
-    if (refs.editor.current
-      && typeof value === 'string'
-      && value !== refs.editor.current.innerHTML
-      && !isCodeView
-    ) {
-      refs.editor.current.innerHTML = value;
-      setCurrentValue(value);
-      if (refs.hidden.current) {
-        refs.hidden.current.value = value;
-      }
-    }
-  }, [value, isCodeView]);
+  const [ isCodeView, setIsCodeView ] = useState(false);
+  const [ currentValue, setCurrentValue ] = useState(defaultValue || value || '');
 
   //using refs so that they are not recreated on every render
   const refs = {
@@ -383,8 +372,7 @@ export function useTextEditor(config: TextEditorConfig) {
       }
     }
   };
-
-  //event handlers
+  //handlers
   const handlers = {
     change(e: ChangeEvent<HTMLTextAreaElement>) {
       if (isCodeView && refs.hidden.current) {
@@ -424,8 +412,49 @@ export function useTextEditor(config: TextEditorConfig) {
       onUpdate?.({ value: refs.editor.current.innerHTML || '', action: command });
     }
   };
+  //effects
+  // - whenever value changes from outside, update currentValue
+  useEffect(() => {
+    if (typeof value === 'undefined' && currentValue !== '') {
+      setCurrentValue('');
+    } else if (currentValue !== String(value)) {
+      setCurrentValue(String(value));
+    }
+  }, [ value ]);
+  // - whenever currentValue changes, update 
+  //   hidden input (for form submission)
+  useEffect(() => {
+    if (refs.hidden.current) {
+      refs.hidden.current.value = currentValue;
+    }
+  }, [ currentValue, refs.hidden ]);
+  // - whenever editor (<div contenteditable>) 
+  //   is mounted, set the inner HTML
+  useEffect(() => {
+    if (refs.editor.current) {
+      refs.editor.current.innerHTML = currentValue;
+    }
+  }, [ refs.editor ]);
+  // - if in code view, whenever currentValue changes, 
+  //   update editor inner HTML. Changing textarea value will 
+  //   reset the cursor position, so we only update editor 
+  //   when in code view.
+  useEffect(() => {
+    if (refs.editor.current && isCodeView) {
+      refs.editor.current.innerHTML = currentValue;
+    }
+  }, [ currentValue, isCodeView ]);
+  // - if not in code view, whenever currentValue changes, 
+  //   update textarea value. Changing editor inner HTML 
+  //   will reset the cursor position, so we only update textarea
+  //   when not in code view.
+  useEffect(() => {
+    if (refs.textarea.current && !isCodeView) {
+      refs.textarea.current.value = currentValue;
+    }
+  }, [ currentValue, isCodeView ]);
 
-  return { refs, blocks, handlers, isCodeView, value: currentValue };
+  return { refs, blocks, handlers, isCodeView, currentValue };
 };
 
 //--------------------------------------------------------------------//
@@ -437,6 +466,8 @@ export function useTextEditor(config: TextEditorConfig) {
 export function TextEditor(props: TextEditorProps) {
   //destructure props and separate out attributes to pass to hidden input
   const {
+    value = '',
+    defaultValue = '',
     history,
     font,
     size,
@@ -469,6 +500,7 @@ export function TextEditor(props: TextEditorProps) {
     save,
     template,
     dir,
+    error,//todo
     onChange,
     onUpdate,
     ...attributes
@@ -479,10 +511,11 @@ export function TextEditor(props: TextEditorProps) {
     refs,
     blocks,
     handlers,
-    value,
+    currentValue,
     isCodeView
   } = useTextEditor({
-    value: props.value,
+    defaultValue,
+    value,
     onChange,
     onUpdate
   });
@@ -1223,7 +1256,7 @@ export function TextEditor(props: TextEditorProps) {
       <input
         type="hidden"
         ref={refs.hidden}
-        value={value}
+        value={currentValue}
         {...attributes}
       />
       {/* This will be the editable div for the TextEditor content */}
@@ -1251,7 +1284,7 @@ export function TextEditor(props: TextEditorProps) {
           resize: 'vertical'
         }}
         onChange={handlers.change}
-        defaultValue={value}
+        value={currentValue}
       />
     </div>
   );

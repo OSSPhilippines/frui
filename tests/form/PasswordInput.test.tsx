@@ -61,7 +61,7 @@ describe('<PasswordInput />', () => {
     render(<PasswordInput />);
     const input = screen.getByTestId('password-input');
     const wrapper = input.closest('div');
-    expect(wrapper).toHaveClass('frui-form-input-password');
+    expect(wrapper).toHaveClass('frui-form-password-input');
     expect(input).toHaveAttribute('type', 'password');
   });
 
@@ -70,7 +70,7 @@ describe('<PasswordInput />', () => {
     const toggle = screen.getByText('A');
     expect(toggle).toBeInTheDocument();
     expect(toggle).toHaveClass(
-      'frui-form-input-password-toggle'
+      'frui-form-password-input-toggle'
     );
   });
 
@@ -94,7 +94,7 @@ describe('<PasswordInput />', () => {
       .getByTestId('password-input')
       .closest('div') as HTMLDivElement;
     expect(wrapper).toHaveClass(
-      'frui-form-input-password',
+      'frui-form-password-input',
       'custom-class'
     );
   });

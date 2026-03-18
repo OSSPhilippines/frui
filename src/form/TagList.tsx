@@ -38,10 +38,10 @@ export type TagListProps = ExtendsType<HTMLInputProps, {
  * TagList Hook Aggregate
  */
 export function useTagList(config: TagListConfig) {
-  const { value, defaultValue, onChange, onUpdate } = config;
+  const { defaultValue = [], onChange, onUpdate, value = defaultValue } = config;
   const [ input, setInput ] = useState('');
   const [ isKeyReleased, setIsKeyReleased ] = useState(false);
-  const [ tags, setTags ] = useState<string[]>(defaultValue || []);
+  const [ tags, setTags ] = useState<string[]>(defaultValue);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {

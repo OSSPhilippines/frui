@@ -151,7 +151,7 @@ describe('useTextEditor()', () => {
   it('initializes with provided value', () => {
     const getHook = setupHook({ value: '<p>Sample</p>' });
     const result = getHook();
-    expect(result.value).toBe('<p>Sample</p>');
+    expect(result.currentValue).toBe('<p>Sample</p>');
   });
   it('execCommand triggers onUpdate', () => {
     const onUpdate = vi.fn();

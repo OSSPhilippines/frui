@@ -104,16 +104,24 @@ export function useSlugInput(config: SlugInputConfig) {
     //whether to use underscores instead of dashes
     line, //?: boolean
     //on blur event handler
-    onBlur, //?: (e: ChangeEvent<HTMLInputElement>) => void
+    onBlur, //?: (e: FocusEvent<HTMLInputElement>) => void
     //on change event handler
     onChange, //?: (e: ChangeEvent<HTMLInputElement>) => void
     //controlled value
-    value //: string|number|readonly string[]|undefined
+    value = defaultValue //: string|number|readonly string[]|undefined
   } = config;
+  // determine default value
+  const defaults = String(
+    typeof defaultValue !== 'undefined' 
+      ? defaultValue 
+      : typeof value !== 'undefined' 
+      ? value 
+      : ''
+  );
   //hooks
   const [ slug, setSlug ] = useState<string>(camel 
-    ? camelfy(String(defaultValue))
-    : slugify(String(defaultValue), !dash, !line)
+    ? camelfy(defaults)
+    : slugify(defaults, !dash, !line)
   );
   //handlers
   const handlers = {
@@ -134,11 +142,12 @@ export function useSlugInput(config: SlugInputConfig) {
   };
   //effects
   useEffect(() => {
-    if (value !== undefined) {
-      const slug = camel 
-        ? camelfy(String(value))
-        : slugify(String(value), !dash, !line);
-      setSlug(slug);
+    const string = typeof value === 'undefined' ? '' : String(value);
+    const newValue = camel 
+      ? camelfy(string)
+      : slugify(string, !dash, !line);
+    if (newValue !== slug) {
+      setSlug(newValue);
     }
   }, [ value, camel, dash, line ]);
   return { slug, handlers };

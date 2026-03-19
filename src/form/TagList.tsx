@@ -172,6 +172,7 @@ export function TagList(props: TagListProps) {
         <div key={i} className={tagClasses.join(' ')} style={tagStyle}>
           {tag}
           <button 
+            type="button"
             className="frui-form-tag-list-remove"
             onClick={() => handlers.remove(i)}
           >

@@ -74,7 +74,7 @@ const examples = [
     ? 'border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white' 
     : 'border border-b-0 p-2 theme-bc-3 cursor-pointer'
   }
-  content="border theme-bc-3 p-4"
+  content={({ active }) => active ? 'border theme-bc-3 p-4' : 'frui-none'}
 >
   <Tabs.Head className="flex">
     <Tabs.Label value="tab1">Tab 1</Tabs.Label>
@@ -93,6 +93,7 @@ const examples = [
     ? 'border border-r-0 p-2 theme-bc-3 theme-bg-3 text-white' 
     : 'border border-r-0 p-2 theme-bc-3 cursor-pointer'
   }
+  content={({ active }) => !active ? 'frui-none' : ''}
 >
   <Tabs.Head className="w-32">
     <Tabs.Label value="tab1">Tab 1</Tabs.Label>
@@ -111,6 +112,7 @@ const examples = [
     ? 'border border-l-0 p-2 theme-bc-3 theme-bg-3 text-white' 
     : 'border border-l-0 p-2 theme-bc-3 cursor-pointer'
   }
+  content={({ active }) => !active ? 'frui-none' : ''}
 >
   <Tabs.Body className="flex-grow border theme-bc-3 p-4">
     <Tabs.Content value="tab1">Content for Tab 1</Tabs.Content>
@@ -128,7 +130,7 @@ const examples = [
     ? 'border border-t-0 p-2 theme-bg-3 text-white' 
     : 'border border-t-0 p-2 theme-bc-3 cursor-pointer'
   }
-  content="border theme-bc-3 p-4"
+  content={({ active }) => active ? 'border theme-bc-3 p-4' : 'frui-none'}
 >
   <Tabs.Body>
     <Tabs.Content value="tab1">Content for Tab 1</Tabs.Content>
@@ -151,7 +153,7 @@ const examples = [
     <Tabs.Label value="tab1">Tab 1</Tabs.Label>
     <Tabs.Label value="tab2">Tab 2</Tabs.Label>
   </Tabs.Head>
-  <Tabs.Body contentClassStyle="border theme-bc-3 p-4">
+  <Tabs.Body>
     <Tabs.Content value="tab1">
       Content for Tab 1
     </Tabs.Content>
@@ -207,7 +209,7 @@ return (
         ? 'border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white' 
         : 'border border-b-0 p-2 theme-bc-3 cursor-pointer'
       }
-      content="border theme-bc-3 p-4"
+      content={({ active }) => active ? 'border theme-bc-3 p-4' : 'frui-none'}
     >
       <Tabs.Head className="flex">
         <Tabs.Label value="tab1">Tab 1</Tabs.Label>
@@ -249,7 +251,7 @@ return (
     ? 'border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white' 
     : 'border border-b-0 p-2 theme-bc-3 cursor-pointer'
   }
-  content="border theme-bc-3 p-4"
+  content={({ active }) => active ? 'border theme-bc-3 p-4' : 'frui-none'}
 >
   <Tabs.Head className="flex">
     <Tabs.Label value="tab1">
@@ -341,7 +343,10 @@ export function Examples() {
               ? 'border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white' 
               : 'border border-b-0 p-2 theme-bc-3 cursor-pointer'
             }
-            content="border theme-bc-3 p-4"
+            content={({ active }) => active 
+              ? 'border theme-bc-3 p-4' 
+              : 'frui-none'
+            }
           >
             <Tabs.Head className="flex">
               <Tabs.Label value="tab1">Tab 1</Tabs.Label>
@@ -369,6 +374,7 @@ export function Examples() {
               ? 'border border-r-0 p-2 theme-bc-3 theme-bg-3 text-white' 
               : 'border border-r-0 p-2 theme-bc-3 cursor-pointer'
             }
+            content={({ active }) => !active ? 'frui-none' : ''}
           >
             <Tabs.Head className="w-32">
               <Tabs.Label value="tab1">Tab 1</Tabs.Label>
@@ -396,6 +402,7 @@ export function Examples() {
               ? 'border border-l-0 p-2 theme-bc-3 theme-bg-3 text-white' 
               : 'border border-l-0 p-2 theme-bc-3 cursor-pointer'
             }
+            content={({ active }) => !active ? 'frui-none' : ''}
           >
             <Tabs.Body className="flex-grow border theme-bc-3 p-4">
               <Tabs.Content value="tab1">Content for Tab 1</Tabs.Content>
@@ -422,7 +429,7 @@ export function Examples() {
               ? 'border border-t-0 p-2 theme-bg-3 text-white' 
               : 'border border-t-0 p-2 theme-bc-3 cursor-pointer'
             }
-            content="border theme-bc-3 p-4"
+            content={({ active }) => active ? 'border theme-bc-3 p-4' : 'frui-none'}
           >
             <Tabs.Body>
               <Tabs.Content value="tab1">Content for Tab 1</Tabs.Content>
@@ -492,7 +499,7 @@ export function Body() {
         <p className="py-2">
           <Translate>
             You can manage the styles of the tabs by passing class names to
-            the <C value="tabClassStyle" />, <C value="activeClassStyle" />, 
+            the <C value="tabClassStyle" />, and <C value="activeClassStyle" />, 
             and <C value="contentClassStyle" /> props in 
             the <C value="<Tabs>" /> component.
           </Translate>
@@ -541,7 +548,7 @@ export function Body() {
                 ? 'border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white' 
                 : 'border border-b-0 p-2 theme-bc-3 cursor-pointer'
               }
-              content="border theme-bc-3 p-4"
+              content={({ active }) => active ? 'border theme-bc-3 p-4' : 'frui-none'}
             >
               <Tabs.Head className="flex">
                 <Tabs.Label value="tab1">Tab 1</Tabs.Label>
@@ -603,7 +610,7 @@ export function Body() {
                 ? 'border border-b-0 p-2 theme-bc-3 theme-bg-3 text-white' 
                 : 'border border-b-0 p-2 theme-bc-3 cursor-pointer'
               }
-              content="border theme-bc-3 p-4"
+              content={({ active }) => active ? 'border theme-bc-3 p-4' : 'frui-none'}
             >
               <Tabs.Head className="flex">
                 <Tabs.Label value="tab1">

@@ -15,7 +15,6 @@ import type {
   CallableClassStyleProps,
   CallableSlotStyleProp,
   CallableChildrenProps,
-  SlotStyleProp,
   HTMLElementProps
 } from '../types.js';
 import getClassStyles from '../helpers/getClassStyles.js';
@@ -37,7 +36,7 @@ export type TabsConfig = {
 
 export type TabsContextProps = {
   //slot: class/style to apply to each content element
-  content?: SlotStyleProp,
+  content?: CallableSlotStyleProp<TabsStates>,
   //change value handler
   change: (value: string) => void,
   //slot: class/style to apply to each tab element
@@ -63,22 +62,25 @@ export type TabsLabelProps = ExtendsType<
 
 export type TabsBodyProps = HTMLElementProps & {
   //slot: class/style to apply to each content
-  content?: SlotStyleProp
+  content?: CallableSlotStyleProp<TabsStates>
 };
 
-export type TabsContentProps = HTMLElementProps<HTMLDivElement> & {
-  //unique name for the tab
-  value?: string
-};
+export type TabsContentProps = ExtendsType<
+  HTMLElementProps<HTMLDivElement>,
+  CallableClassStyleProps<TabsStates>
+    & CallableChildrenProps<TabsStates>
+    //unique name for the tab
+    & { value?: string }
+>;
 
 export type TabsActiveProps = HTMLElementProps<HTMLDivElement>;
 export type TabsInactiveProps = HTMLElementProps<HTMLDivElement>;
 
 export type TabsProps = TabsConfig 
-  & HTMLElementProps<HTMLDivElement> 
+  & Omit<HTMLElementProps<HTMLDivElement>, 'content'> 
   & {
     //slot: class/style to apply to each content
-    content?: SlotStyleProp,
+    content?: CallableSlotStyleProp<TabsStates>,
     //slot: class/style to apply to each tab
     tab?: CallableSlotStyleProp<TabsStates>,
   };
@@ -146,7 +148,7 @@ export function TabsActive(props: TabsActiveProps) {
   const { value, tabValue } = useTabsContext();
   //variables
   // configure classes
-  const classes = [ 'frui-accordion-active' ];
+  const classes = [ 'frui-tabs-active' ];
   if (className) {
     classes.push(className);
   }
@@ -168,7 +170,7 @@ export function TabsInactive(props: TabsInactiveProps) {
   const { value, tabValue } = useTabsContext();
   //variables
   // configure classes
-  const classes = [ 'frui-accordion-inactive' ];
+  const classes = [ 'frui-tabs-inactive' ];
   if (className) {
     classes.push(className);
   }
@@ -245,7 +247,10 @@ export function TabsLabel(props: TabsLabelProps) {
     //default classes to apply
     classes: [ 
       'frui-tabs-label', 
-      ...(active ? ['frui-tabs-label-active'] : []) 
+      ...(active 
+        ? [ 'frui-tabs-label-active' ] 
+        : [ 'frui-tabs-label-inactive' ]
+      ) 
     ],
     //style props
     props: {
@@ -330,12 +335,20 @@ export function TabsContent(props: TabsContentProps) {
   //hooks
   const context = useTabsContext();
   //variables
+  // determine active state
+  const active = Boolean(value && context.value === value);
   // get slot styles
-  const slot = context.content ? getSlotStyles(context.content, {}) : {};
+  const slot = context.content ? getSlotStyles(context.content, { active }) : {};
   //get final classes and styles
   const { classes, styles } = getClassStyles({
     //default classes to apply
-    classes: [ 'frui-tabs-content' ],
+    classes: [
+      'frui-tabs-content',
+      ...(active 
+        ? [ 'frui-tabs-content-active' ] 
+        : [ 'frui-tabs-content-inactive' ]
+      ) 
+    ],
     //style props
     props: {
       //prefer direct props over slot props
@@ -344,14 +357,18 @@ export function TabsContent(props: TabsContentProps) {
       style: style || slot.style
     },
     //state to pass to callable props
-    state: {}
+    state: { active }
   });
+  // configure context provider
+  const provider = { ...context, tabValue: value };
   //render
-  return value && context.value === value ? (
-    <div className={classes.join(' ')} style={styles}>
-      {children}
-    </div>
-  ) : null;
+  return (
+    <TabsContext.Provider value={provider}>
+      <div className={classes.join(' ')} style={styles}>
+        {typeof children === 'function' ? children({ active }) : children}
+      </div>
+    </TabsContext.Provider>
+  );
 };
 
 /**
@@ -365,7 +382,7 @@ export function Tabs(props: TabsProps) {
     //tabs class name
     className, //?: string
     //slot: class/style to apply to each content
-    content, //?: SlotStyleProp
+    content, //?: CallableSlotStyleProp<TabsStates>
     //default active tab value
     defaultValue, //?: string
     //change value handler
@@ -373,7 +390,7 @@ export function Tabs(props: TabsProps) {
     //tabs style
     style, //?: CSSProperties
     //slot: class/style to apply to each tab
-    tab, //?: CallableSlotStyleProp<TabsStates>,
+    tab, //?: CallableSlotStyleProp<TabsStates>
     //controlled value
     value, //?: string
     ...attributes

@@ -40,7 +40,7 @@ describe('<Tabs />', () => {
     expect(root).toBeInTheDocument();
     expect(root).toHaveClass('frui-tabs');
     expect(screen.getByText('Content 1')).toBeInTheDocument();
-    expect(screen.queryByText('Content 2')).not.toBeInTheDocument();
+    expect(screen.queryByText('Content 2')).toBeInTheDocument();
   });
 
   it('changes active tab on click in uncontrolled mode', () => {
@@ -48,7 +48,7 @@ describe('<Tabs />', () => {
     expect(screen.getByText('Content 1')).toBeInTheDocument();
     fireEvent.click(screen.getByText('Tab 2'));
     expect(screen.getByText('Content 2')).toBeInTheDocument();
-    expect(screen.queryByText('Content 1')).not.toBeInTheDocument();
+    expect(screen.queryByText('Content 1')).toBeInTheDocument();
   });
 
   it('calls onChange when a tab label is clicked', () => {
@@ -193,7 +193,7 @@ describe('<Tabs />', () => {
         </Tabs.Body>
       </Tabs>
     );
-    expect(screen.queryByText('Content 3')).not.toBeInTheDocument();
+    expect(screen.queryByText('Content 3')).toBeInTheDocument();
   });
 
   it('handles undefined value in TabsLabel', () => {
@@ -219,6 +219,6 @@ describe('<Tabs />', () => {
     );
     expect(
       screen.queryByText('No Value Content')
-    ).not.toBeInTheDocument();
+    ).toBeInTheDocument();
   });
 });

@@ -10,6 +10,7 @@
 @import url('./styles/base/pager.css');
 @import url('./styles/base/progress.css');
 @import url('./styles/base/table.css');
+@import url('./styles/base/tabs.css');
 @import url('./styles/base/tooltip.css');
 
 @import url('./styles/form/code-editor.css');

@@ -23,12 +23,14 @@ const props = [
   [ 'className', 'string', 'No', 'Standard HTML class names' ],
   [ 'defaultValue', 'string', 'No', 'Alias to value' ],
   [ 'error', 'string|boolean', 'No', 'Any error message' ],
+  [ 'fetch', 'Function', 'No', 'Custom fetch function for dependency injection (mainly for tests)' ],
   [ 'name', 'string', 'No', 'Used for react server components.' ],
   [ 'onChange', 'Function', 'No', 'Event handler when value has changed' ],
   [ 'onDropdown', 'Function', 'No', 'Event handler when dropdown opens/closes' ],
   [ 'onQuery', 'Function', 'No', 'Event handler when something is searched' ],
   [ 'onUpdate', 'Function', 'No', 'Update event handler' ],
   [ 'options', 'string[]', 'No', 'List of select options.' ],
+  [ 'remote', 'string', 'No', 'Remote URL for fetching suggestions (use {{QUERY}} as placeholder)' ],
   [ 'style', 'CSS Object', 'No', 'Standard CSS object' ],
   [ 'value', 'string', 'No', 'Selected value from the options' ]
 ];
@@ -90,7 +92,26 @@ return (
       </div>
     </div>
   </SuggestInput.Option>
-</SuggestInput>`
+</SuggestInput>`,
+//5
+`<SuggestInput 
+  remote="https://api.example.com/search?q={{QUERY}}"
+  placeholder="Search products..."
+/>`,
+//6
+`const mockFetch = vi.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve([
+      { value: 'result1', label: 'Result 1' },
+      { value: 'result2', label: 'Result 2' }
+    ])
+  } as Response)
+);
+<SuggestInput 
+  fetch={mockFetch}
+  remote="https://api.example.com/search?q={{QUERY}}"
+  placeholder="Search..."
+/>`
 ];
 
 //--------------------------------------------------------------------//
@@ -281,6 +302,24 @@ export function Examples() {
           </SuggestInput>
         </Preview.Example>
         <Preview.Code>{examples[4]}</Preview.Code>
+      </Preview>
+      {/* Remote Example */}
+      <Preview 
+        title="Remote Example" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <Code language="typescript">{examples[5]}</Code>
+        </Preview.Example>
+      </Preview>
+      {/* Custom Fetch Example */}
+      <Preview 
+        title="Custom Fetch for Testing" 
+        className="border border-2 theme-bc-3 px-w-50-7 rmd-px-w-100-0"
+      >
+        <Preview.Example center padding>
+          <Code language="typescript">{examples[6]}</Code>
+        </Preview.Example>
       </Preview>
     </div>
   );

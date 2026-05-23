@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "frui",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "license": "MIT",
   "description": "A collection of vanilla react components written in typescript.",
   "author": "Chris <chris@incept.asia>",
@@ -152,40 +152,108 @@
   },
   "typesVersions": {
     "*": {
-      ".": [ "./cjs/index.d.ts" ],
-      "types": [ "./cjs/types.d.ts" ],
-      "unocss": [ "./cjs/unocss.d.ts" ],
-      "Accordion": [ "./cjs/base/Accordion.d.ts" ],
-      "Alert": [ "./cjs/base/Alert.d.ts" ],
-      "Badge": [ "./cjs/base/Badge.d.ts" ],
-      "Box": [ "./cjs/base/Box.d.ts" ],
-      "Bread": [ "./cjs/base/Bread.d.ts" ],
-      "Button": [ "./cjs/base/Button.d.ts" ],
-      "Card": [ "./cjs/base/Card.d.ts" ],
-      "Carousel": [ "./cjs/base/Carousel.d.ts" ],
-      "Dialog": [ "./cjs/base/Dialog.d.ts" ],
-      "Dropdown": [ "./cjs/base/Dropdown.d.ts" ],
-      "Film": [ "./cjs/base/Film.d.ts" ],
-      "Loader": [ "./cjs/base/Loader.d.ts" ],
-      "Notifier": [ "./cjs/base/Notifier.d.ts" ],
-      "Pager": [ "./cjs/base/Pager.d.ts" ],
-      "Progress": [ "./cjs/base/Progress.d.ts" ],
-      "Scope": [ "./cjs/tool/Scope.d.ts" ],
-      "Table": [ "./cjs/base/Table.d.ts" ],
-      "Tabs": [ "./cjs/base/Tabs.d.ts" ],
-      "Tooltip": [ "./cjs/base/Tooltip.d.ts" ],
-      "When": [ "./cjs/tool/When.d.ts" ],
-      "base": [ "./cjs/base/index.d.ts" ],
-      "base/*": [ "./cjs/base/*.d.ts" ],
-      "component": [ "./cjs/base/index.d.ts" ],
-      "component/*": [ "./cjs/base/*.d.ts" ],
-      "data/*": [ "./cjs/data/*.d.ts" ],
-      "form": [ "./cjs/form/index.d.ts" ],
-      "form/*": [ "./cjs/form/*.d.ts" ],
-      "tool": [ "./cjs/tool/index.d.ts" ],
-      "tool/*": [ "./cjs/tool/*.d.ts" ],
-      "view": [ "./cjs/view/index.d.ts" ],
-      "view/*": [ "./cjs/view/*.d.ts" ]
+      ".": [
+        "./cjs/index.d.ts"
+      ],
+      "types": [
+        "./cjs/types.d.ts"
+      ],
+      "unocss": [
+        "./cjs/unocss.d.ts"
+      ],
+      "Accordion": [
+        "./cjs/base/Accordion.d.ts"
+      ],
+      "Alert": [
+        "./cjs/base/Alert.d.ts"
+      ],
+      "Badge": [
+        "./cjs/base/Badge.d.ts"
+      ],
+      "Box": [
+        "./cjs/base/Box.d.ts"
+      ],
+      "Bread": [
+        "./cjs/base/Bread.d.ts"
+      ],
+      "Button": [
+        "./cjs/base/Button.d.ts"
+      ],
+      "Card": [
+        "./cjs/base/Card.d.ts"
+      ],
+      "Carousel": [
+        "./cjs/base/Carousel.d.ts"
+      ],
+      "Dialog": [
+        "./cjs/base/Dialog.d.ts"
+      ],
+      "Dropdown": [
+        "./cjs/base/Dropdown.d.ts"
+      ],
+      "Film": [
+        "./cjs/base/Film.d.ts"
+      ],
+      "Loader": [
+        "./cjs/base/Loader.d.ts"
+      ],
+      "Notifier": [
+        "./cjs/base/Notifier.d.ts"
+      ],
+      "Pager": [
+        "./cjs/base/Pager.d.ts"
+      ],
+      "Progress": [
+        "./cjs/base/Progress.d.ts"
+      ],
+      "Scope": [
+        "./cjs/tool/Scope.d.ts"
+      ],
+      "Table": [
+        "./cjs/base/Table.d.ts"
+      ],
+      "Tabs": [
+        "./cjs/base/Tabs.d.ts"
+      ],
+      "Tooltip": [
+        "./cjs/base/Tooltip.d.ts"
+      ],
+      "When": [
+        "./cjs/tool/When.d.ts"
+      ],
+      "base": [
+        "./cjs/base/index.d.ts"
+      ],
+      "base/*": [
+        "./cjs/base/*.d.ts"
+      ],
+      "component": [
+        "./cjs/base/index.d.ts"
+      ],
+      "component/*": [
+        "./cjs/base/*.d.ts"
+      ],
+      "data/*": [
+        "./cjs/data/*.d.ts"
+      ],
+      "form": [
+        "./cjs/form/index.d.ts"
+      ],
+      "form/*": [
+        "./cjs/form/*.d.ts"
+      ],
+      "tool": [
+        "./cjs/tool/index.d.ts"
+      ],
+      "tool/*": [
+        "./cjs/tool/*.d.ts"
+      ],
+      "view": [
+        "./cjs/view/index.d.ts"
+      ],
+      "view/*": [
+        "./cjs/view/*.d.ts"
+      ]
     }
   },
   "files": [
@@ -216,14 +284,14 @@
   },
   "devDependencies": {
     "@codemirror/language-data": "6.5.1",
-    "@stackpress/ingest": "0.6.5",
+    "@stackpress/ingest": "0.10.3",
     "@testing-library/dom": "10.4.1",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
     "@types/inputmask": "5.0.7",
-    "@types/node": "25.0.3",
-    "@types/react": "19.2.7",
+    "@types/node": "25.3.5",
+    "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "5.1.2",
     "@vitest/coverage-v8": "4.0.16",
@@ -235,15 +303,15 @@
     "mime": "4.1.0",
     "moment": "2.30.1",
     "r22n": "1.0.10",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "react-shiki": "0.9.1",
     "react-toastify": "11.0.5",
     "reactus": "0.6.5",
     "tsx": "4.21.0",
     "typescript": "5.9.3",
     "universal-cookie": "8.0.1",
-    "unocss": "66.5.10",
+    "unocss": "66.6.6",
     "vite": "7.3.0",
     "vite-tsconfig-paths": "6.0.3",
     "vitest": "4.0.16"

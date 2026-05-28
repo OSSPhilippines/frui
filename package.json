@@ -307,7 +307,7 @@
     "react-dom": "19.2.4",
     "react-shiki": "0.9.1",
     "react-toastify": "11.0.5",
-    "reactus": "0.6.5",
+    "reactus": "0.10.4",
     "tsx": "4.21.0",
     "typescript": "5.9.3",
     "universal-cookie": "8.0.1",

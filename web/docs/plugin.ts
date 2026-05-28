@@ -4,7 +4,7 @@ import type { HttpServer } from '@stackpress/ingest';
 import type { Config } from '../app/types.js';
 
 export default function plugin(server: HttpServer<Config>) {
-  server.on('route', async (_, __, ctx) => {
+  server.on('route', async ({ ctx }) => {
     ctx.get('/start', '@/web/docs/views/start');
 
     ctx.get('/component', '@/web/docs/views/component/index');

@@ -12,7 +12,7 @@ import reactus, { Server } from 'reactus';
 import type { Config, ViewPlugin } from './types';
 
 export function config(server: HttpServer<Config>) {
-  const config = server.config.data;
+  const config = server.config();
   //create reactus engine
   const engine = reactus(Server.configure({ 
     cwd: config.cwd,
@@ -24,22 +24,27 @@ export function config(server: HttpServer<Config>) {
   //set the render function
   server.view.render = (action, props) => engine.render(action, props);
   //set the view engine
-  server.view.engine = async (action, req, res, ctx) => {
+  server.view.engine = async (action, { req, res, ctx }) => {
     //set the final status
     const status = Status.get(res.code || 200) as ResponseStatus;
-    res.setStatus(status.code, status.status);
+    res.statusCode(status.code, status.status);
+    //get the noteplate flag
+    const noview = ctx.config.path('view.noview', 'json');
     //const render, if redirecting
     if (res.redirected 
       //or if json
-      || req.data.has('json')
+      || req.data.has(noview)
       //or body is a string already
       || typeof res.body === 'string'
     ) return;
     //get props from config
     const props = ctx.config.path('view.props', {});
+    //get the session
+    const session = await ctx.resolve('me', req);
     //render the html
     const html = await ctx.view.render(action, {
-      data: {...props, ...res.data<Record<string, unknown>>() },
+      data: {...props, ...(res.data() as Record<string, unknown>) },
+      session: session.results,
       request: {
         url: {
           hash: req.url.hash,
@@ -63,7 +68,7 @@ export function config(server: HttpServer<Config>) {
     //if there is html
     if (html) {
       //add the html to the response
-      res.setHTML(html, status.code, status.status);
+      res.html(html, status.code, status.status);
     }
   };
 };

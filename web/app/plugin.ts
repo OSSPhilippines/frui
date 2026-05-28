@@ -21,13 +21,13 @@ const mime: Record<string, string> = {
 };
 
 export default function plugin(server: HttpServer<Config>) {
-  server.on('config', (_, __, ctx) => {
+  server.on('config', ({ ctx }) => {
     view.config(ctx);
   });
 
-  server.on('route', async (_, __, ctx) => {
+  server.on('route', ({ ctx }) => {
     ctx.get('/', '@/web/app/views/home');
-    ctx.on('request', async (req, res, ctx) => {
+    ctx.on('request', async ({ req, res, ctx }) => {
       await view.route(req, res, ctx);
       //if there is a body or a code that is not 404, skip
       if (res.resource.headersSent 
@@ -38,12 +38,12 @@ export default function plugin(server: HttpServer<Config>) {
       const resource = req.url.pathname.substring(1).replace(/\/\//, '/'); 
       //if no pathname, skip
       if (resource.length === 0) return;
-      const assets = server.config.get<string>('assets');
+      const assets = server.config<string>('assets');
       const file = path.resolve(assets, resource);
       if (fs.existsSync(file)) {
         const ext = path.extname(file);
         const type = mime[ext] || 'application/octet-stream';
-        res.setBody(type, fs.createReadStream(file));
+        res.set(type, fs.createReadStream(file));
       }
     });
   });

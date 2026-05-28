@@ -1,11 +1,13 @@
 import type { 
+  Trace
+} from '@stackpress/lib';
+import type { 
   IM, SR,
   Method, 
   NestedObject, 
   ResponseStatus,
   UnknownNest, 
   StatusResponse,
-  Trace, 
   FileMeta
 } from '@stackpress/ingest';
 

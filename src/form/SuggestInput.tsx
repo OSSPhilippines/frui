@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------//
 // Imports
 
+//modules
+import { useState } from 'react';
 //frui
 import type { 
   SlotStyleProp, 
@@ -37,12 +39,16 @@ export type SuggestInputProps = Omit<InputProps
     control?: SlotStyleProp,
     //slot: style to apply to the select drop down
     dropdown?: SlotStyleProp,
+    //custom fetch function for dependency injection
+    fetch?: typeof fetch,
     //called whenever user types
     onQuery?: (query: string) => void,
     //slot: style to apply to the select control
     option?: CallableSlotStyleProp<DropdownStates>,
     //serialized list of options as array or object
     options?: DropdownOptionProp
+    //remote url to fetch suggestions
+    remote?: string
   }, 
   'multiple'
 >;
@@ -141,14 +147,20 @@ export function SuggestInput(props: SuggestInputProps) {
     error, //?: boolean
     //position of the dropdown
     left, //?: boolean
+    //custom fetch function for dependency injection (mainly for tests)
+    fetch: customFetch = fetch,
     //dropdown handler
     onDropdown, //?: (show: boolean) => void
+    //called whenever user types
+    onQuery, //?: (query: string) => void 
     //update handler
     onUpdate, //?: (value: string) => void
     //slot: style to apply to the select control
     option, //: CallableSlotStyleProp<SelectStates>
     //serialized list of options as array or object
     options, //: SelectOption[]|Record<string, string>
+    //remote url to fetch suggestions
+    remote, //?: string
     //position of the dropdown
     right, //?: boolean
     //custom inline styles
@@ -159,6 +171,11 @@ export function SuggestInput(props: SuggestInputProps) {
     value, //?: T
     ...inputProps
   } = props;
+  //hooks
+  const [ 
+    remoteOptions, 
+    setRemoteOptions 
+  ] = useState<DropdownOptionProp | undefined>(options);
   //variables
   // determine classes
   const classes = [ 'frui-form-suggest-input' ];
@@ -169,6 +186,20 @@ export function SuggestInput(props: SuggestInputProps) {
   // get slot styles
   const controlStyles = control ? getSlotStyles(control, {}) : {};
   const dropdownStyles = dropdown ? getSlotStyles(dropdown, {}) : {};
+  //handlers
+  const handleQuery = async (query: string) => {
+    if (typeof remote === 'string' && query) {
+      const response = 
+        await customFetch(
+          remote.replace('{{QUERY}}', encodeURIComponent(query))
+        );
+      const data = await response.json();
+      if (Array.isArray(data)) {
+        setRemoteOptions(data);
+      }
+    }
+    onQuery && onQuery(query);
+  };
   //render
   return (
     <Dropdown
@@ -181,7 +212,7 @@ export function SuggestInput(props: SuggestInputProps) {
       onDropdown={onDropdown}
       onUpdate={onUpdate}
       option={option}
-      options={options}
+      options={remoteOptions}
       right={right}
       top={top}
       value={value}
@@ -191,6 +222,7 @@ export function SuggestInput(props: SuggestInputProps) {
           {...inputProps}
           className={controlStyles.className} 
           style={controlStyles.style}
+          onQuery={handleQuery}
         />
       </Dropdown.Control>
       {children}

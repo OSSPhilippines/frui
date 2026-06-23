@@ -2,21 +2,15 @@
 // Imports
 
 //frui
-import Select, { SelectPlaceholder } from '../../src/form/Select.js';
-//tests
+import SuggestInput from '../../src/form/SuggestInput.js';
 import '@testing-library/jest-dom';
-import {
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor
+import { 
+  fireEvent, 
+  render, 
+  screen, 
+  waitFor 
 } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 
 //--------------------------------------------------------------------//
 // Mocks
@@ -40,49 +34,49 @@ vi.mock('src/helpers/getClassStyles.js', () => ({
 //--------------------------------------------------------------------//
 // Tests
 
-describe('<Select />', () => {
-  it('renders base wrapper and placeholder text', () => {
+describe('<SuggestInput />', () => {
+  it('renders base wrapper and input field', () => {
     render(
-      <Select placeholder="Pick one">
-        <SelectPlaceholder>Pick one</SelectPlaceholder>
-      </Select>
+      <SuggestInput placeholder="Type to search" />
     );
-    const wrapper = document.querySelector('.frui-form-select');
+    const wrapper = 
+      document.querySelector('.frui-form-suggest-input');
     expect(wrapper).toBeInTheDocument();
-    expect(screen.getByText('Pick one')).toBeInTheDocument();
-  });
-
-  it('applies error class when error prop set', () => {
-    const { container } = render(<Select error />);
-    const wrapper = container.querySelector('.frui-form-select');
-    expect(wrapper).toBeInTheDocument();
-    expect(wrapper?.className).toContain('frui-form-select-error');
-  });
-
-  it('toggles dropdown open on placeholder click', () => {
-    render(
-      <Select
-        options={[
-          { value: '1', label: 'One' },
-          { value: '2', label: 'Two' }
-        ]}
-      >
-        <SelectPlaceholder>Click me</SelectPlaceholder>
-      </Select>
-    );
-    const toggle = screen.getByText('Click me');
-    fireEvent.click(toggle);
     expect(
-      document.querySelector(
-        '.frui-form-select-control-actions-toggle'
-      )
+      screen.getByPlaceholderText('Type to search')
     ).toBeInTheDocument();
   });
-
+  it('applies error class when error prop set', () => {
+    const { container } = render(<SuggestInput error />);
+    const wrapper = 
+      container.querySelector('.frui-form-suggest-input');
+    expect(wrapper).toBeInTheDocument();
+    expect(
+      wrapper?.className
+    ).toContain('frui-form-suggest-input-error');
+  });
+  it('opens dropdown after typing minimum chars', () => {
+    const onQuery = vi.fn();
+    render(
+      <SuggestInput
+        chars={3}
+        onQuery={onQuery}
+        options={[
+          { value: 'apple', label: 'Apple' },
+          { value: 'apricot', label: 'Apricot' }
+        ]}
+      />
+    );
+    const input = screen.getByRole('textbox') as HTMLInputElement;
+    fireEvent.change(input, { target: { value: 'ap' } });
+    expect(onQuery).not.toHaveBeenCalled();
+    fireEvent.change(input, { target: { value: 'app' } });
+    expect(onQuery).toHaveBeenCalledWith('app');
+  });
   it('calls onUpdate when external value changes', async () => {
     const onUpdate = vi.fn();
     const { rerender } = render(
-      <Select
+      <SuggestInput
         onUpdate={onUpdate}
         options={[
           { value: 'yes', label: 'Yes' },
@@ -92,7 +86,7 @@ describe('<Select />', () => {
       />
     );
     rerender(
-      <Select
+      <SuggestInput
         onUpdate={onUpdate}
         options={[
           { value: 'yes', label: 'Yes' },
@@ -105,73 +99,57 @@ describe('<Select />', () => {
       expect(onUpdate).toHaveBeenCalledWith('no');
     });
   });
-
-  it('adds hidden input after selection', async () => {
+  it('shows controlled input value', async () => {
     const { rerender } = render(
-      <Select
-        name="colors"
-        options={[ { value: 'blue', label: 'Blue' } ]}
+      <SuggestInput
+        name="search"
+        options={[ { value: 'test', label: 'Test' } ]}
         value=""
       />
     );
     rerender(
-      <Select
-        name="colors"
-        options={[ { value: 'blue', label: 'Blue' } ]}
-        value="blue"
+      <SuggestInput
+        name="search"
+        options={[ { value: 'test', label: 'Test' } ]}
+        value="test"
       />
     );
     await waitFor(() => {
-      const hidden = document.querySelector(
-        'input[ type="hidden" ]'
-      ) as HTMLInputElement;
-      expect(hidden).toBeInTheDocument();
-      expect(hidden.name).toBe('colors');
-      expect(hidden.value).toBe('blue');
+      const input = screen.getByRole('textbox') as HTMLInputElement;
+      expect(input).toBeInTheDocument();
+      expect(input.name).toBe('search');
+      expect(input.value).toBe('test');
     });
   });
-
-  it('supports multiple selections and clear button', async () => {
-    const { rerender } = render(
-      <Select
-        multiple
-        name="multi"
-        options={[
-          { value: 'a', label: 'A' },
-          { value: 'b', label: 'B' }
-        ]}
-        value={[]}
+  it('fetches remote suggestions with custom fetch prop', async () => {
+    const mockFetch = vi.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve([
+          { value: 'result1', label: 'Result 1' },
+          { value: 'result2', label: 'Result 2' }
+        ])
+      } as Response)
+    );
+    render(
+      <SuggestInput
+        chars={2}
+        fetch={mockFetch}
+        remote="https://api.example.com/search?q={{QUERY}}"
       />
     );
-    rerender(
-      <Select
-        multiple
-        name="multi"
-        options={[
-          { value: 'a', label: 'A' },
-          { value: 'b', label: 'B' }
-        ]}
-        value={[ 'a', 'b' ]}
-      />
-    );
+    const input = screen.getByRole('textbox') as HTMLInputElement;
+    fireEvent.change(input, { target: { value: 'test' } });
     await waitFor(() => {
-      const clearBtn = document.querySelector(
-        '.frui-form-select-control-actions-clear'
+      expect(mockFetch).toHaveBeenCalledWith(
+        'https://api.example.com/search?q=test'
       );
-      expect(clearBtn).toBeInTheDocument();
-      fireEvent.click(clearBtn!);
-      const inputs = document.querySelectorAll(
-        'input[ type="hidden" ]'
-      );
-      expect(inputs.length).toBe(0);
     });
   });
-
   it(
-    'renders correct selected option when value prop provided',
+    'renders correct selected value when value prop provided',
     async () => {
-      const { rerender, container } = render(
-        <Select
+      const { rerender } = render(
+        <SuggestInput
           options={[
             { value: 'opt1', label: 'Opt1' },
             { value: 'opt2', label: 'Opt2' }
@@ -179,13 +157,10 @@ describe('<Select />', () => {
           value="opt2"
         />
       );
-      const control = container.querySelector(
-        '.frui-form-select-control-selected'
-      );
-      expect(control).toBeInTheDocument();
-      expect(control?.textContent).toContain('Opt2');
+      const input = screen.getByRole('textbox') as HTMLInputElement;
+      expect(input.value).toBe('opt2');
       rerender(
-        <Select
+        <SuggestInput
           options={[
             { value: 'opt1', label: 'Opt1' },
             { value: 'opt2', label: 'Opt2' }
@@ -194,11 +169,7 @@ describe('<Select />', () => {
         />
       );
       await waitFor(() => {
-        const updated = container.querySelector(
-          '.frui-form-select-control-selected'
-        );
-        expect(updated).toBeInTheDocument();
-        expect(updated?.textContent).toContain('Opt1');
+        expect(input.value).toBe('opt1');
       });
     }
   );
